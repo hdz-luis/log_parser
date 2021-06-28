@@ -287,15 +287,15 @@ namespace OutSystems_Log_Parser
 
         private void txtBoxSearchWinSysErrorCode_TextChanged(object sender, EventArgs e)
         {
-            //make sure there are at least two digits before starting to search for similar Windows errors
-            if (txtBoxSearchWinSysErrorCode.Text.Length <= 1)
+            //make sure there is at least one digit before starting to search for similar Windows errors
+            if (txtBoxSearchWinSysErrorCode.Text.Length < 1)
             {
                 listViewCodes.Clear();
                 txtBoxWinSysErrorCode.Clear();
                 txtBoxMeaning.Clear();
                 txtBoxDescription.Clear();
             }
-            else if (txtBoxSearchWinSysErrorCode.Text.Length > 1)
+            else if (txtBoxSearchWinSysErrorCode.Text.Length > 0)
             {
                 listViewCodes.Clear();
                 listViewCodes.View = View.Details;
