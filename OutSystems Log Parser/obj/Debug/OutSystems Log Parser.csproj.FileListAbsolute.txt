@@ -1,0 +1,25 @@
+c:\users\herna\documents\visual studio 2017\Projects\OutSystems Log Parser\OutSystems Log Parser\obj\Debug\OutSystems Log Parser.csprojResolveAssemblyReference.cache
+c:\users\herna\documents\visual studio 2017\Projects\OutSystems Log Parser\OutSystems Log Parser\obj\Debug\OutSystems_Log_Parser.Form1.resources
+c:\users\herna\documents\visual studio 2017\Projects\OutSystems Log Parser\OutSystems Log Parser\obj\Debug\OutSystems_Log_Parser.Properties.Resources.resources
+c:\users\herna\documents\visual studio 2017\Projects\OutSystems Log Parser\OutSystems Log Parser\obj\Debug\OutSystems Log Parser.csproj.GenerateResource.Cache
+c:\users\herna\documents\visual studio 2017\Projects\OutSystems Log Parser\OutSystems Log Parser\bin\Debug\OutSystems Log Parser.exe.config
+c:\users\herna\documents\visual studio 2017\Projects\OutSystems Log Parser\OutSystems Log Parser\bin\Debug\OutSystems Log Parser.exe
+c:\users\herna\documents\visual studio 2017\Projects\OutSystems Log Parser\OutSystems Log Parser\bin\Debug\OutSystems Log Parser.pdb
+c:\users\herna\documents\visual studio 2017\Projects\OutSystems Log Parser\OutSystems Log Parser\obj\Debug\OutSystems Log Parser.exe
+c:\users\herna\documents\visual studio 2017\Projects\OutSystems Log Parser\OutSystems Log Parser\obj\Debug\OutSystems Log Parser.pdb
+C:\Users\herna\Documents\Visual Studio 2017\Projects\OutSystems Log Parser - Orig\OutSystems Log Parser\bin\Debug\OutSystems Log Parser.exe.config
+C:\Users\herna\Documents\Visual Studio 2017\Projects\OutSystems Log Parser - Orig\OutSystems Log Parser\bin\Debug\OutSystems Log Parser.exe
+C:\Users\herna\Documents\Visual Studio 2017\Projects\OutSystems Log Parser - Orig\OutSystems Log Parser\bin\Debug\OutSystems Log Parser.pdb
+C:\Users\herna\Documents\Visual Studio 2017\Projects\OutSystems Log Parser - Orig\OutSystems Log Parser\obj\Debug\OutSystems Log Parser.csprojResolveAssemblyReference.cache
+C:\Users\herna\Documents\Visual Studio 2017\Projects\OutSystems Log Parser - Orig\OutSystems Log Parser\obj\Debug\OutSystems_Log_Parser.Form1.resources
+C:\Users\herna\Documents\Visual Studio 2017\Projects\OutSystems Log Parser - Orig\OutSystems Log Parser\obj\Debug\OutSystems_Log_Parser.Properties.Resources.resources
+C:\Users\herna\Documents\Visual Studio 2017\Projects\OutSystems Log Parser - Orig\OutSystems Log Parser\obj\Debug\OutSystems Log Parser.csproj.GenerateResource.Cache
+C:\Users\herna\Documents\Visual Studio 2017\Projects\OutSystems Log Parser - Orig\OutSystems Log Parser\obj\Debug\OutSystems Log Parser.exe
+C:\Users\herna\Documents\Visual Studio 2017\Projects\OutSystems Log Parser - Orig\OutSystems Log Parser\obj\Debug\OutSystems Log Parser.pdb
+C:\Users\herna\Documents\Visual Studio 2017\Projects\OutSystems Log Parser - Orig\OutSystems Log Parser\obj\Debug\OutSystems_Log_Parser.Form2.resources
+C:\Users\herna\Documents\Visual Studio 2017\Projects\OutSystems Log Parser - Orig\OutSystems Log Parser\obj\Debug\OutSystems_Log_Parser.Form3.resources
+C:\Users\herna\Documents\Visual Studio 2017\Projects\OutSystems Log Parser - Orig\OutSystems Log Parser\obj\Debug\OutSystems_Log_Parser.Form4.resources
+C:\Users\herna\Documents\Visual Studio 2017\Projects\OutSystems Log Parser - Orig\OutSystems Log Parser\obj\Debug\OutSystems_Log_Parser.Form5.resources
+C:\Users\herna\Documents\Visual Studio 2017\Projects\OutSystems Log Parser\OutSystems Log Parser\obj\Debug\OutSystems_Log_Parser.Form2.resources
+C:\Users\herna\Documents\Visual Studio 2017\Projects\OutSystems Log Parser\OutSystems Log Parser\obj\Debug\OutSystems_Log_Parser.Form3.resources
+C:\Users\herna\Documents\Visual Studio 2017\Projects\OutSystems Log Parser\OutSystems Log Parser\obj\Debug\OutSystems_Log_Parser.Form4.resources
