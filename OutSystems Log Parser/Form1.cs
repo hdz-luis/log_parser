@@ -20,7 +20,9 @@ namespace OutSystems_Log_Parser
         string fullPath = "";
         char delimiters;
         string extension = "";
+        string directory = Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath);
         int totalDatagridviewRowsCount = 0;
+        
 
         public Form1()
         {
@@ -164,7 +166,12 @@ namespace OutSystems_Log_Parser
                 //so far, only the error logs seem to have the relevant data for troubleshooting purposes
                 if (txtFileName.Text.Contains("ErrorLog"))
                 {
-                    string directory = Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath);
+                    string exportedFilesFolder = directory + "\\exported_files\\";
+
+                    if (!Directory.Exists(exportedFilesFolder))
+                    {
+                        Directory.CreateDirectory(exportedFilesFolder);
+                    }
 
                     //searching for keywords in the MESSAGE field from the error logs
                     string[] keywords = { "invalid", "corrupt", "roll", "method not found", "cannot read", "mismatch", "task", "terminate", "fatal", "query", "email", "null", "access denied", "connection", "environment health", "refuse", "does not exist", "missing", "unexpected", "escape", "update", "undefined", "cannot insert", "listening" };
@@ -172,7 +179,7 @@ namespace OutSystems_Log_Parser
                     int tempDatagridviewRowsCount = 0;
                     foreach (string keyword in keywords)
                     {
-                        string xlsxFile = directory + "\\exported_files\\" + txtFileName.Text + "_" + keyword + ".xlsx";
+                        string xlsxFile = exportedFilesFolder + txtFileName.Text + "_" + keyword + ".xlsx";
                         (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("MESSAGE LIKE '%{0}%'", keyword);
                         tempDatagridviewRowsCount = dataGridView1.Rows.Count;
 
@@ -217,8 +224,8 @@ namespace OutSystems_Log_Parser
                         {
                             textBox1.Text = String.Join(Environment.NewLine, foundKeywords);
                         }
-                        MessageBox.Show("Some data has been already exported to the \"exported_files\" folder", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
+                        MessageBox.Show("Some data has been already exported to the \"exported_files\" folder", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }
@@ -296,7 +303,12 @@ namespace OutSystems_Log_Parser
                 //so far, only the error logs seem to have the relevant data for troubleshooting purposes
                 if (txtFileName.Text.Contains("ErrorLog"))
                 {
-                    string directory = Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath);
+                    string exportedFilesFolder = directory + "\\exported_files\\";
+
+                    if (!Directory.Exists(exportedFilesFolder))
+                    {
+                        Directory.CreateDirectory(exportedFilesFolder);
+                    }
 
                     //searching for keywords in the MESSAGE field from the error logs
                     string[] keywords = { "invalid", "corrupt", "roll", "method not found", "cannot read", "mismatch", "task", "terminate", "fatal", "query", "email", "null", "access denied", "connection", "environment health", "refuse", "does not exist", "missing", "unexpected", "escape", "update", "undefined", "cannot insert", "listening" };
@@ -304,7 +316,7 @@ namespace OutSystems_Log_Parser
                     int tempDatagridviewRowsCount = 0;
                     foreach (string keyword in keywords)
                     {
-                        string csvFile = directory + "\\exported_files\\" + txtFileName.Text + "_" + keyword + ".csv";
+                        string csvFile = exportedFilesFolder + txtFileName.Text + "_" + keyword + ".csv";
                         (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("MESSAGE LIKE '%{0}%'", keyword);
                         tempDatagridviewRowsCount = dataGridView1.Rows.Count;
 
@@ -348,8 +360,8 @@ namespace OutSystems_Log_Parser
                         {
                             textBox1.Text = String.Join(Environment.NewLine, foundKeywords);
                         }
-                        MessageBox.Show("Some data has been already exported to the \"exported_files\" folder", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
+                        MessageBox.Show("Some data has been already exported to the \"exported_files\" folder", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }
@@ -481,6 +493,119 @@ namespace OutSystems_Log_Parser
                 label2.Visible = true;
                 txtBoxHTTPCode.Visible = true;
                 txtBoxWindowsErrorCodes.Visible = true;
+
+                string exportedFilesFolder = directory + "\\exported_files\\";
+
+                if (!Directory.Exists(exportedFilesFolder))
+                {
+                    Directory.CreateDirectory(exportedFilesFolder);
+                }
+
+                //searching for the HTTP and Windows error codes in the sc-status and sc-win32-status fields from the IIS logs
+                string[] httpErrorCodes = { "102", "202", "203", "204", "205", "300", "301", "302", "305", "306", "308", "400", "401", "403", "404", "405", "406", "407", "408", "409", "500", "501", "502", "503", "504", "505", "506", "507", "508" };
+                string[] windowsErrorCodes = { "1", "2", "3", "4", "5", "8", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "24", "25", "26", "28", "29", "30", "31", "32", "33", "36", "39", "50", "51", "52", "53",
+                                                "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "69", "70", "71", "72", "82", "84", "85", "86", "87", "88", "89", "107", "108", "109", "110", "111", "112", "118",
+                                                "119", "120", "123", "126", "127", "144", "145", "147", "148", "150", "155", "156", "159", "160", "161", "164", "170", "183", "196", "197", "199", "203", "206", "208", "215", "220", "221", "240",
+                                                "300", "301", "302", "303", "306", "307", "310", "315", "316", "318", "319", "320", "321", "323", "330", "331", "334", "335", "336", "337", "350", "351", "352", "353", "400", "402" };
+
+                //split the values from textbox1 and textbox2
+                string[] txtbx1 = new string[] { "\r\n" };
+                string[] myTtxtbx1 = textBox1.Text.Split(txtbx1, StringSplitOptions.RemoveEmptyEntries);
+                string[] txtbx2 = new string[] { "\r\n" };
+                string[] myTtxtbx2 = textBox2.Text.Split(txtbx1, StringSplitOptions.RemoveEmptyEntries);
+
+                int tempDatagridviewRowsCount = 0;
+                int tempDatagridviewRowsCount2 = 0;
+
+                foreach (string httpErr in httpErrorCodes)
+                {
+                    foreach (string txtbxln1 in myTtxtbx1)
+                    {
+                        if (httpErr == txtbxln1)
+                        {
+                            string txtFile = exportedFilesFolder + "IIS_HTTP_Code_" + httpErr + ".txt";
+
+                            //filter the content from the table based on the HTTP code
+                            (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("HTTPProtocolStatus_scstatus LIKE '%{0}%'", httpErr);
+                            tempDatagridviewRowsCount = dataGridView1.Rows.Count;
+
+                            //if something was found, proceed
+                            if (tempDatagridviewRowsCount > 0)
+                            {
+                                //This line of code creates a txt file for the data export.
+                                StreamWriter exportFile = new StreamWriter(txtFile);
+                                string eLine = "";
+
+                                //This for loop loops through each row in the table
+                                for (int r = 0; r <= dataGridView1.Rows.Count - 1; r++)
+                                {
+                                    //This for loop loops through each column, and the row number
+                                    //is passed from the for loop above.
+                                    for (int c = 0; c <= dataGridView1.Columns.Count - 1; c++)
+                                    {
+                                        eLine = eLine + dataGridView1.Rows[r].Cells[c].Value;
+                                        if (c != dataGridView1.Columns.Count - 1)
+                                        {
+                                            //Add a text delimiter in order
+                                            //to separate each field in the txt file.
+                                            eLine = eLine + " ";
+                                        }
+                                    }
+                                    //The exported text is written to the txt file, one line at a time.
+                                    exportFile.WriteLine(eLine);
+                                    eLine = "";
+                                }
+                                exportFile.Close();
+                            }
+                        }
+                    }
+                }
+
+                foreach (string windowsErr in windowsErrorCodes)
+                {
+                    foreach (string txtbxln2 in myTtxtbx2)
+                    {
+                        if (windowsErr == txtbxln2)
+                        {
+                            string txtFile2 = exportedFilesFolder + "IIS_Windows_Error_Code_" + windowsErr + ".txt";
+
+                            //filter the content from the table based on the HTTP code
+                            (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("WindowsSystemErrorCode_scwin32status LIKE '%{0}%'", windowsErr);
+                            tempDatagridviewRowsCount2 = dataGridView1.Rows.Count;
+
+                            //if something was found, proceed
+                            if (tempDatagridviewRowsCount2 > 0)
+                            {
+                                //This line of code creates a txt file for the data export.
+                                StreamWriter exportFile2 = new StreamWriter(txtFile2);
+                                string eLine2 = "";
+
+                                //This for loop loops through each row in the table
+                                for (int r2 = 0; r2 <= dataGridView1.Rows.Count - 1; r2++)
+                                {
+                                    //This for loop loops through each column, and the row number
+                                    //is passed from the for loop above.
+                                    for (int c2 = 0; c2 <= dataGridView1.Columns.Count - 1; c2++)
+                                    {
+                                        eLine2 = eLine2 + dataGridView1.Rows[r2].Cells[c2].Value;
+                                        if (c2 != dataGridView1.Columns.Count - 1)
+                                        {
+                                            //Add a text delimiter in order
+                                            //to separate each field in the txt file.
+                                            eLine2 = eLine2 + " ";
+                                        }
+                                    }
+                                    //The exported text is written to the txt file, one line at a time.
+                                    exportFile2.WriteLine(eLine2);
+                                    eLine2 = "";
+                                }
+                                exportFile2.Close();
+                            }
+                        }
+                    }
+                }
+                (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
+                MessageBox.Show("Some data has been already exported to the \"exported_files\" folder", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -638,7 +763,13 @@ namespace OutSystems_Log_Parser
         private void btnExportTXTFile_Click(object sender, EventArgs e)
         {
             //export the text files in the current working directory and append either the HTTP code or the Windows error at the end of the file
-            string directory = Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath);
+            string exportedFilesFolder = directory + "\\exported_files\\";
+
+            if (!Directory.Exists(exportedFilesFolder))
+            {
+                Directory.CreateDirectory(exportedFilesFolder);
+            }
+
             string txtFile = "";
 
             if (string.IsNullOrEmpty(txtBoxHTTPCode.Text) && string.IsNullOrEmpty(txtBoxWindowsErrorCodes.Text))
@@ -647,11 +778,11 @@ namespace OutSystems_Log_Parser
             }
             else if (string.IsNullOrEmpty(txtBoxHTTPCode.Text) && !string.IsNullOrEmpty(txtBoxWindowsErrorCodes.Text))
             {
-                txtFile = directory + "\\exported_files\\IIS_Windows_Error_Code_" + txtBoxWindowsErrorCodes.Text + ".txt";
+                txtFile = exportedFilesFolder + "IIS_Windows_Error_Code_" + txtBoxWindowsErrorCodes.Text + ".txt";
             }
             else if(string.IsNullOrEmpty(txtBoxWindowsErrorCodes.Text) && !string.IsNullOrEmpty(txtBoxHTTPCode.Text))
             {
-                txtFile = directory + "\\exported_files\\IIS_HTTP_Code_" + txtBoxHTTPCode.Text + ".txt";
+                txtFile = exportedFilesFolder + "IIS_HTTP_Code_" + txtBoxHTTPCode.Text + ".txt";
             }
 
             try
@@ -754,12 +885,17 @@ namespace OutSystems_Log_Parser
                     }
 
                     //use the current working directory to create the file with the data
-                    string exportDirectory = Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath);
+                    string exportedFilesFolder = directory + "\\exported_files\\";
+
+                    if (!Directory.Exists(exportedFilesFolder))
+                    {
+                        Directory.CreateDirectory(exportedFilesFolder);
+                    }
 
                     //check the file extension to determine the exporting process
                     if (txtExtension.Text == ".xlsx")
                     {
-                        string xlsxFile = exportDirectory + "\\exported_files\\" + txtFileName.Text + "_" + txtBoxSearchValue.Text + ".xlsx";
+                        string xlsxFile = exportedFilesFolder + txtFileName.Text + "_" + txtBoxSearchValue.Text + ".xlsx";
 
                         //columns in the Excel spreadsheet
                         string[] alphabet = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
@@ -786,7 +922,7 @@ namespace OutSystems_Log_Parser
                     }
                     else if(txtExtension.Text == ".csv")
                     {
-                        string csvFile = exportDirectory + "\\exported_files\\" + txtFileName.Text + "_" + txtBoxSearchValue.Text + ".csv";
+                        string csvFile = exportedFilesFolder + txtFileName.Text + "_" + txtBoxSearchValue.Text + ".csv";
                         StreamWriter exportCSVFile = new StreamWriter(csvFile);
                         for (int i = 0; i < rowValuesList.Count; i++)
                         {
