@@ -523,7 +523,7 @@ namespace OutSystems_Log_Parser
                     {
                         if (httpErr == txtbxln1)
                         {
-                            string txtFile = exportedFilesFolder + "IIS_HTTP_Code_" + httpErr + ".txt";
+                            string txtFile = exportedFilesFolder + txtFileName.Text + "_HTTP_Code_" + httpErr + ".txt";
 
                             //filter the content from the table based on the HTTP code
                             (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("HTTPProtocolStatus_scstatus LIKE '%{0}%'", httpErr);
@@ -567,7 +567,7 @@ namespace OutSystems_Log_Parser
                     {
                         if (windowsErr == txtbxln2)
                         {
-                            string txtFile2 = exportedFilesFolder + "IIS_Windows_Error_Code_" + windowsErr + ".txt";
+                            string txtFile2 = exportedFilesFolder + txtFileName.Text + "_Windows_Error_Code_" + windowsErr + ".txt";
 
                             //filter the content from the table based on the HTTP code
                             (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("WindowsSystemErrorCode_scwin32status LIKE '%{0}%'", windowsErr);
@@ -778,11 +778,11 @@ namespace OutSystems_Log_Parser
             }
             else if (string.IsNullOrEmpty(txtBoxHTTPCode.Text) && !string.IsNullOrEmpty(txtBoxWindowsErrorCodes.Text))
             {
-                txtFile = exportedFilesFolder + "IIS_Windows_Error_Code_" + txtBoxWindowsErrorCodes.Text + ".txt";
+                txtFile = exportedFilesFolder + txtFileName.Text + "_Windows_Error_Code_" + txtBoxWindowsErrorCodes.Text + ".txt";
             }
             else if(string.IsNullOrEmpty(txtBoxWindowsErrorCodes.Text) && !string.IsNullOrEmpty(txtBoxHTTPCode.Text))
             {
-                txtFile = exportedFilesFolder + "IIS_HTTP_Code_" + txtBoxHTTPCode.Text + ".txt";
+                txtFile = exportedFilesFolder + txtFileName.Text + "_HTTP_Code_" + txtBoxHTTPCode.Text + ".txt";
             }
 
             try
