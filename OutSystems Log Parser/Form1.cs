@@ -17,6 +17,7 @@ namespace OutSystems_Log_Parser
 {
     public partial class Form1 : Form
     {
+        string fileSelected = "";
         string fullPath = "";
         string relativePath = "";
         string extension = "";
@@ -36,63 +37,151 @@ namespace OutSystems_Log_Parser
                 txtDirectoryName.Text = "";
                 txtFileName.Text = "";
                 txtExtension.Text = "";
+                textBox1.Text = "";
+                textBox2.Text = "";
+                textBox3.Text = "";
+                textBox5.Text = "";
                 dataGridView1.DataSource = null;
 
                 //filter the file extensions and get sections from the absolute path
                 openFileDialog1.Filter = "TXT Files (*.txt)|*.txt";
-                openFileDialog1.Title = "Please select the \"masterXLSXfile\"";
+                openFileDialog1.Title = "Please select a file to analyze";
                 openFileDialog1.FileName = null;
                 openFileDialog1.ShowDialog();
                 fullPath = openFileDialog1.FileName;
 
-                if (Path.GetFileNameWithoutExtension(fullPath) == "masterXLSXfile")
+                fileSelected = Path.GetFileNameWithoutExtension(fullPath);
+                relativePath = Path.GetDirectoryName(fullPath);
+                extension = Path.GetExtension(fullPath);
+
+                if (fileSelected == "masterXLSXfile" && extension == ".txt")
                 {
-                    relativePath = Path.GetDirectoryName(fullPath);
+                    TXTfile(fullPath, delimiters);
 
-                    extension = Path.GetExtension(fullPath);
-
-                    if (extension == ".txt")
+                    if (File.Exists(relativePath + "\\masterLOGfile_datetime.txt"))
                     {
-                        txtDirectoryName.Text = fullPath.Split('\\')[3];
-                        txtFileName.Text = Path.GetFileNameWithoutExtension(fullPath);
-                        txtExtension.Text = extension;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Please select a .txt file", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        TXTfile2(relativePath + "\\masterLOGfile_datetime.txt", delimiters);
                     }
 
-                    if (extension == ".txt")
+                    if (File.Exists(relativePath + "\\masterLOGfile_timetaken.txt"))
                     {
-                        //the delimiter is always a pipe
-                        TXTfile(fullPath, delimiters);
+                        TXTfile3(relativePath + "\\masterLOGfile_timetaken.txt", delimiters);
+                    }
 
-                        if (File.Exists(relativePath + "\\masterLOGfile_datetime.txt"))
-                        {
-                            TXTfile2(relativePath + "\\masterLOGfile_datetime.txt", delimiters);
-                        }
+                    if (File.Exists(relativePath + "\\masterEVTXfile.txt"))
+                    {
+                        TXTfile4(relativePath + "\\masterEVTXfile.txt", delimiters);
+                    }
 
-                        if (File.Exists(relativePath + "\\masterLOGfile_timetaken.txt"))
-                        {
-                            TXTfile3(relativePath + "\\masterLOGfile_timetaken.txt", delimiters);
-                        }
+                    if (File.Exists(relativePath + "\\masterTXTfile.txt"))
+                    {
+                        TXTfile5(relativePath + "\\masterTXTfile.txt", delimiters);
+                    }
+                }
+                else if (fileSelected == "masterLOGfile_datetime" && extension == ".txt")
+                {
 
-                        if (File.Exists(relativePath + "\\masterEVTXfile.txt"))
-                        {
-                            TXTfile4(relativePath + "\\masterEVTXfile.txt", delimiters);
-                        }
+                    TXTfile2(fullPath, delimiters);
 
-                        if (File.Exists(relativePath + "\\masterTXTfile.txt"))
-                        {
-                            TXTfile5(relativePath + "\\masterTXTfile.txt", delimiters);
-                        }
+                    if (File.Exists(relativePath + "\\masterXLSXfile.txt"))
+                    {
+                        TXTfile(relativePath + "\\masterXLSXfile.txt", delimiters);
+                    }
+
+                    if (File.Exists(relativePath + "\\masterLOGfile_timetaken.txt"))
+                    {
+                        TXTfile3(relativePath + "\\masterLOGfile_timetaken.txt", delimiters);
+                    }
+
+                    if (File.Exists(relativePath + "\\masterEVTXfile.txt"))
+                    {
+                        TXTfile4(relativePath + "\\masterEVTXfile.txt", delimiters);
+                    }
+
+                    if (File.Exists(relativePath + "\\masterTXTfile.txt"))
+                    {
+                        TXTfile5(relativePath + "\\masterTXTfile.txt", delimiters);
+                    }
+                }
+                else if (fileSelected == "masterLOGfile_timetaken" && extension == ".txt")
+                {
+
+                    TXTfile3(fullPath, delimiters);
+
+                    if (File.Exists(relativePath + "\\masterXLSXfile.txt"))
+                    {
+                        TXTfile(relativePath + "\\masterXLSXfile.txt", delimiters);
+                    }
+
+                    if (File.Exists(relativePath + "\\masterLOGfile_datetime.txt"))
+                    {
+                        TXTfile2(relativePath + "\\masterLOGfile_datetime.txt", delimiters);
+                    }
+
+                    if (File.Exists(relativePath + "\\masterEVTXfile.txt"))
+                    {
+                        TXTfile4(relativePath + "\\masterEVTXfile.txt", delimiters);
+                    }
+
+                    if (File.Exists(relativePath + "\\masterTXTfile.txt"))
+                    {
+                        TXTfile5(relativePath + "\\masterTXTfile.txt", delimiters);
+                    }
+                }
+                else if (fileSelected == "masterEVTXfile" && extension == ".txt")
+                {
+
+                    TXTfile4(fullPath, delimiters);
+
+                    if (File.Exists(relativePath + "\\masterXLSXfile.txt"))
+                    {
+                        TXTfile(relativePath + "\\masterXLSXfile.txt", delimiters);
+                    }
+
+                    if (File.Exists(relativePath + "\\masterLOGfile_datetime.txt"))
+                    {
+                        TXTfile2(relativePath + "\\masterLOGfile_datetime.txt", delimiters);
+                    }
+
+                    if (File.Exists(relativePath + "\\masterLOGfile_timetaken.txt"))
+                    {
+                        TXTfile3(relativePath + "\\masterLOGfile_timetaken.txt", delimiters);
+                    }
+
+                    if (File.Exists(relativePath + "\\masterTXTfile.txt"))
+                    {
+                        TXTfile5(relativePath + "\\masterTXTfile.txt", delimiters);
+                    }
+                }
+                else if (fileSelected == "masterTXTfile" && extension == ".txt")
+                {
+
+                    TXTfile5(fullPath, delimiters);
+
+                    if (File.Exists(relativePath + "\\masterXLSXfile.txt"))
+                    {
+                        TXTfile(relativePath + "\\masterXLSXfile.txt", delimiters);
+                    }
+
+                    if (File.Exists(relativePath + "\\masterLOGfile_datetime.txt"))
+                    {
+                        TXTfile2(relativePath + "\\masterLOGfile_datetime.txt", delimiters);
+                    }
+
+                    if (File.Exists(relativePath + "\\masterLOGfile_timetaken.txt"))
+                    {
+                        TXTfile3(relativePath + "\\masterLOGfile_timetaken.txt", delimiters);
+                    }
+
+                    if (File.Exists(relativePath + "\\masterEVTXfile.txt"))
+                    {
+                        TXTfile4(relativePath + "\\masterEVTXfile.txt", delimiters);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Please select the \"masterXLSXfile\"", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Please select one the \"master\" files generated by the Python script", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                
             }
             catch (Exception ex)
             {
@@ -103,6 +192,10 @@ namespace OutSystems_Log_Parser
 
         private void TXTfile(string filePath, char splitter)
         {
+            txtDirectoryName.Text = filePath.Split('\\')[3];
+            txtFileName.Text = Path.GetFileNameWithoutExtension(filePath);
+            txtExtension.Text = extension;
+
             DataTable dt = new DataTable();
 
             string[] lines = System.IO.File.ReadAllLines(filePath).ToArray();
