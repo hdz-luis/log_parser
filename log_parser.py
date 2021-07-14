@@ -576,7 +576,7 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
 
     if maxLines >= numOfLines:
         if "ErrorLog" in filename:
-            readSplitFiles(cycleNum, "ErrorLog", ext, r"^([\d]+)\|([\w\-]+)\|([\d\-\:\. ]+)\|([\w\/\= ]+)?\|([\d]+)\|([\d]+)\|([\w\(\)\[\]\'\.\:\-\>\<\,\=\&\`\\\/ ]+)\|([\w\(\)\[\]\'\.\,\>\<\:\-\=\&\`\\\/ ]+)?\|([\w\(\) ]+)?\|([\w]+)\|([\w\(\)\[\]\-\:\'\,\.\>\`\<\&\=\\\/ ]+)?\|([\w]+)?\|([\w]+)?\|([\w\-]+)\|([\w]+)\|([\w ]+)\|([\w\-]+)", _fromDate, _toDate)
+            readSplitFiles(cycleNum, "ErrorLog", ext, r"^([\d]+)\|([\w\-]+)\|([\d\-\:\. ]+)\|([\w\/\=\+ ]+)?\|([\d]+)\|([\d]+)\|([\w\(\)\[\]\'\.\:\-\>\<\,\=\&\`\\\/\? ]+)\|([\w\(\)\[\]\'\.\,\>\<\:\-\=\&\`\\\/ ]+)?\|([\w\:\-\=\,\.\/\(\)\' ]+)?\|([\w\-\:\=\,\.\/\(\)\' ]+)\|([\w\(\)\[\]\-\:\'\,\.\>\`\<\&\=\\\/ ]+)?\|([\w]+)?\|([\w]+)?\|([\w\-]+)\|([\w]+)\|([\w ]+)\|([\w\-]+)", _fromDate, _toDate)
         elif "GeneralLog" in filename:
             readSplitFiles(cycleNum, "GeneralLog", ext, r"^([\d]+)\|([\d\-\:\. ]+)\|([\w\+\/\=]+)?\|([\d]+)\|([\d]+)\|([\w\-]+)?\|([\w\(\)\.\:\'\- ]+)\|([\w]+)?\|([\w]+)\|([\w\-]+)?\|([\w]+)?\|([\w]+)?\|([\d\.\:]+)?\|([\w]+)?\|([\w ]+)?\|([\w\-]+)?\|([\w\@\.]+)?", _fromDate, _toDate)
         elif "IntegrationsLog" in filename:
@@ -603,7 +603,7 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
             searchLines = linesFromText.read()
             #split the fields and rearrange them to combine them all later
             if "ErrorLog" in filename:
-                regex = re.compile(r"^([\d]+)\|([\w\-]+)\|([\d\-\:\. ]+)\|([\w\/\= ]+)?\|([\d]+)\|([\d]+)\|([\w\(\)\[\]\'\.\:\-\>\<\,\=\&\`\\\/ ]+)\|([\w\(\)\[\]\'\.\,\>\<\:\-\=\&\`\\\/ ]+)?\|([\w\(\) ]+)?\|([\w]+)\|([\w\(\)\[\]\-\:\'\,\.\>\`\<\&\=\\\/ ]+)?\|([\w]+)?\|([\w]+)?\|([\w\-]+)\|([\w]+)\|([\w ]+)\|([\w\-]+)", re.MULTILINE + re.IGNORECASE)
+                regex = re.compile(r"^([\d]+)\|([\w\-]+)\|([\d\-\:\. ]+)\|([\w\/\=\+ ]+)?\|([\d]+)\|([\d]+)\|([\w\(\)\[\]\'\.\:\-\>\<\,\=\&\`\\\/\? ]+)\|([\w\(\)\[\]\'\.\,\>\<\:\-\=\&\`\\\/ ]+)?\|([\w\:\-\=\,\.\/\(\)\' ]+)?\|([\w\-\:\=\,\.\/\(\)\' ]+)\|([\w\(\)\[\]\-\:\'\,\.\>\`\<\&\=\\\/ ]+)?\|([\w]+)?\|([\w]+)?\|([\w\-]+)\|([\w]+)\|([\w ]+)\|([\w\-]+)", re.MULTILINE + re.IGNORECASE)
                 for match in regex.finditer(searchLines):
                     tenantID = match.group(1)
                     iD = match.group(2)
@@ -1101,7 +1101,7 @@ def txtFile(absolutePath, filename, filenameWithExt, ext, fromDate, toDate):
         searchLines = linesFromText.read()
 
         #split the fields and rearrange them to combine them all later
-        if "iOSBuildLog" in filename:
+        if "iosbuildlog" in filename.lower():
             regex = re.compile("^\[([\d\-]+)T([\d\:\.]+)Z\][ ]\[(INFO|VERBOSE)\][ ]\[([\w\[\] ]+)?\](?:[ \t]+)([\w\:\-\/\*\@\.\#\ \,\"\(\)\'\[\]\?\~\`\>\$\=\\\{\}\^\;]+)?", re.MULTILINE + re.IGNORECASE)
             for match in regex.finditer(searchLines):
                 date = match.group(1)
@@ -1131,7 +1131,37 @@ def txtFile(absolutePath, filename, filenameWithExt, ext, fromDate, toDate):
                     if not outText in myLinesFromDateRange:
                                 myLinesFromDateRange.append(outText)
 
-        elif "service" in filename.lower() and "studio" in filename.lower():
+        elif "androidbuildlog" in filename.lower():
+            regex = re.compile("^\[([\d\-]+)T([\d\:\.]+)Z\][ ]\[(INFO|VERBOSE)\][ ]\[([\w\[\] ]+)?\](?:[ \t]+)([\w\:\-\/\*\@\.\#\ \,\"\(\)\'\[\]\?\~\`\>\$\=\\\{\}\^\;]+)?", re.MULTILINE + re.IGNORECASE)
+            for match in regex.finditer(searchLines):
+                date = match.group(1)
+                time = match.group(2)
+                messageType = match.group(3)
+                method = match.group(4)#null
+                message = match.group(5)#null
+
+                _time = time[:8]
+
+                _fromDate = datetime.strptime(fromDate, "%Y-%m-%d").date()
+                _toDate = datetime.strptime(toDate, "%Y-%m-%d").date()
+                _date = datetime.strptime(date, "%Y-%m-%d").date()
+                    
+                if _fromDate <= _date <= _toDate:
+
+                    if not method == None:
+                        method = method.replace("[", "")
+                        method = method.replace("]", "")
+                    else:
+                        method = " "
+
+                    if message == None:
+                        message = " "
+                    
+                    outText = "AndroidBuild|" + date + " " + _time + "|" + messageType + "|" + method + "|" + message + "\n"
+                    if not outText in myLinesFromDateRange:
+                                myLinesFromDateRange.append(outText)
+
+        elif "studio" in filename.lower() or "report" in filename.lower():
             #service studio report
             regex = re.compile("^(?:[ \t]+)\[([\d\/]+)[ ]([\d\:A-Z ]+)\][ ]\[([\d\:\?]+)\][ ]([\w\-\(\) ]{10,}?)(\s+(?:(?:[\w\[\]\(\)\:\;\=\-\.\+\>\’\'\`\,\<\&\#\t\r\n ]+){1,}?))?(?:\r\n|\n)", re.MULTILINE + re.IGNORECASE)
             for match in regex.finditer(searchLines):
@@ -1290,7 +1320,7 @@ def txtFile(absolutePath, filename, filenameWithExt, ext, fromDate, toDate):
 
     if len(myLinesFromDateRange) > 0:
         createFolder("\\filtered_data_files\\")
-        if "iOSBuildLog" in filename:
+        if "iosbuildlog" in filename.lower():
             outFilename = "iOS_build_logs" + ext
 
             with codecs.open(os.getcwd() + "\\filtered_data_files\\" + outFilename, "a+", "utf-8", "ignore") as linesFromDateRange:
@@ -1298,7 +1328,17 @@ def txtFile(absolutePath, filename, filenameWithExt, ext, fromDate, toDate):
                 if len(linesFromDateRange.read(100)) > 0:
                     linesFromDateRange.writelines("\n")
                 linesFromDateRange.writelines(myLinesFromDateRange)
-        elif "service" in filename.lower() and "studio" in filename.lower():
+
+        elif "androidbuildlog" in filename.lower():
+            outFilename = "android_build_logs" + ext
+
+            with codecs.open(os.getcwd() + "\\filtered_data_files\\" + outFilename, "a+", "utf-8", "ignore") as linesFromDateRange:
+                linesFromDateRange.seek(0)
+                if len(linesFromDateRange.read(100)) > 0:
+                    linesFromDateRange.writelines("\n")
+                linesFromDateRange.writelines(myLinesFromDateRange)
+
+        elif "studio" in filename.lower() or "report" in filename.lower():
             outFilename = "service_studio_report" + ext
 
             with codecs.open(os.getcwd() + "\\filtered_data_files\\" + outFilename, "a+", "utf-8", "ignore") as linesFromDateRange:
@@ -1349,7 +1389,7 @@ def combineTXTFile(directoryPath):
             #confirm if the filename matches the TXT filenames
             if not filename in myXLSXfiles:
                 if not filename == "iis_logs" and not filename == "windows_security_event_viewer" and not filename == "windows_app_sys_event_viewer":
-                    if filename == "iOS_build_logs" or filename == "service_studio_report":
+                    if filename == "iOS_build_logs" or filename == "android_build_logs" or filename == "service_studio_report":
                         #create temporary files to store the filtered data from the TXT files
                         fullpath = os.path.join(root, f)
                         with codecs.open(os.getcwd() + "\\master_2.txt", "a", "utf-8", "ignore") as linesToText:
@@ -1404,8 +1444,6 @@ def combineTXTFile(directoryPath):
         os.remove(os.getcwd() + "\\master.txt")
 
 def combineEVTXFile(directoryPath):
-    print("Combining content from the .EVTX file(s)")
-
     outText = ""
 
     for root, subFolders, files in os.walk(directoryPath):
@@ -1413,7 +1451,7 @@ def combineEVTXFile(directoryPath):
             filename, ext = os.path.splitext(f)
             #confirm if the filename matches the TXT filenames
             if not filename in myXLSXfiles:
-                if not filename == "iis_logs" and not filename == "iOS_build_logs" and not filename == "service_studio_report":
+                if not filename == "iis_logs" and not filename == "iOS_build_logs" and not filename == "android_build_logs" and not filename == "service_studio_report":
                     #create temporary files to store the filtered data from the TXT files
                     fullpath = os.path.join(root, f)
                     with codecs.open(os.getcwd() + "\\master_2.txt", "a", "utf-8", "ignore") as linesToText:
@@ -1422,6 +1460,7 @@ def combineEVTXFile(directoryPath):
                             linesToText.writelines(contents)
 
     if os.path.exists(os.getcwd() + "\\master_2.txt"):
+        print("Combining content from the .EVTX file(s)")
         #sort the data by the timestamp
         with codecs.open(os.getcwd() + "\\master_2.txt", "r", "utf-8", "ignore") as linesFromText:
             searchLines = linesFromText.read()
