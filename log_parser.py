@@ -5,6 +5,8 @@ import csv
 import codecs
 import shutil
 import openpyxl
+from lxml import etree
+import Evtx.Evtx as evtx
 from datetime import datetime
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
@@ -34,7 +36,7 @@ TXT:
 LOG DATE_TIME MESSAGE_TYPE ACTION_NAME MESSAGE
 
 EVTX:
-LOG DATE_TIME LEVEL SOURCE EVENT_ID TASK CATEGORY MESSAGE
+LOG DATE_TIME LEVEL PROVIDER_NAME QUALIFIERS EVENT_ID EVENT_RECORD_ID TASK KEYWORDS MESSAGE COMPUTER
 
 1) Filter data based on a date range
 2) Read the input files and rearrange the columns.
@@ -53,6 +55,7 @@ myTXTlines = []
 myFileExt = []
 myDateTimes = []
 myTimesTaken = []
+myXMLList = []
 myXLSXfiles = [
     "error_logs",
     "general_logs",
@@ -85,6 +88,8 @@ def searchDirectory(directoryPath):
                 txtFile(absolutePathOfFile, filenameWithoutExt, filenameWithExt, extension, fromDate, toDate)
             elif extension == ".log":
                 logFile(absolutePathOfFile, filenameWithExt, ".txt", fromDate, toDate)
+            elif extension == ".evtx":
+                evtxFile(absolutePathOfFile, filenameWithExt, ".txt", fromDate, toDate)
 
 def searchDirectory2(directoryPath, myList):
     #search for the files with the filtered data
@@ -162,7 +167,7 @@ def readSplitFiles(cycleNum, filename, ext, pattern, _fromDate, _toDate):
                     applicationKey = match.group(17)
                                 
                     date = timestamp[0:10]
-                    time = timestamp[12:19]
+                    time = timestamp[11:19]
                     time = time.replace(".", "")
 
                     _date = datetime.strptime(date, "%Y-%m-%d").date()
@@ -213,7 +218,7 @@ def readSplitFiles(cycleNum, filename, ext, pattern, _fromDate, _toDate):
                     username = match.group(17)#null
                                 
                     date = timestamp[0:10]
-                    time = timestamp[12:19]
+                    time = timestamp[11:19]
                     time = time.replace(".", "")
 
                     _date = datetime.strptime(date, "%Y-%m-%d").date()
@@ -276,7 +281,7 @@ def readSplitFiles(cycleNum, filename, ext, pattern, _fromDate, _toDate):
                     applicationKey = match.group(14)
                                 
                     date = timestamp[0:10]
-                    time = timestamp[12:19]
+                    time = timestamp[11:19]
                     time = time.replace(".", "")
 
                     _date = datetime.strptime(date, "%Y-%m-%d").date()
@@ -317,7 +322,7 @@ def readSplitFiles(cycleNum, filename, ext, pattern, _fromDate, _toDate):
                     applicationKey = match.group(16)
                                 
                     date = timestamp[0:10]
-                    time = timestamp[12:19]
+                    time = timestamp[11:19]
                     time = time.replace(".", "")
 
                     _date = datetime.strptime(date, "%Y-%m-%d").date()
@@ -350,7 +355,7 @@ def readSplitFiles(cycleNum, filename, ext, pattern, _fromDate, _toDate):
                     cyclicJobName = match.group(14)
                                 
                     date = timestamp[0:10]
-                    time = timestamp[12:19]
+                    time = timestamp[11:19]
                     time = time.replace(".", "")
 
                     _date = datetime.strptime(date, "%Y-%m-%d").date()
@@ -427,7 +432,7 @@ def readSplitFiles(cycleNum, filename, ext, pattern, _fromDate, _toDate):
                     username = match.group(16)
                                 
                     date = timestamp[0:10]
-                    time = timestamp[12:19]
+                    time = timestamp[11:19]
                     time = time.replace(".", "")
 
                     _date = datetime.strptime(date, "%Y-%m-%d").date()
@@ -465,7 +470,7 @@ def readSplitFiles(cycleNum, filename, ext, pattern, _fromDate, _toDate):
                     originalRequestKey = match.group(19)
                                 
                     date = timestamp[0:10]
-                    time = timestamp[12:19]
+                    time = timestamp[11:19]
                     time = time.replace(".", "")
 
                     _date = datetime.strptime(date, "%Y-%m-%d").date()
@@ -513,7 +518,7 @@ def readSplitFiles(cycleNum, filename, ext, pattern, _fromDate, _toDate):
                     applicationKey = match.group(20)
                         
                     date = timestamp[0:10]
-                    time = timestamp[12:19]
+                    time = timestamp[11:19]
                     time = time.replace(".", "")
 
                     _date = datetime.strptime(date, "%Y-%m-%d").date()
@@ -527,6 +532,11 @@ def readSplitFiles(cycleNum, filename, ext, pattern, _fromDate, _toDate):
                         if not outText in myLinesFromDateRange:
                             myLinesFromDateRange.append(outText)
         count+=1
+
+def parseXMLtoString(lineToXML, xmlPath):
+    xmlVar = etree.XPath(xmlPath)
+    newXMLVar = " ".join(xmlVar(lineToXML))
+    return newXMLVar
 
 def xlsxFile(absolutePath, relativePath, filename, ext, fromDate, toDate):
     #convert the XLSX file to TXT to manipulate the data in an easier way
@@ -624,7 +634,7 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
                     applicationKey = match.group(17)
                             
                     date = timestamp[0:10]
-                    time = timestamp[12:19]
+                    time = timestamp[11:19]
                     time = time.replace(".", "")
 
                     _date = datetime.strptime(date, "%Y-%m-%d").date()
@@ -675,7 +685,7 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
                     username = match.group(17)#null
                         
                     date = timestamp[0:10]
-                    time = timestamp[12:19]
+                    time = timestamp[11:19]
                     time = time.replace(".", "")
 
                     _date = datetime.strptime(date, "%Y-%m-%d").date()
@@ -738,7 +748,7 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
                     applicationKey = match.group(14)
                         
                     date = timestamp[0:10]
-                    time = timestamp[12:19]
+                    time = timestamp[11:19]
                     time = time.replace(".", "")
 
                     _date = datetime.strptime(date, "%Y-%m-%d").date()
@@ -779,7 +789,7 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
                     applicationKey = match.group(16)
                         
                     date = timestamp[0:10]
-                    time = timestamp[12:19]
+                    time = timestamp[11:19]
                     time = time.replace(".", "")
 
                     _date = datetime.strptime(date, "%Y-%m-%d").date()
@@ -812,7 +822,7 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
                     cyclicJobName = match.group(14)
                         
                     date = timestamp[0:10]
-                    time = timestamp[12:19]
+                    time = timestamp[11:19]
                     time = time.replace(".", "")
 
                     _date = datetime.strptime(date, "%Y-%m-%d").date()
@@ -889,7 +899,7 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
                     username = match.group(16)
                         
                     date = timestamp[0:10]
-                    time = timestamp[12:19]
+                    time = timestamp[11:19]
                     time = time.replace(".", "")
 
                     _date = datetime.strptime(date, "%Y-%m-%d").date()
@@ -927,7 +937,7 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
                     originalRequestKey = match.group(19)
                         
                     date = timestamp[0:10]
-                    time = timestamp[12:19]
+                    time = timestamp[11:19]
                     time = time.replace(".", "")
 
                     _date = datetime.strptime(date, "%Y-%m-%d").date()
@@ -975,7 +985,7 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
                     applicationKey = match.group(20)
                         
                     date = timestamp[0:10]
-                    time = timestamp[12:19]
+                    time = timestamp[11:19]
                     time = time.replace(".", "")
 
                     _date = datetime.strptime(date, "%Y-%m-%d").date()
@@ -1041,8 +1051,8 @@ def combineXLSXFile(directoryPath):
                         contents = linesFromText.readlines()
                         linesToText.writelines(contents)
             else:
-                if not filename == "iis_logs" and not filename == "iOS_build_logs" and not filename == "service_studio_report":
-                    if not filename == "windows_security_event_viewer" and not filename == "windows_app_sys_event_viewer":
+                if not filename == "iis_logs" and not filename == "iOS_build_logs" and not filename == "android_build_logs" and not filename == "service_studio_report":
+                    if not filename == "windows_event_viewer_logs":
                         print("\"" + filename + "\" was not found in the XLSX files list")
 
     if os.path.exists(os.getcwd() + "\\master_2.txt"):
@@ -1213,111 +1223,6 @@ def txtFile(absolutePath, filename, filenameWithExt, ext, fromDate, toDate):
                         if not outText in myLinesFromDateRange:
                             myLinesFromDateRange.append(outText)
 
-        elif "security" in filename.lower():
-            #windows security event viewer
-            regex2 = re.compile("^([\w]+)(?:[\t]+)([\d\/]+)[ ]([\d\:A-Z ]+)(?:[\t]+)([\w\-\. ]+)(?:[\t]+)([\d]+)(?:[\t]+)([\w\(\) ]+)(?:[\t]+)([\w\.\-\:\;\,\"\(\) ]+)(?:(?:\r\n|\n){2})((?:.*(?:\r\n|\n)){1,}?)Token", re.MULTILINE + re.IGNORECASE)
-            for match2 in regex2.finditer(searchLines):
-                level = match2.group(1)
-                date = match2.group(2)
-                time = match2.group(3)
-                source = match2.group(4)
-                eventID = match2.group(5)
-                task = match2.group(6)
-                category = match2.group(7)
-                message = match2.group(8)
-
-                #reformat the dates
-                year = date.split("/")[2]
-                month = date.split("/")[0]
-                day = date.split("/")[1]
-
-                if len(month) != 2:
-                    month = "0" + month
-
-                _date = year + "-" + month + "-" + day
-
-                #reformat the times
-                if time[-2:] == "AM" and time[:2] == "12":
-                    _time = "00" + time[2:-2]
-                elif time[-2:] == "AM":
-                    _time = time[:-2]
-                elif time[-2:] == "PM" and time[:2] == "12":
-                    _time = time[:-2]
-                elif time[-2:] == "PM":
-                    hours = time.split(":")[0]
-                    minutes = time.split(":")[1]
-                    seconds = time.split(":")[2]
-                    _time = str(int(hours) + 12) + ":" + minutes + ":" + seconds[:-2]
-
-                message = message.replace("\t", " ")
-                message = message.replace("\r\n", " ")
-                message = message.replace("\n", " ")
-
-                _fromDate = datetime.strptime(fromDate, "%Y-%m-%d").date()
-                _toDate = datetime.strptime(toDate, "%Y-%m-%d").date()
-                _date_ = datetime.strptime(_date, "%Y-%m-%d").date()
-                        
-                if _fromDate <= _date_ <= _toDate:
-                             
-                    outText = "WindowsSecurityEventViewer|" + _date + " " + _time.strip() + "|" + level + "|" + source + "|" + eventID + "|" + task + "|" + category + "|" + message.strip() + "\n"
-                    if not outText in myLinesFromDateRange:
-                        myLinesFromDateRange.append(outText)
-
-        elif "application" in filename.lower() or "system" in filename.lower():
-            #windows application/system event viewer
-            regex3 = re.compile("^([\w]+)(?:[\t]+)([\d\/]+)[ ]([\d\:A-Z ]+)(?:[\t]+)([\w\-\. ]+)(?:[\t]+)([\d]+)(?:[\t]+)([\w\(\) ]+)(?:[\t]+)([\w\.\-\:\;\,\"\(\) ]+)(?:(?:(?:\r\n|\n){2}).*?originated.*?saved.*?(?:(?:\r\n|\n){2}).*?information.*?event\:\s*?(?:\r\n|\n)(?:\r\n|\n)((?:.*(?:\r\n|\n)){1,}?)\")?", re.MULTILINE + re.IGNORECASE)
-            for match3 in regex3.finditer(searchLines):
-                level = match3.group(1)
-                date = match3.group(2)
-                time = match3.group(3)
-                source = match3.group(4)
-                eventID = match3.group(5)
-                task = match3.group(6)
-                category = match3.group(7)
-                message = match3.group(8)#null
-
-                #reformat the dates
-                year = date.split("/")[2]
-                month = date.split("/")[0]
-                day = date.split("/")[1]
-
-                if len(month) != 2:
-                    month = "0" + month
-
-                _date = year + "-" + month + "-" + day
-
-                #reformat the times
-                if time[-2:] == "AM" and time[:2] == "12":
-                    _time = "00" + time[2:-2]
-                elif time[-2:] == "AM":
-                    _time = time[:-2]
-                elif time[-2:] == "PM" and time[:2] == "12":
-                    _time = time[:-2]
-                elif time[-2:] == "PM":
-                    hours = time.split(":")[0]
-                    minutes = time.split(":")[1]
-                    seconds = time.split(":")[2]
-                    _time = str(int(hours) + 12) + ":" + minutes + ":" + seconds[:-2]
-
-                _fromDate = datetime.strptime(fromDate, "%Y-%m-%d").date()
-                _toDate = datetime.strptime(toDate, "%Y-%m-%d").date()
-                _date_ = datetime.strptime(_date, "%Y-%m-%d").date()
-                            
-                if _fromDate <= _date_ <= _toDate:
-
-                    if message == None:
-                        message = " "
-                        outText = "WindowsAppSysEventViewer|" + _date + " " + _time.strip() + "|" + level + "|" + source + "|" + eventID + "|" + task + "|" + category + "|" + message + "\n"
-                        if not outText in myLinesFromDateRange:
-                            myLinesFromDateRange.append(outText)
-                    else:
-                        message = message.replace("\t", " ")
-                        message = message.replace("\r\n", " ")
-                        message = message.replace("\n", " ")
-                        outText = "WindowsAppSysEventViewer|" + _date + " " + _time.strip() + "|" + level + "|" + source + "|" + eventID + "|" + task + "|" + category + "|The following information was included with the event: " + message.strip() + "\n"
-                        if not outText in myLinesFromDateRange:
-                            myLinesFromDateRange.append(outText)
-
     if len(myLinesFromDateRange) > 0:
         createFolder("\\filtered_data_files\\")
         if "iosbuildlog" in filename.lower():
@@ -1353,24 +1258,6 @@ def txtFile(absolutePath, filename, filenameWithExt, ext, fromDate, toDate):
                 searchLines2 = searchLines2[:-1]
                 with codecs.open(os.getcwd() + "\\filtered_data_files\\" + outFilename, "w", "utf-8", "ignore") as linesFromDateRange2:
                     linesFromDateRange2.writelines(searchLines2)
-
-        elif "security" in filename.lower():
-            outFilename = "windows_security_event_viewer" + ext
-
-            with codecs.open(os.getcwd() + "\\filtered_data_files\\" + outFilename, "a+", "utf-8", "ignore") as linesFromDateRange:
-                linesFromDateRange.seek(0)
-                if len(linesFromDateRange.read(100)) > 0:
-                    linesFromDateRange.writelines("\n")
-                linesFromDateRange.writelines(myLinesFromDateRange)
-
-        elif "application" in filename.lower() or "system" in filename.lower():
-            outFilename = "windows_app_sys_event_viewer" + ext
-
-            with codecs.open(os.getcwd() + "\\filtered_data_files\\" + outFilename, "a+", "utf-8", "ignore") as linesFromDateRange:
-                linesFromDateRange.seek(0)
-                if len(linesFromDateRange.read(100)) > 0:
-                    linesFromDateRange.writelines("\n")
-                linesFromDateRange.writelines(myLinesFromDateRange)
                 
     else:
         print("No data was found within the specified date range.")
@@ -1388,7 +1275,7 @@ def combineTXTFile(directoryPath):
             filename, ext = os.path.splitext(f)
             #confirm if the filename matches the TXT filenames
             if not filename in myXLSXfiles:
-                if not filename == "iis_logs" and not filename == "windows_security_event_viewer" and not filename == "windows_app_sys_event_viewer":
+                if not filename == "iis_logs" and not filename == "windows_event_viewer_logs":
                     if filename == "iOS_build_logs" or filename == "android_build_logs" or filename == "service_studio_report":
                         #create temporary files to store the filtered data from the TXT files
                         fullpath = os.path.join(root, f)
@@ -1438,69 +1325,6 @@ def combineTXTFile(directoryPath):
             linesToText4.writelines(myTXTlines)
 
         print("Master file was created from the .TXT file(s)")
-        del myTXTlines[:]
-        #delete the temporary files
-        os.remove(os.getcwd() + "\\master_2.txt")
-        os.remove(os.getcwd() + "\\master.txt")
-
-def combineEVTXFile(directoryPath):
-    outText = ""
-
-    for root, subFolders, files in os.walk(directoryPath):
-        for f in files:
-            filename, ext = os.path.splitext(f)
-            #confirm if the filename matches the TXT filenames
-            if not filename in myXLSXfiles:
-                if not filename == "iis_logs" and not filename == "iOS_build_logs" and not filename == "android_build_logs" and not filename == "service_studio_report":
-                    #create temporary files to store the filtered data from the TXT files
-                    fullpath = os.path.join(root, f)
-                    with codecs.open(os.getcwd() + "\\master_2.txt", "a", "utf-8", "ignore") as linesToText:
-                        with codecs.open(fullpath, "r", "utf-8", "ignore") as linesFromText:
-                            contents = linesFromText.readlines()
-                            linesToText.writelines(contents)
-
-    if os.path.exists(os.getcwd() + "\\master_2.txt"):
-        print("Combining content from the .EVTX file(s)")
-        #sort the data by the timestamp
-        with codecs.open(os.getcwd() + "\\master_2.txt", "r", "utf-8", "ignore") as linesFromText:
-            searchLines = linesFromText.read()
-            regex = re.compile("^([\w]+)\|([\d\-\: ]+)\|(.+)", re.MULTILINE + re.IGNORECASE)
-            for match in regex.finditer(searchLines):
-                source = match.group(1)
-                dateTime = match.group(2)
-                tail = match.group(3)
-
-                outText = dateTime + "|" + source + "|" + tail + "\n"
-                if not outText in myTXTlines:
-                    myTXTlines.append(outText)
-
-        myTXTlines.sort()
-
-        #create another temporary file to store the sorted data
-        with codecs.open(os.getcwd() + "\\master.txt", "w", "utf-8", "ignore") as linesToText3:
-            linesToText3.writelines(myTXTlines)
-
-        del myTXTlines[:]
-        outText = ""
-
-        #rearrange the fields from the sorted data
-        with codecs.open(os.getcwd() + "\\master.txt", "r", "utf-8", "ignore") as linesFromText2:
-            searchLines2 = linesFromText2.read()
-            regex = re.compile("^([\d\-\: ]+)\|([\w]+)\|(.+)", re.MULTILINE + re.IGNORECASE)
-            for match in regex.finditer(searchLines2):
-                date_time = match.group(1)
-                _source = match.group(2)
-                _tail = match.group(3)
-
-                outText = _source + "|" + date_time + "|" + _tail + "\n"
-                if not outText in myTXTlines:
-                    myTXTlines.append(outText)
-
-        createFolder("\\master_files\\")
-        with codecs.open(os.getcwd() + "\\master_files\\masterEVTXfile.txt", "w", "utf-8", "ignore") as linesToText4:
-            linesToText4.writelines(myTXTlines)
-
-        print("Master file was created from the .EVTX file(s)")
         del myTXTlines[:]
         #delete the temporary files
         os.remove(os.getcwd() + "\\master_2.txt")
@@ -1680,6 +1504,143 @@ def combineLOGFile(directoryPath):
                 outText2 = ""
                 #delete the temporary file
                 os.remove(os.getcwd() + "\\master.txt")
+
+def evtxFile(absolutePath, filenameWithExt, ext, fromDate, toDate):
+    print("Reading: " + filenameWithExt)
+
+    del myLinesFromDateRange[:]
+    outText = ""
+
+    #read the windows event viewer log and convert its contents to XML
+    with evtx.Evtx(absolutePath) as log:
+        for record in log.records():
+            myXMLList.append(record.xml())
+
+    for x, elm in enumerate(myXMLList):
+        #remove the namespace from each line of the list
+        xmlLine = myXMLList[x].replace(" xmlns=\"http://schemas.microsoft.com/win/2004/08/events/event\"", "")
+        #parse each line from the list to XML format
+        xmlParse = etree.XML(xmlLine)
+
+        providerName = parseXMLtoString(xmlParse, ".//Provider/@Name")
+        qualifiers = parseXMLtoString(xmlParse, ".//EventID/@Qualifiers")
+        timestamp = parseXMLtoString(xmlParse, ".//TimeCreated/@SystemTime")
+        eventID = parseXMLtoString(xmlParse, ".//EventID/text()")
+        level = parseXMLtoString(xmlParse, ".//Level/text()")
+        task = parseXMLtoString(xmlParse, ".//Task/text()")
+        keywords = parseXMLtoString(xmlParse, ".//Keywords/text()")
+        eventRecordID = parseXMLtoString(xmlParse, ".//EventRecordID/text()")
+        channel = parseXMLtoString(xmlParse, ".//Channel/text()")
+        computer = parseXMLtoString(xmlParse, ".//Computer/text()")
+        message = parseXMLtoString(xmlParse, ".//Data/text()")
+
+        date = timestamp[0:10]
+        time = timestamp[11:19]
+        time = time.replace(".", "")
+
+        _fromDate = datetime.strptime(fromDate, "%Y-%m-%d").date()
+        _toDate = datetime.strptime(toDate, "%Y-%m-%d").date()
+        _date = datetime.strptime(date, "%Y-%m-%d").date()
+                
+        if _fromDate <= _date <= _toDate:
+
+            if level == "0" or level == "4":
+                level = "Information"
+            elif level == "1":
+                level = "Critical"
+            elif level == "2":
+                level = "Error"
+            elif level == "3":
+                level = "Warning"
+
+            message = message.replace("<string>", "")
+            message = message.replace("</string>", "")
+            message = message.replace("\t", " ")
+            message = message.replace("\r\n", " ")
+            message = message.replace("\n", " ")
+
+            outText = channel + "|" + date + " " + time + "|" + level + "|" + providerName + "|" + qualifiers + "|" + eventID + "|" + eventRecordID + "|" + task + "|" + keywords + "|" + message.strip() + "|" + computer + "\n"
+            if not outText in myLinesFromDateRange:
+                        myLinesFromDateRange.append(outText)
+
+    if len(myLinesFromDateRange) > 0:
+        createFolder("\\filtered_data_files\\")
+        outFilename = "windows_event_viewer_logs" + ext
+
+        with codecs.open(os.getcwd() + "\\filtered_data_files\\" + outFilename, "a+", "utf-8", "ignore") as linesFromDateRange:
+            linesFromDateRange.seek(0)
+            if len(linesFromDateRange.read(100)) > 0:
+                linesFromDateRange.writelines("\n")
+            linesFromDateRange.writelines(myLinesFromDateRange)
+    else:
+        print("No data was found within the specified date range.")
+
+    print("Closing: " + filenameWithExt)
+    del myLinesFromDateRange[:]
+    
+def combineEVTXFile(directoryPath):
+    del myTXTlines[:]
+    outText = ""
+    
+    for root, subFolders, files in os.walk(directoryPath):
+        for f in files:
+            filename, ext = os.path.splitext(f)
+            #confirm if the filename matches the TXT filenames
+            if not filename in myXLSXfiles:
+                if not filename == "iis_logs" and not filename == "iOS_build_logs" and not filename == "android_build_logs" and not filename == "service_studio_report":
+                    #create temporary files to store the filtered data from the TXT files
+                    fullpath = os.path.join(root, f)
+                    with codecs.open(os.getcwd() + "\\master_2.txt", "a", "utf-8", "ignore") as linesToText:
+                        with codecs.open(fullpath, "r", "utf-8", "ignore") as linesFromText:
+                            contents = linesFromText.readlines()
+                            linesToText.writelines(contents)
+
+    if os.path.exists(os.getcwd() + "\\master_2.txt"):
+        print("Combining content from the .EVTX file(s)")
+        #sort the data by the timestamp
+        with codecs.open(os.getcwd() + "\\master_2.txt", "r", "utf-8", "ignore") as linesFromText:
+            searchLines = linesFromText.read()
+            regex = re.compile("^([\w]+)\|([\d\-\: ]+)\|(.+)", re.MULTILINE + re.IGNORECASE)
+            for match in regex.finditer(searchLines):
+                source = match.group(1)
+                dateTime = match.group(2)
+                tail = match.group(3)
+
+                outText = dateTime + "|" + source + "|" + tail + "\n"
+                if not outText in myTXTlines:
+                    myTXTlines.append(outText)
+
+        myTXTlines.sort()
+
+        #create another temporary file to store the sorted data
+        with codecs.open(os.getcwd() + "\\master.txt", "w", "utf-8", "ignore") as linesToText3:
+            linesToText3.writelines(myTXTlines)
+
+        del myTXTlines[:]
+        outText = ""
+
+        #rearrange the fields from the sorted data
+        with codecs.open(os.getcwd() + "\\master.txt", "r", "utf-8", "ignore") as linesFromText2:
+            searchLines2 = linesFromText2.read()
+            regex = re.compile("^([\d\-\: ]+)\|([\w]+)\|(.+)", re.MULTILINE + re.IGNORECASE)
+            for match in regex.finditer(searchLines2):
+                date_time = match.group(1)
+                _source = match.group(2)
+                _tail = match.group(3)
+
+                outText = _source + "|" + date_time + "|" + _tail + "\n"
+                if not outText in myTXTlines:
+                    myTXTlines.append(outText)
+
+        createFolder("\\master_files\\")
+        with codecs.open(os.getcwd() + "\\master_files\\masterEVTXfile.txt", "w", "utf-8", "ignore") as linesToText4:
+            linesToText4.writelines(myTXTlines)
+
+        print("Master file was created from the .EVTX file(s)")
+        del myTXTlines[:]
+        #delete the temporary files
+        os.remove(os.getcwd() + "\\master_2.txt")
+        os.remove(os.getcwd() + "\\master.txt")
 
 #the following line displays the absolute path of the folder where
 #Python was installed on your PC. Uncomment only when necessary.
