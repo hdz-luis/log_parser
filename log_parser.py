@@ -278,7 +278,7 @@ def readSplitFiles(cycleNum, filename, ext, pattern, _fromDate, _toDate):
                     requestKey = match.group(11)
                     eSpaceName = match.group(12)
                     applicationName = match.group(13)
-                    applicationKey = match.group(14)
+                    applicationKey = match.group(14)#null
                                 
                     date = timestamp[0:10]
                     time = timestamp[11:19]
@@ -296,6 +296,9 @@ def readSplitFiles(cycleNum, filename, ext, pattern, _fromDate, _toDate):
 
                         if errorID == None:
                             errorID = " "
+
+                        if applicationKey == None:
+                            applicationKey = " "
 
                         outText = "Integrations|" + date + " " + time + "|||" + duration + "||||||||||||" + applicationName + "|" + applicationKey + "||" + actionName + "|" + actionType + "||" + source + "||" + endpoint + "|" + executedBy + "|||" + eSpaceName + "|" + eSpaceID + "||||||||||||||||||" + errorID + "||||||" + requestKey + "|||" + tenantID + "\n"
                         if not outText in myLinesFromDateRange:
@@ -429,7 +432,7 @@ def readSplitFiles(cycleNum, filename, ext, pattern, _fromDate, _toDate):
                     extensionName = match.group(13)
                     applicationName = match.group(14)
                     applicationKey = match.group(15)
-                    username = match.group(16)
+                    username = match.group(16)#null
                                 
                     date = timestamp[0:10]
                     time = timestamp[11:19]
@@ -441,6 +444,9 @@ def readSplitFiles(cycleNum, filename, ext, pattern, _fromDate, _toDate):
 
                         if errorID == None:
                             errorID = " "
+
+                        if username == None:
+                            username = " "
 
                         outText = "Extension|" + date + " " + time + "|||" + duration + "||||||||||||" + applicationName + "|" + applicationKey + "||" + actionName + "||||||" + executedBy + "|||" + eSpaceName + "|" + eSpaceID + "|" + username + "||" + userID + "|" + sessionID + "|" + extensionID + "|" + extensionName + "|||||||||" + errorID + "||||||" + requestKey + "|||" + tenantID + "\n"
                         if not outText in myLinesFromDateRange:
@@ -590,15 +596,15 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
         elif "GeneralLog" in filename:
             readSplitFiles(cycleNum, "GeneralLog", ext, r"^([\d]+)\|([\d\-\:\. ]+)\|([\w\+\/\=]+)?\|([\d]+)\|([\d]+)\|([\w\-]+)?\|([\w\(\)\.\:\'\- ]+)\|([\w]+)?\|([\w]+)\|([\w\-]+)?\|([\w]+)?\|([\w]+)?\|([\d\.\:]+)?\|([\w]+)?\|([\w ]+)?\|([\w\-]+)?\|([\w\@\.]+)?", _fromDate, _toDate)
         elif "IntegrationsLog" in filename:
-            readSplitFiles(cycleNum, "IntegrationsLog", ext, r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d\.]+)?\|([\w\:\/\.\-]+)?\|([\w\.\(\) ]+)\|([\w\(\) ]+)\|([\d]+)\|([\w\-]+)?\|([\w]+)\|([\w\-]+)\|([\w]+)\|([\w ]+)\|([\w\-]+)", _fromDate, _toDate)
+            readSplitFiles(cycleNum, "IntegrationsLog", ext, r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d\.]+)?\|([\w\:\/\.\-]+)?\|([\w\/\.\(\) ]+)\|([\w\(\) ]+)\|([\d]+)\|([\w\-]+)?\|([\w\-]+)\|([\w\-\:]+)\|([\w\.]+)\|([\w\. ]+)\|([\w\-]+)?", _fromDate, _toDate)
         elif "MobileRequestsLog" in filename:
             readSplitFiles(cycleNum, "MobileRequestsLog", ext, r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\.\-\:\; ]+)\|([\w]+)\|([\d]+)\|([\w\-]+)\|([\w\-]+)?\|([\d]+)\|([\w\-]+)\|([\w\/\+\=]+)\|([\d]+)\|([\w]+)\|([\w]+)\|([\w\-]+)", _fromDate, _toDate)
         elif "TimerLog" in filename:
             readSplitFiles(cycleNum, "TimerLog", ext, r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w\-]+)\|([\d]+)\|([\w\-]+)\|([\w\-]+)?\|([\d\-\:\. ]+)\|([\d\-\:\. ]+)\|([\w\-]+)\|([\w]+)\|([\w ]+)\|([\w\-]+)\|([\w]+)", _fromDate, _toDate)
         elif "EmailLog" in filename:
-            readSplitFiles(cycleNum, "EmailLog", ext, r"^([\d]+)\|([\w]+)\|([\w\-\:\. ]+)\|([\w\-\:\. ]+)?\|([\d]+)\|([\w\@\.]+)\|([\w\@\.]+)\|([\w\@\.]+)?\|([\w\@\.]+)?\|([\w ]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)\|([\w]+)\|([\w]+)\|([\d]+)\|([\w\@\.]+)", _fromDate, _toDate)
+            readSplitFiles(cycleNum, "EmailLog", ext, r"^([\d]+)\|([\w]+)\|([\w\-\:\. ]+)\|([\w\-\:\. ]+)?\|([\d]+)\|([\w\@\.\-]+)\|([\w\@\.\-]+)\|([\w\@\.]+)?\|([\w\@\.]+)?\|([\w\.\!\?\:\-\(\)\[\]\,\@\#\$\%\&\*\'\"\;\+\= ]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)\|([\w]+)\|([\w]+)\|([\d]+)\|([\w\@\.]+)", _fromDate, _toDate)
         elif "ExtensionLog" in filename:
-            readSplitFiles(cycleNum, "ExtensionLog", ext, r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\/\=\+]+)\|([\d]+)\|([\d]+)\|([\d]+)\|([\w\-]+)\|([\w\-]+)?\|([\w\-]+)\|([\w]+)\|([\w]+)\|([\w]+)\|([\w\-]+)\|([\w\@\.]+)", _fromDate, _toDate)
+            readSplitFiles(cycleNum, "ExtensionLog", ext, r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\/\=\+]+)\|([\d]+)\|([\d]+)\|([\d]+)\|([\w\-]+)\|([\w\-]+)?\|([\w\-]+)\|([\w]+)\|([\w]+)\|([\w ]+)\|([\w\-]+)\|([\w\@\.]+)?", _fromDate, _toDate)
         elif "ServiceActionLog" in filename:
             readSplitFiles(cycleNum, "ServiceActionLog", ext, r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)?\|([\w\=\/\+]+)\|([\d]+)\|([\w\-]+)?\|([\w]+)\|([\w\-]+)\|([\w\-]+)?\|([\w]+)\|([\d]+)\|([\d\.]+)\|([\w\\]+)\|([\w]+)\|([\w ]+)\|([\w\-]+)\|([\w]+)?\|([\w\-]+)", _fromDate, _toDate)
         elif "ScreenLog" in filename:
@@ -730,7 +736,7 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
                             myLinesFromDateRange.append(outText)
 
             elif "IntegrationsLog" in filename:
-                regex = re.compile(r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d\.]+)?\|([\w\:\/\.\-]+)?\|([\w\.\(\) ]+)\|([\w\(\) ]+)\|([\d]+)\|([\w\-]+)?\|([\w]+)\|([\w\-]+)\|([\w]+)\|([\w ]+)\|([\w\-]+)", re.MULTILINE + re.IGNORECASE)
+                regex = re.compile(r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d\.]+)?\|([\w\:\/\.\-]+)?\|([\w\/\.\(\) ]+)\|([\w\(\) ]+)\|([\d]+)\|([\w\-]+)?\|([\w\-]+)\|([\w\-\:]+)\|([\w\.]+)\|([\w\. ]+)\|([\w\-]+)?", re.MULTILINE + re.IGNORECASE)
                 for match in regex.finditer(searchLines):
                     tenantID = match.group(1)
                     timestamp = match.group(2)
@@ -745,7 +751,7 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
                     requestKey = match.group(11)
                     eSpaceName = match.group(12)
                     applicationName = match.group(13)
-                    applicationKey = match.group(14)
+                    applicationKey = match.group(14)#null
                         
                     date = timestamp[0:10]
                     time = timestamp[11:19]
@@ -763,6 +769,9 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
 
                         if errorID == None:
                             errorID = " "
+
+                        if applicationKey == None:
+                            applicationKey = " "
 
                         outText = "Integrations|" + date + " " + time + "|||" + duration + "||||||||||||" + applicationName + "|" + applicationKey + "||" + actionName + "|" + actionType + "||" + source + "||" + endpoint + "|" + executedBy + "|||" + eSpaceName + "|" + eSpaceID + "||||||||||||||||||" + errorID + "||||||" + requestKey + "|||" + tenantID + "\n"
                         if not outText in myLinesFromDateRange:
@@ -837,7 +846,7 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
                             myLinesFromDateRange.append(outText)
 
             elif "EmailLog" in filename:
-                regex = re.compile(r"^([\d]+)\|([\w]+)\|([\w\-\:\. ]+)\|([\w\-\:\. ]+)?\|([\d]+)\|([\w\@\.]+)\|([\w\@\.]+)\|([\w\@\.]+)?\|([\w\@\.]+)?\|([\w ]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)\|([\w]+)\|([\w]+)\|([\d]+)\|([\w\@\.]+)", re.MULTILINE + re.IGNORECASE)
+                regex = re.compile(r"^([\d]+)\|([\w]+)\|([\w\-\:\. ]+)\|([\w\-\:\. ]+)?\|([\d]+)\|([\w\@\.\-]+)\|([\w\@\.\-]+)\|([\w\@\.]+)?\|([\w\@\.]+)?\|([\w\.\!\?\:\-\(\)\[\]\,\@\#\$\%\&\*\'\"\;\+\= ]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)\|([\w]+)\|([\w]+)\|([\d]+)\|([\w\@\.]+)", re.MULTILINE + re.IGNORECASE)
                 for match in regex.finditer(searchLines):
                     iD = match.group(1)
                     name = match.group(2)
@@ -879,7 +888,7 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
                             myLinesFromDateRange.append(outText)
 
             elif "ExtensionLog" in filename:
-                regex = re.compile(r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\/\=\+]+)\|([\d]+)\|([\d]+)\|([\d]+)\|([\w\-]+)\|([\w\-]+)?\|([\w\-]+)\|([\w]+)\|([\w]+)\|([\w]+)\|([\w\-]+)\|([\w\@\.]+)", re.MULTILINE + re.IGNORECASE)
+                regex = re.compile(r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\/\=\+]+)\|([\d]+)\|([\d]+)\|([\d]+)\|([\w\-]+)\|([\w\-]+)?\|([\w\-]+)\|([\w]+)\|([\w]+)\|([\w ]+)\|([\w\-]+)\|([\w\@\.]+)?", re.MULTILINE + re.IGNORECASE)
                 for match in regex.finditer(searchLines):
                     tenantID = match.group(1)
                     timestamp = match.group(2)
@@ -896,7 +905,7 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
                     extensionName = match.group(13)
                     applicationName = match.group(14)
                     applicationKey = match.group(15)
-                    username = match.group(16)
+                    username = match.group(16)#null
                         
                     date = timestamp[0:10]
                     time = timestamp[11:19]
@@ -908,6 +917,9 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
 
                         if errorID == None:
                             errorID = " "
+
+                        if username == None:
+                            username = " "
 
                         outText = "Extension|" + date + " " + time + "|||" + duration + "||||||||||||" + applicationName + "|" + applicationKey + "||" + actionName + "||||||" + executedBy + "|||" + eSpaceName + "|" + eSpaceID + "|" + username + "||" + userID + "|" + sessionID + "|" + extensionID + "|" + extensionName + "|||||||||" + errorID + "||||||" + requestKey + "|||" + tenantID + "\n"
                         if not outText in myLinesFromDateRange:
@@ -1111,7 +1123,7 @@ def txtFile(absolutePath, filename, filenameWithExt, ext, fromDate, toDate):
         searchLines = linesFromText.read()
 
         #split the fields and rearrange them to combine them all later
-        if "iosbuildlog" in filename.lower():
+        if "iosbuildlog" in filename.lower() or "androidbuildlog" in filename.lower():
             regex = re.compile("^\[([\d\-]+)T([\d\:\.]+)Z\][ ]\[(INFO|VERBOSE)\][ ]\[([\w\[\] ]+)?\](?:[ \t]+)([\w\:\-\/\*\@\.\#\ \,\"\(\)\'\[\]\?\~\`\>\$\=\\\{\}\^\;]+)?", re.MULTILINE + re.IGNORECASE)
             for match in regex.finditer(searchLines):
                 date = match.group(1)
@@ -1136,38 +1148,12 @@ def txtFile(absolutePath, filename, filenameWithExt, ext, fromDate, toDate):
 
                     if message == None:
                         message = " "
-                    
-                    outText = "iOSBuild|" + date + " " + _time + "|" + messageType + "|" + method + "|" + message + "\n"
-                    if not outText in myLinesFromDateRange:
-                                myLinesFromDateRange.append(outText)
 
-        elif "androidbuildlog" in filename.lower():
-            regex = re.compile("^\[([\d\-]+)T([\d\:\.]+)Z\][ ]\[(INFO|VERBOSE)\][ ]\[([\w\[\] ]+)?\](?:[ \t]+)([\w\:\-\/\*\@\.\#\ \,\"\(\)\'\[\]\?\~\`\>\$\=\\\{\}\^\;]+)?", re.MULTILINE + re.IGNORECASE)
-            for match in regex.finditer(searchLines):
-                date = match.group(1)
-                time = match.group(2)
-                messageType = match.group(3)
-                method = match.group(4)#null
-                message = match.group(5)#null
+                    if "iosbuildlog" in filename.lower():
+                        outText = "iOSBuild|" + date + " " + _time + "|" + messageType + "|" + method + "|" + message + "\n"
+                    elif "androidbuildlog" in filename.lower():
+                        outText = "AndroidBuild|" + date + " " + _time + "|" + messageType + "|" + method + "|" + message + "\n"
 
-                _time = time[:8]
-
-                _fromDate = datetime.strptime(fromDate, "%Y-%m-%d").date()
-                _toDate = datetime.strptime(toDate, "%Y-%m-%d").date()
-                _date = datetime.strptime(date, "%Y-%m-%d").date()
-                    
-                if _fromDate <= _date <= _toDate:
-
-                    if not method == None:
-                        method = method.replace("[", "")
-                        method = method.replace("]", "")
-                    else:
-                        method = " "
-
-                    if message == None:
-                        message = " "
-                    
-                    outText = "AndroidBuild|" + date + " " + _time + "|" + messageType + "|" + method + "|" + message + "\n"
                     if not outText in myLinesFromDateRange:
                                 myLinesFromDateRange.append(outText)
 
@@ -1644,7 +1630,7 @@ def combineEVTXFile(directoryPath):
 
 #the following line displays the absolute path of the folder where
 #Python was installed on your PC. Uncomment only when necessary.
-#print(os.path.dirname(sys.executable))
+#print("PYTHON WAS INSTALLED HERE -> " + os.path.dirname(sys.executable))
 
 num_args = len(sys.argv)
 
