@@ -47,33 +47,36 @@
             this.label5.BackColor = System.Drawing.Color.RoyalBlue;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(10, 341);
+            this.label5.Location = new System.Drawing.Point(12, 426);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(83, 17);
+            this.label5.Size = new System.Drawing.Size(100, 20);
             this.label5.TabIndex = 42;
             this.label5.Text = "Description:";
             // 
             // txtBoxDescription
             // 
             this.txtBoxDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxDescription.Location = new System.Drawing.Point(135, 338);
+            this.txtBoxDescription.Location = new System.Drawing.Point(169, 422);
+            this.txtBoxDescription.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtBoxDescription.Multiline = true;
             this.txtBoxDescription.Name = "txtBoxDescription";
             this.txtBoxDescription.ReadOnly = true;
             this.txtBoxDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtBoxDescription.Size = new System.Drawing.Size(226, 113);
+            this.txtBoxDescription.Size = new System.Drawing.Size(282, 140);
             this.txtBoxDescription.TabIndex = 41;
             this.txtBoxDescription.TabStop = false;
             // 
             // txtBoxMeaning
             // 
             this.txtBoxMeaning.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxMeaning.Location = new System.Drawing.Point(135, 290);
+            this.txtBoxMeaning.Location = new System.Drawing.Point(169, 362);
+            this.txtBoxMeaning.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtBoxMeaning.Multiline = true;
             this.txtBoxMeaning.Name = "txtBoxMeaning";
             this.txtBoxMeaning.ReadOnly = true;
             this.txtBoxMeaning.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtBoxMeaning.Size = new System.Drawing.Size(226, 42);
+            this.txtBoxMeaning.Size = new System.Drawing.Size(282, 52);
             this.txtBoxMeaning.TabIndex = 40;
             this.txtBoxMeaning.TabStop = false;
             // 
@@ -83,19 +86,21 @@
             this.label4.BackColor = System.Drawing.Color.RoyalBlue;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(10, 293);
+            this.label4.Location = new System.Drawing.Point(12, 366);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(66, 17);
+            this.label4.Size = new System.Drawing.Size(77, 20);
             this.label4.TabIndex = 39;
             this.label4.Text = "Meaning:";
             // 
             // txtBoxWinSysErrorCode
             // 
             this.txtBoxWinSysErrorCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxWinSysErrorCode.Location = new System.Drawing.Point(135, 251);
+            this.txtBoxWinSysErrorCode.Location = new System.Drawing.Point(169, 314);
+            this.txtBoxWinSysErrorCode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtBoxWinSysErrorCode.Name = "txtBoxWinSysErrorCode";
             this.txtBoxWinSysErrorCode.ReadOnly = true;
-            this.txtBoxWinSysErrorCode.Size = new System.Drawing.Size(226, 23);
+            this.txtBoxWinSysErrorCode.Size = new System.Drawing.Size(282, 26);
             this.txtBoxWinSysErrorCode.TabIndex = 38;
             this.txtBoxWinSysErrorCode.TabStop = false;
             // 
@@ -104,9 +109,10 @@
             this.label3.BackColor = System.Drawing.Color.RoyalBlue;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(9, 242);
+            this.label3.Location = new System.Drawing.Point(11, 302);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(119, 44);
+            this.label3.Size = new System.Drawing.Size(149, 55);
             this.label3.TabIndex = 37;
             this.label3.Text = "Windows System Error Code:";
             // 
@@ -114,10 +120,12 @@
             // 
             this.listViewCodes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listViewCodes.FullRowSelect = true;
-            this.listViewCodes.Location = new System.Drawing.Point(12, 106);
+            this.listViewCodes.HideSelection = false;
+            this.listViewCodes.Location = new System.Drawing.Point(15, 132);
+            this.listViewCodes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.listViewCodes.MultiSelect = false;
             this.listViewCodes.Name = "listViewCodes";
-            this.listViewCodes.Size = new System.Drawing.Size(349, 123);
+            this.listViewCodes.Size = new System.Drawing.Size(435, 153);
             this.listViewCodes.TabIndex = 3;
             this.listViewCodes.UseCompatibleStateImageBehavior = false;
             this.listViewCodes.Click += new System.EventHandler(this.listViewCodes_Click);
@@ -127,18 +135,20 @@
             this.label1.BackColor = System.Drawing.Color.RoyalBlue;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(10, 62);
+            this.label1.Location = new System.Drawing.Point(12, 78);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(351, 41);
+            this.label1.Size = new System.Drawing.Size(439, 51);
             this.label1.TabIndex = 36;
-            this.label1.Text = "Highlight the row to display the information in the bottom section:";
+            this.label1.Text = "Click on a row to display the information in the bottom section:";
             // 
             // txtBoxSearchWinSysErrorCode
             // 
             this.txtBoxSearchWinSysErrorCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxSearchWinSysErrorCode.Location = new System.Drawing.Point(135, 20);
+            this.txtBoxSearchWinSysErrorCode.Location = new System.Drawing.Point(169, 25);
+            this.txtBoxSearchWinSysErrorCode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtBoxSearchWinSysErrorCode.Name = "txtBoxSearchWinSysErrorCode";
-            this.txtBoxSearchWinSysErrorCode.Size = new System.Drawing.Size(226, 23);
+            this.txtBoxSearchWinSysErrorCode.Size = new System.Drawing.Size(282, 26);
             this.txtBoxSearchWinSysErrorCode.TabIndex = 1;
             this.txtBoxSearchWinSysErrorCode.TextChanged += new System.EventHandler(this.txtBoxSearchWinSysErrorCode_TextChanged);
             // 
@@ -147,19 +157,20 @@
             this.label2.BackColor = System.Drawing.Color.RoyalBlue;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(10, 10);
+            this.label2.Location = new System.Drawing.Point(12, 12);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(119, 43);
+            this.label2.Size = new System.Drawing.Size(149, 54);
             this.label2.TabIndex = 35;
             this.label2.Text = "Windows System Error Code:";
             // 
             // Form4
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(371, 463);
+            this.ClientSize = new System.Drawing.Size(461, 569);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtBoxDescription);
             this.Controls.Add(this.txtBoxMeaning);
@@ -172,9 +183,10 @@
             this.Controls.Add(this.label2);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(387, 502);
-            this.MinimumSize = new System.Drawing.Size(387, 502);
+            this.MaximumSize = new System.Drawing.Size(479, 616);
+            this.MinimumSize = new System.Drawing.Size(479, 616);
             this.Name = "Form4";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Windows System Error Codes";

@@ -47,31 +47,34 @@
             this.label5.BackColor = System.Drawing.Color.RoyalBlue;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(9, 293);
+            this.label5.Location = new System.Drawing.Point(11, 366);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(83, 17);
+            this.label5.Size = new System.Drawing.Size(100, 20);
             this.label5.TabIndex = 31;
             this.label5.Text = "Description:";
             // 
             // txtBoxDescription
             // 
             this.txtBoxDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxDescription.Location = new System.Drawing.Point(101, 290);
+            this.txtBoxDescription.Location = new System.Drawing.Point(126, 362);
+            this.txtBoxDescription.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtBoxDescription.Multiline = true;
             this.txtBoxDescription.Name = "txtBoxDescription";
             this.txtBoxDescription.ReadOnly = true;
             this.txtBoxDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtBoxDescription.Size = new System.Drawing.Size(258, 113);
+            this.txtBoxDescription.Size = new System.Drawing.Size(322, 140);
             this.txtBoxDescription.TabIndex = 30;
             this.txtBoxDescription.TabStop = false;
             // 
             // txtBoxMeaning
             // 
             this.txtBoxMeaning.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxMeaning.Location = new System.Drawing.Point(101, 258);
+            this.txtBoxMeaning.Location = new System.Drawing.Point(126, 322);
+            this.txtBoxMeaning.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtBoxMeaning.Name = "txtBoxMeaning";
             this.txtBoxMeaning.ReadOnly = true;
-            this.txtBoxMeaning.Size = new System.Drawing.Size(258, 23);
+            this.txtBoxMeaning.Size = new System.Drawing.Size(322, 26);
             this.txtBoxMeaning.TabIndex = 29;
             this.txtBoxMeaning.TabStop = false;
             // 
@@ -81,19 +84,21 @@
             this.label4.BackColor = System.Drawing.Color.RoyalBlue;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(9, 261);
+            this.label4.Location = new System.Drawing.Point(11, 326);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(66, 17);
+            this.label4.Size = new System.Drawing.Size(77, 20);
             this.label4.TabIndex = 28;
             this.label4.Text = "Meaning:";
             // 
             // txtBoxHTTPcode
             // 
             this.txtBoxHTTPcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxHTTPcode.Location = new System.Drawing.Point(101, 226);
+            this.txtBoxHTTPcode.Location = new System.Drawing.Point(126, 282);
+            this.txtBoxHTTPcode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtBoxHTTPcode.Name = "txtBoxHTTPcode";
             this.txtBoxHTTPcode.ReadOnly = true;
-            this.txtBoxHTTPcode.Size = new System.Drawing.Size(258, 23);
+            this.txtBoxHTTPcode.Size = new System.Drawing.Size(322, 26);
             this.txtBoxHTTPcode.TabIndex = 27;
             this.txtBoxHTTPcode.TabStop = false;
             // 
@@ -103,9 +108,10 @@
             this.label3.BackColor = System.Drawing.Color.RoyalBlue;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(9, 229);
+            this.label3.Location = new System.Drawing.Point(11, 286);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(86, 17);
+            this.label3.Size = new System.Drawing.Size(102, 20);
             this.label3.TabIndex = 26;
             this.label3.Text = "HTTP Code:";
             // 
@@ -113,10 +119,12 @@
             // 
             this.listViewCodes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listViewCodes.FullRowSelect = true;
-            this.listViewCodes.Location = new System.Drawing.Point(12, 88);
+            this.listViewCodes.HideSelection = false;
+            this.listViewCodes.Location = new System.Drawing.Point(15, 110);
+            this.listViewCodes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.listViewCodes.MultiSelect = false;
             this.listViewCodes.Name = "listViewCodes";
-            this.listViewCodes.Size = new System.Drawing.Size(351, 123);
+            this.listViewCodes.Size = new System.Drawing.Size(438, 153);
             this.listViewCodes.TabIndex = 3;
             this.listViewCodes.UseCompatibleStateImageBehavior = false;
             this.listViewCodes.Click += new System.EventHandler(this.listViewCodes_Click);
@@ -126,18 +134,20 @@
             this.label1.BackColor = System.Drawing.Color.RoyalBlue;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(12, 37);
+            this.label1.Location = new System.Drawing.Point(15, 46);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(351, 48);
+            this.label1.Size = new System.Drawing.Size(439, 60);
             this.label1.TabIndex = 25;
-            this.label1.Text = "Highlight the row to display the information in the bottom section:";
+            this.label1.Text = "Click on a row to display the information in the bottom section:";
             // 
             // txtBoxSearchHTTPcode
             // 
             this.txtBoxSearchHTTPcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxSearchHTTPcode.Location = new System.Drawing.Point(101, 7);
+            this.txtBoxSearchHTTPcode.Location = new System.Drawing.Point(126, 9);
+            this.txtBoxSearchHTTPcode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtBoxSearchHTTPcode.Name = "txtBoxSearchHTTPcode";
-            this.txtBoxSearchHTTPcode.Size = new System.Drawing.Size(258, 23);
+            this.txtBoxSearchHTTPcode.Size = new System.Drawing.Size(322, 26);
             this.txtBoxSearchHTTPcode.TabIndex = 1;
             this.txtBoxSearchHTTPcode.TextChanged += new System.EventHandler(this.txtBoxSearchHTTPcode_TextChanged);
             // 
@@ -147,19 +157,20 @@
             this.label2.BackColor = System.Drawing.Color.RoyalBlue;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(9, 10);
+            this.label2.Location = new System.Drawing.Point(11, 12);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(86, 17);
+            this.label2.Size = new System.Drawing.Size(102, 20);
             this.label2.TabIndex = 24;
             this.label2.Text = "HTTP Code:";
             // 
             // Form3
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(371, 411);
+            this.ClientSize = new System.Drawing.Size(461, 504);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtBoxDescription);
             this.Controls.Add(this.txtBoxMeaning);
@@ -172,9 +183,10 @@
             this.Controls.Add(this.label2);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(387, 450);
-            this.MinimumSize = new System.Drawing.Size(387, 450);
+            this.MaximumSize = new System.Drawing.Size(479, 551);
+            this.MinimumSize = new System.Drawing.Size(479, 551);
             this.Name = "Form3";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "HTTP Status Codes";
