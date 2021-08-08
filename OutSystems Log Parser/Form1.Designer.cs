@@ -29,74 +29,126 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.txtFileName = new System.Windows.Forms.TextBox();
             this.btnBrowseFile = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.txtDirectoryName = new System.Windows.Forms.TextBox();
-            this.txtExtension = new System.Windows.Forms.TextBox();
             this.linkIISFields = new System.Windows.Forms.LinkLabel();
             this.linkWinSyscodes = new System.Windows.Forms.LinkLabel();
             this.linkHTTPcodes = new System.Windows.Forms.LinkLabel();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.dataGridViewErrorlogs = new System.Windows.Forms.DataGridView();
+            this.txtBoxDetailErrorLogs = new System.Windows.Forms.TextBox();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailGenerallogs = new System.Windows.Forms.TextBox();
+            this.dataGridViewGenerallogs = new System.Windows.Forms.DataGridView();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailIntegrationlogs = new System.Windows.Forms.TextBox();
+            this.dataGridViewIntegrationslogs = new System.Windows.Forms.DataGridView();
+            this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailScreenRequestslogs = new System.Windows.Forms.TextBox();
+            this.dataGridViewScreenRequestslogs = new System.Windows.Forms.DataGridView();
+            this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailTimerlogs = new System.Windows.Forms.TextBox();
+            this.dataGridViewTimerlogs = new System.Windows.Forms.DataGridView();
+            this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailEmaillogs = new System.Windows.Forms.TextBox();
+            this.dataGridViewEmaillogs = new System.Windows.Forms.DataGridView();
+            this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailExtensionlogs = new System.Windows.Forms.TextBox();
+            this.dataGridViewExtensionlogs = new System.Windows.Forms.DataGridView();
+            this.tabPage12 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailServiceActionlogs = new System.Windows.Forms.TextBox();
+            this.dataGridViewServiceActionlogs = new System.Windows.Forms.DataGridView();
+            this.tabPage13 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailTradWebRequests = new System.Windows.Forms.TextBox();
+            this.dataGridViewTradWebRequests = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.txtExtension3 = new System.Windows.Forms.TextBox();
-            this.txtDirectoryName3 = new System.Windows.Forms.TextBox();
-            this.txtFileName3 = new System.Windows.Forms.TextBox();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.txtExtension2 = new System.Windows.Forms.TextBox();
-            this.txtDirectoryName2 = new System.Windows.Forms.TextBox();
-            this.txtFileName2 = new System.Windows.Forms.TextBox();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.txtDetailIISlogs = new System.Windows.Forms.TextBox();
+            this.dataGridViewIISTimeTaken = new System.Windows.Forms.DataGridView();
+            this.dataGridViewIISDateTime = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.dataGridView4 = new System.Windows.Forms.DataGridView();
-            this.txtDirectoryName4 = new System.Windows.Forms.TextBox();
-            this.txtExtension4 = new System.Windows.Forms.TextBox();
-            this.txtFileName4 = new System.Windows.Forms.TextBox();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.tabPage14 = new System.Windows.Forms.TabPage();
+            this.dataGridViewWinAppEventViewer = new System.Windows.Forms.DataGridView();
+            this.txtBoxDetailWinAppEventViewer = new System.Windows.Forms.TextBox();
+            this.tabPage15 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailWinSysEventViewer = new System.Windows.Forms.TextBox();
+            this.dataGridViewWinSysEventViewer = new System.Windows.Forms.DataGridView();
+            this.tabPage16 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailWinSecEventViewer = new System.Windows.Forms.TextBox();
+            this.dataGridViewWinSecEventViewer = new System.Windows.Forms.DataGridView();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.dataGridView5 = new System.Windows.Forms.DataGridView();
-            this.txtDirectoryName5 = new System.Windows.Forms.TextBox();
-            this.txtExtension5 = new System.Windows.Forms.TextBox();
-            this.txtFileName5 = new System.Windows.Forms.TextBox();
+            this.tabControl3 = new System.Windows.Forms.TabControl();
+            this.tabPage17 = new System.Windows.Forms.TabPage();
+            this.dataGridViewAndroidlogs = new System.Windows.Forms.DataGridView();
+            this.txtBoxDetailAndroidLogs = new System.Windows.Forms.TextBox();
+            this.tabPage18 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailiOSLogs = new System.Windows.Forms.TextBox();
+            this.dataGridViewiOSlogs = new System.Windows.Forms.DataGridView();
+            this.tabPage19 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailServiceStudioLogs = new System.Windows.Forms.TextBox();
+            this.dataGridViewServiceStudiologs = new System.Windows.Forms.DataGridView();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.btnFilter = new System.Windows.Forms.Button();
+            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
+            this.maskedTextBox2 = new System.Windows.Forms.MaskedTextBox();
+            this.btnClearFilter = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewErrorlogs)).BeginInit();
+            this.tabPage6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewGenerallogs)).BeginInit();
+            this.tabPage7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIntegrationslogs)).BeginInit();
+            this.tabPage8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScreenRequestslogs)).BeginInit();
+            this.tabPage9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTimerlogs)).BeginInit();
+            this.tabPage10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmaillogs)).BeginInit();
+            this.tabPage11.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewExtensionlogs)).BeginInit();
+            this.tabPage12.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewServiceActionlogs)).BeginInit();
+            this.tabPage13.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTradWebRequests)).BeginInit();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIISTimeTaken)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIISDateTime)).BeginInit();
             this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
+            this.tabControl2.SuspendLayout();
+            this.tabPage14.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewWinAppEventViewer)).BeginInit();
+            this.tabPage15.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewWinSysEventViewer)).BeginInit();
+            this.tabPage16.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewWinSecEventViewer)).BeginInit();
             this.tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
+            this.tabControl3.SuspendLayout();
+            this.tabPage17.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAndroidlogs)).BeginInit();
+            this.tabPage18.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewiOSlogs)).BeginInit();
+            this.tabPage19.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewServiceStudiologs)).BeginInit();
             this.SuspendLayout();
-            // 
-            // txtFileName
-            // 
-            this.txtFileName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFileName.Location = new System.Drawing.Point(148, 8);
-            this.txtFileName.Margin = new System.Windows.Forms.Padding(4);
-            this.txtFileName.Name = "txtFileName";
-            this.txtFileName.ReadOnly = true;
-            this.txtFileName.Size = new System.Drawing.Size(359, 30);
-            this.txtFileName.TabIndex = 0;
-            this.txtFileName.TabStop = false;
             // 
             // btnBrowseFile
             // 
             this.btnBrowseFile.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnBrowseFile.BackgroundImage")));
             this.btnBrowseFile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnBrowseFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBrowseFile.Location = new System.Drawing.Point(584, 8);
+            this.btnBrowseFile.Location = new System.Drawing.Point(13, 13);
             this.btnBrowseFile.Margin = new System.Windows.Forms.Padding(4);
             this.btnBrowseFile.Name = "btnBrowseFile";
-            this.btnBrowseFile.Size = new System.Drawing.Size(48, 32);
+            this.btnBrowseFile.Size = new System.Drawing.Size(64, 32);
             this.btnBrowseFile.TabIndex = 1;
             this.btnBrowseFile.UseVisualStyleBackColor = true;
             this.btnBrowseFile.Click += new System.EventHandler(this.btnBrowseFile_Click);
@@ -107,28 +159,6 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // txtDirectoryName
-            // 
-            this.txtDirectoryName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDirectoryName.Location = new System.Drawing.Point(8, 8);
-            this.txtDirectoryName.Margin = new System.Windows.Forms.Padding(4);
-            this.txtDirectoryName.Name = "txtDirectoryName";
-            this.txtDirectoryName.ReadOnly = true;
-            this.txtDirectoryName.Size = new System.Drawing.Size(132, 30);
-            this.txtDirectoryName.TabIndex = 3;
-            this.txtDirectoryName.TabStop = false;
-            // 
-            // txtExtension
-            // 
-            this.txtExtension.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtExtension.Location = new System.Drawing.Point(515, 8);
-            this.txtExtension.Margin = new System.Windows.Forms.Padding(4);
-            this.txtExtension.Name = "txtExtension";
-            this.txtExtension.ReadOnly = true;
-            this.txtExtension.Size = new System.Drawing.Size(60, 30);
-            this.txtExtension.TabIndex = 4;
-            this.txtExtension.TabStop = false;
-            // 
             // linkIISFields
             // 
             this.linkIISFields.ActiveLinkColor = System.Drawing.Color.Silver;
@@ -137,7 +167,7 @@
             this.linkIISFields.DisabledLinkColor = System.Drawing.Color.Silver;
             this.linkIISFields.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.linkIISFields.LinkColor = System.Drawing.Color.Black;
-            this.linkIISFields.Location = new System.Drawing.Point(8, 366);
+            this.linkIISFields.Location = new System.Drawing.Point(8, 26);
             this.linkIISFields.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkIISFields.Name = "linkIISFields";
             this.linkIISFields.Size = new System.Drawing.Size(153, 25);
@@ -155,7 +185,7 @@
             this.linkWinSyscodes.DisabledLinkColor = System.Drawing.Color.Silver;
             this.linkWinSyscodes.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.linkWinSyscodes.LinkColor = System.Drawing.Color.Black;
-            this.linkWinSyscodes.Location = new System.Drawing.Point(365, 366);
+            this.linkWinSyscodes.Location = new System.Drawing.Point(365, 26);
             this.linkWinSyscodes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkWinSyscodes.Name = "linkWinSyscodes";
             this.linkWinSyscodes.Size = new System.Drawing.Size(274, 25);
@@ -173,7 +203,7 @@
             this.linkHTTPcodes.DisabledLinkColor = System.Drawing.Color.Silver;
             this.linkHTTPcodes.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.linkHTTPcodes.LinkColor = System.Drawing.Color.Black;
-            this.linkHTTPcodes.Location = new System.Drawing.Point(170, 366);
+            this.linkHTTPcodes.Location = new System.Drawing.Point(170, 26);
             this.linkHTTPcodes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkHTTPcodes.Name = "linkHTTPcodes";
             this.linkHTTPcodes.Size = new System.Drawing.Size(189, 25);
@@ -189,74 +219,428 @@
             this.tabControl.Controls.Add(this.tabPage2);
             this.tabControl.Controls.Add(this.tabPage3);
             this.tabControl.Controls.Add(this.tabPage4);
+            this.tabControl.Controls.Add(this.tabPage19);
             this.tabControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl.Location = new System.Drawing.Point(15, 15);
+            this.tabControl.Location = new System.Drawing.Point(15, 53);
             this.tabControl.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1604, 805);
+            this.tabControl.Size = new System.Drawing.Size(1604, 767);
             this.tabControl.TabIndex = 9;
             // 
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.RoyalBlue;
-            this.tabPage1.Controls.Add(this.textBox1);
-            this.tabPage1.Controls.Add(this.dataGridView1);
-            this.tabPage1.Controls.Add(this.txtDirectoryName);
-            this.tabPage1.Controls.Add(this.txtExtension);
-            this.tabPage1.Controls.Add(this.txtFileName);
-            this.tabPage1.Controls.Add(this.btnBrowseFile);
+            this.tabPage1.Controls.Add(this.tabControl1);
             this.tabPage1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage1.Location = new System.Drawing.Point(4, 34);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage1.Size = new System.Drawing.Size(1596, 767);
+            this.tabPage1.Size = new System.Drawing.Size(1596, 729);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "XLSX Logs";
+            this.tabPage1.Text = "Service Center Logs";
             // 
-            // textBox1
+            // tabControl1
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(1335, 48);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(250, 708);
-            this.textBox1.TabIndex = 10;
-            this.textBox1.TabStop = false;
+            this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Controls.Add(this.tabPage6);
+            this.tabControl1.Controls.Add(this.tabPage7);
+            this.tabControl1.Controls.Add(this.tabPage8);
+            this.tabControl1.Controls.Add(this.tabPage9);
+            this.tabControl1.Controls.Add(this.tabPage10);
+            this.tabControl1.Controls.Add(this.tabPage11);
+            this.tabControl1.Controls.Add(this.tabPage12);
+            this.tabControl1.Controls.Add(this.tabPage13);
+            this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControl1.Location = new System.Drawing.Point(4, 8);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1584, 713);
+            this.tabControl1.TabIndex = 10;
             // 
-            // dataGridView1
+            // tabPage5
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(8, 48);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridView1.MultiSelect = false;
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.ShowEditingIcon = false;
-            this.dataGridView1.Size = new System.Drawing.Size(1320, 709);
-            this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.TabStop = false;
-            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.tabPage5.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage5.Controls.Add(this.dataGridViewErrorlogs);
+            this.tabPage5.Controls.Add(this.txtBoxDetailErrorLogs);
+            this.tabPage5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage5.Location = new System.Drawing.Point(4, 34);
+            this.tabPage5.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage5.Size = new System.Drawing.Size(1576, 675);
+            this.tabPage5.TabIndex = 0;
+            this.tabPage5.Text = "Error";
+            // 
+            // dataGridViewErrorlogs
+            // 
+            this.dataGridViewErrorlogs.AllowUserToAddRows = false;
+            this.dataGridViewErrorlogs.AllowUserToDeleteRows = false;
+            this.dataGridViewErrorlogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewErrorlogs.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewErrorlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewErrorlogs.MultiSelect = false;
+            this.dataGridViewErrorlogs.Name = "dataGridViewErrorlogs";
+            this.dataGridViewErrorlogs.ReadOnly = true;
+            this.dataGridViewErrorlogs.ShowEditingIcon = false;
+            this.dataGridViewErrorlogs.Size = new System.Drawing.Size(1306, 659);
+            this.dataGridViewErrorlogs.TabIndex = 13;
+            this.dataGridViewErrorlogs.TabStop = false;
+            this.dataGridViewErrorlogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewErrorlogs_CellClick);
+            // 
+            // txtBoxDetailErrorLogs
+            // 
+            this.txtBoxDetailErrorLogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailErrorLogs.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailErrorLogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailErrorLogs.Multiline = true;
+            this.txtBoxDetailErrorLogs.Name = "txtBoxDetailErrorLogs";
+            this.txtBoxDetailErrorLogs.ReadOnly = true;
+            this.txtBoxDetailErrorLogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailErrorLogs.Size = new System.Drawing.Size(250, 659);
+            this.txtBoxDetailErrorLogs.TabIndex = 12;
+            this.txtBoxDetailErrorLogs.TabStop = false;
+            // 
+            // tabPage6
+            // 
+            this.tabPage6.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage6.Controls.Add(this.txtBoxDetailGenerallogs);
+            this.tabPage6.Controls.Add(this.dataGridViewGenerallogs);
+            this.tabPage6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage6.Location = new System.Drawing.Point(4, 34);
+            this.tabPage6.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage6.Size = new System.Drawing.Size(1576, 675);
+            this.tabPage6.TabIndex = 1;
+            this.tabPage6.Text = "General";
+            // 
+            // txtBoxDetailGenerallogs
+            // 
+            this.txtBoxDetailGenerallogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailGenerallogs.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailGenerallogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailGenerallogs.Multiline = true;
+            this.txtBoxDetailGenerallogs.Name = "txtBoxDetailGenerallogs";
+            this.txtBoxDetailGenerallogs.ReadOnly = true;
+            this.txtBoxDetailGenerallogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailGenerallogs.Size = new System.Drawing.Size(250, 659);
+            this.txtBoxDetailGenerallogs.TabIndex = 15;
+            this.txtBoxDetailGenerallogs.TabStop = false;
+            // 
+            // dataGridViewGenerallogs
+            // 
+            this.dataGridViewGenerallogs.AllowUserToAddRows = false;
+            this.dataGridViewGenerallogs.AllowUserToDeleteRows = false;
+            this.dataGridViewGenerallogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewGenerallogs.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewGenerallogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewGenerallogs.MultiSelect = false;
+            this.dataGridViewGenerallogs.Name = "dataGridViewGenerallogs";
+            this.dataGridViewGenerallogs.ReadOnly = true;
+            this.dataGridViewGenerallogs.ShowEditingIcon = false;
+            this.dataGridViewGenerallogs.Size = new System.Drawing.Size(1306, 659);
+            this.dataGridViewGenerallogs.TabIndex = 14;
+            this.dataGridViewGenerallogs.TabStop = false;
+            this.dataGridViewGenerallogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewGenerallogs_CellClick);
+            // 
+            // tabPage7
+            // 
+            this.tabPage7.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage7.Controls.Add(this.txtBoxDetailIntegrationlogs);
+            this.tabPage7.Controls.Add(this.dataGridViewIntegrationslogs);
+            this.tabPage7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage7.Location = new System.Drawing.Point(4, 34);
+            this.tabPage7.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Size = new System.Drawing.Size(1576, 675);
+            this.tabPage7.TabIndex = 2;
+            this.tabPage7.Text = "Integrations";
+            // 
+            // txtBoxDetailIntegrationlogs
+            // 
+            this.txtBoxDetailIntegrationlogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailIntegrationlogs.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailIntegrationlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailIntegrationlogs.Multiline = true;
+            this.txtBoxDetailIntegrationlogs.Name = "txtBoxDetailIntegrationlogs";
+            this.txtBoxDetailIntegrationlogs.ReadOnly = true;
+            this.txtBoxDetailIntegrationlogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailIntegrationlogs.Size = new System.Drawing.Size(250, 659);
+            this.txtBoxDetailIntegrationlogs.TabIndex = 16;
+            this.txtBoxDetailIntegrationlogs.TabStop = false;
+            // 
+            // dataGridViewIntegrationslogs
+            // 
+            this.dataGridViewIntegrationslogs.AllowUserToAddRows = false;
+            this.dataGridViewIntegrationslogs.AllowUserToDeleteRows = false;
+            this.dataGridViewIntegrationslogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewIntegrationslogs.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewIntegrationslogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewIntegrationslogs.MultiSelect = false;
+            this.dataGridViewIntegrationslogs.Name = "dataGridViewIntegrationslogs";
+            this.dataGridViewIntegrationslogs.ReadOnly = true;
+            this.dataGridViewIntegrationslogs.ShowEditingIcon = false;
+            this.dataGridViewIntegrationslogs.Size = new System.Drawing.Size(1306, 659);
+            this.dataGridViewIntegrationslogs.TabIndex = 15;
+            this.dataGridViewIntegrationslogs.TabStop = false;
+            this.dataGridViewIntegrationslogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewIntegrationslogs_CellClick);
+            // 
+            // tabPage8
+            // 
+            this.tabPage8.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage8.Controls.Add(this.txtBoxDetailScreenRequestslogs);
+            this.tabPage8.Controls.Add(this.dataGridViewScreenRequestslogs);
+            this.tabPage8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage8.Location = new System.Drawing.Point(4, 34);
+            this.tabPage8.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage8.Name = "tabPage8";
+            this.tabPage8.Size = new System.Drawing.Size(1576, 675);
+            this.tabPage8.TabIndex = 3;
+            this.tabPage8.Text = "Screen Requests";
+            // 
+            // txtBoxDetailScreenRequestslogs
+            // 
+            this.txtBoxDetailScreenRequestslogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailScreenRequestslogs.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailScreenRequestslogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailScreenRequestslogs.Multiline = true;
+            this.txtBoxDetailScreenRequestslogs.Name = "txtBoxDetailScreenRequestslogs";
+            this.txtBoxDetailScreenRequestslogs.ReadOnly = true;
+            this.txtBoxDetailScreenRequestslogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailScreenRequestslogs.Size = new System.Drawing.Size(250, 659);
+            this.txtBoxDetailScreenRequestslogs.TabIndex = 17;
+            this.txtBoxDetailScreenRequestslogs.TabStop = false;
+            // 
+            // dataGridViewScreenRequestslogs
+            // 
+            this.dataGridViewScreenRequestslogs.AllowUserToAddRows = false;
+            this.dataGridViewScreenRequestslogs.AllowUserToDeleteRows = false;
+            this.dataGridViewScreenRequestslogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewScreenRequestslogs.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewScreenRequestslogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewScreenRequestslogs.MultiSelect = false;
+            this.dataGridViewScreenRequestslogs.Name = "dataGridViewScreenRequestslogs";
+            this.dataGridViewScreenRequestslogs.ReadOnly = true;
+            this.dataGridViewScreenRequestslogs.ShowEditingIcon = false;
+            this.dataGridViewScreenRequestslogs.Size = new System.Drawing.Size(1306, 659);
+            this.dataGridViewScreenRequestslogs.TabIndex = 16;
+            this.dataGridViewScreenRequestslogs.TabStop = false;
+            this.dataGridViewScreenRequestslogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewScreenRequestslogs_CellClick);
+            // 
+            // tabPage9
+            // 
+            this.tabPage9.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage9.Controls.Add(this.txtBoxDetailTimerlogs);
+            this.tabPage9.Controls.Add(this.dataGridViewTimerlogs);
+            this.tabPage9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage9.Location = new System.Drawing.Point(4, 34);
+            this.tabPage9.Name = "tabPage9";
+            this.tabPage9.Size = new System.Drawing.Size(1576, 675);
+            this.tabPage9.TabIndex = 4;
+            this.tabPage9.Text = "Timer";
+            // 
+            // txtBoxDetailTimerlogs
+            // 
+            this.txtBoxDetailTimerlogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailTimerlogs.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailTimerlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailTimerlogs.Multiline = true;
+            this.txtBoxDetailTimerlogs.Name = "txtBoxDetailTimerlogs";
+            this.txtBoxDetailTimerlogs.ReadOnly = true;
+            this.txtBoxDetailTimerlogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailTimerlogs.Size = new System.Drawing.Size(250, 659);
+            this.txtBoxDetailTimerlogs.TabIndex = 18;
+            this.txtBoxDetailTimerlogs.TabStop = false;
+            // 
+            // dataGridViewTimerlogs
+            // 
+            this.dataGridViewTimerlogs.AllowUserToAddRows = false;
+            this.dataGridViewTimerlogs.AllowUserToDeleteRows = false;
+            this.dataGridViewTimerlogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewTimerlogs.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewTimerlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewTimerlogs.MultiSelect = false;
+            this.dataGridViewTimerlogs.Name = "dataGridViewTimerlogs";
+            this.dataGridViewTimerlogs.ReadOnly = true;
+            this.dataGridViewTimerlogs.ShowEditingIcon = false;
+            this.dataGridViewTimerlogs.Size = new System.Drawing.Size(1306, 659);
+            this.dataGridViewTimerlogs.TabIndex = 17;
+            this.dataGridViewTimerlogs.TabStop = false;
+            this.dataGridViewTimerlogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTimerlogs_CellClick);
+            // 
+            // tabPage10
+            // 
+            this.tabPage10.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage10.Controls.Add(this.txtBoxDetailEmaillogs);
+            this.tabPage10.Controls.Add(this.dataGridViewEmaillogs);
+            this.tabPage10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage10.Location = new System.Drawing.Point(4, 34);
+            this.tabPage10.Name = "tabPage10";
+            this.tabPage10.Size = new System.Drawing.Size(1576, 675);
+            this.tabPage10.TabIndex = 5;
+            this.tabPage10.Text = "Email";
+            // 
+            // txtBoxDetailEmaillogs
+            // 
+            this.txtBoxDetailEmaillogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailEmaillogs.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailEmaillogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailEmaillogs.Multiline = true;
+            this.txtBoxDetailEmaillogs.Name = "txtBoxDetailEmaillogs";
+            this.txtBoxDetailEmaillogs.ReadOnly = true;
+            this.txtBoxDetailEmaillogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailEmaillogs.Size = new System.Drawing.Size(250, 659);
+            this.txtBoxDetailEmaillogs.TabIndex = 19;
+            this.txtBoxDetailEmaillogs.TabStop = false;
+            // 
+            // dataGridViewEmaillogs
+            // 
+            this.dataGridViewEmaillogs.AllowUserToAddRows = false;
+            this.dataGridViewEmaillogs.AllowUserToDeleteRows = false;
+            this.dataGridViewEmaillogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewEmaillogs.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewEmaillogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewEmaillogs.MultiSelect = false;
+            this.dataGridViewEmaillogs.Name = "dataGridViewEmaillogs";
+            this.dataGridViewEmaillogs.ReadOnly = true;
+            this.dataGridViewEmaillogs.ShowEditingIcon = false;
+            this.dataGridViewEmaillogs.Size = new System.Drawing.Size(1306, 659);
+            this.dataGridViewEmaillogs.TabIndex = 18;
+            this.dataGridViewEmaillogs.TabStop = false;
+            this.dataGridViewEmaillogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewEmaillogs_CellClick);
+            // 
+            // tabPage11
+            // 
+            this.tabPage11.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage11.Controls.Add(this.txtBoxDetailExtensionlogs);
+            this.tabPage11.Controls.Add(this.dataGridViewExtensionlogs);
+            this.tabPage11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage11.Location = new System.Drawing.Point(4, 34);
+            this.tabPage11.Name = "tabPage11";
+            this.tabPage11.Size = new System.Drawing.Size(1576, 675);
+            this.tabPage11.TabIndex = 6;
+            this.tabPage11.Text = "Extension";
+            // 
+            // txtBoxDetailExtensionlogs
+            // 
+            this.txtBoxDetailExtensionlogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailExtensionlogs.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailExtensionlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailExtensionlogs.Multiline = true;
+            this.txtBoxDetailExtensionlogs.Name = "txtBoxDetailExtensionlogs";
+            this.txtBoxDetailExtensionlogs.ReadOnly = true;
+            this.txtBoxDetailExtensionlogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailExtensionlogs.Size = new System.Drawing.Size(250, 659);
+            this.txtBoxDetailExtensionlogs.TabIndex = 20;
+            this.txtBoxDetailExtensionlogs.TabStop = false;
+            // 
+            // dataGridViewExtensionlogs
+            // 
+            this.dataGridViewExtensionlogs.AllowUserToAddRows = false;
+            this.dataGridViewExtensionlogs.AllowUserToDeleteRows = false;
+            this.dataGridViewExtensionlogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewExtensionlogs.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewExtensionlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewExtensionlogs.MultiSelect = false;
+            this.dataGridViewExtensionlogs.Name = "dataGridViewExtensionlogs";
+            this.dataGridViewExtensionlogs.ReadOnly = true;
+            this.dataGridViewExtensionlogs.ShowEditingIcon = false;
+            this.dataGridViewExtensionlogs.Size = new System.Drawing.Size(1306, 659);
+            this.dataGridViewExtensionlogs.TabIndex = 19;
+            this.dataGridViewExtensionlogs.TabStop = false;
+            this.dataGridViewExtensionlogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewExtensionlogs_CellClick);
+            // 
+            // tabPage12
+            // 
+            this.tabPage12.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage12.Controls.Add(this.txtBoxDetailServiceActionlogs);
+            this.tabPage12.Controls.Add(this.dataGridViewServiceActionlogs);
+            this.tabPage12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage12.Location = new System.Drawing.Point(4, 34);
+            this.tabPage12.Name = "tabPage12";
+            this.tabPage12.Size = new System.Drawing.Size(1576, 675);
+            this.tabPage12.TabIndex = 7;
+            this.tabPage12.Text = "Service Action";
+            // 
+            // txtBoxDetailServiceActionlogs
+            // 
+            this.txtBoxDetailServiceActionlogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailServiceActionlogs.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailServiceActionlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailServiceActionlogs.Multiline = true;
+            this.txtBoxDetailServiceActionlogs.Name = "txtBoxDetailServiceActionlogs";
+            this.txtBoxDetailServiceActionlogs.ReadOnly = true;
+            this.txtBoxDetailServiceActionlogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailServiceActionlogs.Size = new System.Drawing.Size(250, 659);
+            this.txtBoxDetailServiceActionlogs.TabIndex = 21;
+            this.txtBoxDetailServiceActionlogs.TabStop = false;
+            // 
+            // dataGridViewServiceActionlogs
+            // 
+            this.dataGridViewServiceActionlogs.AllowUserToAddRows = false;
+            this.dataGridViewServiceActionlogs.AllowUserToDeleteRows = false;
+            this.dataGridViewServiceActionlogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewServiceActionlogs.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewServiceActionlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewServiceActionlogs.MultiSelect = false;
+            this.dataGridViewServiceActionlogs.Name = "dataGridViewServiceActionlogs";
+            this.dataGridViewServiceActionlogs.ReadOnly = true;
+            this.dataGridViewServiceActionlogs.ShowEditingIcon = false;
+            this.dataGridViewServiceActionlogs.Size = new System.Drawing.Size(1306, 659);
+            this.dataGridViewServiceActionlogs.TabIndex = 20;
+            this.dataGridViewServiceActionlogs.TabStop = false;
+            this.dataGridViewServiceActionlogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewServiceActionlogs_CellClick);
+            // 
+            // tabPage13
+            // 
+            this.tabPage13.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage13.Controls.Add(this.txtBoxDetailTradWebRequests);
+            this.tabPage13.Controls.Add(this.dataGridViewTradWebRequests);
+            this.tabPage13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage13.Location = new System.Drawing.Point(4, 34);
+            this.tabPage13.Name = "tabPage13";
+            this.tabPage13.Size = new System.Drawing.Size(1576, 675);
+            this.tabPage13.TabIndex = 8;
+            this.tabPage13.Text = "Traditional Web Requests";
+            // 
+            // txtBoxDetailTradWebRequests
+            // 
+            this.txtBoxDetailTradWebRequests.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailTradWebRequests.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailTradWebRequests.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailTradWebRequests.Multiline = true;
+            this.txtBoxDetailTradWebRequests.Name = "txtBoxDetailTradWebRequests";
+            this.txtBoxDetailTradWebRequests.ReadOnly = true;
+            this.txtBoxDetailTradWebRequests.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailTradWebRequests.Size = new System.Drawing.Size(250, 659);
+            this.txtBoxDetailTradWebRequests.TabIndex = 22;
+            this.txtBoxDetailTradWebRequests.TabStop = false;
+            // 
+            // dataGridViewTradWebRequests
+            // 
+            this.dataGridViewTradWebRequests.AllowUserToAddRows = false;
+            this.dataGridViewTradWebRequests.AllowUserToDeleteRows = false;
+            this.dataGridViewTradWebRequests.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewTradWebRequests.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewTradWebRequests.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewTradWebRequests.MultiSelect = false;
+            this.dataGridViewTradWebRequests.Name = "dataGridViewTradWebRequests";
+            this.dataGridViewTradWebRequests.ReadOnly = true;
+            this.dataGridViewTradWebRequests.ShowEditingIcon = false;
+            this.dataGridViewTradWebRequests.Size = new System.Drawing.Size(1306, 659);
+            this.dataGridViewTradWebRequests.TabIndex = 21;
+            this.dataGridViewTradWebRequests.TabStop = false;
+            this.dataGridViewTradWebRequests.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTradWebRequests_CellClick);
             // 
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.RoyalBlue;
-            this.tabPage2.Controls.Add(this.textBox5);
-            this.tabPage2.Controls.Add(this.pictureBox1);
-            this.tabPage2.Controls.Add(this.txtExtension3);
-            this.tabPage2.Controls.Add(this.txtDirectoryName3);
-            this.tabPage2.Controls.Add(this.txtFileName3);
-            this.tabPage2.Controls.Add(this.dataGridView3);
-            this.tabPage2.Controls.Add(this.txtExtension2);
-            this.tabPage2.Controls.Add(this.txtDirectoryName2);
-            this.tabPage2.Controls.Add(this.txtFileName2);
-            this.tabPage2.Controls.Add(this.dataGridView2);
+            this.tabPage2.Controls.Add(this.txtDetailIISlogs);
+            this.tabPage2.Controls.Add(this.dataGridViewIISTimeTaken);
+            this.tabPage2.Controls.Add(this.dataGridViewIISDateTime);
             this.tabPage2.Controls.Add(this.linkIISFields);
             this.tabPage2.Controls.Add(this.linkWinSyscodes);
             this.tabPage2.Controls.Add(this.linkHTTPcodes);
@@ -265,286 +649,454 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage2.Size = new System.Drawing.Size(1596, 767);
+            this.tabPage2.Size = new System.Drawing.Size(1596, 729);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "IIS Logs";
             // 
-            // textBox5
+            // txtDetailIISlogs
             // 
-            this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox5.Location = new System.Drawing.Point(1339, 48);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox5.Multiline = true;
-            this.textBox5.Name = "textBox5";
-            this.textBox5.ReadOnly = true;
-            this.textBox5.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox5.Size = new System.Drawing.Size(250, 708);
-            this.textBox5.TabIndex = 20;
-            this.textBox5.TabStop = false;
+            this.txtDetailIISlogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDetailIISlogs.Location = new System.Drawing.Point(1339, 77);
+            this.txtDetailIISlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtDetailIISlogs.Multiline = true;
+            this.txtDetailIISlogs.Name = "txtDetailIISlogs";
+            this.txtDetailIISlogs.ReadOnly = true;
+            this.txtDetailIISlogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtDetailIISlogs.Size = new System.Drawing.Size(250, 644);
+            this.txtDetailIISlogs.TabIndex = 20;
+            this.txtDetailIISlogs.TabStop = false;
             // 
-            // pictureBox1
+            // dataGridViewIISTimeTaken
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(718, 48);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(536, 464);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 19;
-            this.pictureBox1.TabStop = false;
+            this.dataGridViewIISTimeTaken.AllowUserToAddRows = false;
+            this.dataGridViewIISTimeTaken.AllowUserToDeleteRows = false;
+            this.dataGridViewIISTimeTaken.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewIISTimeTaken.Location = new System.Drawing.Point(8, 413);
+            this.dataGridViewIISTimeTaken.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewIISTimeTaken.MultiSelect = false;
+            this.dataGridViewIISTimeTaken.Name = "dataGridViewIISTimeTaken";
+            this.dataGridViewIISTimeTaken.ReadOnly = true;
+            this.dataGridViewIISTimeTaken.ShowEditingIcon = false;
+            this.dataGridViewIISTimeTaken.Size = new System.Drawing.Size(1323, 308);
+            this.dataGridViewIISTimeTaken.TabIndex = 14;
+            this.dataGridViewIISTimeTaken.TabStop = false;
+            this.dataGridViewIISTimeTaken.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewIISTimeTaken_CellClick);
             // 
-            // txtExtension3
+            // dataGridViewIISDateTime
             // 
-            this.txtExtension3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtExtension3.Location = new System.Drawing.Point(515, 409);
-            this.txtExtension3.Margin = new System.Windows.Forms.Padding(4);
-            this.txtExtension3.Name = "txtExtension3";
-            this.txtExtension3.ReadOnly = true;
-            this.txtExtension3.Size = new System.Drawing.Size(60, 30);
-            this.txtExtension3.TabIndex = 18;
-            this.txtExtension3.TabStop = false;
-            // 
-            // txtDirectoryName3
-            // 
-            this.txtDirectoryName3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDirectoryName3.Location = new System.Drawing.Point(8, 409);
-            this.txtDirectoryName3.Margin = new System.Windows.Forms.Padding(4);
-            this.txtDirectoryName3.Name = "txtDirectoryName3";
-            this.txtDirectoryName3.ReadOnly = true;
-            this.txtDirectoryName3.Size = new System.Drawing.Size(132, 30);
-            this.txtDirectoryName3.TabIndex = 17;
-            this.txtDirectoryName3.TabStop = false;
-            // 
-            // txtFileName3
-            // 
-            this.txtFileName3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFileName3.Location = new System.Drawing.Point(148, 409);
-            this.txtFileName3.Margin = new System.Windows.Forms.Padding(4);
-            this.txtFileName3.Name = "txtFileName3";
-            this.txtFileName3.ReadOnly = true;
-            this.txtFileName3.Size = new System.Drawing.Size(359, 30);
-            this.txtFileName3.TabIndex = 15;
-            this.txtFileName3.TabStop = false;
-            // 
-            // dataGridView3
-            // 
-            this.dataGridView3.AllowUserToAddRows = false;
-            this.dataGridView3.AllowUserToDeleteRows = false;
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(8, 449);
-            this.dataGridView3.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridView3.MultiSelect = false;
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.ReadOnly = true;
-            this.dataGridView3.ShowEditingIcon = false;
-            this.dataGridView3.Size = new System.Drawing.Size(628, 308);
-            this.dataGridView3.TabIndex = 14;
-            this.dataGridView3.TabStop = false;
-            this.dataGridView3.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellClick);
-            // 
-            // txtExtension2
-            // 
-            this.txtExtension2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtExtension2.Location = new System.Drawing.Point(515, 8);
-            this.txtExtension2.Margin = new System.Windows.Forms.Padding(4);
-            this.txtExtension2.Name = "txtExtension2";
-            this.txtExtension2.ReadOnly = true;
-            this.txtExtension2.Size = new System.Drawing.Size(60, 30);
-            this.txtExtension2.TabIndex = 13;
-            this.txtExtension2.TabStop = false;
-            // 
-            // txtDirectoryName2
-            // 
-            this.txtDirectoryName2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDirectoryName2.Location = new System.Drawing.Point(8, 8);
-            this.txtDirectoryName2.Margin = new System.Windows.Forms.Padding(4);
-            this.txtDirectoryName2.Name = "txtDirectoryName2";
-            this.txtDirectoryName2.ReadOnly = true;
-            this.txtDirectoryName2.Size = new System.Drawing.Size(132, 30);
-            this.txtDirectoryName2.TabIndex = 12;
-            this.txtDirectoryName2.TabStop = false;
-            // 
-            // txtFileName2
-            // 
-            this.txtFileName2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFileName2.Location = new System.Drawing.Point(148, 8);
-            this.txtFileName2.Margin = new System.Windows.Forms.Padding(4);
-            this.txtFileName2.Name = "txtFileName2";
-            this.txtFileName2.ReadOnly = true;
-            this.txtFileName2.Size = new System.Drawing.Size(359, 30);
-            this.txtFileName2.TabIndex = 10;
-            this.txtFileName2.TabStop = false;
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(8, 48);
-            this.dataGridView2.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridView2.MultiSelect = false;
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.ReadOnly = true;
-            this.dataGridView2.ShowEditingIcon = false;
-            this.dataGridView2.Size = new System.Drawing.Size(628, 308);
-            this.dataGridView2.TabIndex = 9;
-            this.dataGridView2.TabStop = false;
-            this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
+            this.dataGridViewIISDateTime.AllowUserToAddRows = false;
+            this.dataGridViewIISDateTime.AllowUserToDeleteRows = false;
+            this.dataGridViewIISDateTime.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewIISDateTime.Location = new System.Drawing.Point(8, 77);
+            this.dataGridViewIISDateTime.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewIISDateTime.MultiSelect = false;
+            this.dataGridViewIISDateTime.Name = "dataGridViewIISDateTime";
+            this.dataGridViewIISDateTime.ReadOnly = true;
+            this.dataGridViewIISDateTime.ShowEditingIcon = false;
+            this.dataGridViewIISDateTime.Size = new System.Drawing.Size(1323, 308);
+            this.dataGridViewIISDateTime.TabIndex = 9;
+            this.dataGridViewIISDateTime.TabStop = false;
+            this.dataGridViewIISDateTime.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewIISDateTime_CellClick);
             // 
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.RoyalBlue;
-            this.tabPage3.Controls.Add(this.textBox2);
-            this.tabPage3.Controls.Add(this.dataGridView4);
-            this.tabPage3.Controls.Add(this.txtDirectoryName4);
-            this.tabPage3.Controls.Add(this.txtExtension4);
-            this.tabPage3.Controls.Add(this.txtFileName4);
+            this.tabPage3.Controls.Add(this.tabControl2);
             this.tabPage3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage3.Location = new System.Drawing.Point(4, 34);
             this.tabPage3.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1596, 767);
+            this.tabPage3.Size = new System.Drawing.Size(1596, 729);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "EVTX Logs";
+            this.tabPage3.Text = "Windows Event Viewer Logs";
             // 
-            // textBox2
+            // tabControl2
             // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(1335, 48);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox2.Size = new System.Drawing.Size(250, 708);
-            this.textBox2.TabIndex = 11;
-            this.textBox2.TabStop = false;
+            this.tabControl2.Controls.Add(this.tabPage14);
+            this.tabControl2.Controls.Add(this.tabPage15);
+            this.tabControl2.Controls.Add(this.tabPage16);
+            this.tabControl2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControl2.Location = new System.Drawing.Point(6, 8);
+            this.tabControl2.Margin = new System.Windows.Forms.Padding(4);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(1584, 713);
+            this.tabControl2.TabIndex = 11;
             // 
-            // dataGridView4
+            // tabPage14
             // 
-            this.dataGridView4.AllowUserToAddRows = false;
-            this.dataGridView4.AllowUserToDeleteRows = false;
-            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView4.Location = new System.Drawing.Point(8, 48);
-            this.dataGridView4.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridView4.MultiSelect = false;
-            this.dataGridView4.Name = "dataGridView4";
-            this.dataGridView4.ReadOnly = true;
-            this.dataGridView4.ShowEditingIcon = false;
-            this.dataGridView4.Size = new System.Drawing.Size(1320, 709);
-            this.dataGridView4.TabIndex = 9;
-            this.dataGridView4.TabStop = false;
-            this.dataGridView4.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView4_CellClick);
+            this.tabPage14.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage14.Controls.Add(this.dataGridViewWinAppEventViewer);
+            this.tabPage14.Controls.Add(this.txtBoxDetailWinAppEventViewer);
+            this.tabPage14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage14.Location = new System.Drawing.Point(4, 34);
+            this.tabPage14.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage14.Name = "tabPage14";
+            this.tabPage14.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage14.Size = new System.Drawing.Size(1576, 675);
+            this.tabPage14.TabIndex = 0;
+            this.tabPage14.Text = "Application";
             // 
-            // txtDirectoryName4
+            // dataGridViewWinAppEventViewer
             // 
-            this.txtDirectoryName4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDirectoryName4.Location = new System.Drawing.Point(8, 8);
-            this.txtDirectoryName4.Margin = new System.Windows.Forms.Padding(4);
-            this.txtDirectoryName4.Name = "txtDirectoryName4";
-            this.txtDirectoryName4.ReadOnly = true;
-            this.txtDirectoryName4.Size = new System.Drawing.Size(132, 30);
-            this.txtDirectoryName4.TabIndex = 7;
-            this.txtDirectoryName4.TabStop = false;
+            this.dataGridViewWinAppEventViewer.AllowUserToAddRows = false;
+            this.dataGridViewWinAppEventViewer.AllowUserToDeleteRows = false;
+            this.dataGridViewWinAppEventViewer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewWinAppEventViewer.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewWinAppEventViewer.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewWinAppEventViewer.MultiSelect = false;
+            this.dataGridViewWinAppEventViewer.Name = "dataGridViewWinAppEventViewer";
+            this.dataGridViewWinAppEventViewer.ReadOnly = true;
+            this.dataGridViewWinAppEventViewer.ShowEditingIcon = false;
+            this.dataGridViewWinAppEventViewer.Size = new System.Drawing.Size(1306, 659);
+            this.dataGridViewWinAppEventViewer.TabIndex = 13;
+            this.dataGridViewWinAppEventViewer.TabStop = false;
+            this.dataGridViewWinAppEventViewer.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewWinAppEventViewer_CellClick);
             // 
-            // txtExtension4
+            // txtBoxDetailWinAppEventViewer
             // 
-            this.txtExtension4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtExtension4.Location = new System.Drawing.Point(515, 8);
-            this.txtExtension4.Margin = new System.Windows.Forms.Padding(4);
-            this.txtExtension4.Name = "txtExtension4";
-            this.txtExtension4.ReadOnly = true;
-            this.txtExtension4.Size = new System.Drawing.Size(60, 30);
-            this.txtExtension4.TabIndex = 8;
-            this.txtExtension4.TabStop = false;
+            this.txtBoxDetailWinAppEventViewer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailWinAppEventViewer.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailWinAppEventViewer.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailWinAppEventViewer.Multiline = true;
+            this.txtBoxDetailWinAppEventViewer.Name = "txtBoxDetailWinAppEventViewer";
+            this.txtBoxDetailWinAppEventViewer.ReadOnly = true;
+            this.txtBoxDetailWinAppEventViewer.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailWinAppEventViewer.Size = new System.Drawing.Size(250, 659);
+            this.txtBoxDetailWinAppEventViewer.TabIndex = 12;
+            this.txtBoxDetailWinAppEventViewer.TabStop = false;
             // 
-            // txtFileName4
+            // tabPage15
             // 
-            this.txtFileName4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFileName4.Location = new System.Drawing.Point(148, 8);
-            this.txtFileName4.Margin = new System.Windows.Forms.Padding(4);
-            this.txtFileName4.Name = "txtFileName4";
-            this.txtFileName4.ReadOnly = true;
-            this.txtFileName4.Size = new System.Drawing.Size(359, 30);
-            this.txtFileName4.TabIndex = 5;
-            this.txtFileName4.TabStop = false;
+            this.tabPage15.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage15.Controls.Add(this.txtBoxDetailWinSysEventViewer);
+            this.tabPage15.Controls.Add(this.dataGridViewWinSysEventViewer);
+            this.tabPage15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage15.Location = new System.Drawing.Point(4, 34);
+            this.tabPage15.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage15.Name = "tabPage15";
+            this.tabPage15.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage15.Size = new System.Drawing.Size(1576, 675);
+            this.tabPage15.TabIndex = 1;
+            this.tabPage15.Text = "System";
+            // 
+            // txtBoxDetailWinSysEventViewer
+            // 
+            this.txtBoxDetailWinSysEventViewer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailWinSysEventViewer.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailWinSysEventViewer.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailWinSysEventViewer.Multiline = true;
+            this.txtBoxDetailWinSysEventViewer.Name = "txtBoxDetailWinSysEventViewer";
+            this.txtBoxDetailWinSysEventViewer.ReadOnly = true;
+            this.txtBoxDetailWinSysEventViewer.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailWinSysEventViewer.Size = new System.Drawing.Size(250, 659);
+            this.txtBoxDetailWinSysEventViewer.TabIndex = 15;
+            this.txtBoxDetailWinSysEventViewer.TabStop = false;
+            // 
+            // dataGridViewWinSysEventViewer
+            // 
+            this.dataGridViewWinSysEventViewer.AllowUserToAddRows = false;
+            this.dataGridViewWinSysEventViewer.AllowUserToDeleteRows = false;
+            this.dataGridViewWinSysEventViewer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewWinSysEventViewer.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewWinSysEventViewer.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewWinSysEventViewer.MultiSelect = false;
+            this.dataGridViewWinSysEventViewer.Name = "dataGridViewWinSysEventViewer";
+            this.dataGridViewWinSysEventViewer.ReadOnly = true;
+            this.dataGridViewWinSysEventViewer.ShowEditingIcon = false;
+            this.dataGridViewWinSysEventViewer.Size = new System.Drawing.Size(1306, 659);
+            this.dataGridViewWinSysEventViewer.TabIndex = 14;
+            this.dataGridViewWinSysEventViewer.TabStop = false;
+            this.dataGridViewWinSysEventViewer.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewWinSysEventViewer_CellClick);
+            // 
+            // tabPage16
+            // 
+            this.tabPage16.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage16.Controls.Add(this.txtBoxDetailWinSecEventViewer);
+            this.tabPage16.Controls.Add(this.dataGridViewWinSecEventViewer);
+            this.tabPage16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage16.Location = new System.Drawing.Point(4, 34);
+            this.tabPage16.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage16.Name = "tabPage16";
+            this.tabPage16.Size = new System.Drawing.Size(1576, 675);
+            this.tabPage16.TabIndex = 2;
+            this.tabPage16.Text = "Security";
+            // 
+            // txtBoxDetailWinSecEventViewer
+            // 
+            this.txtBoxDetailWinSecEventViewer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailWinSecEventViewer.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailWinSecEventViewer.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailWinSecEventViewer.Multiline = true;
+            this.txtBoxDetailWinSecEventViewer.Name = "txtBoxDetailWinSecEventViewer";
+            this.txtBoxDetailWinSecEventViewer.ReadOnly = true;
+            this.txtBoxDetailWinSecEventViewer.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailWinSecEventViewer.Size = new System.Drawing.Size(250, 659);
+            this.txtBoxDetailWinSecEventViewer.TabIndex = 16;
+            this.txtBoxDetailWinSecEventViewer.TabStop = false;
+            // 
+            // dataGridViewWinSecEventViewer
+            // 
+            this.dataGridViewWinSecEventViewer.AllowUserToAddRows = false;
+            this.dataGridViewWinSecEventViewer.AllowUserToDeleteRows = false;
+            this.dataGridViewWinSecEventViewer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewWinSecEventViewer.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewWinSecEventViewer.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewWinSecEventViewer.MultiSelect = false;
+            this.dataGridViewWinSecEventViewer.Name = "dataGridViewWinSecEventViewer";
+            this.dataGridViewWinSecEventViewer.ReadOnly = true;
+            this.dataGridViewWinSecEventViewer.ShowEditingIcon = false;
+            this.dataGridViewWinSecEventViewer.Size = new System.Drawing.Size(1306, 659);
+            this.dataGridViewWinSecEventViewer.TabIndex = 15;
+            this.dataGridViewWinSecEventViewer.TabStop = false;
+            this.dataGridViewWinSecEventViewer.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewWinSecEventViewer_CellClick);
             // 
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.Color.RoyalBlue;
-            this.tabPage4.Controls.Add(this.textBox3);
-            this.tabPage4.Controls.Add(this.dataGridView5);
-            this.tabPage4.Controls.Add(this.txtDirectoryName5);
-            this.tabPage4.Controls.Add(this.txtExtension5);
-            this.tabPage4.Controls.Add(this.txtFileName5);
+            this.tabPage4.Controls.Add(this.tabControl3);
             this.tabPage4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage4.Location = new System.Drawing.Point(4, 34);
             this.tabPage4.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(1596, 767);
+            this.tabPage4.Size = new System.Drawing.Size(1596, 729);
             this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "TXT Logs";
+            this.tabPage4.Text = "Mobile Logs";
             // 
-            // textBox3
+            // tabControl3
             // 
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(1335, 48);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox3.Size = new System.Drawing.Size(250, 708);
-            this.textBox3.TabIndex = 13;
-            this.textBox3.TabStop = false;
+            this.tabControl3.Controls.Add(this.tabPage17);
+            this.tabControl3.Controls.Add(this.tabPage18);
+            this.tabControl3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControl3.Location = new System.Drawing.Point(6, 8);
+            this.tabControl3.Margin = new System.Windows.Forms.Padding(4);
+            this.tabControl3.Name = "tabControl3";
+            this.tabControl3.SelectedIndex = 0;
+            this.tabControl3.Size = new System.Drawing.Size(1584, 713);
+            this.tabControl3.TabIndex = 12;
             // 
-            // dataGridView5
+            // tabPage17
             // 
-            this.dataGridView5.AllowUserToAddRows = false;
-            this.dataGridView5.AllowUserToDeleteRows = false;
-            this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView5.Location = new System.Drawing.Point(8, 48);
-            this.dataGridView5.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridView5.MultiSelect = false;
-            this.dataGridView5.Name = "dataGridView5";
-            this.dataGridView5.ReadOnly = true;
-            this.dataGridView5.ShowEditingIcon = false;
-            this.dataGridView5.Size = new System.Drawing.Size(1320, 709);
-            this.dataGridView5.TabIndex = 12;
-            this.dataGridView5.TabStop = false;
-            this.dataGridView5.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView5_CellClick);
+            this.tabPage17.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage17.Controls.Add(this.dataGridViewAndroidlogs);
+            this.tabPage17.Controls.Add(this.txtBoxDetailAndroidLogs);
+            this.tabPage17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage17.Location = new System.Drawing.Point(4, 34);
+            this.tabPage17.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage17.Name = "tabPage17";
+            this.tabPage17.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage17.Size = new System.Drawing.Size(1576, 675);
+            this.tabPage17.TabIndex = 0;
+            this.tabPage17.Text = "Android";
             // 
-            // txtDirectoryName5
+            // dataGridViewAndroidlogs
             // 
-            this.txtDirectoryName5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDirectoryName5.Location = new System.Drawing.Point(8, 8);
-            this.txtDirectoryName5.Margin = new System.Windows.Forms.Padding(4);
-            this.txtDirectoryName5.Name = "txtDirectoryName5";
-            this.txtDirectoryName5.ReadOnly = true;
-            this.txtDirectoryName5.Size = new System.Drawing.Size(132, 30);
-            this.txtDirectoryName5.TabIndex = 10;
-            this.txtDirectoryName5.TabStop = false;
+            this.dataGridViewAndroidlogs.AllowUserToAddRows = false;
+            this.dataGridViewAndroidlogs.AllowUserToDeleteRows = false;
+            this.dataGridViewAndroidlogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewAndroidlogs.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewAndroidlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewAndroidlogs.MultiSelect = false;
+            this.dataGridViewAndroidlogs.Name = "dataGridViewAndroidlogs";
+            this.dataGridViewAndroidlogs.ReadOnly = true;
+            this.dataGridViewAndroidlogs.ShowEditingIcon = false;
+            this.dataGridViewAndroidlogs.Size = new System.Drawing.Size(1306, 659);
+            this.dataGridViewAndroidlogs.TabIndex = 13;
+            this.dataGridViewAndroidlogs.TabStop = false;
+            this.dataGridViewAndroidlogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewAndroidlogs_CellClick);
             // 
-            // txtExtension5
+            // txtBoxDetailAndroidLogs
             // 
-            this.txtExtension5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtExtension5.Location = new System.Drawing.Point(515, 8);
-            this.txtExtension5.Margin = new System.Windows.Forms.Padding(4);
-            this.txtExtension5.Name = "txtExtension5";
-            this.txtExtension5.ReadOnly = true;
-            this.txtExtension5.Size = new System.Drawing.Size(60, 30);
-            this.txtExtension5.TabIndex = 11;
-            this.txtExtension5.TabStop = false;
+            this.txtBoxDetailAndroidLogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailAndroidLogs.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailAndroidLogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailAndroidLogs.Multiline = true;
+            this.txtBoxDetailAndroidLogs.Name = "txtBoxDetailAndroidLogs";
+            this.txtBoxDetailAndroidLogs.ReadOnly = true;
+            this.txtBoxDetailAndroidLogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailAndroidLogs.Size = new System.Drawing.Size(250, 659);
+            this.txtBoxDetailAndroidLogs.TabIndex = 12;
+            this.txtBoxDetailAndroidLogs.TabStop = false;
             // 
-            // txtFileName5
+            // tabPage18
             // 
-            this.txtFileName5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFileName5.Location = new System.Drawing.Point(148, 8);
-            this.txtFileName5.Margin = new System.Windows.Forms.Padding(4);
-            this.txtFileName5.Name = "txtFileName5";
-            this.txtFileName5.ReadOnly = true;
-            this.txtFileName5.Size = new System.Drawing.Size(359, 30);
-            this.txtFileName5.TabIndex = 9;
-            this.txtFileName5.TabStop = false;
+            this.tabPage18.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage18.Controls.Add(this.txtBoxDetailiOSLogs);
+            this.tabPage18.Controls.Add(this.dataGridViewiOSlogs);
+            this.tabPage18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage18.Location = new System.Drawing.Point(4, 34);
+            this.tabPage18.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage18.Name = "tabPage18";
+            this.tabPage18.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage18.Size = new System.Drawing.Size(1576, 675);
+            this.tabPage18.TabIndex = 1;
+            this.tabPage18.Text = "iOS";
+            // 
+            // txtBoxDetailiOSLogs
+            // 
+            this.txtBoxDetailiOSLogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailiOSLogs.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailiOSLogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailiOSLogs.Multiline = true;
+            this.txtBoxDetailiOSLogs.Name = "txtBoxDetailiOSLogs";
+            this.txtBoxDetailiOSLogs.ReadOnly = true;
+            this.txtBoxDetailiOSLogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailiOSLogs.Size = new System.Drawing.Size(250, 659);
+            this.txtBoxDetailiOSLogs.TabIndex = 15;
+            this.txtBoxDetailiOSLogs.TabStop = false;
+            // 
+            // dataGridViewiOSlogs
+            // 
+            this.dataGridViewiOSlogs.AllowUserToAddRows = false;
+            this.dataGridViewiOSlogs.AllowUserToDeleteRows = false;
+            this.dataGridViewiOSlogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewiOSlogs.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewiOSlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewiOSlogs.MultiSelect = false;
+            this.dataGridViewiOSlogs.Name = "dataGridViewiOSlogs";
+            this.dataGridViewiOSlogs.ReadOnly = true;
+            this.dataGridViewiOSlogs.ShowEditingIcon = false;
+            this.dataGridViewiOSlogs.Size = new System.Drawing.Size(1306, 659);
+            this.dataGridViewiOSlogs.TabIndex = 14;
+            this.dataGridViewiOSlogs.TabStop = false;
+            this.dataGridViewiOSlogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewiOSlogs_CellClick);
+            // 
+            // tabPage19
+            // 
+            this.tabPage19.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage19.Controls.Add(this.txtBoxDetailServiceStudioLogs);
+            this.tabPage19.Controls.Add(this.dataGridViewServiceStudiologs);
+            this.tabPage19.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage19.Location = new System.Drawing.Point(4, 34);
+            this.tabPage19.Name = "tabPage19";
+            this.tabPage19.Size = new System.Drawing.Size(1596, 729);
+            this.tabPage19.TabIndex = 4;
+            this.tabPage19.Text = "Service Studio Report";
+            // 
+            // txtBoxDetailServiceStudioLogs
+            // 
+            this.txtBoxDetailServiceStudioLogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailServiceStudioLogs.Location = new System.Drawing.Point(1342, 7);
+            this.txtBoxDetailServiceStudioLogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailServiceStudioLogs.Multiline = true;
+            this.txtBoxDetailServiceStudioLogs.Name = "txtBoxDetailServiceStudioLogs";
+            this.txtBoxDetailServiceStudioLogs.ReadOnly = true;
+            this.txtBoxDetailServiceStudioLogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailServiceStudioLogs.Size = new System.Drawing.Size(250, 718);
+            this.txtBoxDetailServiceStudioLogs.TabIndex = 21;
+            this.txtBoxDetailServiceStudioLogs.TabStop = false;
+            // 
+            // dataGridViewServiceStudiologs
+            // 
+            this.dataGridViewServiceStudiologs.AllowUserToAddRows = false;
+            this.dataGridViewServiceStudiologs.AllowUserToDeleteRows = false;
+            this.dataGridViewServiceStudiologs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewServiceStudiologs.Location = new System.Drawing.Point(7, 7);
+            this.dataGridViewServiceStudiologs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewServiceStudiologs.MultiSelect = false;
+            this.dataGridViewServiceStudiologs.Name = "dataGridViewServiceStudiologs";
+            this.dataGridViewServiceStudiologs.ReadOnly = true;
+            this.dataGridViewServiceStudiologs.ShowEditingIcon = false;
+            this.dataGridViewServiceStudiologs.Size = new System.Drawing.Size(1327, 718);
+            this.dataGridViewServiceStudiologs.TabIndex = 14;
+            this.dataGridViewServiceStudiologs.TabStop = false;
+            this.dataGridViewServiceStudiologs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewServiceStudiologs_CellClick);
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker1.CustomFormat = "yyyy-MM-dd";
+            this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker1.Location = new System.Drawing.Point(367, 13);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(160, 30);
+            this.dateTimePicker1.TabIndex = 2;
+            this.dateTimePicker1.Value = new System.DateTime(2021, 8, 7, 0, 0, 0, 0);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.RoyalBlue;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(203, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(158, 25);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "From Date Time:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.RoyalBlue;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(631, 13);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(137, 25);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "To Date Time:";
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker2.CustomFormat = "yyyy-MM-dd";
+            this.dateTimePicker2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker2.Location = new System.Drawing.Point(777, 13);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(160, 30);
+            this.dateTimePicker2.TabIndex = 4;
+            this.dateTimePicker2.Value = new System.DateTime(2021, 8, 7, 0, 0, 0, 0);
+            // 
+            // btnFilter
+            // 
+            this.btnFilter.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFilter.BackgroundImage")));
+            this.btnFilter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFilter.Location = new System.Drawing.Point(1042, 11);
+            this.btnFilter.Margin = new System.Windows.Forms.Padding(4);
+            this.btnFilter.Name = "btnFilter";
+            this.btnFilter.Size = new System.Drawing.Size(64, 32);
+            this.btnFilter.TabIndex = 6;
+            this.btnFilter.UseVisualStyleBackColor = true;
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            this.btnFilter.MouseEnter += new System.EventHandler(this.btnFilter_MouseEnter);
+            this.btnFilter.MouseLeave += new System.EventHandler(this.btnFilter_MouseLeave);
+            // 
+            // maskedTextBox1
+            // 
+            this.maskedTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.maskedTextBox1.Location = new System.Drawing.Point(533, 13);
+            this.maskedTextBox1.Mask = "00:00";
+            this.maskedTextBox1.Name = "maskedTextBox1";
+            this.maskedTextBox1.Size = new System.Drawing.Size(65, 30);
+            this.maskedTextBox1.TabIndex = 3;
+            this.maskedTextBox1.ValidatingType = typeof(System.DateTime);
+            // 
+            // maskedTextBox2
+            // 
+            this.maskedTextBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.maskedTextBox2.Location = new System.Drawing.Point(943, 13);
+            this.maskedTextBox2.Mask = "00:00";
+            this.maskedTextBox2.Name = "maskedTextBox2";
+            this.maskedTextBox2.Size = new System.Drawing.Size(65, 30);
+            this.maskedTextBox2.TabIndex = 5;
+            this.maskedTextBox2.ValidatingType = typeof(System.DateTime);
+            // 
+            // btnClearFilter
+            // 
+            this.btnClearFilter.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnClearFilter.BackgroundImage")));
+            this.btnClearFilter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnClearFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClearFilter.Location = new System.Drawing.Point(1114, 11);
+            this.btnClearFilter.Margin = new System.Windows.Forms.Padding(4);
+            this.btnClearFilter.Name = "btnClearFilter";
+            this.btnClearFilter.Size = new System.Drawing.Size(64, 32);
+            this.btnClearFilter.TabIndex = 7;
+            this.btnClearFilter.UseVisualStyleBackColor = true;
+            this.btnClearFilter.Click += new System.EventHandler(this.btnClearFilter_Click);
+            this.btnClearFilter.MouseEnter += new System.EventHandler(this.btnClearFilter_MouseEnter);
+            this.btnClearFilter.MouseLeave += new System.EventHandler(this.btnClearFilter_MouseLeave);
             // 
             // Form1
             // 
@@ -553,7 +1105,16 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1631, 825);
+            this.Controls.Add(this.btnClearFilter);
+            this.Controls.Add(this.maskedTextBox2);
+            this.Controls.Add(this.maskedTextBox1);
+            this.Controls.Add(this.btnFilter);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.dateTimePicker2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.tabControl);
+            this.Controls.Add(this.btnBrowseFile);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -562,33 +1123,71 @@
             this.MinimumSize = new System.Drawing.Size(1649, 872);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "OutSystems Log Parser V.072721";
+            this.Text = "OutSystems Log Parser V.080721";
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewErrorlogs)).EndInit();
+            this.tabPage6.ResumeLayout(false);
+            this.tabPage6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewGenerallogs)).EndInit();
+            this.tabPage7.ResumeLayout(false);
+            this.tabPage7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIntegrationslogs)).EndInit();
+            this.tabPage8.ResumeLayout(false);
+            this.tabPage8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScreenRequestslogs)).EndInit();
+            this.tabPage9.ResumeLayout(false);
+            this.tabPage9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTimerlogs)).EndInit();
+            this.tabPage10.ResumeLayout(false);
+            this.tabPage10.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmaillogs)).EndInit();
+            this.tabPage11.ResumeLayout(false);
+            this.tabPage11.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewExtensionlogs)).EndInit();
+            this.tabPage12.ResumeLayout(false);
+            this.tabPage12.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewServiceActionlogs)).EndInit();
+            this.tabPage13.ResumeLayout(false);
+            this.tabPage13.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTradWebRequests)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIISTimeTaken)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIISDateTime)).EndInit();
             this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
+            this.tabControl2.ResumeLayout(false);
+            this.tabPage14.ResumeLayout(false);
+            this.tabPage14.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewWinAppEventViewer)).EndInit();
+            this.tabPage15.ResumeLayout(false);
+            this.tabPage15.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewWinSysEventViewer)).EndInit();
+            this.tabPage16.ResumeLayout(false);
+            this.tabPage16.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewWinSecEventViewer)).EndInit();
             this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
+            this.tabControl3.ResumeLayout(false);
+            this.tabPage17.ResumeLayout(false);
+            this.tabPage17.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAndroidlogs)).EndInit();
+            this.tabPage18.ResumeLayout(false);
+            this.tabPage18.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewiOSlogs)).EndInit();
+            this.tabPage19.ResumeLayout(false);
+            this.tabPage19.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewServiceStudiologs)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox txtFileName;
         private System.Windows.Forms.Button btnBrowseFile;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.TextBox txtDirectoryName;
-        private System.Windows.Forms.TextBox txtExtension;
         private System.Windows.Forms.LinkLabel linkIISFields;
         private System.Windows.Forms.LinkLabel linkHTTPcodes;
         private System.Windows.Forms.LinkLabel linkWinSyscodes;
@@ -596,29 +1195,66 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox txtExtension2;
-        private System.Windows.Forms.TextBox txtDirectoryName2;
-        private System.Windows.Forms.TextBox txtFileName2;
-        private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.DataGridView dataGridView3;
-        private System.Windows.Forms.DataGridView dataGridView4;
-        private System.Windows.Forms.TextBox txtDirectoryName4;
-        private System.Windows.Forms.TextBox txtExtension4;
-        private System.Windows.Forms.TextBox txtFileName4;
-        private System.Windows.Forms.TextBox txtExtension3;
-        private System.Windows.Forms.TextBox txtDirectoryName3;
-        private System.Windows.Forms.TextBox txtFileName3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.DataGridView dataGridViewIISDateTime;
+        private System.Windows.Forms.DataGridView dataGridViewIISTimeTaken;
         private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.TextBox txtDirectoryName5;
-        private System.Windows.Forms.TextBox txtExtension5;
-        private System.Windows.Forms.TextBox txtFileName5;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.DataGridView dataGridView5;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox txtDetailIISlogs;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.TabPage tabPage8;
+        private System.Windows.Forms.DataGridView dataGridViewErrorlogs;
+        private System.Windows.Forms.TextBox txtBoxDetailErrorLogs;
+        private System.Windows.Forms.TextBox txtBoxDetailGenerallogs;
+        private System.Windows.Forms.DataGridView dataGridViewGenerallogs;
+        private System.Windows.Forms.DataGridView dataGridViewIntegrationslogs;
+        private System.Windows.Forms.TextBox txtBoxDetailIntegrationlogs;
+        private System.Windows.Forms.TextBox txtBoxDetailScreenRequestslogs;
+        private System.Windows.Forms.DataGridView dataGridViewScreenRequestslogs;
+        private System.Windows.Forms.TabPage tabPage9;
+        private System.Windows.Forms.TextBox txtBoxDetailTimerlogs;
+        private System.Windows.Forms.DataGridView dataGridViewTimerlogs;
+        private System.Windows.Forms.TabPage tabPage10;
+        private System.Windows.Forms.TextBox txtBoxDetailEmaillogs;
+        private System.Windows.Forms.DataGridView dataGridViewEmaillogs;
+        private System.Windows.Forms.TabPage tabPage11;
+        private System.Windows.Forms.TabPage tabPage12;
+        private System.Windows.Forms.TabPage tabPage13;
+        private System.Windows.Forms.TextBox txtBoxDetailExtensionlogs;
+        private System.Windows.Forms.DataGridView dataGridViewExtensionlogs;
+        private System.Windows.Forms.TextBox txtBoxDetailServiceActionlogs;
+        private System.Windows.Forms.DataGridView dataGridViewServiceActionlogs;
+        private System.Windows.Forms.TextBox txtBoxDetailTradWebRequests;
+        private System.Windows.Forms.DataGridView dataGridViewTradWebRequests;
+        private System.Windows.Forms.TabControl tabControl2;
+        private System.Windows.Forms.TabPage tabPage14;
+        private System.Windows.Forms.DataGridView dataGridViewWinAppEventViewer;
+        private System.Windows.Forms.TextBox txtBoxDetailWinAppEventViewer;
+        private System.Windows.Forms.TabPage tabPage15;
+        private System.Windows.Forms.TextBox txtBoxDetailWinSysEventViewer;
+        private System.Windows.Forms.DataGridView dataGridViewWinSysEventViewer;
+        private System.Windows.Forms.TabPage tabPage16;
+        private System.Windows.Forms.TextBox txtBoxDetailWinSecEventViewer;
+        private System.Windows.Forms.DataGridView dataGridViewWinSecEventViewer;
+        private System.Windows.Forms.TabControl tabControl3;
+        private System.Windows.Forms.TabPage tabPage17;
+        private System.Windows.Forms.DataGridView dataGridViewAndroidlogs;
+        private System.Windows.Forms.TextBox txtBoxDetailAndroidLogs;
+        private System.Windows.Forms.TabPage tabPage18;
+        private System.Windows.Forms.TextBox txtBoxDetailiOSLogs;
+        private System.Windows.Forms.DataGridView dataGridViewiOSlogs;
+        private System.Windows.Forms.TabPage tabPage19;
+        private System.Windows.Forms.TextBox txtBoxDetailServiceStudioLogs;
+        private System.Windows.Forms.DataGridView dataGridViewServiceStudiologs;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.Button btnFilter;
+        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
+        private System.Windows.Forms.MaskedTextBox maskedTextBox2;
+        private System.Windows.Forms.Button btnClearFilter;
     }
 }
 
