@@ -14,59 +14,65 @@ import matplotlib.dates as mdates
 """
 OutSystems Log Parser
 
-XSLX:
-LOG DATE_TIME SENT LAST_ERROR DURATION MESSAGE MESSAGE_TYPE STACK FROM TO SUBJECT CC BCC SCREEN SCREEN_TYPE
-MODULE_NAME APPLICATION_NAME APPLICATION_KEY NAME ACTION_NAME ACTION_TYPE ACCESS_MODE SOURCE ENTRYPOINT_NAME
-ENDPOINT EXECUTED_BY SERVER CLIENT_IP ESPACE_NAME ESPACE_ID USERNAME LOGIN_ID USER_ID SESSION_ID SESSION_REQUESTS
-SESSION_BYTES VIEW_STATE_BYTES EXTENSION_ID EXTENSION_NAME CYCLE CYCLIC_JOB_NAME CYCLIC_JOB_KEY
-SHOULD_HAVE_RUN_AT NEXT_RUN ENVIRONMENT_INFORMATION SIZE MS_IS_DN ERROR_ID MESSAGE_ID ACTIVITY EMAIL_DEFINITION
-STORE_CONTENT IS_TEST_EMAIL REQUEST_KEY ORIGINAL_REQUEST_KEY ID TENANT_ID
+Service Center Logs:
+Error logs:
+DATE_TIME MESSAGE STACK MODULE_NAME APPLICATION_NAME APPLICATION_KEY ACTION_NAME ENTRYPOINT_NAME SERVER ESPACE_NAME ESPACE_ID USER_ID SESSION_ID ENVIRONMENT_INFORMATION ID TENANT_ID
 
-ScreenLog = TraditionalWebRequests
+General logs:
+DATE_TIME MESSAGE MESSAGE_TYPE MODULE_NAME APPLICATION_NAME APPLICATION_KEY ACTION_NAME ENTRYPOINT_NAME CLIENT_IP ESPACE_NAME ESPACE_ID USER_ID SESSION_ID ERROR_ID REQUEST_KEY TENANT_ID
+
+Integration logs:
+DATE_TIME DURATION APPLICATION_NAME APPLICATION_KEY ACTION_NAME ACTION_TYPE SOURCE ENDPOINT EXECUTED_BY ESPACE_NAME ESPACE_ID ERROR_ID REQUEST_KEY TENANT_ID
+
 MobileRequestsLog = ScreenRequests
+Screen Requests logs:
+DATE_TIME DURATION SCREEN APPLICATION_NAME APPLICATION_KEY SOURCE ENDPOINT EXECUTED_BY ESPACE_NAME ESPACE_ID LOGIN_ID USER_ID CYCLE ERROR_ID REQUEST_KEY TENANT_ID
 
-LOG:
+Timer logs:
+DATE_TIME DURATION APPLICATION_NAME APPLICATION_KEY EXECUTED_BY ESPACE_NAME ESPACE_ID CYCLIC_JOB_NAME CYCLIC_JOB_KEY SHOULD_HAVE_RUN_AT NEXT_RUN ERROR_ID REQUEST_KEY TENANT_ID
+
+Email logs:
+DATE_TIME SENT LAST_ERROR FROM TO SUBJECT CC BCC NAME SIZE MESSAGE_ID ACTIVITY EMAIL_DEFINITION STORE_CONTENT IS_TEST_EMAIL ID TENANT_ID
+
+Extension logs:
+DATE_TIME DURATION APPLICATION_NAME APPLICATION_KEY ACTION_NAME EXECUTED_BY ESPACE_NAME ESPACE_ID USERNAME USER_ID SESSION_ID EXTENSION_ID EXTENSION_NAME ERROR_ID REQUEST_KEY TENANT_ID
+
+Service Action logs:
+DATE_TIME DURATION APPLICATION_NAME APPLICATION_KEY ACTION_NAME SOURCE ENTRYPOINT_NAME ENDPOINT EXECUTED_BY ESPACE_NAME ESPACE_ID USERNAME LOGIN_ID USER_ID SESSION_ID ERROR_ID REQUEST_KEY ORIGINAL_REQUEST_KEY TENANT_ID
+
+ScreenLog = TraditionalWebRequests             
+TraditionalWebRequests logs:
+DATE_TIME DURATION SCREEN SCREEN_TYPE APPLICATION_NAME APPLICATION_KEY ACTION_NAME ACCESS_MODE EXECUTED_BY CLIENT_IP ESPACE_NAME ESPACE_ID USER_ID SESSION_ID SESSION_REQUESTS SESSION_BYTES VIEW_STATE_BYTES MS_IS_DN REQUEST_KEY TENANT_ID
+  
+IIS logs:
 DATE_TIME TIME_TAKEN HTTP_CODE HTTP_SUBCODE WINDOWS_ERROR_CODE CLIENT_IP SERVER_IP SERVER_PORT
 METHOD URI_STEM URI_QUERY USERNAME BROWSER REFERRER
 
 TIME_TAKEN DATE_TIME HTTP_CODE HTTP_SUBCODE WINDOWS_ERROR_CODE CLIENT_IP SERVER_IP SERVER_PORT
 METHOD URI_STEM URI_QUERY USERNAME BROWSER REFERRER
 
-TXT:
-LOG DATE_TIME MESSAGE_TYPE ACTION_NAME MESSAGE
+Android, iOS, and Service Studio Report:
+DATE_TIME MESSAGE_TYPE ACTION_NAME MESSAGE
 
-EVTX:
-LOG DATE_TIME LEVEL PROVIDER_NAME QUALIFIERS EVENT_ID EVENT_RECORD_ID TASK KEYWORDS MESSAGE COMPUTER
+Windows Event Viewer logs:
+DATE_TIME LEVEL PROVIDER_NAME QUALIFIERS EVENT_ID EVENT_RECORD_ID TASK KEYWORDS MESSAGE COMPUTER
 
 1) Filter data based on a date range
 2) Read the input files and rearrange the columns.
-3) Filtered outputs should be TXT files using the pipe ("|") as the delimiter and their filenames should be the logs they represent.
-4) All the "datetime" fields from the logs should be in the following format: YYYY-MM-DD hh:mm:ss
-5) Combine all the data from all the output files, sort them by time, and then store the data into one single file.
+3) Filtered outputs should be already sorted by their timestamp.
+4) Filtered outputs should be TXT files using the pipe ("|") as the delimiter and their filenames should be the logs they represent.
+5) All the "datetime" fields from the logs should be in the following format: YYYY-MM-DD hh:mm:ss
 """
 
 myLinesFromDateRange = []
 myTempXLSXlines = []
-myXLSXlines = []
 myLOGlines = []
-myLOGlines2 = []
 myTimeTaken = []
-myTXTlines = []
 myFileExt = []
 myDateTimes = []
 myTimesTaken = []
 myXMLList = []
-myXLSXfiles = [
-    "error_logs",
-    "general_logs",
-    "integrations_logs",
-    "timer_logs",
-    "email_logs",
-    "extension_logs",
-    "mobile_requests_logs",
-    "service_action_logs",
-    "screen_logs"
-    ]
+
 numOfLines = 6000
 constant = 6000
 
@@ -99,14 +105,9 @@ def searchDirectory2(directoryPath, myList):
             if not fileExt + "\n" in myList:
                 myList.append(fileExt + "\n")
 
-    for ext in myFileExt:
-        if ext.strip() == ".xlsx":
-            combineXLSXFile(os.getcwd() + "\\filtered_data_files")
-        elif ext.strip() == ".txt":
-            combineTXTFile(os.getcwd() + "\\filtered_data_files")
-            combineEVTXFile(os.getcwd() + "\\filtered_data_files")
-        elif ext.strip() == ".log":
-            combineLOGFile(os.getcwd() + "\\filtered_data_files")
+    for ext in myList:
+        if ext.strip() == ".log":
+            sortLOGFile(os.getcwd() + "\\filtered_data_files")
 
 def createFolder(fldPath):
     fldName = os.getcwd() + fldPath
@@ -192,7 +193,7 @@ def readSplitFiles(cycleNum, filename, ext, pattern, _fromDate, _toDate):
                         if actionName == None:
                             actionName = " "
 
-                        outText = "Error|" + date + " " + time + "||||" + message + "||" + stack + "||||||||" + moduleName + "|" + applicationName + "|" + applicationKey + "||" + actionName + "||||" + entryPointName + "|||" + server + "||" + eSpaceName + "|" + eSpaceID + "|||" + userID + "|" + sessionID + "|||||||||||" + environmentInformation + "|||||||||||" + iD + "|" + tenantID + "\n"
+                        outText = date + " " + time + "|" + message + "|" + stack + "|" + moduleName + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + entryPointName + "|" + server + "|" + eSpaceName + "|" + eSpaceID + "|" + userID + "|" + sessionID + "|" + environmentInformation + "|" + iD + "|" + tenantID + "\n"
                         if not outText in myLinesFromDateRange:
                             myLinesFromDateRange.append(outText)
 
@@ -258,7 +259,7 @@ def readSplitFiles(cycleNum, filename, ext, pattern, _fromDate, _toDate):
                         if username == None:
                             username = " "
 
-                        outText = "General|" + date + " " + time + "||||" + message + "|" + messageType + "|||||||||" + moduleName + "|" + applicationName + "|" + applicationKey + "||" + actionName + "||||" + entryPointName + "||||" + clientIP + "|" + eSpaceName + "|" + eSpaceID + "|||" + userID + "|" + sessionID + "||||||||||||||" + errorID + "||||||" + requestKey + "|||" + tenantID + "\n"
+                        outText = date + " " + time + "|" + message + "|" + messageType + "|" + moduleName + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + entryPointName + "|" + clientIP + "|" + eSpaceName + "|" + eSpaceID + "|" + userID + "|" + sessionID + "|" + errorID + "|" + requestKey + "|" + tenantID + "\n"
                         if not outText in myLinesFromDateRange:
                             myLinesFromDateRange.append(outText)
 
@@ -300,7 +301,7 @@ def readSplitFiles(cycleNum, filename, ext, pattern, _fromDate, _toDate):
                         if applicationKey == None:
                             applicationKey = " "
 
-                        outText = "Integrations|" + date + " " + time + "|||" + duration + "||||||||||||" + applicationName + "|" + applicationKey + "||" + actionName + "|" + actionType + "||" + source + "||" + endpoint + "|" + executedBy + "|||" + eSpaceName + "|" + eSpaceID + "||||||||||||||||||" + errorID + "||||||" + requestKey + "|||" + tenantID + "\n"
+                        outText = date + " " + time + "|" + duration + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + actionType + "|" + source + "|" + endpoint + "|" + executedBy + "|" + eSpaceName + "|" + eSpaceID + "|" + errorID + "|" + requestKey + "|" + tenantID + "\n"
                         if not outText in myLinesFromDateRange:
                             myLinesFromDateRange.append(outText)
 
@@ -335,7 +336,7 @@ def readSplitFiles(cycleNum, filename, ext, pattern, _fromDate, _toDate):
                         if errorID == None:
                             errorID = " "
 
-                        outText = "ScreenRequests|" + date + " " + time + "|||" + duration + "|||||||||" + screen + "|||" + applicationName + "|" + applicationKey + "|||||" + source + "||" + endpoint + "|" + executedBy + "|||" + eSpaceName + "|" + eSpaceID + "||" + loginID + "|" + userID + "|||||||" + cycle + "||||||||" + errorID + "||||||" + requestKey + "|||" + tenantID + "\n"
+                        outText = date + " " + time + "|" + duration + "|" + screen + "|" + applicationName + "|" + applicationKey + "|" + source + "|" + endpoint + "|" + executedBy + "|" + eSpaceName + "|" + eSpaceID + "|" + loginID + "|" + userID + "|" + cycle + "|" + errorID + "|" + requestKey + "|" + tenantID + "\n"
                         if not outText in myLinesFromDateRange:
                             myLinesFromDateRange.append(outText)
 
@@ -368,7 +369,7 @@ def readSplitFiles(cycleNum, filename, ext, pattern, _fromDate, _toDate):
                         if errorID == None:
                             errorID = " "
 
-                        outText = "Timer|" + date + " " + time + "|||" + duration + "||||||||||||" + applicationName + "|" + applicationKey + "||||||||" + executedBy + "|||" + eSpaceName + "|" + eSpaceID + "|||||||||||" + cyclicJobName + "|" + cyclicJobKey + "|" + shouldHaveRunAt + "|" + nextRun + "||||" + errorID + "||||||" + requestKey + "|||" + tenantID + "\n"
+                        outText = date + " " + time + "|" + duration + "|" + applicationName + "|" + applicationKey + "|" + executedBy + "|" + eSpaceName + "|" + eSpaceID + "|" + cyclicJobName + "|" + cyclicJobKey + "|" + shouldHaveRunAt + "|" + nextRun + "|" + errorID + "|" + requestKey + "|" + tenantID + "\n"
                         if not outText in myLinesFromDateRange:
                             myLinesFromDateRange.append(outText)
 
@@ -410,7 +411,7 @@ def readSplitFiles(cycleNum, filename, ext, pattern, _fromDate, _toDate):
                         if bcc == None:
                             bcc = " "
 
-                        outText = "Email|" + date + " " + time + "|" + sent + "|" + lastError + "|||||" + from_ + "|" + to + "|" + subject + "|" + cc + "|" + bcc + "||||||" + name + "|||||||||||||||||||||||||||" + size + "|||" + messageID + "|" + activity + "|" + emailDefinition + "|" + storeContent + "|" + isTestEmail + "|||" + iD + "|" + tenantID + "\n"
+                        outText = date + " " + time + "|" + sent + "|" + lastError + "|" + from_ + "|" + to + "|" + subject + "|" + cc + "|" + bcc + "|" + name + "|" + size + "|" + messageID + "|" + activity + "|" + emailDefinition + "|" + storeContent + "|" + isTestEmail + "|" + iD + "|" + tenantID + "\n"
                         if not outText in myLinesFromDateRange:
                             myLinesFromDateRange.append(outText)
 
@@ -448,7 +449,7 @@ def readSplitFiles(cycleNum, filename, ext, pattern, _fromDate, _toDate):
                         if username == None:
                             username = " "
 
-                        outText = "Extension|" + date + " " + time + "|||" + duration + "||||||||||||" + applicationName + "|" + applicationKey + "||" + actionName + "||||||" + executedBy + "|||" + eSpaceName + "|" + eSpaceID + "|" + username + "||" + userID + "|" + sessionID + "|" + extensionID + "|" + extensionName + "|||||||||" + errorID + "||||||" + requestKey + "|||" + tenantID + "\n"
+                        outText = date + " " + time + "|" + duration + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + executedBy + "|" + eSpaceName + "|" + eSpaceID + "|" + username + "|" + userID + "|" + sessionID + "|" + extensionID + "|" + extensionName + "|" + errorID + "|" + requestKey + "|" + tenantID + "\n"
                         if not outText in myLinesFromDateRange:
                             myLinesFromDateRange.append(outText)
 
@@ -495,7 +496,7 @@ def readSplitFiles(cycleNum, filename, ext, pattern, _fromDate, _toDate):
                         if username == None:
                             username = " "
 
-                        outText = "ServiceAction|" + date + " " + time + "|||" + duration + "||||||||||||" + applicationName + "|" + applicationKey + "||" + actionName + "|||" + source + "|" + entrypointName + "|" + endpoint + "|" + executedBy + "|||" + eSpaceName + "|" + eSpaceID + "|" + username + "|" + loginID + "|" + userID + "|" + sessionID + "|||||||||||" + errorID + "||||||" + requestKey + "|" + originalRequestKey + "||" + tenantID + "\n"
+                        outText = date + " " + time + "|" + duration + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + source + "|" + entrypointName + "|" + endpoint + "|" + executedBy + "|" + eSpaceName + "|" + eSpaceID + "|" + username + "|" + loginID + "|" + userID + "|" + sessionID + "|" + errorID + "|" + requestKey + "|" + originalRequestKey + "|" + tenantID + "\n"
                         if not outText in myLinesFromDateRange:
                             myLinesFromDateRange.append(outText)
 
@@ -534,7 +535,7 @@ def readSplitFiles(cycleNum, filename, ext, pattern, _fromDate, _toDate):
                         if msisdn == None:
                             msisdn = " "
 
-                        outText = "TraditionalWebRequests|" + date + " " + time + "|||" + duration + "|||||||||" + screen + "|" + screenType + "||" + applicationName + "|" + applicationKey + "||" + actionName + "||" + accessMode + "||||" + executedBy + "||" + clientIP + "|" + eSpaceName + "|" + eSpaceID + "|||" + userID + "|" + sessionID + "|" + sessionRequests + "|" + sessionBytes + "|" + viewstateBytes + "||||||||||" + msisdn + "||||||" + requestKey + "|||" + tenantID + "\n"
+                        outText = date + " " + time + "|" + duration + "|" + screen + "|" + screenType + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + accessMode + "|" + executedBy + "|" + clientIP + "|" + eSpaceName + "|" + eSpaceID + "|" + userID + "|" + sessionID + "|" + sessionRequests + "|" + sessionBytes + "|" + viewstateBytes + "|" + msisdn + "|" + requestKey + "|" + tenantID + "\n"
                         if not outText in myLinesFromDateRange:
                             myLinesFromDateRange.append(outText)
         count+=1
@@ -573,7 +574,7 @@ def xlsxFile(absolutePath, relativePath, filename, ext, fromDate, toDate):
     xlsxtxtFile(relativePath + "\\" + filename + ext, filename, ext, fromDate, toDate)
 
 def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
-    print("Reading: " + filename + ".txt")
+    print("Reading: " + filename + ext)
 
     del myLinesFromDateRange[:]
     outText = ""
@@ -598,7 +599,7 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
         elif "IntegrationsLog" in filename:
             readSplitFiles(cycleNum, "IntegrationsLog", ext, r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d\.]+)?\|([\w\:\/\.\-]+)?\|([\w\/\.\(\) ]+)\|([\w\(\) ]+)\|([\d]+)\|([\w\-]+)?\|([\w\-]+)\|([\w\-\:]+)\|([\w\.]+)\|([\w\. ]+)\|([\w\-]+)?", _fromDate, _toDate)
         elif "MobileRequestsLog" in filename:
-            readSplitFiles(cycleNum, "MobileRequestsLog", ext, r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\.\-\:\; ]+)\|([\w]+)\|([\d]+)\|([\w\-]+)\|([\w\-]+)?\|([\d]+)\|([\w\-]+)\|([\w\/\+\=]+)\|([\d]+)\|([\w]+)\|([\w]+)\|([\w\-]+)", _fromDate, _toDate)
+            readSplitFiles(cycleNum, "MobileRequestsLog", ext, r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\.\-\:\; ]+)\|([\w]+)\|([\d]+)\|([\w\-]+)\|([\w\-]+)?\|([\d]+)\|([\w\-]+)\|([\w\/\+\=]+)\|([\d]+)\|([\w]+)\|([\w ]+)\|([\w\-]+)", _fromDate, _toDate)
         elif "TimerLog" in filename:
             readSplitFiles(cycleNum, "TimerLog", ext, r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w\-]+)\|([\d]+)\|([\w\-]+)\|([\w\-]+)?\|([\d\-\:\. ]+)\|([\d\-\:\. ]+)\|([\w\-]+)\|([\w]+)\|([\w ]+)\|([\w\-]+)\|([\w]+)", _fromDate, _toDate)
         elif "EmailLog" in filename:
@@ -606,7 +607,7 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
         elif "ExtensionLog" in filename:
             readSplitFiles(cycleNum, "ExtensionLog", ext, r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\/\=\+]+)\|([\d]+)\|([\d]+)\|([\d]+)\|([\w\-]+)\|([\w\-]+)?\|([\w\-]+)\|([\w]+)\|([\w]+)\|([\w ]+)\|([\w\-]+)\|([\w\@\.]+)?", _fromDate, _toDate)
         elif "ServiceActionLog" in filename:
-            readSplitFiles(cycleNum, "ServiceActionLog", ext, r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)?\|([\w\=\/\+]+)\|([\d]+)\|([\w\-]+)?\|([\w]+)\|([\w\-]+)\|([\w\-]+)?\|([\w]+)\|([\d]+)\|([\d\.]+)\|([\w\\]+)\|([\w]+)\|([\w ]+)\|([\w\-]+)\|([\w]+)?\|([\w\-]+)", _fromDate, _toDate)
+            readSplitFiles(cycleNum, "ServiceActionLog", ext, r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)?\|([\w\=\/\+]+)\|([\d]+)\|([\w\-]+)?\|([\w\-]+)\|([\w\-]+)\|([\w\-]+)?\|([\w]+)\|([\d]+)\|([\d\.]+)\|([\w\\]+)\|([\w]+)\|([\w ]+)\|([\w\-]+)\|([\w]+)?\|([\w\-]+)", _fromDate, _toDate)
         elif "ScreenLog" in filename:
             readSplitFiles(cycleNum, "ScreenLog", ext, r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\=\+\/]+)\|([\d]+)\|([\d]+)\|([\w\-\:\. ]+)?\|([\w]+)\|([\w\-]+)\|([\d]+)\|([\d]+)\|([\d]+)\|([\w]+)\|([\w\-]+)\|([\w\(\)\.]+)\|([\w\-\:\. ]+)\|([\w]+)\|([\w ]+)\|([\w\-]+)", _fromDate, _toDate)
 
@@ -665,7 +666,7 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
                         if actionName == None:
                             actionName = " "
 
-                        outText = "Error|" + date + " " + time + "||||" + message + "||" + stack + "||||||||" + moduleName + "|" + applicationName + "|" + applicationKey + "||" + actionName + "||||" + entryPointName + "|||" + server + "||" + eSpaceName + "|" + eSpaceID + "|||" + userID + "|" + sessionID + "|||||||||||" + environmentInformation + "|||||||||||" + iD + "|" + tenantID + "\n"
+                        outText = date + " " + time + "|" + message + "|" + stack + "|" + moduleName + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + entryPointName + "|" + server + "|" + eSpaceName + "|" + eSpaceID + "|" + userID + "|" + sessionID + "|" + environmentInformation + "|" + iD + "|" + tenantID + "\n"
                         if not outText in myLinesFromDateRange:
                             myLinesFromDateRange.append(outText)
 
@@ -731,7 +732,7 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
                         if username == None:
                             username = " "
 
-                        outText = "General|" + date + " " + time + "||||" + message + "|" + messageType + "|||||||||" + moduleName + "|" + applicationName + "|" + applicationKey + "||" + actionName + "||||" + entryPointName + "||||" + clientIP + "|" + eSpaceName + "|" + eSpaceID + "|||" + userID + "|" + sessionID + "||||||||||||||" + errorID + "||||||" + requestKey + "|||" + tenantID + "\n"
+                        outText = date + " " + time + "|" + message + "|" + messageType + "|" + moduleName + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + entryPointName + "|" + clientIP + "|" + eSpaceName + "|" + eSpaceID + "|" + userID + "|" + sessionID + "|" + errorID + "|" + requestKey + "|" + tenantID + "\n"
                         if not outText in myLinesFromDateRange:
                             myLinesFromDateRange.append(outText)
 
@@ -773,12 +774,12 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
                         if applicationKey == None:
                             applicationKey = " "
 
-                        outText = "Integrations|" + date + " " + time + "|||" + duration + "||||||||||||" + applicationName + "|" + applicationKey + "||" + actionName + "|" + actionType + "||" + source + "||" + endpoint + "|" + executedBy + "|||" + eSpaceName + "|" + eSpaceID + "||||||||||||||||||" + errorID + "||||||" + requestKey + "|||" + tenantID + "\n"
+                        outText = date + " " + time + "|" + duration + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + actionType + "|" + source + "|" + endpoint + "|" + executedBy + "|" + eSpaceName + "|" + eSpaceID + "|" + errorID + "|" + requestKey + "|" + tenantID + "\n"
                         if not outText in myLinesFromDateRange:
                             myLinesFromDateRange.append(outText)
 
             elif "MobileRequestsLog" in filename:
-                regex = re.compile(r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\.\-\:\; ]+)\|([\w]+)\|([\d]+)\|([\w\-]+)\|([\w\-]+)?\|([\d]+)\|([\w\-]+)\|([\w\/\+\=]+)\|([\d]+)\|([\w]+)\|([\w]+)\|([\w\-]+)", re.MULTILINE + re.IGNORECASE)
+                regex = re.compile(r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\.\-\:\; ]+)\|([\w]+)\|([\d]+)\|([\w\-]+)\|([\w\-]+)?\|([\d]+)\|([\w\-]+)\|([\w\/\+\=]+)\|([\d]+)\|([\w]+)\|([\w ]+)\|([\w\-]+)", re.MULTILINE + re.IGNORECASE)
                 for match in regex.finditer(searchLines):
                     tenantID = match.group(1)
                     timestamp = match.group(2)
@@ -808,7 +809,7 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
                         if errorID == None:
                             errorID = " "
 
-                        outText = "ScreenRequests|" + date + " " + time + "|||" + duration + "|||||||||" + screen + "|||" + applicationName + "|" + applicationKey + "|||||" + source + "||" + endpoint + "|" + executedBy + "|||" + eSpaceName + "|" + eSpaceID + "||" + loginID + "|" + userID + "|||||||" + cycle + "||||||||" + errorID + "||||||" + requestKey + "|||" + tenantID + "\n"
+                        outText = date + " " + time + "|" + duration + "|" + screen + "|" + applicationName + "|" + applicationKey + "|" + source + "|" + endpoint + "|" + executedBy + "|" + eSpaceName + "|" + eSpaceID + "|" + loginID + "|" + userID + "|" + cycle + "|" + errorID + "|" + requestKey + "|" + tenantID + "\n"
                         if not outText in myLinesFromDateRange:
                             myLinesFromDateRange.append(outText)
 
@@ -841,7 +842,7 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
                         if errorID == None:
                             errorID = " "
 
-                        outText = "Timer|" + date + " " + time + "|||" + duration + "||||||||||||" + applicationName + "|" + applicationKey + "||||||||" + executedBy + "|||" + eSpaceName + "|" + eSpaceID + "|||||||||||" + cyclicJobName + "|" + cyclicJobKey + "|" + shouldHaveRunAt + "|" + nextRun + "||||" + errorID + "||||||" + requestKey + "|||" + tenantID + "\n"
+                        outText = date + " " + time + "|" + duration + "|" + applicationName + "|" + applicationKey + "|" + executedBy + "|" + eSpaceName + "|" + eSpaceID + "|" + cyclicJobName + "|" + cyclicJobKey + "|" + shouldHaveRunAt + "|" + nextRun + "|" + errorID + "|" + requestKey + "|" + tenantID + "\n"
                         if not outText in myLinesFromDateRange:
                             myLinesFromDateRange.append(outText)
 
@@ -883,7 +884,7 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
                         if bcc == None:
                             bcc = " "
 
-                        outText = "Email|" + date + " " + time + "|" + sent + "|" + lastError + "|||||" + from_ + "|" + to + "|" + subject + "|" + cc + "|" + bcc + "||||||" + name + "|||||||||||||||||||||||||||" + size + "|||" + messageID + "|" + activity + "|" + emailDefinition + "|" + storeContent + "|" + isTestEmail + "|||" + iD + "|" + tenantID + "\n"
+                        outText = date + " " + time + "|" + sent + "|" + lastError + "|" + from_ + "|" + to + "|" + subject + "|" + cc + "|" + bcc + "|" + name + "|" + size + "|" + messageID + "|" + activity + "|" + emailDefinition + "|" + storeContent + "|" + isTestEmail + "|" + iD + "|" + tenantID + "\n"
                         if not outText in myLinesFromDateRange:
                             myLinesFromDateRange.append(outText)
 
@@ -921,12 +922,12 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
                         if username == None:
                             username = " "
 
-                        outText = "Extension|" + date + " " + time + "|||" + duration + "||||||||||||" + applicationName + "|" + applicationKey + "||" + actionName + "||||||" + executedBy + "|||" + eSpaceName + "|" + eSpaceID + "|" + username + "||" + userID + "|" + sessionID + "|" + extensionID + "|" + extensionName + "|||||||||" + errorID + "||||||" + requestKey + "|||" + tenantID + "\n"
+                        outText = date + " " + time + "|" + duration + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + executedBy + "|" + eSpaceName + "|" + eSpaceID + "|" + username + "|" + userID + "|" + sessionID + "|" + extensionID + "|" + extensionName + "|" + errorID + "|" + requestKey + "|" + tenantID + "\n"
                         if not outText in myLinesFromDateRange:
                             myLinesFromDateRange.append(outText)
                                 
             elif "ServiceActionLog" in filename:
-                regex = re.compile(r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)?\|([\w\=\/\+]+)\|([\d]+)\|([\w\-]+)?\|([\w]+)\|([\w\-]+)\|([\w\-]+)?\|([\w]+)\|([\d]+)\|([\d\.]+)\|([\w\\]+)\|([\w]+)\|([\w ]+)\|([\w\-]+)\|([\w]+)?\|([\w\-]+)", re.MULTILINE + re.IGNORECASE)
+                regex = re.compile(r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)?\|([\w\=\/\+]+)\|([\d]+)\|([\w\-]+)?\|([\w\-]+)\|([\w\-]+)\|([\w\-]+)?\|([\w]+)\|([\d]+)\|([\d\.]+)\|([\w\\]+)\|([\w]+)\|([\w ]+)\|([\w\-]+)\|([\w]+)?\|([\w\-]+)", re.MULTILINE + re.IGNORECASE)
                 for match in regex.finditer(searchLines):
                     tenantID = match.group(1)
                     timestamp = match.group(2)
@@ -968,7 +969,7 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
                         if username == None:
                             username = " "
 
-                        outText = "ServiceAction|" + date + " " + time + "|||" + duration + "||||||||||||" + applicationName + "|" + applicationKey + "||" + actionName + "|||" + source + "|" + entrypointName + "|" + endpoint + "|" + executedBy + "|||" + eSpaceName + "|" + eSpaceID + "|" + username + "|" + loginID + "|" + userID + "|" + sessionID + "|||||||||||" + errorID + "||||||" + requestKey + "|" + originalRequestKey + "||" + tenantID + "\n"
+                        outText = date + " " + time + "|" + duration + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + source + "|" + entrypointName + "|" + endpoint + "|" + executedBy + "|" + eSpaceName + "|" + eSpaceID + "|" + username + "|" + loginID + "|" + userID + "|" + sessionID + "|" + errorID + "|" + requestKey + "|" + originalRequestKey + "|" + tenantID + "\n"
                         if not outText in myLinesFromDateRange:
                             myLinesFromDateRange.append(outText)
 
@@ -1007,7 +1008,7 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
                         if msisdn == None:
                             msisdn = " "
 
-                        outText = "TraditionalWebRequests|" + date + " " + time + "|||" + duration + "|||||||||" + screen + "|" + screenType + "||" + applicationName + "|" + applicationKey + "||" + actionName + "||" + accessMode + "||||" + executedBy + "||" + clientIP + "|" + eSpaceName + "|" + eSpaceID + "|||" + userID + "|" + sessionID + "|" + sessionRequests + "|" + sessionBytes + "|" + viewstateBytes + "||||||||||" + msisdn + "||||||" + requestKey + "|||" + tenantID + "\n"
+                        outText = date + " " + time + "|" + duration + "|" + screen + "|" + screenType + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + accessMode + "|" + executedBy + "|" + clientIP + "|" + eSpaceName + "|" + eSpaceID + "|" + userID + "|" + sessionID + "|" + sessionRequests + "|" + sessionBytes + "|" + viewstateBytes + "|" + msisdn + "|" + requestKey + "|" + tenantID + "\n"
                         if not outText in myLinesFromDateRange:
                             myLinesFromDateRange.append(outText)
 
@@ -1035,6 +1036,8 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
         elif "ScreenLog" in filename:
             outFilename = "screen_logs" + ext
 
+        myLinesFromDateRange.sort()
+
         with codecs.open(os.getcwd() + "\\filtered_data_files\\" + outFilename, "a+", "utf-8", "ignore") as linesFromDateRange:
             linesFromDateRange.seek(0)
             if len(linesFromDateRange.read(100)) > 0:
@@ -1045,73 +1048,6 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
 
     print("Closing: " + filename + ".txt")
     del myLinesFromDateRange[:]
-
-def combineXLSXFile(directoryPath):
-    print("Combining content from the .XLSX file(s)")
-
-    outText = ""
-    
-    for root, subFolders, files in os.walk(directoryPath):
-        for f in files:
-            filename, ext = os.path.splitext(f)
-            #confirm if the filename matches the XLSX filenames
-            if filename in myXLSXfiles:
-                fullpath = os.path.join(root, f)
-                #create a temporary file to store the filtered data from the XLSX files
-                with codecs.open(os.getcwd() + "\\master_2.txt", "a", "utf-8", "ignore") as linesToText:
-                    with codecs.open(fullpath, "r", "utf-8", "ignore") as linesFromText:
-                        contents = linesFromText.readlines()
-                        linesToText.writelines(contents)
-            else:
-                if not filename == "iis_logs" and not filename == "iOS_build_logs" and not filename == "android_build_logs" and not filename == "service_studio_report":
-                    if not filename == "windows_event_viewer_logs":
-                        print("\"" + filename + "\" was not found in the XLSX files list")
-
-    if os.path.exists(os.getcwd() + "\\master_2.txt"):
-        #sort the data by the timestamp
-        with codecs.open(os.getcwd() + "\\master_2.txt", "r", "utf-8", "ignore") as linesFromText:
-            searchLines = linesFromText.read()
-            regex = re.compile("^([\w]+)\|([\d\-\: ]+)\|(.+)", re.MULTILINE + re.IGNORECASE)
-            for match in regex.finditer(searchLines):
-                source = match.group(1)
-                dateTime = match.group(2)
-                tail = match.group(3)
-
-                outText = dateTime + "|" + source + "|" + tail + "\n"
-                if not outText in myXLSXlines:
-                    myXLSXlines.append(outText)
-
-        myXLSXlines.sort()
-
-        #create another temporary file to store the sorted data
-        with codecs.open(os.getcwd() + "\\master.txt", "w", "utf-8", "ignore") as linesToText2:
-            linesToText2.writelines(myXLSXlines)
-
-        del myXLSXlines[:]
-        outText = ""
-
-        #rearrange the fields from the sorted data
-        with codecs.open(os.getcwd() + "\\master.txt", "r", "utf-8", "ignore") as linesFromText2:
-            searchLines2 = linesFromText2.read()
-            regex = re.compile("^([\d\-\: ]+)\|([\w]+)\|(.+)", re.MULTILINE + re.IGNORECASE)
-            for match in regex.finditer(searchLines2):
-                date_time = match.group(1)
-                _source = match.group(2)
-                _tail = match.group(3)
-
-                outText = _source + "|" + date_time + "|" + _tail + "\n"
-                if not outText in myXLSXlines:
-                    myXLSXlines.append(outText)
-
-        createFolder("\\master_files\\")
-        with codecs.open(os.getcwd() + "\\master_files\\masterXLSXfile.txt", "w", "utf-8", "ignore") as linesToText3:
-            linesToText3.writelines(myXLSXlines)
-
-        print("Master file was created from the .XLSX file(s)")
-        del myXLSXlines[:]
-        #delete the temporary files
-        os.remove(os.getcwd() + "\\master_2.txt")
-        os.remove(os.getcwd() + "\\master.txt")
 
 def txtFile(absolutePath, filename, filenameWithExt, ext, fromDate, toDate):
     print("Reading: " + filenameWithExt)
@@ -1150,14 +1086,14 @@ def txtFile(absolutePath, filename, filenameWithExt, ext, fromDate, toDate):
                         message = " "
 
                     if "iosbuildlog" in filename.lower():
-                        outText = "iOSBuild|" + date + " " + _time + "|" + messageType + "|" + method + "|" + message + "\n"
+                        outText = date + " " + _time + "|" + messageType + "|" + method + "|" + message + "\n"
                     elif "androidbuildlog" in filename.lower():
-                        outText = "AndroidBuild|" + date + " " + _time + "|" + messageType + "|" + method + "|" + message + "\n"
+                        outText = date + " " + _time + "|" + messageType + "|" + method + "|" + message + "\n"
 
                     if not outText in myLinesFromDateRange:
                                 myLinesFromDateRange.append(outText)
 
-        elif "studio" in filename.lower() or "report" in filename.lower():
+        elif "studio" in filename.lower() and "report" in filename.lower():
             #service studio report
             regex = re.compile("^(?:[ \t]+)\[([\d\/]+)[ ]([\d\:A-Z ]+)\][ ]\[([\d\:\?]+)\][ ]([\w\-\(\) ]{10,}?)(\s+(?:(?:[\w\[\]\(\)\:\;\=\-\.\+\>\’\'\`\,\<\&\#\t\r\n ]+){1,}?))?(?:\r\n|\n)", re.MULTILINE + re.IGNORECASE)
             for match in regex.finditer(searchLines):
@@ -1198,14 +1134,14 @@ def txtFile(absolutePath, filename, filenameWithExt, ext, fromDate, toDate):
 
                     if message == None:
                         message = " "
-                        outText = "ServiceStudio|" + _date + " " + _time.strip() + "|" + numberOfOccurrences + "|" + actionName.strip() + "|" + message + "\n"
+                        outText = _date + " " + _time.strip() + "|" + numberOfOccurrences + "|" + actionName.strip() + "|" + message + "\n"
                         if not outText in myLinesFromDateRange:
                             myLinesFromDateRange.append(outText)
                     else:
                         message = message.replace("\t", " ")
                         message = message.replace("\r\n", " ")
                         message = message.replace("\n", " ")
-                        outText = "ServiceStudio|" + _date + " " + _time.strip() + "|" + numberOfOccurrences + "|" + actionName.strip() + "|" + message.strip() + "\n"
+                        outText = _date + " " + _time.strip() + "|" + numberOfOccurrences + "|" + actionName.strip() + "|" + message.strip() + "\n"
                         if not outText in myLinesFromDateRange:
                             myLinesFromDateRange.append(outText)
 
@@ -1213,31 +1149,20 @@ def txtFile(absolutePath, filename, filenameWithExt, ext, fromDate, toDate):
         createFolder("\\filtered_data_files\\")
         if "iosbuildlog" in filename.lower():
             outFilename = "iOS_build_logs" + ext
-
-            with codecs.open(os.getcwd() + "\\filtered_data_files\\" + outFilename, "a+", "utf-8", "ignore") as linesFromDateRange:
-                linesFromDateRange.seek(0)
-                if len(linesFromDateRange.read(100)) > 0:
-                    linesFromDateRange.writelines("\n")
-                linesFromDateRange.writelines(myLinesFromDateRange)
-
         elif "androidbuildlog" in filename.lower():
             outFilename = "android_build_logs" + ext
-
-            with codecs.open(os.getcwd() + "\\filtered_data_files\\" + outFilename, "a+", "utf-8", "ignore") as linesFromDateRange:
-                linesFromDateRange.seek(0)
-                if len(linesFromDateRange.read(100)) > 0:
-                    linesFromDateRange.writelines("\n")
-                linesFromDateRange.writelines(myLinesFromDateRange)
-
-        elif "studio" in filename.lower() or "report" in filename.lower():
+        elif "studio" in filename.lower() and "report" in filename.lower():
             outFilename = "service_studio_report" + ext
 
-            with codecs.open(os.getcwd() + "\\filtered_data_files\\" + outFilename, "a+", "utf-8", "ignore") as linesFromDateRange:
-                linesFromDateRange.seek(0)
-                if len(linesFromDateRange.read(100)) > 0:
-                    linesFromDateRange.writelines("\n")
-                linesFromDateRange.writelines(myLinesFromDateRange)
+        myLinesFromDateRange.sort()
 
+        with codecs.open(os.getcwd() + "\\filtered_data_files\\" + outFilename, "a+", "utf-8", "ignore") as linesFromDateRange:
+            linesFromDateRange.seek(0)
+            if len(linesFromDateRange.read(100)) > 0:
+                linesFromDateRange.writelines("\n")
+            linesFromDateRange.writelines(myLinesFromDateRange)
+
+        if "studio" in filename.lower() and "report" in filename.lower():
             #remove the last line from the filtered file
             with codecs.open(os.getcwd() + "\\filtered_data_files\\" + outFilename, "r", "utf-8", "ignore") as linesFromText2:
                 searchLines2 = linesFromText2.readlines()
@@ -1250,71 +1175,6 @@ def txtFile(absolutePath, filename, filenameWithExt, ext, fromDate, toDate):
 
     print("Closing: " + filenameWithExt)
     del myLinesFromDateRange[:]
-
-def combineTXTFile(directoryPath):
-    print("Combining content from the .TXT file(s)")
-
-    outText = ""
-
-    for root, subFolders, files in os.walk(directoryPath):
-        for f in files:
-            filename, ext = os.path.splitext(f)
-            #confirm if the filename matches the TXT filenames
-            if not filename in myXLSXfiles:
-                if not filename == "iis_logs" and not filename == "windows_event_viewer_logs":
-                    if filename == "iOS_build_logs" or filename == "android_build_logs" or filename == "service_studio_report":
-                        #create temporary files to store the filtered data from the TXT files
-                        fullpath = os.path.join(root, f)
-                        with codecs.open(os.getcwd() + "\\master_2.txt", "a", "utf-8", "ignore") as linesToText:
-                            with codecs.open(fullpath, "r", "utf-8", "ignore") as linesFromText:
-                                contents = linesFromText.readlines()
-                                linesToText.writelines(contents)
-
-    if os.path.exists(os.getcwd() + "\\master_2.txt"):
-        #sort the data by the timestamp
-        with codecs.open(os.getcwd() + "\\master_2.txt", "r", "utf-8", "ignore") as linesFromText:
-            searchLines = linesFromText.read()
-            regex = re.compile("^([\w]+)\|([\d\-\: ]+)\|(.+)", re.MULTILINE + re.IGNORECASE)
-            for match in regex.finditer(searchLines):
-                source = match.group(1)
-                dateTime = match.group(2)
-                tail = match.group(3)
-
-                outText = dateTime + "|" + source + "|" + tail + "\n"
-                if not outText in myTXTlines:
-                    myTXTlines.append(outText)
-
-        myTXTlines.sort()
-
-        #create another temporary file to store the sorted data
-        with codecs.open(os.getcwd() + "\\master.txt", "w", "utf-8", "ignore") as linesToText3:
-            linesToText3.writelines(myTXTlines)
-
-        del myTXTlines[:]
-        outText = ""
-
-        #rearrange the fields from the sorted data
-        with codecs.open(os.getcwd() + "\\master.txt", "r", "utf-8", "ignore") as linesFromText2:
-            searchLines2 = linesFromText2.read()
-            regex = re.compile("^([\d\-\: ]+)\|([\w]+)\|(.+)", re.MULTILINE + re.IGNORECASE)
-            for match in regex.finditer(searchLines2):
-                date_time = match.group(1)
-                _source = match.group(2)
-                _tail = match.group(3)
-
-                outText = _source + "|" + date_time + "|" + _tail + "\n"
-                if not outText in myTXTlines:
-                    myTXTlines.append(outText)
-
-        createFolder("\\master_files\\")
-        with codecs.open(os.getcwd() + "\\master_files\\masterTXTfile.txt", "w", "utf-8", "ignore") as linesToText4:
-            linesToText4.writelines(myTXTlines)
-
-        print("Master file was created from the .TXT file(s)")
-        del myTXTlines[:]
-        #delete the temporary files
-        os.remove(os.getcwd() + "\\master_2.txt")
-        os.remove(os.getcwd() + "\\master.txt")
 
 def logFile(absolutePath, filenameWithExt, ext, fromDate, toDate):
     print("Reading: " + filenameWithExt)
@@ -1356,6 +1216,8 @@ def logFile(absolutePath, filenameWithExt, ext, fromDate, toDate):
         createFolder("\\filtered_data_files\\")
         outFilename = "iis_logs" + ext
 
+        myLinesFromDateRange.sort()
+
         with codecs.open(os.getcwd() + "\\filtered_data_files\\" + outFilename, "a+", "utf-8", "ignore") as linesFromDateRange:
             linesFromDateRange.seek(0)
             if len(linesFromDateRange.read(100)) > 0:
@@ -1367,135 +1229,103 @@ def logFile(absolutePath, filenameWithExt, ext, fromDate, toDate):
     print("Closing: " + filenameWithExt)
     del myLinesFromDateRange[:]
 
-def combineLOGFile(directoryPath):
-    print("Combining content from the .LOG file(s)")
+def sortLOGFile(directoryPath):
+    print("Sorting the content from the IIS log(s)")
 
     outText = ""
-    outText2 = ""
 
-    for root, subFolders, files in os.walk(directoryPath):
-        for f in files:
-            filename, ext = os.path.splitext(f)
-            if filename == "iis_logs":
-                #create a temporary file to store the filtered data from the LOG files
-                with codecs.open(os.getcwd() + "\\master.txt", "a", "utf-8", "ignore") as linesToText:
-                    with codecs.open(directoryPath + "\\iis_logs.txt", "r", "utf-8", "ignore") as linesFromText:
-                        contents = linesFromText.readlines()
-                        linesToText.writelines(contents)
+    #sort the data by time taken to perform a task
+    with codecs.open(os.getcwd() + "\\filtered_data_files\\iis_logs.txt", "r", "utf-8", "ignore") as linesFromText2:
+        searchLines = linesFromText2.read()
+        regex = re.compile("^([\d\-\: ]+)\|([\d]+)\|(.+)", re.MULTILINE + re.IGNORECASE)
+        for match in regex.finditer(searchLines):
+            dateTime = match.group(1)
+            timeTaken = match.group(2)
+            tail = match.group(3)
 
-                #sort the data by the timestamp and by the time taken to perform a task
-                with codecs.open(os.getcwd() + "\\master.txt", "r", "utf-8", "ignore") as linesFromText2:
-                    searchLines = linesFromText2.read()
-                    regex = re.compile("^([\d\-\: ]+)\|([\d]+)\|(.+)", re.MULTILINE + re.IGNORECASE)
-                    for match in regex.finditer(searchLines):
-                        dateTime = match.group(1)
-                        timeTaken = match.group(2)
-                        tail = match.group(3)
+            outText = timeTaken + "|" + dateTime + "|" + tail + "\n"
+            _timeTaken = int(timeTaken)
+            _date_time = datetime.strptime(dateTime, "%Y-%m-%d %H:%M:%S")
 
-                        outText = dateTime + "|" + timeTaken + "|" + tail + "\n"
-                        outText2 = timeTaken + "|" + dateTime + "|" + tail + "\n"
-                        _timeTaken = int(timeTaken)
+            if not outText in myLOGlines:
+                myLOGlines.append(outText)
 
-                        if not outText in myLOGlines:
-                            myLOGlines.append(outText)
+            if not _timeTaken in myTimeTaken:
+                myTimeTaken.append(_timeTaken)
 
-                        if not outText2 in myLOGlines2:
-                            myLOGlines2.append(outText2)
+            myDateTimes.append(dateTime)
+            myTimesTaken.append(_timeTaken)
 
-                        if not _timeTaken in myTimeTaken:
-                            myTimeTaken.append(_timeTaken)
+    myTimeTaken.sort()
 
-                myLOGlines.sort()
-                myTimeTaken.sort()
+    minimum = min(myTimeTaken)
+    maximum = max(myTimeTaken)
 
-                minimum = min(myTimeTaken)
-                maximum = max(myTimeTaken)
+    with codecs.open(os.getcwd() + "\\filtered_data_files\\iis_logs_timetaken.txt", "w", "utf-8", "ignore") as linesToText3:
+        while maximum >= minimum:
+            if maximum in myTimeTaken:
+                for t, tt in enumerate(myLOGlines):
+                    time = [int(w) for w in myLOGlines[t].split("|") if w.isdigit()]
+                    if maximum == time[0]:
+                        linesToText3.writelines(myLOGlines[t])
+                    t+=1
+            maximum-=1
 
-                createFolder("\\master_files\\")
-                with codecs.open(os.getcwd() + "\\master_files\\masterLOGfile_datetime.txt", "w", "utf-8", "ignore") as linesToText2:
-                    linesToText2.writelines(myLOGlines)
+    #create a line graph with the compiled data
+    createFolder("\\graphs\\")
 
-                with codecs.open(os.getcwd() + "\\master_files\\masterLOGfile_timetaken.txt", "w", "utf-8", "ignore") as linesToText3:
-                    while maximum >= minimum:
-                        if maximum in myTimeTaken:
-                            for t, tt in enumerate(myLOGlines2):
-                                time = [int(w) for w in myLOGlines2[t].split("|") if w.isdigit()]
-                                if maximum == time[0]:
-                                    linesToText3.writelines(myLOGlines2[t])
-                                t+=1
-                        maximum-=1
+    fig, ax = plt.subplots()
+    ax.plot(myDateTimes, myTimesTaken)
+    #reformat the timestamps to display the month-day hour:minutes
+    myFmt = mdates.DateFormatter("%m-%d %H:%M")
+    ax.xaxis.set_major_formatter(myFmt)
+    #only display ten labels for the X and the Y axis
+    ax.xaxis.set_major_locator(plt.MaxNLocator(10))
+    ax.yaxis.set_major_locator(plt.MaxNLocator(10))
+    #change the label's font size and rotate the labels from the X axis
+    ax.xaxis.set_tick_params(labelsize = 6)
+    ax.yaxis.set_tick_params(labelsize = 6)
+    plt.xticks(rotation = 45)
+    #save a copy of the line graph and display a dialog window with the interactive line graph
+    plt.savefig(os.getcwd() + "\\graphs\\line_graph.png")
+    plt.show()
 
-                print("Master files were created from the .LOG file(s)")
+    del myDateTimes[:]
+    del myTimesTaken[:]
 
-                #create a line graph with the compiled data that was sorted by the timestamp
-                #retrieve the timestamp and the time taken to perform a task
-                with codecs.open(os.getcwd() + "\\master_files\\masterLOGfile_datetime.txt", "r", "utf-8", "ignore") as linesFromText3:
-                    searchLines2 = linesFromText3.read()
-                    regex = re.compile("^([\d\-\: ]+)\|([\d]+)\|.+", re.MULTILINE + re.IGNORECASE)
-                    for match in regex.finditer(searchLines2):
-                        date_time = match.group(1)
-                        time_taken = match.group(2)
+    with codecs.open(os.getcwd() + "\\filtered_data_files\\iis_logs_timetaken.txt", "r", "utf-8", "ignore") as linesFromText4:
+        searchLines3 = linesFromText4.read()
+        regex2 = re.compile("^([\d]+)\|([\d\-\: ]+)\|.+", re.MULTILINE + re.IGNORECASE)
+        for match2 in regex2.finditer(searchLines3):
+            time_taken_ = match2.group(1)
+            date_time_ = match2.group(2)
 
-                        _date_time = datetime.strptime(date_time, "%Y-%m-%d %H:%M:%S")
+            myDateTimes.append(date_time_)
+            myTimesTaken.append(time_taken_)
 
-                        myDateTimes.append(_date_time)
-                        myTimesTaken.append(int(time_taken))
+    with codecs.open(os.getcwd() + "\\graphs\\line_graph.html", "w", "utf-8", "ignore") as linesToText4:
+        linesToText4.writelines("<!doctype html>\n<body>\n<div id=\"container\" style=\"width: 500px; height: 400px;\"></div>\n<script src=\"https://cdn.anychart.com/releases/v8/js/anychart-base.min.js\" type=\"text/javascript\"></script>\n<script>\n\tanychart.onDocumentReady(function() {\n\t\t//create CSV string\n\t\tvar csvString = 'Timestamp;Time*' +\n")
+        for x, elm in enumerate(myDateTimes):
+            if x == len(myDateTimes) - 1:
+                linesToText4.writelines("\t\t\t'" + myDateTimes[x] + "|" + myTimesTaken[x] + "';\n\n")
+            else:
+                linesToText4.writelines("\t\t\t'" + myDateTimes[x] + "|" + myTimesTaken[x] + "*' +\n")
+            x+=1
+        linesToText4.writelines("\t\t//create an area chart\n\t\tvar chart = anychart.line();\n\n\t\t//create the area series based on CSV data\n\t\tchart.line(csvString, {ignoreFirstRow: true, columnsSeparator: \"|\", rowsSeparator: \"*\"});\n\n\t\t//display a chart\n\t\tchart.container('container').draw();\n\n\t\tchart.xAxis().title(\"Timestamp\");\n\t\tchart.yAxis().title(\"Time Taken\");\n\n\t\t//set ticks interval\n\t\tchart.yScale().ticks().interval(1000);\n\n\t\t//set minor ticks interval\n\t\tchart.yScale().minorTicks().interval(500);\n\n\t\t//settings\n\t\tchart.tooltip().fontColor(\"red\");\n\n\t\t//tooltip padding for all series on a chart\n\t\tchart.tooltip().padding().left(20);\n\n\t\t//background color\n\t\tchart.tooltip().background().fill(\"black\");\n});\n</script>\n</body>\n</html>")
 
-                fig, ax = plt.subplots()
-                ax.plot(myDateTimes, myTimesTaken)
-                #reformat the timestamps to display the month-day hour:minutes
-                myFmt = mdates.DateFormatter("%m-%d %H:%M")
-                ax.xaxis.set_major_formatter(myFmt)
-                #only display ten labels for the X and the Y axis
-                ax.xaxis.set_major_locator(plt.MaxNLocator(10))
-                ax.yaxis.set_major_locator(plt.MaxNLocator(10))
-                #change the label's font size and rotate the labels from the X axis
-                ax.xaxis.set_tick_params(labelsize = 6)
-                ax.yaxis.set_tick_params(labelsize = 6)
-                plt.xticks(rotation = 45)
-                #save a copy of the line graph and display a dialog window with the interactive line graph
-                plt.savefig(os.getcwd() + "\\master_files\\line_graph.png")
-                print("Saved the line graph from the .LOG file(s)")
-                plt.show()
-
-                del myDateTimes[:]
-                del myTimesTaken[:]
-
-                with codecs.open(os.getcwd() + "\\master_files\\masterLOGfile_timetaken.txt", "r", "utf-8", "ignore") as linesFromText4:
-                    searchLines3 = linesFromText4.read()
-                    regex2 = re.compile("^([\d]+)\|([\d\-\: ]+)\|.+", re.MULTILINE + re.IGNORECASE)
-                    for match2 in regex2.finditer(searchLines3):
-                        time_taken_ = match2.group(1)
-                        date_time_ = match2.group(2)
-
-                        myDateTimes.append(date_time_)
-                        myTimesTaken.append(time_taken_)
-
-                with codecs.open(os.getcwd() + "\\master_files\\line_graph.html", "w", "utf-8", "ignore") as linesToText4:
-                    linesToText4.writelines("<!doctype html>\n<body>\n<div id=\"container\" style=\"width: 500px; height: 400px;\"></div>\n<script src=\"https://cdn.anychart.com/releases/v8/js/anychart-base.min.js\" type=\"text/javascript\"></script>\n<script>\n\tanychart.onDocumentReady(function() {\n\t\t//create CSV string\n\t\tvar csvString = 'Timestamp;Time*' +\n")
-                    for x, elm in enumerate(myDateTimes):
-                        if x == len(myDateTimes) - 1:
-                            linesToText4.writelines("\t\t\t'" + myDateTimes[x] + "|" + myTimesTaken[x] + "';\n\n")
-                        else:
-                            linesToText4.writelines("\t\t\t'" + myDateTimes[x] + "|" + myTimesTaken[x] + "*' +\n")
-                        x+=1
-                    linesToText4.writelines("\t\t//create an area chart\n\t\tvar chart = anychart.line();\n\n\t\t//create the area series based on CSV data\n\t\tchart.line(csvString, {ignoreFirstRow: true, columnsSeparator: \"|\", rowsSeparator: \"*\"});\n\n\t\t//display a chart\n\t\tchart.container('container').draw();\n\n\t\tchart.xAxis().title(\"Timestamp\");\n\t\tchart.yAxis().title(\"Time Taken\");\n\n\t\t//set ticks interval\n\t\tchart.yScale().ticks().interval(1000);\n\n\t\t//set minor ticks interval\n\t\tchart.yScale().minorTicks().interval(500);\n\n\t\t//settings\n\t\tchart.tooltip().fontColor(\"red\");\n\n\t\t//tooltip padding for all series on a chart\n\t\tchart.tooltip().padding().left(20);\n\n\t\t//background color\n\t\tchart.tooltip().background().fill(\"black\");\n});\n</script>\n</body>\n</html>")
-                    
-                del myLOGlines[:]
-                del myLOGlines2[:]
-                del myTimeTaken[:]
-                del myDateTimes[:]
-                del myTimesTaken[:]
-                outText = ""
-                outText2 = ""
-                #delete the temporary file
-                os.remove(os.getcwd() + "\\master.txt")
+    print("Saved the line graphs from the IIS log(s)")     
+    del myLOGlines[:]
+    del myTimeTaken[:]
+    del myDateTimes[:]
+    del myTimesTaken[:]
+    outText = ""
 
 def evtxFile(absolutePath, filenameWithExt, ext, fromDate, toDate):
     print("Reading: " + filenameWithExt)
 
     del myLinesFromDateRange[:]
     outText = ""
+    channel = ""
 
     #read the windows event viewer log and convert its contents to XML
     with evtx.Evtx(absolutePath) as log:
@@ -1545,13 +1375,15 @@ def evtxFile(absolutePath, filenameWithExt, ext, fromDate, toDate):
             message = message.replace("\r\n", " ")
             message = message.replace("\n", " ")
 
-            outText = channel + "|" + date + " " + time + "|" + level + "|" + providerName + "|" + qualifiers + "|" + eventID + "|" + eventRecordID + "|" + task + "|" + keywords + "|" + message.strip() + "|" + computer + "\n"
+            outText = date + " " + time + "|" + level + "|" + providerName + "|" + qualifiers + "|" + eventID + "|" + eventRecordID + "|" + task + "|" + keywords + "|" + message.strip() + "|" + computer + "\n"
             if not outText in myLinesFromDateRange:
                         myLinesFromDateRange.append(outText)
 
     if len(myLinesFromDateRange) > 0:
         createFolder("\\filtered_data_files\\")
-        outFilename = "windows_event_viewer_logs" + ext
+        outFilename = "windows_" + channel.lower() + "_event_viewer_logs" + ext
+
+        myLinesFromDateRange.sort()
 
         with codecs.open(os.getcwd() + "\\filtered_data_files\\" + outFilename, "a+", "utf-8", "ignore") as linesFromDateRange:
             linesFromDateRange.seek(0)
@@ -1564,72 +1396,7 @@ def evtxFile(absolutePath, filenameWithExt, ext, fromDate, toDate):
     print("Closing: " + filenameWithExt)
     del myLinesFromDateRange[:]
     
-def combineEVTXFile(directoryPath):
-    del myTXTlines[:]
-    outText = ""
-    
-    for root, subFolders, files in os.walk(directoryPath):
-        for f in files:
-            filename, ext = os.path.splitext(f)
-            #confirm if the filename matches the TXT filenames
-            if not filename in myXLSXfiles:
-                if not filename == "iis_logs" and not filename == "iOS_build_logs" and not filename == "android_build_logs" and not filename == "service_studio_report":
-                    #create temporary files to store the filtered data from the TXT files
-                    fullpath = os.path.join(root, f)
-                    with codecs.open(os.getcwd() + "\\master_2.txt", "a", "utf-8", "ignore") as linesToText:
-                        with codecs.open(fullpath, "r", "utf-8", "ignore") as linesFromText:
-                            contents = linesFromText.readlines()
-                            linesToText.writelines(contents)
-
-    if os.path.exists(os.getcwd() + "\\master_2.txt"):
-        print("Combining content from the .EVTX file(s)")
-        #sort the data by the timestamp
-        with codecs.open(os.getcwd() + "\\master_2.txt", "r", "utf-8", "ignore") as linesFromText:
-            searchLines = linesFromText.read()
-            regex = re.compile("^([\w]+)\|([\d\-\: ]+)\|(.+)", re.MULTILINE + re.IGNORECASE)
-            for match in regex.finditer(searchLines):
-                source = match.group(1)
-                dateTime = match.group(2)
-                tail = match.group(3)
-
-                outText = dateTime + "|" + source + "|" + tail + "\n"
-                if not outText in myTXTlines:
-                    myTXTlines.append(outText)
-
-        myTXTlines.sort()
-
-        #create another temporary file to store the sorted data
-        with codecs.open(os.getcwd() + "\\master.txt", "w", "utf-8", "ignore") as linesToText3:
-            linesToText3.writelines(myTXTlines)
-
-        del myTXTlines[:]
-        outText = ""
-
-        #rearrange the fields from the sorted data
-        with codecs.open(os.getcwd() + "\\master.txt", "r", "utf-8", "ignore") as linesFromText2:
-            searchLines2 = linesFromText2.read()
-            regex = re.compile("^([\d\-\: ]+)\|([\w]+)\|(.+)", re.MULTILINE + re.IGNORECASE)
-            for match in regex.finditer(searchLines2):
-                date_time = match.group(1)
-                _source = match.group(2)
-                _tail = match.group(3)
-
-                outText = _source + "|" + date_time + "|" + _tail + "\n"
-                if not outText in myTXTlines:
-                    myTXTlines.append(outText)
-
-        createFolder("\\master_files\\")
-        with codecs.open(os.getcwd() + "\\master_files\\masterEVTXfile.txt", "w", "utf-8", "ignore") as linesToText4:
-            linesToText4.writelines(myTXTlines)
-
-        print("Master file was created from the .EVTX file(s)")
-        del myTXTlines[:]
-        #delete the temporary files
-        os.remove(os.getcwd() + "\\master_2.txt")
-        os.remove(os.getcwd() + "\\master.txt")
-
-#the following line displays the absolute path of the folder where
-#Python was installed on your PC. Uncomment only when necessary.
+#the following line displays the absolute path of the folder where Python was installed on your PC. Uncomment only when necessary.
 #print("PYTHON WAS INSTALLED HERE -> " + os.path.dirname(sys.executable))
 
 num_args = len(sys.argv)
