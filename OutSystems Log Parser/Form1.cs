@@ -25,7 +25,6 @@ namespace OutSystems_Log_Parser
             InitializeComponent();
         }
 
-        //Beginning of the Service Center Logs tab code
         private void btnBrowseFile_Click(object sender, EventArgs e)
         {
             try
@@ -86,71 +85,113 @@ namespace OutSystems_Log_Parser
 
                             if (fileName == "android_build_logs.txt")
                             {
-                                androidLogs(relativePath + "\\android_build_logs.txt", delimiters);
+                                string[] column_names = { "DATE_TIME", "MESSAGE_TYPE", "ACTION_NAME", "MESSAGE" };
+                                populateTables(relativePath + "\\android_build_logs.txt", delimiters, column_names, dataGridViewAndroidlogs);
                             }
                             else if (fileName == "email_logs.txt")
                             {
-                                emailLogs(relativePath + "\\email_logs.txt", delimiters);
+                                string[] column_names = { "DATE_TIME", "SENT", "LAST_ERROR", "FROM", "TO", "SUBJECT",
+                                    "CC", "BCC", "NAME", "SIZE", "MESSAGE_ID", "ACTIVITY", "EMAIL_DEFINITION", "STORE_CONTENT",
+                                    "IS_TEST_EMAIL", "ID", "TENANT_ID" };
+                                populateTables(relativePath + "\\email_logs.txt", delimiters, column_names, dataGridViewEmaillogs);
                             }
                             else if (fileName == "error_logs.txt")
                             {
-                                errorLogs(relativePath + "\\error_logs.txt", delimiters);
+                                string[] column_names = { "DATE_TIME", "MESSAGE", "STACK", "MODULE_NAME", "APPLICATION_NAME",
+                                    "APPLICATION_KEY", "ACTION_NAME", "ENTRYPOINT_NAME", "SERVER", "ESPACE_NAME", "ESPACE_ID",
+                                    "USER_ID", "SESSION_ID", "ENVIRONMENT_INFORMATION", "ID", "TENANT_ID" };
+                                populateTables(relativePath + "\\error_logs.txt", delimiters, column_names, dataGridViewErrorlogs);
                             }
                             else if (fileName == "extension_logs.txt")
                             {
-                                extensionLogs(relativePath + "\\extension_logs.txt", delimiters);
+                                string[] column_names = { "DATE_TIME", "DURATION", "APPLICATION_NAME", "APPLICATION_KEY", "ACTION_NAME",
+                                    "EXECUTED_BY", "ESPACE_NAME", "ESPACE_ID", "USERNAME", "USER_ID", "SESSION_ID", "EXTENSION_ID",
+                                    "EXTENSION_NAME", "ERROR_ID", "REQUEST_KEY", "TENANT_ID" };
+                                populateTables(relativePath + "\\extension_logs.txt", delimiters, column_names, dataGridViewExtensionlogs);
                             }
                             else if (fileName == "general_logs.txt")
                             {
-                                generalLogs(relativePath + "\\general_logs.txt", delimiters);
+                                string[] column_names = { "DATE_TIME", "MESSAGE", "MESSAGE_TYPE", "MODULE_NAME", "APPLICATION_NAME",
+                                    "APPLICATION_KEY", "ACTION_NAME", "ENTRYPOINT_NAME", "CLIENT_IP", "ESPACE_NAME", "ESPACE_ID",
+                                    "USER_ID", "SESSION_ID", "ERROR_ID", "REQUEST_KEY", "TENANT_ID" };
+                                populateTables(relativePath + "\\general_logs.txt", delimiters, column_names, dataGridViewGenerallogs);
                             }
                             else if (fileName == "iis_logs.txt")
                             {
-                                iisLogs(relativePath + "\\iis_logs.txt", delimiters);
+                                string[] column_names = { "DATE_TIME", "TIME_TAKEN", "HTTP_CODE", "HTTP_SUBCODE", "WINDOWS_ERROR_CODE",
+                                    "CLIENT_IP", "SERVER_IP", "SERVER_PORT", "METHOD", "URI_STEM", "URI_QUERY", "USERNAME", "BROWSER",
+                                    "REFERRER" };
+                                populateTables(relativePath + "\\iis_logs.txt", delimiters, column_names, dataGridViewIISDateTime);
                             }
                             else if (fileName == "iis_logs_timetaken.txt")
                             {
-                                iisLogsTime(relativePath + "\\iis_logs_timetaken.txt", delimiters);
+                                string[] column_names = { "TIME_TAKEN", "DATE_TIME", "HTTP_CODE", "HTTP_SUBCODE", "WINDOWS_ERROR_CODE",
+                                    "CLIENT_IP", "SERVER_IP", "SERVER_PORT", "METHOD", "URI_STEM", "URI_QUERY", "USERNAME", "BROWSER",
+                                    "REFERRER" };
+                                populateTables(relativePath + "\\iis_logs_timetaken.txt", delimiters, column_names, dataGridViewIISTimeTaken);
                             }
                             else if (fileName == "integrations_logs.txt")
                             {
-                                integrationsLogs(relativePath + "\\integrations_logs.txt", delimiters);
+                                string[] column_names = { "DATE_TIME", "DURATION", "APPLICATION_NAME", "APPLICATION_KEY", "ACTION_NAME",
+                                    "ACTION_TYPE", "SOURCE", "ENDPOINT", "EXECUTED_BY", "ESPACE_NAME", "ESPACE_ID", "ERROR_ID",
+                                    "REQUEST_KEY", "TENANT_ID" };
+                                populateTables(relativePath + "\\integrations_logs.txt", delimiters, column_names, dataGridViewIntegrationslogs);
                             }
                             else if (fileName == "iOS_build_logs.txt")
                             {
-                                iOSLogs(relativePath + "\\iOS_build_logs.txt", delimiters);
+                                string[] column_names = { "DATE_TIME", "MESSAGE_TYPE", "ACTION_NAME", "MESSAGE" };
+                                populateTables(relativePath + "\\iOS_build_logs.txt", delimiters, column_names, dataGridViewiOSlogs);
                             }
                             else if (fileName == "mobile_requests_logs.txt")
                             {
-                                mobileRequestsLogs(relativePath + "\\mobile_requests_logs.txt", delimiters);
+                                string[] column_names = { "DATE_TIME", "DURATION", "SCREEN", "APPLICATION_NAME", "APPLICATION_KEY", "SOURCE",
+                                    "ENDPOINT", "EXECUTED_BY", "ESPACE_NAME", "ESPACE_ID", "LOGIN_ID", "USER_ID", "CYCLE",
+                                    "ERROR_ID", "REQUEST_KEY", "TENANT_ID" };
+                                populateTables(relativePath + "\\mobile_requests_logs.txt", delimiters, column_names, dataGridViewScreenRequestslogs);
                             }
                             else if (fileName == "screen_logs.txt")
                             {
-                                screenLogs(relativePath + "\\screen_logs.txt", delimiters);
+                                string[] column_names = { "DATE_TIME", "DURATION", "SCREEN", "SCREEN_TYPE", "APPLICATION_NAME", "APPLICATION_KEY",
+                                    "ACTION_NAME", "ACCESS_MODE", "EXECUTED_BY", "CLIENT_IP", "ESPACE_NAME", "ESPACE_ID",
+                                    "USER_ID", "SESSION_ID", "SESSION_REQUESTS", "SESSION_BYTES", "VIEW_STATE_BYTES", "MS_IS_DN", "REQUEST_KEY", "TENANT_ID" };
+                                populateTables(relativePath + "\\screen_logs.txt", delimiters, column_names, dataGridViewTradWebRequests);
                             }
                             else if (fileName == "service_action_logs.txt")
                             {
-                                serviceActionLogs(relativePath + "\\service_action_logs.txt", delimiters);
+                                string[] column_names = { "DATE_TIME", "DURATION", "APPLICATION_NAME", "APPLICATION_KEY", "ACTION_NAME", "SOURCE",
+                                    "ENTRYPOINT_NAME", "ENDPOINT", "EXECUTED_BY", "ESPACE_NAME", "ESPACE_ID", "USERNAME", "LOGIN_ID",
+                                    "USER_ID", "SESSION_ID", "ERROR_ID", "REQUEST_KEY", "ORIGINAL_REQUEST_KEY", "TENANT_ID" };
+                                populateTables(relativePath + "\\service_action_logs.txt", delimiters, column_names, dataGridViewServiceActionlogs);
                             }
                             else if (fileName == "service_studio_report.txt")
                             {
-                                serviceStudioLogs(relativePath + "\\service_studio_report.txt", delimiters);
+                                string[] column_names = { "DATE_TIME", "MESSAGE_TYPE", "ACTION_NAME", "MESSAGE" };
+                                populateTables(relativePath + "\\service_studio_report.txt", delimiters, column_names, dataGridViewServiceStudiologs);
                             }
                             else if (fileName == "timer_logs.txt")
                             {
-                                timerLogs(relativePath + "\\timer_logs.txt", delimiters);
+                                string[] column_names = { "DATE_TIME", "DURATION", "APPLICATION_NAME", "APPLICATION_KEY", "EXECUTED_BY",
+                                    "ESPACE_NAME", "ESPACE_ID", "CYCLIC_JOB_NAME", "CYCLIC_JOB_KEY", "SHOULD_HAVE_RUN_AT", "NEXT_RUN",
+                                    "ERROR_ID", "REQUEST_KEY", "TENANT_ID" };
+                                populateTables(relativePath + "\\timer_logs.txt", delimiters, column_names, dataGridViewTimerlogs);
                             }
                             else if (fileName == "windows_application_event_viewer_logs.txt")
                             {
-                                winAppEventViewer(relativePath + "\\windows_application_event_viewer_logs.txt", delimiters);
+                                string[] column_names = { "DATE_TIME", "LEVEL", "PROVIDER_NAME", "QUALIFIERS", "EVENT_ID", "EVENT_RECORD_ID",
+                                    "TASK", "KEYWORDS", "MESSAGE", "COMPUTER" };
+                                populateTables(relativePath + "\\windows_application_event_viewer_logs.txt", delimiters, column_names, dataGridViewWinAppEventViewer);
                             }
                             else if (fileName == "windows_security_event_viewer_logs.txt")
                             {
-                                winSecEventViewer(relativePath + "\\windows_security_event_viewer_logs.txt", delimiters);
+                                string[] column_names = { "DATE_TIME", "LEVEL", "PROVIDER_NAME", "QUALIFIERS", "EVENT_ID", "EVENT_RECORD_ID",
+                                    "TASK", "KEYWORDS", "MESSAGE", "COMPUTER" };
+                                populateTables(relativePath + "\\windows_security_event_viewer_logs.txt", delimiters, column_names, dataGridViewWinSecEventViewer);
                             }
                             else if (fileName == "windows_system_event_viewer_logs.txt")
                             {
-                                winSysEventViewer(relativePath + "\\windows_system_event_viewer_logs.txt", delimiters);
+                                string[] column_names = { "DATE_TIME", "LEVEL", "PROVIDER_NAME", "QUALIFIERS", "EVENT_ID", "EVENT_RECORD_ID",
+                                    "TASK", "KEYWORDS", "MESSAGE", "COMPUTER" };
+                                populateTables(relativePath + "\\windows_system_event_viewer_logs.txt", delimiters, column_names, dataGridViewWinSysEventViewer);
                             }
                         }
                     }
@@ -167,84 +208,11 @@ namespace OutSystems_Log_Parser
             }
         }
 
-        private void errorLogs(string filePath, char splitter)
+        private void populateTables(string filePath, char splitter, string[] headerLabels, DataGridView tableName)
         {
             DataTable dt = new DataTable();
-
             string[] lines = System.IO.File.ReadAllLines(filePath).ToArray();
-
-            string[] headerLabels = { "DATE_TIME", "MESSAGE", "STACK", "MODULE_NAME", "APPLICATION_NAME",
-                "APPLICATION_KEY", "ACTION_NAME", "ENTRYPOINT_NAME", "SERVER", "ESPACE_NAME", "ESPACE_ID", 
-                "USER_ID", "SESSION_ID", "ENVIRONMENT_INFORMATION", "ID", "TENANT_ID"
-                };
             List<string> newLines = new List<string>();
-
-            int colsExpected = 0;
-
-            try
-            {
-                if (lines.Length > 0)
-                {
-                    //for the headers
-                    foreach (string headerWord in headerLabels)
-                    {
-                        dt.Columns.Add(new DataColumn(headerWord));
-                    }
-
-                    colsExpected = dt.Columns.Count;
-
-                    //for removing line breaks in data
-                    for (int i = 0; i < lines.Length; i++)
-                    {
-                        string temp = lines[i];
-                        string[] fields = temp.Split(splitter);
-                        while (fields.Length < colsExpected && i < (lines.Length - 1))
-                        {
-                            i++;
-                            temp += lines[i];
-                            fields = temp.Split(splitter);
-                        }
-                        newLines.Add(temp);
-                    }
-                    
-                    //for the data
-                    string[] dataFields = newLines.ToArray();
-                    for (int i = 0; i < dataFields.Length; i++)
-                    {
-                        string[] dataCols = dataFields[i].Split(splitter);
-                        DataRow dr = dt.NewRow();
-                        int columnIndex = 0;
-                        foreach (string headerWord in headerLabels)
-                        {
-                            dr[headerWord] = dataCols[columnIndex++];
-                        }
-                        dt.Rows.Add(dr);
-                    }
-                }
-                if (dt.Rows.Count > 0)
-                {
-                    dataGridViewErrorlogs.DataSource = dt;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
-        }
-
-        private void generalLogs(string filePath, char splitter)
-        {
-            DataTable dt = new DataTable();
-
-            string[] lines = System.IO.File.ReadAllLines(filePath).ToArray();
-
-            string[] headerLabels = { "DATE_TIME", "MESSAGE", "MESSAGE_TYPE", "MODULE_NAME", "APPLICATION_NAME",
-                "APPLICATION_KEY", "ACTION_NAME", "ENTRYPOINT_NAME", "CLIENT_IP", "ESPACE_NAME", "ESPACE_ID",
-                "USER_ID", "SESSION_ID", "ERROR_ID", "REQUEST_KEY", "TENANT_ID"
-                };
-            List<string> newLines = new List<string>();
-
             int colsExpected = 0;
 
             try
@@ -289,469 +257,7 @@ namespace OutSystems_Log_Parser
                 }
                 if (dt.Rows.Count > 0)
                 {
-                    dataGridViewGenerallogs.DataSource = dt;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
-        }
-
-        private void integrationsLogs(string filePath, char splitter)
-        {
-            DataTable dt = new DataTable();
-
-            string[] lines = System.IO.File.ReadAllLines(filePath).ToArray();
-
-            string[] headerLabels = { "DATE_TIME", "DURATION", "APPLICATION_NAME", "APPLICATION_KEY", "ACTION_NAME",
-                "ACTION_TYPE", "SOURCE", "ENDPOINT", "EXECUTED_BY", "ESPACE_NAME", "ESPACE_ID",
-                "ERROR_ID", "REQUEST_KEY", "TENANT_ID"
-                };
-            List<string> newLines = new List<string>();
-
-            int colsExpected = 0;
-
-            try
-            {
-                if (lines.Length > 0)
-                {
-                    //for the headers
-                    foreach (string headerWord in headerLabels)
-                    {
-                        dt.Columns.Add(new DataColumn(headerWord));
-                    }
-
-                    colsExpected = dt.Columns.Count;
-
-                    //for removing line breaks in data
-                    for (int i = 0; i < lines.Length; i++)
-                    {
-                        string temp = lines[i];
-                        string[] fields = temp.Split(splitter);
-                        while (fields.Length < colsExpected && i < (lines.Length - 1))
-                        {
-                            i++;
-                            temp += lines[i];
-                            fields = temp.Split(splitter);
-                        }
-                        newLines.Add(temp);
-                    }
-
-                    //for the data
-                    string[] dataFields = newLines.ToArray();
-                    for (int i = 0; i < dataFields.Length; i++)
-                    {
-                        string[] dataCols = dataFields[i].Split(splitter);
-                        DataRow dr = dt.NewRow();
-                        int columnIndex = 0;
-                        foreach (string headerWord in headerLabels)
-                        {
-                            dr[headerWord] = dataCols[columnIndex++];
-                        }
-                        dt.Rows.Add(dr);
-                    }
-                }
-                if (dt.Rows.Count > 0)
-                {
-                    dataGridViewIntegrationslogs.DataSource = dt;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
-        }
-
-        private void mobileRequestsLogs(string filePath, char splitter)
-        {
-            DataTable dt = new DataTable();
-
-            string[] lines = System.IO.File.ReadAllLines(filePath).ToArray();
-
-            string[] headerLabels = { "DATE_TIME", "DURATION", "SCREEN", "APPLICATION_NAME", "APPLICATION_KEY", "SOURCE",
-                "ENDPOINT", "EXECUTED_BY", "ESPACE_NAME", "ESPACE_ID", "LOGIN_ID", "USER_ID", "CYCLE",
-                "ERROR_ID", "REQUEST_KEY", "TENANT_ID"
-                };
-            List<string> newLines = new List<string>();
-
-            int colsExpected = 0;
-
-            try
-            {
-                if (lines.Length > 0)
-                {
-                    //for the headers
-                    foreach (string headerWord in headerLabels)
-                    {
-                        dt.Columns.Add(new DataColumn(headerWord));
-                    }
-
-                    colsExpected = dt.Columns.Count;
-
-                    //for removing line breaks in data
-                    for (int i = 0; i < lines.Length; i++)
-                    {
-                        string temp = lines[i];
-                        string[] fields = temp.Split(splitter);
-                        while (fields.Length < colsExpected && i < (lines.Length - 1))
-                        {
-                            i++;
-                            temp += lines[i];
-                            fields = temp.Split(splitter);
-                        }
-                        newLines.Add(temp);
-                    }
-
-                    //for the data
-                    string[] dataFields = newLines.ToArray();
-                    for (int i = 0; i < dataFields.Length; i++)
-                    {
-                        string[] dataCols = dataFields[i].Split(splitter);
-                        DataRow dr = dt.NewRow();
-                        int columnIndex = 0;
-                        foreach (string headerWord in headerLabels)
-                        {
-                            dr[headerWord] = dataCols[columnIndex++];
-                        }
-                        dt.Rows.Add(dr);
-                    }
-                }
-                if (dt.Rows.Count > 0)
-                {
-                    dataGridViewScreenRequestslogs.DataSource = dt;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
-        }
-
-        private void timerLogs(string filePath, char splitter)
-        {
-            DataTable dt = new DataTable();
-
-            string[] lines = System.IO.File.ReadAllLines(filePath).ToArray();
-
-            string[] headerLabels = { "DATE_TIME", "DURATION", "APPLICATION_NAME", "APPLICATION_KEY", "EXECUTED_BY",
-                "ESPACE_NAME", "ESPACE_ID", "CYCLIC_JOB_NAME", "CYCLIC_JOB_KEY", "SHOULD_HAVE_RUN_AT", "NEXT_RUN",
-                "ERROR_ID", "REQUEST_KEY", "TENANT_ID"
-                };
-            List<string> newLines = new List<string>();
-
-            int colsExpected = 0;
-
-            try
-            {
-                if (lines.Length > 0)
-                {
-                    //for the headers
-                    foreach (string headerWord in headerLabels)
-                    {
-                        dt.Columns.Add(new DataColumn(headerWord));
-                    }
-
-                    colsExpected = dt.Columns.Count;
-
-                    //for removing line breaks in data
-                    for (int i = 0; i < lines.Length; i++)
-                    {
-                        string temp = lines[i];
-                        string[] fields = temp.Split(splitter);
-                        while (fields.Length < colsExpected && i < (lines.Length - 1))
-                        {
-                            i++;
-                            temp += lines[i];
-                            fields = temp.Split(splitter);
-                        }
-                        newLines.Add(temp);
-                    }
-
-                    //for the data
-                    string[] dataFields = newLines.ToArray();
-                    for (int i = 0; i < dataFields.Length; i++)
-                    {
-                        string[] dataCols = dataFields[i].Split(splitter);
-                        DataRow dr = dt.NewRow();
-                        int columnIndex = 0;
-                        foreach (string headerWord in headerLabels)
-                        {
-                            dr[headerWord] = dataCols[columnIndex++];
-                        }
-                        dt.Rows.Add(dr);
-                    }
-                }
-                if (dt.Rows.Count > 0)
-                {
-                    dataGridViewTimerlogs.DataSource = dt;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
-        }
-
-        private void emailLogs(string filePath, char splitter)
-        {
-            DataTable dt = new DataTable();
-
-            string[] lines = System.IO.File.ReadAllLines(filePath).ToArray();
-
-            string[] headerLabels = { "DATE_TIME", "SENT", "LAST_ERROR", "FROM", "TO",
-                "SUBJECT", "CC", "BCC", "NAME", "SIZE", "MESSAGE_ID", "ACTIVITY",
-                "EMAIL_DEFINITION", "STORE_CONTENT", "IS_TEST_EMAIL", "ID", "TENANT_ID"
-                };
-            List<string> newLines = new List<string>();
-
-            int colsExpected = 0;
-
-            try
-            {
-                if (lines.Length > 0)
-                {
-                    //for the headers
-                    foreach (string headerWord in headerLabels)
-                    {
-                        dt.Columns.Add(new DataColumn(headerWord));
-                    }
-
-                    colsExpected = dt.Columns.Count;
-
-                    //for removing line breaks in data
-                    for (int i = 0; i < lines.Length; i++)
-                    {
-                        string temp = lines[i];
-                        string[] fields = temp.Split(splitter);
-                        while (fields.Length < colsExpected && i < (lines.Length - 1))
-                        {
-                            i++;
-                            temp += lines[i];
-                            fields = temp.Split(splitter);
-                        }
-                        newLines.Add(temp);
-                    }
-
-                    //for the data
-                    string[] dataFields = newLines.ToArray();
-                    for (int i = 0; i < dataFields.Length; i++)
-                    {
-                        string[] dataCols = dataFields[i].Split(splitter);
-                        DataRow dr = dt.NewRow();
-                        int columnIndex = 0;
-                        foreach (string headerWord in headerLabels)
-                        {
-                            dr[headerWord] = dataCols[columnIndex++];
-                        }
-                        dt.Rows.Add(dr);
-                    }
-                }
-                if (dt.Rows.Count > 0)
-                {
-                    dataGridViewEmaillogs.DataSource = dt;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
-        }
-
-        private void extensionLogs(string filePath, char splitter)
-        {
-            DataTable dt = new DataTable();
-
-            string[] lines = System.IO.File.ReadAllLines(filePath).ToArray();
-
-            string[] headerLabels = { "DATE_TIME", "DURATION", "APPLICATION_NAME", "APPLICATION_KEY", "ACTION_NAME",
-                "EXECUTED_BY", "ESPACE_NAME", "ESPACE_ID", "USERNAME", "USER_ID", "SESSION_ID", "EXTENSION_ID",
-                "EXTENSION_NAME", "ERROR_ID", "REQUEST_KEY", "TENANT_ID"
-                };
-            List<string> newLines = new List<string>();
-
-            int colsExpected = 0;
-
-            try
-            {
-                if (lines.Length > 0)
-                {
-                    //for the headers
-                    foreach (string headerWord in headerLabels)
-                    {
-                        dt.Columns.Add(new DataColumn(headerWord));
-                    }
-
-                    colsExpected = dt.Columns.Count;
-
-                    //for removing line breaks in data
-                    for (int i = 0; i < lines.Length; i++)
-                    {
-                        string temp = lines[i];
-                        string[] fields = temp.Split(splitter);
-                        while (fields.Length < colsExpected && i < (lines.Length - 1))
-                        {
-                            i++;
-                            temp += lines[i];
-                            fields = temp.Split(splitter);
-                        }
-                        newLines.Add(temp);
-                    }
-
-                    //for the data
-                    string[] dataFields = newLines.ToArray();
-                    for (int i = 0; i < dataFields.Length; i++)
-                    {
-                        string[] dataCols = dataFields[i].Split(splitter);
-                        DataRow dr = dt.NewRow();
-                        int columnIndex = 0;
-                        foreach (string headerWord in headerLabels)
-                        {
-                            dr[headerWord] = dataCols[columnIndex++];
-                        }
-                        dt.Rows.Add(dr);
-                    }
-                }
-                if (dt.Rows.Count > 0)
-                {
-                    dataGridViewExtensionlogs.DataSource = dt;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
-        }
-
-        private void serviceActionLogs(string filePath, char splitter)
-        {
-            DataTable dt = new DataTable();
-
-            string[] lines = System.IO.File.ReadAllLines(filePath).ToArray();
-
-            string[] headerLabels = { "DATE_TIME", "DURATION", "APPLICATION_NAME", "APPLICATION_KEY", "ACTION_NAME", "SOURCE",
-                "ENTRYPOINT_NAME", "ENDPOINT", "EXECUTED_BY", "ESPACE_NAME", "ESPACE_ID", "USERNAME", "LOGIN_ID",
-                "USER_ID", "SESSION_ID", "ERROR_ID", "REQUEST_KEY", "ORIGINAL_REQUEST_KEY", "TENANT_ID"
-                };
-            List<string> newLines = new List<string>();
-
-            int colsExpected = 0;
-
-            try
-            {
-                if (lines.Length > 0)
-                {
-                    //for the headers
-                    foreach (string headerWord in headerLabels)
-                    {
-                        dt.Columns.Add(new DataColumn(headerWord));
-                    }
-
-                    colsExpected = dt.Columns.Count;
-
-                    //for removing line breaks in data
-                    for (int i = 0; i < lines.Length; i++)
-                    {
-                        string temp = lines[i];
-                        string[] fields = temp.Split(splitter);
-                        while (fields.Length < colsExpected && i < (lines.Length - 1))
-                        {
-                            i++;
-                            temp += lines[i];
-                            fields = temp.Split(splitter);
-                        }
-                        newLines.Add(temp);
-                    }
-
-                    //for the data
-                    string[] dataFields = newLines.ToArray();
-                    for (int i = 0; i < dataFields.Length; i++)
-                    {
-                        string[] dataCols = dataFields[i].Split(splitter);
-                        DataRow dr = dt.NewRow();
-                        int columnIndex = 0;
-                        foreach (string headerWord in headerLabels)
-                        {
-                            dr[headerWord] = dataCols[columnIndex++];
-                        }
-                        dt.Rows.Add(dr);
-                    }
-                }
-                if (dt.Rows.Count > 0)
-                {
-                    dataGridViewServiceActionlogs.DataSource = dt;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
-        }
-
-        private void screenLogs(string filePath, char splitter)
-        {
-            DataTable dt = new DataTable();
-
-            string[] lines = System.IO.File.ReadAllLines(filePath).ToArray();
-
-            string[] headerLabels = { "DATE_TIME", "DURATION", "SCREEN", "SCREEN_TYPE", "APPLICATION_NAME", "APPLICATION_KEY",
-                "ACTION_NAME", "ACCESS_MODE", "EXECUTED_BY", "CLIENT_IP", "ESPACE_NAME", "ESPACE_ID",
-                "USER_ID", "SESSION_ID", "SESSION_REQUESTS", "SESSION_BYTES", "VIEW_STATE_BYTES", "MS_IS_DN", "REQUEST_KEY", "TENANT_ID"
-                };
-            List<string> newLines = new List<string>();
-
-            int colsExpected = 0;
-
-            try
-            {
-                if (lines.Length > 0)
-                {
-                    //for the headers
-                    foreach (string headerWord in headerLabels)
-                    {
-                        dt.Columns.Add(new DataColumn(headerWord));
-                    }
-
-                    colsExpected = dt.Columns.Count;
-
-                    //for removing line breaks in data
-                    for (int i = 0; i < lines.Length; i++)
-                    {
-                        string temp = lines[i];
-                        string[] fields = temp.Split(splitter);
-                        while (fields.Length < colsExpected && i < (lines.Length - 1))
-                        {
-                            i++;
-                            temp += lines[i];
-                            fields = temp.Split(splitter);
-                        }
-                        newLines.Add(temp);
-                    }
-
-                    //for the data
-                    string[] dataFields = newLines.ToArray();
-                    for (int i = 0; i < dataFields.Length; i++)
-                    {
-                        string[] dataCols = dataFields[i].Split(splitter);
-                        DataRow dr = dt.NewRow();
-                        int columnIndex = 0;
-                        foreach (string headerWord in headerLabels)
-                        {
-                            dr[headerWord] = dataCols[columnIndex++];
-                        }
-                        dt.Rows.Add(dr);
-                    }
-                }
-                if (dt.Rows.Count > 0)
-                {
-                    dataGridViewTradWebRequests.DataSource = dt;
+                    tableName.DataSource = dt;
                 }
             }
             catch (Exception ex)
@@ -815,6 +321,7 @@ namespace OutSystems_Log_Parser
             btnClearFilter.BackColor = SystemColors.ControlLight;
         }
 
+        //Beginning of the Service Center Logs tab code
         private void dataGridViewErrorlogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -1077,333 +584,7 @@ namespace OutSystems_Log_Parser
         }
         //End of the Service Center Logs tab code
 
-        //Beginning of the IIS log tab code
-        private void iisLogs(string filePath, char splitter)
-        {
-            DataTable dt = new DataTable();
-
-            string[] lines = System.IO.File.ReadAllLines(filePath).ToArray();
-
-            string[] headerLabels = { "DATE_TIME", "TIME_TAKEN", "HTTP_CODE", "HTTP_SUBCODE", "WINDOWS_ERROR_CODE",
-                "CLIENT_IP", "SERVER_IP", "SERVER_PORT", "METHOD", "URI_STEM", "URI_QUERY", "USERNAME", "BROWSER",
-                "REFERRER"
-                };
-            List<string> newLines = new List<string>();
-
-            int colsExpected = 0;
-
-            try
-            {
-                if (lines.Length > 0)
-                {
-                    //for the headers
-                    foreach (string headerWord in headerLabels)
-                    {
-                        dt.Columns.Add(new DataColumn(headerWord));
-                    }
-
-                    colsExpected = dt.Columns.Count;
-
-                    //for removing line breaks in data
-                    for (int i = 0; i < lines.Length; i++)
-                    {
-                        string temp = lines[i];
-                        string[] fields = temp.Split(splitter);
-                        while (fields.Length < colsExpected && i < (lines.Length - 1))
-                        {
-                            i++;
-                            temp += lines[i];
-                            fields = temp.Split(splitter);
-                        }
-                        newLines.Add(temp);
-                    }
-
-                    //for the data
-                    string[] dataFields = newLines.ToArray();
-                    for (int i = 0; i < dataFields.Length; i++)
-                    {
-                        string[] dataCols = dataFields[i].Split(splitter);
-                        DataRow dr = dt.NewRow();
-                        int columnIndex = 0;
-                        foreach (string headerWord in headerLabels)
-                        {
-                            dr[headerWord] = dataCols[columnIndex++];
-                        }
-                        dt.Rows.Add(dr);
-                    }
-                }
-                if (dt.Rows.Count > 0)
-                {
-                    dataGridViewIISDateTime.DataSource = dt;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
-        }
-
-        private void iisLogsTime(string filePath, char splitter)
-        {
-            DataTable dt = new DataTable();
-
-            string[] lines = System.IO.File.ReadAllLines(filePath).ToArray();
-
-            string[] headerLabels = { "TIME_TAKEN", "DATE_TIME", "HTTP_CODE", "HTTP_SUBCODE", "WINDOWS_ERROR_CODE",
-                "CLIENT_IP", "SERVER_IP", "SERVER_PORT", "METHOD", "URI_STEM", "URI_QUERY", "USERNAME", "BROWSER",
-                "REFERRER"
-                };
-            List<string> newLines = new List<string>();
-
-            int colsExpected = 0;
-
-            try
-            {
-                if (lines.Length > 0)
-                {
-                    //for the headers
-                    foreach (string headerWord in headerLabels)
-                    {
-                        dt.Columns.Add(new DataColumn(headerWord));
-                    }
-
-                    colsExpected = dt.Columns.Count;
-
-                    //for removing line breaks in data
-                    for (int i = 0; i < lines.Length; i++)
-                    {
-                        string temp = lines[i];
-                        string[] fields = temp.Split(splitter);
-                        while (fields.Length < colsExpected && i < (lines.Length - 1))
-                        {
-                            i++;
-                            temp += lines[i];
-                            fields = temp.Split(splitter);
-                        }
-                        newLines.Add(temp);
-                    }
-
-                    //for the data
-                    string[] dataFields = newLines.ToArray();
-                    for (int i = 0; i < dataFields.Length; i++)
-                    {
-                        string[] dataCols = dataFields[i].Split(splitter);
-                        DataRow dr = dt.NewRow();
-                        int columnIndex = 0;
-                        foreach (string headerWord in headerLabels)
-                        {
-                            dr[headerWord] = dataCols[columnIndex++];
-                        }
-                        dt.Rows.Add(dr);
-                    }
-                }
-                if (dt.Rows.Count > 0)
-                {
-                    dataGridViewIISTimeTaken.DataSource = dt;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
-        }
-        //End of the IIS logs tab code
-
         //Beginning of the Windows Event Viewer logs tab code
-        private void winAppEventViewer(string filePath, char splitter)
-        {
-            DataTable dt = new DataTable();
-
-            string[] lines = System.IO.File.ReadAllLines(filePath).ToArray();
-
-            string[] headerLabels = { "DATE_TIME", "LEVEL", "PROVIDER_NAME", "QUALIFIERS", "EVENT_ID", "EVENT_RECORD_ID", "TASK", "KEYWORDS", "MESSAGE", "COMPUTER"
-                };
-            List<string> newLines = new List<string>();
-
-            int colsExpected = 0;
-
-            try
-            {
-                if (lines.Length > 0)
-                {
-                    //for the headers
-                    foreach (string headerWord in headerLabels)
-                    {
-                        dt.Columns.Add(new DataColumn(headerWord));
-                    }
-
-                    colsExpected = dt.Columns.Count;
-
-                    //for removing line breaks in data
-                    for (int i = 0; i < lines.Length; i++)
-                    {
-                        string temp = lines[i];
-                        string[] fields = temp.Split(splitter);
-                        while (fields.Length < colsExpected && i < (lines.Length - 1))
-                        {
-                            i++;
-                            temp += lines[i];
-                            fields = temp.Split(splitter);
-                        }
-                        newLines.Add(temp);
-                    }
-
-                    //for the data
-                    string[] dataFields = newLines.ToArray();
-                    for (int i = 0; i < dataFields.Length; i++)
-                    {
-                        string[] dataCols = dataFields[i].Split(splitter);
-                        DataRow dr = dt.NewRow();
-                        int columnIndex = 0;
-                        foreach (string headerWord in headerLabels)
-                        {
-                            dr[headerWord] = dataCols[columnIndex++];
-                        }
-                        dt.Rows.Add(dr);
-                    }
-                }
-                if (dt.Rows.Count > 0)
-                {
-                    dataGridViewWinAppEventViewer.DataSource = dt;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
-        }
-
-        private void winSecEventViewer(string filePath, char splitter)
-        {
-            DataTable dt = new DataTable();
-
-            string[] lines = System.IO.File.ReadAllLines(filePath).ToArray();
-
-            string[] headerLabels = { "DATE_TIME", "LEVEL", "PROVIDER_NAME", "QUALIFIERS", "EVENT_ID", "EVENT_RECORD_ID", "TASK", "KEYWORDS", "MESSAGE", "COMPUTER"
-                };
-            List<string> newLines = new List<string>();
-
-            int colsExpected = 0;
-
-            try
-            {
-                if (lines.Length > 0)
-                {
-                    //for the headers
-                    foreach (string headerWord in headerLabels)
-                    {
-                        dt.Columns.Add(new DataColumn(headerWord));
-                    }
-
-                    colsExpected = dt.Columns.Count;
-
-                    //for removing line breaks in data
-                    for (int i = 0; i < lines.Length; i++)
-                    {
-                        string temp = lines[i];
-                        string[] fields = temp.Split(splitter);
-                        while (fields.Length < colsExpected && i < (lines.Length - 1))
-                        {
-                            i++;
-                            temp += lines[i];
-                            fields = temp.Split(splitter);
-                        }
-                        newLines.Add(temp);
-                    }
-
-                    //for the data
-                    string[] dataFields = newLines.ToArray();
-                    for (int i = 0; i < dataFields.Length; i++)
-                    {
-                        string[] dataCols = dataFields[i].Split(splitter);
-                        DataRow dr = dt.NewRow();
-                        int columnIndex = 0;
-                        foreach (string headerWord in headerLabels)
-                        {
-                            dr[headerWord] = dataCols[columnIndex++];
-                        }
-                        dt.Rows.Add(dr);
-                    }
-                }
-                if (dt.Rows.Count > 0)
-                {
-                    dataGridViewWinSecEventViewer.DataSource = dt;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
-        }
-
-        private void winSysEventViewer(string filePath, char splitter)
-        {
-            DataTable dt = new DataTable();
-
-            string[] lines = System.IO.File.ReadAllLines(filePath).ToArray();
-
-            string[] headerLabels = { "DATE_TIME", "LEVEL", "PROVIDER_NAME", "QUALIFIERS", "EVENT_ID", "EVENT_RECORD_ID", "TASK", "KEYWORDS", "MESSAGE", "COMPUTER"
-                };
-            List<string> newLines = new List<string>();
-
-            int colsExpected = 0;
-
-            try
-            {
-                if (lines.Length > 0)
-                {
-                    //for the headers
-                    foreach (string headerWord in headerLabels)
-                    {
-                        dt.Columns.Add(new DataColumn(headerWord));
-                    }
-
-                    colsExpected = dt.Columns.Count;
-
-                    //for removing line breaks in data
-                    for (int i = 0; i < lines.Length; i++)
-                    {
-                        string temp = lines[i];
-                        string[] fields = temp.Split(splitter);
-                        while (fields.Length < colsExpected && i < (lines.Length - 1))
-                        {
-                            i++;
-                            temp += lines[i];
-                            fields = temp.Split(splitter);
-                        }
-                        newLines.Add(temp);
-                    }
-
-                    //for the data
-                    string[] dataFields = newLines.ToArray();
-                    for (int i = 0; i < dataFields.Length; i++)
-                    {
-                        string[] dataCols = dataFields[i].Split(splitter);
-                        DataRow dr = dt.NewRow();
-                        int columnIndex = 0;
-                        foreach (string headerWord in headerLabels)
-                        {
-                            dr[headerWord] = dataCols[columnIndex++];
-                        }
-                        dt.Rows.Add(dr);
-                    }
-                }
-                if (dt.Rows.Count > 0)
-                {
-                    dataGridViewWinSysEventViewer.DataSource = dt;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
-        }
-
         private void dataGridViewWinAppEventViewer_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -1493,134 +674,6 @@ namespace OutSystems_Log_Parser
         //End of the Windows Event Viewer logs tab code
 
         //Beginning of the Mobile logs tab code
-        private void androidLogs(string filePath, char splitter)
-        {
-            DataTable dt = new DataTable();
-
-            string[] lines = System.IO.File.ReadAllLines(filePath).ToArray();
-
-            string[] headerLabels = { "DATE_TIME", "MESSAGE_TYPE", "ACTION_NAME", "MESSAGE"
-                };
-            List<string> newLines = new List<string>();
-
-            int colsExpected = 0;
-
-            try
-            {
-                if (lines.Length > 0)
-                {
-                    //for the headers
-                    foreach (string headerWord in headerLabels)
-                    {
-                        dt.Columns.Add(new DataColumn(headerWord));
-                    }
-
-                    colsExpected = dt.Columns.Count;
-
-                    //for removing line breaks in data
-                    for (int i = 0; i < lines.Length; i++)
-                    {
-                        string temp = lines[i];
-                        string[] fields = temp.Split(splitter);
-                        while (fields.Length < colsExpected && i < (lines.Length - 1))
-                        {
-                            i++;
-                            temp += lines[i];
-                            fields = temp.Split(splitter);
-                        }
-                        newLines.Add(temp);
-                    }
-
-                    //for the data
-                    string[] dataFields = newLines.ToArray();
-                    for (int i = 0; i < dataFields.Length; i++)
-                    {
-                        string[] dataCols = dataFields[i].Split(splitter);
-                        DataRow dr = dt.NewRow();
-                        int columnIndex = 0;
-                        foreach (string headerWord in headerLabels)
-                        {
-                            dr[headerWord] = dataCols[columnIndex++];
-                        }
-                        dt.Rows.Add(dr);
-                    }
-                }
-                if (dt.Rows.Count > 0)
-                {
-                    dataGridViewAndroidlogs.DataSource = dt;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
-        }
-
-        private void iOSLogs(string filePath, char splitter)
-        {
-            DataTable dt = new DataTable();
-
-            string[] lines = System.IO.File.ReadAllLines(filePath).ToArray();
-
-            string[] headerLabels = { "DATE_TIME", "MESSAGE_TYPE", "ACTION_NAME", "MESSAGE"
-                };
-            List<string> newLines = new List<string>();
-
-            int colsExpected = 0;
-
-            try
-            {
-                if (lines.Length > 0)
-                {
-                    //for the headers
-                    foreach (string headerWord in headerLabels)
-                    {
-                        dt.Columns.Add(new DataColumn(headerWord));
-                    }
-
-                    colsExpected = dt.Columns.Count;
-
-                    //for removing line breaks in data
-                    for (int i = 0; i < lines.Length; i++)
-                    {
-                        string temp = lines[i];
-                        string[] fields = temp.Split(splitter);
-                        while (fields.Length < colsExpected && i < (lines.Length - 1))
-                        {
-                            i++;
-                            temp += lines[i];
-                            fields = temp.Split(splitter);
-                        }
-                        newLines.Add(temp);
-                    }
-
-                    //for the data
-                    string[] dataFields = newLines.ToArray();
-                    for (int i = 0; i < dataFields.Length; i++)
-                    {
-                        string[] dataCols = dataFields[i].Split(splitter);
-                        DataRow dr = dt.NewRow();
-                        int columnIndex = 0;
-                        foreach (string headerWord in headerLabels)
-                        {
-                            dr[headerWord] = dataCols[columnIndex++];
-                        }
-                        dt.Rows.Add(dr);
-                    }
-                }
-                if (dt.Rows.Count > 0)
-                {
-                    dataGridViewiOSlogs.DataSource = dt;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
-        }
-
         private void dataGridViewAndroidlogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -1680,6 +733,7 @@ namespace OutSystems_Log_Parser
         }
         //End of the Mobile logs tab code
 
+        //Beginning of the IIS tab code
         private void dataGridViewIISDateTime_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -1737,71 +791,9 @@ namespace OutSystems_Log_Parser
                 throw;
             }
         }
+        //End of the IIS tab code
 
-            private void serviceStudioLogs(string filePath, char splitter)
-            {
-                DataTable dt = new DataTable();
-
-                string[] lines = System.IO.File.ReadAllLines(filePath).ToArray();
-
-                string[] headerLabels = { "DATE_TIME", "MESSAGE_TYPE", "ACTION_NAME", "MESSAGE"
-                };
-                List<string> newLines = new List<string>();
-
-                int colsExpected = 0;
-
-                try
-                {
-                    if (lines.Length > 0)
-                    {
-                        //for the headers
-                        foreach (string headerWord in headerLabels)
-                        {
-                            dt.Columns.Add(new DataColumn(headerWord));
-                        }
-
-                        colsExpected = dt.Columns.Count;
-
-                        //for removing line breaks in data
-                        for (int i = 0; i < lines.Length; i++)
-                        {
-                            string temp = lines[i];
-                            string[] fields = temp.Split(splitter);
-                            while (fields.Length < colsExpected && i < (lines.Length - 1))
-                            {
-                                i++;
-                                temp += lines[i];
-                                fields = temp.Split(splitter);
-                            }
-                            newLines.Add(temp);
-                        }
-
-                        //for the data
-                        string[] dataFields = newLines.ToArray();
-                        for (int i = 0; i < dataFields.Length; i++)
-                        {
-                            string[] dataCols = dataFields[i].Split(splitter);
-                            DataRow dr = dt.NewRow();
-                            int columnIndex = 0;
-                            foreach (string headerWord in headerLabels)
-                            {
-                                dr[headerWord] = dataCols[columnIndex++];
-                            }
-                            dt.Rows.Add(dr);
-                        }
-                    }
-                    if (dt.Rows.Count > 0)
-                    {
-                        dataGridViewServiceStudiologs.DataSource = dt;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                    throw;
-                }
-            }
-
+        //Beginning of the Service Studio Report tab code
         private void dataGridViewServiceStudiologs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -1830,6 +822,7 @@ namespace OutSystems_Log_Parser
                 throw;
             }
         }
+        //End of Service Studio Report tab code
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
@@ -1843,17 +836,17 @@ namespace OutSystems_Log_Parser
 
                 if (string.IsNullOrEmpty(timeFilter1) && string.IsNullOrEmpty(timeFilter2))
                 {
-                    MessageBox.Show("Please enter the time in the following format: HH:mm (24 hour format)", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Please enter the time in the following format: HH:mm (24-hour format)", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else if (string.IsNullOrEmpty(timeFilter1) && !string.IsNullOrEmpty(timeFilter2))
                 {
-                    MessageBox.Show("Please enter the time in the following format: HH:mm (24 hour format)", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Please enter the time in the following format: HH:mm (24-hour format)", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     maskedTextBox1.BackColor = Color.Orange;
                     maskedTextBox1.Focus();
                 }
                 else if (!string.IsNullOrEmpty(timeFilter1) && string.IsNullOrEmpty(timeFilter2))
                 {
-                    MessageBox.Show("Please enter the time in the following format: HH:mm (24 hour format)", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Please enter the time in the following format: HH:mm (24-hour format)", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     maskedTextBox2.BackColor = Color.Orange;
                     maskedTextBox2.Focus();
                 }
@@ -2006,84 +999,126 @@ namespace OutSystems_Log_Parser
 
                     if (fileName == "android_build_logs.txt")
                     {
-                        androidLogs(relativePath + "\\android_build_logs.txt", delimiters);
+                        string[] column_names = { "DATE_TIME", "MESSAGE_TYPE", "ACTION_NAME", "MESSAGE" };
+                        populateTables(relativePath + "\\android_build_logs.txt", delimiters, column_names, dataGridViewAndroidlogs);
                     }
                     else if (fileName == "email_logs.txt")
                     {
-                        emailLogs(relativePath + "\\email_logs.txt", delimiters);
+                        string[] column_names = { "DATE_TIME", "SENT", "LAST_ERROR", "FROM", "TO", "SUBJECT",
+                                    "CC", "BCC", "NAME", "SIZE", "MESSAGE_ID", "ACTIVITY", "EMAIL_DEFINITION", "STORE_CONTENT",
+                                    "IS_TEST_EMAIL", "ID", "TENANT_ID" };
+                        populateTables(relativePath + "\\email_logs.txt", delimiters, column_names, dataGridViewEmaillogs);
                     }
                     else if (fileName == "error_logs.txt")
                     {
-                        errorLogs(relativePath + "\\error_logs.txt", delimiters);
+                        string[] column_names = { "DATE_TIME", "MESSAGE", "STACK", "MODULE_NAME", "APPLICATION_NAME",
+                                    "APPLICATION_KEY", "ACTION_NAME", "ENTRYPOINT_NAME", "SERVER", "ESPACE_NAME", "ESPACE_ID",
+                                    "USER_ID", "SESSION_ID", "ENVIRONMENT_INFORMATION", "ID", "TENANT_ID" };
+                        populateTables(relativePath + "\\error_logs.txt", delimiters, column_names, dataGridViewErrorlogs);
                     }
                     else if (fileName == "extension_logs.txt")
                     {
-                        extensionLogs(relativePath + "\\extension_logs.txt", delimiters);
+                        string[] column_names = { "DATE_TIME", "DURATION", "APPLICATION_NAME", "APPLICATION_KEY", "ACTION_NAME",
+                                    "EXECUTED_BY", "ESPACE_NAME", "ESPACE_ID", "USERNAME", "USER_ID", "SESSION_ID", "EXTENSION_ID",
+                                    "EXTENSION_NAME", "ERROR_ID", "REQUEST_KEY", "TENANT_ID" };
+                        populateTables(relativePath + "\\extension_logs.txt", delimiters, column_names, dataGridViewExtensionlogs);
                     }
                     else if (fileName == "general_logs.txt")
                     {
-                        generalLogs(relativePath + "\\general_logs.txt", delimiters);
+                        string[] column_names = { "DATE_TIME", "MESSAGE", "MESSAGE_TYPE", "MODULE_NAME", "APPLICATION_NAME",
+                                    "APPLICATION_KEY", "ACTION_NAME", "ENTRYPOINT_NAME", "CLIENT_IP", "ESPACE_NAME", "ESPACE_ID",
+                                    "USER_ID", "SESSION_ID", "ERROR_ID", "REQUEST_KEY", "TENANT_ID" };
+                        populateTables(relativePath + "\\general_logs.txt", delimiters, column_names, dataGridViewGenerallogs);
                     }
                     else if (fileName == "iis_logs.txt")
                     {
-                        iisLogs(relativePath + "\\iis_logs.txt", delimiters);
+                        string[] column_names = { "DATE_TIME", "TIME_TAKEN", "HTTP_CODE", "HTTP_SUBCODE", "WINDOWS_ERROR_CODE",
+                                    "CLIENT_IP", "SERVER_IP", "SERVER_PORT", "METHOD", "URI_STEM", "URI_QUERY", "USERNAME", "BROWSER",
+                                    "REFERRER" };
+                        populateTables(relativePath + "\\iis_logs.txt", delimiters, column_names, dataGridViewIISDateTime);
                     }
                     else if (fileName == "iis_logs_timetaken.txt")
                     {
-                        iisLogsTime(relativePath + "\\iis_logs_timetaken.txt", delimiters);
+                        string[] column_names = { "TIME_TAKEN", "DATE_TIME", "HTTP_CODE", "HTTP_SUBCODE", "WINDOWS_ERROR_CODE",
+                                    "CLIENT_IP", "SERVER_IP", "SERVER_PORT", "METHOD", "URI_STEM", "URI_QUERY", "USERNAME", "BROWSER",
+                                    "REFERRER" };
+                        populateTables(relativePath + "\\iis_logs_timetaken.txt", delimiters, column_names, dataGridViewIISTimeTaken);
                     }
                     else if (fileName == "integrations_logs.txt")
                     {
-                        integrationsLogs(relativePath + "\\integrations_logs.txt", delimiters);
+                        string[] column_names = { "DATE_TIME", "DURATION", "APPLICATION_NAME", "APPLICATION_KEY", "ACTION_NAME",
+                                    "ACTION_TYPE", "SOURCE", "ENDPOINT", "EXECUTED_BY", "ESPACE_NAME", "ESPACE_ID", "ERROR_ID",
+                                    "REQUEST_KEY", "TENANT_ID" };
+                        populateTables(relativePath + "\\integrations_logs.txt", delimiters, column_names, dataGridViewIntegrationslogs);
                     }
                     else if (fileName == "iOS_build_logs.txt")
                     {
-                        iOSLogs(relativePath + "\\iOS_build_logs.txt", delimiters);
+                        string[] column_names = { "DATE_TIME", "MESSAGE_TYPE", "ACTION_NAME", "MESSAGE" };
+                        populateTables(relativePath + "\\iOS_build_logs.txt", delimiters, column_names, dataGridViewiOSlogs);
                     }
                     else if (fileName == "mobile_requests_logs.txt")
                     {
-                        mobileRequestsLogs(relativePath + "\\mobile_requests_logs.txt", delimiters);
+                        string[] column_names = { "DATE_TIME", "DURATION", "SCREEN", "APPLICATION_NAME", "APPLICATION_KEY", "SOURCE",
+                                    "ENDPOINT", "EXECUTED_BY", "ESPACE_NAME", "ESPACE_ID", "LOGIN_ID", "USER_ID", "CYCLE",
+                                    "ERROR_ID", "REQUEST_KEY", "TENANT_ID" };
+                        populateTables(relativePath + "\\mobile_requests_logs.txt", delimiters, column_names, dataGridViewScreenRequestslogs);
                     }
                     else if (fileName == "screen_logs.txt")
                     {
-                        screenLogs(relativePath + "\\screen_logs.txt", delimiters);
+                        string[] column_names = { "DATE_TIME", "DURATION", "SCREEN", "SCREEN_TYPE", "APPLICATION_NAME", "APPLICATION_KEY",
+                                    "ACTION_NAME", "ACCESS_MODE", "EXECUTED_BY", "CLIENT_IP", "ESPACE_NAME", "ESPACE_ID",
+                                    "USER_ID", "SESSION_ID", "SESSION_REQUESTS", "SESSION_BYTES", "VIEW_STATE_BYTES", "MS_IS_DN", "REQUEST_KEY", "TENANT_ID" };
+                        populateTables(relativePath + "\\screen_logs.txt", delimiters, column_names, dataGridViewTradWebRequests);
                     }
                     else if (fileName == "service_action_logs.txt")
                     {
-                        serviceActionLogs(relativePath + "\\service_action_logs.txt", delimiters);
+                        string[] column_names = { "DATE_TIME", "DURATION", "APPLICATION_NAME", "APPLICATION_KEY", "ACTION_NAME", "SOURCE",
+                                    "ENTRYPOINT_NAME", "ENDPOINT", "EXECUTED_BY", "ESPACE_NAME", "ESPACE_ID", "USERNAME", "LOGIN_ID",
+                                    "USER_ID", "SESSION_ID", "ERROR_ID", "REQUEST_KEY", "ORIGINAL_REQUEST_KEY", "TENANT_ID" };
+                        populateTables(relativePath + "\\service_action_logs.txt", delimiters, column_names, dataGridViewServiceActionlogs);
                     }
                     else if (fileName == "service_studio_report.txt")
                     {
-                        serviceStudioLogs(relativePath + "\\service_studio_report.txt", delimiters);
+                        string[] column_names = { "DATE_TIME", "MESSAGE_TYPE", "ACTION_NAME", "MESSAGE" };
+                        populateTables(relativePath + "\\service_studio_report.txt", delimiters, column_names, dataGridViewServiceStudiologs);
                     }
                     else if (fileName == "timer_logs.txt")
                     {
-                        timerLogs(relativePath + "\\timer_logs.txt", delimiters);
+                        string[] column_names = { "DATE_TIME", "DURATION", "APPLICATION_NAME", "APPLICATION_KEY", "EXECUTED_BY",
+                                    "ESPACE_NAME", "ESPACE_ID", "CYCLIC_JOB_NAME", "CYCLIC_JOB_KEY", "SHOULD_HAVE_RUN_AT", "NEXT_RUN",
+                                    "ERROR_ID", "REQUEST_KEY", "TENANT_ID" };
+                        populateTables(relativePath + "\\timer_logs.txt", delimiters, column_names, dataGridViewTimerlogs);
                     }
                     else if (fileName == "windows_application_event_viewer_logs.txt")
                     {
-                        winAppEventViewer(relativePath + "\\windows_application_event_viewer_logs.txt", delimiters);
+                        string[] column_names = { "DATE_TIME", "LEVEL", "PROVIDER_NAME", "QUALIFIERS", "EVENT_ID", "EVENT_RECORD_ID",
+                                    "TASK", "KEYWORDS", "MESSAGE", "COMPUTER" };
+                        populateTables(relativePath + "\\windows_application_event_viewer_logs.txt", delimiters, column_names, dataGridViewWinAppEventViewer);
                     }
                     else if (fileName == "windows_security_event_viewer_logs.txt")
                     {
-                        winSecEventViewer(relativePath + "\\windows_security_event_viewer_logs.txt", delimiters);
+                        string[] column_names = { "DATE_TIME", "LEVEL", "PROVIDER_NAME", "QUALIFIERS", "EVENT_ID", "EVENT_RECORD_ID",
+                                    "TASK", "KEYWORDS", "MESSAGE", "COMPUTER" };
+                        populateTables(relativePath + "\\windows_security_event_viewer_logs.txt", delimiters, column_names, dataGridViewWinSecEventViewer);
                     }
                     else if (fileName == "windows_system_event_viewer_logs.txt")
                     {
-                        winSysEventViewer(relativePath + "\\windows_system_event_viewer_logs.txt", delimiters);
+                        string[] column_names = { "DATE_TIME", "LEVEL", "PROVIDER_NAME", "QUALIFIERS", "EVENT_ID", "EVENT_RECORD_ID",
+                                    "TASK", "KEYWORDS", "MESSAGE", "COMPUTER" };
+                        populateTables(relativePath + "\\windows_system_event_viewer_logs.txt", delimiters, column_names, dataGridViewWinSysEventViewer);
                     }
                 }
             }
         }
 
-        private void clearTextboxes(TextBox txt_box)
+        private void clearTextboxes(TextBox txtbox)
         {
-            txt_box.Text = "";
+            txtbox.Text = "";
         }
 
-        private void clearTables(DataGridView table_name)
+        private void clearTables(DataGridView tableName)
         {
-            table_name.DataSource = null;
+            tableName.DataSource = null;
         }
     }
 }
