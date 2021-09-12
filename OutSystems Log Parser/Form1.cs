@@ -19,7 +19,14 @@ namespace OutSystems_Log_Parser
         string[] filesPaths;
         string fileName = "";
         char delimiters = '|';
-        
+        int totalRowsCount;
+        string myMessage = "";
+        int myMessageCount;
+        double percentageMessageCount;
+        double roundedPercentageMessageCount;
+        bool removeGarbage = false;
+        bool highlightError = false;
+
         public Form1()
         {
             InitializeComponent();
@@ -195,6 +202,20 @@ namespace OutSystems_Log_Parser
                             }
                         }
                     }
+
+                    btnFilter.Enabled = true;
+                    btnFilter.BackColor = SystemColors.ControlLight;
+                    dateTimePicker1.Enabled = true;
+                    maskedTextBox1.Enabled = true;
+                    dateTimePicker2.Enabled = true;
+                    maskedTextBox2.Enabled = true;
+                    btnRemoveGarbage.Enabled = true;
+                    btnRemoveGarbage.BackColor = SystemColors.ControlLight;
+                    numericUpDownPercentage.Enabled = true;
+                    btnHighlight.Enabled = true;
+                    btnHighlight.BackColor = SystemColors.ControlLight;
+                    btnClearFilter.Enabled = true;
+                    btnClearFilter.BackColor = SystemColors.ControlLight;
                 }
                 else
                 {
@@ -287,13 +308,13 @@ namespace OutSystems_Log_Parser
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            var result = MessageBox.Show("ARE YOU SURE YOU WANT TO EXIT THE LOG PARSER APPLICATION?", "QUESTION", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var result = MessageBox.Show("Are you sure you want to exit the Log Parser Application?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             e.Cancel = (result == DialogResult.No);
         }
 
         private void btnBrowseFile_MouseEnter(object sender, EventArgs e)
         {
-            btnBrowseFile.BackColor = Color.Black;
+            btnBrowseFile.BackColor = Color.SpringGreen;
         }
 
         private void btnBrowseFile_MouseLeave(object sender, EventArgs e)
@@ -303,7 +324,7 @@ namespace OutSystems_Log_Parser
 
         private void btnFilter_MouseEnter(object sender, EventArgs e)
         {
-            btnFilter.BackColor = Color.Black;
+            btnFilter.BackColor = Color.SpringGreen;
         }
 
         private void btnFilter_MouseLeave(object sender, EventArgs e)
@@ -313,12 +334,32 @@ namespace OutSystems_Log_Parser
 
         private void btnClearFilter_MouseEnter(object sender, EventArgs e)
         {
-            btnClearFilter.BackColor = Color.Black;
+            btnClearFilter.BackColor = Color.SpringGreen;
         }
 
         private void btnClearFilter_MouseLeave(object sender, EventArgs e)
         {
             btnClearFilter.BackColor = SystemColors.ControlLight;
+        }
+
+        private void btnRemoveGarbage_MouseEnter(object sender, EventArgs e)
+        {
+            btnRemoveGarbage.BackColor = Color.SpringGreen;
+        }
+
+        private void btnRemoveGarbage_MouseLeave(object sender, EventArgs e)
+        {
+            btnRemoveGarbage.BackColor = SystemColors.ControlLight;
+        }
+
+        private void btnHighlight_MouseEnter(object sender, EventArgs e)
+        {
+            btnHighlight.BackColor = Color.SpringGreen;
+        }
+
+        private void btnHighlight_MouseLeave(object sender, EventArgs e)
+        {
+            btnHighlight.BackColor = SystemColors.ControlLight;
         }
 
         //Beginning of the Service Center Logs tab code
@@ -793,37 +834,6 @@ namespace OutSystems_Log_Parser
         }
         //End of the IIS tab code
 
-        //Beginning of the Service Studio Report tab code
-        private void dataGridViewServiceStudiologs_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewServiceStudiologs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewServiceStudiologs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailServiceStudioLogs.Text = String.Join(Environment.NewLine, rowInfo);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
-        }
-        //End of Service Studio Report tab code
-
         private void btnFilter_Click(object sender, EventArgs e)
         {
             try
@@ -921,6 +931,61 @@ namespace OutSystems_Log_Parser
                         queryDataGridViews(dataGridViewWinSecEventViewer, isoFrom, isoTo);
                     }
                 }
+
+                if (removeGarbage)
+                {
+                    removeGenericErrors(dataGridViewErrorlogs, 1);
+                    removeGenericErrors(dataGridViewGenerallogs, 1);
+                    //removeGenericErrors(dataGridViewIntegrationslogs);
+                    //removeGenericErrors(dataGridViewScreenRequestslogs);
+                    //removeGenericErrors(dataGridViewTimerlogs);
+                    //removeGenericErrors(dataGridViewEmaillogs);
+                    //removeGenericErrors(dataGridViewExtensionlogs);
+                    //removeGenericErrors(dataGridViewServiceActionlogs);
+                    //removeGenericErrors(dataGridViewTradWebRequests);
+                    //removeGenericErrors(dataGridViewIISDateTime);
+                    //removeGenericErrors(dataGridViewIISTimeTaken);
+                    removeGenericErrors(dataGridViewWinAppEventViewer, 8);
+                    removeGenericErrors(dataGridViewWinSysEventViewer, 8);
+                    removeGenericErrors(dataGridViewWinSecEventViewer, 8);
+                    removeGenericErrors(dataGridViewAndroidlogs, 3);
+                    removeGenericErrors(dataGridViewiOSlogs, 3);
+                    removeGenericErrors(dataGridViewServiceStudiologs, 3);
+                }
+
+                if (highlightError)
+                {
+                    string[] knownErrors_Errorlogs = { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "a fatal error has occurred", "communicationexception", "json deserialization" };
+                    string[] knownErrors_Generallogs = { "system cannot find" };
+                    string[] knownErrors_WinAppEventViewer = { "ora-", "error closing the transaction" };
+                    string[] knownErrors_WinSysEventViewer = { "error closing the transaction" };
+                    string[] knownErrors_AndroidiOSlogs = { "file is corrupt or invalid", "androidx library", "command finished with error code 0", "plugin is not going to work", "error: spawnsync sudo etimeout", "plugin doesn't support this project's cordova-android version", "failed to fetch plug" };
+                    string[] knownErrors_ServiceStudiologs = { "oneoftypedefinition" };
+
+                    highlightKnownErrors(dataGridViewErrorlogs, 1, knownErrors_Errorlogs);
+                    highlightKnownErrors(dataGridViewGenerallogs, 1, knownErrors_Generallogs);
+                    //highlightKnownErrors(dataGridViewIntegrationslogs);
+                    //highlightKnownErrors(dataGridViewScreenRequestslogs);
+                    //highlightKnownErrors(dataGridViewTimerlogs);
+                    //highlightKnownErrors(dataGridViewEmaillogs);
+                    //highlightKnownErrors(dataGridViewExtensionlogs);
+                    //highlightKnownErrors(dataGridViewServiceActionlogs);
+                    //highlightKnownErrors(dataGridViewTradWebRequests);
+                    //highlightKnownErrors(dataGridViewIISDateTime);
+                    //highlightKnownErrors(dataGridViewIISTimeTaken);
+                    highlightKnownErrors(dataGridViewWinAppEventViewer, 8, knownErrors_WinAppEventViewer);
+                    highlightKnownErrors(dataGridViewWinSysEventViewer, 8, knownErrors_WinSysEventViewer);
+                    //highlightKnownErrors(dataGridViewWinSecEventViewer, 8);
+                    highlightKnownErrors(dataGridViewAndroidlogs, 3, knownErrors_AndroidiOSlogs);
+                    highlightKnownErrors(dataGridViewiOSlogs, 3, knownErrors_AndroidiOSlogs);
+                    highlightKnownErrors(dataGridViewServiceStudiologs, 3, knownErrors_ServiceStudiologs);
+                }
+
+                btnFilter.Enabled = false;
+                dateTimePicker1.Enabled = false;
+                maskedTextBox1.Enabled = false;
+                dateTimePicker2.Enabled = false;
+                maskedTextBox2.Enabled = false;
             }
             catch (Exception ex)
             {
@@ -949,12 +1014,17 @@ namespace OutSystems_Log_Parser
 
         private void btnClearFilter_Click(object sender, EventArgs e)
         {
+            removeGarbage = false;
+            highlightError = false;
+
             dateTimePicker1.Text = "";
             dateTimePicker2.Text = "";
             maskedTextBox1.Text = "";
             maskedTextBox2.Text = "";
             maskedTextBox1.BackColor = SystemColors.Window;
             maskedTextBox2.BackColor = SystemColors.Window;
+
+            numericUpDownPercentage.Value = 20;
 
             clearTextboxes(txtBoxDetailErrorLogs);
             clearTextboxes(txtBoxDetailGenerallogs);
@@ -1107,6 +1177,30 @@ namespace OutSystems_Log_Parser
                                     "TASK", "KEYWORDS", "MESSAGE", "COMPUTER" };
                         populateTables(relativePath + "\\windows_system_event_viewer_logs.txt", delimiters, column_names, dataGridViewWinSysEventViewer);
                     }
+
+                    btnFilter.Enabled = true;
+                    btnFilter.BackColor = SystemColors.ControlLight;
+                    dateTimePicker1.Enabled = true;
+                    maskedTextBox1.Enabled = true;
+                    dateTimePicker2.Enabled = true;
+                    maskedTextBox2.Enabled = true;
+                    btnRemoveGarbage.Enabled = true;
+                    btnRemoveGarbage.BackColor = SystemColors.ControlLight;
+                    numericUpDownPercentage.Enabled = true;
+                    btnHighlight.Enabled = true;
+                    btnHighlight.BackColor = SystemColors.ControlLight;
+                }
+                else
+                {
+                    btnFilter.Enabled = false;
+                    dateTimePicker1.Enabled = false;
+                    maskedTextBox1.Enabled = false;
+                    dateTimePicker2.Enabled = false;
+                    maskedTextBox2.Enabled = false;
+                    btnRemoveGarbage.Enabled = false;
+                    numericUpDownPercentage.Enabled = false;
+                    btnHighlight.Enabled = false;
+                    btnClearFilter.Enabled = false;
                 }
             }
         }
@@ -1120,5 +1214,220 @@ namespace OutSystems_Log_Parser
         {
             tableName.DataSource = null;
         }
+
+        private void btnRemoveGarbage_Click(object sender, EventArgs e)
+        {
+            removeGarbage = true;
+
+            removeGenericErrors(dataGridViewErrorlogs, 1);
+            removeGenericErrors(dataGridViewGenerallogs, 1);
+            //removeGenericErrors(dataGridViewIntegrationslogs);
+            //removeGenericErrors(dataGridViewScreenRequestslogs);
+            //removeGenericErrors(dataGridViewTimerlogs);
+            //removeGenericErrors(dataGridViewEmaillogs);
+            //removeGenericErrors(dataGridViewExtensionlogs);
+            //removeGenericErrors(dataGridViewServiceActionlogs);
+            //removeGenericErrors(dataGridViewTradWebRequests);
+            //removeGenericErrors(dataGridViewIISDateTime);
+            //removeGenericErrors(dataGridViewIISTimeTaken);
+            removeGenericErrors(dataGridViewWinAppEventViewer, 8);
+            removeGenericErrors(dataGridViewWinSysEventViewer, 8);
+            removeGenericErrors(dataGridViewWinSecEventViewer, 8);
+            removeGenericErrors(dataGridViewAndroidlogs, 3);
+            removeGenericErrors(dataGridViewiOSlogs, 3);
+            removeGenericErrors(dataGridViewServiceStudiologs, 3);
+
+            if (highlightError)
+            {
+                string[] knownErrors_Errorlogs = { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "a fatal error has occurred", "communicationexception", "json deserialization" };
+                string[] knownErrors_Generallogs = { "system cannot find" };
+                string[] knownErrors_WinAppEventViewer = { "ora-", "error closing the transaction" };
+                string[] knownErrors_WinSysEventViewer = { "error closing the transaction" };
+                string[] knownErrors_AndroidiOSlogs = { "file is corrupt or invalid", "androidx library", "command finished with error code 0", "plugin is not going to work", "error: spawnsync sudo etimeout", "plugin doesn't support this project's cordova-android version", "failed to fetch plug" };
+                string[] knownErrors_ServiceStudiologs = { "oneoftypedefinition" };
+
+                highlightKnownErrors(dataGridViewErrorlogs, 1, knownErrors_Errorlogs);
+                highlightKnownErrors(dataGridViewGenerallogs, 1, knownErrors_Generallogs);
+                //highlightKnownErrors(dataGridViewIntegrationslogs);
+                //highlightKnownErrors(dataGridViewScreenRequestslogs);
+                //highlightKnownErrors(dataGridViewTimerlogs);
+                //highlightKnownErrors(dataGridViewEmaillogs);
+                //highlightKnownErrors(dataGridViewExtensionlogs);
+                //highlightKnownErrors(dataGridViewServiceActionlogs);
+                //highlightKnownErrors(dataGridViewTradWebRequests);
+                //highlightKnownErrors(dataGridViewIISDateTime);
+                //highlightKnownErrors(dataGridViewIISTimeTaken);
+                highlightKnownErrors(dataGridViewWinAppEventViewer, 8, knownErrors_WinAppEventViewer);
+                highlightKnownErrors(dataGridViewWinSysEventViewer, 8, knownErrors_WinSysEventViewer);
+                //highlightKnownErrors(dataGridViewWinSecEventViewer, 8);
+                highlightKnownErrors(dataGridViewAndroidlogs, 3, knownErrors_AndroidiOSlogs);
+                highlightKnownErrors(dataGridViewiOSlogs, 3, knownErrors_AndroidiOSlogs);
+                highlightKnownErrors(dataGridViewServiceStudiologs, 3, knownErrors_ServiceStudiologs);
+            }
+
+            btnRemoveGarbage.Enabled = false;
+            numericUpDownPercentage.Enabled = false;
+        }
+
+        private void removeGenericErrors(DataGridView tableName, int columnIndex)
+        {
+            try
+            {
+                totalRowsCount = tableName.RowCount;
+
+                var messageLineCountQuery = tableName.Rows.Cast<DataGridViewRow>()
+                    .Where(r => r.Cells[columnIndex].Value != null)
+                    .Select(r => r.Cells[columnIndex].Value)
+                    .GroupBy(msg => msg)
+                        .OrderByDescending(msg => msg.Count())
+                        .Select(g => new { Message = g.Key, Count = g.Count() });
+
+                foreach (var messageLineCount in messageLineCountQuery)
+                {
+                    myMessage = messageLineCount.Message.ToString();
+                    myMessageCount = messageLineCount.Count;
+
+                    percentageMessageCount = ((double)myMessageCount / (double)totalRowsCount) * 100;
+
+                    roundedPercentageMessageCount = Math.Round(percentageMessageCount, 0, MidpointRounding.AwayFromZero);
+
+                    if (roundedPercentageMessageCount >= (double)numericUpDownPercentage.Value)
+                    {
+                        foreach (DataGridViewRow row in tableName.Rows)
+                        {
+                            if (row.Cells[columnIndex].Value.ToString().Equals(myMessage))
+                            {
+                                row.Visible = false;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void btnHighlight_Click(object sender, EventArgs e)
+        {
+            highlightError = true;
+
+            string[] knownErrors_Errorlogs = { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "a fatal error has occurred", "communicationexception", "json deserialization" };
+            string[] knownErrors_Generallogs = { "system cannot find" };
+            string[] knownErrors_WinAppEventViewer = { "ora-", "error closing the transaction" };
+            string[] knownErrors_WinSysEventViewer = { "error closing the transaction" };
+            string[] knownErrors_AndroidiOSlogs = { "file is corrupt or invalid", "androidx library", "command finished with error code 0", "plugin is not going to work", "error: spawnsync sudo etimeout", "plugin doesn't support this project's cordova-android version", "failed to fetch plug" };
+            string[] knownErrors_ServiceStudiologs = { "oneoftypedefinition" };
+
+            highlightKnownErrors(dataGridViewErrorlogs, 1, knownErrors_Errorlogs);
+            highlightKnownErrors(dataGridViewGenerallogs, 1, knownErrors_Generallogs);
+            //highlightKnownErrors(dataGridViewIntegrationslogs);
+            //highlightKnownErrors(dataGridViewScreenRequestslogs);
+            //highlightKnownErrors(dataGridViewTimerlogs);
+            //highlightKnownErrors(dataGridViewEmaillogs);
+            //highlightKnownErrors(dataGridViewExtensionlogs);
+            //highlightKnownErrors(dataGridViewServiceActionlogs);
+            //highlightKnownErrors(dataGridViewTradWebRequests);
+            //highlightKnownErrors(dataGridViewIISDateTime);
+            //highlightKnownErrors(dataGridViewIISTimeTaken);
+            highlightKnownErrors(dataGridViewWinAppEventViewer, 8, knownErrors_WinAppEventViewer);
+            highlightKnownErrors(dataGridViewWinSysEventViewer, 8, knownErrors_WinSysEventViewer);
+            //highlightKnownErrors(dataGridViewWinSecEventViewer, 8);
+            highlightKnownErrors(dataGridViewAndroidlogs, 3, knownErrors_AndroidiOSlogs);
+            highlightKnownErrors(dataGridViewiOSlogs, 3, knownErrors_AndroidiOSlogs);
+            highlightKnownErrors(dataGridViewServiceStudiologs, 3, knownErrors_ServiceStudiologs);
+
+            if (removeGarbage)
+            {
+                removeGenericErrors(dataGridViewErrorlogs, 1);
+                removeGenericErrors(dataGridViewGenerallogs, 1);
+                //removeGenericErrors(dataGridViewIntegrationslogs);
+                //removeGenericErrors(dataGridViewScreenRequestslogs);
+                //removeGenericErrors(dataGridViewTimerlogs);
+                //removeGenericErrors(dataGridViewEmaillogs);
+                //removeGenericErrors(dataGridViewExtensionlogs);
+                //removeGenericErrors(dataGridViewServiceActionlogs);
+                //removeGenericErrors(dataGridViewTradWebRequests);
+                //removeGenericErrors(dataGridViewIISDateTime);
+                //removeGenericErrors(dataGridViewIISTimeTaken);
+                removeGenericErrors(dataGridViewWinAppEventViewer, 8);
+                removeGenericErrors(dataGridViewWinSysEventViewer, 8);
+                removeGenericErrors(dataGridViewWinSecEventViewer, 8);
+                removeGenericErrors(dataGridViewAndroidlogs, 3);
+                removeGenericErrors(dataGridViewiOSlogs, 3);
+                removeGenericErrors(dataGridViewServiceStudiologs, 3);
+            }
+
+            btnHighlight.Enabled = false;
+        }
+
+        private void highlightKnownErrors(DataGridView tableName, int columnIndex, string[] errorsList)
+        {
+            try
+            {
+                foreach (string error in errorsList)
+                {
+                    foreach (DataGridViewRow row in tableName.Rows)
+                    {
+                        if (row.Cells[columnIndex].Value.ToString().ToLower().Contains(error))
+                        {
+                            row.DefaultCellStyle.BackColor = Color.Yellow;
+                        }
+                    }
+                }   
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        //Beginning of the Service Studio Report tab code
+        private void dataGridViewServiceStudiologs_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewServiceStudiologs.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewServiceStudiologs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailServiceStudioLogs.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+        //End of Service Studio Report tab code
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            btnFilter.Enabled = false;
+            dateTimePicker1.Enabled = false;
+            maskedTextBox1.Enabled = false;
+            dateTimePicker2.Enabled = false;
+            maskedTextBox2.Enabled = false;
+            btnRemoveGarbage.Enabled = false;
+            numericUpDownPercentage.Enabled = false;
+            btnHighlight.Enabled = false;
+            btnClearFilter.Enabled = false;
+        }
+        
     }
 }
