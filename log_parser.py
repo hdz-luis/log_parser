@@ -91,13 +91,13 @@ myXMLList = []
 numOfLines = 6000
 constant = 6000
 
-errorLogsRegex = r"^([\d]+)\|([\w\-]+)\|([\d\-\:\. ]+)\|([\w\'\/\=\+ ]+)?\|([\d]+)\|([\d]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w\-\(\)\. ]+)?\|([\w\(\)]+)?\|([\w\-]+)?\|([\w]+)?\|([\w\-\.\,\(\)\[\]\/\& ]+)?\|([\w\-]+)?"
-negativeErrorLogsRegex = r"^((?!(?:[\d]+)\|(?:[\w\-]+)\|(?:[\d\-\:\. ]+)\|(?:[\w\'\/\=\+ ]+)?\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w\-\(\)\. ]+)?\|(?:[\w\(\)]+)?\|(?:[\w\-]+)?\|(?:[\w]+)?\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)?\|(?:[\w\-]+)?).*)"
+errorLogsRegex = r"^([\d]+)\|([\w\-]+)\|([\d\-\:\. ]+)\|([\w\'\/\=\+ ]+)?\|([\d]+)\|([\d]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w\-\(\)\.\* ]+)?\|([\w\.\(\)]+)?\|([\w\-]+)?\|([\w]+)?\|([\w\-\.\,\(\)\[\]\/\& ]+)?\|([\w\-]+)?"
+negativeErrorLogsRegex = r"^((?!(?:[\d]+)\|(?:[\w\-]+)\|(?:[\d\-\:\. ]+)\|(?:[\w\'\/\=\+ ]+)?\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w\-\(\)\.\* ]+)?\|(?:[\w\.\(\)]+)?\|(?:[\w\-]+)?\|(?:[\w]+)?\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)?\|(?:[\w\-]+)?).*)"
 nonMatchedErrorLogsRegex = r"^((?:.*?\|){2})([\d\-]+)(.+)"
 japaneseErrorLogsRegex = r"^([\d]+)\|(.*?)\|([\d\-\:\. ]+)\|(.*?)?\|([\d]+)\|([\d]+)\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?"
 
-generalLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\w\+\/\=\' ]+)?\|([\d]+)\|([\d]+)\|([\w\-]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w]+)?\|([\w\-\.\# ]+)?\|([\w\-]+)?\|([\w\-\(\)\. ]+)?\|([\w\(\)\.]+)?\|([\w\-\.\:\;\% ]+)?\|([\w]+)?\|([\w\-\.\,\(\)\[\]\/\& ]+)?\|([\w\-]+)?\|([\w\@\.\\]+)?"
-negativeGeneralLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\w\+\/\=\' ]+)?\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w]+)?\|(?:[\w\-\.\# ]+)?\|(?:[\w\-]+)?\|(?:[\w\-\(\)\. ]+)?\|(?:[\w\(\)\.]+)?\|(?:[\w\-\.\:\;\% ]+)?\|(?:[\w]+)?\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)?\|(?:[\w\-]+)?\|(?:[\w\@\.\\]+)?).*)"
+generalLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\w\+\/\=\' ]+)?\|([\d]+)\|([\d]+)\|([\w\-]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w]+)?\|([\w\-\.\# ]+)?\|([\w\-]+)?\|([\w\-\(\)\.\* ]+)?\|([\w\(\)\.]+)?\|([\w\-\.\:\;\% ]+)?\|([\w]+)?\|([\w\-\.\,\(\)\[\]\/\& ]+)?\|([\w\-]+)?\|([\w\@\.\\]+)?"
+negativeGeneralLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\w\+\/\=\' ]+)?\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w]+)?\|(?:[\w\-\.\# ]+)?\|(?:[\w\-]+)?\|(?:[\w\-\(\)\.\* ]+)?\|(?:[\w\(\)\.]+)?\|(?:[\w\-\.\:\;\% ]+)?\|(?:[\w]+)?\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)?\|(?:[\w\-]+)?\|(?:[\w\@\.\\]+)?).*)"
 nonMatchedGeneralLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseGeneralLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|(.*?)?\|([\d]+)\|([\d]+)\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?"
 
@@ -126,8 +126,8 @@ negativeExtensionLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[
 nonMatchedExtensionLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseExtensionLogsRegex = r"^([\d]+)\|(.*?)\|(.*?)\|(.*?)?\|([\d]+)\|(.*?)\|(.*?)\|(.*?)?\|(.*?)?\|(.*?)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)\|(.*?)\|(.*?)\|([\d]+)\|(.*?)"
 
-serviceActionLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)?\|([\w\/\=\+]+)\|([\d]+)\|([\w\-]+)?\|([\w\-]+)\|([\w\-\:]+)\|([\w\-\(\)\. ]+)?\|([\w\(\)]+)\|([\d]+)\|([\w\.\:\;\-\% ]+)\|([\w\:\/\\\.\-\=\%\&\?]+)\|([\w\.]+)\|([\w\-\.\,\(\)\[\]\/\& ]+)\|([\w\-]+)\|([\w\@\.\\]+)?\|([\w\-\:]+)"
-negativeServiceActionLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\d]+)?\|(?:[\w\/\=\+]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w\-]+)\|(?:[\w\-\:]+)\|(?:[\w\-\(\)\. ]+)?\|(?:[\w\(\)]+)\|(?:[\d]+)\|(?:[\w\.\:\;\-\% ]+)\|(?:[\w\:\/\\\.\-\=\%\&\?]+)\|(?:[\w\.]+)\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)\|(?:[\w\-]+)\|(?:[\w\@\.\\]+)?\|(?:[\w\-\:]+)).*)"
+serviceActionLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)?\|([\w\/\=\+]+)\|([\d]+)\|([\w\-]+)?\|([\w\-]+)\|([\w\-\:]+)\|([\w\-\(\)\.\* ]+)?\|([\w\.\(\)]+)\|([\d]+)\|([\w\.\:\;\-\% ]+)\|([\w\:\/\\\.\-\=\%\&\?]+)\|([\w\.]+)\|([\w\-\.\,\(\)\[\]\/\& ]+)\|([\w\-]+)\|([\w\@\.\\]+)?\|([\w\-\:]+)"
+negativeServiceActionLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\d]+)?\|(?:[\w\/\=\+]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w\-]+)\|(?:[\w\-\:]+)\|(?:[\w\-\(\)\.\* ]+)?\|(?:[\w\.\(\)]+)\|(?:[\d]+)\|(?:[\w\.\:\;\-\% ]+)\|(?:[\w\:\/\\\.\-\=\%\&\?]+)\|(?:[\w\.]+)\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)\|(?:[\w\-]+)\|(?:[\w\@\.\\]+)?\|(?:[\w\-\:]+)).*)"
 nonMatchedServiceActionLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseServiceActionLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)?\|(.*?)\|([\d]+)\|(.*?)?\|(.*?)\|(.*?)\|(.*?)?\|(.*?)\|([\d]+)\|(.*?)\|(.*?)\|(.*?)\|(.*?)\|(.*?)\|(.*?)?\|(.*?)"
 
@@ -136,17 +136,17 @@ negativeScreenLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w]
 nonMatchedScreenLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseScreenLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|(.*?)\|(.*?)\|([\d]+)\|([\d]+)\|(.*?)?\|(.*?)\|(.*?)\|([\d]+)\|([\d]+)\|([\d]+)\|(.*?)\|(.*?)\|(.*?)?\|(.*?)\|(.*?)\|(.*?)\|(.*?)"
 
-androidiOSBuildLogsRegex = "^\[([\d\-]+)T([\d\:\.]+)Z\][ ]\[(INFO|VERBOSE|ERROR)\][ ](\[(?:[\w\[\] ]+)\])?(?:[ \t]+)?([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?"
-negativeAndroidiOSBuildLogsRegex = "^((?!\[(?:[\d\-]+)T(?:[\d\:\.]+)Z\][ ]\[(?:INFO|VERBOSE|ERROR)\][ ](?:\[(?:[\w\[\] ]+)\])?(?:[ \t]+)?(?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?).*)"
+androidiOSBuildLogsRegex = "^\[([\d\-]+)T([\d\:\.]+)Z\][ ]\[(INFO|VERBOSE|ERROR|DEBUG)\][ ](\[(?:[\w\[\] ]+)\])?(?:[ \t]+)?([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?"
+negativeAndroidiOSBuildLogsRegex = "^((?!\[(?:[\d\-]+)T(?:[\d\:\.]+)Z\][ ]\[(?:INFO|VERBOSE|ERROR|DEBUG)\][ ](?:\[(?:[\w\[\] ]+)\])?(?:[ \t]+)?(?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?).*)"
 nonMatchedAndroidiOSBuildLogsRegex = "^\[([\d\-]+)(?:T.+)"
 japaneseAndroidiOSBuildLogsRegex = "^\[([\d\-]+)T([\d\:\.]+)Z\](.+)"
 
-serviceStudioReportsDetailsRegex = "^.*?(Service.*?:\s*?(?:[\d\.])+).*?(?:(?:\r\n|\n){2,}?)(Platform.*?:\s*?(?:[\d\.])+).*?(?:(?:\r\n|\n){2,}?)(Service.*?)(?:(?:\r\n|\n){2,}?)((?:.+(?:\r\n|\n)){1,})?"
-serviceStudioReportsOperationsLogsRegex = "^(?:[ \t]+)\[([\d\/]+)[ ]([\d\:A-Z ]+)\][ ]\[([\d\:\?]+)\][ ]([\w\-\(\) ]{10,}?)(\s+(?:(?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®\t\r\n ]+){1,}?))?(?:\r\n|\n)"
-negativeServiceStudioReportsOperationsLogsRegex = "^((?!(?:[ \t]+)\[(?:[\d\/]+)[ ](?:[\d\:A-Z ]+)\][ ]\[(?:[\d\:\?]+)\][ ](?:[\w\-\(\) ]{10,}?)(?:\s+(?:(?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®\t\r\n ]+){1,}?))?(?:\r\n|\n)).*)"
-nonMatchedServiceStudioReportsOperationsLogsRegex = "^(?:[ \t]+)\[([\d\/]+)((?:.+)(?:\s+(?:(?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®\t\r\n ]+){1,}?))?)(?:\r\n|\n)"
-japaneseServiceStudioReportsOperationsLogsRegex = "^(?:[ \t]+)\[([\d\/]+)[ ]([\d\:A-Z ]+)\](.+)"
-serviceStudioReportsOperationsLogsRegex2 = "^(?:[ \t]+)\[([\d\/]+)[ ]([\d\:A-Z ]+)\][ ]\[([\d\:\?]+)\][ ]([\w\-\(\) ]{10,}?)(?:[ \t]+)([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)"
+serviceStudioReportsDetailsRegex = "^.*?(Service.*?:\s*?(?:[\d\.])+).*?(Platform.*?:\s*?(?:[\d\.])+).*?(Service.*?)Channel"
+serviceStudioReportsOperationsLogsRegex = "\[([\d\-]+)[ ]([\d\:A-Z ]+)\][ ]\[([\d\:\?]+)\][ ]([\w\-\(\) ]{10,}?)\s+([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®\t\r\n ]+)?\|"
+serviceStudioReportsOperationsLogsRegex2 = "^([\d\-]+)\|([\d\:A-Z ]+)\|([\d\:\?]+)\|([\w\-\(\) ]{10,}?)\|([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?"
+negativeServiceStudioReportsOperationsLogsRegex = "^((?!(?:[\d\-]+)\|(?:[\d\:A-Z ]+)\|(?:[\d\:\?]+)\|(?:[\w\-\(\) ]{10,}?)\|(?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?).*)"
+nonMatchedServiceStudioReportsOperationsLogsRegex = "^([\d\-]+)\|(.+)"
+japaneseServiceStudioReportsOperationsLogsRegex = "^([\d\-]+)\|([\d\:A-Z ]+)\|(.+)"
 
 iisLogsRegex = "^([\d\-]+)[ ]([\d\:]+)[ ]([\d\.\:]+)[ ](POST|PUT|PROPFIND|(?:n)?GET|OPTIONS|HEAD|ABCD|QUALYS|TRACE|SEARCH|RNDMMTD|TRACK|B(?:A)?DM(?:E)?T(?:H)?(?:O)?(?:D)?|CFYZ|DEBUG|MKCOL|INDEX|DELETE|PATCH|ACUNETIX)[ ]([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ]([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ]([\d]+)[ ]([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ]([\w\-\.\:]+)[ ]([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ]([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ]([\d]+)[ ]([\d]+)[ ]([\d]+)[ ]([\d]+)"
 negativeIisLogsRegex = "^((?!(?:[\d\-]+)[ ](?:[\d\:]+)[ ](?:[\d\.\:]+)[ ](?:POST|PUT|PROPFIND|(?:n)?GET|OPTIONS|HEAD|ABCD|QUALYS|TRACE|SEARCH|RNDMMTD|TRACK|B(?:A)?DM(?:E)?T(?:H)?(?:O)?(?:D)?|CFYZ|DEBUG|MKCOL|INDEX|DELETE|PATCH|ACUNETIX)[ ](?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ](?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ](?:[\d]+)[ ](?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ](?:[\w\-\.\:]+)[ ](?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ](?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ](?:[\d]+)[ ](?:[\d]+)[ ](?:[\d]+)[ ](?:[\d]+)).*)"
@@ -154,10 +154,11 @@ nonMatchedIisLogsRegex = "^([\d\-]+)(.+)"
 japaneseIisLogsRegex = "^([\d\-]+)[ ]([\d\:]+)(.+)[ ]([\d]+)"
 
 nonMatchedPath = os.getcwd() + "\\nonmatched_valid_lines\\file.txt"
+tempFilePath = os.getcwd() + "\\tempFile.txt"
 
 start = datetime.now()
 
-def searchDirectory(directoryPath):
+def searchDirectory(directoryPath, _fromDate, _toDate):
     #search for the files with the raw data in the specified directory
     for root, subFolders, files in os.walk(directoryPath):
         for f in files:
@@ -168,13 +169,13 @@ def searchDirectory(directoryPath):
             extension = os.path.splitext(filenameWithExt)[1]
 
             if extension == ".xlsx":
-                xlsxFile(absolutePathOfFile, filePathWithoutFilename, filenameWithoutExt, ".txt", fromDate, toDate)
+                xlsxFile(absolutePathOfFile, filePathWithoutFilename, filenameWithoutExt, ".txt", _fromDate, _toDate)
             elif extension == ".txt":
-                txtFile(absolutePathOfFile, filenameWithoutExt, filenameWithExt, extension, fromDate, toDate)
+                txtFile(absolutePathOfFile, filenameWithoutExt, filenameWithExt, extension, _fromDate, _toDate)
             elif extension == ".log":
-                logFile(absolutePathOfFile, filenameWithExt, ".txt", fromDate, toDate)
+                logFile(absolutePathOfFile, filenameWithExt, ".txt", _fromDate, _toDate)
             elif extension == ".evtx":
-                evtxFile(absolutePathOfFile, filenameWithExt, ".txt", fromDate, toDate)
+                evtxFile(absolutePathOfFile, filenameWithExt, ".txt", _fromDate, _toDate)
 
 def searchDirectory2(directoryPath, myList):
     #search for the files with the filtered data
@@ -200,9 +201,12 @@ def sanitizeLines(string):
     string = re.sub(u'(\u1680)', " ", string)
     string = re.sub(u'(\u180e)', " ", string)
     string = re.sub(u'(\ufeff)', " ", string)
+    string = re.sub(u'(\u00ad)', " ", string)
 
     #all unwanted control characters
     string = re.sub(u'([\u0004-\u0007])', " ", string)
+    string = re.sub(u'(\u0081)', " ", string)
+    string = re.sub(u'(\u008d)', " ", string)
 
     #emojis
     string = re.sub(u'(\u2714)', " ", string)
@@ -213,6 +217,12 @@ def sanitizeLines(string):
 
 def normalizeLines(string):
     #all unwanted ASCII characters
+    string = string.replace("‰", " ")
+    string = string.replace("‚", " ")
+    string = string.replace("“", " ")
+    string = string.replace("”", " ")
+    string = string.replace("–", " ")
+    string = string.replace("š", " ")
     string = string.replace("¤", " ")
     string = string.replace("¦", " ")
     string = string.replace("§", " ")
@@ -311,35 +321,40 @@ def normalizeLines(string):
 
     return myNewString
 
-def splitFiles(numOfLines, constant, maxLines, cycleNum, inputTxtFile, ext, outputTxtFile, myList):
+def splitFiles(numOfLines, constant, maxLines, cycleNum, inputTxtFile, ext, outputTxtFile):
     div = round(maxLines/constant)
     partial = constant*div
 
+    myTempXLSXlines = ['']
+    del myTempXLSXlines[:]
+
     with codecs.open(inputTxtFile, "r", "utf-8", "ignore") as inp:
         searchLines = inp.readlines()
-        searchLines = searchLines[1:]
         for x, line in enumerate(searchLines):
             if x < numOfLines:
-                myList.append(line)
+                myTempXLSXlines.append(line)
             #make sure maxLines is greater or equal than numOfLines
             #otherwise, the program will never reach this point
             if x == numOfLines:
-                myList.append(line)
+                myTempXLSXlines.append(line)
                 cycleNum+=1
                 with codecs.open(outputTxtFile + str(cycleNum) + ext, "w", "utf-8", "ignore") as out:
-                    out.writelines(myList)
-                del myList[:]
+                    out.writelines(myTempXLSXlines)
+                del myTempXLSXlines[:]
                 numOfLines+=constant
                 #final cycle
                 if numOfLines > partial:
                     numOfLines = maxLines
             x+=1
+
     return cycleNum
 
 def readSplitFiles(cycleNum, filename, ext, _fromDate, _toDate):
     outText = ""
     nonMatchedOutText = ""
     JPText = ""
+    nonMatchedLine = ""
+    nonMatchedLine2 = ""
     count = 1
     while count <= cycleNum:
         with codecs.open(os.getcwd() + "\\split_data\\file_" + str(count) + ext, "r", "utf-8", "ignore") as linesFromText:
@@ -1413,7 +1428,7 @@ def parseXMLtoString(lineToXML, xmlPath):
     newXMLVar = " ".join(xmlVar(lineToXML))
     return newXMLVar
 
-def xlsxFile(absolutePath, relativePath, filename, ext, fromDate, toDate):
+def xlsxFile(absolutePath, relativePath, filename, ext, _fromDate, _toDate):
     #convert the XLSX file to TXT to manipulate the data in an easier way
     print("Converting " + filename + ".xlsx to .txt format")
     
@@ -1441,17 +1456,17 @@ def xlsxFile(absolutePath, relativePath, filename, ext, fromDate, toDate):
                     sanitizeLines(newLine)
                     linesFromXLSX.write(newLine + "|")
 
-    xlsxtxtFile(relativePath + "\\" + filename + ext, filename, ext, fromDate, toDate)
+    xlsxtxtFile(relativePath + "\\" + filename + ext, filename, ext, _fromDate, _toDate)
 
-def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
+def xlsxtxtFile(absolutePath, filename, ext, _fromDate, _toDate):
     print("Reading: " + filename + ext)
 
     outText = ""
     nonMatchedOutText = ""
+    JPText = ""
+    nonMatchedLine = ""
+    nonMatchedLine2 = ""
     cycleNum = 0
-
-    _fromDate = datetime.strptime(fromDate, "%Y-%m-%d").date()
-    _toDate = datetime.strptime(toDate, "%Y-%m-%d").date()
 
     with codecs.open(absolutePath, "r", "utf-8", "ignore") as max_lines:
         #total number of lines from the data
@@ -1459,7 +1474,7 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
         #for large files, split the data into several files
         if maxLines >= numOfLines:
             createFolder("\\split_data\\")
-            cycleNum = splitFiles(numOfLines, constant, maxLines, cycleNum, absolutePath, ext, os.getcwd() + "\\split_data\\file_", myTempXLSXlines)
+            cycleNum = splitFiles(numOfLines, constant, maxLines, cycleNum, absolutePath, ext, os.getcwd() + "\\split_data\\file_")
 
     if maxLines >= numOfLines:
         if "ErrorLog" in filename:
@@ -2601,17 +2616,24 @@ def xlsxtxtFile(absolutePath, filename, ext, fromDate, toDate):
 
     print("Closing: " + filename + ".txt")
 
-def txtFile(absolutePath, filename, filenameWithExt, ext, fromDate, toDate):
+def txtFile(absolutePath, filename, filenameWithExt, ext, _fromDate, _toDate):
     print("Reading: " + filenameWithExt)
 
     outText = ""
     outText2 = ""
     nonMatchedOutText = ""
     JPText = ""
+    nonMatchedLine = ""
+    nonMatchedLine2 = ""
 
     with codecs.open(absolutePath, "r", "utf-8", "ignore") as linesFromText:
         searchLines = linesFromText.read()
-
+        searchLines = searchLines.replace("|", "")
+        searchLines = searchLines.replace("\\", "")
+        searchLines = searchLines.replace("/", "-")
+        searchLines2 = '|'.join(searchLines.splitlines())
+        searchLines3 = ' '.join(searchLines2.split())
+        
         #split the fields and rearrange them to combine them all later
         if "iosbuildlog" in filename.lower() or "androidbuildlog" in filename.lower():
             regex = re.compile(androidiOSBuildLogsRegex, re.MULTILINE + re.IGNORECASE)
@@ -2624,8 +2646,6 @@ def txtFile(absolutePath, filename, filenameWithExt, ext, fromDate, toDate):
 
                 _time = time[:8]
 
-                _fromDate = datetime.strptime(fromDate, "%Y-%m-%d").date()
-                _toDate = datetime.strptime(toDate, "%Y-%m-%d").date()
                 _date = datetime.strptime(date, "%Y-%m-%d").date()
                     
                 if _fromDate <= _date <= _toDate:
@@ -2722,214 +2742,158 @@ def txtFile(absolutePath, filename, filenameWithExt, ext, fromDate, toDate):
 
         elif "studio" in filename.lower() and "report" in filename.lower():
             #service studio report
-            regex1 = re.compile(serviceStudioReportsDetailsRegex, re.MULTILINE + re.IGNORECASE)
-            for match1 in regex1.finditer(searchLines):
-                message1 = match1.group(1)
-                message2 = match1.group(2)
-                message3 = match1.group(3)
-                message4 = match1.group(4)#null
+            regex1 = re.findall(serviceStudioReportsDetailsRegex, searchLines3)
+            if regex1:
+                findAllString = ' '.join([str(elm) for elm in regex1])
+                findAllString = findAllString.replace("|", "")
+                findAllString = findAllString.replace("('", "")
+                findAllString = findAllString.replace("')", "")
+                findAllString = findAllString.replace("', '", " ")
+                outText = fromDate + " 00:00:00|||" + findAllString + "\n"
+                myLinesFromDateRange.append(outText)
+            
+            regex2 = re.findall(serviceStudioReportsOperationsLogsRegex, searchLines3)
+            if regex2:
+                findAllString2 = '\n'.join([str(elm2) for elm2 in regex2])
+                findAllString2 = findAllString2.replace("|", "")
+                findAllString2 = findAllString2.replace("('", "")
+                findAllString2 = findAllString2.replace("')", "")
+                findAllString2 = findAllString2.replace("(\"", "")
+                findAllString2 = findAllString2.replace("\")", "")
+                findAllString2 = findAllString2.replace("', '", "|")
+                findAllString2 = findAllString2.replace("', \"", "|")
 
-                if message4 == None:
-                    message4 = " "
-                    outText = fromDate + " 00:00:00|||" + message1 + " " + message2 + " " + message3 + " " + message4 + "\n"
-                    myLinesFromDateRange.append(outText)
-                else:
-                    #remove all the new lines from the string
-                    newMessage4 = ' '.join(message4.splitlines())
+                with codecs.open(tempFilePath, "w", "utf-8", "ignore") as tempFile:
+                    tempFile.writelines(findAllString2)
 
-                    #replace white spaces with a single space
-                    myNewMessage4 = ' '.join(newMessage4.split())
-                    
-                    outText = fromDate + " 00:00:00|||" + message1 + " " + message2 + " " + message3 + " " + myNewMessage4.strip() + "\n"
-                    myLinesFromDateRange.append(outText)
+                with codecs.open(tempFilePath, "r", "utf-8", "ignore") as tempFile2:
+                    _searchLines = tempFile2.read()
+                    regex3 = re.compile(serviceStudioReportsOperationsLogsRegex2, re.MULTILINE + re.IGNORECASE)
+                    for match3 in regex3.finditer(_searchLines):
+                        date = match3.group(1)
+                        time = match3.group(2)
+                        numberOfOccurrences = match3.group(3)
+                        actionName = match3.group(4)
+                        message = match3.group(5)#null
 
-            regex2 = re.compile(serviceStudioReportsOperationsLogsRegex, re.MULTILINE + re.IGNORECASE)
-            for match2 in regex2.finditer(searchLines):
-                date = match2.group(1)
-                time = match2.group(2)
-                numberOfOccurrences = match2.group(3)
-                actionName = match2.group(4)
-                message = match2.group(5)#null
+                        #reformat the dates
+                        year = date.split("-")[2]
+                        month = date.split("-")[0]
+                        day = date.split("-")[1]
 
-                #reformat the dates
-                year = date.split("/")[2]
-                month = date.split("/")[0]
-                day = date.split("/")[1]
+                        if len(month) != 2:
+                            month = "0" + month
 
-                if len(month) != 2:
-                    month = "0" + month
+                        _date = year + "-" + month + "-" + day
 
-                _date = year + "-" + month + "-" + day
+                        #reformat the times
+                        if time[-2:] == "AM" and time[:2] == "12":
+                            _time = "00" + time[2:-2]
+                        elif time[-2:] == "AM":
+                            hours = time.split(":")[0]
+                            minutes = time.split(":")[1]
+                            seconds = time.split(":")[2]
+                            if len(hours) < 2:
+                                hours = "0" + hours
+                                _time = hours + ":" + minutes + ":" + seconds[:-2]
+                        elif time[-2:] == "PM" and time[:2] == "12":
+                            _time = time[:-2]
+                        elif time[-2:] == "PM":
+                            hours = time.split(":")[0]
+                            minutes = time.split(":")[1]
+                            seconds = time.split(":")[2]
+                            _time = str(int(hours) + 12) + ":" + minutes + ":" + seconds[:-2]
 
-                #reformat the times
-                if time[-2:] == "AM" and time[:2] == "12":
-                    _time = "00" + time[2:-2]
-                elif time[-2:] == "AM":
-                    hours = time.split(":")[0]
-                    minutes = time.split(":")[1]
-                    seconds = time.split(":")[2]
-                    if len(hours) < 2:
-                        hours = "0" + hours
-                    _time = hours + ":" + minutes + ":" + seconds[:-2]
-                elif time[-2:] == "PM" and time[:2] == "12":
-                    _time = time[:-2]
-                elif time[-2:] == "PM":
-                    hours = time.split(":")[0]
-                    minutes = time.split(":")[1]
-                    seconds = time.split(":")[2]
-                    _time = str(int(hours) + 12) + ":" + minutes + ":" + seconds[:-2]
+                        _date_ = datetime.strptime(_date, "%Y-%m-%d").date()
+                                                
+                        if _fromDate <= _date_ <= _toDate:
 
-                _fromDate = datetime.strptime(fromDate, "%Y-%m-%d").date()
-                _toDate = datetime.strptime(toDate, "%Y-%m-%d").date()
-                _date_ = datetime.strptime(_date, "%Y-%m-%d").date()
-                            
-                if _fromDate <= _date_ <= _toDate:
+                            if message == None:
+                                message = " "
+                                outText2 = _date + " " + _time.strip() + "|" + numberOfOccurrences + "|" + actionName.strip() + "|" + message + "\n"
+                                myLinesFromDateRange.append(outText2)
+                            else:            
+                                outText2 = _date + " " + _time.strip() + "|" + numberOfOccurrences + "|" + actionName.strip() + "|" + message.strip() + "\n"
+                                myLinesFromDateRange.append(outText2)
 
-                    if message == None:
-                        message = " "
-                        outText2 = _date + " " + _time.strip() + "|" + numberOfOccurrences + "|" + actionName.strip() + "|" + message + "\n"
-                        myLinesFromDateRange.append(outText2)
-                    else:
-                        #remove all the new lines from the string
-                        newMessage = ' '.join(message.splitlines())
+                    #capture all the lines that didn't match the regex
+                    negativeRegex = re.compile(negativeServiceStudioReportsOperationsLogsRegex, re.MULTILINE + re.IGNORECASE)
+                    for match in negativeRegex.finditer(_searchLines):
+                        nonMatchedLine = match.group(1)
 
-                        #replace white spaces with a single space
-                        myNewMessage = ' '.join(newMessage.split())
-                        
-                        outText2 = _date + " " + _time.strip() + "|" + numberOfOccurrences + "|" + actionName.strip() + "|" + myNewMessage.strip() + "\n"
-                        myLinesFromDateRange.append(outText2)
+                        nonMatchedRegex = re.search(nonMatchedServiceStudioReportsOperationsLogsRegex, nonMatchedLine)
+                        if nonMatchedRegex:
+                            nonMatchedDate = nonMatchedRegex.group(1)
+                            nonMatchedTail = nonMatchedRegex.group(2)
 
-            #capture all the lines that didn't match the regex
-            negativeRegex = re.compile(negativeServiceStudioReportsOperationsLogsRegex, re.MULTILINE + re.IGNORECASE)
-            for match in negativeRegex.finditer(searchLines):
-                nonMatchedLine = match.group(1)
+                            #reformat the dates
+                            nonMatchedYear = nonMatchedDate.split("-")[2]
+                            nonMatchedMonth = nonMatchedDate.split("-")[0]
+                            nonMatchedDay = nonMatchedDate.split("-")[1]
 
-                nonMatchedRegex = re.search(nonMatchedServiceStudioReportsOperationsLogsRegex, nonMatchedLine)
-                if nonMatchedRegex:
-                    nonMatchedDate = nonMatchedRegex.group(1)
-                    nonMatchedTail = nonMatchedRegex.group(2)
+                            if len(nonMatchedMonth) != 2:
+                                nonMatchedMonth = "0" + nonMatchedMonth
 
-                    #reformat the dates
-                    nonMatchedYear = nonMatchedDate.split("/")[2]
-                    nonMatchedMonth = nonMatchedDate.split("/")[0]
-                    nonMatchedDay = nonMatchedDate.split("/")[1]
+                            _nonMatchedDate = nonMatchedYear + "-" + nonMatchedMonth + "-" + nonMatchedDay
 
-                    if len(nonMatchedMonth) != 2:
-                        nonMatchedMonth = "0" + nonMatchedMonth
+                            _nonMatchedDate_ = datetime.strptime(_nonMatchedDate, "%Y-%m-%d").date()
 
-                    _nonMatchedDate = nonMatchedYear + "-" + nonMatchedMonth + "-" + nonMatchedDay
+                            #check if the non-matched lines fall within the specified range
+                            if _fromDate <= _nonMatchedDate_ <= _toDate:
 
-                    _nonMatchedDate_ = datetime.strptime(_nonMatchedDate, "%Y-%m-%d").date()
+                                nonMatchedLine2 = nonMatchedDate + " " + nonMatchedTail
 
-                    #check if the non-matched lines fall within the specified range
-                    if _fromDate <= _nonMatchedDate_ <= _toDate:
+                                #check if the line has Japanese characters
+                                hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
+                                katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
+                                kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
 
-                        nonMatchedLine2 = " [" + nonMatchedDate + nonMatchedTail
+                                if hiragana or katakana or kanji:
+                                    JPRegex = re.search(japaneseServiceStudioReportsOperationsLogsRegex, nonMatchedLine2)
+                                    if JPRegex:
+                                        JPDate = JPRegex.group(1)
+                                        JPTime = JPRegex.group(2)
+                                        JPTail = JPRegex.group(3)
 
-                        #check if the line has Japanese characters
-                        hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
-                        katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
-                        kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
+                                        #reformat the dates
+                                        year = JPDate.split("-")[2]
+                                        month = JPDate.split("-")[0]
+                                        day = JPDate.split("-")[1]
 
-                        if hiragana or katakana or kanji:
-                            JPRegex = re.search(japaneseServiceStudioReportsOperationsLogsRegex, nonMatchedLine2)
-                            if JPRegex:
-                                JPDate = JPRegex.group(1)
-                                JPTime = JPRegex.group(2)
-                                JPTail = JPRegex.group(3)
+                                        if len(month) != 2:
+                                            month = "0" + month
 
-                                #reformat the dates
-                                year = JPDate.split("/")[2]
-                                month = JPDate.split("/")[0]
-                                day = JPDate.split("/")[1]
+                                        _JPDate = year + "-" + month + "-" + day
 
-                                if len(month) != 2:
-                                    month = "0" + month
+                                        #reformat the times
+                                        if JPTime[-2:] == "AM" and JPTime[:2] == "12":
+                                            _JPTime = "00" + JPTime[2:-2]
+                                        elif JPTime[-2:] == "AM":
+                                            hours = JPTime.split(":")[0]
+                                            minutes = JPTime.split(":")[1]
+                                            seconds = JPTime.split(":")[2]
+                                            if len(hours) < 2:
+                                                hours = "0" + hours
+                                            _JPTime = hours + ":" + minutes + ":" + seconds[:-2]
+                                        elif JPTime[-2:] == "PM" and JPTime[:2] == "12":
+                                            _JPTime = JPTime[:-2]
+                                        elif JPTime[-2:] == "PM":
+                                            hours = JPTime.split(":")[0]
+                                            minutes = JPTime.split(":")[1]
+                                            seconds = JPTime.split(":")[2]
+                                            _JPTime = str(int(hours) + 12) + ":" + minutes + ":" + seconds[:-2]
 
-                                _JPDate = year + "-" + month + "-" + day
+                                        JPText = _JPDate + " " + _JPTime + "|||" + JPTail.strip() + "\n"
 
-                                #reformat the times
-                                if JPTime[-2:] == "AM" and JPTime[:2] == "12":
-                                    _JPTime = "00" + JPTime[2:-2]
-                                elif JPTime[-2:] == "AM":
-                                    hours = JPTime.split(":")[0]
-                                    minutes = JPTime.split(":")[1]
-                                    seconds = JPTime.split(":")[2]
-                                    if len(hours) < 2:
-                                        hours = "0" + hours
-                                    _JPTime = hours + ":" + minutes + ":" + seconds[:-2]
-                                elif JPTime[-2:] == "PM" and JPTime[:2] == "12":
-                                    _JPTime = JPTime[:-2]
-                                elif JPTime[-2:] == "PM":
-                                    hours = JPTime.split(":")[0]
-                                    minutes = JPTime.split(":")[1]
-                                    seconds = JPTime.split(":")[2]
-                                    _JPTime = str(int(hours) + 12) + ":" + minutes + ":" + seconds[:-2]
+                                        myLinesFromDateRange.append(JPText)
 
-                                #remove all the new lines from the string
-                                newJPTail = ' '.join(JPTail.splitlines())
-
-                                #replace white spaces with a single space
-                                myNewJPTail = ' '.join(newJPTail.split())
-
-                                JPText = _JPDate + " " + _JPTime + "|||" + myNewJPTail.strip() + "\n"
-
-                                myLinesFromDateRange.append(JPText)
-
-                        else:
-                            newNonMatchedLine2 = normalizeLines(nonMatchedLine2)
-                            sanitizeLines(newNonMatchedLine2)
-                            
-
-                            #check if the line matches the regular expression
-                            regex3 = re.search(serviceStudioReportsOperationsLogsRegex2, newNonMatchedLine2)
-                            if regex3:
-                                date = regex3.group(1)
-                                time = regex3.group(2)
-                                numberOfOccurrences = regex3.group(3)
-                                actionName = regex3.group(4)
-                                message = regex3.group(5)#null
-
-                                #reformat the dates
-                                year = date.split("/")[2]
-                                month = date.split("/")[0]
-                                day = date.split("/")[1]
-
-                                if len(month) != 2:
-                                    month = "0" + month
-
-                                _date = year + "-" + month + "-" + day
-
-                                #reformat the times
-                                if time[-2:] == "AM" and time[:2] == "12":
-                                    _time = "00" + time[2:-2]
-                                elif time[-2:] == "AM":
-                                    hours = time.split(":")[0]
-                                    minutes = time.split(":")[1]
-                                    seconds = time.split(":")[2]
-                                    if len(hours) < 2:
-                                        hours = "0" + hours
-                                    _time = hours + ":" + minutes + ":" + seconds[:-2]
-                                elif time[-2:] == "PM" and time[:2] == "12":
-                                    _time = time[:-2]
-                                elif time[-2:] == "PM":
-                                    hours = time.split(":")[0]
-                                    minutes = time.split(":")[1]
-                                    seconds = time.split(":")[2]
-                                    _time = str(int(hours) + 12) + ":" + minutes + ":" + seconds[:-2]
-
-                                if message == None:
-                                    message = " "
-                                    outText2 = _date + " " + _time.strip() + "|" + numberOfOccurrences + "|" + actionName.strip() + "|" + message + "\n"
-                                    myLinesFromDateRange.append(outText2)
                                 else:
-                                    outText2 = _date + " " + _time.strip() + "|" + numberOfOccurrences + "|" + actionName.strip() + "|" + message.strip() + "\n"
-                                    myLinesFromDateRange.append(outText2)
+                                    nonMatchedOutText = "ServiceStudioReport -> " + nonMatchedLine2.strip() + "\n"
 
-                            if not regex3:
-                                nonMatchedOutText = "ServiceStudioReport -> " + newNonMatchedLine2 + "\n"
+                                    myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
 
-                                myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
+                #delete the temporary files and directory that were created
+                os.remove(tempFilePath)
 
     if len(myNonMatchedValidLinesFromDateRange) > 0:
         createFolder("\\nonmatched_valid_lines\\")
@@ -2961,27 +2925,21 @@ def txtFile(absolutePath, filename, filenameWithExt, ext, fromDate, toDate):
             linesFromDateRange.writelines(myFinalLinesFromDateRange)
         del myLinesFromDateRange[:]
         del myFinalLinesFromDateRange[:]
-
-        if "studio" in filename.lower() and "report" in filename.lower():
-            #remove the last line from the filtered file
-            with codecs.open(os.getcwd() + "\\filtered_data_files\\" + outFilename, "r", "utf-8", "ignore") as linesFromText2:
-                searchLines2 = linesFromText2.readlines()
-                searchLines2 = searchLines2[:-1]
-                with codecs.open(os.getcwd() + "\\filtered_data_files\\" + outFilename, "w", "utf-8", "ignore") as linesFromDateRange2:
-                    linesFromDateRange2.writelines(searchLines2)
                 
     else:
         print("No data was found within the specified date range.")
 
     print("Closing: " + filenameWithExt)
 
-def logFile(absolutePath, filenameWithExt, ext, fromDate, toDate):
+def logFile(absolutePath, filenameWithExt, ext, _fromDate, _toDate):
     print("Reading: " + filenameWithExt)
     
     outText = ""
     outText2 = ""
     nonMatchedOutText = ""
     JPText = ""
+    nonMatchedLine = ""
+    nonMatchedLine2 = ""
 
     #split the fields and rearrange them to combine them all later
     if not "_x" in filenameWithExt.lower():
@@ -3005,8 +2963,6 @@ def logFile(absolutePath, filenameWithExt, ext, fromDate, toDate):
                 windowsCode = match.group(14)
                 timeTaken = match.group(15)
 
-                _fromDate = datetime.strptime(fromDate, "%Y-%m-%d").date()
-                _toDate = datetime.strptime(toDate, "%Y-%m-%d").date()
                 _date = datetime.strptime(date, "%Y-%m-%d").date()
                     
                 if _fromDate <= _date <= _toDate:
@@ -3201,7 +3157,7 @@ def sortLOGFile(directoryPath):
     del myTimesTaken[:]
     outText = ""
 
-def evtxFile(absolutePath, filenameWithExt, ext, fromDate, toDate):
+def evtxFile(absolutePath, filenameWithExt, ext, _fromDate, _toDate):
     print("Reading: " + filenameWithExt)
 
     outText = ""
@@ -3234,8 +3190,6 @@ def evtxFile(absolutePath, filenameWithExt, ext, fromDate, toDate):
         time = timestamp[11:19]
         time = time.replace(".", "")
 
-        _fromDate = datetime.strptime(fromDate, "%Y-%m-%d").date()
-        _toDate = datetime.strptime(toDate, "%Y-%m-%d").date()
         _date = datetime.strptime(date, "%Y-%m-%d").date()
                 
         if _fromDate <= _date <= _toDate:
@@ -3293,13 +3247,19 @@ else:
     fromDate = sys.argv[2]
     toDate = sys.argv[3]
 
-    searchDirectory(directoryPath)
-    searchDirectory2(directoryPath, myFileExt)
+    _fromDate = datetime.strptime(fromDate, "%Y-%m-%d").date()
+    _toDate = datetime.strptime(toDate, "%Y-%m-%d").date()
 
-    if os.path.exists(nonMatchedPath):
-        print("\nALERT!\nThere were valid lines that did not match the logic.\n" +
-              "A file has been created in your current workig directory: \"" + os.getcwd() + "\" under the \"nonmatched_valid_lines\" folder.\n" +
-              "Please go to the Slack channel #log-parser-feedback and post the generated file for further review.\nALERT!")
+    if _fromDate > _toDate:
+        print("The \"from date\" cannot be greater than the \"to date\"\nPlease try again.")
+    else:
+        searchDirectory(directoryPath, _fromDate, _toDate)
+        searchDirectory2(directoryPath, myFileExt)
+
+        if os.path.exists(nonMatchedPath):
+            print("\nALERT!\nThere were valid lines that did not match the logic.\n" +
+                  "A file has been created in your current workig directory: \"" + os.getcwd() + "\" under the \"nonmatched_valid_lines\" folder.\n" +
+                  "Please go to the Slack channel #log-parser-feedback and post the generated file for further review.\nALERT!")
 
 end = datetime.now()
 print("\nElapsed time: {0}".format(end-start))
