@@ -7,6 +7,7 @@ using System.Linq;
 using System.IO;
 using System.Globalization;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -934,23 +935,23 @@ namespace OutSystems_Log_Parser
 
                 if (removeGarbage)
                 {
-                    removeGenericErrors(dataGridViewErrorlogs, 1);
-                    removeGenericErrors(dataGridViewGenerallogs, 1);
-                    //removeGenericErrors(dataGridViewIntegrationslogs);
-                    //removeGenericErrors(dataGridViewScreenRequestslogs);
-                    //removeGenericErrors(dataGridViewTimerlogs);
-                    //removeGenericErrors(dataGridViewEmaillogs);
-                    //removeGenericErrors(dataGridViewExtensionlogs);
-                    //removeGenericErrors(dataGridViewServiceActionlogs);
-                    //removeGenericErrors(dataGridViewTradWebRequests);
-                    //removeGenericErrors(dataGridViewIISDateTime);
-                    //removeGenericErrors(dataGridViewIISTimeTaken);
-                    removeGenericErrors(dataGridViewWinAppEventViewer, 8);
-                    removeGenericErrors(dataGridViewWinSysEventViewer, 8);
-                    removeGenericErrors(dataGridViewWinSecEventViewer, 8);
-                    removeGenericErrors(dataGridViewAndroidlogs, 3);
-                    removeGenericErrors(dataGridViewiOSlogs, 3);
-                    removeGenericErrors(dataGridViewServiceStudiologs, 3);
+                    removeGenericErrors(dataGridViewErrorlogs, 1, txtBoxDetailErrorLogs);
+                    removeGenericErrors(dataGridViewGenerallogs, 1, txtBoxDetailGenerallogs);
+                    removeGenericErrors2(dataGridViewIntegrationslogs, txtBoxDetailIntegrationlogs);
+                    removeGenericErrors2(dataGridViewScreenRequestslogs, txtBoxDetailScreenRequestslogs);
+                    removeGenericErrors2(dataGridViewTimerlogs, txtBoxDetailTimerlogs);
+                    removeGenericErrors2(dataGridViewEmaillogs, txtBoxDetailEmaillogs);
+                    removeGenericErrors2(dataGridViewExtensionlogs, txtBoxDetailExtensionlogs);
+                    removeGenericErrors2(dataGridViewServiceActionlogs, txtBoxDetailServiceActionlogs);
+                    removeGenericErrors2(dataGridViewTradWebRequests, txtBoxDetailTradWebRequests);
+                    //removeGenericErrors2(dataGridViewIISDateTime, txtDetailIISlogs);
+                    //removeGenericErrors2(dataGridViewIISTimeTaken, txtDetailIISlogs);
+                    removeGenericErrors(dataGridViewWinAppEventViewer, 8, txtBoxDetailWinAppEventViewer);
+                    removeGenericErrors(dataGridViewWinSysEventViewer, 8, txtBoxDetailWinSysEventViewer);
+                    removeGenericErrors(dataGridViewWinSecEventViewer, 8, txtBoxDetailWinSecEventViewer);
+                    removeGenericErrors(dataGridViewAndroidlogs, 3, txtBoxDetailAndroidLogs);
+                    removeGenericErrors(dataGridViewiOSlogs, 3, txtBoxDetailiOSLogs);
+                    removeGenericErrors(dataGridViewServiceStudiologs, 3, txtBoxDetailServiceStudioLogs);
                 }
 
                 if (highlightError)
@@ -959,8 +960,8 @@ namespace OutSystems_Log_Parser
                     string[] knownErrors_Generallogs = { "system cannot find" };
                     string[] knownErrors_WinAppEventViewer = { "ora-", "error closing the transaction" };
                     string[] knownErrors_WinSysEventViewer = { "error closing the transaction" };
-                    string[] knownErrors_AndroidiOSlogs = { "file is corrupt or invalid", "androidx library", "command finished with error code 0", "plugin is not going to work", "error: spawnsync sudo etimeout", "plugin doesn't support this project's cordova-android version", "failed to fetch plug" };
-                    string[] knownErrors_ServiceStudiologs = { "oneoftypedefinition" };
+                    string[] knownErrors_AndroidiOSlogs = { "file is corrupt or invalid", "androidx library", "command finished with error code 0", "plugin is not going to work", "error: spawnsync sudo etimeout", "plugin doesn't support this project's cordova-android version", "failed to fetch plug", "archive failed", "build failed with the following error", "command failed with exit code", "signing certificate is invalid", "the ios deployment target" };
+                    string[] knownErrors_ServiceStudiologs = { "oneoftypedefinition", "http forbidden" };
 
                     highlightKnownErrors(dataGridViewErrorlogs, 1, knownErrors_Errorlogs);
                     highlightKnownErrors(dataGridViewGenerallogs, 1, knownErrors_Generallogs);
@@ -1219,23 +1220,23 @@ namespace OutSystems_Log_Parser
         {
             removeGarbage = true;
 
-            removeGenericErrors(dataGridViewErrorlogs, 1);
-            removeGenericErrors(dataGridViewGenerallogs, 1);
-            //removeGenericErrors(dataGridViewIntegrationslogs);
-            //removeGenericErrors(dataGridViewScreenRequestslogs);
-            //removeGenericErrors(dataGridViewTimerlogs);
-            //removeGenericErrors(dataGridViewEmaillogs);
-            //removeGenericErrors(dataGridViewExtensionlogs);
-            //removeGenericErrors(dataGridViewServiceActionlogs);
-            //removeGenericErrors(dataGridViewTradWebRequests);
-            //removeGenericErrors(dataGridViewIISDateTime);
-            //removeGenericErrors(dataGridViewIISTimeTaken);
-            removeGenericErrors(dataGridViewWinAppEventViewer, 8);
-            removeGenericErrors(dataGridViewWinSysEventViewer, 8);
-            removeGenericErrors(dataGridViewWinSecEventViewer, 8);
-            removeGenericErrors(dataGridViewAndroidlogs, 3);
-            removeGenericErrors(dataGridViewiOSlogs, 3);
-            removeGenericErrors(dataGridViewServiceStudiologs, 3);
+            removeGenericErrors(dataGridViewErrorlogs, 1, txtBoxDetailErrorLogs);
+            removeGenericErrors(dataGridViewGenerallogs, 1, txtBoxDetailGenerallogs);
+            removeGenericErrors2(dataGridViewIntegrationslogs, txtBoxDetailIntegrationlogs);
+            removeGenericErrors2(dataGridViewScreenRequestslogs, txtBoxDetailScreenRequestslogs);
+            removeGenericErrors2(dataGridViewTimerlogs, txtBoxDetailTimerlogs);
+            removeGenericErrors2(dataGridViewEmaillogs, txtBoxDetailEmaillogs);
+            removeGenericErrors2(dataGridViewExtensionlogs, txtBoxDetailExtensionlogs);
+            removeGenericErrors2(dataGridViewServiceActionlogs, txtBoxDetailServiceActionlogs);
+            removeGenericErrors2(dataGridViewTradWebRequests, txtBoxDetailTradWebRequests);
+            //removeGenericErrors2(dataGridViewIISDateTime, txtDetailIISlogs);
+            //removeGenericErrors2(dataGridViewIISTimeTaken, txtDetailIISlogs);
+            removeGenericErrors(dataGridViewWinAppEventViewer, 8, txtBoxDetailWinAppEventViewer);
+            removeGenericErrors(dataGridViewWinSysEventViewer, 8, txtBoxDetailWinSysEventViewer);
+            removeGenericErrors(dataGridViewWinSecEventViewer, 8, txtBoxDetailWinSecEventViewer);
+            removeGenericErrors(dataGridViewAndroidlogs, 3, txtBoxDetailAndroidLogs);
+            removeGenericErrors(dataGridViewiOSlogs, 3, txtBoxDetailiOSLogs);
+            removeGenericErrors(dataGridViewServiceStudiologs, 3, txtBoxDetailServiceStudioLogs);
 
             if (highlightError)
             {
@@ -1243,8 +1244,8 @@ namespace OutSystems_Log_Parser
                 string[] knownErrors_Generallogs = { "system cannot find" };
                 string[] knownErrors_WinAppEventViewer = { "ora-", "error closing the transaction" };
                 string[] knownErrors_WinSysEventViewer = { "error closing the transaction" };
-                string[] knownErrors_AndroidiOSlogs = { "file is corrupt or invalid", "androidx library", "command finished with error code 0", "plugin is not going to work", "error: spawnsync sudo etimeout", "plugin doesn't support this project's cordova-android version", "failed to fetch plug" };
-                string[] knownErrors_ServiceStudiologs = { "oneoftypedefinition" };
+                string[] knownErrors_AndroidiOSlogs = { "file is corrupt or invalid", "androidx library", "command finished with error code 0", "plugin is not going to work", "error: spawnsync sudo etimeout", "plugin doesn't support this project's cordova-android version", "failed to fetch plug", "archive failed", "build failed with the following error", "command failed with exit code", "signing certificate is invalid", "the ios deployment target" };
+                string[] knownErrors_ServiceStudiologs = { "oneoftypedefinition", "http forbidden" };
 
                 highlightKnownErrors(dataGridViewErrorlogs, 1, knownErrors_Errorlogs);
                 highlightKnownErrors(dataGridViewGenerallogs, 1, knownErrors_Generallogs);
@@ -1269,7 +1270,7 @@ namespace OutSystems_Log_Parser
             numericUpDownPercentage.Enabled = false;
         }
 
-        private void removeGenericErrors(DataGridView tableName, int columnIndex)
+        private void removeGenericErrors(DataGridView tableName, int columnIndex, TextBox txtbox)
         {
             try
             {
@@ -1297,7 +1298,275 @@ namespace OutSystems_Log_Parser
                         {
                             if (row.Cells[columnIndex].Value.ToString().Equals(myMessage))
                             {
+                                tableName.CurrentCell = null;
+                                clearTextboxes(txtbox);
                                 row.Visible = false;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void removeGenericErrors2(DataGridView tableName, TextBox txtbox)
+        {
+            try
+            {
+                totalRowsCount = tableName.RowCount;
+
+                if (tableName.Name.ToString() == "dataGridViewIntegrationslogs")
+                {
+                    var messageLineCountQuery = tableName.Rows.Cast<DataGridViewRow>()
+                    .Where(r => r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null && r.Cells[10].Value != null)
+                    .Select(r => new { Val2 = r.Cells[2].Value, Val3 = r.Cells[3].Value, Val4 = r.Cells[4].Value, Val5 = r.Cells[5].Value, Val6 = r.Cells[6].Value, Val7 = r.Cells[7].Value, Val8 = r.Cells[8].Value, Val9 = r.Cells[9].Value, Val10 = r.Cells[10].Value })
+                    .GroupBy(msg => msg)
+                        .OrderByDescending(msg => msg.Count())
+                        .Select(g => new { Message = g.Key, Count = g.Count() });
+
+                    foreach (var messageLineCount in messageLineCountQuery)
+                    {
+                        myMessage = messageLineCount.Message.ToString();
+                        myMessageCount = messageLineCount.Count;
+
+                        percentageMessageCount = ((double)myMessageCount / (double)totalRowsCount) * 100;
+
+                        roundedPercentageMessageCount = Math.Round(percentageMessageCount, 0, MidpointRounding.AwayFromZero);
+
+                        if (roundedPercentageMessageCount >= (double)numericUpDownPercentage.Value)
+                        {
+                            foreach (DataGridViewRow row in tableName.Rows)
+                            {
+                                string myString = row.Cells[2].Value.ToString() + row.Cells[3].Value.ToString() + row.Cells[4].Value.ToString() + row.Cells[5].Value.ToString() + row.Cells[6].Value.ToString() + row.Cells[7].Value.ToString() + row.Cells[8].Value.ToString() + row.Cells[9].Value.ToString() + row.Cells[10].Value.ToString();
+                                string myNewMessage = "";
+                                myNewMessage = Regex.Replace(myMessage, @"([\{\,]?[ ]Val[\d]{1,2}[ ][\=][ ]?)", "");
+                                myNewMessage = myNewMessage.Replace(" }", "");
+                                if (myString.Equals(myNewMessage))
+                                {
+                                    tableName.CurrentCell = null;
+                                    clearTextboxes(txtbox);
+                                    row.Visible = false;
+                                }
+                            }
+                        }
+                    }
+                }
+                else if (tableName.Name.ToString() == "dataGridViewScreenRequestslogs")
+                {
+                    var messageLineCountQuery = tableName.Rows.Cast<DataGridViewRow>()
+                    .Where(r => r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null && r.Cells[10].Value != null && r.Cells[11].Value != null && r.Cells[12].Value != null)
+                    .Select(r => new { Val2 = r.Cells[2].Value, Val3 = r.Cells[3].Value, Val4 = r.Cells[4].Value, Val5 = r.Cells[5].Value, Val6 = r.Cells[6].Value, Val7 = r.Cells[7].Value, Val8 = r.Cells[8].Value, Val9 = r.Cells[9].Value, Val10 = r.Cells[10].Value, Val11 = r.Cells[11].Value, Val12 = r.Cells[12].Value })
+                    .GroupBy(msg => msg)
+                        .OrderByDescending(msg => msg.Count())
+                        .Select(g => new { Message = g.Key, Count = g.Count() });
+
+                    foreach (var messageLineCount in messageLineCountQuery)
+                    {
+                        myMessage = messageLineCount.Message.ToString();
+                        myMessageCount = messageLineCount.Count;
+
+                        percentageMessageCount = ((double)myMessageCount / (double)totalRowsCount) * 100;
+
+                        roundedPercentageMessageCount = Math.Round(percentageMessageCount, 0, MidpointRounding.AwayFromZero);
+
+                        if (roundedPercentageMessageCount >= (double)numericUpDownPercentage.Value)
+                        {
+                            foreach (DataGridViewRow row in tableName.Rows)
+                            {
+                                string myString = row.Cells[2].Value.ToString() + row.Cells[3].Value.ToString() + row.Cells[4].Value.ToString() + row.Cells[5].Value.ToString() + row.Cells[6].Value.ToString() + row.Cells[7].Value.ToString() + row.Cells[8].Value.ToString() + row.Cells[9].Value.ToString() + row.Cells[10].Value.ToString() + row.Cells[11].Value.ToString() + row.Cells[12].Value.ToString();
+                                string myNewMessage = "";
+                                myNewMessage = Regex.Replace(myMessage, @"([\{\,]?[ ]Val[\d]{1,2}[ ][\=][ ]?)", "");
+                                myNewMessage = myNewMessage.Replace(" }", "");
+                                if (myString.Equals(myNewMessage))
+                                {
+                                    tableName.CurrentCell = null;
+                                    clearTextboxes(txtbox);
+                                    row.Visible = false;
+                                }
+                            }
+                        }
+                    }
+                }
+                else if (tableName.Name.ToString() == "dataGridViewTimerlogs")
+                {
+                    var messageLineCountQuery = tableName.Rows.Cast<DataGridViewRow>()
+                    .Where(r => r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null)
+                    .Select(r => new { Val2 = r.Cells[2].Value, Val3 = r.Cells[3].Value, Val4 = r.Cells[4].Value, Val5 = r.Cells[5].Value, Val6 = r.Cells[6].Value, Val7 = r.Cells[7].Value })
+                    .GroupBy(msg => msg)
+                        .OrderByDescending(msg => msg.Count())
+                        .Select(g => new { Message = g.Key, Count = g.Count() });
+
+                    foreach (var messageLineCount in messageLineCountQuery)
+                    {
+                        myMessage = messageLineCount.Message.ToString();
+                        myMessageCount = messageLineCount.Count;
+
+                        percentageMessageCount = ((double)myMessageCount / (double)totalRowsCount) * 100;
+
+                        roundedPercentageMessageCount = Math.Round(percentageMessageCount, 0, MidpointRounding.AwayFromZero);
+
+                        if (roundedPercentageMessageCount >= (double)numericUpDownPercentage.Value)
+                        {
+                            foreach (DataGridViewRow row in tableName.Rows)
+                            {
+                                string myString = row.Cells[2].Value.ToString() + row.Cells[3].Value.ToString() + row.Cells[4].Value.ToString() + row.Cells[5].Value.ToString() + row.Cells[6].Value.ToString() + row.Cells[7].Value.ToString();
+                                string myNewMessage = "";
+                                myNewMessage = Regex.Replace(myMessage, @"([\{\,]?[ ]Val[\d]{1,2}[ ][\=][ ]?)", "");
+                                myNewMessage = myNewMessage.Replace(" }", "");
+                                if (myString.Equals(myNewMessage))
+                                {
+                                    tableName.CurrentCell = null;
+                                    clearTextboxes(txtbox);
+                                    row.Visible = false;
+                                }
+                            }
+                        }
+                    }
+                }
+                else if (tableName.Name.ToString() == "dataGridViewEmaillogs")
+                {
+                    var messageLineCountQuery = tableName.Rows.Cast<DataGridViewRow>()
+                    .Where(r => r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null)
+                    .Select(r => new { Val3 = r.Cells[3].Value, Val4 = r.Cells[4].Value, Val5 = r.Cells[5].Value })
+                    .GroupBy(msg => msg)
+                        .OrderByDescending(msg => msg.Count())
+                        .Select(g => new { Message = g.Key, Count = g.Count() });
+
+                    foreach (var messageLineCount in messageLineCountQuery)
+                    {
+                        myMessage = messageLineCount.Message.ToString();
+                        myMessageCount = messageLineCount.Count;
+
+                        percentageMessageCount = ((double)myMessageCount / (double)totalRowsCount) * 100;
+
+                        roundedPercentageMessageCount = Math.Round(percentageMessageCount, 0, MidpointRounding.AwayFromZero);
+
+                        if (roundedPercentageMessageCount >= (double)numericUpDownPercentage.Value)
+                        {
+                            foreach (DataGridViewRow row in tableName.Rows)
+                            {
+                                string myString = row.Cells[3].Value.ToString() + row.Cells[4].Value.ToString() + row.Cells[5].Value.ToString();
+                                string myNewMessage = "";
+                                myNewMessage = Regex.Replace(myMessage, @"([\{\,]?[ ]Val[\d]{1,2}[ ][\=][ ]?)", "");
+                                myNewMessage = myNewMessage.Replace(" }", "");
+                                if (myString.Equals(myNewMessage))
+                                {
+                                    tableName.CurrentCell = null;
+                                    clearTextboxes(txtbox);
+                                    row.Visible = false;
+                                }
+                            }
+                        }
+                    }
+                }
+                else if (tableName.Name.ToString() == "dataGridViewExtensionlogs")
+                {
+                    var messageLineCountQuery = tableName.Rows.Cast<DataGridViewRow>()
+                    .Where(r => r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null)
+                    .Select(r => new { Val2 = r.Cells[2].Value, Val3 = r.Cells[3].Value, Val4 = r.Cells[4].Value, Val5 = r.Cells[5].Value, Val6 = r.Cells[6].Value, Val7 = r.Cells[7].Value })
+                    .GroupBy(msg => msg)
+                        .OrderByDescending(msg => msg.Count())
+                        .Select(g => new { Message = g.Key, Count = g.Count() });
+
+                    foreach (var messageLineCount in messageLineCountQuery)
+                    {
+                        myMessage = messageLineCount.Message.ToString();
+                        myMessageCount = messageLineCount.Count;
+
+                        percentageMessageCount = ((double)myMessageCount / (double)totalRowsCount) * 100;
+
+                        roundedPercentageMessageCount = Math.Round(percentageMessageCount, 0, MidpointRounding.AwayFromZero);
+
+                        if (roundedPercentageMessageCount >= (double)numericUpDownPercentage.Value)
+                        {
+                            foreach (DataGridViewRow row in tableName.Rows)
+                            {
+                                string myString = row.Cells[2].Value.ToString() + row.Cells[3].Value.ToString() + row.Cells[4].Value.ToString() + row.Cells[5].Value.ToString() + row.Cells[6].Value.ToString() + row.Cells[7].Value.ToString();
+                                string myNewMessage = "";
+                                myNewMessage = Regex.Replace(myMessage, @"([\{\,]?[ ]Val[\d]{1,2}[ ][\=][ ]?)", "");
+                                myNewMessage = myNewMessage.Replace(" }", "");
+                                if (myString.Equals(myNewMessage))
+                                {
+                                    tableName.CurrentCell = null;
+                                    clearTextboxes(txtbox);
+                                    row.Visible = false;
+                                }
+                            }
+                        }
+                    }
+                }
+                else if (tableName.Name.ToString() == "dataGridViewServiceActionlogs")
+                {
+                    var messageLineCountQuery = tableName.Rows.Cast<DataGridViewRow>()
+                    .Where(r => r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null)
+                    .Select(r => new { Val2 = r.Cells[2].Value, Val3 = r.Cells[3].Value, Val4 = r.Cells[4].Value, Val5 = r.Cells[5].Value })
+                    .GroupBy(msg => msg)
+                        .OrderByDescending(msg => msg.Count())
+                        .Select(g => new { Message = g.Key, Count = g.Count() });
+
+                    foreach (var messageLineCount in messageLineCountQuery)
+                    {
+                        myMessage = messageLineCount.Message.ToString();
+                        myMessageCount = messageLineCount.Count;
+
+                        percentageMessageCount = ((double)myMessageCount / (double)totalRowsCount) * 100;
+
+                        roundedPercentageMessageCount = Math.Round(percentageMessageCount, 0, MidpointRounding.AwayFromZero);
+
+                        if (roundedPercentageMessageCount >= (double)numericUpDownPercentage.Value)
+                        {
+                            foreach (DataGridViewRow row in tableName.Rows)
+                            {
+                                string myString = row.Cells[2].Value.ToString() + row.Cells[3].Value.ToString() + row.Cells[4].Value.ToString() + row.Cells[5].Value.ToString();
+                                string myNewMessage = "";
+                                myNewMessage = Regex.Replace(myMessage, @"([\{\,]?[ ]Val[\d]{1,2}[ ][\=][ ]?)", "");
+                                myNewMessage = myNewMessage.Replace(" }", "");
+                                if (myString.Equals(myNewMessage))
+                                {
+                                    tableName.CurrentCell = null;
+                                    clearTextboxes(txtbox);
+                                    row.Visible = false;
+                                }
+                            }
+                        }
+                    }
+                }
+                else if (tableName.Name.ToString() == "dataGridViewTradWebRequests")
+                {
+                    var messageLineCountQuery = tableName.Rows.Cast<DataGridViewRow>()
+                    .Where(r => r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null && r.Cells[10].Value != null && r.Cells[11].Value != null)
+                    .Select(r => new { Val2 = r.Cells[2].Value, Val3 = r.Cells[3].Value, Val4 = r.Cells[4].Value, Val5 = r.Cells[5].Value, Val6 = r.Cells[6].Value, Val7 = r.Cells[7].Value, Val8 = r.Cells[8].Value, Val9 = r.Cells[9].Value, Val10 = r.Cells[10].Value, Val11 = r.Cells[11].Value })
+                    .GroupBy(msg => msg)
+                        .OrderByDescending(msg => msg.Count())
+                        .Select(g => new { Message = g.Key, Count = g.Count() });
+
+                    foreach (var messageLineCount in messageLineCountQuery)
+                    {
+                        myMessage = messageLineCount.Message.ToString();
+                        myMessageCount = messageLineCount.Count;
+
+                        percentageMessageCount = ((double)myMessageCount / (double)totalRowsCount) * 100;
+
+                        roundedPercentageMessageCount = Math.Round(percentageMessageCount, 0, MidpointRounding.AwayFromZero);
+
+                        if (roundedPercentageMessageCount >= (double)numericUpDownPercentage.Value)
+                        {
+                            foreach (DataGridViewRow row in tableName.Rows)
+                            {
+                                string myString = row.Cells[2].Value.ToString() + row.Cells[3].Value.ToString() + row.Cells[4].Value.ToString() + row.Cells[5].Value.ToString() + row.Cells[6].Value.ToString() + row.Cells[7].Value.ToString() + row.Cells[8].Value.ToString() + row.Cells[9].Value.ToString() + row.Cells[10].Value.ToString() + row.Cells[11].Value.ToString();
+                                string myNewMessage = "";
+                                myNewMessage = Regex.Replace(myMessage, @"([\{\,]?[ ]Val[\d]{1,2}[ ][\=][ ]?)", "");
+                                myNewMessage = myNewMessage.Replace(" }", "");
+                                if (myString.Equals(myNewMessage))
+                                {
+                                    tableName.CurrentCell = null;
+                                    clearTextboxes(txtbox);
+                                    row.Visible = false;
+                                }
                             }
                         }
                     }
@@ -1318,8 +1587,8 @@ namespace OutSystems_Log_Parser
             string[] knownErrors_Generallogs = { "system cannot find" };
             string[] knownErrors_WinAppEventViewer = { "ora-", "error closing the transaction" };
             string[] knownErrors_WinSysEventViewer = { "error closing the transaction" };
-            string[] knownErrors_AndroidiOSlogs = { "file is corrupt or invalid", "androidx library", "command finished with error code 0", "plugin is not going to work", "error: spawnsync sudo etimeout", "plugin doesn't support this project's cordova-android version", "failed to fetch plug" };
-            string[] knownErrors_ServiceStudiologs = { "oneoftypedefinition" };
+            string[] knownErrors_AndroidiOSlogs = { "file is corrupt or invalid", "androidx library", "command finished with error code 0", "plugin is not going to work", "error: spawnsync sudo etimeout", "plugin doesn't support this project's cordova-android version", "failed to fetch plug", "archive failed", "build failed with the following error", "command failed with exit code", "signing certificate is invalid", "the ios deployment target" };
+            string[] knownErrors_ServiceStudiologs = { "oneoftypedefinition", "http forbidden" };
 
             highlightKnownErrors(dataGridViewErrorlogs, 1, knownErrors_Errorlogs);
             highlightKnownErrors(dataGridViewGenerallogs, 1, knownErrors_Generallogs);
@@ -1341,23 +1610,23 @@ namespace OutSystems_Log_Parser
 
             if (removeGarbage)
             {
-                removeGenericErrors(dataGridViewErrorlogs, 1);
-                removeGenericErrors(dataGridViewGenerallogs, 1);
-                //removeGenericErrors(dataGridViewIntegrationslogs);
-                //removeGenericErrors(dataGridViewScreenRequestslogs);
-                //removeGenericErrors(dataGridViewTimerlogs);
-                //removeGenericErrors(dataGridViewEmaillogs);
-                //removeGenericErrors(dataGridViewExtensionlogs);
-                //removeGenericErrors(dataGridViewServiceActionlogs);
-                //removeGenericErrors(dataGridViewTradWebRequests);
-                //removeGenericErrors(dataGridViewIISDateTime);
-                //removeGenericErrors(dataGridViewIISTimeTaken);
-                removeGenericErrors(dataGridViewWinAppEventViewer, 8);
-                removeGenericErrors(dataGridViewWinSysEventViewer, 8);
-                removeGenericErrors(dataGridViewWinSecEventViewer, 8);
-                removeGenericErrors(dataGridViewAndroidlogs, 3);
-                removeGenericErrors(dataGridViewiOSlogs, 3);
-                removeGenericErrors(dataGridViewServiceStudiologs, 3);
+                removeGenericErrors(dataGridViewErrorlogs, 1, txtBoxDetailErrorLogs);
+                removeGenericErrors(dataGridViewGenerallogs, 1, txtBoxDetailGenerallogs);
+                removeGenericErrors2(dataGridViewIntegrationslogs, txtBoxDetailIntegrationlogs);
+                removeGenericErrors2(dataGridViewScreenRequestslogs, txtBoxDetailScreenRequestslogs);
+                removeGenericErrors2(dataGridViewTimerlogs, txtBoxDetailTimerlogs);
+                removeGenericErrors2(dataGridViewEmaillogs, txtBoxDetailEmaillogs);
+                removeGenericErrors2(dataGridViewExtensionlogs, txtBoxDetailExtensionlogs);
+                removeGenericErrors2(dataGridViewServiceActionlogs, txtBoxDetailServiceActionlogs);
+                removeGenericErrors2(dataGridViewTradWebRequests, txtBoxDetailTradWebRequests);
+                //removeGenericErrors2(dataGridViewIISDateTime, txtDetailIISlogs);
+                //removeGenericErrors2(dataGridViewIISTimeTaken, txtDetailIISlogs);
+                removeGenericErrors(dataGridViewWinAppEventViewer, 8, txtBoxDetailWinAppEventViewer);
+                removeGenericErrors(dataGridViewWinSysEventViewer, 8, txtBoxDetailWinSysEventViewer);
+                removeGenericErrors(dataGridViewWinSecEventViewer, 8, txtBoxDetailWinSecEventViewer);
+                removeGenericErrors(dataGridViewAndroidlogs, 3, txtBoxDetailAndroidLogs);
+                removeGenericErrors(dataGridViewiOSlogs, 3, txtBoxDetailiOSLogs);
+                removeGenericErrors(dataGridViewServiceStudiologs, 3, txtBoxDetailServiceStudioLogs);
             }
 
             btnHighlight.Enabled = false;
