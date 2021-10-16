@@ -108,6 +108,7 @@
             this.btnHighlight = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.numericUpDownPercentage = new System.Windows.Forms.NumericUpDown();
+            this.btnScreenshot = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -1092,7 +1093,7 @@
             this.dateTimePicker1.CustomFormat = "yyyy-MM-dd";
             this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(367, 13);
+            this.dateTimePicker1.Location = new System.Drawing.Point(307, 13);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(160, 30);
             this.dateTimePicker1.TabIndex = 2;
@@ -1103,7 +1104,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.RoyalBlue;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(203, 13);
+            this.label1.Location = new System.Drawing.Point(143, 13);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(158, 25);
             this.label1.TabIndex = 11;
@@ -1114,7 +1115,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.RoyalBlue;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(631, 13);
+            this.label2.Location = new System.Drawing.Point(571, 13);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(137, 25);
             this.label2.TabIndex = 13;
@@ -1126,7 +1127,7 @@
             this.dateTimePicker2.CustomFormat = "yyyy-MM-dd";
             this.dateTimePicker2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(777, 13);
+            this.dateTimePicker2.Location = new System.Drawing.Point(717, 13);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(160, 30);
             this.dateTimePicker2.TabIndex = 4;
@@ -1137,7 +1138,7 @@
             this.btnFilter.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFilter.BackgroundImage")));
             this.btnFilter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFilter.Location = new System.Drawing.Point(1015, 11);
+            this.btnFilter.Location = new System.Drawing.Point(955, 11);
             this.btnFilter.Margin = new System.Windows.Forms.Padding(4);
             this.btnFilter.Name = "btnFilter";
             this.btnFilter.Size = new System.Drawing.Size(64, 32);
@@ -1151,7 +1152,7 @@
             // maskedTextBox1
             // 
             this.maskedTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.maskedTextBox1.Location = new System.Drawing.Point(533, 13);
+            this.maskedTextBox1.Location = new System.Drawing.Point(473, 13);
             this.maskedTextBox1.Mask = "00:00";
             this.maskedTextBox1.Name = "maskedTextBox1";
             this.maskedTextBox1.Size = new System.Drawing.Size(65, 30);
@@ -1161,7 +1162,7 @@
             // maskedTextBox2
             // 
             this.maskedTextBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.maskedTextBox2.Location = new System.Drawing.Point(943, 13);
+            this.maskedTextBox2.Location = new System.Drawing.Point(883, 13);
             this.maskedTextBox2.Mask = "00:00";
             this.maskedTextBox2.Name = "maskedTextBox2";
             this.maskedTextBox2.Size = new System.Drawing.Size(65, 30);
@@ -1173,7 +1174,7 @@
             this.btnClearFilter.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnClearFilter.BackgroundImage")));
             this.btnClearFilter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnClearFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClearFilter.Location = new System.Drawing.Point(1425, 11);
+            this.btnClearFilter.Location = new System.Drawing.Point(1424, 11);
             this.btnClearFilter.Margin = new System.Windows.Forms.Padding(4);
             this.btnClearFilter.Name = "btnClearFilter";
             this.btnClearFilter.Size = new System.Drawing.Size(64, 32);
@@ -1189,7 +1190,7 @@
             this.btnRemoveGarbage.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnRemoveGarbage.BackgroundImage")));
             this.btnRemoveGarbage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnRemoveGarbage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRemoveGarbage.Location = new System.Drawing.Point(1211, 11);
+            this.btnRemoveGarbage.Location = new System.Drawing.Point(1147, 11);
             this.btnRemoveGarbage.Margin = new System.Windows.Forms.Padding(4);
             this.btnRemoveGarbage.Name = "btnRemoveGarbage";
             this.btnRemoveGarbage.Size = new System.Drawing.Size(64, 32);
@@ -1205,7 +1206,7 @@
             this.btnHighlight.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnHighlight.BackgroundImage")));
             this.btnHighlight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnHighlight.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHighlight.Location = new System.Drawing.Point(1309, 11);
+            this.btnHighlight.Location = new System.Drawing.Point(1240, 11);
             this.btnHighlight.Margin = new System.Windows.Forms.Padding(4);
             this.btnHighlight.Name = "btnHighlight";
             this.btnHighlight.Size = new System.Drawing.Size(64, 32);
@@ -1224,7 +1225,7 @@
             0,
             0,
             0});
-            this.numericUpDownPercentage.Location = new System.Drawing.Point(1115, 13);
+            this.numericUpDownPercentage.Location = new System.Drawing.Point(1051, 13);
             this.numericUpDownPercentage.Maximum = new decimal(new int[] {
             30,
             0,
@@ -1246,12 +1247,28 @@
             0,
             0});
             // 
+            // btnScreenshot
+            // 
+            this.btnScreenshot.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnScreenshot.BackgroundImage")));
+            this.btnScreenshot.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnScreenshot.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnScreenshot.Location = new System.Drawing.Point(1332, 11);
+            this.btnScreenshot.Margin = new System.Windows.Forms.Padding(4);
+            this.btnScreenshot.Name = "btnScreenshot";
+            this.btnScreenshot.Size = new System.Drawing.Size(64, 32);
+            this.btnScreenshot.TabIndex = 15;
+            this.toolTip1.SetToolTip(this.btnScreenshot, "Take a screenshot of the error.");
+            this.btnScreenshot.UseVisualStyleBackColor = true;
+            this.btnScreenshot.Click += new System.EventHandler(this.btnScreenshot_Click);
+            this.btnScreenshot.MouseEnter += new System.EventHandler(this.btnScreenshot_MouseEnter);
+            this.btnScreenshot.MouseLeave += new System.EventHandler(this.btnScreenshot_MouseLeave);
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.RoyalBlue;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(1174, 15);
+            this.label3.Location = new System.Drawing.Point(1110, 15);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(30, 25);
             this.label3.TabIndex = 14;
@@ -1264,6 +1281,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1631, 825);
+            this.Controls.Add(this.btnScreenshot);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.numericUpDownPercentage);
             this.Controls.Add(this.btnHighlight);
@@ -1286,7 +1304,7 @@
             this.MinimumSize = new System.Drawing.Size(1649, 872);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "OutSystems Log Parser V.092521";
+            this.Text = "OutSystems Log Parser V.101621";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -1435,6 +1453,7 @@
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.NumericUpDown numericUpDownPercentage;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnScreenshot;
     }
 }
 
