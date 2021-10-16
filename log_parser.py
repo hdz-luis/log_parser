@@ -1,7 +1,6 @@
 import os
 import re
 import sys
-import csv
 import codecs
 import shutil
 import openpyxl
@@ -68,7 +67,7 @@ Android, iOS, and Service Studio Report:
 DATE_TIME MESSAGE_TYPE ACTION_NAME MESSAGE
 
 Windows Event Viewer logs:
-DATE_TIME LEVEL PROVIDER_NAME QUALIFIERS EVENT_ID EVENT_RECORD_ID TASK KEYWORDS MESSAGE COMPUTER
+DATE_TIME LEVEL MESSAGE TASK COMPUTER PROVIDER_NAME QUALIFIERS EVENT_ID EVENT_RECORD_ID KEYWORDS
 
 1) Filter data based on a date range
 2) Read the input files and rearrange the columns.
@@ -86,7 +85,74 @@ myTimeTaken = []
 myFileExt = []
 myDateTimes = []
 myTimesTaken = []
-myXMLList = []
+
+#all illegal space characters, control characters, ASCII characters, and emojis
+replacementDict = {}
+replacementDict.update(dict.fromkeys(range(0x2000, 0x206f), " "))
+replacementDict.update(dict.fromkeys(range(0x0004, 0x0007), " "))
+replacementDict.update(dict.fromkeys(range(0x2194, 0x1faf6), " "))
+replacementDict.update(dict.fromkeys(range(0x0091, 0x0094), " "))
+replacementDict.update(dict.fromkeys(range(0x0096, 0x0097), " "))
+replacementDict.update(dict.fromkeys(range(0x00a6, 0x00a8), " "))
+replacementDict.update(dict.fromkeys(range(0x00aa, 0x00ac), " "))
+replacementDict.update(dict.fromkeys(range(0x00af, 0x00be), " "))
+replacementDict.update(dict.fromkeys(range(0x00c4, 0x00c6), " "))
+replacementDict.update(dict.fromkeys(range(0x00cf, 0x00d0), " "))
+replacementDict.update(dict.fromkeys(range(0x00d6, 0x00d8), " "))
+replacementDict.update(dict.fromkeys(range(0x00dd, 0x00df), " "))
+replacementDict.update(dict.fromkeys(range(0x00e4, 0x00e6), " "))
+replacementDict.update(dict.fromkeys(range(0x00ef, 0x00f0), " "))
+replacementDict.update(dict.fromkeys(range(0x00f6, 0x00f8), " "))
+replacementDict.update(dict.fromkeys(range(0x00fd, 0x00ff), " "))
+replacementDict.update(dict.fromkeys(range(0x2013, 0x2014), "-"))
+replacementDict.update(dict.fromkeys(range(0x2018, 0x2019), "\'"))
+replacementDict.update(dict.fromkeys(range(0x201c, 0x201d), "\""))
+replacementDict.update(dict.fromkeys(range(0x2550, 0x2551), " "))
+replacementDict.update(dict.fromkeys(range(0x2591, 0x2593), " "))
+replacementDict[0x00a0] = " "
+replacementDict[0x1680] = " "
+replacementDict[0x180e] = " "
+replacementDict[0xfeff] = " "
+replacementDict[0x00ad] = " "
+replacementDict[0x0081] = " "
+replacementDict[0x008d] = " "
+replacementDict[0xeed1] = " "
+replacementDict[0x0082] = " "
+replacementDict[0x0089] = " "
+replacementDict[0x009a] = " "
+replacementDict[0x0161] = " "
+replacementDict[0x00a4] = " "
+replacementDict[0x00cb] = " "
+replacementDict[0x00eb] = " "
+replacementDict[0x0131] = " "
+replacementDict[0x0192] = " "
+replacementDict[0x2017] = " "
+replacementDict[0x2261] = " "
+replacementDict[0x2310] = " "
+replacementDict[0x2500] = " "
+replacementDict[0x2502] = " "
+replacementDict[0x250c] = " "
+replacementDict[0x2510] = " "
+replacementDict[0x2514] = " "
+replacementDict[0x2518] = " "
+replacementDict[0x251c] = " "
+replacementDict[0x252c] = " "
+replacementDict[0x2534] = " "
+replacementDict[0x253c] = " "
+replacementDict[0x2554] = " "
+replacementDict[0x2557] = " "
+replacementDict[0x255a] = " "
+replacementDict[0x255d] = " "
+replacementDict[0x2560] = " "
+replacementDict[0x2563] = " "
+replacementDict[0x2566] = " "
+replacementDict[0x2569] = " "
+replacementDict[0x256c] = " "
+replacementDict[0x2580] = " "
+replacementDict[0x2584] = " "
+replacementDict[0x2588] = " "
+replacementDict[0x25a0] = " "
+replacementDict[0x3002] = " "
 
 numOfLines = 6000
 constant = 6000
@@ -96,8 +162,8 @@ negativeErrorLogsRegex = r"^((?!(?:[\d]+)\|(?:[\w\-]+)\|(?:[\d\-\:\. ]+)\|(?:[\w
 nonMatchedErrorLogsRegex = r"^((?:.*?\|){2})([\d\-]+)(.+)"
 japaneseErrorLogsRegex = r"^([\d]+)\|(.*?)\|([\d\-\:\. ]+)\|(.*?)?\|([\d]+)\|([\d]+)\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?"
 
-generalLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\w\+\/\=\' ]+)?\|([\d]+)\|([\d]+)\|([\w\-]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w]+)?\|([\w\-\.\# ]+)?\|([\w\-]+)?\|([\w\-\(\)\.\* ]+)?\|([\w\(\)\.]+)?\|([\w\-\.\:\;\% ]+)?\|([\w]+)?\|([\w\-\.\,\(\)\[\]\/\& ]+)?\|([\w\-]+)?\|([\w\@\.\\]+)?"
-negativeGeneralLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\w\+\/\=\' ]+)?\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w]+)?\|(?:[\w\-\.\# ]+)?\|(?:[\w\-]+)?\|(?:[\w\-\(\)\.\* ]+)?\|(?:[\w\(\)\.]+)?\|(?:[\w\-\.\:\;\% ]+)?\|(?:[\w]+)?\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)?\|(?:[\w\-]+)?\|(?:[\w\@\.\\]+)?).*)"
+generalLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\w\+\/\=\' ]+)?\|([\d]+)\|([\d]+)\|([\w\-]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w]+)?\|([\w\-\.\:\# ]+)?\|([\w\-]+)?\|([\w\-\(\)\.\* ]+)?\|([\w\(\)\.]+)?\|([\w\-\.\:\;\% ]+)?\|([\w]+)?\|([\w\-\.\,\(\)\[\]\/\& ]+)?\|([\w\-]+)?\|([\w\@\.\\]+)?"
+negativeGeneralLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\w\+\/\=\' ]+)?\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w]+)?\|(?:[\w\-\.\:\# ]+)?\|(?:[\w\-]+)?\|(?:[\w\-\(\)\.\* ]+)?\|(?:[\w\(\)\.]+)?\|(?:[\w\-\.\:\;\% ]+)?\|(?:[\w]+)?\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)?\|(?:[\w\-]+)?\|(?:[\w\@\.\\]+)?).*)"
 nonMatchedGeneralLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseGeneralLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|(.*?)?\|([\d]+)\|([\d]+)\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?"
 
@@ -121,18 +187,18 @@ negativeEmailLogsRegex = r"^((?!(?:[\d]+)\|(?:[\w]+)\|(?:[\w\-\:\. ]+)\|(?:[\w\-
 nonMatchedEmailLogsRegex = r"^((?:.*?\|){10})([\d\-]+)(.+)"
 japaneseEmailLogsRegex = r"^([\d]+)\|(.*?)\|(.*?)\|(.*?)?\|([\d]+)\|(.*?)\|(.*?)\|(.*?)?\|(.*?)?\|(.*?)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)\|(.*?)\|(.*?)\|([\d]+)\|(.*?)"
 
-extensionLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\/\=\+]+)\|([\d]+)\|([\d]+)\|([\d]+)\|([\w\-]+)\|([\w\-]+)?\|([\w\-\:]+)\|([\w\.]+)\|([\w]+)\|([\w\-\.\,\(\)\[\]\/\& ]+)\|([\w\-]+)\|([\w\@\.\\]+)?"
-negativeExtensionLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w\/\=\+]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\-]+)\|(?:[\w\-]+)?\|(?:[\w\-\:]+)\|(?:[\w\.]+)\|(?:[\w]+)\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)\|(?:[\w\-]+)\|(?:[\w\@\.\\]+)?).*)"
+extensionLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\/\'\=\+]+)\|([\d]+)\|([\d]+)\|([\d]+)\|([\w\-]+)\|([\w\-]+)?\|([\w\-\:]+)\|([\w\.]+)\|([\w]+)\|([\w\-\.\,\(\)\[\]\/\& ]+)\|([\w\-]+)\|([\w\@\.\\]+)?"
+negativeExtensionLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w\/\'\=\+]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\-]+)\|(?:[\w\-]+)?\|(?:[\w\-\:]+)\|(?:[\w\.]+)\|(?:[\w]+)\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)\|(?:[\w\-]+)\|(?:[\w\@\.\\]+)?).*)"
 nonMatchedExtensionLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseExtensionLogsRegex = r"^([\d]+)\|(.*?)\|(.*?)\|(.*?)?\|([\d]+)\|(.*?)\|(.*?)\|(.*?)?\|(.*?)?\|(.*?)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)\|(.*?)\|(.*?)\|([\d]+)\|(.*?)"
 
-serviceActionLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)?\|([\w\/\=\+]+)\|([\d]+)\|([\w\-]+)?\|([\w\-]+)\|([\w\-\:]+)\|([\w\-\(\)\.\* ]+)?\|([\w\.\(\)]+)\|([\d]+)\|([\w\.\:\;\-\% ]+)\|([\w\:\/\\\.\-\=\%\&\?]+)\|([\w\.]+)\|([\w\-\.\,\(\)\[\]\/\& ]+)\|([\w\-]+)\|([\w\@\.\\]+)?\|([\w\-\:]+)"
-negativeServiceActionLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\d]+)?\|(?:[\w\/\=\+]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w\-]+)\|(?:[\w\-\:]+)\|(?:[\w\-\(\)\.\* ]+)?\|(?:[\w\.\(\)]+)\|(?:[\d]+)\|(?:[\w\.\:\;\-\% ]+)\|(?:[\w\:\/\\\.\-\=\%\&\?]+)\|(?:[\w\.]+)\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)\|(?:[\w\-]+)\|(?:[\w\@\.\\]+)?\|(?:[\w\-\:]+)).*)"
+serviceActionLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)?\|([\w\/\'\=\+]+)\|([\d]+)\|([\w\-]+)?\|([\w\-]+)\|([\w\-\:]+)\|([\w\-\(\)\.\* ]+)?\|([\w\.\(\)]+)\|([\d]+)\|([\w\.\:\;\-\% ]+)\|([\w\:\/\\\.\-\=\%\&\?]+)\|([\w\.]+)\|([\w\-\.\,\(\)\[\]\/\& ]+)\|([\w\-]+)\|([\w\@\.\\]+)?\|([\w\-\:]+)"
+negativeServiceActionLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\d]+)?\|(?:[\w\/\'\=\+]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w\-]+)\|(?:[\w\-\:]+)\|(?:[\w\-\(\)\.\* ]+)?\|(?:[\w\.\(\)]+)\|(?:[\d]+)\|(?:[\w\.\:\;\-\% ]+)\|(?:[\w\:\/\\\.\-\=\%\&\?]+)\|(?:[\w\.]+)\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)\|(?:[\w\-]+)\|(?:[\w\@\.\\]+)?\|(?:[\w\-\:]+)).*)"
 nonMatchedServiceActionLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseServiceActionLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)?\|(.*?)\|([\d]+)\|(.*?)?\|(.*?)\|(.*?)\|(.*?)?\|(.*?)\|([\d]+)\|(.*?)\|(.*?)\|(.*?)\|(.*?)\|(.*?)\|(.*?)?\|(.*?)"
 
-screenLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\/\=\+]+)\|([\d]+)\|([\d]+)\|([\w\-\:\. ]+)?\|([\w]+)\|([\w\-]+)\|([\d]+)\|([\d]+)\|([\d]+)\|([\w]+)\|([\w\-\:]+)\|([\w\(\)\.]+)?\|([\w\-\:\. ]+)\|([\w\.]+)\|([\w\-\.\,\(\)\[\]\/\& ]+)\|([\w\-]+)"
-negativeScreenLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w\/\=\+]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\-\:\. ]+)?\|(?:[\w]+)\|(?:[\w\-]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w\-\:]+)\|(?:[\w\(\)\.]+)?\|(?:[\w\-\:\. ]+)\|(?:[\w\.]+)\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)\|(?:[\w\-]+)).*)"
+screenLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\/\'\=\+]+)\|([\d]+)\|([\d]+)\|([\w\-\:\. ]+)?\|([\w]+)\|([\w\-]+)\|([\d]+)\|([\d]+)\|([\d]+)\|([\w]+)\|([\w\-\:]+)\|([\w\(\)\.]+)?\|([\w\-\:\. ]+)\|([\w\.]+)\|([\w\-\.\,\(\)\[\]\/\& ]+)\|([\w\-]+)"
+negativeScreenLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w\/\'\=\+]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\-\:\. ]+)?\|(?:[\w]+)\|(?:[\w\-]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w\-\:]+)\|(?:[\w\(\)\.]+)?\|(?:[\w\-\:\. ]+)\|(?:[\w\.]+)\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)\|(?:[\w\-]+)).*)"
 nonMatchedScreenLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseScreenLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|(.*?)\|(.*?)\|([\d]+)\|([\d]+)\|(.*?)?\|(.*?)\|(.*?)\|([\d]+)\|([\d]+)\|([\d]+)\|(.*?)\|(.*?)\|(.*?)?\|(.*?)\|(.*?)\|(.*?)\|(.*?)"
 
@@ -194,123 +260,8 @@ def createFolder(fldPath):
     if not os.path.exists(os.path.dirname(fldName)):
         os.makedirs(os.path.dirname(fldName))
 
-def sanitizeLines(string):
-    #all unwanted space characters
-    string = re.sub(u'([\u2000-\u206f])', " ", string)
-    string = re.sub(u'(\u00a0)', " ", string)
-    string = re.sub(u'(\u1680)', " ", string)
-    string = re.sub(u'(\u180e)', " ", string)
-    string = re.sub(u'(\ufeff)', " ", string)
-    string = re.sub(u'(\u00ad)', " ", string)
-
-    #all unwanted control characters
-    string = re.sub(u'([\u0004-\u0007])', " ", string)
-    string = re.sub(u'(\u0081)', " ", string)
-    string = re.sub(u'(\u008d)', " ", string)
-
-    #emojis
-    string = re.sub(u'(\u2714)', " ", string)
-    string = re.sub(u'([\u1f980-\u1f984])', " ", string)
-    string = re.sub(u'([\u1f910-\u1f918])', " ", string)
-    string = re.sub(u'([\u1f973-\u1f976])', " ", string)
-    string = re.sub(u'([\u26a0-\u26a1])', " ", string)
-
 def normalizeLines(string):
-    #all unwanted ASCII characters
-    string = string.replace("‰", " ")
-    string = string.replace("‚", " ")
-    string = string.replace("“", " ")
-    string = string.replace("”", " ")
-    string = string.replace("–", " ")
-    string = string.replace("š", " ")
-    string = string.replace("¤", " ")
-    string = string.replace("¦", " ")
-    string = string.replace("§", " ")
-    string = string.replace("¨", " ")
-    string = string.replace("ª", " ")
-    string = string.replace("«", " ")
-    string = string.replace("¬", " ")
-    string = string.replace("¯", " ")
-    string = string.replace("°", " ")
-    string = string.replace("±", " ")
-    string = string.replace("²", " ")
-    string = string.replace("³", " ")
-    string = string.replace("´", " ")
-    string = string.replace("µ", " ")
-    string = string.replace("¶", " ")
-    string = string.replace("·", " ")
-    string = string.replace("¸", " ")
-    string = string.replace("¹", " ")
-    string = string.replace("º", " ")
-    string = string.replace("»", " ")
-    string = string.replace("¼", " ")
-    string = string.replace("½", " ")
-    string = string.replace("¾", " ")
-    string = string.replace("Ä", " ")
-    string = string.replace("Å", " ")
-    string = string.replace("Æ", " ")
-    string = string.replace("Ë", " ")
-    string = string.replace("Ï", " ")
-    string = string.replace("Ð", " ")
-    string = string.replace("Ö", " ")
-    string = string.replace("×", " ")
-    string = string.replace("Ø", " ")
-    string = string.replace("Ý", " ")
-    string = string.replace("Þ", " ")
-    string = string.replace("ß", " ")
-    string = string.replace("ä", " ")
-    string = string.replace("å", " ")
-    string = string.replace("æ", " ")
-    string = string.replace("ë", " ")
-    string = string.replace("ï", " ")
-    string = string.replace("ð", " ")
-    string = string.replace("ö", " ")
-    string = string.replace("÷", " ")
-    string = string.replace("ø", " ")
-    string = string.replace("ý", " ")
-    string = string.replace("þ", " ")
-    string = string.replace("ÿ", " ")
-    string = string.replace("ı", " ")
-    string = string.replace("ƒ", " ")
-    string = string.replace("‗", " ")
-    string = string.replace("≡", " ")
-    string = string.replace("─", " ")
-    string = string.replace("│", " ")
-    string = string.replace("┌", " ")
-    string = string.replace("┐", " ")
-    string = string.replace("└", " ")
-    string = string.replace("┘", " ")
-    string = string.replace("├", " ")
-    string = string.replace("┬", " ")
-    string = string.replace("┴", " ")
-    string = string.replace("┼", " ")
-    string = string.replace("═", " ")
-    string = string.replace("║", " ")
-    string = string.replace("╔", " ")
-    string = string.replace("╗", " ")
-    string = string.replace("╚", " ")
-    string = string.replace("╝", " ")
-    string = string.replace("╠", " ")
-    string = string.replace("╣", " ")
-    string = string.replace("╦", " ")
-    string = string.replace("╩", " ")
-    string = string.replace("╬", " ")
-    string = string.replace("▀", " ")
-    string = string.replace("▄", " ")
-    string = string.replace("█", " ")
-    string = string.replace("░", " ")
-    string = string.replace("▒", " ")
-    string = string.replace("▓", " ")
-    string = string.replace("■", " ")
-    string = string.replace("。", " ")
-    
     string = string.replace("|", " ")
-    string = string.replace("–", "-")
-    string = string.replace("—", "-")
-    string = string.replace("‘", "'")
-    string = string.replace("’", "'")
-    string = string.replace("“", "\"")
-    string = string.replace("”", "\"")
     string = string.replace("\t", " ")
 
     #remove all the new lines from the string
@@ -349,1079 +300,1447 @@ def splitFiles(numOfLines, constant, maxLines, cycleNum, inputTxtFile, ext, outp
 
     return cycleNum
 
-def readSplitFiles(cycleNum, filename, ext, _fromDate, _toDate):
+def readSplitFilesXLSX(cycleNum, filename, ext, _fromDate, _toDate):
+    count = 1
+    try:
+        while count <= cycleNum:
+            with codecs.open(os.getcwd() + "\\split_data\\file_" + str(count) + ext, "r", "utf-8", "ignore") as linesFromText:
+                searchLines = linesFromText.read()
+                if "errorlog" in filename.lower():
+                    readErrorLogs(searchLines, _fromDate, _toDate)
+                elif "generallog" in filename.lower():
+                    readGeneralLogs(searchLines, _fromDate, _toDate)
+                elif "integrationslog" in filename.lower():
+                    readIntegrationsLogs(searchLines, _fromDate, _toDate)
+                elif "mobilerequestslog" in filename.lower():
+                    readMobileRequestsLogs(searchLines, _fromDate, _toDate)
+                elif "timerlog" in filename.lower():
+                    readTimerLogs(searchLines, _fromDate, _toDate)
+                elif "emaillog" in filename.lower():
+                    readEmailLogs(searchLines, _fromDate, _toDate)
+                elif "extensionlog" in filename.lower():
+                    readExtensionLogs(searchLines, _fromDate, _toDate)
+                elif "serviceactionlog" in filename.lower():
+                    readServiceActionLogs(searchLines, _fromDate, _toDate)
+                elif "screenlog" in filename.lower():
+                    readScreenLogs(searchLines, _fromDate, _toDate)
+            count+=1
+    except ValueError as valError:
+        print("\nThe customer altered the original Excel spreadsheet.\n\nPossible reasons:\n1- The customer added a column on the spreadsheet.\n" +
+              "2- The customer switched the columns of the spreadsheet.\n3- The customer modified the dates on the spreadsheet.\n")
+
+def readErrorLogs(searchLines, _fromDate, _toDate):
     outText = ""
     nonMatchedOutText = ""
     JPText = ""
     nonMatchedLine = ""
     nonMatchedLine2 = ""
-    count = 1
-    while count <= cycleNum:
-        with codecs.open(os.getcwd() + "\\split_data\\file_" + str(count) + ext, "r", "utf-8", "ignore") as linesFromText:
-            searchLines = linesFromText.read()
-            #split the fields and rearrange them to combine them all later
-            if filename == "ErrorLog":
-                regex = re.compile(errorLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in regex.finditer(searchLines):
-                    tenantID = match.group(1)
-                    iD = match.group(2)
-                    timestamp = match.group(3)
-                    sessionID = match.group(4)#null
-                    userID = match.group(5)
-                    eSpaceID = match.group(6)
-                    message = match.group(7)#null
-                    stack = match.group(8)#null
-                    moduleName = match.group(9)#null
-                    server = match.group(10)
-                    environmentInformation = match.group(11)#null
-                    entryPointName = match.group(12)#null
-                    actionName = match.group(13)#null
-                    requestKey = match.group(14)#null
-                    eSpaceName = match.group(15)#null
-                    applicationName = match.group(16)#null
-                    applicationKey = match.group(17)#null
-                                
-                    date = timestamp[0:10]
-                    time = timestamp[11:19]
-                    time = time.replace(".", "")
-
-                    _date = datetime.strptime(date, "%Y-%m-%d").date()
-
-                    if _fromDate <= _date <= _toDate:
-
-                        if sessionID == None:
-                            sessionID = " "
-
-                        if message == None:
-                            message = " "
-
-                        if stack == None:
-                            stack = " "
-
-                        if moduleName == None:
-                            moduleName = " "
-
-                        if environmentInformation == None:
-                            environmentInformation = " "
-
-                        if entryPointName == None:
-                            entryPointName = " "
-
-                        if actionName == None:
-                            actionName = " "
-
-                        if requestKey == None:
-                            requestKey = " "
-
-                        if eSpaceName == None:
-                            eSpaceName = " "
-
-                        if applicationName == None:
-                            applicationName = " "
-
-                        if applicationKey == None:
-                            applicationKey = " "
-
-                        outText = date + " " + time + "|" + message + "|" + stack + "|" + moduleName + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + entryPointName + "|" + server + "|" + eSpaceName + "|" + eSpaceID + "|" + userID + "|" + sessionID + "|" + environmentInformation + "|" + iD + "|" + tenantID + "\n"
-                        myLinesFromDateRange.append(outText)
-
-                #capture all the lines that didn't match the regex
-                negativeRegex = re.compile(negativeErrorLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in negativeRegex.finditer(searchLines):
-                    nonMatchedLine = match.group(1)
-
-                    nonMatchedRegex = re.search(nonMatchedErrorLogsRegex, nonMatchedLine)
-                    if nonMatchedRegex:
-                        nonMatchedHead = nonMatchedRegex.group(1)
-                        nonMatchedDate = nonMatchedRegex.group(2)
-                        nonMatchedTail = nonMatchedRegex.group(3)
-
-                        _nonMatchedDate = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
-
-                        #check if the non-matched lines fall within the specified range
-                        if _fromDate <= _nonMatchedDate <= _toDate:
-
-                            nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
-
-                            #check if the line has Japanese characters
-                            hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
-                            katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
-                            kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
-
-                            if hiragana or katakana or kanji:
-                                JPRegex = re.search(japaneseErrorLogsRegex, nonMatchedLine2)
-                                if JPRegex:
-                                    JPtenantID = JPRegex.group(1)
-                                    JPiD = JPRegex.group(2)
-                                    JPtimestamp = JPRegex.group(3)
-                                    JPsessionID = JPRegex.group(4)#null
-                                    JPuserID = JPRegex.group(5)
-                                    JPeSpaceID = JPRegex.group(6)
-                                    JPmessage = JPRegex.group(7)#null
-                                    JPstack = JPRegex.group(8)#null
-                                    JPmoduleName = JPRegex.group(9)#null
-                                    JPserver = JPRegex.group(10)
-                                    JPenvironmentInformation = JPRegex.group(11)#null
-                                    JPentryPointName = JPRegex.group(12)#null
-                                    JPactionName = JPRegex.group(13)#null
-                                    JPrequestKey = JPRegex.group(14)#null
-                                    JPeSpaceName = JPRegex.group(15)#null
-                                    JPapplicationName = JPRegex.group(16)#null
-                                    JPapplicationKey = JPRegex.group(17)#null
-
-                                    JPdate = JPtimestamp[0:10]
-                                    JPtime = JPtimestamp[11:19]
-                                    JPtime = JPtime.replace(".", "")
-
-                                    if JPsessionID == None:
-                                        JPsessionID = " "
-
-                                    if JPmessage == None:
-                                        JPmessage = " "
-
-                                    if JPstack == None:
-                                        JPstack = " "
-
-                                    if JPmoduleName == None:
-                                        JPmoduleName = " "
-
-                                    if JPenvironmentInformation == None:
-                                        JPenvironmentInformation = " "
 
-                                    if JPentryPointName == None:
-                                        JPentryPointName = " "
+    with codecs.open(tempFilePath, "a+", "utf-8", "ignore") as tempFile:
+        #split the fields and rearrange them to combine them all later
+        regex = re.compile(errorLogsRegex, re.MULTILINE + re.IGNORECASE)
+        for match in regex.finditer(searchLines):
+            tenantID = match.group(1)
+            iD = match.group(2)
+            timestamp = match.group(3)
+            sessionID = match.group(4)#null
+            userID = match.group(5)
+            eSpaceID = match.group(6)
+            message = match.group(7)#null
+            stack = match.group(8)#null
+            moduleName = match.group(9)#null
+            server = match.group(10)
+            environmentInformation = match.group(11)#null
+            entryPointName = match.group(12)#null
+            actionName = match.group(13)#null
+            requestKey = match.group(14)#null
+            eSpaceName = match.group(15)#null
+            applicationName = match.group(16)#null
+            applicationKey = match.group(17)#null
+                                    
+            date = timestamp[0:10]
+            time = timestamp[11:19]
+            time = time.replace(".", "")
+
+            _date = datetime.strptime(date, "%Y-%m-%d").date()
+
+            if _fromDate <= _date <= _toDate:
+
+                if sessionID == None:
+                    sessionID = " "
+
+                if message == None:
+                    message = " "
+
+                if stack == None:
+                    stack = " "
+
+                if moduleName == None:
+                    moduleName = " "
+
+                if environmentInformation == None:
+                    environmentInformation = " "
+
+                if entryPointName == None:
+                    entryPointName = " "
+
+                if actionName == None:
+                    actionName = " "
+
+                if requestKey == None:
+                    requestKey = " "
+
+                if eSpaceName == None:
+                    eSpaceName = " "
+
+                if applicationName == None:
+                    applicationName = " "
 
-                                    if JPactionName == None:
-                                        JPactionName = " "
-
-                                    if JPrequestKey == None:
-                                        JPrequestKey = " "
-
-                                    if JPeSpaceName == None:
-                                        JPeSpaceName = " "
-
-                                    if JPapplicationName == None:
-                                        JPapplicationName = " "
-
-                                    if JPapplicationKey == None:
-                                        JPapplicationKey = " "
-
-                                    JPText = JPdate + " " + JPtime + "|" + JPmessage + "|" + JPstack + "|" + JPmoduleName + "|" + JPapplicationName + "|" + JPapplicationKey + "|" + JPactionName + "|" + JPentryPointName + "|" + JPserver + "|" + JPeSpaceName + "|" + JPeSpaceID + "|" + JPuserID + "|" + JPsessionID + "|" + JPenvironmentInformation + "|" + JPiD + "|" + JPtenantID + "\n"
-                                    myLinesFromDateRange.append(JPText)
-
-                            else:
-                                nonMatchedOutText = "ErrorLog -> " + nonMatchedLine2 + "\n"
-
-                                myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
-
-            elif filename == "GeneralLog":
-                regex = re.compile(generalLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in regex.finditer(searchLines):
-                    tenantID = match.group(1)
-                    timestamp = match.group(2)
-                    sessionID = match.group(3)#null
-                    userID = match.group(4)
-                    eSpaceID = match.group(5)
-                    errorID = match.group(6)#null
-                    message = match.group(7)#null
-                    messageType = match.group(8)#null
-                    moduleName = match.group(9)#null
-                    requestKey = match.group(10)#null
-                    entryPointName = match.group(11)#null
-                    actionName = match.group(12)#null
-                    clientIP = match.group(13)#null
-                    eSpaceName = match.group(14)#null
-                    applicationName = match.group(15)#null
-                    applicationKey = match.group(16)#null
-                    username = match.group(17)#null
-                                
-                    date = timestamp[0:10]
-                    time = timestamp[11:19]
-                    time = time.replace(".", "")
-
-                    _date = datetime.strptime(date, "%Y-%m-%d").date()
-
-                    if _fromDate <= _date <= _toDate:
-
-                        if sessionID == None:
-                            sessionID = " "
-
-                        if message == None:
-                            message = " "
-
-                        if errorID == None:
-                            errorID = " "
-
-                        if messageType == None:
-                            messageType = " "
-
-                        if moduleName == None:
-                            moduleName = " "
-
-                        if requestKey == None:
-                            requestKey = " "
-
-                        if entryPointName == None:
-                            entryPointName = " "
-
-                        if actionName == None:
-                            actionName = " "
-
-                        if clientIP == None:
-                            clientIP = " "
-
-                        if eSpaceName == None:
-                            eSpaceName = " "
-
-                        if applicationName == None:
-                            applicationName = " "
-
-                        if applicationKey == None:
-                            applicationKey = " "
-
-                        if username == None:
-                            username = " "
-
-                        outText = date + " " + time + "|" + message + "|" + messageType + "|" + moduleName + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + entryPointName + "|" + clientIP + "|" + eSpaceName + "|" + eSpaceID + "|" + userID + "|" + sessionID + "|" + errorID + "|" + requestKey + "|" + tenantID + "\n"
-                        myLinesFromDateRange.append(outText)
-
-                #capture all the lines that didn't match the regex
-                negativeRegex = re.compile(negativeGeneralLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in negativeRegex.finditer(searchLines):
-                    nonMatchedLine = match.group(1)
-
-                    nonMatchedRegex = re.search(nonMatchedGeneralLogsRegex, nonMatchedLine)
-                    if nonMatchedRegex:
-                        nonMatchedHead = nonMatchedRegex.group(1)
-                        nonMatchedDate = nonMatchedRegex.group(2)
-                        nonMatchedTail = nonMatchedRegex.group(3)
-
-                        _nonMatchedDate = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
-
-                        #check if the non-matched lines fall within the specified range
-                        if _fromDate <= _nonMatchedDate <= _toDate:
-
-                            nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
-
-                            #check if the line has Japanese characters
-                            hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
-                            katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
-                            kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
-
-                            if hiragana or katakana or kanji:
-                                JPRegex = re.search(japaneseGeneralLogsRegex, nonMatchedLine2)
-                                if JPRegex:
-                                    JPtenantID = JPRegex.group(1)
-                                    JPtimestamp = JPRegex.group(2)
-                                    JPsessionID = JPRegex.group(3)#null
-                                    JPuserID = JPRegex.group(4)
-                                    JPeSpaceID = JPRegex.group(5)
-                                    JPerrorID = JPRegex.group(6)#null
-                                    JPmessage = JPRegex.group(7)#null
-                                    JPmessageType = JPRegex.group(8)#null
-                                    JPmoduleName = JPRegex.group(9)#null
-                                    JPrequestKey = JPRegex.group(10)#null
-                                    JPentryPointName = JPRegex.group(11)#null
-                                    JPactionName = JPRegex.group(12)#null
-                                    JPclientIP = JPRegex.group(13)#null
-                                    JPeSpaceName = JPRegex.group(14)#null
-                                    JPapplicationName = JPRegex.group(15)#null
-                                    JPapplicationKey = JPRegex.group(16)#null
-                                    JPusername = JPRegex.group(17)#null
-                                                
-                                    JPdate = JPtimestamp[0:10]
-                                    JPtime = JPtimestamp[11:19]
-                                    JPtime = JPtime.replace(".", "")
-
-                                    if JPsessionID == None:
-                                        JPsessionID = " "
-
-                                    if JPmessage == None:
-                                        JPmessage = " "
-
-                                    if JPerrorID == None:
-                                        JPerrorID = " "
-
-                                    if JPmessageType == None:
-                                        JPmessageType = " "
-
-                                    if JPmoduleName == None:
-                                        JPmoduleName = " "
-
-                                    if JPrequestKey == None:
-                                        JPrequestKey = " "
-
-                                    if JPentryPointName == None:
-                                        JPentryPointName = " "
-
-                                    if JPactionName == None:
-                                        JPactionName = " "
-
-                                    if JPclientIP == None:
-                                        JPclientIP = " "
-
-                                    if JPeSpaceName == None:
-                                        JPeSpaceName = " "
-
-                                    if JPapplicationName == None:
-                                        JPapplicationName = " "
-
-                                    if JPapplicationKey == None:
-                                        JPapplicationKey = " "
-
-                                    if JPusername == None:
-                                        JPusername = " "
-
-                                    JPText = JPdate + " " + JPtime + "|" + JPmessage + "|" + JPmessageType + "|" + JPmoduleName + "|" + JPapplicationName + "|" + JPapplicationKey + "|" + JPactionName + "|" + JPentryPointName + "|" + JPclientIP + "|" + JPeSpaceName + "|" + JPeSpaceID + "|" + JPuserID + "|" + JPsessionID + "|" + JPerrorID + "|" + JPrequestKey + "|" + JPtenantID + "\n"
-                                    myLinesFromDateRange.append(JPText)
-
-                            else:
-                                nonMatchedOutText = "GeneralLog -> " + nonMatchedLine2 + "\n"
-
-                                myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
-
-            elif filename == "IntegrationsLog":
-                regex = re.compile(integrationsLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in regex.finditer(searchLines):
-                    tenantID = match.group(1)
-                    timestamp = match.group(2)
-                    duration = match.group(3)
-                    source = match.group(4)#null
-                    endpoint = match.group(5)#null
-                    actionName = match.group(6)
-                    actionType = match.group(7)
-                    eSpaceID = match.group(8)
-                    errorID = match.group(9)#null
-                    executedBy = match.group(10)
-                    requestKey = match.group(11)
-                    eSpaceName = match.group(12)#null
-                    applicationName = match.group(13)#null
-                    applicationKey = match.group(14)#null
-                                
-                    date = timestamp[0:10]
-                    time = timestamp[11:19]
-                    time = time.replace(".", "")
-
-                    _date = datetime.strptime(date, "%Y-%m-%d").date()
-
-                    if _fromDate <= _date <= _toDate:
-
-                        if source == None:
-                            source = " "
-
-                        if endpoint == None:
-                            endpoint = " "
-
-                        if errorID == None:
-                            errorID = " "
-
-                        if eSpaceName == None:
-                            eSpaceName = " "
-
-                        if applicationName == None:
-                            applicationName = " "
-
-                        if applicationKey == None:
-                            applicationKey = " "
-
-                        outText = date + " " + time + "|" + duration + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + actionType + "|" + source + "|" + endpoint + "|" + executedBy + "|" + eSpaceName + "|" + eSpaceID + "|" + errorID + "|" + requestKey + "|" + tenantID + "\n"
-                        myLinesFromDateRange.append(outText)
-
-                #capture all the lines that didn't match the regex
-                negativeRegex = re.compile(negativeIntegrationsLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in negativeRegex.finditer(searchLines):
-                    nonMatchedLine = match.group(1)
-
-                    nonMatchedRegex = re.search(nonMatchedIntegrationsLogsRegex, nonMatchedLine)
-                    if nonMatchedRegex:
-                        nonMatchedHead = nonMatchedRegex.group(1)
-                        nonMatchedDate = nonMatchedRegex.group(2)
-                        nonMatchedTail = nonMatchedRegex.group(3)
-
-                        _nonMatchedDate = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
-
-                        #check if the non-matched lines fall within the specified range
-                        if _fromDate <= _nonMatchedDate <= _toDate:
-
-                            nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
-
-                            #check if the line has Japanese characters
-                            hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
-                            katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
-                            kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
-
-                            if hiragana or katakana or kanji:
-                                JPRegex = re.search(japaneseIntegrationsLogsRegex, nonMatchedLine2)
-                                if JPRegex:
-                                    JPtenantID = JPRegex.group(1)
-                                    JPtimestamp = JPRegex.group(2)
-                                    JPduration = JPRegex.group(3)
-                                    JPsource = JPRegex.group(4)#null
-                                    JPendpoint = JPRegex.group(5)#null
-                                    JPactionName = JPRegex.group(6)
-                                    JPactionType = JPRegex.group(7)
-                                    JPeSpaceID = JPRegex.group(8)
-                                    JPerrorID = JPRegex.group(9)#null
-                                    JPexecutedBy = JPRegex.group(10)
-                                    JPrequestKey = JPRegex.group(11)
-                                    JPeSpaceName = JPRegex.group(12)#null
-                                    JPapplicationName = JPRegex.group(13)#null
-                                    JPapplicationKey = JPRegex.group(14)#null
-                                                
-                                    JPdate = JPtimestamp[0:10]
-                                    JPtime = JPtimestamp[11:19]
-                                    JPtime = JPtime.replace(".", "")
-
-                                    if JPsource == None:
-                                        JPsource = " "
-
-                                    if JPendpoint == None:
-                                        JPendpoint = " "
-
-                                    if JPerrorID == None:
-                                        JPerrorID = " "
-
-                                    if JPeSpaceName == None:
-                                        JPeSpaceName = " "
-
-                                    if JPapplicationName == None:
-                                        JPapplicationName = " "
-
-                                    if JPapplicationKey == None:
-                                        JPapplicationKey = " "
-
-                                    JPText  = JPdate + " " + JPtime + "|" + JPduration + "|" + JPapplicationName + "|" + JPapplicationKey + "|" + JPactionName + "|" + JPactionType + "|" + JPsource + "|" + JPendpoint + "|" + JPexecutedBy + "|" + JPeSpaceName + "|" + JPeSpaceID + "|" + JPerrorID + "|" + JPrequestKey + "|" + JPtenantID + "\n"
-                                    myLinesFromDateRange.append(JPText)
-
-                            else:
-                                nonMatchedOutText = "IntegrationsLog -> " + nonMatchedLine2 + "\n"
-
-                                myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
-
-            elif filename == "MobileRequestsLog":
-                regex = re.compile(mobileRequestsLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in regex.finditer(searchLines):
-                    tenantID = match.group(1)
-                    timestamp = match.group(2)
-                    eSpaceID = match.group(3)
-                    screen = match.group(4)
-                    source = match.group(5)
-                    endpoint = match.group(6)
-                    duration = match.group(7)
-                    executedBy = match.group(8)
-                    errorID = match.group(9)#null
-                    cycle = match.group(10)
-                    requestKey = match.group(11)
-                    loginID = match.group(12)#null
-                    userID = match.group(13)
-                    eSpaceName = match.group(14)
-                    applicationName = match.group(15)
-                    applicationKey = match.group(16)
-                                
-                    date = timestamp[0:10]
-                    time = timestamp[11:19]
-                    time = time.replace(".", "")
-
-                    _date = datetime.strptime(date, "%Y-%m-%d").date()
-
-                    if _fromDate <= _date <= _toDate:
-
-                        if errorID == None:
-                            errorID = " "
-
-                        if loginID == None:
-                            loginID = " "
-
-                        outText = date + " " + time + "|" + duration + "|" + screen + "|" + applicationName + "|" + applicationKey + "|" + source + "|" + endpoint + "|" + executedBy + "|" + eSpaceName + "|" + eSpaceID + "|" + loginID + "|" + userID + "|" + cycle + "|" + errorID + "|" + requestKey + "|" + tenantID + "\n"
-                        myLinesFromDateRange.append(outText)
-
-                #capture all the lines that didn't match the regex
-                negativeRegex = re.compile(negativeMobileRequestsLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in negativeRegex.finditer(searchLines):
-                    nonMatchedLine = match.group(1)
-
-                    nonMatchedRegex = re.search(nonMatchedMobileRequestsLogsRegex, nonMatchedLine)
-                    if nonMatchedRegex:
-                        nonMatchedHead = nonMatchedRegex.group(1)
-                        nonMatchedDate = nonMatchedRegex.group(2)
-                        nonMatchedTail = nonMatchedRegex.group(3)
-
-                        _nonMatchedDate = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
-
-                        #check if the non-matched lines fall within the specified range
-                        if _fromDate <= _nonMatchedDate <= _toDate:
-
-                            nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
-
-                            #check if the line has Japanese characters
-                            hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
-                            katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
-                            kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
-
-                            if hiragana or katakana or kanji:
-                                JPRegex = re.search(japaneseMobileRequestsLogsRegex, nonMatchedLine2)
-                                if JPRegex:
-                                    JPtenantID = JPRegex.group(1)
-                                    JPtimestamp = JPRegex.group(2)
-                                    JPeSpaceID = JPRegex.group(3)
-                                    JPscreen = JPRegex.group(4)
-                                    JPsource = JPRegex.group(5)
-                                    JPendpoint = JPRegex.group(6)
-                                    JPduration = JPRegex.group(7)
-                                    JPexecutedBy = JPRegex.group(8)
-                                    JPerrorID = JPRegex.group(9)#null
-                                    JPcycle = JPRegex.group(10)
-                                    JPrequestKey = JPRegex.group(11)
-                                    JPloginID = JPRegex.group(12)#null
-                                    JPuserID = JPRegex.group(13)
-                                    JPeSpaceName = JPRegex.group(14)
-                                    JPapplicationName = JPRegex.group(15)
-                                    JPapplicationKey = JPRegex.group(16)
-                                                
-                                    JPdate = JPtimestamp[0:10]
-                                    JPtime = JPtimestamp[11:19]
-                                    JPtime = JPtime.replace(".", "")
-
-                                    if JPerrorID == None:
-                                        JPerrorID = " "
-
-                                    if JPloginID == None:
-                                        JPloginID = " "
-
-                                    JPText = JPdate + " " + JPtime + "|" + JPduration + "|" + JPscreen + "|" + JPapplicationName + "|" + JPapplicationKey + "|" + JPsource + "|" + JPendpoint + "|" + JPexecutedBy + "|" + JPeSpaceName + "|" + JPeSpaceID + "|" + JPloginID + "|" + JPuserID + "|" + JPcycle + "|" + JPerrorID + "|" + JPrequestKey + "|" + JPtenantID + "\n"
-                                    myLinesFromDateRange.append(JPText)
-
-                            else:
-                                nonMatchedOutText = "MobileRequestsLog -> " + nonMatchedLine2 + "\n"
-
-                                myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
-
-            elif filename == "TimerLog":
-                regex = re.compile(timerLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in regex.finditer(searchLines):
-                    tenantID = match.group(1)
-                    timestamp = match.group(2)
-                    duration = match.group(3)
-                    cyclicJobKey = match.group(4)
-                    eSpaceID = match.group(5)
-                    executedBy = match.group(6)
-                    errorID = match.group(7)#null
-                    shouldHaveRunAt = match.group(8)
-                    nextRun = match.group(9)
-                    requestKey = match.group(10)#null
-                    eSpaceName = match.group(11)
-                    applicationName = match.group(12)
-                    applicationKey = match.group(13)
-                    cyclicJobName = match.group(14)
-                                
-                    date = timestamp[0:10]
-                    time = timestamp[11:19]
-                    time = time.replace(".", "")
-
-                    _date = datetime.strptime(date, "%Y-%m-%d").date()
-
-                    if _fromDate <= _date <= _toDate:
-
-                        if errorID == None:
-                            errorID = " "
-
-                        if requestKey == None:
-                            requestKey = " "
-
-                        outText = date + " " + time + "|" + duration + "|" + applicationName + "|" + applicationKey + "|" + executedBy + "|" + eSpaceName + "|" + eSpaceID + "|" + cyclicJobName + "|" + cyclicJobKey + "|" + shouldHaveRunAt + "|" + nextRun + "|" + errorID + "|" + requestKey + "|" + tenantID + "\n"
-                        myLinesFromDateRange.append(outText)
-
-                #capture all the lines that didn't match the regex
-                negativeRegex = re.compile(negativeTimerLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in negativeRegex.finditer(searchLines):
-                    nonMatchedLine = match.group(1)
-
-                    nonMatchedRegex = re.search(nonMatchedTimerLogsRegex, nonMatchedLine)
-                    if nonMatchedRegex:
-                        nonMatchedHead = nonMatchedRegex.group(1)
-                        nonMatchedDate = nonMatchedRegex.group(2)
-                        nonMatchedTail = nonMatchedRegex.group(3)
-
-                        _nonMatchedDate = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
-
-                        #check if the non-matched lines fall within the specified range
-                        if _fromDate <= _nonMatchedDate <= _toDate:
-
-                            nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
-
-                            #check if the line has Japanese characters
-                            hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
-                            katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
-                            kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
-
-                            if hiragana or katakana or kanji:
-                                JPRegex = re.search(japaneseTimerLogsRegex, nonMatchedLine2)
-                                if JPRegex:
-                                    JPtenantID = JPRegex.group(1)
-                                    JPtimestamp = JPRegex.group(2)
-                                    JPduration = JPRegex.group(3)
-                                    JPcyclicJobKey = JPRegex.group(4)
-                                    JPeSpaceID = JPRegex.group(5)
-                                    JPexecutedBy = JPRegex.group(6)
-                                    JPerrorID = JPRegex.group(7)#null
-                                    JPshouldHaveRunAt = JPRegex.group(8)
-                                    JPnextRun = JPRegex.group(9)
-                                    JPrequestKey = JPRegex.group(10)#null
-                                    JPeSpaceName = JPRegex.group(11)
-                                    JPapplicationName = JPRegex.group(12)
-                                    JPapplicationKey = JPRegex.group(13)
-                                    JPcyclicJobName = JPRegex.group(14)
-                                                
-                                    JPdate = JPtimestamp[0:10]
-                                    JPtime = JPtimestamp[11:19]
-                                    JPtime = JPtime.replace(".", "")
-
-                                    if JPerrorID == None:
-                                        JPerrorID = " "
-
-                                    if JPrequestKey == None:
-                                        JPrequestKey = " "
-
-                                    JPText = JPdate + " " + JPtime + "|" + JPduration + "|" + JPapplicationName + "|" + JPapplicationKey + "|" + JPexecutedBy + "|" + JPeSpaceName + "|" + JPeSpaceID + "|" + JPcyclicJobName + "|" + JPcyclicJobKey + "|" + JPshouldHaveRunAt + "|" + JPnextRun + "|" + JPerrorID + "|" + JPrequestKey + "|" + JPtenantID + "\n"
-                                    myLinesFromDateRange.append(JPText)
-
-                            else:
-                                nonMatchedOutText = "TimerLog -> " + nonMatchedLine2
-
-                                myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
-
-            elif filename == "EmailLog":
-                regex = re.compile(emailLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in regex.finditer(searchLines):
-                    iD = match.group(1)
-                    name = match.group(2)
-                    sent = match.group(3)
-                    lastError = match.group(4)#null
-                    tenantID = match.group(5)
-                    from_ = match.group(6)
-                    to = match.group(7)
-                    cc = match.group(8)#null
-                    bcc = match.group(9)#null
-                    subject = match.group(10)#null
-                    created = match.group(11)
-                    activity = match.group(12)
-                    emailDefinition = match.group(13)
-                    storeContent = match.group(14)
-                    isTestEmail = match.group(15)
-                    size = match.group(16)
-                    messageID = match.group(17)
-                                
-                    date = created[0:10]
-                    time = created[12:19]
-                    time = time.replace(".", "")
-
-                    _date = datetime.strptime(date, "%Y-%m-%d").date()
-
-                    if _fromDate <= _date <= _toDate:
-
-                        if lastError == None:
-                            lastError = " "
-
-                        if cc == None:
-                            cc = " "
-
-                        if bcc == None:
-                            bcc = " "
-
-                        if subject == None:
-                            subject = " "
-
-                        outText = date + " " + time + "|" + sent + "|" + lastError + "|" + from_ + "|" + to + "|" + subject + "|" + cc + "|" + bcc + "|" + name + "|" + size + "|" + messageID + "|" + activity + "|" + emailDefinition + "|" + storeContent + "|" + isTestEmail + "|" + iD + "|" + tenantID + "\n"
-                        myLinesFromDateRange.append(outText)
-
-                #capture all the lines that didn't match the regex
-                negativeRegex = re.compile(negativeEmailLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in negativeRegex.finditer(searchLines):
-                    nonMatchedLine = match.group(1)
-
-                    nonMatchedRegex = re.search(nonMatchedEmailLogsRegex, nonMatchedLine)
-                    if nonMatchedRegex:
-                        nonMatchedHead = nonMatchedRegex.group(1)
-                        nonMatchedDate = nonMatchedRegex.group(2)
-                        nonMatchedTail = nonMatchedRegex.group(3)
-
-                        _nonMatchedDate = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
-
-                        #check if the non-matched lines fall within the specified range
-                        if _fromDate <= _nonMatchedDate <= _toDate:
-
-                            nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
-
-                            #check if the line has Japanese characters
-                            hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
-                            katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
-                            kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
-
-                            if hiragana or katakana or kanji:
-                                JPRegex = re.search(japaneseEmailLogsRegex, nonMatchedLine2)
-                                if JPRegex:
-                                    JPiD = JPRegex.group(1)
-                                    JPname = JPRegex.group(2)
-                                    JPsent = JPRegex.group(3)
-                                    JPlastError = JPRegex.group(4)#null
-                                    JPtenantID = JPRegex.group(5)
-                                    JPfrom_ = JPRegex.group(6)
-                                    JPto = JPRegex.group(7)
-                                    JPcc = JPRegex.group(8)#null
-                                    JPbcc = JPRegex.group(9)#null
-                                    JPsubject = JPRegex.group(10)#null
-                                    JPcreated = JPRegex.group(11)
-                                    JPactivity = JPRegex.group(12)
-                                    JPemailDefinition = JPRegex.group(13)
-                                    JPstoreContent = JPRegex.group(14)
-                                    JPisTestEmail = JPRegex.group(15)
-                                    JPsize = JPRegex.group(16)
-                                    JPmessageID = JPRegex.group(17)
-                                                
-                                    JPdate = JPcreated[0:10]
-                                    JPtime = JPcreated[12:19]
-                                    JPtime = JPtime.replace(".", "")
-
-                                    if JPlastError == None:
-                                        JPlastError = " "
-
-                                    if JPcc == None:
-                                        JPcc = " "
-
-                                    if JPbcc == None:
-                                        JPbcc = " "
-
-                                    if JPsubject == None:
-                                        JPsubject = " "
-
-                                    JPText = JPdate + " " + JPtime + "|" + JPsent + "|" + JPlastError + "|" + JPfrom_ + "|" + JPto + "|" + JPsubject + "|" + JPcc + "|" + JPbcc + "|" + JPname + "|" + JPsize + "|" + JPmessageID + "|" + JPactivity + "|" + JPemailDefinition + "|" + JPstoreContent + "|" + JPisTestEmail + "|" + JPiD + "|" + JPtenantID + "\n"
-                                    myLinesFromDateRange.append(JPText)
-
-                            else:
-                                nonMatchedOutText = "EmailLog -> " + nonMatchedLine2 + "\n"
-
-                                myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
-
-            elif filename == "ExtensionLog":
-                regex = re.compile(extensionLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in regex.finditer(searchLines):
-                    tenantID = match.group(1)
-                    timestamp = match.group(2)
-                    duration = match.group(3)
-                    actionName = match.group(4)
-                    sessionID = match.group(5)
-                    userID = match.group(6)
-                    eSpaceID = match.group(7)
-                    extensionID = match.group(8)
-                    executedBy = match.group(9)
-                    errorID = match.group(10)#null
-                    requestKey = match.group(11)
-                    eSpaceName = match.group(12)
-                    extensionName = match.group(13)
-                    applicationName = match.group(14)
-                    applicationKey = match.group(15)
-                    username = match.group(16)#null
-                                
-                    date = timestamp[0:10]
-                    time = timestamp[11:19]
-                    time = time.replace(".", "")
-
-                    _date = datetime.strptime(date, "%Y-%m-%d").date()
-
-                    if _fromDate <= _date <= _toDate:
-
-                        if errorID == None:
-                            errorID = " "
-
-                        if username == None:
-                            username = " "
-
-                        outText = date + " " + time + "|" + duration + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + executedBy + "|" + eSpaceName + "|" + eSpaceID + "|" + username + "|" + userID + "|" + sessionID + "|" + extensionID + "|" + extensionName + "|" + errorID + "|" + requestKey + "|" + tenantID + "\n"
-                        myLinesFromDateRange.append(outText)
-
-                #capture all the lines that didn't match the regex
-                negativeRegex = re.compile(negativeExtensionLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in negativeRegex.finditer(searchLines):
-                    nonMatchedLine = match.group(1)
-
-                    nonMatchedRegex = re.search(nonMatchedExtensionLogsRegex, nonMatchedLine)
-                    if nonMatchedRegex:
-                        nonMatchedHead = nonMatchedRegex.group(1)
-                        nonMatchedDate = nonMatchedRegex.group(2)
-                        nonMatchedTail = nonMatchedRegex.group(3)
-
-                        _nonMatchedDate = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
-
-                        #check if the non-matched lines fall within the specified range
-                        if _fromDate <= _nonMatchedDate <= _toDate:
-
-                            nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
-
-                            #check if the line has Japanese characters
-                            hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
-                            katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
-                            kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
-
-                            if hiragana or katakana or kanji:
-                                JPRegex = re.search(japaneseExtensionLogsRegex, nonMatchedLine2)
-                                if JPRegex:
-                                    JPtenantID = JPRegex.group(1)
-                                    JPtimestamp = JPRegex.group(2)
-                                    JPduration = JPRegex.group(3)
-                                    JPactionName = JPRegex.group(4)
-                                    JPsessionID = JPRegex.group(5)
-                                    JPuserID = JPRegex.group(6)
-                                    JPeSpaceID = JPRegex.group(7)
-                                    JPextensionID = JPRegex.group(8)
-                                    JPexecutedBy = JPRegex.group(9)
-                                    JPerrorID = JPRegex.group(10)#null
-                                    JPrequestKey = JPRegex.group(11)
-                                    JPeSpaceName = JPRegex.group(12)
-                                    JPextensionName = JPRegex.group(13)
-                                    JPapplicationName = JPRegex.group(14)
-                                    JPapplicationKey = JPRegex.group(15)
-                                    JPusername = JPRegex.group(16)#null
-                                                
-                                    JPdate = JPtimestamp[0:10]
-                                    JPtime = JPtimestamp[11:19]
-                                    JPtime = JPtime.replace(".", "")
-
-                                    if JPerrorID == None:
-                                        JPerrorID = " "
-
-                                    if JPusername == None:
-                                        JPusername = " "
-
-                                    JPText = JPdate + " " + JPtime + "|" + JPduration + "|" + JPapplicationName + "|" + JPapplicationKey + "|" + JPactionName + "|" + JPexecutedBy + "|" + JPeSpaceName + "|" + JPeSpaceID + "|" + JPusername + "|" + JPuserID + "|" + JPsessionID + "|" + JPextensionID + "|" + JPextensionName + "|" + JPerrorID + "|" + JPrequestKey + "|" + JPtenantID + "\n"
-                                    myLinesFromDateRange.append(JPText)
-
-                            else:
-                                nonMatchedOutText = "ExtensionLog -> " + nonMatchedLine2 + "\n"
-
-                                myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
-
-            elif filename == "ServiceActionLog":
-                regex = re.compile(serviceActionLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in regex.finditer(searchLines):
-                    tenantID = match.group(1)
-                    timestamp = match.group(2)
-                    userID = match.group(3)
-                    loginID = match.group(4)#null
-                    sessionID = match.group(5)
-                    eSpaceID = match.group(6)
-                    errorID = match.group(7)#null
-                    executedBy = match.group(8)
-                    requestKey = match.group(9)
-                    entrypointName = match.group(10)#null
-                    actionName = match.group(11)
-                    duration = match.group(12)
-                    source = match.group(13)
-                    endpoint = match.group(14)
-                    eSpaceName = match.group(15)
-                    applicationName = match.group(16)
-                    applicationKey = match.group(17)
-                    username = match.group(18)#null
-                    originalRequestKey = match.group(19)
-                                
-                    date = timestamp[0:10]
-                    time = timestamp[11:19]
-                    time = time.replace(".", "")
-
-                    _date = datetime.strptime(date, "%Y-%m-%d").date()
-
-                    if _fromDate <= _date <= _toDate:
-
-                        if loginID == None:
-                            loginID = " "
-
-                        if errorID == None:
-                            errorID = " "
-
-                        if entrypointName == None:
-                            entrypointName = " "
-
-                        if username == None:
-                            username = " "
-
-                        outText = date + " " + time + "|" + duration + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + source + "|" + entrypointName + "|" + endpoint + "|" + executedBy + "|" + eSpaceName + "|" + eSpaceID + "|" + username + "|" + loginID + "|" + userID + "|" + sessionID + "|" + errorID + "|" + requestKey + "|" + originalRequestKey + "|" + tenantID + "\n"
-                        myLinesFromDateRange.append(outText)
-
-                #capture all the lines that didn't match the regex
-                negativeRegex = re.compile(negativeServiceActionLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in negativeRegex.finditer(searchLines):
-                    nonMatchedLine = match.group(1)
-
-                    nonMatchedRegex = re.search(nonMatchedServiceActionLogsRegex, nonMatchedLine)
-                    if nonMatchedRegex:
-                        nonMatchedHead = nonMatchedRegex.group(1)
-                        nonMatchedDate = nonMatchedRegex.group(2)
-                        nonMatchedTail = nonMatchedRegex.group(3)
-
-                        _nonMatchedDate = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
-
-                        #check if the non-matched lines fall within the specified range
-                        if _fromDate <= _nonMatchedDate <= _toDate:
-
-                            nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
-
-                            #check if the line has Japanese characters
-                            hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
-                            katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
-                            kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
-
-                            if hiragana or katakana or kanji:
-                                JPRegex = re.search(japaneseServiceActionLogsRegex, nonMatchedLine2)
-                                if JPRegex:
-                                    JPtenantID = JPRegex.group(1)
-                                    JPtimestamp = JPRegex.group(2)
-                                    JPuserID = JPRegex.group(3)
-                                    JPloginID = JPRegex.group(4)#null
-                                    JPsessionID = JPRegex.group(5)
-                                    JPeSpaceID = JPRegex.group(6)
-                                    JPerrorID = JPRegex.group(7)#null
-                                    JPexecutedBy = JPRegex.group(8)
-                                    JPrequestKey = JPRegex.group(9)
-                                    JPentrypointName = JPRegex.group(10)#null
-                                    JPactionName = JPRegex.group(11)
-                                    JPduration = JPRegex.group(12)
-                                    JPsource = JPRegex.group(13)
-                                    JPendpoint = JPRegex.group(14)
-                                    JPeSpaceName = JPRegex.group(15)
-                                    JPapplicationName = JPRegex.group(16)
-                                    JPapplicationKey = JPRegex.group(17)
-                                    JPusername = JPRegex.group(18)#null
-                                    JPoriginalRequestKey = JPRegex.group(19)
-                                                
-                                    JPdate = JPtimestamp[0:10]
-                                    JPtime = JPtimestamp[11:19]
-                                    JPtime = JPtime.replace(".", "")
-
-                                    if JPloginID == None:
-                                        JPloginID = " "
-
-                                    if JPerrorID == None:
-                                        JPerrorID = " "
-
-                                    if JPentrypointName == None:
-                                        JPentrypointName = " "
-
-                                    if JPusername == None:
-                                        JPusername = " "
-
-                                    JPText = JPdate + " " + JPtime + "|" + JPduration + "|" + JPapplicationName + "|" + JPapplicationKey + "|" + JPactionName + "|" + JPsource + "|" + JPentrypointName + "|" + JPendpoint + "|" + JPexecutedBy + "|" + JPeSpaceName + "|" + JPeSpaceID + "|" + JPusername + "|" + JPloginID + "|" + JPuserID + "|" + JPsessionID + "|" + JPerrorID + "|" + JPrequestKey + "|" + JPoriginalRequestKey + "|" + JPtenantID + "\n"
-                                    myLinesFromDateRange.append(JPText)
-
-                            else:
-                                nonMatchedOutText = "ServiceActionLog -> " + nonMatchedLine2 + "\n"
-
-                                myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
-
-            elif filename == "ScreenLog":
-                regex = re.compile(screenLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in regex.finditer(searchLines):
-                    tenantID = match.group(1)
-                    timestamp = match.group(2)
-                    duration = match.group(3)
-                    screen = match.group(4)
-                    sessionID = match.group(5)
-                    userID = match.group(6)
-                    eSpaceID = match.group(7)
-                    msisdn = match.group(8)#null
-                    screenType = match.group(9)
-                    executedBy = match.group(10)
-                    sessionBytes = match.group(11)
-                    viewstateBytes = match.group(12)
-                    sessionRequests = match.group(13)
-                    accessMode = match.group(14)
-                    requestKey = match.group(15)
-                    actionName = match.group(16)#null
-                    clientIP = match.group(17)
-                    eSpaceName = match.group(18)
-                    applicationName = match.group(19)
-                    applicationKey = match.group(20)
-                        
-                    date = timestamp[0:10]
-                    time = timestamp[11:19]
-                    time = time.replace(".", "")
-
-                    _date = datetime.strptime(date, "%Y-%m-%d").date()
-
-                    if _fromDate <= _date <= _toDate:
-
-                        if msisdn == None:
-                            msisdn = " "
-
-                        if actionName == None:
-                            actionName = " "
-
-                        outText = date + " " + time + "|" + duration + "|" + screen + "|" + screenType + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + accessMode + "|" + executedBy + "|" + clientIP + "|" + eSpaceName + "|" + eSpaceID + "|" + userID + "|" + sessionID + "|" + sessionRequests + "|" + sessionBytes + "|" + viewstateBytes + "|" + msisdn + "|" + requestKey + "|" + tenantID + "\n"
-                        myLinesFromDateRange.append(outText)
-
-                #capture all the lines that didn't match the regex
-                negativeRegex = re.compile(negativeScreenLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in negativeRegex.finditer(searchLines):
-                    nonMatchedLine = match.group(1)
-
-                    nonMatchedRegex = re.search(nonMatchedScreenLogsRegex, nonMatchedLine)
-                    if nonMatchedRegex:
-                        nonMatchedHead = nonMatchedRegex.group(1)
-                        nonMatchedDate = nonMatchedRegex.group(2)
-                        nonMatchedTail = nonMatchedRegex.group(3)
-
-                        _nonMatchedDate = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
-
-                        #check if the non-matched lines fall within the specified range
-                        if _fromDate <= _nonMatchedDate <= _toDate:
-
-                            nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
-
-                            #check if the line has Japanese characters
-                            hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
-                            katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
-                            kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
-
-                            if hiragana or katakana or kanji:
-                                JPRegex = re.search(japaneseScreenLogsRegex, nonMatchedLine2)
-                                if JPRegex:
-                                    JPtenantID = JPRegex.group(1)
-                                    JPtimestamp = JPRegex.group(2)
-                                    JPduration = JPRegex.group(3)
-                                    JPscreen = JPRegex.group(4)
-                                    JPsessionID = JPRegex.group(5)
-                                    JPuserID = JPRegex.group(6)
-                                    JPeSpaceID = JPRegex.group(7)
-                                    JPmsisdn = JPRegex.group(8)#null
-                                    JPscreenType = JPRegex.group(9)
-                                    JPexecutedBy = JPRegex.group(10)
-                                    JPsessionBytes = JPRegex.group(11)
-                                    JPviewstateBytes = JPRegex.group(12)
-                                    JPsessionRequests = JPRegex.group(13)
-                                    JPaccessMode = JPRegex.group(14)
-                                    JPrequestKey = JPRegex.group(15)
-                                    JPactionName = JPRegex.group(16)#null
-                                    JPclientIP = JPRegex.group(17)
-                                    JPeSpaceName = JPRegex.group(18)
-                                    JPapplicationName = JPRegex.group(19)
-                                    JPapplicationKey = JPRegex.group(20)
+                if applicationKey == None:
+                    applicationKey = " "
+
+                outText = date + " " + time + "|" + message + "|" + stack + "|" + moduleName + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + entryPointName + "|" + server + "|" + eSpaceName + "|" + eSpaceID + "|" + userID + "|" + sessionID + "|" + environmentInformation + "|" + iD + "|" + tenantID + "\n"
+
+                tempFile.writelines(outText)
+
+        #capture all the lines that didn't match the regex
+        negativeRegex = re.compile(negativeErrorLogsRegex, re.MULTILINE + re.IGNORECASE)
+        for match in negativeRegex.finditer(searchLines):
+            nonMatchedLine = match.group(1)
+
+            nonMatchedRegex = re.search(nonMatchedErrorLogsRegex, nonMatchedLine)
+            if nonMatchedRegex:
+                nonMatchedHead = nonMatchedRegex.group(1)
+                nonMatchedDate = nonMatchedRegex.group(2)
+                nonMatchedTail = nonMatchedRegex.group(3)
+
+                _nonMatchedDate = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
+
+                #check if the non-matched lines fall within the specified range
+                if _fromDate <= _nonMatchedDate <= _toDate:
+
+                    nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
+
+                    #check if the line has Japanese characters
+                    hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
+                    katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
+                    kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
+
+                    if hiragana or katakana or kanji:
+                        JPRegex = re.search(japaneseErrorLogsRegex, nonMatchedLine2)
+                        if JPRegex:
+                            JPtenantID = JPRegex.group(1)
+                            JPiD = JPRegex.group(2)
+                            JPtimestamp = JPRegex.group(3)
+                            JPsessionID = JPRegex.group(4)#null
+                            JPuserID = JPRegex.group(5)
+                            JPeSpaceID = JPRegex.group(6)
+                            JPmessage = JPRegex.group(7)#null
+                            JPstack = JPRegex.group(8)#null
+                            JPmoduleName = JPRegex.group(9)#null
+                            JPserver = JPRegex.group(10)
+                            JPenvironmentInformation = JPRegex.group(11)#null
+                            JPentryPointName = JPRegex.group(12)#null
+                            JPactionName = JPRegex.group(13)#null
+                            JPrequestKey = JPRegex.group(14)#null
+                            JPeSpaceName = JPRegex.group(15)#null
+                            JPapplicationName = JPRegex.group(16)#null
+                            JPapplicationKey = JPRegex.group(17)#null
+
+                            JPdate = JPtimestamp[0:10]
+                            JPtime = JPtimestamp[11:19]
+                            JPtime = JPtime.replace(".", "")
+
+                            if JPsessionID == None:
+                                JPsessionID = " "
+
+                            if JPmessage == None:
+                                JPmessage = " "
+
+                            if JPstack == None:
+                                JPstack = " "
+
+                            if JPmoduleName == None:
+                                JPmoduleName = " "
+
+                            if JPenvironmentInformation == None:
+                                JPenvironmentInformation = " "
+
+                            if JPentryPointName == None:
+                                JPentryPointName = " "
+
+                            if JPactionName == None:
+                                JPactionName = " "
+
+                            if JPrequestKey == None:
+                                JPrequestKey = " "
+
+                            if JPeSpaceName == None:
+                                JPeSpaceName = " "
+
+                            if JPapplicationName == None:
+                                JPapplicationName = " "
+
+                            if JPapplicationKey == None:
+                                JPapplicationKey = " "
+
+                            JPText = JPdate + " " + JPtime + "|" + JPmessage + "|" + JPstack + "|" + JPmoduleName + "|" + JPapplicationName + "|" + JPapplicationKey + "|" + JPactionName + "|" + JPentryPointName + "|" + JPserver + "|" + JPeSpaceName + "|" + JPeSpaceID + "|" + JPuserID + "|" + JPsessionID + "|" + JPenvironmentInformation + "|" + JPiD + "|" + JPtenantID + "\n"
+
+                            tempFile.writelines(JPText)
+
+                    else:
+                        nonMatchedOutText = "ErrorLog -> " + nonMatchedLine2 + "\n"
+
+                        myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
+
+def readGeneralLogs(searchLines, _fromDate, _toDate):
+    outText = ""
+    nonMatchedOutText = ""
+    JPText = ""
+    nonMatchedLine = ""
+    nonMatchedLine2 = ""
+
+    with codecs.open(tempFilePath, "a+", "utf-8", "ignore") as tempFile:
+        #split the fields and rearrange them to combine them all later
+        regex = re.compile(generalLogsRegex, re.MULTILINE + re.IGNORECASE)
+        for match in regex.finditer(searchLines):
+            tenantID = match.group(1)
+            timestamp = match.group(2)
+            sessionID = match.group(3)#null
+            userID = match.group(4)
+            eSpaceID = match.group(5)
+            errorID = match.group(6)#null
+            message = match.group(7)#null
+            messageType = match.group(8)#null
+            moduleName = match.group(9)#null
+            requestKey = match.group(10)#null
+            entryPointName = match.group(11)#null
+            actionName = match.group(12)#null
+            clientIP = match.group(13)#null
+            eSpaceName = match.group(14)#null
+            applicationName = match.group(15)#null
+            applicationKey = match.group(16)#null
+            username = match.group(17)#null
                                         
-                                    JPdate = JPtimestamp[0:10]
-                                    JPtime = JPtimestamp[11:19]
-                                    JPtime = JPtime.replace(".", "")
+            date = timestamp[0:10]
+            time = timestamp[11:19]
+            time = time.replace(".", "")
 
-                                    if JPmsisdn == None:
-                                        JPmsisdn = " "
+            _date = datetime.strptime(date, "%Y-%m-%d").date()
 
-                                    if JPactionName == None:
-                                        JPactionName = " "
+            if _fromDate <= _date <= _toDate:
 
-                                    JPText = JPdate + " " + JPtime + "|" + JPduration + "|" + JPscreen + "|" + JPscreenType + "|" + JPapplicationName + "|" + JPapplicationKey + "|" + JPactionName + "|" + JPaccessMode + "|" + JPexecutedBy + "|" + JPclientIP + "|" + JPeSpaceName + "|" + JPeSpaceID + "|" + JPuserID + "|" + JPsessionID + "|" + JPsessionRequests + "|" + JPsessionBytes + "|" + JPviewstateBytes + "|" + JPmsisdn + "|" + JPrequestKey + "|" + JPtenantID + "\n"
-                                    myLinesFromDateRange.append(JPText)
+                if sessionID == None:
+                    sessionID = " "
 
-                            else:
-                                nonMatchedOutText = "ScreenLog -> " + nonMatchedLine2 + "\n"
+                if message == None:
+                    message = " "
 
-                                myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
-        count+=1
+                if errorID == None:
+                    errorID = " "
+
+                if messageType == None:
+                    messageType = " "
+
+                if moduleName == None:
+                    moduleName = " "
+
+                if requestKey == None:
+                    requestKey = " "
+
+                if entryPointName == None:
+                    entryPointName = " "
+
+                if actionName == None:
+                    actionName = " "
+
+                if clientIP == None:
+                    clientIP = " "
+
+                if eSpaceName == None:
+                    eSpaceName = " "
+
+                if applicationName == None:
+                    applicationName = " "
+
+                if applicationKey == None:
+                    applicationKey = " "
+
+                if username == None:
+                    username = " "
+
+                outText = date + " " + time + "|" + message + "|" + messageType + "|" + moduleName + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + entryPointName + "|" + clientIP + "|" + eSpaceName + "|" + eSpaceID + "|" + userID + "|" + sessionID + "|" + errorID + "|" + requestKey + "|" + tenantID + "\n"
+
+                tempFile.writelines(outText)
+
+        #capture all the lines that didn't match the regex
+        negativeRegex = re.compile(negativeGeneralLogsRegex, re.MULTILINE + re.IGNORECASE)
+        for match in negativeRegex.finditer(searchLines):
+            nonMatchedLine = match.group(1)
+
+            nonMatchedRegex = re.search(nonMatchedGeneralLogsRegex, nonMatchedLine)
+            if nonMatchedRegex:
+                nonMatchedHead = nonMatchedRegex.group(1)
+                nonMatchedDate = nonMatchedRegex.group(2)
+                nonMatchedTail = nonMatchedRegex.group(3)
+
+                _nonMatchedDate = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
+
+                #check if the non-matched lines fall within the specified range
+                if _fromDate <= _nonMatchedDate <= _toDate:
+
+                    nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
+
+                    #check if the line has Japanese characters
+                    hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
+                    katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
+                    kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
+
+                    if hiragana or katakana or kanji:
+                        JPRegex = re.search(japaneseGeneralLogsRegex, nonMatchedLine2)
+                        if JPRegex:
+                            JPtenantID = JPRegex.group(1)
+                            JPtimestamp = JPRegex.group(2)
+                            JPsessionID = JPRegex.group(3)#null
+                            JPuserID = JPRegex.group(4)
+                            JPeSpaceID = JPRegex.group(5)
+                            JPerrorID = JPRegex.group(6)#null
+                            JPmessage = JPRegex.group(7)#null
+                            JPmessageType = JPRegex.group(8)#null
+                            JPmoduleName = JPRegex.group(9)#null
+                            JPrequestKey = JPRegex.group(10)#null
+                            JPentryPointName = JPRegex.group(11)#null
+                            JPactionName = JPRegex.group(12)#null
+                            JPclientIP = JPRegex.group(13)#null
+                            JPeSpaceName = JPRegex.group(14)#null
+                            JPapplicationName = JPRegex.group(15)#null
+                            JPapplicationKey = JPRegex.group(16)#null
+                            JPusername = JPRegex.group(17)#null
+                                                        
+                            JPdate = JPtimestamp[0:10]
+                            JPtime = JPtimestamp[11:19]
+                            JPtime = JPtime.replace(".", "")
+
+                            if JPsessionID == None:
+                                JPsessionID = " "
+
+                            if JPmessage == None:
+                                JPmessage = " "
+
+                            if JPerrorID == None:
+                                JPerrorID = " "
+
+                            if JPmessageType == None:
+                                JPmessageType = " "
+
+                            if JPmoduleName == None:
+                                JPmoduleName = " "
+
+                            if JPrequestKey == None:
+                                JPrequestKey = " "
+
+                            if JPentryPointName == None:
+                                JPentryPointName = " "
+
+                            if JPactionName == None:
+                                JPactionName = " "
+
+                            if JPclientIP == None:
+                                JPclientIP = " "
+
+                            if JPeSpaceName == None:
+                                JPeSpaceName = " "
+
+                            if JPapplicationName == None:
+                                JPapplicationName = " "
+
+                            if JPapplicationKey == None:
+                                JPapplicationKey = " "
+
+                            if JPusername == None:
+                                JPusername = " "
+
+                            JPText = JPdate + " " + JPtime + "|" + JPmessage + "|" + JPmessageType + "|" + JPmoduleName + "|" + JPapplicationName + "|" + JPapplicationKey + "|" + JPactionName + "|" + JPentryPointName + "|" + JPclientIP + "|" + JPeSpaceName + "|" + JPeSpaceID + "|" + JPuserID + "|" + JPsessionID + "|" + JPerrorID + "|" + JPrequestKey + "|" + JPtenantID + "\n"
+
+                            tempFile.writelines(JPText)
+
+                    else:
+                        nonMatchedOutText = "GeneralLog -> " + nonMatchedLine2 + "\n"
+
+                        myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
+
+def readIntegrationsLogs(searchLines, _fromDate, _toDate):
+    outText = ""
+    nonMatchedOutText = ""
+    JPText = ""
+    nonMatchedLine = ""
+    nonMatchedLine2 = ""
+
+    with codecs.open(tempFilePath, "a+", "utf-8", "ignore") as tempFile:
+        #split the fields and rearrange them to combine them all later
+        regex = re.compile(integrationsLogsRegex, re.MULTILINE + re.IGNORECASE)
+        for match in regex.finditer(searchLines):
+            tenantID = match.group(1)
+            timestamp = match.group(2)
+            duration = match.group(3)
+            source = match.group(4)#null
+            endpoint = match.group(5)#null
+            actionName = match.group(6)
+            actionType = match.group(7)
+            eSpaceID = match.group(8)
+            errorID = match.group(9)#null
+            executedBy = match.group(10)
+            requestKey = match.group(11)
+            eSpaceName = match.group(12)#null
+            applicationName = match.group(13)#null
+            applicationKey = match.group(14)#null
+                                    
+            date = timestamp[0:10]
+            time = timestamp[11:19]
+            time = time.replace(".", "")
+
+            _date = datetime.strptime(date, "%Y-%m-%d").date()
+
+            if _fromDate <= _date <= _toDate:
+
+                if source == None:
+                    source = " "
+
+                if endpoint == None:
+                    endpoint = " "
+
+                if errorID == None:
+                    errorID = " "
+
+                if eSpaceName == None:
+                    eSpaceName = " "
+
+                if applicationName == None:
+                    applicationName = " "
+
+                if applicationKey == None:
+                    applicationKey = " "
+
+                outText = date + " " + time + "|" + duration + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + actionType + "|" + source + "|" + endpoint + "|" + executedBy + "|" + eSpaceName + "|" + eSpaceID + "|" + errorID + "|" + requestKey + "|" + tenantID + "\n"
+
+                tempFile.writelines(outText)
+
+        #capture all the lines that didn't match the regex
+        negativeRegex = re.compile(negativeIntegrationsLogsRegex, re.MULTILINE + re.IGNORECASE)
+        for match in negativeRegex.finditer(searchLines):
+            nonMatchedLine = match.group(1)
+
+            nonMatchedRegex = re.search(nonMatchedIntegrationsLogsRegex, nonMatchedLine)
+            if nonMatchedRegex:
+                nonMatchedHead = nonMatchedRegex.group(1)
+                nonMatchedDate = nonMatchedRegex.group(2)
+                nonMatchedTail = nonMatchedRegex.group(3)
+
+                _nonMatchedDate = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
+
+                #check if the non-matched lines fall within the specified range
+                if _fromDate <= _nonMatchedDate <= _toDate:
+
+                    nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
+
+                    #check if the line has Japanese characters
+                    hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
+                    katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
+                    kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
+
+                    if hiragana or katakana or kanji:
+                        JPRegex = re.search(japaneseIntegrationsLogsRegex, nonMatchedLine2)
+                        if JPRegex:
+                            JPtenantID = JPRegex.group(1)
+                            JPtimestamp = JPRegex.group(2)
+                            JPduration = JPRegex.group(3)
+                            JPsource = JPRegex.group(4)#null
+                            JPendpoint = JPRegex.group(5)#null
+                            JPactionName = JPRegex.group(6)
+                            JPactionType = JPRegex.group(7)
+                            JPeSpaceID = JPRegex.group(8)
+                            JPerrorID = JPRegex.group(9)#null
+                            JPexecutedBy = JPRegex.group(10)
+                            JPrequestKey = JPRegex.group(11)
+                            JPeSpaceName = JPRegex.group(12)#null
+                            JPapplicationName = JPRegex.group(13)#null
+                            JPapplicationKey = JPRegex.group(14)#null
+                                                    
+                            JPdate = JPtimestamp[0:10]
+                            JPtime = JPtimestamp[11:19]
+                            JPtime = JPtime.replace(".", "")
+
+                            if JPsource == None:
+                                JPsource = " "
+
+                            if JPendpoint == None:
+                                JPendpoint = " "
+
+                            if JPerrorID == None:
+                                JPerrorID = " "
+
+                            if JPeSpaceName == None:
+                                JPeSpaceName = " "
+
+                            if JPapplicationName == None:
+                                JPapplicationName = " "
+
+                            if JPapplicationKey == None:
+                                JPapplicationKey = " "
+
+                            JPText  = JPdate + " " + JPtime + "|" + JPduration + "|" + JPapplicationName + "|" + JPapplicationKey + "|" + JPactionName + "|" + JPactionType + "|" + JPsource + "|" + JPendpoint + "|" + JPexecutedBy + "|" + JPeSpaceName + "|" + JPeSpaceID + "|" + JPerrorID + "|" + JPrequestKey + "|" + JPtenantID + "\n"
+
+                            tempFile.writelines(JPText)
+
+                    else:
+                        nonMatchedOutText = "IntegrationsLog -> " + nonMatchedLine2 + "\n"
+
+                        myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
+
+def readMobileRequestsLogs(searchLines, _fromDate, _toDate):
+    outText = ""
+    nonMatchedOutText = ""
+    JPText = ""
+    nonMatchedLine = ""
+    nonMatchedLine2 = ""
+
+    with codecs.open(tempFilePath, "a+", "utf-8", "ignore") as tempFile:
+        #split the fields and rearrange them to combine them all later
+        regex = re.compile(mobileRequestsLogsRegex, re.MULTILINE + re.IGNORECASE)
+        for match in regex.finditer(searchLines):
+            tenantID = match.group(1)
+            timestamp = match.group(2)
+            eSpaceID = match.group(3)
+            screen = match.group(4)
+            source = match.group(5)
+            endpoint = match.group(6)
+            duration = match.group(7)
+            executedBy = match.group(8)
+            errorID = match.group(9)#null
+            cycle = match.group(10)
+            requestKey = match.group(11)
+            loginID = match.group(12)#null
+            userID = match.group(13)
+            eSpaceName = match.group(14)
+            applicationName = match.group(15)
+            applicationKey = match.group(16)
+                                    
+            date = timestamp[0:10]
+            time = timestamp[11:19]
+            time = time.replace(".", "")
+
+            _date = datetime.strptime(date, "%Y-%m-%d").date()
+
+            if _fromDate <= _date <= _toDate:
+
+                if errorID == None:
+                    errorID = " "
+
+                if loginID == None:
+                    loginID = " "
+
+                outText = date + " " + time + "|" + duration + "|" + screen + "|" + applicationName + "|" + applicationKey + "|" + source + "|" + endpoint + "|" + executedBy + "|" + eSpaceName + "|" + eSpaceID + "|" + loginID + "|" + userID + "|" + cycle + "|" + errorID + "|" + requestKey + "|" + tenantID + "\n"
+
+                tempFile.writelines(outText)
+
+        #capture all the lines that didn't match the regex
+        negativeRegex = re.compile(negativeMobileRequestsLogsRegex, re.MULTILINE + re.IGNORECASE)
+        for match in negativeRegex.finditer(searchLines):
+            nonMatchedLine = match.group(1)
+
+            nonMatchedRegex = re.search(nonMatchedMobileRequestsLogsRegex, nonMatchedLine)
+            if nonMatchedRegex:
+                nonMatchedHead = nonMatchedRegex.group(1)
+                nonMatchedDate = nonMatchedRegex.group(2)
+                nonMatchedTail = nonMatchedRegex.group(3)
+
+                _nonMatchedDate = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
+
+                #check if the non-matched lines fall within the specified range
+                if _fromDate <= _nonMatchedDate <= _toDate:
+
+                    nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
+
+                    #check if the line has Japanese characters
+                    hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
+                    katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
+                    kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
+
+                    if hiragana or katakana or kanji:
+                        JPRegex = re.search(japaneseMobileRequestsLogsRegex, nonMatchedLine2)
+                        if JPRegex:
+                            JPtenantID = JPRegex.group(1)
+                            JPtimestamp = JPRegex.group(2)
+                            JPeSpaceID = JPRegex.group(3)
+                            JPscreen = JPRegex.group(4)
+                            JPsource = JPRegex.group(5)
+                            JPendpoint = JPRegex.group(6)
+                            JPduration = JPRegex.group(7)
+                            JPexecutedBy = JPRegex.group(8)
+                            JPerrorID = JPRegex.group(9)#null
+                            JPcycle = JPRegex.group(10)
+                            JPrequestKey = JPRegex.group(11)
+                            JPloginID = JPRegex.group(12)#null
+                            JPuserID = JPRegex.group(13)
+                            JPeSpaceName = JPRegex.group(14)
+                            JPapplicationName = JPRegex.group(15)
+                            JPapplicationKey = JPRegex.group(16)
+                                                    
+                            JPdate = JPtimestamp[0:10]
+                            JPtime = JPtimestamp[11:19]
+                            JPtime = JPtime.replace(".", "")
+
+                            if JPerrorID == None:
+                                JPerrorID = " "
+
+                            if JPloginID == None:
+                                JPloginID = " "
+
+                            JPText = JPdate + " " + JPtime + "|" + JPduration + "|" + JPscreen + "|" + JPapplicationName + "|" + JPapplicationKey + "|" + JPsource + "|" + JPendpoint + "|" + JPexecutedBy + "|" + JPeSpaceName + "|" + JPeSpaceID + "|" + JPloginID + "|" + JPuserID + "|" + JPcycle + "|" + JPerrorID + "|" + JPrequestKey + "|" + JPtenantID + "\n"
+
+                            tempFile.writelines(JPText)
+
+                    else:
+                        nonMatchedOutText = "MobileRequestsLog -> " + nonMatchedLine2 + "\n"
+
+                        myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
+
+def readTimerLogs(searchLines, _fromDate, _toDate):
+    outText = ""
+    nonMatchedOutText = ""
+    JPText = ""
+    nonMatchedLine = ""
+    nonMatchedLine2 = ""
+
+    with codecs.open(tempFilePath, "a+", "utf-8", "ignore") as tempFile:
+        #split the fields and rearrange them to combine them all later
+        regex = re.compile(timerLogsRegex, re.MULTILINE + re.IGNORECASE)
+        for match in regex.finditer(searchLines):
+            tenantID = match.group(1)
+            timestamp = match.group(2)
+            duration = match.group(3)
+            cyclicJobKey = match.group(4)
+            eSpaceID = match.group(5)
+            executedBy = match.group(6)
+            errorID = match.group(7)#null
+            shouldHaveRunAt = match.group(8)
+            nextRun = match.group(9)
+            requestKey = match.group(10)#null
+            eSpaceName = match.group(11)
+            applicationName = match.group(12)
+            applicationKey = match.group(13)
+            cyclicJobName = match.group(14)
+                                    
+            date = timestamp[0:10]
+            time = timestamp[11:19]
+            time = time.replace(".", "")
+
+            _date = datetime.strptime(date, "%Y-%m-%d").date()
+
+            if _fromDate <= _date <= _toDate:
+
+                if errorID == None:
+                    errorID = " "
+
+                if requestKey == None:
+                    requestKey = " "
+
+                outText = date + " " + time + "|" + duration + "|" + applicationName + "|" + applicationKey + "|" + executedBy + "|" + eSpaceName + "|" + eSpaceID + "|" + cyclicJobName + "|" + cyclicJobKey + "|" + shouldHaveRunAt + "|" + nextRun + "|" + errorID + "|" + requestKey + "|" + tenantID + "\n"
+
+                tempFile.writelines(outText)
+
+        #capture all the lines that didn't match the regex
+        negativeRegex = re.compile(negativeTimerLogsRegex, re.MULTILINE + re.IGNORECASE)
+        for match in negativeRegex.finditer(searchLines):
+            nonMatchedLine = match.group(1)
+
+            nonMatchedRegex = re.search(nonMatchedTimerLogsRegex, nonMatchedLine)
+            if nonMatchedRegex:
+                nonMatchedHead = nonMatchedRegex.group(1)
+                nonMatchedDate = nonMatchedRegex.group(2)
+                nonMatchedTail = nonMatchedRegex.group(3)
+
+                _nonMatchedDate = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
+
+                #check if the non-matched lines fall within the specified range
+                if _fromDate <= _nonMatchedDate <= _toDate:
+
+                    nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
+
+                    #check if the line has Japanese characters
+                    hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
+                    katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
+                    kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
+
+                    if hiragana or katakana or kanji:
+                        JPRegex = re.search(japaneseTimerLogsRegex, nonMatchedLine2)
+                        if JPRegex:
+                            JPtenantID = JPRegex.group(1)
+                            JPtimestamp = JPRegex.group(2)
+                            JPduration = JPRegex.group(3)
+                            JPcyclicJobKey = JPRegex.group(4)
+                            JPeSpaceID = JPRegex.group(5)
+                            JPexecutedBy = JPRegex.group(6)
+                            JPerrorID = JPRegex.group(7)#null
+                            JPshouldHaveRunAt = JPRegex.group(8)
+                            JPnextRun = JPRegex.group(9)
+                            JPrequestKey = JPRegex.group(10)#null
+                            JPeSpaceName = JPRegex.group(11)
+                            JPapplicationName = JPRegex.group(12)
+                            JPapplicationKey = JPRegex.group(13)
+                            JPcyclicJobName = JPRegex.group(14)
+                                                    
+                            JPdate = JPtimestamp[0:10]
+                            JPtime = JPtimestamp[11:19]
+                            JPtime = JPtime.replace(".", "")
+
+                            if JPerrorID == None:
+                                JPerrorID = " "
+
+                            if JPrequestKey == None:
+                                JPrequestKey = " "
+
+                            JPText = JPdate + " " + JPtime + "|" + JPduration + "|" + JPapplicationName + "|" + JPapplicationKey + "|" + JPexecutedBy + "|" + JPeSpaceName + "|" + JPeSpaceID + "|" + JPcyclicJobName + "|" + JPcyclicJobKey + "|" + JPshouldHaveRunAt + "|" + JPnextRun + "|" + JPerrorID + "|" + JPrequestKey + "|" + JPtenantID + "\n"
+
+                            tempFile.writelines(JPText)
+
+                    else:
+                        nonMatchedOutText = "TimerLog -> " + nonMatchedLine2
+
+                        myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
+
+def readEmailLogs(searchLines, _fromDate, _toDate):
+    outText = ""
+    nonMatchedOutText = ""
+    JPText = ""
+    nonMatchedLine = ""
+    nonMatchedLine2 = ""
+
+    with codecs.open(tempFilePath, "a+", "utf-8", "ignore") as tempFile:
+        #split the fields and rearrange them to combine them all later
+        regex = re.compile(emailLogsRegex, re.MULTILINE + re.IGNORECASE)
+        for match in regex.finditer(searchLines):
+            iD = match.group(1)
+            name = match.group(2)
+            sent = match.group(3)
+            lastError = match.group(4)#null
+            tenantID = match.group(5)
+            from_ = match.group(6)
+            to = match.group(7)
+            cc = match.group(8)#null
+            bcc = match.group(9)#null
+            subject = match.group(10)#null
+            created = match.group(11)
+            activity = match.group(12)
+            emailDefinition = match.group(13)
+            storeContent = match.group(14)
+            isTestEmail = match.group(15)
+            size = match.group(16)
+            messageID = match.group(17)
+                                    
+            date = created[0:10]
+            time = created[12:19]
+            time = time.replace(".", "")
+
+            _date = datetime.strptime(date, "%Y-%m-%d").date()
+
+            if _fromDate <= _date <= _toDate:
+
+                if lastError == None:
+                    lastError = " "
+
+                if cc == None:
+                    cc = " "
+
+                if bcc == None:
+                    bcc = " "
+
+                if subject == None:
+                    subject = " "
+
+                outText = date + " " + time + "|" + sent + "|" + lastError + "|" + from_ + "|" + to + "|" + subject + "|" + cc + "|" + bcc + "|" + name + "|" + size + "|" + messageID + "|" + activity + "|" + emailDefinition + "|" + storeContent + "|" + isTestEmail + "|" + iD + "|" + tenantID + "\n"
+
+                tempFile.writelines(outText)
+
+        #capture all the lines that didn't match the regex
+        negativeRegex = re.compile(negativeEmailLogsRegex, re.MULTILINE + re.IGNORECASE)
+        for match in negativeRegex.finditer(searchLines):
+            nonMatchedLine = match.group(1)
+
+            nonMatchedRegex = re.search(nonMatchedEmailLogsRegex, nonMatchedLine)
+            if nonMatchedRegex:
+                nonMatchedHead = nonMatchedRegex.group(1)
+                nonMatchedDate = nonMatchedRegex.group(2)
+                nonMatchedTail = nonMatchedRegex.group(3)
+
+                _nonMatchedDate = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
+
+                #check if the non-matched lines fall within the specified range
+                if _fromDate <= _nonMatchedDate <= _toDate:
+
+                    nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
+
+                    #check if the line has Japanese characters
+                    hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
+                    katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
+                    kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
+
+                    if hiragana or katakana or kanji:
+                        JPRegex = re.search(japaneseEmailLogsRegex, nonMatchedLine2)
+                        if JPRegex:
+                            JPiD = JPRegex.group(1)
+                            JPname = JPRegex.group(2)
+                            JPsent = JPRegex.group(3)
+                            JPlastError = JPRegex.group(4)#null
+                            JPtenantID = JPRegex.group(5)
+                            JPfrom_ = JPRegex.group(6)
+                            JPto = JPRegex.group(7)
+                            JPcc = JPRegex.group(8)#null
+                            JPbcc = JPRegex.group(9)#null
+                            JPsubject = JPRegex.group(10)#null
+                            JPcreated = JPRegex.group(11)
+                            JPactivity = JPRegex.group(12)
+                            JPemailDefinition = JPRegex.group(13)
+                            JPstoreContent = JPRegex.group(14)
+                            JPisTestEmail = JPRegex.group(15)
+                            JPsize = JPRegex.group(16)
+                            JPmessageID = JPRegex.group(17)
+                                                    
+                            JPdate = JPcreated[0:10]
+                            JPtime = JPcreated[12:19]
+                            JPtime = JPtime.replace(".", "")
+
+                            if JPlastError == None:
+                                JPlastError = " "
+
+                            if JPcc == None:
+                                JPcc = " "
+
+                            if JPbcc == None:
+                                JPbcc = " "
+
+                            if JPsubject == None:
+                                JPsubject = " "
+
+                            JPText = JPdate + " " + JPtime + "|" + JPsent + "|" + JPlastError + "|" + JPfrom_ + "|" + JPto + "|" + JPsubject + "|" + JPcc + "|" + JPbcc + "|" + JPname + "|" + JPsize + "|" + JPmessageID + "|" + JPactivity + "|" + JPemailDefinition + "|" + JPstoreContent + "|" + JPisTestEmail + "|" + JPiD + "|" + JPtenantID + "\n"
+
+                            tempFile.writelines(JPText)
+
+                    else:
+                        nonMatchedOutText = "EmailLog -> " + nonMatchedLine2 + "\n"
+
+                        myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
+
+def readExtensionLogs(searchLines, _fromDate, _toDate):
+    outText = ""
+    nonMatchedOutText = ""
+    JPText = ""
+    nonMatchedLine = ""
+    nonMatchedLine2 = ""
+
+    with codecs.open(tempFilePath, "a+", "utf-8", "ignore") as tempFile:
+        #split the fields and rearrange them to combine them all later
+        regex = re.compile(extensionLogsRegex, re.MULTILINE + re.IGNORECASE)
+        for match in regex.finditer(searchLines):
+            tenantID = match.group(1)
+            timestamp = match.group(2)
+            duration = match.group(3)
+            actionName = match.group(4)
+            sessionID = match.group(5)
+            userID = match.group(6)
+            eSpaceID = match.group(7)
+            extensionID = match.group(8)
+            executedBy = match.group(9)
+            errorID = match.group(10)#null
+            requestKey = match.group(11)
+            eSpaceName = match.group(12)
+            extensionName = match.group(13)
+            applicationName = match.group(14)
+            applicationKey = match.group(15)
+            username = match.group(16)#null
+                                    
+            date = timestamp[0:10]
+            time = timestamp[11:19]
+            time = time.replace(".", "")
+
+            _date = datetime.strptime(date, "%Y-%m-%d").date()
+
+            if _fromDate <= _date <= _toDate:
+
+                if errorID == None:
+                    errorID = " "
+
+                if username == None:
+                    username = " "
+
+                outText = date + " " + time + "|" + duration + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + executedBy + "|" + eSpaceName + "|" + eSpaceID + "|" + username + "|" + userID + "|" + sessionID + "|" + extensionID + "|" + extensionName + "|" + errorID + "|" + requestKey + "|" + tenantID + "\n"
+
+                tempFile.writelines(outText)
+
+        #capture all the lines that didn't match the regex
+        negativeRegex = re.compile(negativeExtensionLogsRegex, re.MULTILINE + re.IGNORECASE)
+        for match in negativeRegex.finditer(searchLines):
+            nonMatchedLine = match.group(1)
+
+            nonMatchedRegex = re.search(nonMatchedExtensionLogsRegex, nonMatchedLine)
+            if nonMatchedRegex:
+                nonMatchedHead = nonMatchedRegex.group(1)
+                nonMatchedDate = nonMatchedRegex.group(2)
+                nonMatchedTail = nonMatchedRegex.group(3)
+
+                _nonMatchedDate = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
+
+                #check if the non-matched lines fall within the specified range
+                if _fromDate <= _nonMatchedDate <= _toDate:
+
+                    nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
+
+                    #check if the line has Japanese characters
+                    hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
+                    katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
+                    kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
+
+                    if hiragana or katakana or kanji:
+                        JPRegex = re.search(japaneseExtensionLogsRegex, nonMatchedLine2)
+                        if JPRegex:
+                            JPtenantID = JPRegex.group(1)
+                            JPtimestamp = JPRegex.group(2)
+                            JPduration = JPRegex.group(3)
+                            JPactionName = JPRegex.group(4)
+                            JPsessionID = JPRegex.group(5)
+                            JPuserID = JPRegex.group(6)
+                            JPeSpaceID = JPRegex.group(7)
+                            JPextensionID = JPRegex.group(8)
+                            JPexecutedBy = JPRegex.group(9)
+                            JPerrorID = JPRegex.group(10)#null
+                            JPrequestKey = JPRegex.group(11)
+                            JPeSpaceName = JPRegex.group(12)
+                            JPextensionName = JPRegex.group(13)
+                            JPapplicationName = JPRegex.group(14)
+                            JPapplicationKey = JPRegex.group(15)
+                            JPusername = JPRegex.group(16)#null
+                                                    
+                            JPdate = JPtimestamp[0:10]
+                            JPtime = JPtimestamp[11:19]
+                            JPtime = JPtime.replace(".", "")
+
+                            if JPerrorID == None:
+                                JPerrorID = " "
+
+                            if JPusername == None:
+                                JPusername = " "
+
+                            JPText = JPdate + " " + JPtime + "|" + JPduration + "|" + JPapplicationName + "|" + JPapplicationKey + "|" + JPactionName + "|" + JPexecutedBy + "|" + JPeSpaceName + "|" + JPeSpaceID + "|" + JPusername + "|" + JPuserID + "|" + JPsessionID + "|" + JPextensionID + "|" + JPextensionName + "|" + JPerrorID + "|" + JPrequestKey + "|" + JPtenantID + "\n"
+
+                            tempFile.writelines(JPText)
+
+                    else:
+                        nonMatchedOutText = "ExtensionLog -> " + nonMatchedLine2 + "\n"
+
+                        myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
+
+def readServiceActionLogs(searchLines, _fromDate, _toDate):
+    outText = ""
+    nonMatchedOutText = ""
+    JPText = ""
+    nonMatchedLine = ""
+    nonMatchedLine2 = ""
+
+    with codecs.open(tempFilePath, "a+", "utf-8", "ignore") as tempFile:
+        #split the fields and rearrange them to combine them all later
+        regex = re.compile(serviceActionLogsRegex, re.MULTILINE + re.IGNORECASE)
+        for match in regex.finditer(searchLines):
+            tenantID = match.group(1)
+            timestamp = match.group(2)
+            userID = match.group(3)
+            loginID = match.group(4)#null
+            sessionID = match.group(5)
+            eSpaceID = match.group(6)
+            errorID = match.group(7)#null
+            executedBy = match.group(8)
+            requestKey = match.group(9)
+            entrypointName = match.group(10)#null
+            actionName = match.group(11)
+            duration = match.group(12)
+            source = match.group(13)
+            endpoint = match.group(14)
+            eSpaceName = match.group(15)
+            applicationName = match.group(16)
+            applicationKey = match.group(17)
+            username = match.group(18)#null
+            originalRequestKey = match.group(19)
+                                    
+            date = timestamp[0:10]
+            time = timestamp[11:19]
+            time = time.replace(".", "")
+
+            _date = datetime.strptime(date, "%Y-%m-%d").date()
+
+            if _fromDate <= _date <= _toDate:
+
+                if loginID == None:
+                    loginID = " "
+
+                if errorID == None:
+                    errorID = " "
+
+                if entrypointName == None:
+                    entrypointName = " "
+
+                if username == None:
+                    username = " "
+
+                outText = date + " " + time + "|" + duration + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + source + "|" + entrypointName + "|" + endpoint + "|" + executedBy + "|" + eSpaceName + "|" + eSpaceID + "|" + username + "|" + loginID + "|" + userID + "|" + sessionID + "|" + errorID + "|" + requestKey + "|" + originalRequestKey + "|" + tenantID + "\n"
+
+                tempFile.writelines(outText)
+
+        #capture all the lines that didn't match the regex
+        negativeRegex = re.compile(negativeServiceActionLogsRegex, re.MULTILINE + re.IGNORECASE)
+        for match in negativeRegex.finditer(searchLines):
+            nonMatchedLine = match.group(1)
+
+            nonMatchedRegex = re.search(nonMatchedServiceActionLogsRegex, nonMatchedLine)
+            if nonMatchedRegex:
+                nonMatchedHead = nonMatchedRegex.group(1)
+                nonMatchedDate = nonMatchedRegex.group(2)
+                nonMatchedTail = nonMatchedRegex.group(3)
+
+                _nonMatchedDate = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
+
+                #check if the non-matched lines fall within the specified range
+                if _fromDate <= _nonMatchedDate <= _toDate:
+
+                    nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
+
+                    #check if the line has Japanese characters
+                    hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
+                    katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
+                    kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
+
+                    if hiragana or katakana or kanji:
+                        JPRegex = re.search(japaneseServiceActionLogsRegex, nonMatchedLine2)
+                        if JPRegex:
+                            JPtenantID = JPRegex.group(1)
+                            JPtimestamp = JPRegex.group(2)
+                            JPuserID = JPRegex.group(3)
+                            JPloginID = JPRegex.group(4)#null
+                            JPsessionID = JPRegex.group(5)
+                            JPeSpaceID = JPRegex.group(6)
+                            JPerrorID = JPRegex.group(7)#null
+                            JPexecutedBy = JPRegex.group(8)
+                            JPrequestKey = JPRegex.group(9)
+                            JPentrypointName = JPRegex.group(10)#null
+                            JPactionName = JPRegex.group(11)
+                            JPduration = JPRegex.group(12)
+                            JPsource = JPRegex.group(13)
+                            JPendpoint = JPRegex.group(14)
+                            JPeSpaceName = JPRegex.group(15)
+                            JPapplicationName = JPRegex.group(16)
+                            JPapplicationKey = JPRegex.group(17)
+                            JPusername = JPRegex.group(18)#null
+                            JPoriginalRequestKey = JPRegex.group(19)
+                                                    
+                            JPdate = JPtimestamp[0:10]
+                            JPtime = JPtimestamp[11:19]
+                            JPtime = JPtime.replace(".", "")
+
+                            if JPloginID == None:
+                                JPloginID = " "
+
+                            if JPerrorID == None:
+                                JPerrorID = " "
+
+                            if JPentrypointName == None:
+                                JPentrypointName = " "
+
+                            if JPusername == None:
+                                JPusername = " "
+
+                            JPText = JPdate + " " + JPtime + "|" + JPduration + "|" + JPapplicationName + "|" + JPapplicationKey + "|" + JPactionName + "|" + JPsource + "|" + JPentrypointName + "|" + JPendpoint + "|" + JPexecutedBy + "|" + JPeSpaceName + "|" + JPeSpaceID + "|" + JPusername + "|" + JPloginID + "|" + JPuserID + "|" + JPsessionID + "|" + JPerrorID + "|" + JPrequestKey + "|" + JPoriginalRequestKey + "|" + JPtenantID + "\n"
+
+                            tempFile.writelines(JPText)
+
+                    else:
+                        nonMatchedOutText = "ServiceActionLog -> " + nonMatchedLine2 + "\n"
+
+                        myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
+
+def readScreenLogs(searchLines, _fromDate, _toDate):
+    outText = ""
+    nonMatchedOutText = ""
+    JPText = ""
+    nonMatchedLine = ""
+    nonMatchedLine2 = ""
+
+    with codecs.open(tempFilePath, "a+", "utf-8", "ignore") as tempFile:
+        #split the fields and rearrange them to combine them all later
+        regex = re.compile(screenLogsRegex, re.MULTILINE + re.IGNORECASE)
+        for match in regex.finditer(searchLines):
+            tenantID = match.group(1)
+            timestamp = match.group(2)
+            duration = match.group(3)
+            screen = match.group(4)
+            sessionID = match.group(5)
+            userID = match.group(6)
+            eSpaceID = match.group(7)
+            msisdn = match.group(8)#null
+            screenType = match.group(9)
+            executedBy = match.group(10)
+            sessionBytes = match.group(11)
+            viewstateBytes = match.group(12)
+            sessionRequests = match.group(13)
+            accessMode = match.group(14)
+            requestKey = match.group(15)
+            actionName = match.group(16)#null
+            clientIP = match.group(17)
+            eSpaceName = match.group(18)
+            applicationName = match.group(19)
+            applicationKey = match.group(20)
+                            
+            date = timestamp[0:10]
+            time = timestamp[11:19]
+            time = time.replace(".", "")
+
+            _date = datetime.strptime(date, "%Y-%m-%d").date()
+
+            if _fromDate <= _date <= _toDate:
+
+                if msisdn == None:
+                    msisdn = " "
+
+                if actionName == None:
+                    actionName = " "
+
+                outText = date + " " + time + "|" + duration + "|" + screen + "|" + screenType + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + accessMode + "|" + executedBy + "|" + clientIP + "|" + eSpaceName + "|" + eSpaceID + "|" + userID + "|" + sessionID + "|" + sessionRequests + "|" + sessionBytes + "|" + viewstateBytes + "|" + msisdn + "|" + requestKey + "|" + tenantID + "\n"
+
+                tempFile.writelines(outText)
+
+        #capture all the lines that didn't match the regex
+        negativeRegex = re.compile(negativeScreenLogsRegex, re.MULTILINE + re.IGNORECASE)
+        for match in negativeRegex.finditer(searchLines):
+            nonMatchedLine = match.group(1)
+
+            nonMatchedRegex = re.search(nonMatchedScreenLogsRegex, nonMatchedLine)
+            if nonMatchedRegex:
+                nonMatchedHead = nonMatchedRegex.group(1)
+                nonMatchedDate = nonMatchedRegex.group(2)
+                nonMatchedTail = nonMatchedRegex.group(3)
+
+                _nonMatchedDate = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
+
+                #check if the non-matched lines fall within the specified range
+                if _fromDate <= _nonMatchedDate <= _toDate:
+
+                    nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
+
+                    #check if the line has Japanese characters
+                    hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
+                    katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
+                    kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
+
+                    if hiragana or katakana or kanji:
+                        JPRegex = re.search(japaneseScreenLogsRegex, nonMatchedLine2)
+                        if JPRegex:
+                            JPtenantID = JPRegex.group(1)
+                            JPtimestamp = JPRegex.group(2)
+                            JPduration = JPRegex.group(3)
+                            JPscreen = JPRegex.group(4)
+                            JPsessionID = JPRegex.group(5)
+                            JPuserID = JPRegex.group(6)
+                            JPeSpaceID = JPRegex.group(7)
+                            JPmsisdn = JPRegex.group(8)#null
+                            JPscreenType = JPRegex.group(9)
+                            JPexecutedBy = JPRegex.group(10)
+                            JPsessionBytes = JPRegex.group(11)
+                            JPviewstateBytes = JPRegex.group(12)
+                            JPsessionRequests = JPRegex.group(13)
+                            JPaccessMode = JPRegex.group(14)
+                            JPrequestKey = JPRegex.group(15)
+                            JPactionName = JPRegex.group(16)#null
+                            JPclientIP = JPRegex.group(17)
+                            JPeSpaceName = JPRegex.group(18)
+                            JPapplicationName = JPRegex.group(19)
+                            JPapplicationKey = JPRegex.group(20)
+                                            
+                            JPdate = JPtimestamp[0:10]
+                            JPtime = JPtimestamp[11:19]
+                            JPtime = JPtime.replace(".", "")
+
+                            if JPmsisdn == None:
+                                JPmsisdn = " "
+
+                            if JPactionName == None:
+                                JPactionName = " "
+
+                            JPText = JPdate + " " + JPtime + "|" + JPduration + "|" + JPscreen + "|" + JPscreenType + "|" + JPapplicationName + "|" + JPapplicationKey + "|" + JPactionName + "|" + JPaccessMode + "|" + JPexecutedBy + "|" + JPclientIP + "|" + JPeSpaceName + "|" + JPeSpaceID + "|" + JPuserID + "|" + JPsessionID + "|" + JPsessionRequests + "|" + JPsessionBytes + "|" + JPviewstateBytes + "|" + JPmsisdn + "|" + JPrequestKey + "|" + JPtenantID + "\n"
+
+                            tempFile.writelines(JPText)
+
+                    else:
+                        nonMatchedOutText = "ScreenLog -> " + nonMatchedLine2 + "\n"
+
+                        myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
+
+def readiOSAndroidLogs(filename, searchLines, _fromDate, _toDate):
+    #split the fields and rearrange them to combine them all later
+    regex = re.compile(androidiOSBuildLogsRegex, re.MULTILINE + re.IGNORECASE)
+    for match in regex.finditer(searchLines):
+        date = match.group(1)
+        time = match.group(2)
+        messageType = match.group(3)
+        method = match.group(4)#null
+        message = match.group(5)#null
+
+        _time = time[:8]
+
+        _date = datetime.strptime(date, "%Y-%m-%d").date()
+                    
+        if _fromDate <= _date <= _toDate:
+
+            if not method == None:
+                method = method.replace("[", "")
+                method = method.replace("]", "")
+            else:
+                method = " "
+
+            if message == None:
+                message = " "
+
+            if "iosbuildlog" in filename.lower():
+                outText = date + " " + _time + "|" + messageType + "|" + method + "|" + message + "\n"
+            elif "androidbuildlog" in filename.lower():
+                outText = date + " " + _time + "|" + messageType + "|" + method + "|" + message + "\n"
+
+            myLinesFromDateRange.append(outText)
+
+    #capture all the lines that didn't match the regex
+    negativeRegex = re.compile(negativeAndroidiOSBuildLogsRegex, re.MULTILINE + re.IGNORECASE)
+    for match in negativeRegex.finditer(searchLines):
+        nonMatchedLine = match.group(1)
+
+        nonMatchedRegex = re.search(nonMatchedAndroidiOSBuildLogsRegex, nonMatchedLine)
+        if nonMatchedRegex:
+            nonMatchedDate = nonMatchedRegex.group(1)
+
+            _nonMatchedDate = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
+
+            #check if the non-matched lines fall within the specified range
+            if _fromDate <= _nonMatchedDate <= _toDate:
+
+                #check if the line has Japanese characters
+                hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine)
+                katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine)
+                kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine)
+
+                if hiragana or katakana or kanji:
+                    JPRegex = re.search(japaneseAndroidiOSBuildLogsRegex, nonMatchedLine)
+                    if JPRegex:
+                        JPDate = JPRegex.group(1)
+                        JPTime = JPRegex.group(2)
+                        JPTail = JPRegex.group(3)
+
+                        _JPTime = JPTime[:8]
+
+                        if "iosbuildlog" in filename.lower():
+                            JPText = JPDate + " " + _JPTime + "|||" + JPTail + "\n"
+                        elif "androidbuildlog" in filename.lower():
+                            JPText = JPDate + " " + _JPTime + "|||" + JPTail + "\n"
+
+                        myLinesFromDateRange.append(JPText)
+
+                else:
+                    newNonMatchedLine = normalizeLines(nonMatchedLine)
+                    newNonMatchedLine = newNonMatchedLine.translate(replacementDict)
+
+                    #check if the line matches the regular expression
+                    regex2 = re.search(androidiOSBuildLogsRegex, newNonMatchedLine)
+                    if regex2:
+                        date = regex2.group(1)
+                        time = regex2.group(2)
+                        messageType = regex2.group(3)
+                        method = regex2.group(4)#null
+                        message = regex2.group(5)#null
+
+                        _time = time[:8]
+
+                        if not method == None:
+                            method = method.replace("[", "")
+                            method = method.replace("]", "")
+                        else:
+                            method = " "
+
+                        if message == None:
+                            message = " "
+
+                        if "iosbuildlog" in filename.lower():
+                            outText = date + " " + _time + "|" + messageType + "|" + method + "|" + message + "\n"
+                        elif "androidbuildlog" in filename.lower():
+                            outText = date + " " + _time + "|" + messageType + "|" + method + "|" + message + "\n"
+
+                        myLinesFromDateRange.append(outText)
+                                    
+                    if not regex2:
+                        if "iosbuildlog" in filename.lower():
+                            nonMatchedOutText = "iOSBuildLog -> " + newNonMatchedLine + "\n"
+                        elif "androidbuildlog" in filename.lower():
+                            nonMatchedOutText = "AndroidBuildLog -> " + newNonMatchedLine + "\n"
+
+                        myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
+
+def readServiceStudioReportLogs(searchLines3, _fromDate, _toDate):
+    #split the fields and rearrange them to combine them all later
+    regex1 = re.findall(serviceStudioReportsDetailsRegex, searchLines3)
+    if regex1:
+        findAllString = ' '.join([str(elm) for elm in regex1])
+        findAllString = findAllString.replace("|", "")
+        findAllString = findAllString.replace("('", "")
+        findAllString = findAllString.replace("')", "")
+        findAllString = findAllString.replace("', '", " ")
+        outText = fromDate + " 00:00:00|||" + findAllString + "\n"
+        myLinesFromDateRange.append(outText)
+            
+    regex2 = re.findall(serviceStudioReportsOperationsLogsRegex, searchLines3)
+    if regex2:
+        findAllString2 = '\n'.join([str(elm2) for elm2 in regex2])
+        findAllString2 = findAllString2.replace("|", "")
+        findAllString2 = findAllString2.replace("('", "")
+        findAllString2 = findAllString2.replace("')", "")
+        findAllString2 = findAllString2.replace("(\"", "")
+        findAllString2 = findAllString2.replace("\")", "")
+        findAllString2 = findAllString2.replace("', '", "|")
+        findAllString2 = findAllString2.replace("', \"", "|")
+
+        with codecs.open(tempFilePath, "w", "utf-8", "ignore") as tempFile:
+            tempFile.writelines(findAllString2)
+
+        with codecs.open(tempFilePath, "r", "utf-8", "ignore") as tempFile2:
+            _searchLines = tempFile2.read()
+            regex3 = re.compile(serviceStudioReportsOperationsLogsRegex2, re.MULTILINE + re.IGNORECASE)
+            for match3 in regex3.finditer(_searchLines):
+                date = match3.group(1)
+                time = match3.group(2)
+                numberOfOccurrences = match3.group(3)
+                actionName = match3.group(4)
+                message = match3.group(5)#null
+
+                #reformat the dates
+                year = date.split("-")[2]
+                month = date.split("-")[0]
+                day = date.split("-")[1]
+
+                if len(month) != 2:
+                    month = "0" + month
+
+                _date = year + "-" + month + "-" + day
+
+                #reformat the times
+                if time[-2:] == "AM" and time[:2] == "12":
+                    _time = "00" + time[2:-2]
+                elif time[-2:] == "AM":
+                    hours = time.split(":")[0]
+                    minutes = time.split(":")[1]
+                    seconds = time.split(":")[2]
+                    if len(hours) < 2:
+                        hours = "0" + hours
+                        _time = hours + ":" + minutes + ":" + seconds[:-2]
+                elif time[-2:] == "PM" and time[:2] == "12":
+                    _time = time[:-2]
+                elif time[-2:] == "PM":
+                    hours = time.split(":")[0]
+                    minutes = time.split(":")[1]
+                    seconds = time.split(":")[2]
+                    _time = str(int(hours) + 12) + ":" + minutes + ":" + seconds[:-2]
+
+                _date_ = datetime.strptime(_date, "%Y-%m-%d").date()
+                                                
+                if _fromDate <= _date_ <= _toDate:
+
+                    if message == None:
+                        message = " "
+                        outText2 = _date + " " + _time.strip() + "|" + numberOfOccurrences + "|" + actionName.strip() + "|" + message + "\n"
+                        myLinesFromDateRange.append(outText2)
+                    else:            
+                        outText2 = _date + " " + _time.strip() + "|" + numberOfOccurrences + "|" + actionName.strip() + "|" + message.strip() + "\n"
+                        myLinesFromDateRange.append(outText2)
+
+            #capture all the lines that didn't match the regex
+            negativeRegex = re.compile(negativeServiceStudioReportsOperationsLogsRegex, re.MULTILINE + re.IGNORECASE)
+            for match in negativeRegex.finditer(_searchLines):
+                nonMatchedLine = match.group(1)
+
+                nonMatchedRegex = re.search(nonMatchedServiceStudioReportsOperationsLogsRegex, nonMatchedLine)
+                if nonMatchedRegex:
+                    nonMatchedDate = nonMatchedRegex.group(1)
+                    nonMatchedTail = nonMatchedRegex.group(2)
+
+                    #reformat the dates
+                    nonMatchedYear = nonMatchedDate.split("-")[2]
+                    nonMatchedMonth = nonMatchedDate.split("-")[0]
+                    nonMatchedDay = nonMatchedDate.split("-")[1]
+
+                    if len(nonMatchedMonth) != 2:
+                        nonMatchedMonth = "0" + nonMatchedMonth
+
+                    _nonMatchedDate = nonMatchedYear + "-" + nonMatchedMonth + "-" + nonMatchedDay
+
+                    _nonMatchedDate_ = datetime.strptime(_nonMatchedDate, "%Y-%m-%d").date()
+
+                    #check if the non-matched lines fall within the specified range
+                    if _fromDate <= _nonMatchedDate_ <= _toDate:
+
+                        nonMatchedLine2 = nonMatchedDate + " " + nonMatchedTail
+
+                        #check if the line has Japanese characters
+                        hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
+                        katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
+                        kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
+
+                        if hiragana or katakana or kanji:
+                            JPRegex = re.search(japaneseServiceStudioReportsOperationsLogsRegex, nonMatchedLine2)
+                            if JPRegex:
+                                JPDate = JPRegex.group(1)
+                                JPTime = JPRegex.group(2)
+                                JPTail = JPRegex.group(3)
+
+                                #reformat the dates
+                                year = JPDate.split("-")[2]
+                                month = JPDate.split("-")[0]
+                                day = JPDate.split("-")[1]
+
+                                if len(month) != 2:
+                                    month = "0" + month
+
+                                _JPDate = year + "-" + month + "-" + day
+
+                                #reformat the times
+                                if JPTime[-2:] == "AM" and JPTime[:2] == "12":
+                                    _JPTime = "00" + JPTime[2:-2]
+                                elif JPTime[-2:] == "AM":
+                                    hours = JPTime.split(":")[0]
+                                    minutes = JPTime.split(":")[1]
+                                    seconds = JPTime.split(":")[2]
+                                    if len(hours) < 2:
+                                        hours = "0" + hours
+                                    _JPTime = hours + ":" + minutes + ":" + seconds[:-2]
+                                elif JPTime[-2:] == "PM" and JPTime[:2] == "12":
+                                    _JPTime = JPTime[:-2]
+                                elif JPTime[-2:] == "PM":
+                                    hours = JPTime.split(":")[0]
+                                    minutes = JPTime.split(":")[1]
+                                    seconds = JPTime.split(":")[2]
+                                    _JPTime = str(int(hours) + 12) + ":" + minutes + ":" + seconds[:-2]
+
+                                JPText = _JPDate + " " + _JPTime + "|||" + JPTail.strip() + "\n"
+
+                                myLinesFromDateRange.append(JPText)
+
+                        else:
+                            nonMatchedOutText = "ServiceStudioReport -> " + nonMatchedLine2.strip() + "\n"
+
+                            myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
+
+        #delete the temporary file that was created
+        os.remove(tempFilePath)
 
 def parseXMLtoString(lineToXML, xmlPath):
     xmlVar = etree.XPath(xmlPath)
@@ -1447,13 +1766,13 @@ def xlsxFile(absolutePath, relativePath, filename, ext, _fromDate, _toDate):
                 if i == len(rowList) - 1:
                     line = str(rowList[i].value)
                     newLine = normalizeLines(line)
-                    sanitizeLines(newLine)
+                    newLine = newLine.translate(replacementDict)
                     linesFromXLSX.write(newLine)
                     linesFromXLSX.write("\n")
                 else:
                     line = str(rowList[i].value)
                     newLine = normalizeLines(line)
-                    sanitizeLines(newLine)
+                    newLine = newLine.translate(replacementDict)
                     linesFromXLSX.write(newLine + "|")
 
     xlsxtxtFile(relativePath + "\\" + filename + ext, filename, ext, _fromDate, _toDate)
@@ -1477,1097 +1796,66 @@ def xlsxtxtFile(absolutePath, filename, ext, _fromDate, _toDate):
             cycleNum = splitFiles(numOfLines, constant, maxLines, cycleNum, absolutePath, ext, os.getcwd() + "\\split_data\\file_")
 
     if maxLines >= numOfLines:
-        if "ErrorLog" in filename:
-            readSplitFiles(cycleNum, "ErrorLog", ext, _fromDate, _toDate)
-        elif "GeneralLog" in filename:
-            readSplitFiles(cycleNum, "GeneralLog", ext, _fromDate, _toDate)
-        elif "IntegrationsLog" in filename:
-            readSplitFiles(cycleNum, "IntegrationsLog", ext, _fromDate, _toDate)
-        elif "MobileRequestsLog" in filename:
-            readSplitFiles(cycleNum, "MobileRequestsLog", ext, _fromDate, _toDate)
-        elif "TimerLog" in filename:
-            readSplitFiles(cycleNum, "TimerLog", ext, _fromDate, _toDate)
-        elif "EmailLog" in filename:
-            readSplitFiles(cycleNum, "EmailLog", ext, _fromDate, _toDate)
-        elif "ExtensionLog" in filename:
-            readSplitFiles(cycleNum, "ExtensionLog", ext, _fromDate, _toDate)
-        elif "ServiceActionLog" in filename:
-            readSplitFiles(cycleNum, "ServiceActionLog", ext, _fromDate, _toDate)
-        elif "ScreenLog" in filename:
-            readSplitFiles(cycleNum, "ScreenLog", ext, _fromDate, _toDate)
+        readSplitFilesXLSX(cycleNum, filename, ext, _fromDate, _toDate)
+
+        if os.path.exists(tempFilePath):
+            with codecs.open(tempFilePath, "r", "utf-8", "ignore") as tempFile2:
+                myLinesFromDateRange = tempFile2.readlines()
+        else:
+            print("The file \"" + filename + ext + "\" could not be read.")
+            myLinesFromDateRange = ['']
+            del myLinesFromDateRange[:]
 
         #delete the temporary files and directory that were created
         os.remove(absolutePath)
         shutil.rmtree(os.getcwd() + "\\split_data")
 
+        try:
+            os.remove(tempFilePath)
+        except FileNotFoundError as fileError:
+            pass
+
     else:
-        with codecs.open(absolutePath, "r", "utf-8", "ignore") as linesFromText:
-            searchLines = linesFromText.read()
-            #split the fields and rearrange them to combine them all later
-            if "ErrorLog" in filename:
-                regex = re.compile(errorLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in regex.finditer(searchLines):
-                    tenantID = match.group(1)
-                    iD = match.group(2)
-                    timestamp = match.group(3)
-                    sessionID = match.group(4)#null
-                    userID = match.group(5)
-                    eSpaceID = match.group(6)
-                    message = match.group(7)#null
-                    stack = match.group(8)#null
-                    moduleName = match.group(9)#null
-                    server = match.group(10)
-                    environmentInformation = match.group(11)#null
-                    entryPointName = match.group(12)#null
-                    actionName = match.group(13)#null
-                    requestKey = match.group(14)#null
-                    eSpaceName = match.group(15)#null
-                    applicationName = match.group(16)#null
-                    applicationKey = match.group(17)#null
-                                
-                    date = timestamp[0:10]
-                    time = timestamp[11:19]
-                    time = time.replace(".", "")
-
-                    _date = datetime.strptime(date, "%Y-%m-%d").date()
-
-                    if _fromDate <= _date <= _toDate:
-
-                        if sessionID == None:
-                            sessionID = " "
-
-                        if message == None:
-                            message = " "
-
-                        if stack == None:
-                            stack = " "
-
-                        if moduleName == None:
-                            moduleName = " "
-
-                        if environmentInformation == None:
-                            environmentInformation = " "
-
-                        if entryPointName == None:
-                            entryPointName = " "
-
-                        if actionName == None:
-                            actionName = " "
-
-                        if requestKey == None:
-                            requestKey = " "
-
-                        if eSpaceName == None:
-                            eSpaceName = " "
-
-                        if applicationName == None:
-                            applicationName = " "
-
-                        if applicationKey == None:
-                            applicationKey = " "
-
-                        outText = date + " " + time + "|" + message + "|" + stack + "|" + moduleName + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + entryPointName + "|" + server + "|" + eSpaceName + "|" + eSpaceID + "|" + userID + "|" + sessionID + "|" + environmentInformation + "|" + iD + "|" + tenantID + "\n"
-                        myLinesFromDateRange.append(outText)
-
-                #capture all the lines that didn't match the regex
-                negativeRegex = re.compile(negativeErrorLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in negativeRegex.finditer(searchLines):
-                    nonMatchedLine = match.group(1)
-
-                    nonMatchedRegex = re.search(nonMatchedErrorLogsRegex, nonMatchedLine)
-                    if nonMatchedRegex:
-                        nonMatchedHead = nonMatchedRegex.group(1)
-                        nonMatchedDate = nonMatchedRegex.group(2)
-                        nonMatchedTail = nonMatchedRegex.group(3)
-
-                        _nonMatchedDate = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
-
-                        #check if the non-matched lines fall within the specified range
-                        if _fromDate <= _nonMatchedDate <= _toDate:
-
-                            nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
-
-                            #check if the line has Japanese characters
-                            hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
-                            katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
-                            kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
-
-                            if hiragana or katakana or kanji:
-                                JPRegex = re.search(japaneseErrorLogsRegex, nonMatchedLine2)
-                                if JPRegex:
-                                    JPtenantID = JPRegex.group(1)
-                                    JPiD = JPRegex.group(2)
-                                    JPtimestamp = JPRegex.group(3)
-                                    JPsessionID = JPRegex.group(4)#null
-                                    JPuserID = JPRegex.group(5)
-                                    JPeSpaceID = JPRegex.group(6)
-                                    JPmessage = JPRegex.group(7)#null
-                                    JPstack = JPRegex.group(8)#null
-                                    JPmoduleName = JPRegex.group(9)#null
-                                    JPserver = JPRegex.group(10)
-                                    JPenvironmentInformation = JPRegex.group(11)#null
-                                    JPentryPointName = JPRegex.group(12)#null
-                                    JPactionName = JPRegex.group(13)#null
-                                    JPrequestKey = JPRegex.group(14)#null
-                                    JPeSpaceName = JPRegex.group(15)#null
-                                    JPapplicationName = JPRegex.group(16)#null
-                                    JPapplicationKey = JPRegex.group(17)#null
-
-                                    JPdate = JPtimestamp[0:10]
-                                    JPtime = JPtimestamp[11:19]
-                                    JPtime = JPtime.replace(".", "")
-
-                                    if JPsessionID == None:
-                                        JPsessionID = " "
-
-                                    if JPmessage == None:
-                                        JPmessage = " "
-
-                                    if JPstack == None:
-                                        JPstack = " "
-
-                                    if JPmoduleName == None:
-                                        JPmoduleName = " "
-
-                                    if JPenvironmentInformation == None:
-                                        JPenvironmentInformation = " "
-
-                                    if JPentryPointName == None:
-                                        JPentryPointName = " "
-
-                                    if JPactionName == None:
-                                        JPactionName = " "
-
-                                    if JPrequestKey == None:
-                                        JPrequestKey = " "
-
-                                    if JPeSpaceName == None:
-                                        JPeSpaceName = " "
-
-                                    if JPapplicationName == None:
-                                        JPapplicationName = " "
-
-                                    if JPapplicationKey == None:
-                                        JPapplicationKey = " "
-
-                                    JPText = JPdate + " " + JPtime + "|" + JPmessage + "|" + JPstack + "|" + JPmoduleName + "|" + JPapplicationName + "|" + JPapplicationKey + "|" + JPactionName + "|" + JPentryPointName + "|" + JPserver + "|" + JPeSpaceName + "|" + JPeSpaceID + "|" + JPuserID + "|" + JPsessionID + "|" + JPenvironmentInformation + "|" + JPiD + "|" + JPtenantID + "\n"
-                                    myLinesFromDateRange.append(JPText)
-
-                            else:
-                                nonMatchedOutText = "ErrorLog -> " + nonMatchedLine2 + "\n"
-
-                                myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
-
-            elif "GeneralLog" in filename:
-                regex = re.compile(generalLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in regex.finditer(searchLines):
-                    tenantID = match.group(1)
-                    timestamp = match.group(2)
-                    sessionID = match.group(3)#null
-                    userID = match.group(4)
-                    eSpaceID = match.group(5)
-                    errorID = match.group(6)#null
-                    message = match.group(7)#null
-                    messageType = match.group(8)#null
-                    moduleName = match.group(9)#null
-                    requestKey = match.group(10)#null
-                    entryPointName = match.group(11)#null
-                    actionName = match.group(12)#null
-                    clientIP = match.group(13)#null
-                    eSpaceName = match.group(14)#null
-                    applicationName = match.group(15)#null
-                    applicationKey = match.group(16)#null
-                    username = match.group(17)#null
-                                
-                    date = timestamp[0:10]
-                    time = timestamp[11:19]
-                    time = time.replace(".", "")
-
-                    _date = datetime.strptime(date, "%Y-%m-%d").date()
-
-                    if _fromDate <= _date <= _toDate:
-
-                        if sessionID == None:
-                            sessionID = " "
-
-                        if message == None:
-                            message = " "
-
-                        if errorID == None:
-                            errorID = " "
-
-                        if messageType == None:
-                            messageType = " "
-
-                        if moduleName == None:
-                            moduleName = " "
-
-                        if requestKey == None:
-                            requestKey = " "
-
-                        if entryPointName == None:
-                            entryPointName = " "
-
-                        if actionName == None:
-                            actionName = " "
-
-                        if clientIP == None:
-                            clientIP = " "
-
-                        if eSpaceName == None:
-                            eSpaceName = " "
-
-                        if applicationName == None:
-                            applicationName = " "
-
-                        if applicationKey == None:
-                            applicationKey = " "
-
-                        if username == None:
-                            username = " "
-
-                        outText = date + " " + time + "|" + message + "|" + messageType + "|" + moduleName + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + entryPointName + "|" + clientIP + "|" + eSpaceName + "|" + eSpaceID + "|" + userID + "|" + sessionID + "|" + errorID + "|" + requestKey + "|" + tenantID + "\n"
-                        myLinesFromDateRange.append(outText)
-
-                #capture all the lines that didn't match the regex
-                negativeRegex = re.compile(negativeGeneralLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in negativeRegex.finditer(searchLines):
-                    nonMatchedLine = match.group(1)
-
-                    nonMatchedRegex = re.search(nonMatchedGeneralLogsRegex, nonMatchedLine)
-                    if nonMatchedRegex:
-                        nonMatchedHead = nonMatchedRegex.group(1)
-                        nonMatchedDate = nonMatchedRegex.group(2)
-                        nonMatchedTail = nonMatchedRegex.group(3)
-
-                        _nonMatchedDate = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
-
-                        #check if the non-matched lines fall within the specified range
-                        if _fromDate <= _nonMatchedDate <= _toDate:
-
-                            nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
-
-                            #check if the line has Japanese characters
-                            hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
-                            katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
-                            kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
-
-                            if hiragana or katakana or kanji:
-                                JPRegex = re.search(japaneseGeneralLogsRegex, nonMatchedLine2)
-                                if JPRegex:
-                                    JPtenantID = JPRegex.group(1)
-                                    JPtimestamp = JPRegex.group(2)
-                                    JPsessionID = JPRegex.group(3)#null
-                                    JPuserID = JPRegex.group(4)
-                                    JPeSpaceID = JPRegex.group(5)
-                                    JPerrorID = JPRegex.group(6)#null
-                                    JPmessage = JPRegex.group(7)#null
-                                    JPmessageType = JPRegex.group(8)#null
-                                    JPmoduleName = JPRegex.group(9)#null
-                                    JPrequestKey = JPRegex.group(10)#null
-                                    JPentryPointName = JPRegex.group(11)#null
-                                    JPactionName = JPRegex.group(12)#null
-                                    JPclientIP = JPRegex.group(13)#null
-                                    JPeSpaceName = JPRegex.group(14)#null
-                                    JPapplicationName = JPRegex.group(15)#null
-                                    JPapplicationKey = JPRegex.group(16)#null
-                                    JPusername = JPRegex.group(17)#null
-                                                
-                                    JPdate = JPtimestamp[0:10]
-                                    JPtime = JPtimestamp[11:19]
-                                    JPtime = JPtime.replace(".", "")
-
-                                    if JPsessionID == None:
-                                        JPsessionID = " "
-
-                                    if JPmessage == None:
-                                        JPmessage = " "
-
-                                    if JPerrorID == None:
-                                        JPerrorID = " "
-
-                                    if JPmessageType == None:
-                                        JPmessageType = " "
-
-                                    if JPmoduleName == None:
-                                        JPmoduleName = " "
-
-                                    if JPrequestKey == None:
-                                        JPrequestKey = " "
-
-                                    if JPentryPointName == None:
-                                        JPentryPointName = " "
-
-                                    if JPactionName == None:
-                                        JPactionName = " "
-
-                                    if JPclientIP == None:
-                                        JPclientIP = " "
-
-                                    if JPeSpaceName == None:
-                                        JPeSpaceName = " "
-
-                                    if JPapplicationName == None:
-                                        JPapplicationName = " "
-
-                                    if JPapplicationKey == None:
-                                        JPapplicationKey = " "
-
-                                    if JPusername == None:
-                                        JPusername = " "
-
-                                    JPText = JPdate + " " + JPtime + "|" + JPmessage + "|" + JPmessageType + "|" + JPmoduleName + "|" + JPapplicationName + "|" + JPapplicationKey + "|" + JPactionName + "|" + JPentryPointName + "|" + JPclientIP + "|" + JPeSpaceName + "|" + JPeSpaceID + "|" + JPuserID + "|" + JPsessionID + "|" + JPerrorID + "|" + JPrequestKey + "|" + JPtenantID + "\n"
-                                    myLinesFromDateRange.append(JPText)
-
-                            else:
-                                nonMatchedOutText = "GeneralLog -> " + nonMatchedLine2 + "\n"
-
-                                myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
-
-            elif "IntegrationsLog" in filename:
-                regex = re.compile(integrationsLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in regex.finditer(searchLines):
-                    tenantID = match.group(1)
-                    timestamp = match.group(2)
-                    duration = match.group(3)
-                    source = match.group(4)#null
-                    endpoint = match.group(5)#null
-                    actionName = match.group(6)
-                    actionType = match.group(7)
-                    eSpaceID = match.group(8)
-                    errorID = match.group(9)#null
-                    executedBy = match.group(10)
-                    requestKey = match.group(11)
-                    eSpaceName = match.group(12)#null
-                    applicationName = match.group(13)#null
-                    applicationKey = match.group(14)#null
-                                
-                    date = timestamp[0:10]
-                    time = timestamp[11:19]
-                    time = time.replace(".", "")
-
-                    _date = datetime.strptime(date, "%Y-%m-%d").date()
-
-                    if _fromDate <= _date <= _toDate:
-
-                        if source == None:
-                            source = " "
-
-                        if endpoint == None:
-                            endpoint = " "
-
-                        if errorID == None:
-                            errorID = " "
-
-                        if eSpaceName == None:
-                            eSpaceName = " "
-
-                        if applicationName == None:
-                            applicationName = " "
-
-                        if applicationKey == None:
-                            applicationKey = " "
-
-                        outText = date + " " + time + "|" + duration + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + actionType + "|" + source + "|" + endpoint + "|" + executedBy + "|" + eSpaceName + "|" + eSpaceID + "|" + errorID + "|" + requestKey + "|" + tenantID + "\n"
-                        myLinesFromDateRange.append(outText)
-
-                #capture all the lines that didn't match the regex
-                negativeRegex = re.compile(negativeIntegrationsLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in negativeRegex.finditer(searchLines):
-                    nonMatchedLine = match.group(1)
-
-                    nonMatchedRegex = re.search(nonMatchedIntegrationsLogsRegex, nonMatchedLine)
-                    if nonMatchedRegex:
-                        nonMatchedHead = nonMatchedRegex.group(1)
-                        nonMatchedDate = nonMatchedRegex.group(2)
-                        nonMatchedTail = nonMatchedRegex.group(3)
-
-                        _nonMatchedDate = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
-
-                        #check if the non-matched lines fall within the specified range
-                        if _fromDate <= _nonMatchedDate <= _toDate:
-
-                            nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
-
-                            #check if the line has Japanese characters
-                            hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
-                            katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
-                            kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
-
-                            if hiragana or katakana or kanji:
-                                JPRegex = re.search(japaneseIntegrationsLogsRegex, nonMatchedLine2)
-                                if JPRegex:
-                                    JPtenantID = JPRegex.group(1)
-                                    JPtimestamp = JPRegex.group(2)
-                                    JPduration = JPRegex.group(3)
-                                    JPsource = JPRegex.group(4)#null
-                                    JPendpoint = JPRegex.group(5)#null
-                                    JPactionName = JPRegex.group(6)
-                                    JPactionType = JPRegex.group(7)
-                                    JPeSpaceID = JPRegex.group(8)
-                                    JPerrorID = JPRegex.group(9)#null
-                                    JPexecutedBy = JPRegex.group(10)
-                                    JPrequestKey = JPRegex.group(11)
-                                    JPeSpaceName = JPRegex.group(12)#null
-                                    JPapplicationName = JPRegex.group(13)#null
-                                    JPapplicationKey = JPRegex.group(14)#null
-                                                
-                                    JPdate = JPtimestamp[0:10]
-                                    JPtime = JPtimestamp[11:19]
-                                    JPtime = JPtime.replace(".", "")
-
-                                    if JPsource == None:
-                                        JPsource = " "
-
-                                    if JPendpoint == None:
-                                        JPendpoint = " "
-
-                                    if JPerrorID == None:
-                                        JPerrorID = " "
-
-                                    if JPeSpaceName == None:
-                                        JPeSpaceName = " "
-
-                                    if JPapplicationName == None:
-                                        JPapplicationName = " "
-
-                                    if JPapplicationKey == None:
-                                        JPapplicationKey = " "
-
-                                    JPText  = JPdate + " " + JPtime + "|" + JPduration + "|" + JPapplicationName + "|" + JPapplicationKey + "|" + JPactionName + "|" + JPactionType + "|" + JPsource + "|" + JPendpoint + "|" + JPexecutedBy + "|" + JPeSpaceName + "|" + JPeSpaceID + "|" + JPerrorID + "|" + JPrequestKey + "|" + JPtenantID + "\n"
-                                    myLinesFromDateRange.append(JPText)
-
-                            else:
-                                nonMatchedOutText = "IntegrationsLog -> " + nonMatchedLine2 + "\n"
-
-                                myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
-
-            elif "MobileRequestsLog" in filename:
-                regex = re.compile(mobileRequestsLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in regex.finditer(searchLines):
-                    tenantID = match.group(1)
-                    timestamp = match.group(2)
-                    eSpaceID = match.group(3)
-                    screen = match.group(4)
-                    source = match.group(5)
-                    endpoint = match.group(6)
-                    duration = match.group(7)
-                    executedBy = match.group(8)
-                    errorID = match.group(9)#null
-                    cycle = match.group(10)
-                    requestKey = match.group(11)
-                    loginID = match.group(12)#null
-                    userID = match.group(13)
-                    eSpaceName = match.group(14)
-                    applicationName = match.group(15)
-                    applicationKey = match.group(16)
-                                
-                    date = timestamp[0:10]
-                    time = timestamp[11:19]
-                    time = time.replace(".", "")
-
-                    _date = datetime.strptime(date, "%Y-%m-%d").date()
-
-                    if _fromDate <= _date <= _toDate:
-
-                        if errorID == None:
-                            errorID = " "
-
-                        if loginID == None:
-                            loginID = " "
-
-                        outText = date + " " + time + "|" + duration + "|" + screen + "|" + applicationName + "|" + applicationKey + "|" + source + "|" + endpoint + "|" + executedBy + "|" + eSpaceName + "|" + eSpaceID + "|" + loginID + "|" + userID + "|" + cycle + "|" + errorID + "|" + requestKey + "|" + tenantID + "\n"
-                        myLinesFromDateRange.append(outText)
-
-                #capture all the lines that didn't match the regex
-                negativeRegex = re.compile(negativeMobileRequestsLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in negativeRegex.finditer(searchLines):
-                    nonMatchedLine = match.group(1)
-
-                    nonMatchedRegex = re.search(nonMatchedMobileRequestsLogsRegex, nonMatchedLine)
-                    if nonMatchedRegex:
-                        nonMatchedHead = nonMatchedRegex.group(1)
-                        nonMatchedDate = nonMatchedRegex.group(2)
-                        nonMatchedTail = nonMatchedRegex.group(3)
-
-                        _nonMatchedDate = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
-
-                        #check if the non-matched lines fall within the specified range
-                        if _fromDate <= _nonMatchedDate <= _toDate:
-
-                            nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
-
-                            #check if the line has Japanese characters
-                            hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
-                            katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
-                            kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
-
-                            if hiragana or katakana or kanji:
-                                JPRegex = re.search(japaneseMobileRequestsLogsRegex, nonMatchedLine2)
-                                if JPRegex:
-                                    JPtenantID = JPRegex.group(1)
-                                    JPtimestamp = JPRegex.group(2)
-                                    JPeSpaceID = JPRegex.group(3)
-                                    JPscreen = JPRegex.group(4)
-                                    JPsource = JPRegex.group(5)
-                                    JPendpoint = JPRegex.group(6)
-                                    JPduration = JPRegex.group(7)
-                                    JPexecutedBy = JPRegex.group(8)
-                                    JPerrorID = JPRegex.group(9)#null
-                                    JPcycle = JPRegex.group(10)
-                                    JPrequestKey = JPRegex.group(11)
-                                    JPloginID = JPRegex.group(12)#null
-                                    JPuserID = JPRegex.group(13)
-                                    JPeSpaceName = JPRegex.group(14)
-                                    JPapplicationName = JPRegex.group(15)
-                                    JPapplicationKey = JPRegex.group(16)
-                                                
-                                    JPdate = JPtimestamp[0:10]
-                                    JPtime = JPtimestamp[11:19]
-                                    JPtime = JPtime.replace(".", "")
-
-                                    if JPerrorID == None:
-                                        JPerrorID = " "
-
-                                    if JPloginID == None:
-                                        JPloginID = " "
-
-                                    JPText = JPdate + " " + JPtime + "|" + JPduration + "|" + JPscreen + "|" + JPapplicationName + "|" + JPapplicationKey + "|" + JPsource + "|" + JPendpoint + "|" + JPexecutedBy + "|" + JPeSpaceName + "|" + JPeSpaceID + "|" + JPloginID + "|" + JPuserID + "|" + JPcycle + "|" + JPerrorID + "|" + JPrequestKey + "|" + JPtenantID + "\n"
-                                    myLinesFromDateRange.append(JPText)
-
-                            else:
-                                nonMatchedOutText = "MobileRequestsLog -> " + nonMatchedLine2 + "\n"
-
-                                myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
-
-            elif "TimerLog" in filename:
-                regex = re.compile(timerLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in regex.finditer(searchLines):
-                    tenantID = match.group(1)
-                    timestamp = match.group(2)
-                    duration = match.group(3)
-                    cyclicJobKey = match.group(4)
-                    eSpaceID = match.group(5)
-                    executedBy = match.group(6)
-                    errorID = match.group(7)#null
-                    shouldHaveRunAt = match.group(8)
-                    nextRun = match.group(9)
-                    requestKey = match.group(10)#null
-                    eSpaceName = match.group(11)
-                    applicationName = match.group(12)
-                    applicationKey = match.group(13)
-                    cyclicJobName = match.group(14)
-                        
-                    date = timestamp[0:10]
-                    time = timestamp[11:19]
-                    time = time.replace(".", "")
-
-                    _date = datetime.strptime(date, "%Y-%m-%d").date()
-
-                    if _fromDate <= _date <= _toDate:
-
-                        if errorID == None:
-                            errorID = " "
-
-                        if requestKey == None:
-                            requestKey = " "
-
-                        outText = date + " " + time + "|" + duration + "|" + applicationName + "|" + applicationKey + "|" + executedBy + "|" + eSpaceName + "|" + eSpaceID + "|" + cyclicJobName + "|" + cyclicJobKey + "|" + shouldHaveRunAt + "|" + nextRun + "|" + errorID + "|" + requestKey + "|" + tenantID + "\n"
-                        myLinesFromDateRange.append(outText)
-
-                #capture all the lines that didn't match the regex
-                negativeRegex = re.compile(negativeTimerLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in negativeRegex.finditer(searchLines):
-                    nonMatchedLine = match.group(1)
-
-                    nonMatchedRegex = re.search(nonMatchedTimerLogsRegex, nonMatchedLine)
-                    if nonMatchedRegex:
-                        nonMatchedHead = nonMatchedRegex.group(1)
-                        nonMatchedDate = nonMatchedRegex.group(2)
-                        nonMatchedTail = nonMatchedRegex.group(3)
-
-                        _nonMatchedDate = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
-
-                        #check if the non-matched lines fall within the specified range
-                        if _fromDate <= _nonMatchedDate <= _toDate:
-
-                            nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
-
-                            #check if the line has Japanese characters
-                            hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
-                            katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
-                            kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
-
-                            if hiragana or katakana or kanji:
-                                JPRegex = re.search(japaneseTimerLogsRegex, nonMatchedLine2)
-                                if JPRegex:
-                                    JPtenantID = JPRegex.group(1)
-                                    JPtimestamp = JPRegex.group(2)
-                                    JPduration = JPRegex.group(3)
-                                    JPcyclicJobKey = JPRegex.group(4)
-                                    JPeSpaceID = JPRegex.group(5)
-                                    JPexecutedBy = JPRegex.group(6)
-                                    JPerrorID = JPRegex.group(7)#null
-                                    JPshouldHaveRunAt = JPRegex.group(8)
-                                    JPnextRun = JPRegex.group(9)
-                                    JPrequestKey = JPRegex.group(10)#null
-                                    JPeSpaceName = JPRegex.group(11)
-                                    JPapplicationName = JPRegex.group(12)
-                                    JPapplicationKey = JPRegex.group(13)
-                                    JPcyclicJobName = JPRegex.group(14)
-                                                
-                                    JPdate = JPtimestamp[0:10]
-                                    JPtime = JPtimestamp[11:19]
-                                    JPtime = JPtime.replace(".", "")
-
-                                    if JPerrorID == None:
-                                        JPerrorID = " "
-
-                                    if JPrequestKey == None:
-                                        JPrequestKey = " "
-
-                                    JPText = JPdate + " " + JPtime + "|" + JPduration + "|" + JPapplicationName + "|" + JPapplicationKey + "|" + JPexecutedBy + "|" + JPeSpaceName + "|" + JPeSpaceID + "|" + JPcyclicJobName + "|" + JPcyclicJobKey + "|" + JPshouldHaveRunAt + "|" + JPnextRun + "|" + JPerrorID + "|" + JPrequestKey + "|" + JPtenantID + "\n"
-                                    myLinesFromDateRange.append(JPText)
-
-                            else:
-                                nonMatchedOutText = "TimerLog -> " + nonMatchedLine2
-
-                                myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
-
-            elif "EmailLog" in filename:
-                regex = re.compile(emailLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in regex.finditer(searchLines):
-                    iD = match.group(1)
-                    name = match.group(2)
-                    sent = match.group(3)
-                    lastError = match.group(4)#null
-                    tenantID = match.group(5)
-                    from_ = match.group(6)
-                    to = match.group(7)
-                    cc = match.group(8)#null
-                    bcc = match.group(9)#null
-                    subject = match.group(10)#null
-                    created = match.group(11)
-                    activity = match.group(12)
-                    emailDefinition = match.group(13)
-                    storeContent = match.group(14)
-                    isTestEmail = match.group(15)
-                    size = match.group(16)
-                    messageID = match.group(17)
-                                
-                    date = created[0:10]
-                    time = created[12:19]
-                    time = time.replace(".", "")
-
-                    _date = datetime.strptime(date, "%Y-%m-%d").date()
-
-                    if _fromDate <= _date <= _toDate:
-
-                        if lastError == None:
-                            lastError = " "
-
-                        if cc == None:
-                            cc = " "
-
-                        if bcc == None:
-                            bcc = " "
-
-                        if subject == None:
-                            subject = " "
-
-                        outText = date + " " + time + "|" + sent + "|" + lastError + "|" + from_ + "|" + to + "|" + subject + "|" + cc + "|" + bcc + "|" + name + "|" + size + "|" + messageID + "|" + activity + "|" + emailDefinition + "|" + storeContent + "|" + isTestEmail + "|" + iD + "|" + tenantID + "\n"
-                        myLinesFromDateRange.append(outText)
-
-                #capture all the lines that didn't match the regex
-                negativeRegex = re.compile(negativeEmailLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in negativeRegex.finditer(searchLines):
-                    nonMatchedLine = match.group(1)
-
-                    nonMatchedRegex = re.search(nonMatchedEmailLogsRegex, nonMatchedLine)
-                    if nonMatchedRegex:
-                        nonMatchedHead = nonMatchedRegex.group(1)
-                        nonMatchedDate = nonMatchedRegex.group(2)
-                        nonMatchedTail = nonMatchedRegex.group(3)
-
-                        _nonMatchedDate = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
-
-                        #check if the non-matched lines fall within the specified range
-                        if _fromDate <= _nonMatchedDate <= _toDate:
-
-                            nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
-
-                            #check if the line has Japanese characters
-                            hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
-                            katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
-                            kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
-
-                            if hiragana or katakana or kanji:
-                                JPRegex = re.search(japaneseEmailLogsRegex, nonMatchedLine2)
-                                if JPRegex:
-                                    JPiD = JPRegex.group(1)
-                                    JPname = JPRegex.group(2)
-                                    JPsent = JPRegex.group(3)
-                                    JPlastError = JPRegex.group(4)#null
-                                    JPtenantID = JPRegex.group(5)
-                                    JPfrom_ = JPRegex.group(6)
-                                    JPto = JPRegex.group(7)
-                                    JPcc = JPRegex.group(8)#null
-                                    JPbcc = JPRegex.group(9)#null
-                                    JPsubject = JPRegex.group(10)#null
-                                    JPcreated = JPRegex.group(11)
-                                    JPactivity = JPRegex.group(12)
-                                    JPemailDefinition = JPRegex.group(13)
-                                    JPstoreContent = JPRegex.group(14)
-                                    JPisTestEmail = JPRegex.group(15)
-                                    JPsize = JPRegex.group(16)
-                                    JPmessageID = JPRegex.group(17)
-                                                
-                                    JPdate = JPcreated[0:10]
-                                    JPtime = JPcreated[12:19]
-                                    JPtime = JPtime.replace(".", "")
-
-                                    if JPlastError == None:
-                                        JPlastError = " "
-
-                                    if JPcc == None:
-                                        JPcc = " "
-
-                                    if JPbcc == None:
-                                        JPbcc = " "
-
-                                    if JPsubject == None:
-                                        JPsubject = " "
-
-                                    JPText = JPdate + " " + JPtime + "|" + JPsent + "|" + JPlastError + "|" + JPfrom_ + "|" + JPto + "|" + JPsubject + "|" + JPcc + "|" + JPbcc + "|" + JPname + "|" + JPsize + "|" + JPmessageID + "|" + JPactivity + "|" + JPemailDefinition + "|" + JPstoreContent + "|" + JPisTestEmail + "|" + JPiD + "|" + JPtenantID + "\n"
-                                    myLinesFromDateRange.append(JPText)
-
-                            else:
-                                nonMatchedOutText = "EmailLog -> " + nonMatchedLine2 + "\n"
-
-                                myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
-
-            elif "ExtensionLog" in filename:
-                regex = re.compile(extensionLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in regex.finditer(searchLines):
-                    tenantID = match.group(1)
-                    timestamp = match.group(2)
-                    duration = match.group(3)
-                    actionName = match.group(4)
-                    sessionID = match.group(5)
-                    userID = match.group(6)
-                    eSpaceID = match.group(7)
-                    extensionID = match.group(8)
-                    executedBy = match.group(9)
-                    errorID = match.group(10)#null
-                    requestKey = match.group(11)
-                    eSpaceName = match.group(12)
-                    extensionName = match.group(13)
-                    applicationName = match.group(14)
-                    applicationKey = match.group(15)
-                    username = match.group(16)#null
-                        
-                    date = timestamp[0:10]
-                    time = timestamp[11:19]
-                    time = time.replace(".", "")
-
-                    _date = datetime.strptime(date, "%Y-%m-%d").date()
-
-                    if _fromDate <= _date <= _toDate:
-
-                        if errorID == None:
-                            errorID = " "
-
-                        if username == None:
-                            username = " "
-
-                        outText = date + " " + time + "|" + duration + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + executedBy + "|" + eSpaceName + "|" + eSpaceID + "|" + username + "|" + userID + "|" + sessionID + "|" + extensionID + "|" + extensionName + "|" + errorID + "|" + requestKey + "|" + tenantID + "\n"
-                        myLinesFromDateRange.append(outText)
-
-                #capture all the lines that didn't match the regex
-                negativeRegex = re.compile(negativeExtensionLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in negativeRegex.finditer(searchLines):
-                    nonMatchedLine = match.group(1)
-
-                    nonMatchedRegex = re.search(nonMatchedExtensionLogsRegex, nonMatchedLine)
-                    if nonMatchedRegex:
-                        nonMatchedHead = nonMatchedRegex.group(1)
-                        nonMatchedDate = nonMatchedRegex.group(2)
-                        nonMatchedTail = nonMatchedRegex.group(3)
-
-                        _nonMatchedDate = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
-
-                        #check if the non-matched lines fall within the specified range
-                        if _fromDate <= _nonMatchedDate <= _toDate:
-
-                            nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
-
-                            #check if the line has Japanese characters
-                            hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
-                            katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
-                            kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
-
-                            if hiragana or katakana or kanji:
-                                JPRegex = re.search(japaneseExtensionLogsRegex, nonMatchedLine2)
-                                if JPRegex:
-                                    JPtenantID = JPRegex.group(1)
-                                    JPtimestamp = JPRegex.group(2)
-                                    JPduration = JPRegex.group(3)
-                                    JPactionName = JPRegex.group(4)
-                                    JPsessionID = JPRegex.group(5)
-                                    JPuserID = JPRegex.group(6)
-                                    JPeSpaceID = JPRegex.group(7)
-                                    JPextensionID = JPRegex.group(8)
-                                    JPexecutedBy = JPRegex.group(9)
-                                    JPerrorID = JPRegex.group(10)#null
-                                    JPrequestKey = JPRegex.group(11)
-                                    JPeSpaceName = JPRegex.group(12)
-                                    JPextensionName = JPRegex.group(13)
-                                    JPapplicationName = JPRegex.group(14)
-                                    JPapplicationKey = JPRegex.group(15)
-                                    JPusername = JPRegex.group(16)#null
-                                                
-                                    JPdate = JPtimestamp[0:10]
-                                    JPtime = JPtimestamp[11:19]
-                                    JPtime = JPtime.replace(".", "")
-
-                                    if JPerrorID == None:
-                                        JPerrorID = " "
-
-                                    if JPusername == None:
-                                        JPusername = " "
-
-                                    JPText = JPdate + " " + JPtime + "|" + JPduration + "|" + JPapplicationName + "|" + JPapplicationKey + "|" + JPactionName + "|" + JPexecutedBy + "|" + JPeSpaceName + "|" + JPeSpaceID + "|" + JPusername + "|" + JPuserID + "|" + JPsessionID + "|" + JPextensionID + "|" + JPextensionName + "|" + JPerrorID + "|" + JPrequestKey + "|" + JPtenantID + "\n"
-                                    myLinesFromDateRange.append(JPText)
-
-                            else:
-                                nonMatchedOutText = "ExtensionLog -> " + nonMatchedLine2 + "\n"
-
-                                myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
-                                
-            elif "ServiceActionLog" in filename:
-                regex = re.compile(serviceActionLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in regex.finditer(searchLines):
-                    tenantID = match.group(1)
-                    timestamp = match.group(2)
-                    userID = match.group(3)
-                    loginID = match.group(4)#null
-                    sessionID = match.group(5)
-                    eSpaceID = match.group(6)
-                    errorID = match.group(7)#null
-                    executedBy = match.group(8)
-                    requestKey = match.group(9)
-                    entrypointName = match.group(10)#null
-                    actionName = match.group(11)
-                    duration = match.group(12)
-                    source = match.group(13)
-                    endpoint = match.group(14)
-                    eSpaceName = match.group(15)
-                    applicationName = match.group(16)
-                    applicationKey = match.group(17)
-                    username = match.group(18)#null
-                    originalRequestKey = match.group(19)
-                        
-                    date = timestamp[0:10]
-                    time = timestamp[11:19]
-                    time = time.replace(".", "")
-
-                    _date = datetime.strptime(date, "%Y-%m-%d").date()
-
-                    if _fromDate <= _date <= _toDate:
-
-                        if loginID == None:
-                            loginID = " "
-
-                        if errorID == None:
-                            errorID = " "
-
-                        if entrypointName == None:
-                            entrypointName = " "
-
-                        if username == None:
-                            username = " "
-
-                        outText = date + " " + time + "|" + duration + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + source + "|" + entrypointName + "|" + endpoint + "|" + executedBy + "|" + eSpaceName + "|" + eSpaceID + "|" + username + "|" + loginID + "|" + userID + "|" + sessionID + "|" + errorID + "|" + requestKey + "|" + originalRequestKey + "|" + tenantID + "\n"
-                        myLinesFromDateRange.append(outText)
-
-                #capture all the lines that didn't match the regex
-                negativeRegex = re.compile(negativeServiceActionLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in negativeRegex.finditer(searchLines):
-                    nonMatchedLine = match.group(1)
-
-                    nonMatchedRegex = re.search(nonMatchedServiceActionLogsRegex, nonMatchedLine)
-                    if nonMatchedRegex:
-                        nonMatchedHead = nonMatchedRegex.group(1)
-                        nonMatchedDate = nonMatchedRegex.group(2)
-                        nonMatchedTail = nonMatchedRegex.group(3)
-
-                        _nonMatchedDate = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
-
-                        #check if the non-matched lines fall within the specified range
-                        if _fromDate <= _nonMatchedDate <= _toDate:
-
-                            nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
-
-                            #check if the line has Japanese characters
-                            hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
-                            katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
-                            kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
-
-                            if hiragana or katakana or kanji:
-                                JPRegex = re.search(japaneseServiceActionLogsRegex, nonMatchedLine2)
-                                if JPRegex:
-                                    JPtenantID = JPRegex.group(1)
-                                    JPtimestamp = JPRegex.group(2)
-                                    JPuserID = JPRegex.group(3)
-                                    JPloginID = JPRegex.group(4)#null
-                                    JPsessionID = JPRegex.group(5)
-                                    JPeSpaceID = JPRegex.group(6)
-                                    JPerrorID = JPRegex.group(7)#null
-                                    JPexecutedBy = JPRegex.group(8)
-                                    JPrequestKey = JPRegex.group(9)
-                                    JPentrypointName = JPRegex.group(10)#null
-                                    JPactionName = JPRegex.group(11)
-                                    JPduration = JPRegex.group(12)
-                                    JPsource = JPRegex.group(13)
-                                    JPendpoint = JPRegex.group(14)
-                                    JPeSpaceName = JPRegex.group(15)
-                                    JPapplicationName = JPRegex.group(16)
-                                    JPapplicationKey = JPRegex.group(17)
-                                    JPusername = JPRegex.group(18)#null
-                                    JPoriginalRequestKey = JPRegex.group(19)
-                                                
-                                    JPdate = JPtimestamp[0:10]
-                                    JPtime = JPtimestamp[11:19]
-                                    JPtime = JPtime.replace(".", "")
-
-                                    if JPloginID == None:
-                                        JPloginID = " "
-
-                                    if JPerrorID == None:
-                                        JPerrorID = " "
-
-                                    if JPentrypointName == None:
-                                        JPentrypointName = " "
-
-                                    if JPusername == None:
-                                        JPusername = " "
-
-                                    JPText = JPdate + " " + JPtime + "|" + JPduration + "|" + JPapplicationName + "|" + JPapplicationKey + "|" + JPactionName + "|" + JPsource + "|" + JPentrypointName + "|" + JPendpoint + "|" + JPexecutedBy + "|" + JPeSpaceName + "|" + JPeSpaceID + "|" + JPusername + "|" + JPloginID + "|" + JPuserID + "|" + JPsessionID + "|" + JPerrorID + "|" + JPrequestKey + "|" + JPoriginalRequestKey + "|" + JPtenantID + "\n"
-                                    myLinesFromDateRange.append(JPText)
-
-                            else:
-                                nonMatchedOutText = "ServiceActionLog -> " + nonMatchedLine2 + "\n"
-
-                                myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
-
-            elif "ScreenLog" in filename:
-                regex = re.compile(screenLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in regex.finditer(searchLines):
-                    tenantID = match.group(1)
-                    timestamp = match.group(2)
-                    duration = match.group(3)
-                    screen = match.group(4)
-                    sessionID = match.group(5)
-                    userID = match.group(6)
-                    eSpaceID = match.group(7)
-                    msisdn = match.group(8)#null
-                    screenType = match.group(9)
-                    executedBy = match.group(10)
-                    sessionBytes = match.group(11)
-                    viewstateBytes = match.group(12)
-                    sessionRequests = match.group(13)
-                    accessMode = match.group(14)
-                    requestKey = match.group(15)
-                    actionName = match.group(16)#null
-                    clientIP = match.group(17)
-                    eSpaceName = match.group(18)
-                    applicationName = match.group(19)
-                    applicationKey = match.group(20)
-                        
-                    date = timestamp[0:10]
-                    time = timestamp[11:19]
-                    time = time.replace(".", "")
-
-                    _date = datetime.strptime(date, "%Y-%m-%d").date()
-
-                    if _fromDate <= _date <= _toDate:
-
-                        if msisdn == None:
-                            msisdn = " "
-
-                        if actionName == None:
-                            actionName = " "
-
-                        outText = date + " " + time + "|" + duration + "|" + screen + "|" + screenType + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + accessMode + "|" + executedBy + "|" + clientIP + "|" + eSpaceName + "|" + eSpaceID + "|" + userID + "|" + sessionID + "|" + sessionRequests + "|" + sessionBytes + "|" + viewstateBytes + "|" + msisdn + "|" + requestKey + "|" + tenantID + "\n"
-                        myLinesFromDateRange.append(outText)
-
-                #capture all the lines that didn't match the regex
-                negativeRegex = re.compile(negativeScreenLogsRegex, re.MULTILINE + re.IGNORECASE)
-                for match in negativeRegex.finditer(searchLines):
-                    nonMatchedLine = match.group(1)
-
-                    nonMatchedRegex = re.search(nonMatchedScreenLogsRegex, nonMatchedLine)
-                    if nonMatchedRegex:
-                        nonMatchedHead = nonMatchedRegex.group(1)
-                        nonMatchedDate = nonMatchedRegex.group(2)
-                        nonMatchedTail = nonMatchedRegex.group(3)
-
-                        _nonMatchedDate = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
-
-                        #check if the non-matched lines fall within the specified range
-                        if _fromDate <= _nonMatchedDate <= _toDate:
-
-                            nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
-
-                            #check if the line has Japanese characters
-                            hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
-                            katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
-                            kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
-
-                            if hiragana or katakana or kanji:
-                                JPRegex = re.search(japaneseScreenLogsRegex, nonMatchedLine2)
-                                if JPRegex:
-                                    JPtenantID = JPRegex.group(1)
-                                    JPtimestamp = JPRegex.group(2)
-                                    JPduration = JPRegex.group(3)
-                                    JPscreen = JPRegex.group(4)
-                                    JPsessionID = JPRegex.group(5)
-                                    JPuserID = JPRegex.group(6)
-                                    JPeSpaceID = JPRegex.group(7)
-                                    JPmsisdn = JPRegex.group(8)#null
-                                    JPscreenType = JPRegex.group(9)
-                                    JPexecutedBy = JPRegex.group(10)
-                                    JPsessionBytes = JPRegex.group(11)
-                                    JPviewstateBytes = JPRegex.group(12)
-                                    JPsessionRequests = JPRegex.group(13)
-                                    JPaccessMode = JPRegex.group(14)
-                                    JPrequestKey = JPRegex.group(15)
-                                    JPactionName = JPRegex.group(16)#null
-                                    JPclientIP = JPRegex.group(17)
-                                    JPeSpaceName = JPRegex.group(18)
-                                    JPapplicationName = JPRegex.group(19)
-                                    JPapplicationKey = JPRegex.group(20)
-                                        
-                                    JPdate = JPtimestamp[0:10]
-                                    JPtime = JPtimestamp[11:19]
-                                    JPtime = JPtime.replace(".", "")
-
-                                    if JPmsisdn == None:
-                                        JPmsisdn = " "
-
-                                    if JPactionName == None:
-                                        JPactionName = " "
-
-                                    JPText = JPdate + " " + JPtime + "|" + JPduration + "|" + JPscreen + "|" + JPscreenType + "|" + JPapplicationName + "|" + JPapplicationKey + "|" + JPactionName + "|" + JPaccessMode + "|" + JPexecutedBy + "|" + JPclientIP + "|" + JPeSpaceName + "|" + JPeSpaceID + "|" + JPuserID + "|" + JPsessionID + "|" + JPsessionRequests + "|" + JPsessionBytes + "|" + JPviewstateBytes + "|" + JPmsisdn + "|" + JPrequestKey + "|" + JPtenantID + "\n"
-                                    myLinesFromDateRange.append(JPText)
-
-                            else:
-                                nonMatchedOutText = "ScreenLog -> " + nonMatchedLine2 + "\n"
-
-                                myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
-
-        #delete the temporary file that was created
+        try:
+            with codecs.open(absolutePath, "r", "utf-8", "ignore") as linesFromText:
+                searchLines = linesFromText.read()
+                if "errorlog" in filename.lower():
+                    readErrorLogs(searchLines, _fromDate, _toDate)
+                elif "generallog" in filename.lower():
+                    readGeneralLogs(searchLines, _fromDate, _toDate)
+                elif "integrationslog" in filename.lower():
+                    readIntegrationsLogs(searchLines, _fromDate, _toDate)
+                elif "mobilerequestslog" in filename.lower():
+                    readMobileRequestsLogs(searchLines, _fromDate, _toDate)
+                elif "timerlog" in filename.lower():
+                    readTimerLogs(searchLines, _fromDate, _toDate)
+                elif "emaillog" in filename.lower():
+                    readEmailLogs(searchLines, _fromDate, _toDate)
+                elif "extensionlog" in filename.lower():
+                    readExtensionLogs(searchLines, _fromDate, _toDate)
+                elif "serviceactionlog" in filename.lower():
+                    readServiceActionLogs(searchLines, _fromDate, _toDate)
+                elif "screenlog" in filename.lower():
+                    readScreenLogs(searchLines, _fromDate, _toDate)
+        except ValueError as valError:
+            print("\nThe customer altered the original Excel spreadsheet.\n\nPossible reasons:\n1- The customer added a column on the spreadsheet.\n" +
+                  "2- The customer switched the columns of the spreadsheet.\n3- The customer modified the dates on the spreadsheet.\n")
+
+        if os.path.exists(tempFilePath):
+            with codecs.open(tempFilePath, "r", "utf-8", "ignore") as tempFile2:
+                myLinesFromDateRange = tempFile2.readlines()
+        else:
+            print("The file \"" + filename + ext + "\" could not be read.")
+            myLinesFromDateRange = ['']
+            del myLinesFromDateRange[:]
+
+        #delete the temporary files that were created
         os.remove(absolutePath)
+
+        try:
+            os.remove(tempFilePath)
+        except FileNotFoundError as fileError:
+            pass
 
     if len(myNonMatchedValidLinesFromDateRange) > 0:
         createFolder("\\nonmatched_valid_lines\\")
@@ -2577,7 +1865,7 @@ def xlsxtxtFile(absolutePath, filename, ext, _fromDate, _toDate):
                 linesFromDateRange2.writelines("\n")
             linesFromDateRange2.writelines(myNonMatchedValidLinesFromDateRange)
         del myNonMatchedValidLinesFromDateRange[:]
-                        
+
     if len(myLinesFromDateRange) > 0:
         createFolder("\\filtered_data_files\\")
         if "ErrorLog" in filename:
@@ -2626,274 +1914,22 @@ def txtFile(absolutePath, filename, filenameWithExt, ext, _fromDate, _toDate):
     nonMatchedLine = ""
     nonMatchedLine2 = ""
 
-    with codecs.open(absolutePath, "r", "utf-8", "ignore") as linesFromText:
-        searchLines = linesFromText.read()
-        searchLines = searchLines.replace("|", "")
-        searchLines = searchLines.replace("\\", "")
-        searchLines = searchLines.replace("/", "-")
-        searchLines2 = '|'.join(searchLines.splitlines())
-        searchLines3 = ' '.join(searchLines2.split())
-        
-        #split the fields and rearrange them to combine them all later
-        if "iosbuildlog" in filename.lower() or "androidbuildlog" in filename.lower():
-            regex = re.compile(androidiOSBuildLogsRegex, re.MULTILINE + re.IGNORECASE)
-            for match in regex.finditer(searchLines):
-                date = match.group(1)
-                time = match.group(2)
-                messageType = match.group(3)
-                method = match.group(4)#null
-                message = match.group(5)#null
-
-                _time = time[:8]
-
-                _date = datetime.strptime(date, "%Y-%m-%d").date()
-                    
-                if _fromDate <= _date <= _toDate:
-
-                    if not method == None:
-                        method = method.replace("[", "")
-                        method = method.replace("]", "")
-                    else:
-                        method = " "
-
-                    if message == None:
-                        message = " "
-
-                    if "iosbuildlog" in filename.lower():
-                        outText = date + " " + _time + "|" + messageType + "|" + method + "|" + message + "\n"
-                    elif "androidbuildlog" in filename.lower():
-                        outText = date + " " + _time + "|" + messageType + "|" + method + "|" + message + "\n"
-
-                    myLinesFromDateRange.append(outText)
-
-            #capture all the lines that didn't match the regex
-            negativeRegex = re.compile(negativeAndroidiOSBuildLogsRegex, re.MULTILINE + re.IGNORECASE)
-            for match in negativeRegex.finditer(searchLines):
-                nonMatchedLine = match.group(1)
-
-                nonMatchedRegex = re.search(nonMatchedAndroidiOSBuildLogsRegex, nonMatchedLine)
-                if nonMatchedRegex:
-                    nonMatchedDate = nonMatchedRegex.group(1)
-
-                    _nonMatchedDate = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
-
-                    #check if the non-matched lines fall within the specified range
-                    if _fromDate <= _nonMatchedDate <= _toDate:
-
-                        #check if the line has Japanese characters
-                        hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine)
-                        katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine)
-                        kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine)
-
-                        if hiragana or katakana or kanji:
-                            JPRegex = re.search(japaneseAndroidiOSBuildLogsRegex, nonMatchedLine)
-                            if JPRegex:
-                                JPDate = JPRegex.group(1)
-                                JPTime = JPRegex.group(2)
-                                JPTail = JPRegex.group(3)
-
-                                _JPTime = JPTime[:8]
-
-                                if "iosbuildlog" in filename.lower():
-                                    JPText = JPDate + " " + _JPTime + "|||" + JPTail + "\n"
-                                elif "androidbuildlog" in filename.lower():
-                                    JPText = JPDate + " " + _JPTime + "|||" + JPTail + "\n"
-
-                                myLinesFromDateRange.append(JPText)
-
-                        else:
-                            newNonMatchedLine = normalizeLines(nonMatchedLine)
-                            sanitizeLines(newNonMatchedLine)
-
-                            #check if the line matches the regular expression
-                            regex2 = re.search(androidiOSBuildLogsRegex, newNonMatchedLine)
-                            if regex2:
-                                date = regex2.group(1)
-                                time = regex2.group(2)
-                                messageType = regex2.group(3)
-                                method = regex2.group(4)#null
-                                message = regex2.group(5)#null
-
-                                _time = time[:8]
-
-                                if not method == None:
-                                    method = method.replace("[", "")
-                                    method = method.replace("]", "")
-                                else:
-                                    method = " "
-
-                                if message == None:
-                                    message = " "
-
-                                if "iosbuildlog" in filename.lower():
-                                    outText = date + " " + _time + "|" + messageType + "|" + method + "|" + message + "\n"
-                                elif "androidbuildlog" in filename.lower():
-                                    outText = date + " " + _time + "|" + messageType + "|" + method + "|" + message + "\n"
-
-                                myLinesFromDateRange.append(outText)
-                                    
-                            if not regex2:
-                                if "iosbuildlog" in filename.lower():
-                                    nonMatchedOutText = "iOSBuildLog -> " + newNonMatchedLine + "\n"
-                                elif "androidbuildlog" in filename.lower():
-                                    nonMatchedOutText = "AndroidBuildLog -> " + newNonMatchedLine + "\n"
-
-                                myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
-
-        elif "studio" in filename.lower() and "report" in filename.lower():
-            #service studio report
-            regex1 = re.findall(serviceStudioReportsDetailsRegex, searchLines3)
-            if regex1:
-                findAllString = ' '.join([str(elm) for elm in regex1])
-                findAllString = findAllString.replace("|", "")
-                findAllString = findAllString.replace("('", "")
-                findAllString = findAllString.replace("')", "")
-                findAllString = findAllString.replace("', '", " ")
-                outText = fromDate + " 00:00:00|||" + findAllString + "\n"
-                myLinesFromDateRange.append(outText)
+    try:
+        with codecs.open(absolutePath, "r", "utf-8", "ignore") as linesFromText:
+            searchLines = linesFromText.read()
+            searchLines = searchLines.replace("|", "")
+            searchLines = searchLines.replace("\\", "")
+            searchLines = searchLines.replace("/", "-")
+            searchLines2 = '|'.join(searchLines.splitlines())
+            searchLines3 = ' '.join(searchLines2.split())
             
-            regex2 = re.findall(serviceStudioReportsOperationsLogsRegex, searchLines3)
-            if regex2:
-                findAllString2 = '\n'.join([str(elm2) for elm2 in regex2])
-                findAllString2 = findAllString2.replace("|", "")
-                findAllString2 = findAllString2.replace("('", "")
-                findAllString2 = findAllString2.replace("')", "")
-                findAllString2 = findAllString2.replace("(\"", "")
-                findAllString2 = findAllString2.replace("\")", "")
-                findAllString2 = findAllString2.replace("', '", "|")
-                findAllString2 = findAllString2.replace("', \"", "|")
-
-                with codecs.open(tempFilePath, "w", "utf-8", "ignore") as tempFile:
-                    tempFile.writelines(findAllString2)
-
-                with codecs.open(tempFilePath, "r", "utf-8", "ignore") as tempFile2:
-                    _searchLines = tempFile2.read()
-                    regex3 = re.compile(serviceStudioReportsOperationsLogsRegex2, re.MULTILINE + re.IGNORECASE)
-                    for match3 in regex3.finditer(_searchLines):
-                        date = match3.group(1)
-                        time = match3.group(2)
-                        numberOfOccurrences = match3.group(3)
-                        actionName = match3.group(4)
-                        message = match3.group(5)#null
-
-                        #reformat the dates
-                        year = date.split("-")[2]
-                        month = date.split("-")[0]
-                        day = date.split("-")[1]
-
-                        if len(month) != 2:
-                            month = "0" + month
-
-                        _date = year + "-" + month + "-" + day
-
-                        #reformat the times
-                        if time[-2:] == "AM" and time[:2] == "12":
-                            _time = "00" + time[2:-2]
-                        elif time[-2:] == "AM":
-                            hours = time.split(":")[0]
-                            minutes = time.split(":")[1]
-                            seconds = time.split(":")[2]
-                            if len(hours) < 2:
-                                hours = "0" + hours
-                                _time = hours + ":" + minutes + ":" + seconds[:-2]
-                        elif time[-2:] == "PM" and time[:2] == "12":
-                            _time = time[:-2]
-                        elif time[-2:] == "PM":
-                            hours = time.split(":")[0]
-                            minutes = time.split(":")[1]
-                            seconds = time.split(":")[2]
-                            _time = str(int(hours) + 12) + ":" + minutes + ":" + seconds[:-2]
-
-                        _date_ = datetime.strptime(_date, "%Y-%m-%d").date()
-                                                
-                        if _fromDate <= _date_ <= _toDate:
-
-                            if message == None:
-                                message = " "
-                                outText2 = _date + " " + _time.strip() + "|" + numberOfOccurrences + "|" + actionName.strip() + "|" + message + "\n"
-                                myLinesFromDateRange.append(outText2)
-                            else:            
-                                outText2 = _date + " " + _time.strip() + "|" + numberOfOccurrences + "|" + actionName.strip() + "|" + message.strip() + "\n"
-                                myLinesFromDateRange.append(outText2)
-
-                    #capture all the lines that didn't match the regex
-                    negativeRegex = re.compile(negativeServiceStudioReportsOperationsLogsRegex, re.MULTILINE + re.IGNORECASE)
-                    for match in negativeRegex.finditer(_searchLines):
-                        nonMatchedLine = match.group(1)
-
-                        nonMatchedRegex = re.search(nonMatchedServiceStudioReportsOperationsLogsRegex, nonMatchedLine)
-                        if nonMatchedRegex:
-                            nonMatchedDate = nonMatchedRegex.group(1)
-                            nonMatchedTail = nonMatchedRegex.group(2)
-
-                            #reformat the dates
-                            nonMatchedYear = nonMatchedDate.split("-")[2]
-                            nonMatchedMonth = nonMatchedDate.split("-")[0]
-                            nonMatchedDay = nonMatchedDate.split("-")[1]
-
-                            if len(nonMatchedMonth) != 2:
-                                nonMatchedMonth = "0" + nonMatchedMonth
-
-                            _nonMatchedDate = nonMatchedYear + "-" + nonMatchedMonth + "-" + nonMatchedDay
-
-                            _nonMatchedDate_ = datetime.strptime(_nonMatchedDate, "%Y-%m-%d").date()
-
-                            #check if the non-matched lines fall within the specified range
-                            if _fromDate <= _nonMatchedDate_ <= _toDate:
-
-                                nonMatchedLine2 = nonMatchedDate + " " + nonMatchedTail
-
-                                #check if the line has Japanese characters
-                                hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
-                                katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
-                                kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
-
-                                if hiragana or katakana or kanji:
-                                    JPRegex = re.search(japaneseServiceStudioReportsOperationsLogsRegex, nonMatchedLine2)
-                                    if JPRegex:
-                                        JPDate = JPRegex.group(1)
-                                        JPTime = JPRegex.group(2)
-                                        JPTail = JPRegex.group(3)
-
-                                        #reformat the dates
-                                        year = JPDate.split("-")[2]
-                                        month = JPDate.split("-")[0]
-                                        day = JPDate.split("-")[1]
-
-                                        if len(month) != 2:
-                                            month = "0" + month
-
-                                        _JPDate = year + "-" + month + "-" + day
-
-                                        #reformat the times
-                                        if JPTime[-2:] == "AM" and JPTime[:2] == "12":
-                                            _JPTime = "00" + JPTime[2:-2]
-                                        elif JPTime[-2:] == "AM":
-                                            hours = JPTime.split(":")[0]
-                                            minutes = JPTime.split(":")[1]
-                                            seconds = JPTime.split(":")[2]
-                                            if len(hours) < 2:
-                                                hours = "0" + hours
-                                            _JPTime = hours + ":" + minutes + ":" + seconds[:-2]
-                                        elif JPTime[-2:] == "PM" and JPTime[:2] == "12":
-                                            _JPTime = JPTime[:-2]
-                                        elif JPTime[-2:] == "PM":
-                                            hours = JPTime.split(":")[0]
-                                            minutes = JPTime.split(":")[1]
-                                            seconds = JPTime.split(":")[2]
-                                            _JPTime = str(int(hours) + 12) + ":" + minutes + ":" + seconds[:-2]
-
-                                        JPText = _JPDate + " " + _JPTime + "|||" + JPTail.strip() + "\n"
-
-                                        myLinesFromDateRange.append(JPText)
-
-                                else:
-                                    nonMatchedOutText = "ServiceStudioReport -> " + nonMatchedLine2.strip() + "\n"
-
-                                    myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
-
-                #delete the temporary files and directory that were created
-                os.remove(tempFilePath)
+            if "iosbuildlog" in filename.lower() or "androidbuildlog" in filename.lower():
+                readiOSAndroidLogs(filename, searchLines, _fromDate, _toDate)
+            elif "studio" in filename.lower() and "report" in filename.lower():
+                readServiceStudioReportLogs(searchLines3, _fromDate, _toDate)
+    except ValueError as valError:
+        print("\nThe customer altered the original logs.\n\nPossible reasons:\n1- The customer added a column on the logs.\n" +
+              "2- The customer switched the columns of the logs.\n3- The customer modified the dates on the logs.\n")
 
     if len(myNonMatchedValidLinesFromDateRange) > 0:
         createFolder("\\nonmatched_valid_lines\\")
@@ -2932,6 +1968,7 @@ def txtFile(absolutePath, filename, filenameWithExt, ext, _fromDate, _toDate):
     print("Closing: " + filenameWithExt)
 
 def logFile(absolutePath, filenameWithExt, ext, _fromDate, _toDate):
+    #pattern for filenames: u_exYYMMDD.log
     print("Reading: " + filenameWithExt)
     
     outText = ""
@@ -2942,99 +1979,106 @@ def logFile(absolutePath, filenameWithExt, ext, _fromDate, _toDate):
     nonMatchedLine2 = ""
 
     #split the fields and rearrange them to combine them all later
-    if not "_x" in filenameWithExt.lower():
-        with codecs.open(absolutePath, "r", "utf-8", "ignore") as linesFromLog:
-            searchLines = linesFromLog.read()
-            regex = re.compile(iisLogsRegex, re.MULTILINE + re.IGNORECASE)
-            for match in regex.finditer(searchLines):
-                date = match.group(1)
-                time = match.group(2)
-                serverIP = match.group(3)
-                method = match.group(4)
-                uriStem = match.group(5)
-                uriQuery = match.group(6)
-                serverPort = match.group(7)
-                username = match.group(8)
-                clientIP = match.group(9)
-                browser = match.group(10)
-                referrer = match.group(11)
-                httpCode = match.group(12)
-                httpSubCode = match.group(13)
-                windowsCode = match.group(14)
-                timeTaken = match.group(15)
+    if filenameWithExt.lower().endswith("_x.log"):
+        print("\nThe customer altered the original IIS logs.\n\nFilenames ending in \"_x\" mean the customer created his own customized version of the IIS logs.\n")
+    else:
+        try:
+            with codecs.open(absolutePath, "r", "utf-8", "ignore") as linesFromLog:
+                searchLines = linesFromLog.read()
+                regex = re.compile(iisLogsRegex, re.MULTILINE + re.IGNORECASE)
+                for match in regex.finditer(searchLines):
+                    date = match.group(1)
+                    time = match.group(2)
+                    serverIP = match.group(3)
+                    method = match.group(4)
+                    uriStem = match.group(5)
+                    uriQuery = match.group(6)
+                    serverPort = match.group(7)
+                    username = match.group(8)
+                    clientIP = match.group(9)
+                    browser = match.group(10)
+                    referrer = match.group(11)
+                    httpCode = match.group(12)
+                    httpSubCode = match.group(13)
+                    windowsCode = match.group(14)
+                    timeTaken = match.group(15)
 
-                _date = datetime.strptime(date, "%Y-%m-%d").date()
-                    
-                if _fromDate <= _date <= _toDate:
-                    outText = date + " " + time + "|" + timeTaken + "|" + httpCode + "|" + httpSubCode + "|" + windowsCode + "|" + clientIP + "|" + serverIP + "|" + serverPort + "|" + method + "|" + uriStem + "|" + uriQuery + "|" + username + "|" + browser + "|" + referrer + "\n"
-                    myLinesFromDateRange.append(outText)
+                    _date = datetime.strptime(date, "%Y-%m-%d").date()
+                        
+                    if _fromDate <= _date <= _toDate:
+                        outText = date + " " + time + "|" + timeTaken + "|" + httpCode + "|" + httpSubCode + "|" + windowsCode + "|" + clientIP + "|" + serverIP + "|" + serverPort + "|" + method + "|" + uriStem + "|" + uriQuery + "|" + username + "|" + browser + "|" + referrer + "\n"
+                        myLinesFromDateRange.append(outText)
 
-            #capture all the lines that didn't match the regex
-            negativeRegex = re.compile(negativeIisLogsRegex, re.MULTILINE + re.IGNORECASE)
-            for match in negativeRegex.finditer(searchLines):
-                nonMatchedLine = match.group(1)
+                #capture all the lines that didn't match the regex
+                negativeRegex = re.compile(negativeIisLogsRegex, re.MULTILINE + re.IGNORECASE)
+                for match in negativeRegex.finditer(searchLines):
+                    nonMatchedLine = match.group(1)
 
-                nonMatchedRegex = re.search(nonMatchedIisLogsRegex, nonMatchedLine)
-                if nonMatchedRegex:
-                    nonMatchedDate = nonMatchedRegex.group(1)
-                    nonMatchedTail = nonMatchedRegex.group(2)
+                    nonMatchedRegex = re.search(nonMatchedIisLogsRegex, nonMatchedLine)
+                    if nonMatchedRegex:
+                        nonMatchedDate = nonMatchedRegex.group(1)
+                        nonMatchedTail = nonMatchedRegex.group(2)
 
-                    _nonMatchedDate = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
+                        _nonMatchedDate = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
 
-                    #check if the non-matched lines fall within the specified range
-                    if _fromDate <= _nonMatchedDate <= _toDate:
+                        #check if the non-matched lines fall within the specified range
+                        if _fromDate <= _nonMatchedDate <= _toDate:
 
-                        nonMatchedLine2 = nonMatchedDate + nonMatchedTail
+                            nonMatchedLine2 = nonMatchedDate + nonMatchedTail
 
-                        #check if the line has Japanese characters
-                        hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
-                        katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
-                        kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
+                            #check if the line has Japanese characters
+                            hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
+                            katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
+                            kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
 
-                        if hiragana or katakana or kanji:
-                            JPRegex = re.search(japaneseIisLogsRegex, nonMatchedLine2)
-                            if JPRegex:
-                                JPDate = JPRegex.group(1)
-                                JPTime = JPRegex.group(2)
-                                JPTail = JPRegex.group(3)
-                                JPTimeTaken = JPRegex.group(4)
+                            if hiragana or katakana or kanji:
+                                JPRegex = re.search(japaneseIisLogsRegex, nonMatchedLine2)
+                                if JPRegex:
+                                    JPDate = JPRegex.group(1)
+                                    JPTime = JPRegex.group(2)
+                                    JPTail = JPRegex.group(3)
+                                    JPTimeTaken = JPRegex.group(4)
 
-                                newJPTail = normalizeLines(JPTail)
+                                    newJPTail = normalizeLines(JPTail)
 
-                                JPText = JPDate + " " + JPTime + "|" + JPTimeTaken + "|" + newJPTail + "\n"
+                                    JPText = JPDate + " " + JPTime + "|" + JPTimeTaken + "|" + newJPTail + "\n"
 
-                                myLinesFromDateRange.append(JPText)
+                                    myLinesFromDateRange.append(JPText)
 
-                        else:
-                            newNonMatchedLine2 = normalizeLines(nonMatchedLine2)
-                            sanitizeLines(newNonMatchedLine2)
-                            
-                            #check if the line matches the regular expression
-                            regex2 = re.search(iisLogsRegex, newNonMatchedLine2)
-                            if regex2:
-                                date = regex2.group(1)
-                                time = regex2.group(2)
-                                serverIP = regex2.group(3)
-                                method = regex2.group(4)
-                                uriStem = regex2.group(5)
-                                uriQuery = regex2.group(6)
-                                serverPort = regex2.group(7)
-                                username = regex2.group(8)
-                                clientIP = regex2.group(9)
-                                browser = regex2.group(10)
-                                referrer = regex2.group(11)
-                                httpCode = regex2.group(12)
-                                httpSubCode = regex2.group(13)
-                                windowsCode = regex2.group(14)
-                                timeTaken = regex2.group(15)
+                            else:
+                                newNonMatchedLine2 = normalizeLines(nonMatchedLine2)
+                                newNonMatchedLine2 = newNonMatchedLine2.translate(replacementDict)
+                                
+                                #check if the line matches the regular expression
+                                regex2 = re.search(iisLogsRegex, newNonMatchedLine2)
+                                if regex2:
+                                    date = regex2.group(1)
+                                    time = regex2.group(2)
+                                    serverIP = regex2.group(3)
+                                    method = regex2.group(4)
+                                    uriStem = regex2.group(5)
+                                    uriQuery = regex2.group(6)
+                                    serverPort = regex2.group(7)
+                                    username = regex2.group(8)
+                                    clientIP = regex2.group(9)
+                                    browser = regex2.group(10)
+                                    referrer = regex2.group(11)
+                                    httpCode = regex2.group(12)
+                                    httpSubCode = regex2.group(13)
+                                    windowsCode = regex2.group(14)
+                                    timeTaken = regex2.group(15)
 
-                                outText2 = date + " " + time + "|" + timeTaken + "|" + httpCode + "|" + httpSubCode + "|" + windowsCode + "|" + clientIP + "|" + serverIP + "|" + serverPort + "|" + method + "|" + uriStem + "|" + uriQuery + "|" + username + "|" + browser + "|" + referrer + "\n"
-                                myLinesFromDateRange.append(outText2)
+                                    outText2 = date + " " + time + "|" + timeTaken + "|" + httpCode + "|" + httpSubCode + "|" + windowsCode + "|" + clientIP + "|" + serverIP + "|" + serverPort + "|" + method + "|" + uriStem + "|" + uriQuery + "|" + username + "|" + browser + "|" + referrer + "\n"
+                                    myLinesFromDateRange.append(outText2)
 
-                            if not regex2:
-                                nonMatchedOutText = "IISLog -> " + newNonMatchedLine2 + "\n"
+                                if not regex2:
+                                    nonMatchedOutText = "IISLog -> " + newNonMatchedLine2 + "\n"
 
-                                myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
+                                    myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
+
+        except ValueError as valError:
+            print("\nThe customer altered the original IIS logs.\n\nPossible reasons:\n1- The customer added a column on the logs.\n" +
+                  "2- The customer switched the columns of the logs.\n")
 
     if len(myNonMatchedValidLinesFromDateRange) > 0:
         createFolder("\\nonmatched_valid_lines\\")
@@ -3164,53 +2208,55 @@ def evtxFile(absolutePath, filenameWithExt, ext, _fromDate, _toDate):
     channel = ""
 
     #read the windows event viewer log and convert its contents to XML
-    with evtx.Evtx(absolutePath) as log:
-        for record in log.records():
-            myXMLList.append(record.xml())
+    with codecs.open(tempFilePath, "a+", "utf-8", "ignore") as tempFile:
+        with evtx.Evtx(absolutePath) as log:
+            for record in log.records():
+                xmlLine = record.xml()
+                xmlLine = xmlLine.replace(" xmlns=\"http://schemas.microsoft.com/win/2004/08/events/event\"", "")
+                xmlParse = etree.XML(xmlLine)
+                level = parseXMLtoString(xmlParse, ".//Level/text()")
 
-    for x, elm in enumerate(myXMLList):
-        #remove the namespace from each line of the list
-        xmlLine = myXMLList[x].replace(" xmlns=\"http://schemas.microsoft.com/win/2004/08/events/event\"", "")
-        #parse each line from the list to XML format
-        xmlParse = etree.XML(xmlLine)
+                if not level == "0" and not level == "4":
+                    providerName = parseXMLtoString(xmlParse, ".//Provider/@Name")
+                    qualifiers = parseXMLtoString(xmlParse, ".//EventID/@Qualifiers")
+                    timestamp = parseXMLtoString(xmlParse, ".//TimeCreated/@SystemTime")
+                    eventID = parseXMLtoString(xmlParse, ".//EventID/text()")
+                    task = parseXMLtoString(xmlParse, ".//Task/text()")
+                    keywords = parseXMLtoString(xmlParse, ".//Keywords/text()")
+                    eventRecordID = parseXMLtoString(xmlParse, ".//EventRecordID/text()")
+                    channel = parseXMLtoString(xmlParse, ".//Channel/text()")
+                    computer = parseXMLtoString(xmlParse, ".//Computer/text()")
+                    message = parseXMLtoString(xmlParse, ".//Data/text()")
 
-        providerName = parseXMLtoString(xmlParse, ".//Provider/@Name")
-        qualifiers = parseXMLtoString(xmlParse, ".//EventID/@Qualifiers")
-        timestamp = parseXMLtoString(xmlParse, ".//TimeCreated/@SystemTime")
-        eventID = parseXMLtoString(xmlParse, ".//EventID/text()")
-        level = parseXMLtoString(xmlParse, ".//Level/text()")
-        task = parseXMLtoString(xmlParse, ".//Task/text()")
-        keywords = parseXMLtoString(xmlParse, ".//Keywords/text()")
-        eventRecordID = parseXMLtoString(xmlParse, ".//EventRecordID/text()")
-        channel = parseXMLtoString(xmlParse, ".//Channel/text()")
-        computer = parseXMLtoString(xmlParse, ".//Computer/text()")
-        message = parseXMLtoString(xmlParse, ".//Data/text()")
+                    if level == "1":
+                        level = "Critical"
+                    elif level == "2":
+                        level = "Error"
+                    elif level == "3":
+                        level = "Warning"
+                                
+                    date = timestamp[0:10]
+                    time = timestamp[11:19]
+                    time = time.replace(".", "")
 
-        date = timestamp[0:10]
-        time = timestamp[11:19]
-        time = time.replace(".", "")
+                    _date = datetime.strptime(date, "%Y-%m-%d").date()
+                                        
+                    if _fromDate <= _date <= _toDate:
 
-        _date = datetime.strptime(date, "%Y-%m-%d").date()
-                
-        if _fromDate <= _date <= _toDate:
+                        message = message.replace("<string>", "")
+                        message = message.replace("</string>", "")
+                        newMessage = normalizeLines(message)
+                        newMessage = newMessage.translate(replacementDict)
+                                    
+                        outText = date + " " + time + "|" + level + "|" + newMessage.strip() + "|" + task + "|" + computer + "|" + providerName + "|" + qualifiers + "|" + eventID + "|" + eventRecordID + "|" + keywords + "\n"
 
-            if level == "0" or level == "4":
-                level = "Information"
-            elif level == "1":
-                level = "Critical"
-            elif level == "2":
-                level = "Error"
-            elif level == "3":
-                level = "Warning"
+                        tempFile.writelines(outText)
 
-            message = message.replace("<string>", "")
-            message = message.replace("</string>", "")
-            message = message.replace("\t", " ")
-            message = message.replace("\r\n", " ")
-            message = message.replace("\n", " ")
-
-            outText = date + " " + time + "|" + level + "|" + providerName + "|" + qualifiers + "|" + eventID + "|" + eventRecordID + "|" + task + "|" + keywords + "|" + message.strip() + "|" + computer + "\n"
-            myLinesFromDateRange.append(outText)
+    with codecs.open(tempFilePath, "r", "utf-8", "ignore") as tempFile2:
+        myLinesFromDateRange = tempFile2.readlines()
+            
+    #delete the temporary file that was created
+    os.remove(tempFilePath)          
 
     if len(myLinesFromDateRange) > 0:
         createFolder("\\filtered_data_files\\")
