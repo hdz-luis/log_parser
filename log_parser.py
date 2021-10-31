@@ -42,7 +42,10 @@ DATE_TIME DURATION APPLICATION_NAME APPLICATION_KEY ACTION_NAME SOURCE ENTRYPOIN
 ScreenLog = TraditionalWebRequests             
 TraditionalWebRequests logs:
 DATE_TIME DURATION SCREEN SCREEN_TYPE APPLICATION_NAME APPLICATION_KEY ACTION_NAME ACCESS_MODE EXECUTED_BY CLIENT_IP ESPACE_NAME ESPACE_ID USER_ID SESSION_ID SESSION_REQUESTS SESSION_BYTES VIEW_STATE_BYTES MS_IS_DN REQUEST_KEY TENANT_ID
-  
+
+BPTTroubleshootingReports:
+DATE_TIME ESPACE_NAME PROCESS_NAME PROCESS_STATUS PROCESS_LAST_MODIFIED PROCESS_SUSPENDED_DATE PROCESS_ID PARENT_PROCESS_ID ACTIVITY_CREATED ACTIVITY_NAME ACTIVITY_KIND ACTIVITY_STATUS ACTIVITY_RUNNING_SINCE ACTIVITY_NEXT_RUN ACTIVITY_CLOSED ACTIVITY_ERROR_COUNT ACTIVITY_ERROR_ID
+
 IIS logs:
 DATE_TIME TIME_TAKEN HTTP_CODE HTTP_SUBCODE WINDOWS_ERROR_CODE CLIENT_IP SERVER_IP SERVER_PORT
 METHOD URI_STEM URI_QUERY USERNAME BROWSER REFERRER
@@ -66,8 +69,113 @@ SERVER_PORT SERVER_NAME SERVICE_NAME METHOD URI_STEM URI_QUERY USERNAME BROWSER 
 Android, iOS, and Service Studio Report:
 DATE_TIME MESSAGE_TYPE ACTION_NAME MESSAGE
 
+General Text Logs:
+DATE_TIME MESSAGE_TYPE MESSAGE
+
 Windows Event Viewer logs:
 DATE_TIME LEVEL MESSAGE TASK COMPUTER PROVIDER_NAME QUALIFIERS EVENT_ID EVENT_RECORD_ID KEYWORDS
+
+Full Error Dump logs:
+PLATFORM_INFORMATION
+
+Environment Capabilities logs:
+ID ENVIRONMENT CAPABILITY
+
+Environments logs:
+IS_LIFE_TIME IS_REGISTERED ID NAME DESCRIPTION HOST PUBLIC_HOST TYPE PRIMARY_CONTACT ORDER NUMBER_OF_USERS IS_ACTIVE IS_OFFLINE LAST_SET_OFFLINE CREATED_BY CREATED_ON USE_HTTPS VERSION LAST_UPGRADE_VERSION UID CALLBACK_ADDRESS NUMBER_OF_FRONTEND_SERVERS FIRST_SYNC_FINISHED CLOUD_PROVIDER_TYPE ENVIRONMENT_STACK ADDITIONAL_INFO LAST_CACHE_INVALIDATION ENVIRONMENT_DB_PROVIDER ENVIRONMENT_SERVER_KIND TWO_STEP_PUBLISH_MODE LAST_ENV_SYNC_SEQUENTIAL_NUMBER MONITORING_ENABLED DATA_HARVESTED_TO IS_IN_OUTSYSTEMS_CLOUD BEST_HASHING_ALGORITHM ALLOW_NATIVE_BUILDS
+
+Roles logs:
+ID NAME DESCRIPTION ORDER CAN_CONFIGURE_INFRASTRUCTURE CAN_CONFIGURE_ROLES CAN_CONFIGURE_USERS CAN_CONFIGURE_APPLICATION_ROLES KEY ID_2 LABEL_OLD SHORT_LABEL_OLD DESCRIPTION_OLD LABEL SHORT_LABEL DESCRIPTION_2 LT_LEVEL SC_LEVEL APPLICATION_LEVEL IS_OLD_LEVEL ID_3 LABEL_2 SHORT_LABEL_2 DESCRIPTION_3 LEVEL IS_COMPUTED ID_4 ROLE ENVIRONMENT DEFAULT_PERMISSION_LEVEL CAN_CREATE_APPLICATIONS CAN_REFERENCE_SYSTEMS IS_INITIALIZED
+
+Roles In Applications logs:
+ID USER ROLE APPLICATION
+
+Roles In Teams logs:
+ID ROLE KEY TEAM NAME KEY_2
+
+Sync Errors logs:
+DATE_TIME SESSION_ID MESSAGE STACK MODULE SERVER USERNAME ENDPOINT ACTION PROCESS_NAME ACTIVITY_NAME
+
+User logs:
+ID NAME USERNAME EXTERNAL CREATION_DATE	LAST_LOGIN IS_ACTIVE ID_2 NAME_2 DESCRIPTION ORDER CAN_CONFIGURE_INFRASTRUCTURE CAN_CONFIGURE_ROLES CAN_CONFIGURE_USERS CAN_CONFIGURE_APPLICATION_ROLES KEY USER_ROLE KEY_2 MTSI_IDENTIFIER
+
+User Pools logs:
+USER POOL_KEY
+
+Application logs:
+ID TEAM	NAME DESCRIPTION PRIMARY_CONTACT URL_PATH KEY LOGO_HASH	IS_ACTIVE DEFAULT_THEME_IS_MOBILE MONITORING_ENABLED APPLICATION_KIND
+
+Application Version logs:
+ID APPLICATION VERSION CHANGE_LOG CREATED_ON CREATED_BY	CREATED_ON_ENVIRONMENT FRONT_OFFICE_ESPACE_KEY FRONT_OFFICE_ESPACE_NAME BACK_OFFICE_ESPACE_KEY BACK_OFFICE_ESPACE_NAME WEB_THEME_GLOBAL_KEY MOBILE_THEME_GLOBAL_KEY WAS_AUTO_TAGGED VERSION_DECIMAL TEMPLATE_KEY PRIMARY_COLOR NATIVE_HASH KEY
+
+Application Version Module Version logs:
+ID APPLICATION_VERSION MODULE_VERSION ID_2 MODULE HASH GENERAL_HASH CREATED_ON CREATED_BY CREATED_ON_ENVIRONMENT LAST_UPGRADE_VERSION DIRECT_UPGRADE_FROM_VERSION_HASH COMPATIBILITY_SIGNATURE_HASH KEY
+
+ChangeLog logs:
+ID LABEL ID_2 DATE_TIME MESSAGE FIRST_OBJECT_TYPE FIRST_OBJECT SECOND_OBJECT_TYPE SECOND_OBJECT IS_WRITE IS_SUCCESSFUL IS_SYSTEM ENTRY_ESPACE USER CLIENT_IP
+
+Consumer Elements logs:
+CONSUMER_MODULE CONSUMER_MODULE_NAME CONSUMER_MODULE_VERSION CONSUMER_ELEMENT_VERSION CONSUMER_ELEMENT_VERSION_KEY CONSUMER_ELEMENT_VERSION_TYPE CONSUMER_ELEMENT_VERSION_NAME CONSUMER_ELEMENT_VERSION_COMPATIBILITY_HASH PRODUCER_MODULE PRODUCER_MODULE_KEY PRODUCER_MODULE_NAME PRODUCER_MODULE_TYPE CREATED_ON_PRODUCER_MODULE_VERSION
+
+Entity Configurations logs:
+ID ENTITY_KEY MODULE_VERSION_ID CREATED_ON UPDATED_ON ID_2 MODULE_ID STAGING_ID CREATED_ON_2 CREATED_BY UPDATED_ON_2 UPDATED_BY ENTITY_KEY_2 PHYSICAL_TABLE_NAME IS_OVERRIDEN_TABLE_NAME DEFAULT_PHYSICAL_TABLE_NAME ENTITY_NAME SOURCE_PHYSICAL_TABLE_NAME TARGET_PHYSICAL_TABLE_NAME
+
+Environment Application Cache logs:
+ID ENV_APPLICATION_CACHE_ID MOBILE_PLATFORM BINARY_AVAILABLE CONFIG_AVAILABLE VERSION_NUMBER VERSION_CODE VERSION_CHANGED CONFIGURATION_CHANGED TAGGED_MABS_VERSION LAST_BUILD_MABS_VERSION LOCKED_MABS_VERSION ID_2 ENVIRONMENT APPLICATION VERSION VERSION_CHANGED_2 NUMBER_OF_USERS CHANGE_STATUS CHANGE_STATUS_MESSAGE SERVICE_CENTER_STATUS SERVICE_CENTER_STATUS_MESSAGE LAST_PUBLISHED LAST_PUBLISHED_BY DELETED CONSISTENCY_STATUS CONSISTENCY_STATUS_MESSAGES FRONT_OFFICE_ESPACE_KEY FRONT_OFFICE_ESPACE_NAME BACK_OFFICE_ESPACE_KEY BACK_OFFICE_ESPACE_NAME WEB_THEME_GLOBAL_KEY MOBILE_THEME_GLOBAL_KEY IS_OUTDATED DEVELOPMENT_EFFORT TEMPLATE_KEY PRIMARY_COLOR NATIVE_HASH ENV_DEPLOYMENT_ZONES IS_IN_MULTIPLE_DEPLOYMENT_ZONES IS_PWA_ENABLED
+
+Environment Application Module logs:
+ID APPLICATION	MODULE	ENVIRONMENT LAST_CHANGED_ON
+
+Environment App Version logs:
+ID ENVIRONMENT APPLICATION_VERSION
+
+Environment Module Cache logs:
+ID ENVIRONMENT MODULE_VERSION INTERNAL_VERSION PUBLISHED_ON PUBLISHED_BY ID_2 ENVIRONMENT_2 MODULE PUBLISH CHANGE_STATUS CHANGE_STATUS_MESSAGE DELETED	CONSISTENCY_STATUS CONSISTENCY_STATUS_MESSAGES IS_OUTDATED
+
+Environment Module Running logs:
+ID ENVIRONMENT CONSUMER_MODULE PRODUCER_MODULE_KEY PRODUCER_COMPATIBILITY_HASH IS_WEAK_REFERENCE
+
+Module logs:
+ID LABEL TOKEN ID_2 NAME DESCRIPTION KEY TYPE
+
+Module Version References logs:
+ID MODULE_VERSION_REFERENCE PRODUCER_MODULE_VERSION IS_COMPATIBLE IS_IN_DIFFERENT_LUV PLATFORM_VERSION ID_2 MODULE_VERSION PRODUCER_MODULE IS_WEAK_REFERENCE ID_3 MODULE_VERSION_REFERENCE_STATUS ELEMENT_NAME ELEMENT_KEY ELEMENT_TYPE ELEMENT_REF_INCONSISTENCY_TYPE_I
+
+Producer Elements logs:
+MODULE MODULE_NAME MODULE_VERSION ELEMENT_VERSION ELEMENT_VERSION_KEY ELEMENT_VERSION_TYPE ELEMENT_VERSION_NAME ELEMENT_VERSION_COMPATIBILITY_HASH
+
+Site Properties logs:
+ID SS_KEY MODULE_VERSION_ID NAME DATA_TYPE_ID DESCRIPTION DEFAULT_VALUE IS_MULTI_TENANT CREATED_ON UPDATED_ON ID_2 LABEL ORDER IS_ACTIVE ID_3 EFFECTIVE_VALUE_CHANGED_IN_STAGING EFFECTIVE_VALUE_ON_TARGET SITE_PROPERTY_SS_KEY IS_MULTI_TENANT_2 MODULE_ID STAGING_ID IS_NEW CREATED_ON_2 CREATED_BY UPDATED_ON_2 UPDATED_BY
+
+Staging logs:
+ID SOURCE_ENVIRONMENT TARGET_ENVIRONMENT LABEL INTERNAL CREATED_BY CREATED_ON STARTED_BY STARTED_ON FINISHED_ON IS_DRAFT SOLUTION_PUBLISHED_FINISHED IS_WAITING_FOR_CONFIRMATION_PROCESS SAVED_BY SAVED_ON LAST_REFRESHED_ON SYNC_FINISHED_ON SOURCE_STAGING STAGING_CONFIRMATION_KIND TWO_STEP_MODE LAST_RESUME_DATE_TIME MARKED_FOR_ABORT_ON ABORTED_BY KEY STATUS
+
+Staging Application Version logs:
+ID KEY NAME IS_DEFAULT DEPLOYMENT_TECH ENVIRONMENT IS_ACTIVE ID_2 STAGING_APPLICATION_VERSION MOBILE_PLATFORM SOURCE_BINARY_AVAILABLE SOURCE_CONFIG_AVAILABLE SOURCE_VERSION_NUMBER SOURCE_VERSION_CODE TARGET_BINARY_AVAILABLE TARGET_CONFIG_AVAILABLE TARGET_VERSION_NUMBER TARGET_VERSION_CODE VERSION_CHANGED VERSION_AFTER_FINISH_PUBLISH MABS_VERSION_AFTER_PUBLISH ID_3 STAGING APPLICATION APPLICATION_VERSION VERSION_CHANGED_2 APPLICATION_DELETED LAST_PUBLISHED LAST_PUBLISHED_BY FRONT_OFFICE_ESPACE_KEY FRONT_OFFICE_ESPACE_NAME BACK_OFFICE_ESPACE_KEY BACK_OFFICE_ESPACE_NAME WEB_THEME_GLOBAL_KEY MOBILE_THEME_GLOBAL_KEY	TEMPLATE_KEY PRIMARY_COLOR SOURCE_APPLICATION_VERSION SOURCE_VERSION_CHANGED PREVIOUS_APPLICATION_VERSION PREVIOUS_VERSION_CHANGED PREVIOUS_APPLICATION_DELETED PREVIOUS_LAST_PUBLISHED PREVIOUS_LAST_PUBLISHED_BY PREVIOUS_FRONT_OFFICE_ESPACE_KEY PREVIOUS_FRONT_OFFICE_ESPACE_NAME PREVIOUS_BACK_OFFICE_ESPACE_KEY PREVIOUS_BACK_OFFICE_ESPACE_NAME PREVIOUS_WEB_THEME_GLOBAL_KEY PREVIOUS_MOBILE_THEME_GLOBAL_KEY PREVIOUS_TEMPLATE_KEY PREVIOUS_PRIMARY_COLOR OPERATION OPERATION_LABEL OPERATION_MESSAGE OPERATION_IS_DEPLOY OPERATION_IS_FORCE_DEPLOY VERSION_WHEN_STARTING_DEPLOY VERSION_AFTER_FINISHING_DEPLOY TARGET_ENV_CONSISTENCY_STATUS TARGET_ENV_CONSISTENCY_MSG ORDER_IN_SUMMARY_TABLE NEW_TAG_VERSION NEW_TAG_DESCRIPTION STAGING_OPTION PENDING_VALIDATION SOURCE_NATIVE_HASH TARGET_NATIVE_HASH IS_VISIBLE_IN_STAGING HAS_NEW_SITE_PROP ID_4 ENV_DEPLOYMENT_ZONES ENV_DATABASE_CONFIG IS_PWA_ENABLED_ON_SOURCE IS_AUTO_UPGRADE_DISABLED
+
+Staging Message logs:
+ID STAGING MESSAGE DETAIL EXTRA_INFO INTERNAL_ID INTERNAL_TYPE TYPE DATE_TIME
+
+Staging Module Inconsistency logs:
+ID STAGING CONSUMER_MODULE PRODUCER_MODULE FIRST_REQUIRED_ELEMENT FIRST_REQUIRED_ELEMENT_TYPE TOTAL_REQUIRED_ELEMENTS PRODUCER_MODULE_NAME CONSUMER_MODULE_NAME INCONSISTENCY_TYPE
+
+Staging Module Version logs:
+ID STAGING APPLICATION PREVIOUS_APPLICATION MODULE MODULE_VERSION MODULE_DELETED PREVIOUS_MODULE_VERSION PREVIOUS_MODULE_DELETED OPERATION
+
+Staging Module Version To Publish logs:
+ID STAGING PLANNED_MODULE_VERSION_HASH MODULE_VERSION_HASH_TO_PUBLISH
+
+Staging Module Version To Upload logs:
+ID STAGING USER ENVIRONMENT_ID_1 ENVIRONMENT_ID_2 TYPE NAME MODULE_KEY VERSION_KEY DIRECT_UPGRADE_FROM_VERSION_KEY APPLICATION_KEY
+
+Staging Option logs:
+ID STAGING APPLICATION STAGING_OPTION_TYPE APPLICATION_VERSION APPLICATION_VERSION_LABEL LABEL APPLICATION_DESCRIPTION IS_TOP_OPTION iOS_VERSION_LABEL ANDROID_VERSION_LABEL MOBILE_APPS_DESCRIPTION
+
+Staging Outdated Application logs:
+ID STAGING APPLICATION
+
+Staging Outdated Module logs:
+ID STAGING MODULE
 
 1) Filter data based on a date range
 2) Read the input files and rearrange the columns.
@@ -88,71 +196,65 @@ myTimesTaken = []
 
 #all illegal space characters, control characters, ASCII characters, and emojis
 replacementDict = {}
-replacementDict.update(dict.fromkeys(range(0x2000, 0x206f), " "))
-replacementDict.update(dict.fromkeys(range(0x0004, 0x0007), " "))
-replacementDict.update(dict.fromkeys(range(0x2194, 0x1faf6), " "))
-replacementDict.update(dict.fromkeys(range(0x0091, 0x0094), " "))
-replacementDict.update(dict.fromkeys(range(0x0096, 0x0097), " "))
-replacementDict.update(dict.fromkeys(range(0x00a6, 0x00a8), " "))
-replacementDict.update(dict.fromkeys(range(0x00aa, 0x00ac), " "))
-replacementDict.update(dict.fromkeys(range(0x00af, 0x00be), " "))
-replacementDict.update(dict.fromkeys(range(0x00c4, 0x00c6), " "))
-replacementDict.update(dict.fromkeys(range(0x00cf, 0x00d0), " "))
-replacementDict.update(dict.fromkeys(range(0x00d6, 0x00d8), " "))
-replacementDict.update(dict.fromkeys(range(0x00dd, 0x00df), " "))
-replacementDict.update(dict.fromkeys(range(0x00e4, 0x00e6), " "))
-replacementDict.update(dict.fromkeys(range(0x00ef, 0x00f0), " "))
-replacementDict.update(dict.fromkeys(range(0x00f6, 0x00f8), " "))
-replacementDict.update(dict.fromkeys(range(0x00fd, 0x00ff), " "))
-replacementDict.update(dict.fromkeys(range(0x2013, 0x2014), "-"))
-replacementDict.update(dict.fromkeys(range(0x2018, 0x2019), "\'"))
-replacementDict.update(dict.fromkeys(range(0x201c, 0x201d), "\""))
-replacementDict.update(dict.fromkeys(range(0x2550, 0x2551), " "))
-replacementDict.update(dict.fromkeys(range(0x2591, 0x2593), " "))
-replacementDict[0x00a0] = " "
-replacementDict[0x1680] = " "
-replacementDict[0x180e] = " "
-replacementDict[0xfeff] = " "
-replacementDict[0x00ad] = " "
-replacementDict[0x0081] = " "
-replacementDict[0x008d] = " "
-replacementDict[0xeed1] = " "
-replacementDict[0x0082] = " "
-replacementDict[0x0089] = " "
-replacementDict[0x009a] = " "
-replacementDict[0x0161] = " "
-replacementDict[0x00a4] = " "
-replacementDict[0x00cb] = " "
-replacementDict[0x00eb] = " "
-replacementDict[0x0131] = " "
-replacementDict[0x0192] = " "
-replacementDict[0x2017] = " "
-replacementDict[0x2261] = " "
-replacementDict[0x2310] = " "
-replacementDict[0x2500] = " "
-replacementDict[0x2502] = " "
-replacementDict[0x250c] = " "
-replacementDict[0x2510] = " "
-replacementDict[0x2514] = " "
-replacementDict[0x2518] = " "
-replacementDict[0x251c] = " "
-replacementDict[0x252c] = " "
-replacementDict[0x2534] = " "
-replacementDict[0x253c] = " "
-replacementDict[0x2554] = " "
-replacementDict[0x2557] = " "
-replacementDict[0x255a] = " "
-replacementDict[0x255d] = " "
-replacementDict[0x2560] = " "
-replacementDict[0x2563] = " "
-replacementDict[0x2566] = " "
-replacementDict[0x2569] = " "
-replacementDict[0x256c] = " "
-replacementDict[0x2580] = " "
-replacementDict[0x2584] = " "
-replacementDict[0x2588] = " "
-replacementDict[0x25a0] = " "
-replacementDict[0x3002] = " "
+replacementDict.update(dict.fromkeys(range(8220, 8221), ""))
+replacementDict.update(dict.fromkeys(range(166, 168), ""))
+replacementDict.update(dict.fromkeys(range(170, 172), ""))
+replacementDict.update(dict.fromkeys(range(176, 190), ""))
+replacementDict.update(dict.fromkeys(range(196, 198), ""))
+replacementDict.update(dict.fromkeys(range(207, 208), ""))
+replacementDict.update(dict.fromkeys(range(214, 216), ""))
+replacementDict.update(dict.fromkeys(range(221, 223), ""))
+replacementDict.update(dict.fromkeys(range(228, 230), ""))
+replacementDict.update(dict.fromkeys(range(239, 240), ""))
+replacementDict.update(dict.fromkeys(range(246, 248), ""))
+replacementDict.update(dict.fromkeys(range(9617, 9619), ""))
+replacementDict.update(dict.fromkeys(range(8192, 8207), ""))
+replacementDict.update(dict.fromkeys(range(4, 7), ""))
+replacementDict[8240] = ""
+replacementDict[8218] = ""
+replacementDict[8211] = "-"
+replacementDict[353] = ""
+replacementDict[164] = ""
+replacementDict[175] = "-"
+replacementDict[203] = ""
+replacementDict[235] = ""
+replacementDict[255] = ""
+replacementDict[305] = ""
+replacementDict[402] = ""
+replacementDict[8215] = "_"
+replacementDict[8801] = "="
+replacementDict[9472] = "-"
+replacementDict[9474] = ""
+replacementDict[9484] = ""
+replacementDict[9488] = ""
+replacementDict[9492] = ""
+replacementDict[9496] = ""
+replacementDict[9500] = ""
+replacementDict[9516] = ""
+replacementDict[9524] = ""
+replacementDict[9532] = ""
+replacementDict[9552] = "="
+replacementDict[9553] = ""
+replacementDict[9556] = ""
+replacementDict[9562] = ""
+replacementDict[9565] = ""
+replacementDict[9568] = ""
+replacementDict[9571] = ""
+replacementDict[9574] = ""
+replacementDict[9577] = ""
+replacementDict[9580] = ""
+replacementDict[9600] = ""
+replacementDict[9604] = ""
+replacementDict[9608] = ""
+replacementDict[9632] = ""
+replacementDict[12290] = ""
+replacementDict[160] = ""
+replacementDict[173] = ""
+replacementDict[129] = ""
+replacementDict[141] = ""
+replacementDict[5760] = "-"
+replacementDict[6158] = ""
+replacementDict[65279] = ""
 
 numOfLines = 6000
 constant = 6000
@@ -167,8 +269,8 @@ negativeGeneralLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\w\+\/\=\' ]+
 nonMatchedGeneralLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseGeneralLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|(.*?)?\|([\d]+)\|([\d]+)\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?"
 
-integrationsLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w\.\:\;\-\% ]+)?\|([\w\:\/\\\.\-\=\%\&\?]+)?\|([\w\/\.\-\(\) ]+)\|([\w\(\) ]+)\|([\d]+)\|([\w\-]+)?\|([\w\-]+)\|([\w\-\:]+)\|([\w\.]+)?\|([\w\-\.\,\(\)\[\]\/\& ]+)?\|([\w\-]+)?"
-negativeIntegrationsLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w\.\:\;\-\% ]+)?\|(?:[\w\:\/\\\.\-\=\%\&\?]+)?\|(?:[\w\/\.\-\(\) ]+)\|(?:[\w\(\) ]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w\-]+)\|(?:[\w\-\:]+)\|(?:[\w\.]+)?\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)?\|(?:[\w\-]+)?).*)"
+integrationsLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w\.\:\;\-\% ]+)?\|([\w\:\/\\\.\-\=\%\&\?\~]+)?\|([\w\/\.\-\(\) ]+)\|([\w\(\) ]+)\|([\d]+)\|([\w\-]+)?\|([\w\-]+)\|([\w\-\:]+)\|([\w\.]+)?\|([\w\-\.\,\(\)\[\]\/\& ]+)?\|([\w\-]+)?"
+negativeIntegrationsLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w\.\:\;\-\% ]+)?\|(?:[\w\:\/\\\.\-\=\%\&\?\~]+)?\|(?:[\w\/\.\-\(\) ]+)\|(?:[\w\(\) ]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w\-]+)\|(?:[\w\-\:]+)\|(?:[\w\.]+)?\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)?\|(?:[\w\-]+)?).*)"
 nonMatchedIntegrationsLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseIntegrationsLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|(.*?)?\|(.*?)?\|(.*?)\|(.*?)\|([\d]+)\|(.*?)?\|(.*?)\|(.*?)\|(.*?)?\|(.*?)?\|(.*?)?"
 
@@ -182,8 +284,8 @@ negativeTimerLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w\-
 nonMatchedTimerLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseTimerLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|(.*?)\|([\d]+)\|(.*?)\|(.*?)?\|([\d\-\:\. ]+)\|([\d\-\:\. ]+)\|(.*?)?\|(.*?)\|(.*?)\|(.*?)\|(.*?)"
 
-emailLogsRegex = r"^([\d]+)\|([\w]+)\|([\w\-\:\. ]+)\|([\w\-\:\. ]+)?\|([\d]+)\|([\w\@\.\,\- ]+)\|([\w\@\.\,\- ]+)\|([\w\@\.]+)?\|([\w\@\.]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)\|([\w]+)\|([\w]+)\|([\d]+)\|([\w\@\.]+)"
-negativeEmailLogsRegex = r"^((?!(?:[\d]+)\|(?:[\w]+)\|(?:[\w\-\:\. ]+)\|(?:[\w\-\:\. ]+)?\|(?:[\d]+)\|(?:[\w\@\.\,\- ]+)\|(?:[\w\@\.\,\- ]+)\|(?:[\w\@\.]+)?\|(?:[\w\@\.]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w]+)\|(?:[\d]+)\|(?:[\w\@\.]+)).*)"
+emailLogsRegex = r"^([\d]+)\|([\w]+)\|([\w\-\:\. ]+)\|([\w\-\:\. ]+)?\|([\d]+)\|([\w\@\.\,\- ]+)\|([\w\@\.\,\- ]+)\|([\w\@\.\-]+)?\|([\w\@\.\-]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)\|([\w]+)\|([\w]+)\|([\d]+)\|([\w\@\.\-]+)"
+negativeEmailLogsRegex = r"^((?!(?:[\d]+)\|(?:[\w]+)\|(?:[\w\-\:\. ]+)\|(?:[\w\-\:\. ]+)?\|(?:[\d]+)\|(?:[\w\@\.\,\- ]+)\|(?:[\w\@\.\,\- ]+)\|(?:[\w\@\.\-]+)?\|(?:[\w\@\.\-]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w]+)\|(?:[\d]+)\|(?:[\w\@\.\-]+)).*)"
 nonMatchedEmailLogsRegex = r"^((?:.*?\|){10})([\d\-]+)(.+)"
 japaneseEmailLogsRegex = r"^([\d]+)\|(.*?)\|(.*?)\|(.*?)?\|([\d]+)\|(.*?)\|(.*?)\|(.*?)?\|(.*?)?\|(.*?)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)\|(.*?)\|(.*?)\|([\d]+)\|(.*?)"
 
@@ -202,6 +304,10 @@ negativeScreenLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w]
 nonMatchedScreenLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseScreenLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|(.*?)\|(.*?)\|([\d]+)\|([\d]+)\|(.*?)?\|(.*?)\|(.*?)\|([\d]+)\|([\d]+)\|([\d]+)\|(.*?)\|(.*?)\|(.*?)?\|(.*?)\|(.*?)\|(.*?)\|(.*?)"
 
+bptTroubleshootingReportsRegex = "^([\d]+)\|([\w]+)\|([\w]+)\|([\w]+)\|([\d]+)\|([\d\-\:\. ]+)\|([\d\-\:\. ]+)\|([\w\d\-\:\. ]+)?\|([\w\? ]+)\|([\w]+)\|([\d]+)\|([\w\-]+)?\|([\w ]+)\|([\d\-\:\. ]+)((?:\|)(?:[\w\d\-\:\. ]+))?((?:\|)(?:[\w\d\-\:\. ]+))?((?:\|)(?:[\w\d\-\:\. ]+))?"
+negativeBptTroubleshootingReportsRegex = "^((?!(?:[\d]+)\|(?:[\w]+)\|(?:[\w]+)\|(?:[\w]+)\|(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d\-\:\. ]+)\|(?:[\w\d\-\:\. ]+)?\|(?:[\w\? ]+)\|(?:[\w]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w ]+)\|(?:[\d\-\:\. ]+)(?:(?:\|)(?:[\w\d\-\:\. ]+))?(?:(?:\|)(?:[\w\d\-\:\. ]+))?(?:(?:\|)(?:[\w\d\-\:\. ]+))?).*)"
+nonMatchedBptTroubleshootingReportsRegex = "^(.*?\|)([\d\-]+)((?:\s+[\d\:\.]+).+)"
+
 androidiOSBuildLogsRegex = "^\[([\d\-]+)T([\d\:\.]+)Z\][ ]\[(INFO|VERBOSE|ERROR|DEBUG)\][ ](\[(?:[\w\[\] ]+)\])?(?:[ \t]+)?([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?"
 negativeAndroidiOSBuildLogsRegex = "^((?!\[(?:[\d\-]+)T(?:[\d\:\.]+)Z\][ ]\[(?:INFO|VERBOSE|ERROR|DEBUG)\][ ](?:\[(?:[\w\[\] ]+)\])?(?:[ \t]+)?(?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?).*)"
 nonMatchedAndroidiOSBuildLogsRegex = "^\[([\d\-]+)(?:T.+)"
@@ -214,34 +320,74 @@ negativeServiceStudioReportsOperationsLogsRegex = "^((?!(?:[\d\-]+)\|(?:[\d\:A-Z
 nonMatchedServiceStudioReportsOperationsLogsRegex = "^([\d\-]+)\|(.+)"
 japaneseServiceStudioReportsOperationsLogsRegex = "^([\d\-]+)\|([\d\:A-Z ]+)\|(.+)"
 
+generalTextLogsRegex = "^([\w]+)\:\s*?\[([\d\:\.]+)\]\s+([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)"
+generalTextLogsRegex2 = "^\[([\d\:\.]+)\]\s+([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)"
+
 iisLogsRegex = "^([\d\-]+)[ ]([\d\:]+)[ ]([\d\.\:]+)[ ](POST|PUT|PROPFIND|(?:n)?GET|OPTIONS|HEAD|ABCD|QUALYS|TRACE|SEARCH|RNDMMTD|TRACK|B(?:A)?DM(?:E)?T(?:H)?(?:O)?(?:D)?|CFYZ|DEBUG|MKCOL|INDEX|DELETE|PATCH|ACUNETIX)[ ]([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ]([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ]([\d]+)[ ]([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ]([\w\-\.\:]+)[ ]([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ]([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ]([\d]+)[ ]([\d]+)[ ]([\d]+)[ ]([\d]+)"
 negativeIisLogsRegex = "^((?!(?:[\d\-]+)[ ](?:[\d\:]+)[ ](?:[\d\.\:]+)[ ](?:POST|PUT|PROPFIND|(?:n)?GET|OPTIONS|HEAD|ABCD|QUALYS|TRACE|SEARCH|RNDMMTD|TRACK|B(?:A)?DM(?:E)?T(?:H)?(?:O)?(?:D)?|CFYZ|DEBUG|MKCOL|INDEX|DELETE|PATCH|ACUNETIX)[ ](?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ](?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ](?:[\d]+)[ ](?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ](?:[\w\-\.\:]+)[ ](?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ](?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ](?:[\d]+)[ ](?:[\d]+)[ ](?:[\d]+)[ ](?:[\d]+)).*)"
 nonMatchedIisLogsRegex = "^([\d\-]+)(.+)"
 japaneseIisLogsRegex = "^([\d\-]+)[ ]([\d\:]+)(.+)[ ]([\d]+)"
+
+fullErrorDumpLogsRegex = "^(LifeTime.*?(?:\r\n|\n).*?Platform.*?(?:\r\n|\n))(?:\r\n|\n)(\=.*?(?:[\w ]+)\=.*?(?:\r\n|\n)(?:(?:.+)?(?:\r\n|\n)){1,})"
 
 nonMatchedPath = os.getcwd() + "\\nonmatched_valid_lines\\file.txt"
 tempFilePath = os.getcwd() + "\\tempFile.txt"
 
 start = datetime.now()
 
+def splitDirectory(root, file):
+    absolutePathOfFile = os.path.join(root, file)
+    filePathWithoutFilename = os.path.split(absolutePathOfFile)[0]
+    filenameWithExt = os.path.split(absolutePathOfFile)[1]
+    filenameWithoutExt = os.path.splitext(filenameWithExt)[0]
+    extension = os.path.splitext(filenameWithExt)[1]
+
+    return absolutePathOfFile, filePathWithoutFilename, filenameWithExt, filenameWithoutExt, extension
+
+def splitDirectory2(root, file):
+    absolutePathOfFile = os.path.join(root, file)
+    filePathWithoutFilename = os.path.split(absolutePathOfFile)[0]
+    filenameWithoutExt = os.path.splitext(file)[0]
+    extension = os.path.splitext(file)[1]
+
+    return absolutePathOfFile, filePathWithoutFilename, filenameWithoutExt, extension
+
 def searchDirectory(directoryPath, _fromDate, _toDate):
     #search for the files with the raw data in the specified directory
     for root, subFolders, files in os.walk(directoryPath):
-        for f in files:
-            absolutePathOfFile = os.path.join(root, f)
-            filePathWithoutFilename = os.path.split(absolutePathOfFile)[0]
-            filenameWithExt = os.path.split(absolutePathOfFile)[1]
-            filenameWithoutExt = os.path.splitext(filenameWithExt)[0]
-            extension = os.path.splitext(filenameWithExt)[1]
+        for s in subFolders:
+            if "infrastructurereport" in s.lower():
+                absolutePathOfFile2 = os.path.join(root, s)
+                for root2, subFolders2, files2 in os.walk(absolutePathOfFile2):
+                    for f2 in files2:
+                        absolutePathOfFile, filePathWithoutFilename, filenameWithoutExt, extension = splitDirectory2(root2, f2)
 
-            if extension == ".xlsx":
-                xlsxFile(absolutePathOfFile, filePathWithoutFilename, filenameWithoutExt, ".txt", _fromDate, _toDate)
-            elif extension == ".txt":
-                txtFile(absolutePathOfFile, filenameWithoutExt, filenameWithExt, extension, _fromDate, _toDate)
-            elif extension == ".log":
-                logFile(absolutePathOfFile, filenameWithExt, ".txt", _fromDate, _toDate)
-            elif extension == ".evtx":
-                evtxFile(absolutePathOfFile, filenameWithExt, ".txt", _fromDate, _toDate)
+                        if extension == ".xlsx":
+                            xlsxFile(absolutePathOfFile, filePathWithoutFilename, filenameWithoutExt, ".txt", _fromDate, _toDate)
+                        elif extension == ".txt":
+                            txtFile(absolutePathOfFile, filenameWithoutExt, f2, extension, _fromDate, _toDate)
+
+            elif "stagingreport" in s.lower() or "userpermissionsreport" in s.lower():
+                absolutePathOfFile3 = os.path.join(root, s)
+                for root3, subFolders3, files3 in os.walk(absolutePathOfFile3):
+                    for f3 in files3:
+                        absolutePathOfFile, filePathWithoutFilename, filenameWithoutExt, extension = splitDirectory2(root3, f3)
+
+                        if extension == ".xlsx":
+                            xlsxFile(absolutePathOfFile, filePathWithoutFilename, filenameWithoutExt, ".txt", _fromDate, _toDate)
+
+        for f in files:
+            if not "infrastructurereport" in root.lower() and not "stagingreport" in root.lower() and not "userpermissionsreport" in root.lower():
+                absolutePathOfFile, filePathWithoutFilename, filenameWithExt, filenameWithoutExt, extension = splitDirectory(root, f)
+
+                if extension == ".xlsx":
+                    xlsxFile(absolutePathOfFile, filePathWithoutFilename, filenameWithoutExt, ".txt", _fromDate, _toDate)
+                elif extension == ".txt":
+                    txtFile(absolutePathOfFile, filenameWithoutExt, filenameWithExt, extension, _fromDate, _toDate)
+                elif extension == ".log":
+                    logFile(absolutePathOfFile, filenameWithExt, ".txt", _fromDate, _toDate)
+                elif extension == ".evtx":
+                    evtxFile(absolutePathOfFile, filenameWithExt, ".txt", _fromDate, _toDate)
 
 def searchDirectory2(directoryPath, myList):
     #search for the files with the filtered data
@@ -324,6 +470,8 @@ def readSplitFilesXLSX(cycleNum, filename, ext, _fromDate, _toDate):
                     readServiceActionLogs(searchLines, _fromDate, _toDate)
                 elif "screenlog" in filename.lower():
                     readScreenLogs(searchLines, _fromDate, _toDate)
+                elif "troubleshootingreport" in filename.lower():
+                    readBPTTroubleshootingReportLogs(searchLines, _fromDate, _toDate)
             count+=1
     except ValueError as valError:
         print("\nThe customer altered the original Excel spreadsheet.\n\nPossible reasons:\n1- The customer added a column on the spreadsheet.\n" +
@@ -1481,6 +1629,94 @@ def readScreenLogs(searchLines, _fromDate, _toDate):
 
                         myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
 
+def readBPTTroubleshootingReportLogs(searchLines, _fromDate, _toDate):
+    outText = ""
+    newOutText = ""
+    nonMatchedOutText = ""
+    nonMatchedLine = ""
+    nonMatchedLine2 = ""
+
+    with codecs.open(tempFilePath, "a+", "utf-8", "ignore") as tempFile:
+        #split the fields and rearrange them to combine them all later
+        regex = re.compile(bptTroubleshootingReportsRegex, re.MULTILINE + re.IGNORECASE)
+        for match in regex.finditer(searchLines):
+            processID = match.group(1)
+            processStatus = match.group(2)
+            eSpaceName = match.group(3)
+            processName = match.group(4)
+            parentProcessID = match.group(5)
+            timestamp = match.group(6)
+            processLastModified = match.group(7)
+            processSuspendedDate = match.group(8)#null
+            activityName = match.group(9)
+            activityStatus = match.group(10)
+            activityErrorCount = match.group(11)
+            activityErrorID = match.group(12)#null
+            activityKind = match.group(13)
+            activityCreated = match.group(14)
+            activityClosed = match.group(15)#null
+            activityRunningSince = match.group(16)#null
+            activityNextRun = match.group(17)#null
+                            
+            date = timestamp[0:10]
+            time = timestamp[11:19]
+            time = time.replace(".", "")
+
+            _date = datetime.strptime(date, "%Y-%m-%d").date()
+
+            if _fromDate <= _date <= _toDate:
+
+                if processSuspendedDate == None or processSuspendedDate == "None":
+                    processSuspendedDate = " "
+
+                if activityErrorID == None:
+                    activityErrorID = " "
+
+                if activityClosed == None or activityClosed == "None":
+                    activityClosed = " "
+                else:
+                    activityClosed = activityClosed.replace("|", "")
+
+                if activityRunningSince == None or activityRunningSince == "|None":
+                    activityRunningSince = " "
+                else:
+                    activityRunningSince = activityRunningSince.replace("|", "")
+
+                if activityNextRun == None or activityNextRun == "|None":
+                    activityNextRun = " "
+                else:
+                    activityNextRun = activityNextRun.replace("|", "")
+
+                outText = date + " " + time + "|" + eSpaceName + "|" + processName + "|" + processStatus + "|" + processLastModified + "|" + processSuspendedDate + "|" + processID + "|" + parentProcessID + "|" + activityCreated + "|" + activityName + "|" + activityKind + "|" + activityStatus + "|" + activityRunningSince + "|" + activityNextRun + "|" + activityClosed + "|" + activityErrorCount + "|" + activityErrorID
+
+                if outText[-1] == "|":
+                    newOutText = outText[:-1]
+                    tempFile.writelines(newOutText + "\n")
+                else:
+                    tempFile.writelines(outText + "\n")
+
+        #capture all the lines that didn't match the regex
+        negativeRegex = re.compile(negativeBptTroubleshootingReportsRegex, re.MULTILINE + re.IGNORECASE)
+        for match in negativeRegex.finditer(searchLines):
+            nonMatchedLine = match.group(1)
+
+            nonMatchedRegex = re.search(nonMatchedBptTroubleshootingReportsRegex, nonMatchedLine)
+            if nonMatchedRegex:
+                nonMatchedHead = nonMatchedRegex.group(1)
+                nonMatchedDate = nonMatchedRegex.group(2)
+                nonMatchedTail = nonMatchedRegex.group(3)
+
+                _nonMatchedDate = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
+
+                #check if the non-matched lines fall within the specified range
+                if _fromDate <= _nonMatchedDate <= _toDate:
+
+                    nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
+
+                    nonMatchedOutText = "BPTTroubleshootingReport -> " + nonMatchedLine2 + "\n"
+
+                    myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
+
 def readiOSAndroidLogs(filename, searchLines, _fromDate, _toDate):
     #split the fields and rearrange them to combine them all later
     regex = re.compile(androidiOSBuildLogsRegex, re.MULTILINE + re.IGNORECASE)
@@ -1742,6 +1978,48 @@ def readServiceStudioReportLogs(searchLines3, _fromDate, _toDate):
         #delete the temporary file that was created
         os.remove(tempFilePath)
 
+def readGeneralTextLogs(searchLines, _fromDate, _toDate):
+    #split the fields and rearrange them to combine them all later
+    searchLines2 = normalizeLines(searchLines)
+    searchLines2 = searchLines2.replace("LoaderExceptions:", "LoaderException:")
+    searchLines2 = searchLines2.translate(replacementDict)
+    searchLines3 = '\n'.join(searchLines2.split("Exceptions: "))
+    
+    regex = re.compile(generalTextLogsRegex, re.MULTILINE + re.IGNORECASE)
+    for match in regex.finditer(searchLines):
+        messageType = match.group(1)
+        time = match.group(2)
+        message = match.group(3)
+
+        if not "exceptions" == messageType.lower():
+            _time = time[:8]
+
+            outText = fromDate + " " + _time + "|" + messageType + "|" + message + "\n"
+
+            myLinesFromDateRange.append(outText)
+
+    exceptionsRegex = re.compile(generalTextLogsRegex2, re.MULTILINE + re.IGNORECASE)
+    for match2 in exceptionsRegex.finditer(searchLines3):
+        time = match2.group(1)
+        message = match2.group(2)
+
+        _time = time[:8]
+        
+        outText2 = fromDate + " " + _time + "|Exceptions|" + message + "\n"
+
+        myLinesFromDateRange.append(outText2)
+
+def readFullErrorDumpLogs(searchLines):
+    #split the fields and rearrange them to combine them all later
+    regex = re.compile(fullErrorDumpLogsRegex, re.MULTILINE + re.IGNORECASE)
+    for match in regex.finditer(searchLines):
+        information = match.group(1)
+        details = match.group(2)
+
+        outText = information + "\n" + details
+
+        myLinesFromDateRange.append(outText.strip())
+
 def parseXMLtoString(lineToXML, xmlPath):
     xmlVar = etree.XPath(xmlPath)
     newXMLVar = " ".join(xmlVar(lineToXML))
@@ -1775,7 +2053,119 @@ def xlsxFile(absolutePath, relativePath, filename, ext, _fromDate, _toDate):
                     newLine = newLine.translate(replacementDict)
                     linesFromXLSX.write(newLine + "|")
 
-    xlsxtxtFile(relativePath + "\\" + filename + ext, filename, ext, _fromDate, _toDate)
+    if "infrastructurereport" in absolutePath.lower() or "stagingreport" in absolutePath.lower() or "userpermissionsreport" in absolutePath.lower():
+        createFolder("\\filtered_data_files\\")
+
+        regex = re.match("^([a-zA-Z]+)(?:[\_\d]+)?", filename)
+        if regex:
+            file_name = regex.group(1)
+
+            if "EnvironmentCapabilities" in file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\environment_capabilities.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+            elif "Environments" in file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\environments.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+
+            elif "Roles" == file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\roles.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+            elif "RolesInApplications" in file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\roles_in_applications.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+            elif "RolesInTeams" in file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\roles_in_teams.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+            elif "SyncErrors" in file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\sync_errors.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+            elif "User" == file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\user.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+            elif "UserPools" in file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\user_pools.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+
+            elif "Application" == file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\application.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+            elif "ApplicationVersion" == file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\application_version.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+            elif "ApplicationVersionModuleVersion" == file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\application_version_module_version.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+            elif "ChangeLog" in file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\change_log.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+            elif "ConsumerElements" in file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\consumer_elements.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+            elif "EntityConfigurations" in file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\entity_configurations.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+            elif "EnvironmentApplicationCache" in file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\environment_application_cache.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+            elif "EnvironmentApplicationModule" in file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\environment_application_module.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+            elif "EnvironmentAppVersion" in file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\environment_app_version.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+            elif "EnvironmentModuleCache" in file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\environment_module_cache.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+            elif "EnvironmentModuleRunning" in file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\environment_module_running.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+            elif "Modules" == file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\modules.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+            elif "ModuleVersionReferences" in file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\module_version_references.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+            elif "ProducerElements" in file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\producer_elements.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+            elif "SiteProperties" in file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\site_properties.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+            elif "Staging" == file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\staging.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+            elif "StagingApplicationVersion" == file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\staging_application_version.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+            elif "StagingMessage" == file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\staging_message.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+            elif "StagingModuleInconsistency" == file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\staging_module_inconsistency.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+            elif "StagingModuleVersion" == file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\staging_module_version.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+            elif "StagingModuleVersionToPublish" == file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\staging_module_version_to_publish.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+            elif "StagingModuleVersionToUpload" == file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\staging_module_version_to_upload.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+            elif "StagingOption" == file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\staging_option.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+            elif "StagingOutdatedApplication" == file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\staging_outdated_application.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+            elif "StagingOutdatedModule" == file_name:
+                shutil.copyfile(relativePath + "\\" + filename + ext, os.getcwd() + "\\filtered_data_files\\staging_outdated_module.txt")
+                os.remove(relativePath + "\\" + filename + ext)
+
+            print("Closing: " + filename + ".txt")
+
+    else:
+        xlsxtxtFile(relativePath + "\\" + filename + ext, filename, ext, _fromDate, _toDate)
 
 def xlsxtxtFile(absolutePath, filename, ext, _fromDate, _toDate):
     print("Reading: " + filename + ext)
@@ -1837,6 +2227,8 @@ def xlsxtxtFile(absolutePath, filename, ext, _fromDate, _toDate):
                     readServiceActionLogs(searchLines, _fromDate, _toDate)
                 elif "screenlog" in filename.lower():
                     readScreenLogs(searchLines, _fromDate, _toDate)
+                elif "troubleshootingreport" in filename.lower():
+                    readBPTTroubleshootingReportLogs(searchLines, _fromDate, _toDate)
         except ValueError as valError:
             print("\nThe customer altered the original Excel spreadsheet.\n\nPossible reasons:\n1- The customer added a column on the spreadsheet.\n" +
                   "2- The customer switched the columns of the spreadsheet.\n3- The customer modified the dates on the spreadsheet.\n")
@@ -1886,6 +2278,8 @@ def xlsxtxtFile(absolutePath, filename, ext, _fromDate, _toDate):
             outFilename = "service_action_logs" + ext
         elif "ScreenLog" in filename:
             outFilename = "screen_logs" + ext
+        elif "troubleshootingreport" in filename.lower():
+            outFilename = "bpt_troubleshootingreport_logs" + ext
 
         myLinesFromDateRange.sort()
         #remove duplicate records from the list
@@ -1927,6 +2321,10 @@ def txtFile(absolutePath, filename, filenameWithExt, ext, _fromDate, _toDate):
                 readiOSAndroidLogs(filename, searchLines, _fromDate, _toDate)
             elif "studio" in filename.lower() and "report" in filename.lower():
                 readServiceStudioReportLogs(searchLines3, _fromDate, _toDate)
+            elif "general" in filename.lower():
+                readGeneralTextLogs(searchLines, _fromDate, _toDate)
+            elif "fullerrordump" == filename.lower():
+                readFullErrorDumpLogs(searchLines)
     except ValueError as valError:
         print("\nThe customer altered the original logs.\n\nPossible reasons:\n1- The customer added a column on the logs.\n" +
               "2- The customer switched the columns of the logs.\n3- The customer modified the dates on the logs.\n")
@@ -1948,22 +2346,36 @@ def txtFile(absolutePath, filename, filenameWithExt, ext, _fromDate, _toDate):
             outFilename = "android_build_logs" + ext
         elif "studio" in filename.lower() and "report" in filename.lower():
             outFilename = "service_studio_report" + ext
+        elif "general" in filename.lower():
+            outFilename = "general_text_logs" + ext
+        elif "fullerrordump" == filename.lower():
+            outFilename = "full_error_dump_logs" + ext
 
-        myLinesFromDateRange.sort()
-        #remove duplicate records from the list
-        myFinalLinesFromDateRange = list(set(myLinesFromDateRange))
-        myFinalLinesFromDateRange.sort()
+        if not "infrastructurereport" in absolutePath.lower() and not "stagingreport" in absolutePath.lower() and not "userpermissionsreport" in absolutePath.lower():
+            myLinesFromDateRange.sort()
+            #remove duplicate records from the list
+            myFinalLinesFromDateRange = list(set(myLinesFromDateRange))
+            myFinalLinesFromDateRange.sort()
 
-        with codecs.open(os.getcwd() + "\\filtered_data_files\\" + outFilename, "a+", "utf-8", "ignore") as linesFromDateRange:
-            linesFromDateRange.seek(0)
-            if len(linesFromDateRange.read(100)) > 0:
-                linesFromDateRange.writelines("\n")
-            linesFromDateRange.writelines(myFinalLinesFromDateRange)
-        del myLinesFromDateRange[:]
-        del myFinalLinesFromDateRange[:]
+            with codecs.open(os.getcwd() + "\\filtered_data_files\\" + outFilename, "a+", "utf-8", "ignore") as linesFromDateRange:
+                linesFromDateRange.seek(0)
+                if len(linesFromDateRange.read(100)) > 0:
+                    linesFromDateRange.writelines("\n")
+                linesFromDateRange.writelines(myFinalLinesFromDateRange)
+            del myLinesFromDateRange[:]
+            del myFinalLinesFromDateRange[:]
+
+        else:
+            with codecs.open(os.getcwd() + "\\filtered_data_files\\" + outFilename, "a+", "utf-8", "ignore") as linesFromDateRange:
+                linesFromDateRange.seek(0)
+                if len(linesFromDateRange.read(100)) > 0:
+                    linesFromDateRange.writelines("\n")
+                linesFromDateRange.writelines(myLinesFromDateRange)
+            del myLinesFromDateRange[:]
                 
     else:
-        print("No data was found within the specified date range.")
+        if not "errordump" == filename.lower():
+            print("No data was found within the specified date range.")
 
     print("Closing: " + filenameWithExt)
 
@@ -2169,7 +2581,7 @@ def sortLOGFile(directoryPath):
     plt.xticks(rotation = 45)
     #save a copy of the line graph and display a dialog window with the interactive line graph
     plt.savefig(os.getcwd() + "\\graphs\\line_graph.png")
-    plt.show()
+    #plt.show()
 
     del myDateTimes[:]
     del myTimesTaken[:]
