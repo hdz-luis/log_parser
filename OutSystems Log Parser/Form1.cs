@@ -55,6 +55,42 @@ namespace OutSystems_Log_Parser
                 clearTextboxes(txtBoxDetailiOSLogs);
                 clearTextboxes(txtDetailIISlogs);
                 clearTextboxes(txtBoxDetailServiceStudioLogs);
+                clearTextboxes(txtBoxDetailGeneralTXTLogs);
+                clearTextboxes(txtBoxDetailBPTReportslogs);
+                clearTextboxes(txtBoxDetailEnvironmentCapabilitieslogs);
+                clearTextboxes(txtBoxDetailEnvironmentslogs);
+                clearTextboxes(txtBoxDetailFullErrorDumpslogs);
+                clearTextboxes(txtBoxDetailRoleslogs);
+                clearTextboxes(txtBoxDetailRolesInApplicationslogs);
+                clearTextboxes(txtBoxDetailRolesInTeamslogs);
+                clearTextboxes(txtBoxDetailUserlogs);
+                clearTextboxes(txtBoxDetailUserPoolslogs);
+                clearTextboxes(txtBoxDetailSyncErrorslogs);
+                clearTextboxes(txtBoxDetailStagingApplogs);
+                clearTextboxes(txtBoxDetailStagingAppVerlogs);
+                clearTextboxes(txtBoxDetailStagingAppVerModuleVerlogs);
+                clearTextboxes(txtBoxDetailStagingChangelog);
+                clearTextboxes(txtBoxDetailStagingConsumerElementslogs);
+                clearTextboxes(txtBoxDetailStagingEntityConfiguration);
+                clearTextboxes(txtBoxDetailStagingEnvironmentApplicationCache);
+                clearTextboxes(txtBoxDetailStagingEnvironmentApplicationModule);
+                clearTextboxes(txtBoxDetailStagingEnviromentApplicationVersion);
+                clearTextboxes(txtBoxDetailStagingEnvironmentModuleCache);
+                clearTextboxes(txtBoxDetailStagingEnvironmentModuleRunning);
+                clearTextboxes(txtBoxDetailStagingModules);
+                clearTextboxes(txtBoxDetailStagingModuleVersionReferences);
+                clearTextboxes(txtBoxDetailStagingProducerElements);
+                clearTextboxes(txtBoxDetailStagingSiteProperties);
+                clearTextboxes(txtBoxDetailStaginglogs);
+                clearTextboxes(txtBoxDetailStagingApplicationVersion);
+                clearTextboxes(txtBoxDetailStagingMessage);
+                clearTextboxes(txtBoxDetailStagingModuleInconsistencies);
+                clearTextboxes(txtBoxDetailStagingModuleVersion);
+                clearTextboxes(txtBoxDetailStagingModuleVersionPublished);
+                clearTextboxes(txtBoxDetailStagingModuleVersionUploaded);
+                clearTextboxes(txtBoxDetailStagingOptions);
+                clearTextboxes(txtBoxDetailStagingOutdatedApplication);
+                clearTextboxes(txtBoxDetailStagingOutdatedModule);
 
                 clearTables(dataGridViewErrorlogs);
                 clearTables(dataGridViewGenerallogs);
@@ -73,6 +109,42 @@ namespace OutSystems_Log_Parser
                 clearTables(dataGridViewAndroidlogs);
                 clearTables(dataGridViewiOSlogs);
                 clearTables(dataGridViewServiceStudiologs);
+                clearTables(dataGridViewGeneralTXTlogs);
+                clearTables(dataGridViewBPTReportslogs);
+                clearTables(dataGridViewEnvironmentCapabilitieslogs);
+                clearTables(dataGridViewEnvironmentslogs);
+                clearTables(dataGridViewFullErrorDumps);
+                clearTables(dataGridViewRoleslogs);
+                clearTables(dataGridViewRolesInApplicationslogs);
+                clearTables(dataGridViewRolesInTeamslogs);
+                clearTables(dataGridViewUserlogs);
+                clearTables(dataGridViewUserPoolslogs);
+                clearTables(dataGridViewSyncErrorslogs);
+                clearTables(dataGridViewStagingApplogs);
+                clearTables(dataGridViewStagingAppVerlogs);
+                clearTables(dataGridViewStagingAppVerModuleVerlogs);
+                clearTables(dataGridViewStagingChangelog);
+                clearTables(dataGridViewStagingConsumerElements);
+                clearTables(dataGridViewStagingEntityConfiguration);
+                clearTables(dataGridViewStagingEnvironmentAppicationCache);
+                clearTables(dataGridViewStagingEnvironmentApplicationModule);
+                clearTables(dataGridViewStagingEnvironmentApplicationVersion);
+                clearTables(dataGridViewStagingEnvironmentModuleCache);
+                clearTables(dataGridViewStagingEnvironmentModuleRunning);
+                clearTables(dataGridViewStagingModules);
+                clearTables(dataGridViewStagingModuleVersionRefererences);
+                clearTables(dataGridViewStagingProducerElements);
+                clearTables(dataGridViewStagingSiteProperties);
+                clearTables(dataGridViewStaginglogs);
+                clearTables(dataGridViewStagingApplicationVersion);
+                clearTables(dataGridViewStagingMessage);
+                clearTables(dataGridViewStagingModuleInconsistencies);
+                clearTables(dataGridViewStagingModuleVersion);
+                clearTables(dataGridViewStagingModuleVersionPublished);
+                clearTables(dataGridViewStagingModuleVersionUploaded);
+                clearTables(dataGridViewStagingOptions);
+                clearTables(dataGridViewStagingOutdatedApplication);
+                clearTables(dataGridViewStagingOutdatedModule);
 
                 //filter the file extensions and get sections from the absolute path
                 openFileDialog1.Filter = "TXT Files (*.txt)|*.txt";
@@ -177,12 +249,235 @@ namespace OutSystems_Log_Parser
                                 string[] column_names = { "DATE_TIME", "MESSAGE_TYPE", "ACTION_NAME", "MESSAGE" };
                                 populateTables(relativePath + "\\service_studio_report.txt", delimiters, column_names, dataGridViewServiceStudiologs);
                             }
+                            else if (fileName == "general_text_logs.txt")
+                            {
+                                string[] column_names = { "DATE_TIME", "MESSAGE_TYPE", "MESSAGE" };
+                                populateTables(relativePath + "\\general_text_logs.txt", delimiters, column_names, dataGridViewGeneralTXTlogs);
+                            }
                             else if (fileName == "timer_logs.txt")
                             {
                                 string[] column_names = { "DATE_TIME", "DURATION", "APPLICATION_NAME", "APPLICATION_KEY", "EXECUTED_BY",
                                     "ESPACE_NAME", "ESPACE_ID", "CYCLIC_JOB_NAME", "CYCLIC_JOB_KEY", "SHOULD_HAVE_RUN_AT", "NEXT_RUN",
                                     "ERROR_ID", "REQUEST_KEY", "TENANT_ID" };
                                 populateTables(relativePath + "\\timer_logs.txt", delimiters, column_names, dataGridViewTimerlogs);
+                            }
+                            else if (fileName == "bpt_troubleshootingreport_logs.txt")
+                            {
+                                string[] column_names = { "DATE_TIME", "ESPACE_NAME", "PROCESS_NAME", "PROCESS_STATUS", "PROCESS_LAST_MODIFIED",
+                                    "PROCESS_SUSPENDED_DATE", "PROCESS_ID", "PARENT_PROCESS_ID", "ACTIVITY_CREATED", "ACTIVITY_NAME", "ACTIVITY_KIND",
+                                    "ACTIVITY_STATUS", "ACTIVITY_RUNNING_SINCE", "ACTIVITY_NEXT_RUN", "ACTIVITY_CLOSED", "ACTIVITY_ERROR_COUNT", "ACTIVITY_ERROR_ID" };
+                                populateTables(relativePath + "\\bpt_troubleshootingreport_logs.txt", delimiters, column_names, dataGridViewBPTReportslogs);
+                            }
+                            else if (fileName == "environment_capabilities.txt")
+                            {
+                                string[] column_names = { "ID", "ENVIRONMENT", "CAPABILITY" };
+                                populateTables(relativePath + "\\environment_capabilities.txt", delimiters, column_names, dataGridViewEnvironmentCapabilitieslogs);
+                            }
+                            else if (fileName == "environments.txt")
+                            {
+                                string[] column_names = { "IS_LIFE_TIME", "IS_REGISTERED", "ID", "NAME", "DESCRIPTION", "HOST", "PUBLIC_HOST", "TYPE", "PRIMARY_CONTACT", "ORDER",
+                                "NUMBER_OF_USERS", "IS_ACTIVE", "IS_OFFLINE", "LAST_SET_OFFLINE", "CREATED_BY", "CREATED_ON", "USE_HTTPS", "VERSION", "LAST_UPGRADE_VERSION",
+                                "UID", "CALLBACK_ADDRESS", "NUMBER_OF_FRONTEND_SERVERS", "FIRST_SYNC_FINISHED", "CLOUD_PROVIDER_TYPE", "ENVIRONMENT_STACK", "ADDITIONAL_INFO",
+                                "LAST_CACHE_INVALIDATION", "ENVIRONMENT_DB_PROVIDER", "ENVIRONMENT_SERVER_KIND", "TWO_STEP_PUBLISH_MODE", "LAST_ENV_SYNC_SEQUENTIAL_NUMBER",
+                                "DATA_HARVESTED_TO", "IS_IN_OUTSYSTEMS_CLOUD", "BEST_HASHING_ALGORITHM", "ALLOW_NATIVE_BUILDS" };
+                                populateTables(relativePath + "\\environments.txt", delimiters, column_names, dataGridViewEnvironmentslogs);
+                            }
+                            else if (fileName == "full_error_dump_logs.txt")
+                            {
+                                string[] column_names = { "PLATFORM_INFORMATION" };
+                                populateTables(relativePath + "\\full_error_dump_logs.txt", delimiters, column_names, dataGridViewFullErrorDumps);
+                            }
+                            else if (fileName == "roles.txt")
+                            {
+                                string[] column_names = { "ID", "NAME", "DESCRIPTION", "ORDER", "CAN_CONFIGURE_INFRASTRUCTURE", "CAN_CONFIGURE_ROLES", "CAN_CONFIGURE_USERS",
+                                    "CAN_CONFIGURE_APPLICATION_ROLES", "KEY", "ID_2", "LABEL_OLD", "SHORT_LABEL_OLD", "DESCRIPTION_OLD", "LABEL", "SHORT_LABEL", "DESCRIPTION_2",
+                                    "LT_LEVEL", "SC_LEVEL", "APPLICATION_LEVEL", "IS_OLD_LEVEL", "ID_3", "LABEL_2", "SHORT_LABEL_2", "DESCRIPTION_3", "LEVEL", "IS_COMPUTED",
+                                    "ID_4", "ROLE", "ENVIRONMENT", "DEFAULT_PERMISSION_LEVEL", "CAN_CREATE_APPLICATIONS", "CAN_REFERENCE_SYSTEMS", "IS_INITIALIZED" };
+                                populateTables(relativePath + "\\roles.txt", delimiters, column_names, dataGridViewRoleslogs);
+                            }
+                            else if (fileName == "roles_in_applications.txt")
+                            {
+                                string[] column_names = { "ID", "USER", "ROLE", "APPLICATION" };
+                                populateTables(relativePath + "\\roles_in_applications.txt", delimiters, column_names, dataGridViewRolesInApplicationslogs);
+                            }
+                            else if (fileName == "roles_in_teams.txt")
+                            {
+                                string[] column_names = { "ID", "ROLE", "KEY", "TEAM", "NAME", "KEY_2" };
+                                populateTables(relativePath + "\\roles_in_teams.txt", delimiters, column_names, dataGridViewRolesInTeamslogs);
+                            }
+                            else if (fileName == "sync_errors.txt")
+                            {
+                                string[] column_names = { "DATE_TIME", "SESSION_ID", "MESSAGE", "STACK", "MODULE", "USERNAME", "ENDPOINT", "ACTION", "PROCESS_NAME",
+                                    "ACTIVITY_NAME" };
+                                populateTables(relativePath + "\\sync_errors.txt", delimiters, column_names, dataGridViewSyncErrorslogs);
+                            }
+                            else if (fileName == "user.txt")
+                            {
+                                string[] column_names = { "ID", "NAME", "USERNAME", "EXTERNAL", "CREATION_DATE", "LAST_LOGIN", "IS_ACTIVE", "ID_2", "NAME_2",
+                                    "DESCRIPTION", "ORDER", "CAN_CONFIGURE_INFRASTRUCTURE", "CAN_CONFIGURE_ROLES", "CAN_CONFIGURE_USERS", "CAN_CONFIGURE_APPLICATION_ROLES",
+                                    "KEY", "USER_ROLE", "KEY_2", "MTSI_IDENTIFIER" };
+                                populateTables(relativePath + "\\user.txt", delimiters, column_names, dataGridViewUserlogs);
+                            }
+                            else if (fileName == "user_pools.txt")
+                            {
+                                string[] column_names = { "USER", "POOL_KEY" };
+                                populateTables(relativePath + "\\user_pools.txt", delimiters, column_names, dataGridViewUserPoolslogs);
+                            }
+                            else if (fileName == "application.txt")
+                            {
+                                string[] column_names = { "ID", "TEAM", "NAME", "DESCRIPTION", "PRIMARY_CONTACT", "URL_PATH", "KEY", "LOGO_HASH", "IS_ACTIVE", "DEFAULT_THEME_IS_MOBILE",
+                                    "MONITORING_ENABLED", "APPLICATION_KIND" };
+                                populateTables(relativePath + "\\application.txt", delimiters, column_names, dataGridViewStagingApplogs);
+                            }
+                            else if (fileName == "application_version.txt")
+                            {
+                                string[] column_names = { "ID", "APPLICATION", "VERSION", "CHANGE_LOG", "CREATED_ON", "CREATED_BY", "CREATED_ON_ENVIRONMENT", "FRONT_OFFICE_ESPACE_KEY",
+                                    "FRONT_OFFICE_ESPACE_NAME", "BACK_OFFICE_ESPACE_KEY", "BACK_OFFICE_ESPACE_NAME", "WEB_THEME_GLOBAL_KEY", "MOBILE_THEME_GLOBAL_KEY",
+                                    "WAS_AUTO_TAGGED", "VERSION_DECIMAL", "TEMPLATE_KEY", "PRIMARY_COLOR", "NATIVE_HASH", "KEY" };
+                                populateTables(relativePath + "\\application_version.txt", delimiters, column_names, dataGridViewStagingAppVerlogs);
+                            }
+                            else if (fileName == "application_version_module_version.txt")
+                            {
+                                string[] column_names = { "ID", "APPLICATION_VERSION", "MODULE_VERSION", "ID_2", "MODULE", "HASH", "GENERAL_HASH", "CREATED_ON",
+                                    "CREATED_BY", "CREATED_ON_ENVIRONMENT", "LAST_UPGRADE_VERSION", "DIRECT_UPGRADE_FROM_VERSION_HASH", "COMPATIBILITY_SIGNATURE_HASH",
+                                    "KEY" };
+                                populateTables(relativePath + "\\application_version_module_version.txt", delimiters, column_names, dataGridViewStagingAppVerModuleVerlogs);
+                            }
+                            else if (fileName == "change_log.txt")
+                            {
+                                string[] column_names = { "ID", "LABEL", "ID_2", "DATE_TIME", "MESSAGE", "FIRST_OBJECT_TYPE", "FIRST_OBJECT", "SECOND_OBJECT_TYPE",
+                                    "SECOND_OBJECT", "IS_WRITE", "IS_SUCCESSFUL", "IS_SYSTEM", "ENTRY_ESPACE", "USER", "CLIENT_IP" };
+                                populateTables(relativePath + "\\change_log.txt", delimiters, column_names, dataGridViewStagingChangelog);
+                            }
+                            else if (fileName == "consumer_elements.txt")
+                            {
+                                string[] column_names = { "CONSUMER_MODULE", "CONSUMER_MODULE_NAME", "CONSUMER_MODULE_VERSION", "CONSUMER_ELEMENT_VERSION", "CONSUMER_ELEMENT_VERSION_KEY", "CONSUMER_ELEMENT_VERSION_TYPE",
+                                    "CONSUMER_ELEMENT_VERSION_NAME", "CONSUMER_ELEMENT_VERSION_COMPATIBILITY_HASH", "PRODUCER_MODULE", "PRODUCER_MODULE_KEY", "PRODUCER_MODULE_NAME", "PRODUCER_MODULE_TYPE", "CREATED_ON_PRODUCER_MODULE_VERSION" };
+                                populateTables(relativePath + "\\consumer_elements.txt", delimiters, column_names, dataGridViewStagingConsumerElements);
+                            }
+                            else if (fileName == "entity_configurations.txt")
+                            {
+                                string[] column_names = { "ID", "ENTITY_KEY", "MODULE_VERSION_ID", "CREATED_ON", "UPDATED_ON", "ID_2",
+                                    "MODULE_ID", "STAGING_ID", "CREATED_ON_2", "CREATED_BY", "UPDATED_ON_2", "UPDATED_BY", "ENTITY_KEY_2",
+                                    "PHYSICAL_TABLE_NAME", "IS_OVERRIDEN_TABLE_NAME", "DEFAULT_PHYSICAL_TABLE_NAME", "ENTITY_NAME",
+                                    "SOURCE_PHYSICAL_TABLE_NAME", "TARGET_PHYSICAL_TABLE_NAME" };
+                                populateTables(relativePath + "\\entity_configurations.txt", delimiters, column_names, dataGridViewStagingEntityConfiguration);
+                            }
+                            else if (fileName == "environment_app_version.txt")
+                            {
+                                string[] column_names = { "ID", "ENVIRONMENT", "APPLICATION_VERSION" };
+                                populateTables(relativePath + "\\environment_app_version.txt", delimiters, column_names, dataGridViewStagingEnvironmentApplicationVersion);
+                            }
+                            else if (fileName == "environment_application_cache.txt")
+                            {
+                                string[] column_names = { "ID", "ENV_APPLICATION_CACHE_ID", "MOBILE_PLATFORM", "BINARY_AVAILABLE", "CONFIG_AVAILABLE", "VERSION_NUMBER",
+                                    "VERSION_CODE", "VERSION_CHANGED", "CONFIGURATION_CHANGED", "TAGGED_MABS_VERSION", "LAST_BUILD_MABS_VERSION", "LOCKED_MABS_VERSION",
+                                    "ID_2", "ENVIRONMENT", "APPLICATION", "VERSION", "VERSION_CHANGED_2", "NUMBER_OF_USERS", "CHANGE_STATUS", "CHANGE_STATUS_MESSAGE",
+                                    "SERVICE_CENTER_STATUS", "SERVICE_CENTER_STATUS_MESSAGE", "LAST_PUBLISHED", "LAST_PUBLISHED_BY", "DELETED", "CONSISTENCY_STATUS",
+                                    "CONSISTENCY_STATUS_MESSAGES", "FRONT_OFFICE_ESPACE_KEY", "FRONT_OFFICE_ESPACE_NAME", "BACK_OFFICE_ESPACE_KEY", "BACK_OFFICE_ESPACE_NAME",
+                                    "WEB_THEME_GLOBAL_KEY", "MOBILE_THEME_GLOBAL_KEY", "IS_OUTDATED", "DEVELOPMENT_EFFORT", "TEMPLATE_KEY", "PRIMARY_COLOR", "NATIVE_HASH",
+                                    "ENV_DEPLOYMENT_ZONES", "IS_IN_MULTIPLE_DEPLOYMENT_ZONES", "IS_PWA_ENABLED" };
+                                populateTables(relativePath + "\\environment_application_cache.txt", delimiters, column_names, dataGridViewStagingEnvironmentAppicationCache);
+                            }
+                            else if (fileName == "environment_application_module.txt")
+                            {
+                                string[] column_names = { "ID", "APPLICATION", "MODULE", "ENVIRONMENT", "LAST_CHANGED_ON" };
+                                populateTables(relativePath + "\\environment_application_module.txt", delimiters, column_names, dataGridViewStagingEnvironmentApplicationModule);
+                            }
+                            else if (fileName == "environment_module_cache.txt")
+                            {
+                                string[] column_names = { "ID", "ENVIRONMENT", "MODULE_VERSION", "INTERNAL_VERSION", "PUBLISHED_ON", "PUBLISHED_BY", "ID_2", "ENVIRONMENT_2", "MODULE",
+                                    "PUBLISH", "CHANGE_STATUS", "CHANGE_STATUS_MESSAGE", "DELETED", "CONSISTENCY_STATUS", "CONSISTENCY_STATUS_MESSAGES", "IS_OUTDATED" };
+                                populateTables(relativePath + "\\environment_module_cache.txt", delimiters, column_names, dataGridViewStagingEnvironmentModuleCache);
+                            }
+                            else if (fileName == "environment_module_running.txt")
+                            {
+                                string[] column_names = { "ID", "ENVIRONMENT", "CONSUMER_MODULE", "PRODUCER_MODULE_KEY", "PRODUCER_COMPATIBILITY_HASH", "IS_WEAK_REFERENCE" };
+                                populateTables(relativePath + "\\environment_module_running.txt", delimiters, column_names, dataGridViewStagingEnvironmentModuleRunning);
+                            }
+                            else if (fileName == "module_version_references.txt")
+                            {
+                                string[] column_names = { "ID", "MODULE_VERSION_REFERENCE", "PRODUCER_MODULE_VERSION", "IS_COMPATIBLE", "IS_IN_DIFFERENT_LUV", "PLATFORM_VERSION",
+                                    "ID_2", "MODULE_VERSION", "PRODUCER_MODULE", "IS_WEAK_REFERENCE", "ID_3", "MODULE_VERSION_REFERENCE_STATUS", "ELEMENT_NAME", "ELEMENT_KEY",
+                                    "ELEMENT_TYPE", "ELEMENT_REF_INCONSISTENCY_TYPE_I" };
+                                populateTables(relativePath + "\\module_version_references.txt", delimiters, column_names, dataGridViewStagingModuleVersionRefererences);
+                            }
+                            else if (fileName == "modules.txt")
+                            {
+                                string[] column_names = { "ID", "LABEL", "TOKEN", "ID_2", "NAME", "DESCRIPTION", "KEY", "TYPE" };
+                                populateTables(relativePath + "\\modules.txt", delimiters, column_names, dataGridViewStagingModules);
+                            }
+                            else if (fileName == "producer_elements.txt")
+                            {
+                                string[] column_names = { "MODULE", "MODULE_NAME", "MODULE_VERSION", "ELEMENT_VERSION", "ELEMENT_VERSION_KEY", "ELEMENT_VERSION_TYPE", "ELEMENT_VERSION_NAME", "ELEMENT_VERSION_COMPATIBILITY_HASH" };
+                                populateTables(relativePath + "\\producer_elements.txt", delimiters, column_names, dataGridViewStagingProducerElements);
+                            }
+                            else if (fileName == "site_properties.txt")
+                            {
+                                string[] column_names = { "ID", "SS_KEY", "MODULE_VERSION_ID", "NAME", "DATA_TYPE_ID", "DESCRIPTION", "DEFAULT_VALUE", "IS_MULTI_TENANT", "CREATED_ON", "UPDATED_ON", "ID_2", "LABEL", "ORDER", "IS_ACTIVE",
+                                    "ID_3", "EFFECTIVE_VALUE_CHANGED_IN_STAGING", "EFFECTIVE_VALUE_ON_TARGET", "SITE_PROPERTY_SS_KEY", "IS_MULTI_TENANT_2", "MODULE_ID", "STAGING_ID", "IS_NEW", "CREATED_ON_2", "CREATED_BY",
+                                    "UPDATED_ON_2", "UPDATED_BY" };
+                                populateTables(relativePath + "\\site_properties.txt", delimiters, column_names, dataGridViewStagingSiteProperties);
+                            }
+                            else if (fileName == "staging.txt")
+                            {
+                                string[] column_names = { "ID", "SOURCE_ENVIRONMENT", "TARGET_ENVIRONMENT", "LABEL", "INTERNAL", "CREATED_BY", "CREATED_ON", "STARTED_BY", "STARTED_ON", "FINISHED_ON", "IS_DRAFT", "SOLUTION_PUBLISHED_FINISHED",
+                                    "IS_WAITING_FOR_CONFIRMATION_PROCESS", "SAVED_BY", "SAVED_ON", "LAST_REFRESHED_ON", "SYNC_FINISHED_ON", "SOURCE_STAGING", "STAGING_CONFIRMATION_KIND", "TWO_STEP_MODE", "LAST_RESUME_DATE_TIME", "MARKED_FOR_ABORT_ON",
+                                    "ABORTED_BY", "KEY", "STATUS" };
+                                populateTables(relativePath + "\\staging.txt", delimiters, column_names, dataGridViewStaginglogs);
+                            }
+                            else if (fileName == "staging_application_version.txt")
+                            {
+                                string[] column_names = { "ID", "KEY", "NAME", "IS_DEFAULT", "DEPLOYMENT_TECH", "ENVIRONMENT", "IS_ACTIVE", "ID_2", "STAGING_APPLICATION_VERSION", "MOBILE_PLATFORM", "SOURCE_BINARY_AVAILABLE", "SOURCE_CONFIG_AVAILABLE",
+                                    "SOURCE_VERSION_NUMBER", "SOURCE_VERSION_CODE", "TARGET_BINARY_AVAILABLE", "TARGET_CONFIG_AVAILABLE", "TARGET_VERSION_NUMBER", "TARGET_VERSION_CODE", "VERSION_CHANGED", "VERSION_AFTER_FINISH_PUBLISH", "MABS_VERSION_AFTER_PUBLISH",
+                                    "ID_3", "STAGING", "APPLICATION", "APPLICATION_VERSION", "VERSION_CHANGED_2", "APPLICATION_DELETED", "LAST_PUBLISHED", "LAST_PUBLISHED_BY", "FRONT_OFFICE_ESPACE_KEY", "FRONT_OFFICE_ESPACE_NAME", "BACK_OFFICE_ESPACE_KEY",
+                                    "BACK_OFFICE_ESPACE_NAME", "WEB_THEME_GLOBAL_KEY", "MOBILE_THEME_GLOBAL_KEY", "TEMPLATE_KEY", "PRIMARY_COLOR", "SOURCE_APPLICATION_VERSION", "SOURCE_VERSION_CHANGED", "PREVIOUS_APPLICATION_VERSION", "PREVIOUS_VERSION_CHANGED",
+                                    "PREVIOUS_APPLICATION_DELETED", "PREVIOUS_LAST_PUBLISHED", "PREVIOUS_LAST_PUBLISHED_BY", "PREVIOUS_FRONT_OFFICE_ESPACE_KEY", "PREVIOUS_FRONT_OFFICE_ESPACE_NAME", "PREVIOUS_BACK_OFFICE_ESPACE_KEY", "PREVIOUS_BACK_OFFICE_ESPACE_NAME",
+                                    "PREVIOUS_WEB_THEME_GLOBAL_KEY", "PREVIOUS_MOBILE_THEME_GLOBAL_KEY", "PREVIOUS_TEMPLATE_KEY", "PREVIOUS_PRIMARY_COLOR", "OPERATION", "OPERATION_LABEL", "OPERATION_MESSAGE", "OPERATION_IS_DEPLOY", "OPERATION_IS_FORCE_DEPLOY",
+                                    "VERSION_WHEN_STARTING_DEPLOY", "VERSION_AFTER_FINISHING_DEPLOY", "TARGET_ENV_CONSISTENCY_STATUS", "TARGET_ENV_CONSISTENCY_MSG", "ORDER_IN_SUMMARY_TABLE", "NEW_TAG_VERSION", "NEW_TAG_DESCRIPTION", "STAGING_OPTION",
+                                    "PENDING_VALIDATION", "SOURCE_NATIVE_HASH", "TARGET_NATIVE_HASH", "IS_VISIBLE_IN_STAGING", "HAS_NEW_SITE_PROP", "ID_4", "ENV_DEPLOYMENT_ZONES", "ENV_DATABASE_CONFIG", "IS_PWA_ENABLED_ON_SOURCE", "IS_AUTO_UPGRADE_DISABLED" };
+                                populateTables(relativePath + "\\staging_application_version.txt", delimiters, column_names, dataGridViewStagingApplicationVersion);
+                            }
+                            else if (fileName == "staging_message.txt")
+                            {
+                                string[] column_names = { "ID", "STAGING", "MESSAGE", "DETAIL", "EXTRA_INFO", "INTERNAL_ID", "INTERNAL_TYPE", "TYPE", "DATE_TIME" };
+                                populateTables(relativePath + "\\staging_message.txt", delimiters, column_names, dataGridViewStagingMessage);
+                            }
+                            else if (fileName == "staging_module_inconsistency.txt")
+                            {
+                                string[] column_names = { "ID", "STAGING", "CONSUMER_MODULE", "PRODUCER_MODULE", "FIRST_REQUIRED_ELEMENT", "FIRST_REQUIRED_ELEMENT_TYPE", "TOTAL_REQUIRED_ELEMENTS", "PRODUCER_MODULE_NAME", "CONSUMER_MODULE_NAME", "INCONSISTENCY_TYPE" };
+                                populateTables(relativePath + "\\staging_module_inconsistency.txt", delimiters, column_names, dataGridViewStagingModuleInconsistencies);
+                            }
+                            else if (fileName == "staging_module_version.txt")
+                            {
+                                string[] column_names = { "ID", "STAGING", "APPLICATION", "PREVIOUS_APPLICATION", "MODULE", "MODULE_VERSION", "MODULE_DELETED", "PREVIOUS_MODULE_VERSION", "PREVIOUS_MODULE_DELETED", "OPERATION" };
+                                populateTables(relativePath + "\\staging_module_version.txt", delimiters, column_names, dataGridViewStagingModuleVersion);
+                            }
+                            else if (fileName == "staging_module_version_to_publish.txt")
+                            {
+                                string[] column_names = { "ID", "STAGING", "PLANNED_MODULE_VERSION_HASH", "MODULE_VERSION_HASH_TO_PUBLISH" };
+                                populateTables(relativePath + "\\staging_module_version_to_publish.txt", delimiters, column_names, dataGridViewStagingModuleVersionPublished);
+                            }
+                            else if (fileName == "staging_module_version_to_upload.txt")
+                            {
+                                string[] column_names = { "ID", "STAGING", "USER", "ENVIRONMENT_ID_1", "ENVIRONMENT_ID_2", "TYPE", "NAME", "MODULE_KEY", "VERSION_KEY", "DIRECT_UPGRADE_FROM_VERSION_KEY", "APPLICATION_KEY" };
+                                populateTables(relativePath + "\\staging_module_version_to_upload.txt", delimiters, column_names, dataGridViewStagingModuleVersionUploaded);
+                            }
+                            else if (fileName == "staging_option.txt")
+                            {
+                                string[] column_names = { "ID", "STAGING", "APPLICATION", "STAGING_OPTION_TYPE", "APPLICATION_VERSION", "APPLICATION_VERSION_LABEL", "LABEL", "APPLICATION_DESCRIPTION", "IS_TOP_OPTION", "iOS_VERSION_LABEL", "ANDROID_VERSION_LABEL",
+                                    "MOBILE_APPS_DESCRIPTION" };
+                                populateTables(relativePath + "\\staging_option.txt", delimiters, column_names, dataGridViewStagingOptions);
+                            }
+                            else if (fileName == "staging_outdated_application.txt")
+                            {
+                                string[] column_names = { "ID", "STAGING", "APPLICATION" };
+                                populateTables(relativePath + "\\staging_outdated_application.txt", delimiters, column_names, dataGridViewStagingOutdatedApplication);
+                            }
+                            else if (fileName == "staging_outdated_module.txt")
+                            {
+                                string[] column_names = { "ID", "STAGING", "MODULE" };
+                                populateTables(relativePath + "\\staging_outdated_module.txt", delimiters, column_names, dataGridViewStagingOutdatedModule);
                             }
                             else if (fileName == "windows_application_event_viewer_logs.txt")
                             {
@@ -938,8 +1233,10 @@ namespace OutSystems_Log_Parser
                         queryDataGridViews(dataGridViewScreenRequestslogs, isoFrom, isoTo);
                         queryDataGridViews(dataGridViewServiceActionlogs, isoFrom, isoTo);
                         queryDataGridViews(dataGridViewServiceStudiologs, isoFrom, isoTo);
+                        queryDataGridViews(dataGridViewGeneralTXTlogs, isoFrom, isoTo);
                         queryDataGridViews(dataGridViewTimerlogs, isoFrom, isoTo);
                         queryDataGridViews(dataGridViewTradWebRequests, isoFrom, isoTo);
+                        queryDataGridViews(dataGridViewBPTReportslogs, isoFrom, isoTo);
                         queryDataGridViews(dataGridViewWinAppEventViewer, isoFrom, isoTo);
                         queryDataGridViews(dataGridViewWinSysEventViewer, isoFrom, isoTo);
                         queryDataGridViews(dataGridViewWinSecEventViewer, isoFrom, isoTo);
@@ -965,14 +1262,16 @@ namespace OutSystems_Log_Parser
                     removeGenericErrors(dataGridViewAndroidlogs, 3, txtBoxDetailAndroidLogs);
                     removeGenericErrors(dataGridViewiOSlogs, 3, txtBoxDetailiOSLogs);
                     removeGenericErrors(dataGridViewServiceStudiologs, 3, txtBoxDetailServiceStudioLogs);
+                    removeGenericErrors(dataGridViewGeneralTXTlogs, 2, txtBoxDetailGeneralTXTLogs);
+                    //removeGenericErrors(dataGridViewBPTReportslogs, txtBoxDetailBPTReportslogs);
                 }
 
                 if (highlightError)
                 {
-                    string[] knownErrors_Errorlogs = { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "a fatal error has occurred", "communicationexception", "json deserialization", "compilation error" };
+                    string[] knownErrors_Errorlogs = { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "a fatal error has occurred", "communicationexception", "json deserialization", "compilation error", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "can't proceed", "truncated in table" };
                     string[] knownErrors_Generallogs = { "system cannot find" };
-                    string[] knownErrors_WinAppEventViewer = { "ora-", "error closing the transaction", "cannot access destination table" };
-                    string[] knownErrors_WinSysEventViewer = { "error closing the transaction" };
+                    string[] knownErrors_WinAppEventViewer = { "ora-", "error closing", "cannot access", "error opening" };
+                    string[] knownErrors_WinSysEventViewer = { "error closing", "timed out" };
                     string[] knownErrors_AndroidiOSlogs = { "file is corrupt or invalid", "androidx library", "command finished with error code 0", "plugin is not going to work", "error: spawnsync sudo etimeout", "plugin doesn't support this project's cordova-android version", "failed to fetch plug", "archive failed", "build failed with the following error", "command failed with exit code", "signing certificate is invalid", "the ios deployment target", "verification failed" };
                     string[] knownErrors_ServiceStudiologs = { "oneoftypedefinition", "http forbidden", "[not connected]" };
 
@@ -993,6 +1292,8 @@ namespace OutSystems_Log_Parser
                     highlightKnownErrors(dataGridViewAndroidlogs, 3, knownErrors_AndroidiOSlogs);
                     highlightKnownErrors(dataGridViewiOSlogs, 3, knownErrors_AndroidiOSlogs);
                     highlightKnownErrors(dataGridViewServiceStudiologs, 3, knownErrors_ServiceStudiologs);
+                    //highlightKnownErrors(dataGridViewGeneralTXTlogs, 2);
+                    //highlightKnownErrors(dataGridViewBPTReportslogs);
                 }
 
                 btnFilter.Enabled = false;
@@ -1056,6 +1357,42 @@ namespace OutSystems_Log_Parser
             clearTextboxes(txtBoxDetailiOSLogs);
             clearTextboxes(txtDetailIISlogs);
             clearTextboxes(txtBoxDetailServiceStudioLogs);
+            clearTextboxes(txtBoxDetailGeneralTXTLogs);
+            clearTextboxes(txtBoxDetailBPTReportslogs);
+            clearTextboxes(txtBoxDetailEnvironmentCapabilitieslogs);
+            clearTextboxes(txtBoxDetailEnvironmentslogs);
+            clearTextboxes(txtBoxDetailFullErrorDumpslogs);
+            clearTextboxes(txtBoxDetailRoleslogs);
+            clearTextboxes(txtBoxDetailRolesInApplicationslogs);
+            clearTextboxes(txtBoxDetailRolesInTeamslogs);
+            clearTextboxes(txtBoxDetailUserlogs);
+            clearTextboxes(txtBoxDetailUserPoolslogs);
+            clearTextboxes(txtBoxDetailSyncErrorslogs);
+            clearTextboxes(txtBoxDetailStagingApplogs);
+            clearTextboxes(txtBoxDetailStagingAppVerlogs);
+            clearTextboxes(txtBoxDetailStagingAppVerModuleVerlogs);
+            clearTextboxes(txtBoxDetailStagingChangelog);
+            clearTextboxes(txtBoxDetailStagingConsumerElementslogs);
+            clearTextboxes(txtBoxDetailStagingEntityConfiguration);
+            clearTextboxes(txtBoxDetailStagingEnvironmentApplicationCache);
+            clearTextboxes(txtBoxDetailStagingEnvironmentApplicationModule);
+            clearTextboxes(txtBoxDetailStagingEnviromentApplicationVersion);
+            clearTextboxes(txtBoxDetailStagingEnvironmentModuleCache);
+            clearTextboxes(txtBoxDetailStagingEnvironmentModuleRunning);
+            clearTextboxes(txtBoxDetailStagingModules);
+            clearTextboxes(txtBoxDetailStagingModuleVersionReferences);
+            clearTextboxes(txtBoxDetailStagingProducerElements);
+            clearTextboxes(txtBoxDetailStagingSiteProperties);
+            clearTextboxes(txtBoxDetailStaginglogs);
+            clearTextboxes(txtBoxDetailStagingApplicationVersion);
+            clearTextboxes(txtBoxDetailStagingMessage);
+            clearTextboxes(txtBoxDetailStagingModuleInconsistencies);
+            clearTextboxes(txtBoxDetailStagingModuleVersion);
+            clearTextboxes(txtBoxDetailStagingModuleVersionPublished);
+            clearTextboxes(txtBoxDetailStagingModuleVersionUploaded);
+            clearTextboxes(txtBoxDetailStagingOptions);
+            clearTextboxes(txtBoxDetailStagingOutdatedApplication);
+            clearTextboxes(txtBoxDetailStagingOutdatedModule);
 
             clearTables(dataGridViewErrorlogs);
             clearTables(dataGridViewGenerallogs);
@@ -1074,6 +1411,42 @@ namespace OutSystems_Log_Parser
             clearTables(dataGridViewAndroidlogs);
             clearTables(dataGridViewiOSlogs);
             clearTables(dataGridViewServiceStudiologs);
+            clearTables(dataGridViewGeneralTXTlogs);
+            clearTables(dataGridViewBPTReportslogs);
+            clearTables(dataGridViewEnvironmentCapabilitieslogs);
+            clearTables(dataGridViewEnvironmentslogs);
+            clearTables(dataGridViewFullErrorDumps);
+            clearTables(dataGridViewRoleslogs);
+            clearTables(dataGridViewRolesInApplicationslogs);
+            clearTables(dataGridViewRolesInTeamslogs);
+            clearTables(dataGridViewUserlogs);
+            clearTables(dataGridViewUserPoolslogs);
+            clearTables(dataGridViewSyncErrorslogs);
+            clearTables(dataGridViewStagingApplogs);
+            clearTables(dataGridViewStagingAppVerlogs);
+            clearTables(dataGridViewStagingAppVerModuleVerlogs);
+            clearTables(dataGridViewStagingChangelog);
+            clearTables(dataGridViewStagingConsumerElements);
+            clearTables(dataGridViewStagingEntityConfiguration);
+            clearTables(dataGridViewStagingEnvironmentAppicationCache);
+            clearTables(dataGridViewStagingEnvironmentApplicationModule);
+            clearTables(dataGridViewStagingEnvironmentApplicationVersion);
+            clearTables(dataGridViewStagingEnvironmentModuleCache);
+            clearTables(dataGridViewStagingEnvironmentModuleRunning);
+            clearTables(dataGridViewStagingModules);
+            clearTables(dataGridViewStagingModuleVersionRefererences);
+            clearTables(dataGridViewStagingProducerElements);
+            clearTables(dataGridViewStagingSiteProperties);
+            clearTables(dataGridViewStaginglogs);
+            clearTables(dataGridViewStagingApplicationVersion);
+            clearTables(dataGridViewStagingMessage);
+            clearTables(dataGridViewStagingModuleInconsistencies);
+            clearTables(dataGridViewStagingModuleVersion);
+            clearTables(dataGridViewStagingModuleVersionPublished);
+            clearTables(dataGridViewStagingModuleVersionUploaded);
+            clearTables(dataGridViewStagingOptions);
+            clearTables(dataGridViewStagingOutdatedApplication);
+            clearTables(dataGridViewStagingOutdatedModule);
 
             foreach (string filePaths in filesPaths)
             {
@@ -1166,12 +1539,235 @@ namespace OutSystems_Log_Parser
                         string[] column_names = { "DATE_TIME", "MESSAGE_TYPE", "ACTION_NAME", "MESSAGE" };
                         populateTables(relativePath + "\\service_studio_report.txt", delimiters, column_names, dataGridViewServiceStudiologs);
                     }
+                    else if (fileName == "general_text_logs.txt")
+                    {
+                        string[] column_names = { "DATE_TIME", "MESSAGE_TYPE", "MESSAGE" };
+                        populateTables(relativePath + "\\general_text_logs.txt", delimiters, column_names, dataGridViewGeneralTXTlogs);
+                    }
                     else if (fileName == "timer_logs.txt")
                     {
                         string[] column_names = { "DATE_TIME", "DURATION", "APPLICATION_NAME", "APPLICATION_KEY", "EXECUTED_BY",
                                     "ESPACE_NAME", "ESPACE_ID", "CYCLIC_JOB_NAME", "CYCLIC_JOB_KEY", "SHOULD_HAVE_RUN_AT", "NEXT_RUN",
                                     "ERROR_ID", "REQUEST_KEY", "TENANT_ID" };
                         populateTables(relativePath + "\\timer_logs.txt", delimiters, column_names, dataGridViewTimerlogs);
+                    }
+                    else if (fileName == "bpt_troubleshootingreport_logs.txt")
+                    {
+                        string[] column_names = { "DATE_TIME", "ESPACE_NAME", "PROCESS_NAME", "PROCESS_STATUS", "PROCESS_LAST_MODIFIED",
+                                    "PROCESS_SUSPENDED_DATE", "PROCESS_ID", "PARENT_PROCESS_ID", "ACTIVITY_CREATED", "ACTIVITY_NAME", "ACTIVITY_KIND",
+                                    "ACTIVITY_STATUS", "ACTIVITY_RUNNING_SINCE", "ACTIVITY_NEXT_RUN", "ACTIVITY_CLOSED", "ACTIVITY_ERROR_COUNT", "ACTIVITY_ERROR_ID" };
+                        populateTables(relativePath + "\\bpt_troubleshootingreport_logs.txt", delimiters, column_names, dataGridViewBPTReportslogs);
+                    }
+                    else if (fileName == "environment_capabilities.txt")
+                    {
+                        string[] column_names = { "ID", "ENVIRONMENT", "CAPABILITY" };
+                        populateTables(relativePath + "\\environment_capabilities.txt", delimiters, column_names, dataGridViewEnvironmentCapabilitieslogs);
+                    }
+                    else if (fileName == "environments.txt")
+                    {
+                        string[] column_names = { "IS_LIFE_TIME", "IS_REGISTERED", "ID", "NAME", "DESCRIPTION", "HOST", "PUBLIC_HOST", "TYPE", "PRIMARY_CONTACT", "ORDER",
+                                "NUMBER_OF_USERS", "IS_ACTIVE", "IS_OFFLINE", "LAST_SET_OFFLINE", "CREATED_BY", "CREATED_ON", "USE_HTTPS", "VERSION", "LAST_UPGRADE_VERSION",
+                                "UID", "CALLBACK_ADDRESS", "NUMBER_OF_FRONTEND_SERVERS", "FIRST_SYNC_FINISHED", "CLOUD_PROVIDER_TYPE", "ENVIRONMENT_STACK", "ADDITIONAL_INFO",
+                                "LAST_CACHE_INVALIDATION", "ENVIRONMENT_DB_PROVIDER", "ENVIRONMENT_SERVER_KIND", "TWO_STEP_PUBLISH_MODE", "LAST_ENV_SYNC_SEQUENTIAL_NUMBER",
+                                "DATA_HARVESTED_TO", "IS_IN_OUTSYSTEMS_CLOUD", "BEST_HASHING_ALGORITHM", "ALLOW_NATIVE_BUILDS" };
+                        populateTables(relativePath + "\\environments.txt", delimiters, column_names, dataGridViewEnvironmentslogs);
+                    }
+                    else if (fileName == "full_error_dump_logs.txt")
+                    {
+                        string[] column_names = { "PLATFORM_INFORMATION" };
+                        populateTables(relativePath + "\\full_error_dump_logs.txt", delimiters, column_names, dataGridViewFullErrorDumps);
+                    }
+                    else if (fileName == "roles.txt")
+                    {
+                        string[] column_names = { "ID", "NAME", "DESCRIPTION", "ORDER", "CAN_CONFIGURE_INFRASTRUCTURE", "CAN_CONFIGURE_ROLES", "CAN_CONFIGURE_USERS",
+                                    "CAN_CONFIGURE_APPLICATION_ROLES", "KEY", "ID_2", "LABEL_OLD", "SHORT_LABEL_OLD", "DESCRIPTION_OLD", "LABEL", "SHORT_LABEL", "DESCRIPTION_2",
+                                    "LT_LEVEL", "SC_LEVEL", "APPLICATION_LEVEL", "IS_OLD_LEVEL", "ID_3", "LABEL_2", "SHORT_LABEL_2", "DESCRIPTION_3", "LEVEL", "IS_COMPUTED",
+                                    "ID_4", "ROLE", "ENVIRONMENT", "DEFAULT_PERMISSION_LEVEL", "CAN_CREATE_APPLICATIONS", "CAN_REFERENCE_SYSTEMS", "IS_INITIALIZED" };
+                        populateTables(relativePath + "\\roles.txt", delimiters, column_names, dataGridViewRoleslogs);
+                    }
+                    else if (fileName == "roles_in_applications.txt")
+                    {
+                        string[] column_names = { "ID", "USER", "ROLE", "APPLICATION" };
+                        populateTables(relativePath + "\\roles_in_applications.txt", delimiters, column_names, dataGridViewRolesInApplicationslogs);
+                    }
+                    else if (fileName == "roles_in_teams.txt")
+                    {
+                        string[] column_names = { "ID", "ROLE", "KEY", "TEAM", "NAME", "KEY_2" };
+                        populateTables(relativePath + "\\roles_in_teams.txt", delimiters, column_names, dataGridViewRolesInTeamslogs);
+                    }
+                    else if (fileName == "sync_errors.txt")
+                    {
+                        string[] column_names = { "DATE_TIME", "SESSION_ID", "MESSAGE", "STACK", "MODULE", "USERNAME", "ENDPOINT", "ACTION", "PROCESS_NAME",
+                                    "ACTIVITY_NAME" };
+                        populateTables(relativePath + "\\sync_errors.txt", delimiters, column_names, dataGridViewSyncErrorslogs);
+                    }
+                    else if (fileName == "user.txt")
+                    {
+                        string[] column_names = { "ID", "NAME", "USERNAME", "EXTERNAL", "CREATION_DATE", "LAST_LOGIN", "IS_ACTIVE", "ID_2", "NAME_2",
+                                    "DESCRIPTION", "ORDER", "CAN_CONFIGURE_INFRASTRUCTURE", "CAN_CONFIGURE_ROLES", "CAN_CONFIGURE_USERS", "CAN_CONFIGURE_APPLICATION_ROLES",
+                                    "KEY", "USER_ROLE", "KEY_2", "MTSI_IDENTIFIER" };
+                        populateTables(relativePath + "\\user.txt", delimiters, column_names, dataGridViewUserlogs);
+                    }
+                    else if (fileName == "user_pools.txt")
+                    {
+                        string[] column_names = { "USER", "POOL_KEY" };
+                        populateTables(relativePath + "\\user_pools.txt", delimiters, column_names, dataGridViewUserPoolslogs);
+                    }
+                    else if (fileName == "application.txt")
+                    {
+                        string[] column_names = { "ID", "TEAM", "NAME", "DESCRIPTION", "PRIMARY_CONTACT", "URL_PATH", "KEY", "LOGO_HASH", "IS_ACTIVE", "DEFAULT_THEME_IS_MOBILE",
+                                    "MONITORING_ENABLED", "APPLICATION_KIND" };
+                        populateTables(relativePath + "\\application.txt", delimiters, column_names, dataGridViewStagingApplogs);
+                    }
+                    else if (fileName == "application_version.txt")
+                    {
+                        string[] column_names = { "ID", "APPLICATION", "VERSION", "CHANGE_LOG", "CREATED_ON", "CREATED_BY", "CREATED_ON_ENVIRONMENT", "FRONT_OFFICE_ESPACE_KEY",
+                                    "FRONT_OFFICE_ESPACE_NAME", "BACK_OFFICE_ESPACE_KEY", "BACK_OFFICE_ESPACE_NAME", "WEB_THEME_GLOBAL_KEY", "MOBILE_THEME_GLOBAL_KEY",
+                                    "WAS_AUTO_TAGGED", "VERSION_DECIMAL", "TEMPLATE_KEY", "PRIMARY_COLOR", "NATIVE_HASH", "KEY" };
+                        populateTables(relativePath + "\\application_version.txt", delimiters, column_names, dataGridViewStagingAppVerlogs);
+                    }
+                    else if (fileName == "application_version_module_version.txt")
+                    {
+                        string[] column_names = { "ID", "APPLICATION_VERSION", "MODULE_VERSION", "ID_2", "MODULE", "HASH", "GENERAL_HASH", "CREATED_ON",
+                                    "CREATED_BY", "CREATED_ON_ENVIRONMENT", "LAST_UPGRADE_VERSION", "DIRECT_UPGRADE_FROM_VERSION_HASH", "COMPATIBILITY_SIGNATURE_HASH",
+                                    "KEY" };
+                        populateTables(relativePath + "\\application_version_module_version.txt", delimiters, column_names, dataGridViewStagingAppVerModuleVerlogs);
+                    }
+                    else if (fileName == "change_log.txt")
+                    {
+                        string[] column_names = { "ID", "LABEL", "ID_2", "DATE_TIME", "MESSAGE", "FIRST_OBJECT_TYPE", "FIRST_OBJECT", "SECOND_OBJECT_TYPE",
+                                    "SECOND_OBJECT", "IS_WRITE", "IS_SUCCESSFUL", "IS_SYSTEM", "ENTRY_ESPACE", "USER", "CLIENT_IP" };
+                        populateTables(relativePath + "\\change_log.txt", delimiters, column_names, dataGridViewStagingChangelog);
+                    }
+                    else if (fileName == "consumer_elements.txt")
+                    {
+                        string[] column_names = { "CONSUMER_MODULE", "CONSUMER_MODULE_NAME", "CONSUMER_MODULE_VERSION", "CONSUMER_ELEMENT_VERSION", "CONSUMER_ELEMENT_VERSION_KEY", "CONSUMER_ELEMENT_VERSION_TYPE",
+                                    "CONSUMER_ELEMENT_VERSION_NAME", "CONSUMER_ELEMENT_VERSION_COMPATIBILITY_HASH", "PRODUCER_MODULE", "PRODUCER_MODULE_KEY", "PRODUCER_MODULE_NAME", "PRODUCER_MODULE_TYPE", "CREATED_ON_PRODUCER_MODULE_VERSION" };
+                        populateTables(relativePath + "\\consumer_elements.txt", delimiters, column_names, dataGridViewStagingConsumerElements);
+                    }
+                    else if (fileName == "entity_configurations.txt")
+                    {
+                        string[] column_names = { "ID", "ENTITY_KEY", "MODULE_VERSION_ID", "CREATED_ON", "UPDATED_ON", "ID_2",
+                                    "MODULE_ID", "STAGING_ID", "CREATED_ON_2", "CREATED_BY", "UPDATED_ON_2", "UPDATED_BY", "ENTITY_KEY_2",
+                                    "PHYSICAL_TABLE_NAME", "IS_OVERRIDEN_TABLE_NAME", "DEFAULT_PHYSICAL_TABLE_NAME", "ENTITY_NAME",
+                                    "SOURCE_PHYSICAL_TABLE_NAME", "TARGET_PHYSICAL_TABLE_NAME" };
+                        populateTables(relativePath + "\\entity_configurations.txt", delimiters, column_names, dataGridViewStagingEntityConfiguration);
+                    }
+                    else if (fileName == "environment_app_version.txt")
+                    {
+                        string[] column_names = { "ID", "ENVIRONMENT", "APPLICATION_VERSION" };
+                        populateTables(relativePath + "\\environment_app_version.txt", delimiters, column_names, dataGridViewStagingEnvironmentApplicationVersion);
+                    }
+                    else if (fileName == "environment_application_cache.txt")
+                    {
+                        string[] column_names = { "ID", "ENV_APPLICATION_CACHE_ID", "MOBILE_PLATFORM", "BINARY_AVAILABLE", "CONFIG_AVAILABLE", "VERSION_NUMBER",
+                                    "VERSION_CODE", "VERSION_CHANGED", "CONFIGURATION_CHANGED", "TAGGED_MABS_VERSION", "LAST_BUILD_MABS_VERSION", "LOCKED_MABS_VERSION",
+                                    "ID_2", "ENVIRONMENT", "APPLICATION", "VERSION", "VERSION_CHANGED_2", "NUMBER_OF_USERS", "CHANGE_STATUS", "CHANGE_STATUS_MESSAGE",
+                                    "SERVICE_CENTER_STATUS", "SERVICE_CENTER_STATUS_MESSAGE", "LAST_PUBLISHED", "LAST_PUBLISHED_BY", "DELETED", "CONSISTENCY_STATUS",
+                                    "CONSISTENCY_STATUS_MESSAGES", "FRONT_OFFICE_ESPACE_KEY", "FRONT_OFFICE_ESPACE_NAME", "BACK_OFFICE_ESPACE_KEY", "BACK_OFFICE_ESPACE_NAME",
+                                    "WEB_THEME_GLOBAL_KEY", "MOBILE_THEME_GLOBAL_KEY", "IS_OUTDATED", "DEVELOPMENT_EFFORT", "TEMPLATE_KEY", "PRIMARY_COLOR", "NATIVE_HASH",
+                                    "ENV_DEPLOYMENT_ZONES", "IS_IN_MULTIPLE_DEPLOYMENT_ZONES", "IS_PWA_ENABLED" };
+                        populateTables(relativePath + "\\environment_application_cache.txt", delimiters, column_names, dataGridViewStagingEnvironmentAppicationCache);
+                    }
+                    else if (fileName == "environment_application_module.txt")
+                    {
+                        string[] column_names = { "ID", "APPLICATION", "MODULE", "ENVIRONMENT", "LAST_CHANGED_ON" };
+                        populateTables(relativePath + "\\environment_application_module.txt", delimiters, column_names, dataGridViewStagingEnvironmentApplicationModule);
+                    }
+                    else if (fileName == "environment_module_cache.txt")
+                    {
+                        string[] column_names = { "ID", "ENVIRONMENT", "MODULE_VERSION", "INTERNAL_VERSION", "PUBLISHED_ON", "PUBLISHED_BY", "ID_2", "ENVIRONMENT_2", "MODULE",
+                                    "PUBLISH", "CHANGE_STATUS", "CHANGE_STATUS_MESSAGE", "DELETED", "CONSISTENCY_STATUS", "CONSISTENCY_STATUS_MESSAGES", "IS_OUTDATED" };
+                        populateTables(relativePath + "\\environment_module_cache.txt", delimiters, column_names, dataGridViewStagingEnvironmentModuleCache);
+                    }
+                    else if (fileName == "environment_module_running.txt")
+                    {
+                        string[] column_names = { "ID", "ENVIRONMENT", "CONSUMER_MODULE", "PRODUCER_MODULE_KEY", "PRODUCER_COMPATIBILITY_HASH", "IS_WEAK_REFERENCE" };
+                        populateTables(relativePath + "\\environment_module_running.txt", delimiters, column_names, dataGridViewStagingEnvironmentModuleRunning);
+                    }
+                    else if (fileName == "module_version_references.txt")
+                    {
+                        string[] column_names = { "ID", "MODULE_VERSION_REFERENCE", "PRODUCER_MODULE_VERSION", "IS_COMPATIBLE", "IS_IN_DIFFERENT_LUV", "PLATFORM_VERSION",
+                                    "ID_2", "MODULE_VERSION", "PRODUCER_MODULE", "IS_WEAK_REFERENCE", "ID_3", "MODULE_VERSION_REFERENCE_STATUS", "ELEMENT_NAME", "ELEMENT_KEY",
+                                    "ELEMENT_TYPE", "ELEMENT_REF_INCONSISTENCY_TYPE_I" };
+                        populateTables(relativePath + "\\module_version_references.txt", delimiters, column_names, dataGridViewStagingModuleVersionRefererences);
+                    }
+                    else if (fileName == "modules.txt")
+                    {
+                        string[] column_names = { "ID", "LABEL", "TOKEN", "ID_2", "NAME", "DESCRIPTION", "KEY", "TYPE" };
+                        populateTables(relativePath + "\\modules.txt", delimiters, column_names, dataGridViewStagingModules);
+                    }
+                    else if (fileName == "producer_elements.txt")
+                    {
+                        string[] column_names = { "MODULE", "MODULE_NAME", "MODULE_VERSION", "ELEMENT_VERSION", "ELEMENT_VERSION_KEY", "ELEMENT_VERSION_TYPE", "ELEMENT_VERSION_NAME", "ELEMENT_VERSION_COMPATIBILITY_HASH" };
+                        populateTables(relativePath + "\\producer_elements.txt", delimiters, column_names, dataGridViewStagingProducerElements);
+                    }
+                    else if (fileName == "site_properties.txt")
+                    {
+                        string[] column_names = { "ID", "SS_KEY", "MODULE_VERSION_ID", "NAME", "DATA_TYPE_ID", "DESCRIPTION", "DEFAULT_VALUE", "IS_MULTI_TENANT", "CREATED_ON", "UPDATED_ON", "ID_2", "LABEL", "ORDER", "IS_ACTIVE",
+                                    "ID_3", "EFFECTIVE_VALUE_CHANGED_IN_STAGING", "EFFECTIVE_VALUE_ON_TARGET", "SITE_PROPERTY_SS_KEY", "IS_MULTI_TENANT_2", "MODULE_ID", "STAGING_ID", "IS_NEW", "CREATED_ON_2", "CREATED_BY",
+                                    "UPDATED_ON_2", "UPDATED_BY" };
+                        populateTables(relativePath + "\\site_properties.txt", delimiters, column_names, dataGridViewStagingSiteProperties);
+                    }
+                    else if (fileName == "staging.txt")
+                    {
+                        string[] column_names = { "ID", "SOURCE_ENVIRONMENT", "TARGET_ENVIRONMENT", "LABEL", "INTERNAL", "CREATED_BY", "CREATED_ON", "STARTED_BY", "STARTED_ON", "FINISHED_ON", "IS_DRAFT", "SOLUTION_PUBLISHED_FINISHED",
+                                    "IS_WAITING_FOR_CONFIRMATION_PROCESS", "SAVED_BY", "SAVED_ON", "LAST_REFRESHED_ON", "SYNC_FINISHED_ON", "SOURCE_STAGING", "STAGING_CONFIRMATION_KIND", "TWO_STEP_MODE", "LAST_RESUME_DATE_TIME", "MARKED_FOR_ABORT_ON",
+                                    "ABORTED_BY", "KEY", "STATUS" };
+                        populateTables(relativePath + "\\staging.txt", delimiters, column_names, dataGridViewStaginglogs);
+                    }
+                    else if (fileName == "staging_application_version.txt")
+                    {
+                        string[] column_names = { "ID", "KEY", "NAME", "IS_DEFAULT", "DEPLOYMENT_TECH", "ENVIRONMENT", "IS_ACTIVE", "ID_2", "STAGING_APPLICATION_VERSION", "MOBILE_PLATFORM", "SOURCE_BINARY_AVAILABLE", "SOURCE_CONFIG_AVAILABLE",
+                                    "SOURCE_VERSION_NUMBER", "SOURCE_VERSION_CODE", "TARGET_BINARY_AVAILABLE", "TARGET_CONFIG_AVAILABLE", "TARGET_VERSION_NUMBER", "TARGET_VERSION_CODE", "VERSION_CHANGED", "VERSION_AFTER_FINISH_PUBLISH", "MABS_VERSION_AFTER_PUBLISH",
+                                    "ID_3", "STAGING", "APPLICATION", "APPLICATION_VERSION", "VERSION_CHANGED_2", "APPLICATION_DELETED", "LAST_PUBLISHED", "LAST_PUBLISHED_BY", "FRONT_OFFICE_ESPACE_KEY", "FRONT_OFFICE_ESPACE_NAME", "BACK_OFFICE_ESPACE_KEY",
+                                    "BACK_OFFICE_ESPACE_NAME", "WEB_THEME_GLOBAL_KEY", "MOBILE_THEME_GLOBAL_KEY", "TEMPLATE_KEY", "PRIMARY_COLOR", "SOURCE_APPLICATION_VERSION", "SOURCE_VERSION_CHANGED", "PREVIOUS_APPLICATION_VERSION", "PREVIOUS_VERSION_CHANGED",
+                                    "PREVIOUS_APPLICATION_DELETED", "PREVIOUS_LAST_PUBLISHED", "PREVIOUS_LAST_PUBLISHED_BY", "PREVIOUS_FRONT_OFFICE_ESPACE_KEY", "PREVIOUS_FRONT_OFFICE_ESPACE_NAME", "PREVIOUS_BACK_OFFICE_ESPACE_KEY", "PREVIOUS_BACK_OFFICE_ESPACE_NAME",
+                                    "PREVIOUS_WEB_THEME_GLOBAL_KEY", "PREVIOUS_MOBILE_THEME_GLOBAL_KEY", "PREVIOUS_TEMPLATE_KEY", "PREVIOUS_PRIMARY_COLOR", "OPERATION", "OPERATION_LABEL", "OPERATION_MESSAGE", "OPERATION_IS_DEPLOY", "OPERATION_IS_FORCE_DEPLOY",
+                                    "VERSION_WHEN_STARTING_DEPLOY", "VERSION_AFTER_FINISHING_DEPLOY", "TARGET_ENV_CONSISTENCY_STATUS", "TARGET_ENV_CONSISTENCY_MSG", "ORDER_IN_SUMMARY_TABLE", "NEW_TAG_VERSION", "NEW_TAG_DESCRIPTION", "STAGING_OPTION",
+                                    "PENDING_VALIDATION", "SOURCE_NATIVE_HASH", "TARGET_NATIVE_HASH", "IS_VISIBLE_IN_STAGING", "HAS_NEW_SITE_PROP", "ID_4", "ENV_DEPLOYMENT_ZONES", "ENV_DATABASE_CONFIG", "IS_PWA_ENABLED_ON_SOURCE", "IS_AUTO_UPGRADE_DISABLED" };
+                        populateTables(relativePath + "\\staging_application_version.txt", delimiters, column_names, dataGridViewStagingApplicationVersion);
+                    }
+                    else if (fileName == "staging_message.txt")
+                    {
+                        string[] column_names = { "ID", "STAGING", "MESSAGE", "DETAIL", "EXTRA_INFO", "INTERNAL_ID", "INTERNAL_TYPE", "TYPE", "DATE_TIME" };
+                        populateTables(relativePath + "\\staging_message.txt", delimiters, column_names, dataGridViewStagingMessage);
+                    }
+                    else if (fileName == "staging_module_inconsistency.txt")
+                    {
+                        string[] column_names = { "ID", "STAGING", "CONSUMER_MODULE", "PRODUCER_MODULE", "FIRST_REQUIRED_ELEMENT", "FIRST_REQUIRED_ELEMENT_TYPE", "TOTAL_REQUIRED_ELEMENTS", "PRODUCER_MODULE_NAME", "CONSUMER_MODULE_NAME", "INCONSISTENCY_TYPE" };
+                        populateTables(relativePath + "\\staging_module_inconsistency.txt", delimiters, column_names, dataGridViewStagingModuleInconsistencies);
+                    }
+                    else if (fileName == "staging_module_version.txt")
+                    {
+                        string[] column_names = { "ID", "STAGING", "APPLICATION", "PREVIOUS_APPLICATION", "MODULE", "MODULE_VERSION", "MODULE_DELETED", "PREVIOUS_MODULE_VERSION", "PREVIOUS_MODULE_DELETED", "OPERATION" };
+                        populateTables(relativePath + "\\staging_module_version.txt", delimiters, column_names, dataGridViewStagingModuleVersion);
+                    }
+                    else if (fileName == "staging_module_version_to_publish.txt")
+                    {
+                        string[] column_names = { "ID", "STAGING", "PLANNED_MODULE_VERSION_HASH", "MODULE_VERSION_HASH_TO_PUBLISH" };
+                        populateTables(relativePath + "\\staging_module_version_to_publish.txt", delimiters, column_names, dataGridViewStagingModuleVersionPublished);
+                    }
+                    else if (fileName == "staging_module_version_to_upload.txt")
+                    {
+                        string[] column_names = { "ID", "STAGING", "USER", "ENVIRONMENT_ID_1", "ENVIRONMENT_ID_2", "TYPE", "NAME", "MODULE_KEY", "VERSION_KEY", "DIRECT_UPGRADE_FROM_VERSION_KEY", "APPLICATION_KEY" };
+                        populateTables(relativePath + "\\staging_module_version_to_upload.txt", delimiters, column_names, dataGridViewStagingModuleVersionUploaded);
+                    }
+                    else if (fileName == "staging_option.txt")
+                    {
+                        string[] column_names = { "ID", "STAGING", "APPLICATION", "STAGING_OPTION_TYPE", "APPLICATION_VERSION", "APPLICATION_VERSION_LABEL", "LABEL", "APPLICATION_DESCRIPTION", "IS_TOP_OPTION", "iOS_VERSION_LABEL", "ANDROID_VERSION_LABEL",
+                                    "MOBILE_APPS_DESCRIPTION" };
+                        populateTables(relativePath + "\\staging_option.txt", delimiters, column_names, dataGridViewStagingOptions);
+                    }
+                    else if (fileName == "staging_outdated_application.txt")
+                    {
+                        string[] column_names = { "ID", "STAGING", "APPLICATION" };
+                        populateTables(relativePath + "\\staging_outdated_application.txt", delimiters, column_names, dataGridViewStagingOutdatedApplication);
+                    }
+                    else if (fileName == "staging_outdated_module.txt")
+                    {
+                        string[] column_names = { "ID", "STAGING", "MODULE" };
+                        populateTables(relativePath + "\\staging_outdated_module.txt", delimiters, column_names, dataGridViewStagingOutdatedModule);
                     }
                     else if (fileName == "windows_application_event_viewer_logs.txt")
                     {
@@ -1250,13 +1846,15 @@ namespace OutSystems_Log_Parser
             removeGenericErrors(dataGridViewAndroidlogs, 3, txtBoxDetailAndroidLogs);
             removeGenericErrors(dataGridViewiOSlogs, 3, txtBoxDetailiOSLogs);
             removeGenericErrors(dataGridViewServiceStudiologs, 3, txtBoxDetailServiceStudioLogs);
+            removeGenericErrors(dataGridViewGeneralTXTlogs, 2, txtBoxDetailGeneralTXTLogs);
+            //removeGenericErrors(dataGridViewBPTReportslogs, txtBoxDetailBPTReportslogs);
 
             if (highlightError)
             {
-                string[] knownErrors_Errorlogs = { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "a fatal error has occurred", "communicationexception", "json deserialization", "compilation error" };
+                string[] knownErrors_Errorlogs = { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "a fatal error has occurred", "communicationexception", "json deserialization", "compilation error", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "can't proceed", "truncated in table" };
                 string[] knownErrors_Generallogs = { "system cannot find" };
-                string[] knownErrors_WinAppEventViewer = { "ora-", "error closing the transaction", "cannot access destination table" };
-                string[] knownErrors_WinSysEventViewer = { "error closing the transaction" };
+                string[] knownErrors_WinAppEventViewer = { "ora-", "error closing", "cannot access", "error opening" };
+                string[] knownErrors_WinSysEventViewer = { "error closing", "timed out" };
                 string[] knownErrors_AndroidiOSlogs = { "file is corrupt or invalid", "androidx library", "command finished with error code 0", "plugin is not going to work", "error: spawnsync sudo etimeout", "plugin doesn't support this project's cordova-android version", "failed to fetch plug", "archive failed", "build failed with the following error", "command failed with exit code", "signing certificate is invalid", "the ios deployment target", "verification failed" };
                 string[] knownErrors_ServiceStudiologs = { "oneoftypedefinition", "http forbidden", "[not connected]" };
 
@@ -1277,6 +1875,8 @@ namespace OutSystems_Log_Parser
                 highlightKnownErrors(dataGridViewAndroidlogs, 3, knownErrors_AndroidiOSlogs);
                 highlightKnownErrors(dataGridViewiOSlogs, 3, knownErrors_AndroidiOSlogs);
                 highlightKnownErrors(dataGridViewServiceStudiologs, 3, knownErrors_ServiceStudiologs);
+                //highlightKnownErrors(dataGridViewGeneralTXTlogs, 2);
+                //highlightKnownErrors(dataGridViewBPTReportslogs);
             }
 
             btnRemoveGarbage.Enabled = false;
@@ -1596,10 +2196,10 @@ namespace OutSystems_Log_Parser
         {
             highlightError = true;
 
-            string[] knownErrors_Errorlogs = { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "a fatal error has occurred", "communicationexception", "json deserialization", "compilation error" };
+            string[] knownErrors_Errorlogs = { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "a fatal error has occurred", "communicationexception", "json deserialization", "compilation error", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "can't proceed", "truncated in table" };
             string[] knownErrors_Generallogs = { "system cannot find" };
-            string[] knownErrors_WinAppEventViewer = { "ora-", "error closing the transaction", "cannot access destination table" };
-            string[] knownErrors_WinSysEventViewer = { "error closing the transaction" };
+            string[] knownErrors_WinAppEventViewer = { "ora-", "error closing", "cannot access", "error opening" };
+            string[] knownErrors_WinSysEventViewer = { "error closing", "timed out" };
             string[] knownErrors_AndroidiOSlogs = { "file is corrupt or invalid", "androidx library", "command finished with error code 0", "plugin is not going to work", "error: spawnsync sudo etimeout", "plugin doesn't support this project's cordova-android version", "failed to fetch plug", "archive failed", "build failed with the following error", "command failed with exit code", "signing certificate is invalid", "the ios deployment target", "verification failed" };
             string[] knownErrors_ServiceStudiologs = { "oneoftypedefinition", "http forbidden", "[not connected]" };
 
@@ -1620,6 +2220,8 @@ namespace OutSystems_Log_Parser
             highlightKnownErrors(dataGridViewAndroidlogs, 3, knownErrors_AndroidiOSlogs);
             highlightKnownErrors(dataGridViewiOSlogs, 3, knownErrors_AndroidiOSlogs);
             highlightKnownErrors(dataGridViewServiceStudiologs, 3, knownErrors_ServiceStudiologs);
+            //highlightKnownErrors(dataGridViewGeneralTXTlogs, 2);
+            //highlightKnownErrors(dataGridViewBPTReportslogs);
 
             if (removeGarbage)
             {
@@ -1640,6 +2242,8 @@ namespace OutSystems_Log_Parser
                 removeGenericErrors(dataGridViewAndroidlogs, 3, txtBoxDetailAndroidLogs);
                 removeGenericErrors(dataGridViewiOSlogs, 3, txtBoxDetailiOSLogs);
                 removeGenericErrors(dataGridViewServiceStudiologs, 3, txtBoxDetailServiceStudioLogs);
+                removeGenericErrors(dataGridViewGeneralTXTlogs, 2, txtBoxDetailGeneralTXTLogs);
+                //removeGenericErrors(dataGridViewBPTReportslogs, txtBoxDetailBPTReportslogs);
             }
 
             btnHighlight.Enabled = false;
@@ -1714,7 +2318,15 @@ namespace OutSystems_Log_Parser
 
         private void btnScreenshot_Click(object sender, EventArgs e)
         {
-            createScreenshot("detailed_error_logs", txtBoxDetailErrorLogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            string txtDetailErrorLogs = "";
+
+            if (!string.IsNullOrEmpty(txtBoxDetailErrorLogs.Text))
+            {
+                DataGridViewRow row = this.dataGridViewErrorlogs.Rows[dataGridViewErrorlogs.CurrentCell.RowIndex];
+                txtDetailErrorLogs = "DATE_TIME: " + row.Cells["DATE_TIME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "MESSAGE: " + row.Cells["MESSAGE"].Value.ToString() + Environment.NewLine + Environment.NewLine + "STACK: " + row.Cells["STACK"].Value.ToString() + Environment.NewLine + Environment.NewLine + "MODULE_NAME: " + row.Cells["MODULE_NAME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "APPLICATION_NAME: " + row.Cells["APPLICATION_NAME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "SERVER: " + row.Cells["SERVER"].Value.ToString() + Environment.NewLine + Environment.NewLine + "ENVIRONMENT_INFORMATION: " + row.Cells["ENVIRONMENT_INFORMATION"].Value.ToString();
+            }
+
+            createScreenshot("detailed_error_logs", txtDetailErrorLogs, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_general_logs", txtBoxDetailGenerallogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_integrations_logs", txtBoxDetailIntegrationlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_screen_requests_logs", txtBoxDetailScreenRequestslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
@@ -1730,6 +2342,42 @@ namespace OutSystems_Log_Parser
             createScreenshot("detailed_ios_logs", txtBoxDetailiOSLogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_iis_logs", txtDetailIISlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_service_studio_logs", txtBoxDetailServiceStudioLogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_general_text_logs", txtBoxDetailGeneralTXTLogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_bpt_reports_logs", txtBoxDetailBPTReportslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_environment_capabilities_logs", txtBoxDetailEnvironmentCapabilitieslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_environments_logs", txtBoxDetailEnvironmentslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_full_error_dump_logs", txtBoxDetailFullErrorDumpslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_roles_logs", txtBoxDetailRoleslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_roles_in_applications_logs", txtBoxDetailRolesInApplicationslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_roles_in_teams_logs", txtBoxDetailRolesInTeamslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_sync_error_logs", txtBoxDetailSyncErrorslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_user_logs", txtBoxDetailUserlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_user_pool_logs", txtBoxDetailUserPoolslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_application_logs", txtBoxDetailStagingApplogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_application_version_logs", txtBoxDetailStagingAppVerlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_application_version_module_version_logs", txtBoxDetailStagingAppVerModuleVerlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_change_logs", txtBoxDetailStagingChangelog.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_consumer_elements_logs", txtBoxDetailStagingConsumerElementslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_entity_configurations_logs", txtBoxDetailStagingEntityConfiguration.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_environment_application_version_logs", txtBoxDetailStagingEnviromentApplicationVersion.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_environment_application_cache_logs", txtBoxDetailStagingEnvironmentApplicationCache.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_environment_application_module_logs", txtBoxDetailStagingEnvironmentApplicationModule.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_environment_module_cache_logs", txtBoxDetailStagingEnvironmentModuleCache.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_environment_module_running_logs", txtBoxDetailStagingEnvironmentModuleRunning.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_module_version_references_logs", txtBoxDetailStagingModuleVersionReferences.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_modules_logs", txtBoxDetailStagingModules.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_producer_elements_logs", txtBoxDetailStagingProducerElements.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_site_properties_logs", txtBoxDetailStagingSiteProperties.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_staging_logs", txtBoxDetailStaginglogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_staging_application_version_logs", txtBoxDetailStagingApplicationVersion.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_staging_message_logs", txtBoxDetailStagingMessage.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_staging_module_inconsistency_logs", txtBoxDetailStagingModuleInconsistencies.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_staging_module_version_logs", txtBoxDetailStagingModuleVersion.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_staging_module_version_publish_logs", txtBoxDetailStagingModuleVersionPublished.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_staging_module_version_upload_logs", txtBoxDetailStagingModuleVersionUploaded.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_staging_option_logs", txtBoxDetailStagingOptions.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_staging_oudated_application_logs", txtBoxDetailStagingOutdatedApplication.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_staging_oudated_module_logs", txtBoxDetailStagingOutdatedModule.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
         }
 
         private void createScreenshot(String filename, String text, Font font, Color textColor, Color backColor)
@@ -1797,6 +2445,1050 @@ namespace OutSystems_Log_Parser
                     timeStamp = timeStamp.Replace(" ", "");
 
                     img.Save(screenshotsFolder + "\\" + filename + "_" + timeStamp + ".jpg");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewGeneralTXTlogs_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewGeneralTXTlogs.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewGeneralTXTlogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailGeneralTXTLogs.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewBPTReportslogs_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewBPTReportslogs.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewBPTReportslogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailBPTReportslogs.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewEnvironmentCapabilitieslogs_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewEnvironmentCapabilitieslogs.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewEnvironmentCapabilitieslogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailEnvironmentCapabilitieslogs.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewEnvironmentslogs_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewEnvironmentslogs.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewEnvironmentslogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailEnvironmentslogs.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewFullErrorDumps_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewFullErrorDumps.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewFullErrorDumps.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailFullErrorDumpslogs.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewRoleslogs_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewRoleslogs.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewRoleslogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailRoleslogs.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewRolesInApplicationslogs_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewRolesInApplicationslogs.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewRolesInApplicationslogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailRolesInApplicationslogs.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewRolesInTeamslogs_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewRolesInTeamslogs.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewRolesInTeamslogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailRolesInTeamslogs.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewSyncErrorslogs_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewSyncErrorslogs.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewSyncErrorslogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailSyncErrorslogs.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewUserlogs_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewUserlogs.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewUserlogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailUserlogs.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewUserPoolslogs_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewUserPoolslogs.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewUserPoolslogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailUserPoolslogs.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewStagingApplogs_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewStagingApplogs.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewStagingApplogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailStagingApplogs.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewStagingAppVerlogs_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewStagingAppVerlogs.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewStagingAppVerlogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailStagingAppVerlogs.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewStagingAppVerModuleVerlogs_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewStagingAppVerModuleVerlogs.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewStagingAppVerModuleVerlogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailStagingAppVerModuleVerlogs.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewStagingChangelog_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewStagingChangelog.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewStagingChangelog.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailStagingChangelog.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewStagingConsumerElements_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewStagingConsumerElements.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewStagingConsumerElements.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailStagingConsumerElementslogs.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewStagingEntityConfiguration_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewStagingEntityConfiguration.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewStagingEntityConfiguration.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailStagingEntityConfiguration.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewStagingEnvironmentAppicationCache_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewStagingEnvironmentAppicationCache.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewStagingEnvironmentAppicationCache.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailStagingEnvironmentApplicationCache.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewStagingEnvironmentApplicationModule_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewStagingEnvironmentApplicationModule.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewStagingEnvironmentApplicationModule.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailStagingEnvironmentApplicationModule.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewStagingEnvironmentApplicationVersion_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewStagingEnvironmentApplicationVersion.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewStagingEnvironmentApplicationVersion.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailStagingEnviromentApplicationVersion.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewStagingEnvironmentModuleCache_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewStagingEnvironmentModuleCache.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewStagingEnvironmentModuleCache.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailStagingEnvironmentModuleCache.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewStagingEnvironmentModuleRunning_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewStagingEnvironmentModuleRunning.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewStagingEnvironmentModuleRunning.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailStagingEnvironmentModuleRunning.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewStagingModules_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewStagingModules.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewStagingModules.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailStagingModules.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewStagingModuleVersionRefererences_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewStagingModuleVersionRefererences.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewStagingModuleVersionRefererences.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailStagingModuleVersionReferences.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewStagingProducerElements_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewStagingProducerElements.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewStagingProducerElements.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailStagingProducerElements.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewStagingSiteProperties_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewStagingSiteProperties.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewStagingSiteProperties.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailStagingSiteProperties.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewStaginglogs_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewStaginglogs.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewStaginglogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailStaginglogs.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewStagingApplicationVersion_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewStagingApplicationVersion.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewStagingApplicationVersion.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailStagingApplicationVersion.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewStagingMessage_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewStagingMessage.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewStagingMessage.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailStagingMessage.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewStagingModuleInconsistencies_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewStagingModuleInconsistencies.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewStagingModuleInconsistencies.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailStagingModuleInconsistencies.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewStagingModuleVersion_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewStagingModuleVersion.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewStagingModuleVersion.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailStagingModuleVersion.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewStagingModuleVersionPublished_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewStagingModuleVersionPublished.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewStagingModuleVersionPublished.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailStagingModuleVersionPublished.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewStagingModuleVersionUploaded_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewStagingModuleVersionUploaded.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewStagingModuleVersionUploaded.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailStagingModuleVersionUploaded.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewStagingOptions_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewStagingOptions.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewStagingOptions.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailStagingOptions.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewStagingOutdatedApplication_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewStagingOutdatedApplication.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewStagingOutdatedApplication.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailStagingOutdatedApplication.Text = String.Join(Environment.NewLine, rowInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewStagingOutdatedModule_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewStagingOutdatedModule.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewStagingOutdatedModule.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailStagingOutdatedModule.Text = String.Join(Environment.NewLine, rowInfo);
                 }
             }
             catch (Exception ex)

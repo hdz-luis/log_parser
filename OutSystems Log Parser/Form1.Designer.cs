@@ -94,8 +94,121 @@
             this.dataGridViewServiceStudiologs = new System.Windows.Forms.DataGridView();
             this.txtBoxDetailServiceStudioLogs = new System.Windows.Forms.TextBox();
             this.tabPage21 = new System.Windows.Forms.TabPage();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.txtBoxDetailGeneralTXTLogs = new System.Windows.Forms.TextBox();
+            this.dataGridViewGeneralTXTlogs = new System.Windows.Forms.DataGridView();
+            this.tabPage22 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailBPTReportslogs = new System.Windows.Forms.TextBox();
+            this.dataGridViewBPTReportslogs = new System.Windows.Forms.DataGridView();
+            this.tabPage23 = new System.Windows.Forms.TabPage();
+            this.tabControl9 = new System.Windows.Forms.TabControl();
+            this.tabPage55 = new System.Windows.Forms.TabPage();
+            this.dataGridViewStagingModuleVersionPublished = new System.Windows.Forms.DataGridView();
+            this.txtBoxDetailStagingModuleVersionPublished = new System.Windows.Forms.TextBox();
+            this.tabPage56 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailStagingModuleVersionUploaded = new System.Windows.Forms.TextBox();
+            this.dataGridViewStagingModuleVersionUploaded = new System.Windows.Forms.DataGridView();
+            this.tabPage57 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailStagingOptions = new System.Windows.Forms.TextBox();
+            this.dataGridViewStagingOptions = new System.Windows.Forms.DataGridView();
+            this.tabPage58 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailStagingOutdatedApplication = new System.Windows.Forms.TextBox();
+            this.dataGridViewStagingOutdatedApplication = new System.Windows.Forms.DataGridView();
+            this.tabPage59 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailStagingOutdatedModule = new System.Windows.Forms.TextBox();
+            this.dataGridViewStagingOutdatedModule = new System.Windows.Forms.DataGridView();
+            this.tabControl8 = new System.Windows.Forms.TabControl();
+            this.tabPage45 = new System.Windows.Forms.TabPage();
+            this.dataGridViewStagingEnvironmentModuleRunning = new System.Windows.Forms.DataGridView();
+            this.txtBoxDetailStagingEnvironmentModuleRunning = new System.Windows.Forms.TextBox();
+            this.tabPage46 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailStagingModules = new System.Windows.Forms.TextBox();
+            this.dataGridViewStagingModules = new System.Windows.Forms.DataGridView();
+            this.tabPage47 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailStagingModuleVersionReferences = new System.Windows.Forms.TextBox();
+            this.dataGridViewStagingModuleVersionRefererences = new System.Windows.Forms.DataGridView();
+            this.tabPage48 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailStagingProducerElements = new System.Windows.Forms.TextBox();
+            this.dataGridViewStagingProducerElements = new System.Windows.Forms.DataGridView();
+            this.tabPage49 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailStagingSiteProperties = new System.Windows.Forms.TextBox();
+            this.dataGridViewStagingSiteProperties = new System.Windows.Forms.DataGridView();
+            this.tabPage50 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailStaginglogs = new System.Windows.Forms.TextBox();
+            this.dataGridViewStaginglogs = new System.Windows.Forms.DataGridView();
+            this.tabPage51 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailStagingApplicationVersion = new System.Windows.Forms.TextBox();
+            this.dataGridViewStagingApplicationVersion = new System.Windows.Forms.DataGridView();
+            this.tabPage52 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailStagingMessage = new System.Windows.Forms.TextBox();
+            this.dataGridViewStagingMessage = new System.Windows.Forms.DataGridView();
+            this.tabPage53 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailStagingModuleInconsistencies = new System.Windows.Forms.TextBox();
+            this.dataGridViewStagingModuleInconsistencies = new System.Windows.Forms.DataGridView();
+            this.tabPage54 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailStagingModuleVersion = new System.Windows.Forms.TextBox();
+            this.dataGridViewStagingModuleVersion = new System.Windows.Forms.DataGridView();
+            this.tabControl7 = new System.Windows.Forms.TabControl();
+            this.tabPage35 = new System.Windows.Forms.TabPage();
+            this.dataGridViewStagingApplogs = new System.Windows.Forms.DataGridView();
+            this.txtBoxDetailStagingApplogs = new System.Windows.Forms.TextBox();
+            this.tabPage36 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailStagingAppVerlogs = new System.Windows.Forms.TextBox();
+            this.dataGridViewStagingAppVerlogs = new System.Windows.Forms.DataGridView();
+            this.tabPage37 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailStagingAppVerModuleVerlogs = new System.Windows.Forms.TextBox();
+            this.dataGridViewStagingAppVerModuleVerlogs = new System.Windows.Forms.DataGridView();
+            this.tabPage38 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailStagingChangelog = new System.Windows.Forms.TextBox();
+            this.dataGridViewStagingChangelog = new System.Windows.Forms.DataGridView();
+            this.tabPage39 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailStagingConsumerElementslogs = new System.Windows.Forms.TextBox();
+            this.dataGridViewStagingConsumerElements = new System.Windows.Forms.DataGridView();
+            this.tabPage40 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailStagingEntityConfiguration = new System.Windows.Forms.TextBox();
+            this.dataGridViewStagingEntityConfiguration = new System.Windows.Forms.DataGridView();
+            this.tabPage41 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailStagingEnvironmentApplicationCache = new System.Windows.Forms.TextBox();
+            this.dataGridViewStagingEnvironmentAppicationCache = new System.Windows.Forms.DataGridView();
+            this.tabPage42 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailStagingEnvironmentApplicationModule = new System.Windows.Forms.TextBox();
+            this.dataGridViewStagingEnvironmentApplicationModule = new System.Windows.Forms.DataGridView();
+            this.tabPage43 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailStagingEnviromentApplicationVersion = new System.Windows.Forms.TextBox();
+            this.dataGridViewStagingEnvironmentApplicationVersion = new System.Windows.Forms.DataGridView();
+            this.tabPage44 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailStagingEnvironmentModuleCache = new System.Windows.Forms.TextBox();
+            this.dataGridViewStagingEnvironmentModuleCache = new System.Windows.Forms.DataGridView();
+            this.tabPage24 = new System.Windows.Forms.TabPage();
+            this.tabControl5 = new System.Windows.Forms.TabControl();
+            this.tabPage26 = new System.Windows.Forms.TabPage();
+            this.dataGridViewEnvironmentCapabilitieslogs = new System.Windows.Forms.DataGridView();
+            this.txtBoxDetailEnvironmentCapabilitieslogs = new System.Windows.Forms.TextBox();
+            this.tabPage27 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailEnvironmentslogs = new System.Windows.Forms.TextBox();
+            this.dataGridViewEnvironmentslogs = new System.Windows.Forms.DataGridView();
+            this.tabPage28 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailFullErrorDumpslogs = new System.Windows.Forms.TextBox();
+            this.dataGridViewFullErrorDumps = new System.Windows.Forms.DataGridView();
+            this.tabPage25 = new System.Windows.Forms.TabPage();
+            this.tabControl6 = new System.Windows.Forms.TabControl();
+            this.tabPage29 = new System.Windows.Forms.TabPage();
+            this.dataGridViewRoleslogs = new System.Windows.Forms.DataGridView();
+            this.txtBoxDetailRoleslogs = new System.Windows.Forms.TextBox();
+            this.tabPage30 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailRolesInApplicationslogs = new System.Windows.Forms.TextBox();
+            this.dataGridViewRolesInApplicationslogs = new System.Windows.Forms.DataGridView();
+            this.tabPage31 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailRolesInTeamslogs = new System.Windows.Forms.TextBox();
+            this.dataGridViewRolesInTeamslogs = new System.Windows.Forms.DataGridView();
+            this.tabPage32 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailSyncErrorslogs = new System.Windows.Forms.TextBox();
+            this.dataGridViewSyncErrorslogs = new System.Windows.Forms.DataGridView();
+            this.tabPage33 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailUserlogs = new System.Windows.Forms.TextBox();
+            this.dataGridViewUserlogs = new System.Windows.Forms.DataGridView();
+            this.tabPage34 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailUserPoolslogs = new System.Windows.Forms.TextBox();
+            this.dataGridViewUserPoolslogs = new System.Windows.Forms.DataGridView();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -153,7 +266,85 @@
             this.tabPage20.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewServiceStudiologs)).BeginInit();
             this.tabPage21.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewGeneralTXTlogs)).BeginInit();
+            this.tabPage22.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBPTReportslogs)).BeginInit();
+            this.tabPage23.SuspendLayout();
+            this.tabControl9.SuspendLayout();
+            this.tabPage55.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingModuleVersionPublished)).BeginInit();
+            this.tabPage56.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingModuleVersionUploaded)).BeginInit();
+            this.tabPage57.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingOptions)).BeginInit();
+            this.tabPage58.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingOutdatedApplication)).BeginInit();
+            this.tabPage59.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingOutdatedModule)).BeginInit();
+            this.tabControl8.SuspendLayout();
+            this.tabPage45.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingEnvironmentModuleRunning)).BeginInit();
+            this.tabPage46.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingModules)).BeginInit();
+            this.tabPage47.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingModuleVersionRefererences)).BeginInit();
+            this.tabPage48.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingProducerElements)).BeginInit();
+            this.tabPage49.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingSiteProperties)).BeginInit();
+            this.tabPage50.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStaginglogs)).BeginInit();
+            this.tabPage51.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingApplicationVersion)).BeginInit();
+            this.tabPage52.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingMessage)).BeginInit();
+            this.tabPage53.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingModuleInconsistencies)).BeginInit();
+            this.tabPage54.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingModuleVersion)).BeginInit();
+            this.tabControl7.SuspendLayout();
+            this.tabPage35.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingApplogs)).BeginInit();
+            this.tabPage36.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingAppVerlogs)).BeginInit();
+            this.tabPage37.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingAppVerModuleVerlogs)).BeginInit();
+            this.tabPage38.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingChangelog)).BeginInit();
+            this.tabPage39.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingConsumerElements)).BeginInit();
+            this.tabPage40.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingEntityConfiguration)).BeginInit();
+            this.tabPage41.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingEnvironmentAppicationCache)).BeginInit();
+            this.tabPage42.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingEnvironmentApplicationModule)).BeginInit();
+            this.tabPage43.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingEnvironmentApplicationVersion)).BeginInit();
+            this.tabPage44.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingEnvironmentModuleCache)).BeginInit();
+            this.tabPage24.SuspendLayout();
+            this.tabControl5.SuspendLayout();
+            this.tabPage26.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEnvironmentCapabilitieslogs)).BeginInit();
+            this.tabPage27.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEnvironmentslogs)).BeginInit();
+            this.tabPage28.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFullErrorDumps)).BeginInit();
+            this.tabPage25.SuspendLayout();
+            this.tabControl6.SuspendLayout();
+            this.tabPage29.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRoleslogs)).BeginInit();
+            this.tabPage30.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRolesInApplicationslogs)).BeginInit();
+            this.tabPage31.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRolesInTeamslogs)).BeginInit();
+            this.tabPage32.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSyncErrorslogs)).BeginInit();
+            this.tabPage33.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUserlogs)).BeginInit();
+            this.tabPage34.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUserPoolslogs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPercentage)).BeginInit();
             this.SuspendLayout();
             // 
@@ -238,8 +429,12 @@
             this.tabControl.Controls.Add(this.tabPage3);
             this.tabControl.Controls.Add(this.tabPage4);
             this.tabControl.Controls.Add(this.tabPage19);
+            this.tabControl.Controls.Add(this.tabPage22);
+            this.tabControl.Controls.Add(this.tabPage23);
+            this.tabControl.Controls.Add(this.tabPage24);
+            this.tabControl.Controls.Add(this.tabPage25);
             this.tabControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl.Location = new System.Drawing.Point(15, 53);
+            this.tabControl.Location = new System.Drawing.Point(14, 53);
             this.tabControl.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -1048,8 +1243,8 @@
             // tabPage21
             // 
             this.tabPage21.BackColor = System.Drawing.Color.RoyalBlue;
-            this.tabPage21.Controls.Add(this.textBox2);
-            this.tabPage21.Controls.Add(this.dataGridView2);
+            this.tabPage21.Controls.Add(this.txtBoxDetailGeneralTXTLogs);
+            this.tabPage21.Controls.Add(this.dataGridViewGeneralTXTlogs);
             this.tabPage21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage21.Location = new System.Drawing.Point(4, 34);
             this.tabPage21.Margin = new System.Windows.Forms.Padding(4);
@@ -1059,33 +1254,1617 @@
             this.tabPage21.TabIndex = 1;
             this.tabPage21.Text = "General Text Logs";
             // 
-            // textBox2
+            // txtBoxDetailGeneralTXTLogs
             // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(1318, 8);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox2.Size = new System.Drawing.Size(250, 659);
-            this.textBox2.TabIndex = 15;
-            this.textBox2.TabStop = false;
+            this.txtBoxDetailGeneralTXTLogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailGeneralTXTLogs.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailGeneralTXTLogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailGeneralTXTLogs.Multiline = true;
+            this.txtBoxDetailGeneralTXTLogs.Name = "txtBoxDetailGeneralTXTLogs";
+            this.txtBoxDetailGeneralTXTLogs.ReadOnly = true;
+            this.txtBoxDetailGeneralTXTLogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailGeneralTXTLogs.Size = new System.Drawing.Size(250, 659);
+            this.txtBoxDetailGeneralTXTLogs.TabIndex = 15;
+            this.txtBoxDetailGeneralTXTLogs.TabStop = false;
             // 
-            // dataGridView2
+            // dataGridViewGeneralTXTlogs
             // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(8, 8);
-            this.dataGridView2.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridView2.MultiSelect = false;
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.ReadOnly = true;
-            this.dataGridView2.ShowEditingIcon = false;
-            this.dataGridView2.Size = new System.Drawing.Size(1306, 659);
-            this.dataGridView2.TabIndex = 14;
-            this.dataGridView2.TabStop = false;
+            this.dataGridViewGeneralTXTlogs.AllowUserToAddRows = false;
+            this.dataGridViewGeneralTXTlogs.AllowUserToDeleteRows = false;
+            this.dataGridViewGeneralTXTlogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewGeneralTXTlogs.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewGeneralTXTlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewGeneralTXTlogs.MultiSelect = false;
+            this.dataGridViewGeneralTXTlogs.Name = "dataGridViewGeneralTXTlogs";
+            this.dataGridViewGeneralTXTlogs.ReadOnly = true;
+            this.dataGridViewGeneralTXTlogs.ShowEditingIcon = false;
+            this.dataGridViewGeneralTXTlogs.Size = new System.Drawing.Size(1306, 659);
+            this.dataGridViewGeneralTXTlogs.TabIndex = 14;
+            this.dataGridViewGeneralTXTlogs.TabStop = false;
+            this.dataGridViewGeneralTXTlogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewGeneralTXTlogs_CellClick);
+            // 
+            // tabPage22
+            // 
+            this.tabPage22.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage22.Controls.Add(this.txtBoxDetailBPTReportslogs);
+            this.tabPage22.Controls.Add(this.dataGridViewBPTReportslogs);
+            this.tabPage22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage22.Location = new System.Drawing.Point(4, 34);
+            this.tabPage22.Name = "tabPage22";
+            this.tabPage22.Size = new System.Drawing.Size(1596, 729);
+            this.tabPage22.TabIndex = 5;
+            this.tabPage22.Text = "BPT";
+            // 
+            // txtBoxDetailBPTReportslogs
+            // 
+            this.txtBoxDetailBPTReportslogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailBPTReportslogs.Location = new System.Drawing.Point(1342, 4);
+            this.txtBoxDetailBPTReportslogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailBPTReportslogs.Multiline = true;
+            this.txtBoxDetailBPTReportslogs.Name = "txtBoxDetailBPTReportslogs";
+            this.txtBoxDetailBPTReportslogs.ReadOnly = true;
+            this.txtBoxDetailBPTReportslogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailBPTReportslogs.Size = new System.Drawing.Size(250, 721);
+            this.txtBoxDetailBPTReportslogs.TabIndex = 16;
+            this.txtBoxDetailBPTReportslogs.TabStop = false;
+            // 
+            // dataGridViewBPTReportslogs
+            // 
+            this.dataGridViewBPTReportslogs.AllowUserToAddRows = false;
+            this.dataGridViewBPTReportslogs.AllowUserToDeleteRows = false;
+            this.dataGridViewBPTReportslogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewBPTReportslogs.Location = new System.Drawing.Point(4, 4);
+            this.dataGridViewBPTReportslogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewBPTReportslogs.MultiSelect = false;
+            this.dataGridViewBPTReportslogs.Name = "dataGridViewBPTReportslogs";
+            this.dataGridViewBPTReportslogs.ReadOnly = true;
+            this.dataGridViewBPTReportslogs.ShowEditingIcon = false;
+            this.dataGridViewBPTReportslogs.Size = new System.Drawing.Size(1330, 721);
+            this.dataGridViewBPTReportslogs.TabIndex = 15;
+            this.dataGridViewBPTReportslogs.TabStop = false;
+            this.dataGridViewBPTReportslogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewBPTReportslogs_CellClick);
+            // 
+            // tabPage23
+            // 
+            this.tabPage23.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage23.Controls.Add(this.tabControl9);
+            this.tabPage23.Controls.Add(this.tabControl8);
+            this.tabPage23.Controls.Add(this.tabControl7);
+            this.tabPage23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage23.Location = new System.Drawing.Point(4, 34);
+            this.tabPage23.Name = "tabPage23";
+            this.tabPage23.Size = new System.Drawing.Size(1596, 729);
+            this.tabPage23.TabIndex = 6;
+            this.tabPage23.Text = "Staging Reports";
+            // 
+            // tabControl9
+            // 
+            this.tabControl9.Controls.Add(this.tabPage55);
+            this.tabControl9.Controls.Add(this.tabPage56);
+            this.tabControl9.Controls.Add(this.tabPage57);
+            this.tabControl9.Controls.Add(this.tabPage58);
+            this.tabControl9.Controls.Add(this.tabPage59);
+            this.tabControl9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControl9.Location = new System.Drawing.Point(4, 514);
+            this.tabControl9.Margin = new System.Windows.Forms.Padding(4);
+            this.tabControl9.Name = "tabControl9";
+            this.tabControl9.SelectedIndex = 0;
+            this.tabControl9.Size = new System.Drawing.Size(1584, 210);
+            this.tabControl9.TabIndex = 13;
+            // 
+            // tabPage55
+            // 
+            this.tabPage55.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage55.Controls.Add(this.dataGridViewStagingModuleVersionPublished);
+            this.tabPage55.Controls.Add(this.txtBoxDetailStagingModuleVersionPublished);
+            this.tabPage55.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage55.Location = new System.Drawing.Point(4, 34);
+            this.tabPage55.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage55.Name = "tabPage55";
+            this.tabPage55.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage55.Size = new System.Drawing.Size(1576, 172);
+            this.tabPage55.TabIndex = 0;
+            this.tabPage55.Text = "Staging Module Ver Pub";
+            // 
+            // dataGridViewStagingModuleVersionPublished
+            // 
+            this.dataGridViewStagingModuleVersionPublished.AllowUserToAddRows = false;
+            this.dataGridViewStagingModuleVersionPublished.AllowUserToDeleteRows = false;
+            this.dataGridViewStagingModuleVersionPublished.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStagingModuleVersionPublished.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewStagingModuleVersionPublished.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewStagingModuleVersionPublished.MultiSelect = false;
+            this.dataGridViewStagingModuleVersionPublished.Name = "dataGridViewStagingModuleVersionPublished";
+            this.dataGridViewStagingModuleVersionPublished.ReadOnly = true;
+            this.dataGridViewStagingModuleVersionPublished.ShowEditingIcon = false;
+            this.dataGridViewStagingModuleVersionPublished.Size = new System.Drawing.Size(1306, 160);
+            this.dataGridViewStagingModuleVersionPublished.TabIndex = 13;
+            this.dataGridViewStagingModuleVersionPublished.TabStop = false;
+            this.dataGridViewStagingModuleVersionPublished.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewStagingModuleVersionPublished_CellClick);
+            // 
+            // txtBoxDetailStagingModuleVersionPublished
+            // 
+            this.txtBoxDetailStagingModuleVersionPublished.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailStagingModuleVersionPublished.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailStagingModuleVersionPublished.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailStagingModuleVersionPublished.Multiline = true;
+            this.txtBoxDetailStagingModuleVersionPublished.Name = "txtBoxDetailStagingModuleVersionPublished";
+            this.txtBoxDetailStagingModuleVersionPublished.ReadOnly = true;
+            this.txtBoxDetailStagingModuleVersionPublished.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailStagingModuleVersionPublished.Size = new System.Drawing.Size(250, 160);
+            this.txtBoxDetailStagingModuleVersionPublished.TabIndex = 12;
+            this.txtBoxDetailStagingModuleVersionPublished.TabStop = false;
+            // 
+            // tabPage56
+            // 
+            this.tabPage56.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage56.Controls.Add(this.txtBoxDetailStagingModuleVersionUploaded);
+            this.tabPage56.Controls.Add(this.dataGridViewStagingModuleVersionUploaded);
+            this.tabPage56.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage56.Location = new System.Drawing.Point(4, 34);
+            this.tabPage56.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage56.Name = "tabPage56";
+            this.tabPage56.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage56.Size = new System.Drawing.Size(1576, 172);
+            this.tabPage56.TabIndex = 1;
+            this.tabPage56.Text = "Staging Module Ver Up";
+            // 
+            // txtBoxDetailStagingModuleVersionUploaded
+            // 
+            this.txtBoxDetailStagingModuleVersionUploaded.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailStagingModuleVersionUploaded.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailStagingModuleVersionUploaded.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailStagingModuleVersionUploaded.Multiline = true;
+            this.txtBoxDetailStagingModuleVersionUploaded.Name = "txtBoxDetailStagingModuleVersionUploaded";
+            this.txtBoxDetailStagingModuleVersionUploaded.ReadOnly = true;
+            this.txtBoxDetailStagingModuleVersionUploaded.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailStagingModuleVersionUploaded.Size = new System.Drawing.Size(250, 160);
+            this.txtBoxDetailStagingModuleVersionUploaded.TabIndex = 15;
+            this.txtBoxDetailStagingModuleVersionUploaded.TabStop = false;
+            // 
+            // dataGridViewStagingModuleVersionUploaded
+            // 
+            this.dataGridViewStagingModuleVersionUploaded.AllowUserToAddRows = false;
+            this.dataGridViewStagingModuleVersionUploaded.AllowUserToDeleteRows = false;
+            this.dataGridViewStagingModuleVersionUploaded.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStagingModuleVersionUploaded.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewStagingModuleVersionUploaded.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewStagingModuleVersionUploaded.MultiSelect = false;
+            this.dataGridViewStagingModuleVersionUploaded.Name = "dataGridViewStagingModuleVersionUploaded";
+            this.dataGridViewStagingModuleVersionUploaded.ReadOnly = true;
+            this.dataGridViewStagingModuleVersionUploaded.ShowEditingIcon = false;
+            this.dataGridViewStagingModuleVersionUploaded.Size = new System.Drawing.Size(1306, 160);
+            this.dataGridViewStagingModuleVersionUploaded.TabIndex = 14;
+            this.dataGridViewStagingModuleVersionUploaded.TabStop = false;
+            this.dataGridViewStagingModuleVersionUploaded.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewStagingModuleVersionUploaded_CellClick);
+            // 
+            // tabPage57
+            // 
+            this.tabPage57.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage57.Controls.Add(this.txtBoxDetailStagingOptions);
+            this.tabPage57.Controls.Add(this.dataGridViewStagingOptions);
+            this.tabPage57.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage57.Location = new System.Drawing.Point(4, 34);
+            this.tabPage57.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage57.Name = "tabPage57";
+            this.tabPage57.Size = new System.Drawing.Size(1576, 172);
+            this.tabPage57.TabIndex = 2;
+            this.tabPage57.Text = "Staging Opts";
+            // 
+            // txtBoxDetailStagingOptions
+            // 
+            this.txtBoxDetailStagingOptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailStagingOptions.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailStagingOptions.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailStagingOptions.Multiline = true;
+            this.txtBoxDetailStagingOptions.Name = "txtBoxDetailStagingOptions";
+            this.txtBoxDetailStagingOptions.ReadOnly = true;
+            this.txtBoxDetailStagingOptions.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailStagingOptions.Size = new System.Drawing.Size(250, 160);
+            this.txtBoxDetailStagingOptions.TabIndex = 16;
+            this.txtBoxDetailStagingOptions.TabStop = false;
+            // 
+            // dataGridViewStagingOptions
+            // 
+            this.dataGridViewStagingOptions.AllowUserToAddRows = false;
+            this.dataGridViewStagingOptions.AllowUserToDeleteRows = false;
+            this.dataGridViewStagingOptions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStagingOptions.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewStagingOptions.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewStagingOptions.MultiSelect = false;
+            this.dataGridViewStagingOptions.Name = "dataGridViewStagingOptions";
+            this.dataGridViewStagingOptions.ReadOnly = true;
+            this.dataGridViewStagingOptions.ShowEditingIcon = false;
+            this.dataGridViewStagingOptions.Size = new System.Drawing.Size(1306, 160);
+            this.dataGridViewStagingOptions.TabIndex = 15;
+            this.dataGridViewStagingOptions.TabStop = false;
+            this.dataGridViewStagingOptions.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewStagingOptions_CellClick);
+            // 
+            // tabPage58
+            // 
+            this.tabPage58.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage58.Controls.Add(this.txtBoxDetailStagingOutdatedApplication);
+            this.tabPage58.Controls.Add(this.dataGridViewStagingOutdatedApplication);
+            this.tabPage58.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage58.Location = new System.Drawing.Point(4, 34);
+            this.tabPage58.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage58.Name = "tabPage58";
+            this.tabPage58.Size = new System.Drawing.Size(1576, 172);
+            this.tabPage58.TabIndex = 3;
+            this.tabPage58.Text = "Staging Out App";
+            // 
+            // txtBoxDetailStagingOutdatedApplication
+            // 
+            this.txtBoxDetailStagingOutdatedApplication.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailStagingOutdatedApplication.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailStagingOutdatedApplication.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailStagingOutdatedApplication.Multiline = true;
+            this.txtBoxDetailStagingOutdatedApplication.Name = "txtBoxDetailStagingOutdatedApplication";
+            this.txtBoxDetailStagingOutdatedApplication.ReadOnly = true;
+            this.txtBoxDetailStagingOutdatedApplication.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailStagingOutdatedApplication.Size = new System.Drawing.Size(250, 160);
+            this.txtBoxDetailStagingOutdatedApplication.TabIndex = 17;
+            this.txtBoxDetailStagingOutdatedApplication.TabStop = false;
+            // 
+            // dataGridViewStagingOutdatedApplication
+            // 
+            this.dataGridViewStagingOutdatedApplication.AllowUserToAddRows = false;
+            this.dataGridViewStagingOutdatedApplication.AllowUserToDeleteRows = false;
+            this.dataGridViewStagingOutdatedApplication.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStagingOutdatedApplication.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewStagingOutdatedApplication.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewStagingOutdatedApplication.MultiSelect = false;
+            this.dataGridViewStagingOutdatedApplication.Name = "dataGridViewStagingOutdatedApplication";
+            this.dataGridViewStagingOutdatedApplication.ReadOnly = true;
+            this.dataGridViewStagingOutdatedApplication.ShowEditingIcon = false;
+            this.dataGridViewStagingOutdatedApplication.Size = new System.Drawing.Size(1306, 160);
+            this.dataGridViewStagingOutdatedApplication.TabIndex = 16;
+            this.dataGridViewStagingOutdatedApplication.TabStop = false;
+            this.dataGridViewStagingOutdatedApplication.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewStagingOutdatedApplication_CellClick);
+            // 
+            // tabPage59
+            // 
+            this.tabPage59.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage59.Controls.Add(this.txtBoxDetailStagingOutdatedModule);
+            this.tabPage59.Controls.Add(this.dataGridViewStagingOutdatedModule);
+            this.tabPage59.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage59.Location = new System.Drawing.Point(4, 34);
+            this.tabPage59.Name = "tabPage59";
+            this.tabPage59.Size = new System.Drawing.Size(1576, 172);
+            this.tabPage59.TabIndex = 4;
+            this.tabPage59.Text = "Staging Out Module";
+            // 
+            // txtBoxDetailStagingOutdatedModule
+            // 
+            this.txtBoxDetailStagingOutdatedModule.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailStagingOutdatedModule.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailStagingOutdatedModule.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailStagingOutdatedModule.Multiline = true;
+            this.txtBoxDetailStagingOutdatedModule.Name = "txtBoxDetailStagingOutdatedModule";
+            this.txtBoxDetailStagingOutdatedModule.ReadOnly = true;
+            this.txtBoxDetailStagingOutdatedModule.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailStagingOutdatedModule.Size = new System.Drawing.Size(250, 160);
+            this.txtBoxDetailStagingOutdatedModule.TabIndex = 18;
+            this.txtBoxDetailStagingOutdatedModule.TabStop = false;
+            // 
+            // dataGridViewStagingOutdatedModule
+            // 
+            this.dataGridViewStagingOutdatedModule.AllowUserToAddRows = false;
+            this.dataGridViewStagingOutdatedModule.AllowUserToDeleteRows = false;
+            this.dataGridViewStagingOutdatedModule.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStagingOutdatedModule.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewStagingOutdatedModule.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewStagingOutdatedModule.MultiSelect = false;
+            this.dataGridViewStagingOutdatedModule.Name = "dataGridViewStagingOutdatedModule";
+            this.dataGridViewStagingOutdatedModule.ReadOnly = true;
+            this.dataGridViewStagingOutdatedModule.ShowEditingIcon = false;
+            this.dataGridViewStagingOutdatedModule.Size = new System.Drawing.Size(1306, 160);
+            this.dataGridViewStagingOutdatedModule.TabIndex = 17;
+            this.dataGridViewStagingOutdatedModule.TabStop = false;
+            this.dataGridViewStagingOutdatedModule.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewStagingOutdatedModule_CellClick);
+            // 
+            // tabControl8
+            // 
+            this.tabControl8.Controls.Add(this.tabPage45);
+            this.tabControl8.Controls.Add(this.tabPage46);
+            this.tabControl8.Controls.Add(this.tabPage47);
+            this.tabControl8.Controls.Add(this.tabPage48);
+            this.tabControl8.Controls.Add(this.tabPage49);
+            this.tabControl8.Controls.Add(this.tabPage50);
+            this.tabControl8.Controls.Add(this.tabPage51);
+            this.tabControl8.Controls.Add(this.tabPage52);
+            this.tabControl8.Controls.Add(this.tabPage53);
+            this.tabControl8.Controls.Add(this.tabPage54);
+            this.tabControl8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControl8.Location = new System.Drawing.Point(6, 261);
+            this.tabControl8.Margin = new System.Windows.Forms.Padding(4);
+            this.tabControl8.Name = "tabControl8";
+            this.tabControl8.SelectedIndex = 0;
+            this.tabControl8.Size = new System.Drawing.Size(1584, 210);
+            this.tabControl8.TabIndex = 12;
+            // 
+            // tabPage45
+            // 
+            this.tabPage45.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage45.Controls.Add(this.dataGridViewStagingEnvironmentModuleRunning);
+            this.tabPage45.Controls.Add(this.txtBoxDetailStagingEnvironmentModuleRunning);
+            this.tabPage45.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage45.Location = new System.Drawing.Point(4, 34);
+            this.tabPage45.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage45.Name = "tabPage45";
+            this.tabPage45.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage45.Size = new System.Drawing.Size(1576, 172);
+            this.tabPage45.TabIndex = 0;
+            this.tabPage45.Text = "Env Module Run";
+            // 
+            // dataGridViewStagingEnvironmentModuleRunning
+            // 
+            this.dataGridViewStagingEnvironmentModuleRunning.AllowUserToAddRows = false;
+            this.dataGridViewStagingEnvironmentModuleRunning.AllowUserToDeleteRows = false;
+            this.dataGridViewStagingEnvironmentModuleRunning.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStagingEnvironmentModuleRunning.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewStagingEnvironmentModuleRunning.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewStagingEnvironmentModuleRunning.MultiSelect = false;
+            this.dataGridViewStagingEnvironmentModuleRunning.Name = "dataGridViewStagingEnvironmentModuleRunning";
+            this.dataGridViewStagingEnvironmentModuleRunning.ReadOnly = true;
+            this.dataGridViewStagingEnvironmentModuleRunning.ShowEditingIcon = false;
+            this.dataGridViewStagingEnvironmentModuleRunning.Size = new System.Drawing.Size(1306, 160);
+            this.dataGridViewStagingEnvironmentModuleRunning.TabIndex = 13;
+            this.dataGridViewStagingEnvironmentModuleRunning.TabStop = false;
+            this.dataGridViewStagingEnvironmentModuleRunning.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewStagingEnvironmentModuleRunning_CellClick);
+            // 
+            // txtBoxDetailStagingEnvironmentModuleRunning
+            // 
+            this.txtBoxDetailStagingEnvironmentModuleRunning.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailStagingEnvironmentModuleRunning.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailStagingEnvironmentModuleRunning.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailStagingEnvironmentModuleRunning.Multiline = true;
+            this.txtBoxDetailStagingEnvironmentModuleRunning.Name = "txtBoxDetailStagingEnvironmentModuleRunning";
+            this.txtBoxDetailStagingEnvironmentModuleRunning.ReadOnly = true;
+            this.txtBoxDetailStagingEnvironmentModuleRunning.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailStagingEnvironmentModuleRunning.Size = new System.Drawing.Size(250, 160);
+            this.txtBoxDetailStagingEnvironmentModuleRunning.TabIndex = 12;
+            this.txtBoxDetailStagingEnvironmentModuleRunning.TabStop = false;
+            // 
+            // tabPage46
+            // 
+            this.tabPage46.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage46.Controls.Add(this.txtBoxDetailStagingModules);
+            this.tabPage46.Controls.Add(this.dataGridViewStagingModules);
+            this.tabPage46.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage46.Location = new System.Drawing.Point(4, 34);
+            this.tabPage46.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage46.Name = "tabPage46";
+            this.tabPage46.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage46.Size = new System.Drawing.Size(1576, 172);
+            this.tabPage46.TabIndex = 1;
+            this.tabPage46.Text = "Modules";
+            // 
+            // txtBoxDetailStagingModules
+            // 
+            this.txtBoxDetailStagingModules.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailStagingModules.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailStagingModules.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailStagingModules.Multiline = true;
+            this.txtBoxDetailStagingModules.Name = "txtBoxDetailStagingModules";
+            this.txtBoxDetailStagingModules.ReadOnly = true;
+            this.txtBoxDetailStagingModules.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailStagingModules.Size = new System.Drawing.Size(250, 160);
+            this.txtBoxDetailStagingModules.TabIndex = 15;
+            this.txtBoxDetailStagingModules.TabStop = false;
+            // 
+            // dataGridViewStagingModules
+            // 
+            this.dataGridViewStagingModules.AllowUserToAddRows = false;
+            this.dataGridViewStagingModules.AllowUserToDeleteRows = false;
+            this.dataGridViewStagingModules.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStagingModules.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewStagingModules.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewStagingModules.MultiSelect = false;
+            this.dataGridViewStagingModules.Name = "dataGridViewStagingModules";
+            this.dataGridViewStagingModules.ReadOnly = true;
+            this.dataGridViewStagingModules.ShowEditingIcon = false;
+            this.dataGridViewStagingModules.Size = new System.Drawing.Size(1306, 160);
+            this.dataGridViewStagingModules.TabIndex = 14;
+            this.dataGridViewStagingModules.TabStop = false;
+            this.dataGridViewStagingModules.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewStagingModules_CellClick);
+            // 
+            // tabPage47
+            // 
+            this.tabPage47.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage47.Controls.Add(this.txtBoxDetailStagingModuleVersionReferences);
+            this.tabPage47.Controls.Add(this.dataGridViewStagingModuleVersionRefererences);
+            this.tabPage47.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage47.Location = new System.Drawing.Point(4, 34);
+            this.tabPage47.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage47.Name = "tabPage47";
+            this.tabPage47.Size = new System.Drawing.Size(1576, 172);
+            this.tabPage47.TabIndex = 2;
+            this.tabPage47.Text = "Module Ver Refs";
+            // 
+            // txtBoxDetailStagingModuleVersionReferences
+            // 
+            this.txtBoxDetailStagingModuleVersionReferences.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailStagingModuleVersionReferences.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailStagingModuleVersionReferences.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailStagingModuleVersionReferences.Multiline = true;
+            this.txtBoxDetailStagingModuleVersionReferences.Name = "txtBoxDetailStagingModuleVersionReferences";
+            this.txtBoxDetailStagingModuleVersionReferences.ReadOnly = true;
+            this.txtBoxDetailStagingModuleVersionReferences.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailStagingModuleVersionReferences.Size = new System.Drawing.Size(250, 160);
+            this.txtBoxDetailStagingModuleVersionReferences.TabIndex = 16;
+            this.txtBoxDetailStagingModuleVersionReferences.TabStop = false;
+            // 
+            // dataGridViewStagingModuleVersionRefererences
+            // 
+            this.dataGridViewStagingModuleVersionRefererences.AllowUserToAddRows = false;
+            this.dataGridViewStagingModuleVersionRefererences.AllowUserToDeleteRows = false;
+            this.dataGridViewStagingModuleVersionRefererences.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStagingModuleVersionRefererences.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewStagingModuleVersionRefererences.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewStagingModuleVersionRefererences.MultiSelect = false;
+            this.dataGridViewStagingModuleVersionRefererences.Name = "dataGridViewStagingModuleVersionRefererences";
+            this.dataGridViewStagingModuleVersionRefererences.ReadOnly = true;
+            this.dataGridViewStagingModuleVersionRefererences.ShowEditingIcon = false;
+            this.dataGridViewStagingModuleVersionRefererences.Size = new System.Drawing.Size(1306, 160);
+            this.dataGridViewStagingModuleVersionRefererences.TabIndex = 15;
+            this.dataGridViewStagingModuleVersionRefererences.TabStop = false;
+            this.dataGridViewStagingModuleVersionRefererences.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewStagingModuleVersionRefererences_CellClick);
+            // 
+            // tabPage48
+            // 
+            this.tabPage48.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage48.Controls.Add(this.txtBoxDetailStagingProducerElements);
+            this.tabPage48.Controls.Add(this.dataGridViewStagingProducerElements);
+            this.tabPage48.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage48.Location = new System.Drawing.Point(4, 34);
+            this.tabPage48.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage48.Name = "tabPage48";
+            this.tabPage48.Size = new System.Drawing.Size(1576, 172);
+            this.tabPage48.TabIndex = 3;
+            this.tabPage48.Text = "Producer Elems";
+            // 
+            // txtBoxDetailStagingProducerElements
+            // 
+            this.txtBoxDetailStagingProducerElements.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailStagingProducerElements.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailStagingProducerElements.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailStagingProducerElements.Multiline = true;
+            this.txtBoxDetailStagingProducerElements.Name = "txtBoxDetailStagingProducerElements";
+            this.txtBoxDetailStagingProducerElements.ReadOnly = true;
+            this.txtBoxDetailStagingProducerElements.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailStagingProducerElements.Size = new System.Drawing.Size(250, 160);
+            this.txtBoxDetailStagingProducerElements.TabIndex = 17;
+            this.txtBoxDetailStagingProducerElements.TabStop = false;
+            // 
+            // dataGridViewStagingProducerElements
+            // 
+            this.dataGridViewStagingProducerElements.AllowUserToAddRows = false;
+            this.dataGridViewStagingProducerElements.AllowUserToDeleteRows = false;
+            this.dataGridViewStagingProducerElements.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStagingProducerElements.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewStagingProducerElements.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewStagingProducerElements.MultiSelect = false;
+            this.dataGridViewStagingProducerElements.Name = "dataGridViewStagingProducerElements";
+            this.dataGridViewStagingProducerElements.ReadOnly = true;
+            this.dataGridViewStagingProducerElements.ShowEditingIcon = false;
+            this.dataGridViewStagingProducerElements.Size = new System.Drawing.Size(1306, 160);
+            this.dataGridViewStagingProducerElements.TabIndex = 16;
+            this.dataGridViewStagingProducerElements.TabStop = false;
+            this.dataGridViewStagingProducerElements.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewStagingProducerElements_CellClick);
+            // 
+            // tabPage49
+            // 
+            this.tabPage49.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage49.Controls.Add(this.txtBoxDetailStagingSiteProperties);
+            this.tabPage49.Controls.Add(this.dataGridViewStagingSiteProperties);
+            this.tabPage49.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage49.Location = new System.Drawing.Point(4, 34);
+            this.tabPage49.Name = "tabPage49";
+            this.tabPage49.Size = new System.Drawing.Size(1576, 172);
+            this.tabPage49.TabIndex = 4;
+            this.tabPage49.Text = "Site Prop";
+            // 
+            // txtBoxDetailStagingSiteProperties
+            // 
+            this.txtBoxDetailStagingSiteProperties.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailStagingSiteProperties.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailStagingSiteProperties.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailStagingSiteProperties.Multiline = true;
+            this.txtBoxDetailStagingSiteProperties.Name = "txtBoxDetailStagingSiteProperties";
+            this.txtBoxDetailStagingSiteProperties.ReadOnly = true;
+            this.txtBoxDetailStagingSiteProperties.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailStagingSiteProperties.Size = new System.Drawing.Size(250, 160);
+            this.txtBoxDetailStagingSiteProperties.TabIndex = 18;
+            this.txtBoxDetailStagingSiteProperties.TabStop = false;
+            // 
+            // dataGridViewStagingSiteProperties
+            // 
+            this.dataGridViewStagingSiteProperties.AllowUserToAddRows = false;
+            this.dataGridViewStagingSiteProperties.AllowUserToDeleteRows = false;
+            this.dataGridViewStagingSiteProperties.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStagingSiteProperties.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewStagingSiteProperties.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewStagingSiteProperties.MultiSelect = false;
+            this.dataGridViewStagingSiteProperties.Name = "dataGridViewStagingSiteProperties";
+            this.dataGridViewStagingSiteProperties.ReadOnly = true;
+            this.dataGridViewStagingSiteProperties.ShowEditingIcon = false;
+            this.dataGridViewStagingSiteProperties.Size = new System.Drawing.Size(1306, 160);
+            this.dataGridViewStagingSiteProperties.TabIndex = 17;
+            this.dataGridViewStagingSiteProperties.TabStop = false;
+            this.dataGridViewStagingSiteProperties.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewStagingSiteProperties_CellClick);
+            // 
+            // tabPage50
+            // 
+            this.tabPage50.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage50.Controls.Add(this.txtBoxDetailStaginglogs);
+            this.tabPage50.Controls.Add(this.dataGridViewStaginglogs);
+            this.tabPage50.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage50.Location = new System.Drawing.Point(4, 34);
+            this.tabPage50.Name = "tabPage50";
+            this.tabPage50.Size = new System.Drawing.Size(1576, 172);
+            this.tabPage50.TabIndex = 5;
+            this.tabPage50.Text = "Staging";
+            // 
+            // txtBoxDetailStaginglogs
+            // 
+            this.txtBoxDetailStaginglogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailStaginglogs.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailStaginglogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailStaginglogs.Multiline = true;
+            this.txtBoxDetailStaginglogs.Name = "txtBoxDetailStaginglogs";
+            this.txtBoxDetailStaginglogs.ReadOnly = true;
+            this.txtBoxDetailStaginglogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailStaginglogs.Size = new System.Drawing.Size(250, 160);
+            this.txtBoxDetailStaginglogs.TabIndex = 19;
+            this.txtBoxDetailStaginglogs.TabStop = false;
+            // 
+            // dataGridViewStaginglogs
+            // 
+            this.dataGridViewStaginglogs.AllowUserToAddRows = false;
+            this.dataGridViewStaginglogs.AllowUserToDeleteRows = false;
+            this.dataGridViewStaginglogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStaginglogs.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewStaginglogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewStaginglogs.MultiSelect = false;
+            this.dataGridViewStaginglogs.Name = "dataGridViewStaginglogs";
+            this.dataGridViewStaginglogs.ReadOnly = true;
+            this.dataGridViewStaginglogs.ShowEditingIcon = false;
+            this.dataGridViewStaginglogs.Size = new System.Drawing.Size(1306, 160);
+            this.dataGridViewStaginglogs.TabIndex = 18;
+            this.dataGridViewStaginglogs.TabStop = false;
+            this.dataGridViewStaginglogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewStaginglogs_CellClick);
+            // 
+            // tabPage51
+            // 
+            this.tabPage51.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage51.Controls.Add(this.txtBoxDetailStagingApplicationVersion);
+            this.tabPage51.Controls.Add(this.dataGridViewStagingApplicationVersion);
+            this.tabPage51.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage51.Location = new System.Drawing.Point(4, 34);
+            this.tabPage51.Name = "tabPage51";
+            this.tabPage51.Size = new System.Drawing.Size(1576, 172);
+            this.tabPage51.TabIndex = 6;
+            this.tabPage51.Text = "Staging App Ver";
+            // 
+            // txtBoxDetailStagingApplicationVersion
+            // 
+            this.txtBoxDetailStagingApplicationVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailStagingApplicationVersion.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailStagingApplicationVersion.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailStagingApplicationVersion.Multiline = true;
+            this.txtBoxDetailStagingApplicationVersion.Name = "txtBoxDetailStagingApplicationVersion";
+            this.txtBoxDetailStagingApplicationVersion.ReadOnly = true;
+            this.txtBoxDetailStagingApplicationVersion.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailStagingApplicationVersion.Size = new System.Drawing.Size(250, 160);
+            this.txtBoxDetailStagingApplicationVersion.TabIndex = 20;
+            this.txtBoxDetailStagingApplicationVersion.TabStop = false;
+            // 
+            // dataGridViewStagingApplicationVersion
+            // 
+            this.dataGridViewStagingApplicationVersion.AllowUserToAddRows = false;
+            this.dataGridViewStagingApplicationVersion.AllowUserToDeleteRows = false;
+            this.dataGridViewStagingApplicationVersion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStagingApplicationVersion.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewStagingApplicationVersion.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewStagingApplicationVersion.MultiSelect = false;
+            this.dataGridViewStagingApplicationVersion.Name = "dataGridViewStagingApplicationVersion";
+            this.dataGridViewStagingApplicationVersion.ReadOnly = true;
+            this.dataGridViewStagingApplicationVersion.ShowEditingIcon = false;
+            this.dataGridViewStagingApplicationVersion.Size = new System.Drawing.Size(1306, 160);
+            this.dataGridViewStagingApplicationVersion.TabIndex = 19;
+            this.dataGridViewStagingApplicationVersion.TabStop = false;
+            this.dataGridViewStagingApplicationVersion.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewStagingApplicationVersion_CellClick);
+            // 
+            // tabPage52
+            // 
+            this.tabPage52.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage52.Controls.Add(this.txtBoxDetailStagingMessage);
+            this.tabPage52.Controls.Add(this.dataGridViewStagingMessage);
+            this.tabPage52.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage52.Location = new System.Drawing.Point(4, 34);
+            this.tabPage52.Name = "tabPage52";
+            this.tabPage52.Size = new System.Drawing.Size(1576, 172);
+            this.tabPage52.TabIndex = 7;
+            this.tabPage52.Text = "Staging Msg";
+            // 
+            // txtBoxDetailStagingMessage
+            // 
+            this.txtBoxDetailStagingMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailStagingMessage.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailStagingMessage.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailStagingMessage.Multiline = true;
+            this.txtBoxDetailStagingMessage.Name = "txtBoxDetailStagingMessage";
+            this.txtBoxDetailStagingMessage.ReadOnly = true;
+            this.txtBoxDetailStagingMessage.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailStagingMessage.Size = new System.Drawing.Size(250, 160);
+            this.txtBoxDetailStagingMessage.TabIndex = 21;
+            this.txtBoxDetailStagingMessage.TabStop = false;
+            // 
+            // dataGridViewStagingMessage
+            // 
+            this.dataGridViewStagingMessage.AllowUserToAddRows = false;
+            this.dataGridViewStagingMessage.AllowUserToDeleteRows = false;
+            this.dataGridViewStagingMessage.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStagingMessage.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewStagingMessage.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewStagingMessage.MultiSelect = false;
+            this.dataGridViewStagingMessage.Name = "dataGridViewStagingMessage";
+            this.dataGridViewStagingMessage.ReadOnly = true;
+            this.dataGridViewStagingMessage.ShowEditingIcon = false;
+            this.dataGridViewStagingMessage.Size = new System.Drawing.Size(1306, 160);
+            this.dataGridViewStagingMessage.TabIndex = 20;
+            this.dataGridViewStagingMessage.TabStop = false;
+            this.dataGridViewStagingMessage.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewStagingMessage_CellClick);
+            // 
+            // tabPage53
+            // 
+            this.tabPage53.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage53.Controls.Add(this.txtBoxDetailStagingModuleInconsistencies);
+            this.tabPage53.Controls.Add(this.dataGridViewStagingModuleInconsistencies);
+            this.tabPage53.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage53.Location = new System.Drawing.Point(4, 34);
+            this.tabPage53.Name = "tabPage53";
+            this.tabPage53.Size = new System.Drawing.Size(1576, 172);
+            this.tabPage53.TabIndex = 8;
+            this.tabPage53.Text = "Staging Module Incons";
+            // 
+            // txtBoxDetailStagingModuleInconsistencies
+            // 
+            this.txtBoxDetailStagingModuleInconsistencies.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailStagingModuleInconsistencies.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailStagingModuleInconsistencies.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailStagingModuleInconsistencies.Multiline = true;
+            this.txtBoxDetailStagingModuleInconsistencies.Name = "txtBoxDetailStagingModuleInconsistencies";
+            this.txtBoxDetailStagingModuleInconsistencies.ReadOnly = true;
+            this.txtBoxDetailStagingModuleInconsistencies.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailStagingModuleInconsistencies.Size = new System.Drawing.Size(250, 160);
+            this.txtBoxDetailStagingModuleInconsistencies.TabIndex = 22;
+            this.txtBoxDetailStagingModuleInconsistencies.TabStop = false;
+            // 
+            // dataGridViewStagingModuleInconsistencies
+            // 
+            this.dataGridViewStagingModuleInconsistencies.AllowUserToAddRows = false;
+            this.dataGridViewStagingModuleInconsistencies.AllowUserToDeleteRows = false;
+            this.dataGridViewStagingModuleInconsistencies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStagingModuleInconsistencies.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewStagingModuleInconsistencies.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewStagingModuleInconsistencies.MultiSelect = false;
+            this.dataGridViewStagingModuleInconsistencies.Name = "dataGridViewStagingModuleInconsistencies";
+            this.dataGridViewStagingModuleInconsistencies.ReadOnly = true;
+            this.dataGridViewStagingModuleInconsistencies.ShowEditingIcon = false;
+            this.dataGridViewStagingModuleInconsistencies.Size = new System.Drawing.Size(1306, 160);
+            this.dataGridViewStagingModuleInconsistencies.TabIndex = 21;
+            this.dataGridViewStagingModuleInconsistencies.TabStop = false;
+            this.dataGridViewStagingModuleInconsistencies.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewStagingModuleInconsistencies_CellClick);
+            // 
+            // tabPage54
+            // 
+            this.tabPage54.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage54.Controls.Add(this.txtBoxDetailStagingModuleVersion);
+            this.tabPage54.Controls.Add(this.dataGridViewStagingModuleVersion);
+            this.tabPage54.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage54.Location = new System.Drawing.Point(4, 34);
+            this.tabPage54.Name = "tabPage54";
+            this.tabPage54.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.tabPage54.Size = new System.Drawing.Size(1576, 172);
+            this.tabPage54.TabIndex = 9;
+            this.tabPage54.Text = "Staging Module Ver";
+            // 
+            // txtBoxDetailStagingModuleVersion
+            // 
+            this.txtBoxDetailStagingModuleVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailStagingModuleVersion.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailStagingModuleVersion.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailStagingModuleVersion.Multiline = true;
+            this.txtBoxDetailStagingModuleVersion.Name = "txtBoxDetailStagingModuleVersion";
+            this.txtBoxDetailStagingModuleVersion.ReadOnly = true;
+            this.txtBoxDetailStagingModuleVersion.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailStagingModuleVersion.Size = new System.Drawing.Size(250, 160);
+            this.txtBoxDetailStagingModuleVersion.TabIndex = 23;
+            this.txtBoxDetailStagingModuleVersion.TabStop = false;
+            // 
+            // dataGridViewStagingModuleVersion
+            // 
+            this.dataGridViewStagingModuleVersion.AllowUserToAddRows = false;
+            this.dataGridViewStagingModuleVersion.AllowUserToDeleteRows = false;
+            this.dataGridViewStagingModuleVersion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStagingModuleVersion.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewStagingModuleVersion.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewStagingModuleVersion.MultiSelect = false;
+            this.dataGridViewStagingModuleVersion.Name = "dataGridViewStagingModuleVersion";
+            this.dataGridViewStagingModuleVersion.ReadOnly = true;
+            this.dataGridViewStagingModuleVersion.ShowEditingIcon = false;
+            this.dataGridViewStagingModuleVersion.Size = new System.Drawing.Size(1306, 160);
+            this.dataGridViewStagingModuleVersion.TabIndex = 22;
+            this.dataGridViewStagingModuleVersion.TabStop = false;
+            this.dataGridViewStagingModuleVersion.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewStagingModuleVersion_CellClick);
+            // 
+            // tabControl7
+            // 
+            this.tabControl7.Controls.Add(this.tabPage35);
+            this.tabControl7.Controls.Add(this.tabPage36);
+            this.tabControl7.Controls.Add(this.tabPage37);
+            this.tabControl7.Controls.Add(this.tabPage38);
+            this.tabControl7.Controls.Add(this.tabPage39);
+            this.tabControl7.Controls.Add(this.tabPage40);
+            this.tabControl7.Controls.Add(this.tabPage41);
+            this.tabControl7.Controls.Add(this.tabPage42);
+            this.tabControl7.Controls.Add(this.tabPage43);
+            this.tabControl7.Controls.Add(this.tabPage44);
+            this.tabControl7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControl7.Location = new System.Drawing.Point(6, 7);
+            this.tabControl7.Margin = new System.Windows.Forms.Padding(4);
+            this.tabControl7.Name = "tabControl7";
+            this.tabControl7.SelectedIndex = 0;
+            this.tabControl7.Size = new System.Drawing.Size(1584, 210);
+            this.tabControl7.TabIndex = 11;
+            // 
+            // tabPage35
+            // 
+            this.tabPage35.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage35.Controls.Add(this.dataGridViewStagingApplogs);
+            this.tabPage35.Controls.Add(this.txtBoxDetailStagingApplogs);
+            this.tabPage35.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage35.Location = new System.Drawing.Point(4, 34);
+            this.tabPage35.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage35.Name = "tabPage35";
+            this.tabPage35.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage35.Size = new System.Drawing.Size(1576, 172);
+            this.tabPage35.TabIndex = 0;
+            this.tabPage35.Text = "App";
+            // 
+            // dataGridViewStagingApplogs
+            // 
+            this.dataGridViewStagingApplogs.AllowUserToAddRows = false;
+            this.dataGridViewStagingApplogs.AllowUserToDeleteRows = false;
+            this.dataGridViewStagingApplogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStagingApplogs.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewStagingApplogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewStagingApplogs.MultiSelect = false;
+            this.dataGridViewStagingApplogs.Name = "dataGridViewStagingApplogs";
+            this.dataGridViewStagingApplogs.ReadOnly = true;
+            this.dataGridViewStagingApplogs.ShowEditingIcon = false;
+            this.dataGridViewStagingApplogs.Size = new System.Drawing.Size(1306, 160);
+            this.dataGridViewStagingApplogs.TabIndex = 13;
+            this.dataGridViewStagingApplogs.TabStop = false;
+            this.dataGridViewStagingApplogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewStagingApplogs_CellClick);
+            // 
+            // txtBoxDetailStagingApplogs
+            // 
+            this.txtBoxDetailStagingApplogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailStagingApplogs.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailStagingApplogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailStagingApplogs.Multiline = true;
+            this.txtBoxDetailStagingApplogs.Name = "txtBoxDetailStagingApplogs";
+            this.txtBoxDetailStagingApplogs.ReadOnly = true;
+            this.txtBoxDetailStagingApplogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailStagingApplogs.Size = new System.Drawing.Size(250, 160);
+            this.txtBoxDetailStagingApplogs.TabIndex = 12;
+            this.txtBoxDetailStagingApplogs.TabStop = false;
+            // 
+            // tabPage36
+            // 
+            this.tabPage36.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage36.Controls.Add(this.txtBoxDetailStagingAppVerlogs);
+            this.tabPage36.Controls.Add(this.dataGridViewStagingAppVerlogs);
+            this.tabPage36.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage36.Location = new System.Drawing.Point(4, 34);
+            this.tabPage36.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage36.Name = "tabPage36";
+            this.tabPage36.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage36.Size = new System.Drawing.Size(1576, 172);
+            this.tabPage36.TabIndex = 1;
+            this.tabPage36.Text = "App Ver";
+            // 
+            // txtBoxDetailStagingAppVerlogs
+            // 
+            this.txtBoxDetailStagingAppVerlogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailStagingAppVerlogs.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailStagingAppVerlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailStagingAppVerlogs.Multiline = true;
+            this.txtBoxDetailStagingAppVerlogs.Name = "txtBoxDetailStagingAppVerlogs";
+            this.txtBoxDetailStagingAppVerlogs.ReadOnly = true;
+            this.txtBoxDetailStagingAppVerlogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailStagingAppVerlogs.Size = new System.Drawing.Size(250, 160);
+            this.txtBoxDetailStagingAppVerlogs.TabIndex = 15;
+            this.txtBoxDetailStagingAppVerlogs.TabStop = false;
+            // 
+            // dataGridViewStagingAppVerlogs
+            // 
+            this.dataGridViewStagingAppVerlogs.AllowUserToAddRows = false;
+            this.dataGridViewStagingAppVerlogs.AllowUserToDeleteRows = false;
+            this.dataGridViewStagingAppVerlogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStagingAppVerlogs.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewStagingAppVerlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewStagingAppVerlogs.MultiSelect = false;
+            this.dataGridViewStagingAppVerlogs.Name = "dataGridViewStagingAppVerlogs";
+            this.dataGridViewStagingAppVerlogs.ReadOnly = true;
+            this.dataGridViewStagingAppVerlogs.ShowEditingIcon = false;
+            this.dataGridViewStagingAppVerlogs.Size = new System.Drawing.Size(1306, 160);
+            this.dataGridViewStagingAppVerlogs.TabIndex = 14;
+            this.dataGridViewStagingAppVerlogs.TabStop = false;
+            this.dataGridViewStagingAppVerlogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewStagingAppVerlogs_CellClick);
+            // 
+            // tabPage37
+            // 
+            this.tabPage37.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage37.Controls.Add(this.txtBoxDetailStagingAppVerModuleVerlogs);
+            this.tabPage37.Controls.Add(this.dataGridViewStagingAppVerModuleVerlogs);
+            this.tabPage37.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage37.Location = new System.Drawing.Point(4, 34);
+            this.tabPage37.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage37.Name = "tabPage37";
+            this.tabPage37.Size = new System.Drawing.Size(1576, 172);
+            this.tabPage37.TabIndex = 2;
+            this.tabPage37.Text = "App Ver Module Ver";
+            // 
+            // txtBoxDetailStagingAppVerModuleVerlogs
+            // 
+            this.txtBoxDetailStagingAppVerModuleVerlogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailStagingAppVerModuleVerlogs.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailStagingAppVerModuleVerlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailStagingAppVerModuleVerlogs.Multiline = true;
+            this.txtBoxDetailStagingAppVerModuleVerlogs.Name = "txtBoxDetailStagingAppVerModuleVerlogs";
+            this.txtBoxDetailStagingAppVerModuleVerlogs.ReadOnly = true;
+            this.txtBoxDetailStagingAppVerModuleVerlogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailStagingAppVerModuleVerlogs.Size = new System.Drawing.Size(250, 160);
+            this.txtBoxDetailStagingAppVerModuleVerlogs.TabIndex = 16;
+            this.txtBoxDetailStagingAppVerModuleVerlogs.TabStop = false;
+            // 
+            // dataGridViewStagingAppVerModuleVerlogs
+            // 
+            this.dataGridViewStagingAppVerModuleVerlogs.AllowUserToAddRows = false;
+            this.dataGridViewStagingAppVerModuleVerlogs.AllowUserToDeleteRows = false;
+            this.dataGridViewStagingAppVerModuleVerlogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStagingAppVerModuleVerlogs.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewStagingAppVerModuleVerlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewStagingAppVerModuleVerlogs.MultiSelect = false;
+            this.dataGridViewStagingAppVerModuleVerlogs.Name = "dataGridViewStagingAppVerModuleVerlogs";
+            this.dataGridViewStagingAppVerModuleVerlogs.ReadOnly = true;
+            this.dataGridViewStagingAppVerModuleVerlogs.ShowEditingIcon = false;
+            this.dataGridViewStagingAppVerModuleVerlogs.Size = new System.Drawing.Size(1306, 160);
+            this.dataGridViewStagingAppVerModuleVerlogs.TabIndex = 15;
+            this.dataGridViewStagingAppVerModuleVerlogs.TabStop = false;
+            this.dataGridViewStagingAppVerModuleVerlogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewStagingAppVerModuleVerlogs_CellClick);
+            // 
+            // tabPage38
+            // 
+            this.tabPage38.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage38.Controls.Add(this.txtBoxDetailStagingChangelog);
+            this.tabPage38.Controls.Add(this.dataGridViewStagingChangelog);
+            this.tabPage38.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage38.Location = new System.Drawing.Point(4, 34);
+            this.tabPage38.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage38.Name = "tabPage38";
+            this.tabPage38.Size = new System.Drawing.Size(1576, 172);
+            this.tabPage38.TabIndex = 3;
+            this.tabPage38.Text = "Change Log";
+            // 
+            // txtBoxDetailStagingChangelog
+            // 
+            this.txtBoxDetailStagingChangelog.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailStagingChangelog.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailStagingChangelog.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailStagingChangelog.Multiline = true;
+            this.txtBoxDetailStagingChangelog.Name = "txtBoxDetailStagingChangelog";
+            this.txtBoxDetailStagingChangelog.ReadOnly = true;
+            this.txtBoxDetailStagingChangelog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailStagingChangelog.Size = new System.Drawing.Size(250, 160);
+            this.txtBoxDetailStagingChangelog.TabIndex = 17;
+            this.txtBoxDetailStagingChangelog.TabStop = false;
+            // 
+            // dataGridViewStagingChangelog
+            // 
+            this.dataGridViewStagingChangelog.AllowUserToAddRows = false;
+            this.dataGridViewStagingChangelog.AllowUserToDeleteRows = false;
+            this.dataGridViewStagingChangelog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStagingChangelog.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewStagingChangelog.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewStagingChangelog.MultiSelect = false;
+            this.dataGridViewStagingChangelog.Name = "dataGridViewStagingChangelog";
+            this.dataGridViewStagingChangelog.ReadOnly = true;
+            this.dataGridViewStagingChangelog.ShowEditingIcon = false;
+            this.dataGridViewStagingChangelog.Size = new System.Drawing.Size(1306, 160);
+            this.dataGridViewStagingChangelog.TabIndex = 16;
+            this.dataGridViewStagingChangelog.TabStop = false;
+            this.dataGridViewStagingChangelog.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewStagingChangelog_CellClick);
+            // 
+            // tabPage39
+            // 
+            this.tabPage39.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage39.Controls.Add(this.txtBoxDetailStagingConsumerElementslogs);
+            this.tabPage39.Controls.Add(this.dataGridViewStagingConsumerElements);
+            this.tabPage39.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage39.Location = new System.Drawing.Point(4, 34);
+            this.tabPage39.Name = "tabPage39";
+            this.tabPage39.Size = new System.Drawing.Size(1576, 172);
+            this.tabPage39.TabIndex = 4;
+            this.tabPage39.Text = "Consumer Elems";
+            // 
+            // txtBoxDetailStagingConsumerElementslogs
+            // 
+            this.txtBoxDetailStagingConsumerElementslogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailStagingConsumerElementslogs.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailStagingConsumerElementslogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailStagingConsumerElementslogs.Multiline = true;
+            this.txtBoxDetailStagingConsumerElementslogs.Name = "txtBoxDetailStagingConsumerElementslogs";
+            this.txtBoxDetailStagingConsumerElementslogs.ReadOnly = true;
+            this.txtBoxDetailStagingConsumerElementslogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailStagingConsumerElementslogs.Size = new System.Drawing.Size(250, 160);
+            this.txtBoxDetailStagingConsumerElementslogs.TabIndex = 18;
+            this.txtBoxDetailStagingConsumerElementslogs.TabStop = false;
+            // 
+            // dataGridViewStagingConsumerElements
+            // 
+            this.dataGridViewStagingConsumerElements.AllowUserToAddRows = false;
+            this.dataGridViewStagingConsumerElements.AllowUserToDeleteRows = false;
+            this.dataGridViewStagingConsumerElements.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStagingConsumerElements.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewStagingConsumerElements.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewStagingConsumerElements.MultiSelect = false;
+            this.dataGridViewStagingConsumerElements.Name = "dataGridViewStagingConsumerElements";
+            this.dataGridViewStagingConsumerElements.ReadOnly = true;
+            this.dataGridViewStagingConsumerElements.ShowEditingIcon = false;
+            this.dataGridViewStagingConsumerElements.Size = new System.Drawing.Size(1306, 160);
+            this.dataGridViewStagingConsumerElements.TabIndex = 17;
+            this.dataGridViewStagingConsumerElements.TabStop = false;
+            this.dataGridViewStagingConsumerElements.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewStagingConsumerElements_CellClick);
+            // 
+            // tabPage40
+            // 
+            this.tabPage40.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage40.Controls.Add(this.txtBoxDetailStagingEntityConfiguration);
+            this.tabPage40.Controls.Add(this.dataGridViewStagingEntityConfiguration);
+            this.tabPage40.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage40.Location = new System.Drawing.Point(4, 34);
+            this.tabPage40.Name = "tabPage40";
+            this.tabPage40.Size = new System.Drawing.Size(1576, 172);
+            this.tabPage40.TabIndex = 5;
+            this.tabPage40.Text = "Entity Config";
+            // 
+            // txtBoxDetailStagingEntityConfiguration
+            // 
+            this.txtBoxDetailStagingEntityConfiguration.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailStagingEntityConfiguration.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailStagingEntityConfiguration.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailStagingEntityConfiguration.Multiline = true;
+            this.txtBoxDetailStagingEntityConfiguration.Name = "txtBoxDetailStagingEntityConfiguration";
+            this.txtBoxDetailStagingEntityConfiguration.ReadOnly = true;
+            this.txtBoxDetailStagingEntityConfiguration.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailStagingEntityConfiguration.Size = new System.Drawing.Size(250, 160);
+            this.txtBoxDetailStagingEntityConfiguration.TabIndex = 19;
+            this.txtBoxDetailStagingEntityConfiguration.TabStop = false;
+            // 
+            // dataGridViewStagingEntityConfiguration
+            // 
+            this.dataGridViewStagingEntityConfiguration.AllowUserToAddRows = false;
+            this.dataGridViewStagingEntityConfiguration.AllowUserToDeleteRows = false;
+            this.dataGridViewStagingEntityConfiguration.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStagingEntityConfiguration.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewStagingEntityConfiguration.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewStagingEntityConfiguration.MultiSelect = false;
+            this.dataGridViewStagingEntityConfiguration.Name = "dataGridViewStagingEntityConfiguration";
+            this.dataGridViewStagingEntityConfiguration.ReadOnly = true;
+            this.dataGridViewStagingEntityConfiguration.ShowEditingIcon = false;
+            this.dataGridViewStagingEntityConfiguration.Size = new System.Drawing.Size(1306, 160);
+            this.dataGridViewStagingEntityConfiguration.TabIndex = 18;
+            this.dataGridViewStagingEntityConfiguration.TabStop = false;
+            this.dataGridViewStagingEntityConfiguration.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewStagingEntityConfiguration_CellClick);
+            // 
+            // tabPage41
+            // 
+            this.tabPage41.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage41.Controls.Add(this.txtBoxDetailStagingEnvironmentApplicationCache);
+            this.tabPage41.Controls.Add(this.dataGridViewStagingEnvironmentAppicationCache);
+            this.tabPage41.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage41.Location = new System.Drawing.Point(4, 34);
+            this.tabPage41.Name = "tabPage41";
+            this.tabPage41.Size = new System.Drawing.Size(1576, 172);
+            this.tabPage41.TabIndex = 6;
+            this.tabPage41.Text = "Env App Cache";
+            // 
+            // txtBoxDetailStagingEnvironmentApplicationCache
+            // 
+            this.txtBoxDetailStagingEnvironmentApplicationCache.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailStagingEnvironmentApplicationCache.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailStagingEnvironmentApplicationCache.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailStagingEnvironmentApplicationCache.Multiline = true;
+            this.txtBoxDetailStagingEnvironmentApplicationCache.Name = "txtBoxDetailStagingEnvironmentApplicationCache";
+            this.txtBoxDetailStagingEnvironmentApplicationCache.ReadOnly = true;
+            this.txtBoxDetailStagingEnvironmentApplicationCache.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailStagingEnvironmentApplicationCache.Size = new System.Drawing.Size(250, 160);
+            this.txtBoxDetailStagingEnvironmentApplicationCache.TabIndex = 20;
+            this.txtBoxDetailStagingEnvironmentApplicationCache.TabStop = false;
+            // 
+            // dataGridViewStagingEnvironmentAppicationCache
+            // 
+            this.dataGridViewStagingEnvironmentAppicationCache.AllowUserToAddRows = false;
+            this.dataGridViewStagingEnvironmentAppicationCache.AllowUserToDeleteRows = false;
+            this.dataGridViewStagingEnvironmentAppicationCache.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStagingEnvironmentAppicationCache.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewStagingEnvironmentAppicationCache.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewStagingEnvironmentAppicationCache.MultiSelect = false;
+            this.dataGridViewStagingEnvironmentAppicationCache.Name = "dataGridViewStagingEnvironmentAppicationCache";
+            this.dataGridViewStagingEnvironmentAppicationCache.ReadOnly = true;
+            this.dataGridViewStagingEnvironmentAppicationCache.ShowEditingIcon = false;
+            this.dataGridViewStagingEnvironmentAppicationCache.Size = new System.Drawing.Size(1306, 160);
+            this.dataGridViewStagingEnvironmentAppicationCache.TabIndex = 19;
+            this.dataGridViewStagingEnvironmentAppicationCache.TabStop = false;
+            this.dataGridViewStagingEnvironmentAppicationCache.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewStagingEnvironmentAppicationCache_CellClick);
+            // 
+            // tabPage42
+            // 
+            this.tabPage42.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage42.Controls.Add(this.txtBoxDetailStagingEnvironmentApplicationModule);
+            this.tabPage42.Controls.Add(this.dataGridViewStagingEnvironmentApplicationModule);
+            this.tabPage42.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage42.Location = new System.Drawing.Point(4, 34);
+            this.tabPage42.Name = "tabPage42";
+            this.tabPage42.Size = new System.Drawing.Size(1576, 172);
+            this.tabPage42.TabIndex = 7;
+            this.tabPage42.Text = "Env App Module";
+            // 
+            // txtBoxDetailStagingEnvironmentApplicationModule
+            // 
+            this.txtBoxDetailStagingEnvironmentApplicationModule.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailStagingEnvironmentApplicationModule.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailStagingEnvironmentApplicationModule.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailStagingEnvironmentApplicationModule.Multiline = true;
+            this.txtBoxDetailStagingEnvironmentApplicationModule.Name = "txtBoxDetailStagingEnvironmentApplicationModule";
+            this.txtBoxDetailStagingEnvironmentApplicationModule.ReadOnly = true;
+            this.txtBoxDetailStagingEnvironmentApplicationModule.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailStagingEnvironmentApplicationModule.Size = new System.Drawing.Size(250, 160);
+            this.txtBoxDetailStagingEnvironmentApplicationModule.TabIndex = 21;
+            this.txtBoxDetailStagingEnvironmentApplicationModule.TabStop = false;
+            // 
+            // dataGridViewStagingEnvironmentApplicationModule
+            // 
+            this.dataGridViewStagingEnvironmentApplicationModule.AllowUserToAddRows = false;
+            this.dataGridViewStagingEnvironmentApplicationModule.AllowUserToDeleteRows = false;
+            this.dataGridViewStagingEnvironmentApplicationModule.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStagingEnvironmentApplicationModule.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewStagingEnvironmentApplicationModule.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewStagingEnvironmentApplicationModule.MultiSelect = false;
+            this.dataGridViewStagingEnvironmentApplicationModule.Name = "dataGridViewStagingEnvironmentApplicationModule";
+            this.dataGridViewStagingEnvironmentApplicationModule.ReadOnly = true;
+            this.dataGridViewStagingEnvironmentApplicationModule.ShowEditingIcon = false;
+            this.dataGridViewStagingEnvironmentApplicationModule.Size = new System.Drawing.Size(1306, 160);
+            this.dataGridViewStagingEnvironmentApplicationModule.TabIndex = 20;
+            this.dataGridViewStagingEnvironmentApplicationModule.TabStop = false;
+            this.dataGridViewStagingEnvironmentApplicationModule.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewStagingEnvironmentApplicationModule_CellClick);
+            // 
+            // tabPage43
+            // 
+            this.tabPage43.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage43.Controls.Add(this.txtBoxDetailStagingEnviromentApplicationVersion);
+            this.tabPage43.Controls.Add(this.dataGridViewStagingEnvironmentApplicationVersion);
+            this.tabPage43.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage43.Location = new System.Drawing.Point(4, 34);
+            this.tabPage43.Name = "tabPage43";
+            this.tabPage43.Size = new System.Drawing.Size(1576, 172);
+            this.tabPage43.TabIndex = 8;
+            this.tabPage43.Text = "Env App Ver";
+            // 
+            // txtBoxDetailStagingEnviromentApplicationVersion
+            // 
+            this.txtBoxDetailStagingEnviromentApplicationVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailStagingEnviromentApplicationVersion.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailStagingEnviromentApplicationVersion.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailStagingEnviromentApplicationVersion.Multiline = true;
+            this.txtBoxDetailStagingEnviromentApplicationVersion.Name = "txtBoxDetailStagingEnviromentApplicationVersion";
+            this.txtBoxDetailStagingEnviromentApplicationVersion.ReadOnly = true;
+            this.txtBoxDetailStagingEnviromentApplicationVersion.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailStagingEnviromentApplicationVersion.Size = new System.Drawing.Size(250, 160);
+            this.txtBoxDetailStagingEnviromentApplicationVersion.TabIndex = 22;
+            this.txtBoxDetailStagingEnviromentApplicationVersion.TabStop = false;
+            // 
+            // dataGridViewStagingEnvironmentApplicationVersion
+            // 
+            this.dataGridViewStagingEnvironmentApplicationVersion.AllowUserToAddRows = false;
+            this.dataGridViewStagingEnvironmentApplicationVersion.AllowUserToDeleteRows = false;
+            this.dataGridViewStagingEnvironmentApplicationVersion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStagingEnvironmentApplicationVersion.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewStagingEnvironmentApplicationVersion.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewStagingEnvironmentApplicationVersion.MultiSelect = false;
+            this.dataGridViewStagingEnvironmentApplicationVersion.Name = "dataGridViewStagingEnvironmentApplicationVersion";
+            this.dataGridViewStagingEnvironmentApplicationVersion.ReadOnly = true;
+            this.dataGridViewStagingEnvironmentApplicationVersion.ShowEditingIcon = false;
+            this.dataGridViewStagingEnvironmentApplicationVersion.Size = new System.Drawing.Size(1306, 160);
+            this.dataGridViewStagingEnvironmentApplicationVersion.TabIndex = 21;
+            this.dataGridViewStagingEnvironmentApplicationVersion.TabStop = false;
+            this.dataGridViewStagingEnvironmentApplicationVersion.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewStagingEnvironmentApplicationVersion_CellClick);
+            // 
+            // tabPage44
+            // 
+            this.tabPage44.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage44.Controls.Add(this.txtBoxDetailStagingEnvironmentModuleCache);
+            this.tabPage44.Controls.Add(this.dataGridViewStagingEnvironmentModuleCache);
+            this.tabPage44.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage44.Location = new System.Drawing.Point(4, 34);
+            this.tabPage44.Name = "tabPage44";
+            this.tabPage44.Size = new System.Drawing.Size(1576, 172);
+            this.tabPage44.TabIndex = 9;
+            this.tabPage44.Text = "Env Module Cache";
+            // 
+            // txtBoxDetailStagingEnvironmentModuleCache
+            // 
+            this.txtBoxDetailStagingEnvironmentModuleCache.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailStagingEnvironmentModuleCache.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailStagingEnvironmentModuleCache.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailStagingEnvironmentModuleCache.Multiline = true;
+            this.txtBoxDetailStagingEnvironmentModuleCache.Name = "txtBoxDetailStagingEnvironmentModuleCache";
+            this.txtBoxDetailStagingEnvironmentModuleCache.ReadOnly = true;
+            this.txtBoxDetailStagingEnvironmentModuleCache.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailStagingEnvironmentModuleCache.Size = new System.Drawing.Size(250, 160);
+            this.txtBoxDetailStagingEnvironmentModuleCache.TabIndex = 23;
+            this.txtBoxDetailStagingEnvironmentModuleCache.TabStop = false;
+            // 
+            // dataGridViewStagingEnvironmentModuleCache
+            // 
+            this.dataGridViewStagingEnvironmentModuleCache.AllowUserToAddRows = false;
+            this.dataGridViewStagingEnvironmentModuleCache.AllowUserToDeleteRows = false;
+            this.dataGridViewStagingEnvironmentModuleCache.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStagingEnvironmentModuleCache.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewStagingEnvironmentModuleCache.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewStagingEnvironmentModuleCache.MultiSelect = false;
+            this.dataGridViewStagingEnvironmentModuleCache.Name = "dataGridViewStagingEnvironmentModuleCache";
+            this.dataGridViewStagingEnvironmentModuleCache.ReadOnly = true;
+            this.dataGridViewStagingEnvironmentModuleCache.ShowEditingIcon = false;
+            this.dataGridViewStagingEnvironmentModuleCache.Size = new System.Drawing.Size(1306, 160);
+            this.dataGridViewStagingEnvironmentModuleCache.TabIndex = 22;
+            this.dataGridViewStagingEnvironmentModuleCache.TabStop = false;
+            this.dataGridViewStagingEnvironmentModuleCache.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewStagingEnvironmentModuleCache_CellClick);
+            // 
+            // tabPage24
+            // 
+            this.tabPage24.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage24.Controls.Add(this.tabControl5);
+            this.tabPage24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage24.Location = new System.Drawing.Point(4, 34);
+            this.tabPage24.Name = "tabPage24";
+            this.tabPage24.Size = new System.Drawing.Size(1596, 729);
+            this.tabPage24.TabIndex = 7;
+            this.tabPage24.Text = "Infrastructure Reports";
+            // 
+            // tabControl5
+            // 
+            this.tabControl5.Controls.Add(this.tabPage26);
+            this.tabControl5.Controls.Add(this.tabPage27);
+            this.tabControl5.Controls.Add(this.tabPage28);
+            this.tabControl5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControl5.Location = new System.Drawing.Point(6, 8);
+            this.tabControl5.Margin = new System.Windows.Forms.Padding(4);
+            this.tabControl5.Name = "tabControl5";
+            this.tabControl5.SelectedIndex = 0;
+            this.tabControl5.Size = new System.Drawing.Size(1584, 713);
+            this.tabControl5.TabIndex = 12;
+            // 
+            // tabPage26
+            // 
+            this.tabPage26.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage26.Controls.Add(this.dataGridViewEnvironmentCapabilitieslogs);
+            this.tabPage26.Controls.Add(this.txtBoxDetailEnvironmentCapabilitieslogs);
+            this.tabPage26.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage26.Location = new System.Drawing.Point(4, 34);
+            this.tabPage26.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage26.Name = "tabPage26";
+            this.tabPage26.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage26.Size = new System.Drawing.Size(1576, 675);
+            this.tabPage26.TabIndex = 0;
+            this.tabPage26.Text = "Environment Capabilities";
+            // 
+            // dataGridViewEnvironmentCapabilitieslogs
+            // 
+            this.dataGridViewEnvironmentCapabilitieslogs.AllowUserToAddRows = false;
+            this.dataGridViewEnvironmentCapabilitieslogs.AllowUserToDeleteRows = false;
+            this.dataGridViewEnvironmentCapabilitieslogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewEnvironmentCapabilitieslogs.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewEnvironmentCapabilitieslogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewEnvironmentCapabilitieslogs.MultiSelect = false;
+            this.dataGridViewEnvironmentCapabilitieslogs.Name = "dataGridViewEnvironmentCapabilitieslogs";
+            this.dataGridViewEnvironmentCapabilitieslogs.ReadOnly = true;
+            this.dataGridViewEnvironmentCapabilitieslogs.ShowEditingIcon = false;
+            this.dataGridViewEnvironmentCapabilitieslogs.Size = new System.Drawing.Size(1306, 659);
+            this.dataGridViewEnvironmentCapabilitieslogs.TabIndex = 13;
+            this.dataGridViewEnvironmentCapabilitieslogs.TabStop = false;
+            this.dataGridViewEnvironmentCapabilitieslogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewEnvironmentCapabilitieslogs_CellClick);
+            // 
+            // txtBoxDetailEnvironmentCapabilitieslogs
+            // 
+            this.txtBoxDetailEnvironmentCapabilitieslogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailEnvironmentCapabilitieslogs.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailEnvironmentCapabilitieslogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailEnvironmentCapabilitieslogs.Multiline = true;
+            this.txtBoxDetailEnvironmentCapabilitieslogs.Name = "txtBoxDetailEnvironmentCapabilitieslogs";
+            this.txtBoxDetailEnvironmentCapabilitieslogs.ReadOnly = true;
+            this.txtBoxDetailEnvironmentCapabilitieslogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailEnvironmentCapabilitieslogs.Size = new System.Drawing.Size(250, 659);
+            this.txtBoxDetailEnvironmentCapabilitieslogs.TabIndex = 12;
+            this.txtBoxDetailEnvironmentCapabilitieslogs.TabStop = false;
+            // 
+            // tabPage27
+            // 
+            this.tabPage27.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage27.Controls.Add(this.txtBoxDetailEnvironmentslogs);
+            this.tabPage27.Controls.Add(this.dataGridViewEnvironmentslogs);
+            this.tabPage27.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage27.Location = new System.Drawing.Point(4, 34);
+            this.tabPage27.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage27.Name = "tabPage27";
+            this.tabPage27.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage27.Size = new System.Drawing.Size(1576, 675);
+            this.tabPage27.TabIndex = 1;
+            this.tabPage27.Text = "Environments";
+            // 
+            // txtBoxDetailEnvironmentslogs
+            // 
+            this.txtBoxDetailEnvironmentslogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailEnvironmentslogs.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailEnvironmentslogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailEnvironmentslogs.Multiline = true;
+            this.txtBoxDetailEnvironmentslogs.Name = "txtBoxDetailEnvironmentslogs";
+            this.txtBoxDetailEnvironmentslogs.ReadOnly = true;
+            this.txtBoxDetailEnvironmentslogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailEnvironmentslogs.Size = new System.Drawing.Size(250, 659);
+            this.txtBoxDetailEnvironmentslogs.TabIndex = 15;
+            this.txtBoxDetailEnvironmentslogs.TabStop = false;
+            // 
+            // dataGridViewEnvironmentslogs
+            // 
+            this.dataGridViewEnvironmentslogs.AllowUserToAddRows = false;
+            this.dataGridViewEnvironmentslogs.AllowUserToDeleteRows = false;
+            this.dataGridViewEnvironmentslogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewEnvironmentslogs.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewEnvironmentslogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewEnvironmentslogs.MultiSelect = false;
+            this.dataGridViewEnvironmentslogs.Name = "dataGridViewEnvironmentslogs";
+            this.dataGridViewEnvironmentslogs.ReadOnly = true;
+            this.dataGridViewEnvironmentslogs.ShowEditingIcon = false;
+            this.dataGridViewEnvironmentslogs.Size = new System.Drawing.Size(1306, 659);
+            this.dataGridViewEnvironmentslogs.TabIndex = 14;
+            this.dataGridViewEnvironmentslogs.TabStop = false;
+            this.dataGridViewEnvironmentslogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewEnvironmentslogs_CellClick);
+            // 
+            // tabPage28
+            // 
+            this.tabPage28.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage28.Controls.Add(this.txtBoxDetailFullErrorDumpslogs);
+            this.tabPage28.Controls.Add(this.dataGridViewFullErrorDumps);
+            this.tabPage28.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage28.Location = new System.Drawing.Point(4, 34);
+            this.tabPage28.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage28.Name = "tabPage28";
+            this.tabPage28.Size = new System.Drawing.Size(1576, 675);
+            this.tabPage28.TabIndex = 2;
+            this.tabPage28.Text = "Full Error Dumps";
+            // 
+            // txtBoxDetailFullErrorDumpslogs
+            // 
+            this.txtBoxDetailFullErrorDumpslogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailFullErrorDumpslogs.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailFullErrorDumpslogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailFullErrorDumpslogs.Multiline = true;
+            this.txtBoxDetailFullErrorDumpslogs.Name = "txtBoxDetailFullErrorDumpslogs";
+            this.txtBoxDetailFullErrorDumpslogs.ReadOnly = true;
+            this.txtBoxDetailFullErrorDumpslogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailFullErrorDumpslogs.Size = new System.Drawing.Size(250, 659);
+            this.txtBoxDetailFullErrorDumpslogs.TabIndex = 16;
+            this.txtBoxDetailFullErrorDumpslogs.TabStop = false;
+            // 
+            // dataGridViewFullErrorDumps
+            // 
+            this.dataGridViewFullErrorDumps.AllowUserToAddRows = false;
+            this.dataGridViewFullErrorDumps.AllowUserToDeleteRows = false;
+            this.dataGridViewFullErrorDumps.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewFullErrorDumps.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewFullErrorDumps.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewFullErrorDumps.MultiSelect = false;
+            this.dataGridViewFullErrorDumps.Name = "dataGridViewFullErrorDumps";
+            this.dataGridViewFullErrorDumps.ReadOnly = true;
+            this.dataGridViewFullErrorDumps.ShowEditingIcon = false;
+            this.dataGridViewFullErrorDumps.Size = new System.Drawing.Size(1306, 659);
+            this.dataGridViewFullErrorDumps.TabIndex = 15;
+            this.dataGridViewFullErrorDumps.TabStop = false;
+            this.dataGridViewFullErrorDumps.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewFullErrorDumps_CellClick);
+            // 
+            // tabPage25
+            // 
+            this.tabPage25.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage25.Controls.Add(this.tabControl6);
+            this.tabPage25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage25.Location = new System.Drawing.Point(4, 34);
+            this.tabPage25.Name = "tabPage25";
+            this.tabPage25.Size = new System.Drawing.Size(1596, 729);
+            this.tabPage25.TabIndex = 8;
+            this.tabPage25.Text = "User Permissions Reports";
+            // 
+            // tabControl6
+            // 
+            this.tabControl6.Controls.Add(this.tabPage29);
+            this.tabControl6.Controls.Add(this.tabPage30);
+            this.tabControl6.Controls.Add(this.tabPage31);
+            this.tabControl6.Controls.Add(this.tabPage32);
+            this.tabControl6.Controls.Add(this.tabPage33);
+            this.tabControl6.Controls.Add(this.tabPage34);
+            this.tabControl6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControl6.Location = new System.Drawing.Point(6, 8);
+            this.tabControl6.Margin = new System.Windows.Forms.Padding(4);
+            this.tabControl6.Name = "tabControl6";
+            this.tabControl6.SelectedIndex = 0;
+            this.tabControl6.Size = new System.Drawing.Size(1584, 713);
+            this.tabControl6.TabIndex = 13;
+            // 
+            // tabPage29
+            // 
+            this.tabPage29.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage29.Controls.Add(this.dataGridViewRoleslogs);
+            this.tabPage29.Controls.Add(this.txtBoxDetailRoleslogs);
+            this.tabPage29.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage29.Location = new System.Drawing.Point(4, 34);
+            this.tabPage29.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage29.Name = "tabPage29";
+            this.tabPage29.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage29.Size = new System.Drawing.Size(1576, 675);
+            this.tabPage29.TabIndex = 0;
+            this.tabPage29.Text = "Roles";
+            // 
+            // dataGridViewRoleslogs
+            // 
+            this.dataGridViewRoleslogs.AllowUserToAddRows = false;
+            this.dataGridViewRoleslogs.AllowUserToDeleteRows = false;
+            this.dataGridViewRoleslogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewRoleslogs.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewRoleslogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewRoleslogs.MultiSelect = false;
+            this.dataGridViewRoleslogs.Name = "dataGridViewRoleslogs";
+            this.dataGridViewRoleslogs.ReadOnly = true;
+            this.dataGridViewRoleslogs.ShowEditingIcon = false;
+            this.dataGridViewRoleslogs.Size = new System.Drawing.Size(1306, 659);
+            this.dataGridViewRoleslogs.TabIndex = 13;
+            this.dataGridViewRoleslogs.TabStop = false;
+            this.dataGridViewRoleslogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRoleslogs_CellClick);
+            // 
+            // txtBoxDetailRoleslogs
+            // 
+            this.txtBoxDetailRoleslogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailRoleslogs.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailRoleslogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailRoleslogs.Multiline = true;
+            this.txtBoxDetailRoleslogs.Name = "txtBoxDetailRoleslogs";
+            this.txtBoxDetailRoleslogs.ReadOnly = true;
+            this.txtBoxDetailRoleslogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailRoleslogs.Size = new System.Drawing.Size(250, 659);
+            this.txtBoxDetailRoleslogs.TabIndex = 12;
+            this.txtBoxDetailRoleslogs.TabStop = false;
+            // 
+            // tabPage30
+            // 
+            this.tabPage30.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage30.Controls.Add(this.txtBoxDetailRolesInApplicationslogs);
+            this.tabPage30.Controls.Add(this.dataGridViewRolesInApplicationslogs);
+            this.tabPage30.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage30.Location = new System.Drawing.Point(4, 34);
+            this.tabPage30.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage30.Name = "tabPage30";
+            this.tabPage30.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage30.Size = new System.Drawing.Size(1576, 675);
+            this.tabPage30.TabIndex = 1;
+            this.tabPage30.Text = "Roles In Applications";
+            // 
+            // txtBoxDetailRolesInApplicationslogs
+            // 
+            this.txtBoxDetailRolesInApplicationslogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailRolesInApplicationslogs.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailRolesInApplicationslogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailRolesInApplicationslogs.Multiline = true;
+            this.txtBoxDetailRolesInApplicationslogs.Name = "txtBoxDetailRolesInApplicationslogs";
+            this.txtBoxDetailRolesInApplicationslogs.ReadOnly = true;
+            this.txtBoxDetailRolesInApplicationslogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailRolesInApplicationslogs.Size = new System.Drawing.Size(250, 659);
+            this.txtBoxDetailRolesInApplicationslogs.TabIndex = 15;
+            this.txtBoxDetailRolesInApplicationslogs.TabStop = false;
+            // 
+            // dataGridViewRolesInApplicationslogs
+            // 
+            this.dataGridViewRolesInApplicationslogs.AllowUserToAddRows = false;
+            this.dataGridViewRolesInApplicationslogs.AllowUserToDeleteRows = false;
+            this.dataGridViewRolesInApplicationslogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewRolesInApplicationslogs.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewRolesInApplicationslogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewRolesInApplicationslogs.MultiSelect = false;
+            this.dataGridViewRolesInApplicationslogs.Name = "dataGridViewRolesInApplicationslogs";
+            this.dataGridViewRolesInApplicationslogs.ReadOnly = true;
+            this.dataGridViewRolesInApplicationslogs.ShowEditingIcon = false;
+            this.dataGridViewRolesInApplicationslogs.Size = new System.Drawing.Size(1306, 659);
+            this.dataGridViewRolesInApplicationslogs.TabIndex = 14;
+            this.dataGridViewRolesInApplicationslogs.TabStop = false;
+            this.dataGridViewRolesInApplicationslogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRolesInApplicationslogs_CellClick);
+            // 
+            // tabPage31
+            // 
+            this.tabPage31.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage31.Controls.Add(this.txtBoxDetailRolesInTeamslogs);
+            this.tabPage31.Controls.Add(this.dataGridViewRolesInTeamslogs);
+            this.tabPage31.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage31.Location = new System.Drawing.Point(4, 34);
+            this.tabPage31.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage31.Name = "tabPage31";
+            this.tabPage31.Size = new System.Drawing.Size(1576, 675);
+            this.tabPage31.TabIndex = 2;
+            this.tabPage31.Text = "Roles In Teams";
+            // 
+            // txtBoxDetailRolesInTeamslogs
+            // 
+            this.txtBoxDetailRolesInTeamslogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailRolesInTeamslogs.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailRolesInTeamslogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailRolesInTeamslogs.Multiline = true;
+            this.txtBoxDetailRolesInTeamslogs.Name = "txtBoxDetailRolesInTeamslogs";
+            this.txtBoxDetailRolesInTeamslogs.ReadOnly = true;
+            this.txtBoxDetailRolesInTeamslogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailRolesInTeamslogs.Size = new System.Drawing.Size(250, 659);
+            this.txtBoxDetailRolesInTeamslogs.TabIndex = 16;
+            this.txtBoxDetailRolesInTeamslogs.TabStop = false;
+            // 
+            // dataGridViewRolesInTeamslogs
+            // 
+            this.dataGridViewRolesInTeamslogs.AllowUserToAddRows = false;
+            this.dataGridViewRolesInTeamslogs.AllowUserToDeleteRows = false;
+            this.dataGridViewRolesInTeamslogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewRolesInTeamslogs.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewRolesInTeamslogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewRolesInTeamslogs.MultiSelect = false;
+            this.dataGridViewRolesInTeamslogs.Name = "dataGridViewRolesInTeamslogs";
+            this.dataGridViewRolesInTeamslogs.ReadOnly = true;
+            this.dataGridViewRolesInTeamslogs.ShowEditingIcon = false;
+            this.dataGridViewRolesInTeamslogs.Size = new System.Drawing.Size(1306, 659);
+            this.dataGridViewRolesInTeamslogs.TabIndex = 15;
+            this.dataGridViewRolesInTeamslogs.TabStop = false;
+            this.dataGridViewRolesInTeamslogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRolesInTeamslogs_CellClick);
+            // 
+            // tabPage32
+            // 
+            this.tabPage32.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage32.Controls.Add(this.txtBoxDetailSyncErrorslogs);
+            this.tabPage32.Controls.Add(this.dataGridViewSyncErrorslogs);
+            this.tabPage32.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage32.Location = new System.Drawing.Point(4, 34);
+            this.tabPage32.Name = "tabPage32";
+            this.tabPage32.Size = new System.Drawing.Size(1576, 675);
+            this.tabPage32.TabIndex = 3;
+            this.tabPage32.Text = "SyncErrors";
+            // 
+            // txtBoxDetailSyncErrorslogs
+            // 
+            this.txtBoxDetailSyncErrorslogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailSyncErrorslogs.Location = new System.Drawing.Point(1322, 8);
+            this.txtBoxDetailSyncErrorslogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailSyncErrorslogs.Multiline = true;
+            this.txtBoxDetailSyncErrorslogs.Name = "txtBoxDetailSyncErrorslogs";
+            this.txtBoxDetailSyncErrorslogs.ReadOnly = true;
+            this.txtBoxDetailSyncErrorslogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailSyncErrorslogs.Size = new System.Drawing.Size(250, 659);
+            this.txtBoxDetailSyncErrorslogs.TabIndex = 17;
+            this.txtBoxDetailSyncErrorslogs.TabStop = false;
+            // 
+            // dataGridViewSyncErrorslogs
+            // 
+            this.dataGridViewSyncErrorslogs.AllowUserToAddRows = false;
+            this.dataGridViewSyncErrorslogs.AllowUserToDeleteRows = false;
+            this.dataGridViewSyncErrorslogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewSyncErrorslogs.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewSyncErrorslogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewSyncErrorslogs.MultiSelect = false;
+            this.dataGridViewSyncErrorslogs.Name = "dataGridViewSyncErrorslogs";
+            this.dataGridViewSyncErrorslogs.ReadOnly = true;
+            this.dataGridViewSyncErrorslogs.ShowEditingIcon = false;
+            this.dataGridViewSyncErrorslogs.Size = new System.Drawing.Size(1306, 659);
+            this.dataGridViewSyncErrorslogs.TabIndex = 16;
+            this.dataGridViewSyncErrorslogs.TabStop = false;
+            this.dataGridViewSyncErrorslogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSyncErrorslogs_CellClick);
+            // 
+            // tabPage33
+            // 
+            this.tabPage33.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage33.Controls.Add(this.txtBoxDetailUserlogs);
+            this.tabPage33.Controls.Add(this.dataGridViewUserlogs);
+            this.tabPage33.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage33.Location = new System.Drawing.Point(4, 34);
+            this.tabPage33.Name = "tabPage33";
+            this.tabPage33.Size = new System.Drawing.Size(1576, 675);
+            this.tabPage33.TabIndex = 4;
+            this.tabPage33.Text = "User";
+            // 
+            // txtBoxDetailUserlogs
+            // 
+            this.txtBoxDetailUserlogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailUserlogs.Location = new System.Drawing.Point(1322, 8);
+            this.txtBoxDetailUserlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailUserlogs.Multiline = true;
+            this.txtBoxDetailUserlogs.Name = "txtBoxDetailUserlogs";
+            this.txtBoxDetailUserlogs.ReadOnly = true;
+            this.txtBoxDetailUserlogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailUserlogs.Size = new System.Drawing.Size(250, 659);
+            this.txtBoxDetailUserlogs.TabIndex = 18;
+            this.txtBoxDetailUserlogs.TabStop = false;
+            // 
+            // dataGridViewUserlogs
+            // 
+            this.dataGridViewUserlogs.AllowUserToAddRows = false;
+            this.dataGridViewUserlogs.AllowUserToDeleteRows = false;
+            this.dataGridViewUserlogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewUserlogs.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewUserlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewUserlogs.MultiSelect = false;
+            this.dataGridViewUserlogs.Name = "dataGridViewUserlogs";
+            this.dataGridViewUserlogs.ReadOnly = true;
+            this.dataGridViewUserlogs.ShowEditingIcon = false;
+            this.dataGridViewUserlogs.Size = new System.Drawing.Size(1306, 659);
+            this.dataGridViewUserlogs.TabIndex = 17;
+            this.dataGridViewUserlogs.TabStop = false;
+            this.dataGridViewUserlogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewUserlogs_CellClick);
+            // 
+            // tabPage34
+            // 
+            this.tabPage34.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage34.Controls.Add(this.txtBoxDetailUserPoolslogs);
+            this.tabPage34.Controls.Add(this.dataGridViewUserPoolslogs);
+            this.tabPage34.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage34.Location = new System.Drawing.Point(4, 34);
+            this.tabPage34.Name = "tabPage34";
+            this.tabPage34.Size = new System.Drawing.Size(1576, 675);
+            this.tabPage34.TabIndex = 5;
+            this.tabPage34.Text = "User Pools";
+            // 
+            // txtBoxDetailUserPoolslogs
+            // 
+            this.txtBoxDetailUserPoolslogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailUserPoolslogs.Location = new System.Drawing.Point(1322, 8);
+            this.txtBoxDetailUserPoolslogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailUserPoolslogs.Multiline = true;
+            this.txtBoxDetailUserPoolslogs.Name = "txtBoxDetailUserPoolslogs";
+            this.txtBoxDetailUserPoolslogs.ReadOnly = true;
+            this.txtBoxDetailUserPoolslogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailUserPoolslogs.Size = new System.Drawing.Size(250, 659);
+            this.txtBoxDetailUserPoolslogs.TabIndex = 19;
+            this.txtBoxDetailUserPoolslogs.TabStop = false;
+            // 
+            // dataGridViewUserPoolslogs
+            // 
+            this.dataGridViewUserPoolslogs.AllowUserToAddRows = false;
+            this.dataGridViewUserPoolslogs.AllowUserToDeleteRows = false;
+            this.dataGridViewUserPoolslogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewUserPoolslogs.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewUserPoolslogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewUserPoolslogs.MultiSelect = false;
+            this.dataGridViewUserPoolslogs.Name = "dataGridViewUserPoolslogs";
+            this.dataGridViewUserPoolslogs.ReadOnly = true;
+            this.dataGridViewUserPoolslogs.ShowEditingIcon = false;
+            this.dataGridViewUserPoolslogs.Size = new System.Drawing.Size(1306, 659);
+            this.dataGridViewUserPoolslogs.TabIndex = 18;
+            this.dataGridViewUserPoolslogs.TabStop = false;
+            this.dataGridViewUserPoolslogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewUserPoolslogs_CellClick);
             // 
             // dateTimePicker1
             // 
@@ -1304,7 +3083,7 @@
             this.MinimumSize = new System.Drawing.Size(1649, 872);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "OutSystems Log Parser V.101621";
+            this.Text = "OutSystems Log Parser V.103121";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -1366,7 +3145,120 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewServiceStudiologs)).EndInit();
             this.tabPage21.ResumeLayout(false);
             this.tabPage21.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewGeneralTXTlogs)).EndInit();
+            this.tabPage22.ResumeLayout(false);
+            this.tabPage22.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBPTReportslogs)).EndInit();
+            this.tabPage23.ResumeLayout(false);
+            this.tabControl9.ResumeLayout(false);
+            this.tabPage55.ResumeLayout(false);
+            this.tabPage55.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingModuleVersionPublished)).EndInit();
+            this.tabPage56.ResumeLayout(false);
+            this.tabPage56.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingModuleVersionUploaded)).EndInit();
+            this.tabPage57.ResumeLayout(false);
+            this.tabPage57.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingOptions)).EndInit();
+            this.tabPage58.ResumeLayout(false);
+            this.tabPage58.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingOutdatedApplication)).EndInit();
+            this.tabPage59.ResumeLayout(false);
+            this.tabPage59.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingOutdatedModule)).EndInit();
+            this.tabControl8.ResumeLayout(false);
+            this.tabPage45.ResumeLayout(false);
+            this.tabPage45.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingEnvironmentModuleRunning)).EndInit();
+            this.tabPage46.ResumeLayout(false);
+            this.tabPage46.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingModules)).EndInit();
+            this.tabPage47.ResumeLayout(false);
+            this.tabPage47.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingModuleVersionRefererences)).EndInit();
+            this.tabPage48.ResumeLayout(false);
+            this.tabPage48.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingProducerElements)).EndInit();
+            this.tabPage49.ResumeLayout(false);
+            this.tabPage49.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingSiteProperties)).EndInit();
+            this.tabPage50.ResumeLayout(false);
+            this.tabPage50.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStaginglogs)).EndInit();
+            this.tabPage51.ResumeLayout(false);
+            this.tabPage51.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingApplicationVersion)).EndInit();
+            this.tabPage52.ResumeLayout(false);
+            this.tabPage52.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingMessage)).EndInit();
+            this.tabPage53.ResumeLayout(false);
+            this.tabPage53.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingModuleInconsistencies)).EndInit();
+            this.tabPage54.ResumeLayout(false);
+            this.tabPage54.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingModuleVersion)).EndInit();
+            this.tabControl7.ResumeLayout(false);
+            this.tabPage35.ResumeLayout(false);
+            this.tabPage35.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingApplogs)).EndInit();
+            this.tabPage36.ResumeLayout(false);
+            this.tabPage36.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingAppVerlogs)).EndInit();
+            this.tabPage37.ResumeLayout(false);
+            this.tabPage37.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingAppVerModuleVerlogs)).EndInit();
+            this.tabPage38.ResumeLayout(false);
+            this.tabPage38.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingChangelog)).EndInit();
+            this.tabPage39.ResumeLayout(false);
+            this.tabPage39.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingConsumerElements)).EndInit();
+            this.tabPage40.ResumeLayout(false);
+            this.tabPage40.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingEntityConfiguration)).EndInit();
+            this.tabPage41.ResumeLayout(false);
+            this.tabPage41.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingEnvironmentAppicationCache)).EndInit();
+            this.tabPage42.ResumeLayout(false);
+            this.tabPage42.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingEnvironmentApplicationModule)).EndInit();
+            this.tabPage43.ResumeLayout(false);
+            this.tabPage43.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingEnvironmentApplicationVersion)).EndInit();
+            this.tabPage44.ResumeLayout(false);
+            this.tabPage44.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStagingEnvironmentModuleCache)).EndInit();
+            this.tabPage24.ResumeLayout(false);
+            this.tabControl5.ResumeLayout(false);
+            this.tabPage26.ResumeLayout(false);
+            this.tabPage26.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEnvironmentCapabilitieslogs)).EndInit();
+            this.tabPage27.ResumeLayout(false);
+            this.tabPage27.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEnvironmentslogs)).EndInit();
+            this.tabPage28.ResumeLayout(false);
+            this.tabPage28.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFullErrorDumps)).EndInit();
+            this.tabPage25.ResumeLayout(false);
+            this.tabControl6.ResumeLayout(false);
+            this.tabPage29.ResumeLayout(false);
+            this.tabPage29.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRoleslogs)).EndInit();
+            this.tabPage30.ResumeLayout(false);
+            this.tabPage30.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRolesInApplicationslogs)).EndInit();
+            this.tabPage31.ResumeLayout(false);
+            this.tabPage31.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRolesInTeamslogs)).EndInit();
+            this.tabPage32.ResumeLayout(false);
+            this.tabPage32.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSyncErrorslogs)).EndInit();
+            this.tabPage33.ResumeLayout(false);
+            this.tabPage33.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUserlogs)).EndInit();
+            this.tabPage34.ResumeLayout(false);
+            this.tabPage34.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUserPoolslogs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPercentage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -1449,11 +3341,124 @@
         private System.Windows.Forms.DataGridView dataGridViewServiceStudiologs;
         private System.Windows.Forms.TextBox txtBoxDetailServiceStudioLogs;
         private System.Windows.Forms.TabPage tabPage21;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.TextBox txtBoxDetailGeneralTXTLogs;
+        private System.Windows.Forms.DataGridView dataGridViewGeneralTXTlogs;
         private System.Windows.Forms.NumericUpDown numericUpDownPercentage;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnScreenshot;
+        private System.Windows.Forms.TabPage tabPage22;
+        private System.Windows.Forms.TabPage tabPage23;
+        private System.Windows.Forms.TabPage tabPage24;
+        private System.Windows.Forms.TabPage tabPage25;
+        private System.Windows.Forms.TextBox txtBoxDetailBPTReportslogs;
+        private System.Windows.Forms.DataGridView dataGridViewBPTReportslogs;
+        private System.Windows.Forms.TabControl tabControl5;
+        private System.Windows.Forms.TabPage tabPage26;
+        private System.Windows.Forms.DataGridView dataGridViewEnvironmentCapabilitieslogs;
+        private System.Windows.Forms.TextBox txtBoxDetailEnvironmentCapabilitieslogs;
+        private System.Windows.Forms.TabPage tabPage27;
+        private System.Windows.Forms.TextBox txtBoxDetailEnvironmentslogs;
+        private System.Windows.Forms.DataGridView dataGridViewEnvironmentslogs;
+        private System.Windows.Forms.TabPage tabPage28;
+        private System.Windows.Forms.TextBox txtBoxDetailFullErrorDumpslogs;
+        private System.Windows.Forms.DataGridView dataGridViewFullErrorDumps;
+        private System.Windows.Forms.TabControl tabControl6;
+        private System.Windows.Forms.TabPage tabPage29;
+        private System.Windows.Forms.DataGridView dataGridViewRoleslogs;
+        private System.Windows.Forms.TextBox txtBoxDetailRoleslogs;
+        private System.Windows.Forms.TabPage tabPage30;
+        private System.Windows.Forms.TextBox txtBoxDetailRolesInApplicationslogs;
+        private System.Windows.Forms.DataGridView dataGridViewRolesInApplicationslogs;
+        private System.Windows.Forms.TabPage tabPage31;
+        private System.Windows.Forms.TextBox txtBoxDetailRolesInTeamslogs;
+        private System.Windows.Forms.DataGridView dataGridViewRolesInTeamslogs;
+        private System.Windows.Forms.TabPage tabPage32;
+        private System.Windows.Forms.TabPage tabPage33;
+        private System.Windows.Forms.TabPage tabPage34;
+        private System.Windows.Forms.DataGridView dataGridViewSyncErrorslogs;
+        private System.Windows.Forms.DataGridView dataGridViewUserlogs;
+        private System.Windows.Forms.DataGridView dataGridViewUserPoolslogs;
+        private System.Windows.Forms.TextBox txtBoxDetailSyncErrorslogs;
+        private System.Windows.Forms.TextBox txtBoxDetailUserlogs;
+        private System.Windows.Forms.TextBox txtBoxDetailUserPoolslogs;
+        private System.Windows.Forms.TabControl tabControl7;
+        private System.Windows.Forms.TabPage tabPage35;
+        private System.Windows.Forms.DataGridView dataGridViewStagingApplogs;
+        private System.Windows.Forms.TextBox txtBoxDetailStagingApplogs;
+        private System.Windows.Forms.TabPage tabPage36;
+        private System.Windows.Forms.TextBox txtBoxDetailStagingAppVerlogs;
+        private System.Windows.Forms.DataGridView dataGridViewStagingAppVerlogs;
+        private System.Windows.Forms.TabPage tabPage37;
+        private System.Windows.Forms.DataGridView dataGridViewStagingAppVerModuleVerlogs;
+        private System.Windows.Forms.TabPage tabPage38;
+        private System.Windows.Forms.TextBox txtBoxDetailStagingChangelog;
+        private System.Windows.Forms.DataGridView dataGridViewStagingChangelog;
+        private System.Windows.Forms.TabPage tabPage39;
+        private System.Windows.Forms.TextBox txtBoxDetailStagingConsumerElementslogs;
+        private System.Windows.Forms.DataGridView dataGridViewStagingConsumerElements;
+        private System.Windows.Forms.TabPage tabPage40;
+        private System.Windows.Forms.TextBox txtBoxDetailStagingEntityConfiguration;
+        private System.Windows.Forms.DataGridView dataGridViewStagingEntityConfiguration;
+        private System.Windows.Forms.TabPage tabPage41;
+        private System.Windows.Forms.TextBox txtBoxDetailStagingEnvironmentApplicationCache;
+        private System.Windows.Forms.DataGridView dataGridViewStagingEnvironmentAppicationCache;
+        private System.Windows.Forms.TabPage tabPage42;
+        private System.Windows.Forms.TextBox txtBoxDetailStagingEnvironmentApplicationModule;
+        private System.Windows.Forms.DataGridView dataGridViewStagingEnvironmentApplicationModule;
+        private System.Windows.Forms.TabPage tabPage43;
+        private System.Windows.Forms.TextBox txtBoxDetailStagingEnviromentApplicationVersion;
+        private System.Windows.Forms.DataGridView dataGridViewStagingEnvironmentApplicationVersion;
+        private System.Windows.Forms.TabPage tabPage44;
+        private System.Windows.Forms.TabControl tabControl8;
+        private System.Windows.Forms.TabPage tabPage45;
+        private System.Windows.Forms.DataGridView dataGridViewStagingEnvironmentModuleRunning;
+        private System.Windows.Forms.TextBox txtBoxDetailStagingEnvironmentModuleRunning;
+        private System.Windows.Forms.TabPage tabPage46;
+        private System.Windows.Forms.TextBox txtBoxDetailStagingModules;
+        private System.Windows.Forms.DataGridView dataGridViewStagingModules;
+        private System.Windows.Forms.TabPage tabPage47;
+        private System.Windows.Forms.TextBox txtBoxDetailStagingModuleVersionReferences;
+        private System.Windows.Forms.DataGridView dataGridViewStagingModuleVersionRefererences;
+        private System.Windows.Forms.TabPage tabPage48;
+        private System.Windows.Forms.TextBox txtBoxDetailStagingProducerElements;
+        private System.Windows.Forms.DataGridView dataGridViewStagingProducerElements;
+        private System.Windows.Forms.TabPage tabPage49;
+        private System.Windows.Forms.TextBox txtBoxDetailStagingSiteProperties;
+        private System.Windows.Forms.DataGridView dataGridViewStagingSiteProperties;
+        private System.Windows.Forms.TabPage tabPage50;
+        private System.Windows.Forms.TextBox txtBoxDetailStaginglogs;
+        private System.Windows.Forms.DataGridView dataGridViewStaginglogs;
+        private System.Windows.Forms.TabPage tabPage51;
+        private System.Windows.Forms.TextBox txtBoxDetailStagingApplicationVersion;
+        private System.Windows.Forms.DataGridView dataGridViewStagingApplicationVersion;
+        private System.Windows.Forms.TabPage tabPage52;
+        private System.Windows.Forms.TextBox txtBoxDetailStagingMessage;
+        private System.Windows.Forms.DataGridView dataGridViewStagingMessage;
+        private System.Windows.Forms.TabPage tabPage53;
+        private System.Windows.Forms.TextBox txtBoxDetailStagingModuleInconsistencies;
+        private System.Windows.Forms.DataGridView dataGridViewStagingModuleInconsistencies;
+        private System.Windows.Forms.TabPage tabPage54;
+        private System.Windows.Forms.TabControl tabControl9;
+        private System.Windows.Forms.TabPage tabPage55;
+        private System.Windows.Forms.DataGridView dataGridViewStagingModuleVersionPublished;
+        private System.Windows.Forms.TextBox txtBoxDetailStagingModuleVersionPublished;
+        private System.Windows.Forms.TabPage tabPage56;
+        private System.Windows.Forms.TextBox txtBoxDetailStagingModuleVersionUploaded;
+        private System.Windows.Forms.DataGridView dataGridViewStagingModuleVersionUploaded;
+        private System.Windows.Forms.TabPage tabPage57;
+        private System.Windows.Forms.TextBox txtBoxDetailStagingOptions;
+        private System.Windows.Forms.DataGridView dataGridViewStagingOptions;
+        private System.Windows.Forms.TabPage tabPage58;
+        private System.Windows.Forms.TextBox txtBoxDetailStagingOutdatedApplication;
+        private System.Windows.Forms.DataGridView dataGridViewStagingOutdatedApplication;
+        private System.Windows.Forms.TabPage tabPage59;
+        private System.Windows.Forms.TextBox txtBoxDetailStagingOutdatedModule;
+        private System.Windows.Forms.DataGridView dataGridViewStagingOutdatedModule;
+        private System.Windows.Forms.TextBox txtBoxDetailStagingAppVerModuleVerlogs;
+        private System.Windows.Forms.TextBox txtBoxDetailStagingEnvironmentModuleCache;
+        private System.Windows.Forms.DataGridView dataGridViewStagingEnvironmentModuleCache;
+        private System.Windows.Forms.TextBox txtBoxDetailStagingModuleVersion;
+        private System.Windows.Forms.DataGridView dataGridViewStagingModuleVersion;
     }
 }
 
