@@ -26,7 +26,13 @@ namespace OutSystems_Log_Parser
         double percentageMessageCount;
         double roundedPercentageMessageCount;
         bool removeGarbage = false;
+        bool removeGarbageSuccessful = false;
         bool highlightError = false;
+        bool highlightErrorSuccessful = false;
+        bool findKeyword = false;
+        bool findKeywordSuccessful = false;
+        bool screenshotSuccessful = false;
+        bool datetimeFilterSuccessful = false;
         string currentWorkingDirectory = Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath);
 
         public Form1()
@@ -511,10 +517,11 @@ namespace OutSystems_Log_Parser
                     numericUpDownPercentage.Enabled = true;
                     btnHighlight.Enabled = true;
                     btnHighlight.BackColor = SystemColors.ControlLight;
-                    btnScreenshot.Enabled = true;
-                    btnScreenshot.BackColor = SystemColors.ControlLight;
                     btnClearFilter.Enabled = true;
                     btnClearFilter.BackColor = SystemColors.ControlLight;
+                    btnSearchKeyword.Enabled = true;
+                    btnSearchKeyword.BackColor = SystemColors.ControlLight;
+                    txtBoxKeyword.Enabled = true;
                 }
                 else
                 {
@@ -671,6 +678,16 @@ namespace OutSystems_Log_Parser
             btnScreenshot.BackColor = SystemColors.ControlLight;
         }
 
+        private void btnSearchKeyword_MouseEnter(object sender, EventArgs e)
+        {
+            btnSearchKeyword.BackColor = Color.SpringGreen;
+        }
+
+        private void btnSearchKeyword_MouseLeave(object sender, EventArgs e)
+        {
+            btnSearchKeyword.BackColor = SystemColors.ControlLight;
+        }
+
         //Beginning of the Service Center Logs tab code
         private void dataGridViewErrorlogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -692,6 +709,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailErrorLogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -721,6 +744,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailGenerallogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -750,6 +779,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailIntegrationlogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -779,6 +814,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailScreenRequestslogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -808,6 +849,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailTimerlogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -837,6 +884,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailEmaillogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -866,6 +919,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailExtensionlogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -895,6 +954,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailServiceActionlogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -924,6 +989,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailTradWebRequests.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -955,6 +1026,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailWinAppEventViewer.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -984,6 +1061,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailWinSysEventViewer.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -1013,6 +1096,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailWinSecEventViewer.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -1044,6 +1133,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailAndroidLogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -1073,6 +1168,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailiOSLogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -1104,6 +1205,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtDetailIISlogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -1133,6 +1240,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtDetailIISlogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -1240,20 +1353,26 @@ namespace OutSystems_Log_Parser
                         queryDataGridViews(dataGridViewWinAppEventViewer, isoFrom, isoTo);
                         queryDataGridViews(dataGridViewWinSysEventViewer, isoFrom, isoTo);
                         queryDataGridViews(dataGridViewWinSecEventViewer, isoFrom, isoTo);
+
+                        btnFilter.Enabled = false;
+                        dateTimePicker1.Enabled = false;
+                        maskedTextBox1.Enabled = false;
+                        dateTimePicker2.Enabled = false;
+                        maskedTextBox2.Enabled = false;
                     }
                 }
 
                 if (removeGarbage)
                 {
                     removeGenericErrors(dataGridViewErrorlogs, 1, txtBoxDetailErrorLogs);
-                    removeGenericErrors(dataGridViewGenerallogs, 1, txtBoxDetailGenerallogs);
-                    removeGenericErrors2(dataGridViewIntegrationslogs, txtBoxDetailIntegrationlogs);
-                    removeGenericErrors2(dataGridViewScreenRequestslogs, txtBoxDetailScreenRequestslogs);
-                    removeGenericErrors2(dataGridViewTimerlogs, txtBoxDetailTimerlogs);
-                    removeGenericErrors2(dataGridViewEmaillogs, txtBoxDetailEmaillogs);
-                    removeGenericErrors2(dataGridViewExtensionlogs, txtBoxDetailExtensionlogs);
-                    removeGenericErrors2(dataGridViewServiceActionlogs, txtBoxDetailServiceActionlogs);
-                    removeGenericErrors2(dataGridViewTradWebRequests, txtBoxDetailTradWebRequests);
+                    //removeGenericErrors(dataGridViewGenerallogs, 1, txtBoxDetailGenerallogs);
+                    //removeGenericErrors2(dataGridViewIntegrationslogs, txtBoxDetailIntegrationlogs);
+                    //removeGenericErrors2(dataGridViewScreenRequestslogs, txtBoxDetailScreenRequestslogs);
+                    //removeGenericErrors2(dataGridViewTimerlogs, txtBoxDetailTimerlogs);
+                    //removeGenericErrors2(dataGridViewEmaillogs, txtBoxDetailEmaillogs);
+                    //removeGenericErrors2(dataGridViewExtensionlogs, txtBoxDetailExtensionlogs);
+                    //removeGenericErrors2(dataGridViewServiceActionlogs, txtBoxDetailServiceActionlogs);
+                    //removeGenericErrors2(dataGridViewTradWebRequests, txtBoxDetailTradWebRequests);
                     //removeGenericErrors2(dataGridViewIISDateTime, txtDetailIISlogs);
                     //removeGenericErrors2(dataGridViewIISTimeTaken, txtDetailIISlogs);
                     removeGenericErrors(dataGridViewWinAppEventViewer, 2, txtBoxDetailWinAppEventViewer);
@@ -1268,7 +1387,7 @@ namespace OutSystems_Log_Parser
 
                 if (highlightError)
                 {
-                    string[] knownErrors_Errorlogs = { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "a fatal error has occurred", "communicationexception", "json deserialization", "compilation error", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "can't proceed", "truncated in table" };
+                    string[] knownErrors_Errorlogs = { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "a fatal error has occurred", "communicationexception", "json deserialization", "compilation error", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "can't proceed", "truncated in table", "unknown reference expression type email" };
                     string[] knownErrors_Generallogs = { "system cannot find" };
                     string[] knownErrors_WinAppEventViewer = { "ora-", "error closing", "cannot access", "error opening" };
                     string[] knownErrors_WinSysEventViewer = { "error closing", "timed out" };
@@ -1296,11 +1415,67 @@ namespace OutSystems_Log_Parser
                     //highlightKnownErrors(dataGridViewBPTReportslogs);
                 }
 
-                btnFilter.Enabled = false;
-                dateTimePicker1.Enabled = false;
-                maskedTextBox1.Enabled = false;
-                dateTimePicker2.Enabled = false;
-                maskedTextBox2.Enabled = false;
+                if (findKeyword)
+                {
+                    highlightKeyword(dataGridViewErrorlogs);
+                    highlightKeyword(dataGridViewGenerallogs);
+                    highlightKeyword(dataGridViewIntegrationslogs);
+                    highlightKeyword(dataGridViewScreenRequestslogs);
+                    highlightKeyword(dataGridViewTimerlogs);
+                    highlightKeyword(dataGridViewEmaillogs);
+                    highlightKeyword(dataGridViewExtensionlogs);
+                    highlightKeyword(dataGridViewServiceActionlogs);
+                    highlightKeyword(dataGridViewTradWebRequests);
+                    highlightKeyword(dataGridViewIISDateTime);
+                    highlightKeyword(dataGridViewIISTimeTaken);
+                    highlightKeyword(dataGridViewWinAppEventViewer);
+                    highlightKeyword(dataGridViewWinSysEventViewer);
+                    highlightKeyword(dataGridViewWinSecEventViewer);
+                    highlightKeyword(dataGridViewAndroidlogs);
+                    highlightKeyword(dataGridViewiOSlogs);
+                    highlightKeyword(dataGridViewServiceStudiologs);
+                    highlightKeyword(dataGridViewGeneralTXTlogs);
+                    highlightKeyword(dataGridViewBPTReportslogs);
+                    highlightKeyword(dataGridViewEnvironmentCapabilitieslogs);
+                    highlightKeyword(dataGridViewEnvironmentslogs);
+                    highlightKeyword(dataGridViewFullErrorDumps);
+                    highlightKeyword(dataGridViewRoleslogs);
+                    highlightKeyword(dataGridViewRolesInApplicationslogs);
+                    highlightKeyword(dataGridViewRolesInTeamslogs);
+                    highlightKeyword(dataGridViewUserlogs);
+                    highlightKeyword(dataGridViewUserPoolslogs);
+                    highlightKeyword(dataGridViewSyncErrorslogs);
+                    highlightKeyword(dataGridViewStagingApplogs);
+                    highlightKeyword(dataGridViewStagingAppVerlogs);
+                    highlightKeyword(dataGridViewStagingAppVerModuleVerlogs);
+                    highlightKeyword(dataGridViewStagingChangelog);
+                    highlightKeyword(dataGridViewStagingConsumerElements);
+                    highlightKeyword(dataGridViewStagingEntityConfiguration);
+                    highlightKeyword(dataGridViewStagingEnvironmentAppicationCache);
+                    highlightKeyword(dataGridViewStagingEnvironmentApplicationModule);
+                    highlightKeyword(dataGridViewStagingEnvironmentApplicationVersion);
+                    highlightKeyword(dataGridViewStagingEnvironmentModuleCache);
+                    highlightKeyword(dataGridViewStagingEnvironmentModuleRunning);
+                    highlightKeyword(dataGridViewStagingModules);
+                    highlightKeyword(dataGridViewStagingModuleVersionRefererences);
+                    highlightKeyword(dataGridViewStagingProducerElements);
+                    highlightKeyword(dataGridViewStagingSiteProperties);
+                    highlightKeyword(dataGridViewStaginglogs);
+                    highlightKeyword(dataGridViewStagingApplicationVersion);
+                    highlightKeyword(dataGridViewStagingMessage);
+                    highlightKeyword(dataGridViewStagingModuleInconsistencies);
+                    highlightKeyword(dataGridViewStagingModuleVersion);
+                    highlightKeyword(dataGridViewStagingModuleVersionPublished);
+                    highlightKeyword(dataGridViewStagingModuleVersionUploaded);
+                    highlightKeyword(dataGridViewStagingOptions);
+                    highlightKeyword(dataGridViewStagingOutdatedApplication);
+                    highlightKeyword(dataGridViewStagingOutdatedModule);
+                }
+
+                if (datetimeFilterSuccessful)
+                {
+                    MessageBox.Show("The data was filtered by the datetime range provided", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             catch (Exception ex)
             {
@@ -1318,6 +1493,8 @@ namespace OutSystems_Log_Parser
                     string rowFilter = string.Format("DATE_TIME >= '" + from);
                     rowFilter += string.Format("' AND DATE_TIME <= '" + to + "'");
                     (tableName.DataSource as DataTable).DefaultView.RowFilter = rowFilter;
+
+                    datetimeFilterSuccessful = true;
                 }
             }
             catch (Exception ex)
@@ -1331,13 +1508,21 @@ namespace OutSystems_Log_Parser
         {
             removeGarbage = false;
             highlightError = false;
+            findKeyword = false;
+            removeGarbageSuccessful = false;
+            highlightErrorSuccessful = false;
+            findKeywordSuccessful = false;
+            screenshotSuccessful = false;
+            datetimeFilterSuccessful = false;
 
             dateTimePicker1.Text = "";
             dateTimePicker2.Text = "";
             maskedTextBox1.Text = "";
             maskedTextBox2.Text = "";
+            txtBoxKeyword.Text = "";
             maskedTextBox1.BackColor = SystemColors.Window;
             maskedTextBox2.BackColor = SystemColors.Window;
+            txtBoxKeyword.BackColor = SystemColors.Window;
 
             numericUpDownPercentage.Value = 20;
 
@@ -1799,6 +1984,10 @@ namespace OutSystems_Log_Parser
                     numericUpDownPercentage.Enabled = true;
                     btnHighlight.Enabled = true;
                     btnHighlight.BackColor = SystemColors.ControlLight;
+                    btnScreenshot.Enabled = false;
+                    btnSearchKeyword.Enabled = true;
+                    btnSearchKeyword.BackColor = SystemColors.ControlLight;
+                    txtBoxKeyword.Enabled = true;
                 }
                 else
                 {
@@ -1811,6 +2000,9 @@ namespace OutSystems_Log_Parser
                     numericUpDownPercentage.Enabled = false;
                     btnHighlight.Enabled = false;
                     btnClearFilter.Enabled = false;
+                    btnScreenshot.Enabled = false;
+                    btnSearchKeyword.Enabled = false;
+                    txtBoxKeyword.Enabled = false;
                 }
             }
         }
@@ -1830,14 +2022,14 @@ namespace OutSystems_Log_Parser
             removeGarbage = true;
 
             removeGenericErrors(dataGridViewErrorlogs, 1, txtBoxDetailErrorLogs);
-            removeGenericErrors(dataGridViewGenerallogs, 1, txtBoxDetailGenerallogs);
-            removeGenericErrors2(dataGridViewIntegrationslogs, txtBoxDetailIntegrationlogs);
-            removeGenericErrors2(dataGridViewScreenRequestslogs, txtBoxDetailScreenRequestslogs);
-            removeGenericErrors2(dataGridViewTimerlogs, txtBoxDetailTimerlogs);
-            removeGenericErrors2(dataGridViewEmaillogs, txtBoxDetailEmaillogs);
-            removeGenericErrors2(dataGridViewExtensionlogs, txtBoxDetailExtensionlogs);
-            removeGenericErrors2(dataGridViewServiceActionlogs, txtBoxDetailServiceActionlogs);
-            removeGenericErrors2(dataGridViewTradWebRequests, txtBoxDetailTradWebRequests);
+            //removeGenericErrors(dataGridViewGenerallogs, 1, txtBoxDetailGenerallogs);
+            //removeGenericErrors2(dataGridViewIntegrationslogs, txtBoxDetailIntegrationlogs);
+            //removeGenericErrors2(dataGridViewScreenRequestslogs, txtBoxDetailScreenRequestslogs);
+            //removeGenericErrors2(dataGridViewTimerlogs, txtBoxDetailTimerlogs);
+            //removeGenericErrors2(dataGridViewEmaillogs, txtBoxDetailEmaillogs);
+            //removeGenericErrors2(dataGridViewExtensionlogs, txtBoxDetailExtensionlogs);
+            //removeGenericErrors2(dataGridViewServiceActionlogs, txtBoxDetailServiceActionlogs);
+            //removeGenericErrors2(dataGridViewTradWebRequests, txtBoxDetailTradWebRequests);
             //removeGenericErrors2(dataGridViewIISDateTime, txtDetailIISlogs);
             //removeGenericErrors2(dataGridViewIISTimeTaken, txtDetailIISlogs);
             removeGenericErrors(dataGridViewWinAppEventViewer, 2, txtBoxDetailWinAppEventViewer);
@@ -1851,7 +2043,7 @@ namespace OutSystems_Log_Parser
 
             if (highlightError)
             {
-                string[] knownErrors_Errorlogs = { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "a fatal error has occurred", "communicationexception", "json deserialization", "compilation error", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "can't proceed", "truncated in table" };
+                string[] knownErrors_Errorlogs = { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "a fatal error has occurred", "communicationexception", "json deserialization", "compilation error", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "can't proceed", "truncated in table", "unknown reference expression type email" };
                 string[] knownErrors_Generallogs = { "system cannot find" };
                 string[] knownErrors_WinAppEventViewer = { "ora-", "error closing", "cannot access", "error opening" };
                 string[] knownErrors_WinSysEventViewer = { "error closing", "timed out" };
@@ -1879,6 +2071,68 @@ namespace OutSystems_Log_Parser
                 //highlightKnownErrors(dataGridViewBPTReportslogs);
             }
 
+            if (findKeyword)
+            {
+                highlightKeyword(dataGridViewErrorlogs);
+                highlightKeyword(dataGridViewGenerallogs);
+                highlightKeyword(dataGridViewIntegrationslogs);
+                highlightKeyword(dataGridViewScreenRequestslogs);
+                highlightKeyword(dataGridViewTimerlogs);
+                highlightKeyword(dataGridViewEmaillogs);
+                highlightKeyword(dataGridViewExtensionlogs);
+                highlightKeyword(dataGridViewServiceActionlogs);
+                highlightKeyword(dataGridViewTradWebRequests);
+                highlightKeyword(dataGridViewIISDateTime);
+                highlightKeyword(dataGridViewIISTimeTaken);
+                highlightKeyword(dataGridViewWinAppEventViewer);
+                highlightKeyword(dataGridViewWinSysEventViewer);
+                highlightKeyword(dataGridViewWinSecEventViewer);
+                highlightKeyword(dataGridViewAndroidlogs);
+                highlightKeyword(dataGridViewiOSlogs);
+                highlightKeyword(dataGridViewServiceStudiologs);
+                highlightKeyword(dataGridViewGeneralTXTlogs);
+                highlightKeyword(dataGridViewBPTReportslogs);
+                highlightKeyword(dataGridViewEnvironmentCapabilitieslogs);
+                highlightKeyword(dataGridViewEnvironmentslogs);
+                highlightKeyword(dataGridViewFullErrorDumps);
+                highlightKeyword(dataGridViewRoleslogs);
+                highlightKeyword(dataGridViewRolesInApplicationslogs);
+                highlightKeyword(dataGridViewRolesInTeamslogs);
+                highlightKeyword(dataGridViewUserlogs);
+                highlightKeyword(dataGridViewUserPoolslogs);
+                highlightKeyword(dataGridViewSyncErrorslogs);
+                highlightKeyword(dataGridViewStagingApplogs);
+                highlightKeyword(dataGridViewStagingAppVerlogs);
+                highlightKeyword(dataGridViewStagingAppVerModuleVerlogs);
+                highlightKeyword(dataGridViewStagingChangelog);
+                highlightKeyword(dataGridViewStagingConsumerElements);
+                highlightKeyword(dataGridViewStagingEntityConfiguration);
+                highlightKeyword(dataGridViewStagingEnvironmentAppicationCache);
+                highlightKeyword(dataGridViewStagingEnvironmentApplicationModule);
+                highlightKeyword(dataGridViewStagingEnvironmentApplicationVersion);
+                highlightKeyword(dataGridViewStagingEnvironmentModuleCache);
+                highlightKeyword(dataGridViewStagingEnvironmentModuleRunning);
+                highlightKeyword(dataGridViewStagingModules);
+                highlightKeyword(dataGridViewStagingModuleVersionRefererences);
+                highlightKeyword(dataGridViewStagingProducerElements);
+                highlightKeyword(dataGridViewStagingSiteProperties);
+                highlightKeyword(dataGridViewStaginglogs);
+                highlightKeyword(dataGridViewStagingApplicationVersion);
+                highlightKeyword(dataGridViewStagingMessage);
+                highlightKeyword(dataGridViewStagingModuleInconsistencies);
+                highlightKeyword(dataGridViewStagingModuleVersion);
+                highlightKeyword(dataGridViewStagingModuleVersionPublished);
+                highlightKeyword(dataGridViewStagingModuleVersionUploaded);
+                highlightKeyword(dataGridViewStagingOptions);
+                highlightKeyword(dataGridViewStagingOutdatedApplication);
+                highlightKeyword(dataGridViewStagingOutdatedModule);
+            }
+
+            if (removeGarbageSuccessful)
+            {
+                MessageBox.Show("Duplicate generic lines were hidden", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
             btnRemoveGarbage.Enabled = false;
             numericUpDownPercentage.Enabled = false;
         }
@@ -1887,33 +2141,38 @@ namespace OutSystems_Log_Parser
         {
             try
             {
-                totalRowsCount = tableName.RowCount;
-
-                var messageLineCountQuery = tableName.Rows.Cast<DataGridViewRow>()
-                    .Where(r => r.Cells[columnIndex].Value != null)
-                    .Select(r => r.Cells[columnIndex].Value)
-                    .GroupBy(msg => msg)
-                        .OrderByDescending(msg => msg.Count())
-                        .Select(g => new { Message = g.Key, Count = g.Count() });
-
-                foreach (var messageLineCount in messageLineCountQuery)
+                if (tableName.Rows.Count > 0)
                 {
-                    myMessage = messageLineCount.Message.ToString();
-                    myMessageCount = messageLineCount.Count;
+                    totalRowsCount = tableName.RowCount;
 
-                    percentageMessageCount = ((double)myMessageCount / (double)totalRowsCount) * 100;
+                    var messageLineCountQuery = tableName.Rows.Cast<DataGridViewRow>()
+                        .Where(r => r.Cells[columnIndex].Value != null)
+                        .Select(r => r.Cells[columnIndex].Value)
+                        .GroupBy(msg => msg)
+                            .OrderByDescending(msg => msg.Count())
+                            .Select(g => new { Message = g.Key, Count = g.Count() });
 
-                    roundedPercentageMessageCount = Math.Round(percentageMessageCount, 0, MidpointRounding.AwayFromZero);
-
-                    if (roundedPercentageMessageCount >= (double)numericUpDownPercentage.Value)
+                    foreach (var messageLineCount in messageLineCountQuery)
                     {
-                        foreach (DataGridViewRow row in tableName.Rows)
+                        myMessage = messageLineCount.Message.ToString();
+                        myMessageCount = messageLineCount.Count;
+
+                        percentageMessageCount = ((double)myMessageCount / (double)totalRowsCount) * 100;
+
+                        roundedPercentageMessageCount = Math.Round(percentageMessageCount, 0, MidpointRounding.AwayFromZero);
+
+                        if (roundedPercentageMessageCount >= (double)numericUpDownPercentage.Value)
                         {
-                            if (row.Cells[columnIndex].Value.ToString().Equals(myMessage))
+                            foreach (DataGridViewRow row in tableName.Rows)
                             {
-                                tableName.CurrentCell = null;
-                                clearTextboxes(txtbox);
-                                row.Visible = false;
+                                if (row.Cells[columnIndex].Value.ToString().Equals(myMessage))
+                                {
+                                    tableName.CurrentCell = null;
+                                    clearTextboxes(txtbox);
+                                    row.Visible = false;
+
+                                    removeGarbageSuccessful = true;
+                                }
                             }
                         }
                     }
@@ -2196,7 +2455,7 @@ namespace OutSystems_Log_Parser
         {
             highlightError = true;
 
-            string[] knownErrors_Errorlogs = { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "a fatal error has occurred", "communicationexception", "json deserialization", "compilation error", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "can't proceed", "truncated in table" };
+            string[] knownErrors_Errorlogs = { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "a fatal error has occurred", "communicationexception", "json deserialization", "compilation error", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "can't proceed", "truncated in table", "unknown reference expression type email" };
             string[] knownErrors_Generallogs = { "system cannot find" };
             string[] knownErrors_WinAppEventViewer = { "ora-", "error closing", "cannot access", "error opening" };
             string[] knownErrors_WinSysEventViewer = { "error closing", "timed out" };
@@ -2226,14 +2485,14 @@ namespace OutSystems_Log_Parser
             if (removeGarbage)
             {
                 removeGenericErrors(dataGridViewErrorlogs, 1, txtBoxDetailErrorLogs);
-                removeGenericErrors(dataGridViewGenerallogs, 1, txtBoxDetailGenerallogs);
-                removeGenericErrors2(dataGridViewIntegrationslogs, txtBoxDetailIntegrationlogs);
-                removeGenericErrors2(dataGridViewScreenRequestslogs, txtBoxDetailScreenRequestslogs);
-                removeGenericErrors2(dataGridViewTimerlogs, txtBoxDetailTimerlogs);
-                removeGenericErrors2(dataGridViewEmaillogs, txtBoxDetailEmaillogs);
-                removeGenericErrors2(dataGridViewExtensionlogs, txtBoxDetailExtensionlogs);
-                removeGenericErrors2(dataGridViewServiceActionlogs, txtBoxDetailServiceActionlogs);
-                removeGenericErrors2(dataGridViewTradWebRequests, txtBoxDetailTradWebRequests);
+                //removeGenericErrors(dataGridViewGenerallogs, 1, txtBoxDetailGenerallogs);
+                //removeGenericErrors2(dataGridViewIntegrationslogs, txtBoxDetailIntegrationlogs);
+                //removeGenericErrors2(dataGridViewScreenRequestslogs, txtBoxDetailScreenRequestslogs);
+                //removeGenericErrors2(dataGridViewTimerlogs, txtBoxDetailTimerlogs);
+                //removeGenericErrors2(dataGridViewEmaillogs, txtBoxDetailEmaillogs);
+                //removeGenericErrors2(dataGridViewExtensionlogs, txtBoxDetailExtensionlogs);
+                //removeGenericErrors2(dataGridViewServiceActionlogs, txtBoxDetailServiceActionlogs);
+                //removeGenericErrors2(dataGridViewTradWebRequests, txtBoxDetailTradWebRequests);
                 //removeGenericErrors2(dataGridViewIISDateTime, txtDetailIISlogs);
                 //removeGenericErrors2(dataGridViewIISTimeTaken, txtDetailIISlogs);
                 removeGenericErrors(dataGridViewWinAppEventViewer, 2, txtBoxDetailWinAppEventViewer);
@@ -2246,6 +2505,68 @@ namespace OutSystems_Log_Parser
                 //removeGenericErrors(dataGridViewBPTReportslogs, txtBoxDetailBPTReportslogs);
             }
 
+            if (findKeyword)
+            {
+                highlightKeyword(dataGridViewErrorlogs);
+                highlightKeyword(dataGridViewGenerallogs);
+                highlightKeyword(dataGridViewIntegrationslogs);
+                highlightKeyword(dataGridViewScreenRequestslogs);
+                highlightKeyword(dataGridViewTimerlogs);
+                highlightKeyword(dataGridViewEmaillogs);
+                highlightKeyword(dataGridViewExtensionlogs);
+                highlightKeyword(dataGridViewServiceActionlogs);
+                highlightKeyword(dataGridViewTradWebRequests);
+                highlightKeyword(dataGridViewIISDateTime);
+                highlightKeyword(dataGridViewIISTimeTaken);
+                highlightKeyword(dataGridViewWinAppEventViewer);
+                highlightKeyword(dataGridViewWinSysEventViewer);
+                highlightKeyword(dataGridViewWinSecEventViewer);
+                highlightKeyword(dataGridViewAndroidlogs);
+                highlightKeyword(dataGridViewiOSlogs);
+                highlightKeyword(dataGridViewServiceStudiologs);
+                highlightKeyword(dataGridViewGeneralTXTlogs);
+                highlightKeyword(dataGridViewBPTReportslogs);
+                highlightKeyword(dataGridViewEnvironmentCapabilitieslogs);
+                highlightKeyword(dataGridViewEnvironmentslogs);
+                highlightKeyword(dataGridViewFullErrorDumps);
+                highlightKeyword(dataGridViewRoleslogs);
+                highlightKeyword(dataGridViewRolesInApplicationslogs);
+                highlightKeyword(dataGridViewRolesInTeamslogs);
+                highlightKeyword(dataGridViewUserlogs);
+                highlightKeyword(dataGridViewUserPoolslogs);
+                highlightKeyword(dataGridViewSyncErrorslogs);
+                highlightKeyword(dataGridViewStagingApplogs);
+                highlightKeyword(dataGridViewStagingAppVerlogs);
+                highlightKeyword(dataGridViewStagingAppVerModuleVerlogs);
+                highlightKeyword(dataGridViewStagingChangelog);
+                highlightKeyword(dataGridViewStagingConsumerElements);
+                highlightKeyword(dataGridViewStagingEntityConfiguration);
+                highlightKeyword(dataGridViewStagingEnvironmentAppicationCache);
+                highlightKeyword(dataGridViewStagingEnvironmentApplicationModule);
+                highlightKeyword(dataGridViewStagingEnvironmentApplicationVersion);
+                highlightKeyword(dataGridViewStagingEnvironmentModuleCache);
+                highlightKeyword(dataGridViewStagingEnvironmentModuleRunning);
+                highlightKeyword(dataGridViewStagingModules);
+                highlightKeyword(dataGridViewStagingModuleVersionRefererences);
+                highlightKeyword(dataGridViewStagingProducerElements);
+                highlightKeyword(dataGridViewStagingSiteProperties);
+                highlightKeyword(dataGridViewStaginglogs);
+                highlightKeyword(dataGridViewStagingApplicationVersion);
+                highlightKeyword(dataGridViewStagingMessage);
+                highlightKeyword(dataGridViewStagingModuleInconsistencies);
+                highlightKeyword(dataGridViewStagingModuleVersion);
+                highlightKeyword(dataGridViewStagingModuleVersionPublished);
+                highlightKeyword(dataGridViewStagingModuleVersionUploaded);
+                highlightKeyword(dataGridViewStagingOptions);
+                highlightKeyword(dataGridViewStagingOutdatedApplication);
+                highlightKeyword(dataGridViewStagingOutdatedModule);
+            }
+
+            if (highlightErrorSuccessful)
+            {
+                MessageBox.Show("Known errors were highlighted", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
             btnHighlight.Enabled = false;
         }
 
@@ -2253,13 +2574,18 @@ namespace OutSystems_Log_Parser
         {
             try
             {
-                foreach (string error in errorsList)
+                if (tableName.Rows.Count > 0)
                 {
-                    foreach (DataGridViewRow row in tableName.Rows)
+                    foreach (string error in errorsList)
                     {
-                        if (row.Cells[columnIndex].Value.ToString().ToLower().Contains(error))
+                        foreach (DataGridViewRow row in tableName.Rows)
                         {
-                            row.DefaultCellStyle.BackColor = Color.Yellow;
+                            if (row.Cells[columnIndex].Value.ToString().ToLower().Contains(error))
+                            {
+                                row.DefaultCellStyle.BackColor = Color.Yellow;
+
+                                highlightErrorSuccessful = true;
+                            }
                         }
                     }
                 }
@@ -2314,6 +2640,11 @@ namespace OutSystems_Log_Parser
             btnHighlight.Enabled = false;
             btnScreenshot.Enabled = false;
             btnClearFilter.Enabled = false;
+            btnSearchKeyword.Enabled = false;
+            txtBoxKeyword.Enabled = false;
+
+            dateTimePicker1.Value = DateTime.Now;
+            dateTimePicker2.Value = DateTime.Now;
         }
 
         private void btnScreenshot_Click(object sender, EventArgs e)
@@ -2378,6 +2709,12 @@ namespace OutSystems_Log_Parser
             createScreenshot("detailed_staging_option_logs", txtBoxDetailStagingOptions.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_staging_oudated_application_logs", txtBoxDetailStagingOutdatedApplication.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_staging_oudated_module_logs", txtBoxDetailStagingOutdatedModule.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+
+            if (screenshotSuccessful)
+            {
+                MessageBox.Show("A screenshot of the error was taken", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
         }
 
         private void createScreenshot(String filename, String text, Font font, Color textColor, Color backColor)
@@ -2445,6 +2782,8 @@ namespace OutSystems_Log_Parser
                     timeStamp = timeStamp.Replace(" ", "");
 
                     img.Save(screenshotsFolder + "\\" + filename + "_" + timeStamp + ".jpg");
+
+                    screenshotSuccessful = true;
                 }
             }
             catch (Exception ex)
@@ -2474,6 +2813,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailGeneralTXTLogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -2503,6 +2848,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailBPTReportslogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -2532,6 +2883,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailEnvironmentCapabilitieslogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -2561,6 +2918,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailEnvironmentslogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -2590,6 +2953,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailFullErrorDumpslogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -2619,6 +2988,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailRoleslogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -2648,6 +3023,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailRolesInApplicationslogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -2677,6 +3058,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailRolesInTeamslogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -2706,6 +3093,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailSyncErrorslogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -2735,6 +3128,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailUserlogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -2764,6 +3163,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailUserPoolslogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -2793,6 +3198,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailStagingApplogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -2822,6 +3233,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailStagingAppVerlogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -2851,6 +3268,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailStagingAppVerModuleVerlogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -2880,6 +3303,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailStagingChangelog.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -2909,6 +3338,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailStagingConsumerElementslogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -2938,6 +3373,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailStagingEntityConfiguration.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -2967,6 +3408,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailStagingEnvironmentApplicationCache.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -2996,6 +3443,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailStagingEnvironmentApplicationModule.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -3025,6 +3478,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailStagingEnviromentApplicationVersion.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -3054,6 +3513,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailStagingEnvironmentModuleCache.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -3083,6 +3548,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailStagingEnvironmentModuleRunning.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -3112,6 +3583,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailStagingModules.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -3141,6 +3618,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailStagingModuleVersionReferences.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -3170,6 +3653,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailStagingProducerElements.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -3199,6 +3688,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailStagingSiteProperties.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -3228,6 +3723,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailStaginglogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -3257,6 +3758,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailStagingApplicationVersion.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -3286,6 +3793,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailStagingMessage.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -3315,6 +3828,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailStagingModuleInconsistencies.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -3344,6 +3863,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailStagingModuleVersion.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -3373,6 +3898,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailStagingModuleVersionPublished.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -3402,6 +3933,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailStagingModuleVersionUploaded.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -3431,6 +3968,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailStagingOptions.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -3460,6 +4003,12 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailStagingOutdatedApplication.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
                 }
             }
             catch (Exception ex)
@@ -3489,6 +4038,176 @@ namespace OutSystems_Log_Parser
                     }
 
                     txtBoxDetailStagingOutdatedModule.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void btnSearchKeyword_Click(object sender, EventArgs e)
+        {
+            findKeyword = true;
+
+            if (string.IsNullOrEmpty(txtBoxKeyword.Text))
+            {
+                MessageBox.Show("Please enter a keyword to search for", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                txtBoxKeyword.BackColor = Color.Orange;
+                txtBoxKeyword.Focus();
+            }
+            else
+            {
+                highlightKeyword(dataGridViewErrorlogs);
+                highlightKeyword(dataGridViewGenerallogs);
+                highlightKeyword(dataGridViewIntegrationslogs);
+                highlightKeyword(dataGridViewScreenRequestslogs);
+                highlightKeyword(dataGridViewTimerlogs);
+                highlightKeyword(dataGridViewEmaillogs);
+                highlightKeyword(dataGridViewExtensionlogs);
+                highlightKeyword(dataGridViewServiceActionlogs);
+                highlightKeyword(dataGridViewTradWebRequests);
+                highlightKeyword(dataGridViewIISDateTime);
+                highlightKeyword(dataGridViewIISTimeTaken);
+                highlightKeyword(dataGridViewWinAppEventViewer);
+                highlightKeyword(dataGridViewWinSysEventViewer);
+                highlightKeyword(dataGridViewWinSecEventViewer);
+                highlightKeyword(dataGridViewAndroidlogs);
+                highlightKeyword(dataGridViewiOSlogs);
+                highlightKeyword(dataGridViewServiceStudiologs);
+                highlightKeyword(dataGridViewGeneralTXTlogs);
+                highlightKeyword(dataGridViewBPTReportslogs);
+                highlightKeyword(dataGridViewEnvironmentCapabilitieslogs);
+                highlightKeyword(dataGridViewEnvironmentslogs);
+                highlightKeyword(dataGridViewFullErrorDumps);
+                highlightKeyword(dataGridViewRoleslogs);
+                highlightKeyword(dataGridViewRolesInApplicationslogs);
+                highlightKeyword(dataGridViewRolesInTeamslogs);
+                highlightKeyword(dataGridViewUserlogs);
+                highlightKeyword(dataGridViewUserPoolslogs);
+                highlightKeyword(dataGridViewSyncErrorslogs);
+                highlightKeyword(dataGridViewStagingApplogs);
+                highlightKeyword(dataGridViewStagingAppVerlogs);
+                highlightKeyword(dataGridViewStagingAppVerModuleVerlogs);
+                highlightKeyword(dataGridViewStagingChangelog);
+                highlightKeyword(dataGridViewStagingConsumerElements);
+                highlightKeyword(dataGridViewStagingEntityConfiguration);
+                highlightKeyword(dataGridViewStagingEnvironmentAppicationCache);
+                highlightKeyword(dataGridViewStagingEnvironmentApplicationModule);
+                highlightKeyword(dataGridViewStagingEnvironmentApplicationVersion);
+                highlightKeyword(dataGridViewStagingEnvironmentModuleCache);
+                highlightKeyword(dataGridViewStagingEnvironmentModuleRunning);
+                highlightKeyword(dataGridViewStagingModules);
+                highlightKeyword(dataGridViewStagingModuleVersionRefererences);
+                highlightKeyword(dataGridViewStagingProducerElements);
+                highlightKeyword(dataGridViewStagingSiteProperties);
+                highlightKeyword(dataGridViewStaginglogs);
+                highlightKeyword(dataGridViewStagingApplicationVersion);
+                highlightKeyword(dataGridViewStagingMessage);
+                highlightKeyword(dataGridViewStagingModuleInconsistencies);
+                highlightKeyword(dataGridViewStagingModuleVersion);
+                highlightKeyword(dataGridViewStagingModuleVersionPublished);
+                highlightKeyword(dataGridViewStagingModuleVersionUploaded);
+                highlightKeyword(dataGridViewStagingOptions);
+                highlightKeyword(dataGridViewStagingOutdatedApplication);
+                highlightKeyword(dataGridViewStagingOutdatedModule);
+
+                if (removeGarbage)
+                {
+                    removeGenericErrors(dataGridViewErrorlogs, 1, txtBoxDetailErrorLogs);
+                    //removeGenericErrors(dataGridViewGenerallogs, 1, txtBoxDetailGenerallogs);
+                    //removeGenericErrors2(dataGridViewIntegrationslogs, txtBoxDetailIntegrationlogs);
+                    //removeGenericErrors2(dataGridViewScreenRequestslogs, txtBoxDetailScreenRequestslogs);
+                    //removeGenericErrors2(dataGridViewTimerlogs, txtBoxDetailTimerlogs);
+                    //removeGenericErrors2(dataGridViewEmaillogs, txtBoxDetailEmaillogs);
+                    //removeGenericErrors2(dataGridViewExtensionlogs, txtBoxDetailExtensionlogs);
+                    //removeGenericErrors2(dataGridViewServiceActionlogs, txtBoxDetailServiceActionlogs);
+                    //removeGenericErrors2(dataGridViewTradWebRequests, txtBoxDetailTradWebRequests);
+                    //removeGenericErrors2(dataGridViewIISDateTime, txtDetailIISlogs);
+                    //removeGenericErrors2(dataGridViewIISTimeTaken, txtDetailIISlogs);
+                    removeGenericErrors(dataGridViewWinAppEventViewer, 2, txtBoxDetailWinAppEventViewer);
+                    removeGenericErrors(dataGridViewWinSysEventViewer, 2, txtBoxDetailWinSysEventViewer);
+                    removeGenericErrors(dataGridViewWinSecEventViewer, 2, txtBoxDetailWinSecEventViewer);
+                    removeGenericErrors(dataGridViewAndroidlogs, 3, txtBoxDetailAndroidLogs);
+                    removeGenericErrors(dataGridViewiOSlogs, 3, txtBoxDetailiOSLogs);
+                    removeGenericErrors(dataGridViewServiceStudiologs, 3, txtBoxDetailServiceStudioLogs);
+                    removeGenericErrors(dataGridViewGeneralTXTlogs, 2, txtBoxDetailGeneralTXTLogs);
+                    //removeGenericErrors(dataGridViewBPTReportslogs, txtBoxDetailBPTReportslogs);
+                }
+
+                if (highlightError)
+                {
+                    string[] knownErrors_Errorlogs = { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "a fatal error has occurred", "communicationexception", "json deserialization", "compilation error", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "can't proceed", "truncated in table", "unknown reference expression type email" };
+                    string[] knownErrors_Generallogs = { "system cannot find" };
+                    string[] knownErrors_WinAppEventViewer = { "ora-", "error closing", "cannot access", "error opening" };
+                    string[] knownErrors_WinSysEventViewer = { "error closing", "timed out" };
+                    string[] knownErrors_AndroidiOSlogs = { "file is corrupt or invalid", "androidx library", "command finished with error code 0", "plugin is not going to work", "error: spawnsync sudo etimeout", "plugin doesn't support this project's cordova-android version", "failed to fetch plug", "archive failed", "build failed with the following error", "command failed with exit code", "signing certificate is invalid", "the ios deployment target", "verification failed" };
+                    string[] knownErrors_ServiceStudiologs = { "oneoftypedefinition", "http forbidden", "[not connected]" };
+
+                    highlightKnownErrors(dataGridViewErrorlogs, 1, knownErrors_Errorlogs);
+                    highlightKnownErrors(dataGridViewGenerallogs, 1, knownErrors_Generallogs);
+                    //highlightKnownErrors(dataGridViewIntegrationslogs);
+                    //highlightKnownErrors(dataGridViewScreenRequestslogs);
+                    //highlightKnownErrors(dataGridViewTimerlogs);
+                    //highlightKnownErrors(dataGridViewEmaillogs);
+                    //highlightKnownErrors(dataGridViewExtensionlogs);
+                    //highlightKnownErrors(dataGridViewServiceActionlogs);
+                    //highlightKnownErrors(dataGridViewTradWebRequests);
+                    //highlightKnownErrors(dataGridViewIISDateTime);
+                    //highlightKnownErrors(dataGridViewIISTimeTaken);
+                    highlightKnownErrors(dataGridViewWinAppEventViewer, 8, knownErrors_WinAppEventViewer);
+                    highlightKnownErrors(dataGridViewWinSysEventViewer, 8, knownErrors_WinSysEventViewer);
+                    //highlightKnownErrors(dataGridViewWinSecEventViewer, 8);
+                    highlightKnownErrors(dataGridViewAndroidlogs, 3, knownErrors_AndroidiOSlogs);
+                    highlightKnownErrors(dataGridViewiOSlogs, 3, knownErrors_AndroidiOSlogs);
+                    highlightKnownErrors(dataGridViewServiceStudiologs, 3, knownErrors_ServiceStudiologs);
+                    //highlightKnownErrors(dataGridViewGeneralTXTlogs, 2);
+                    //highlightKnownErrors(dataGridViewBPTReportslogs);
+                }
+
+                if (findKeywordSuccessful)
+                {
+                    MessageBox.Show("The keyword was found", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                btnSearchKeyword.Enabled = false;
+                txtBoxKeyword.Enabled = false;
+            }
+        }
+
+        private void highlightKeyword(DataGridView tableName)
+        {
+            try
+            {
+                if (tableName.Rows.Count > 0)
+                {
+                    //search for the value anywhere on the table, meaning, any row and any column
+                    string cellValue = "";
+
+                    for (int r = 0; r <= tableName.Rows.Count - 1; r++)
+                    {
+                        for (int c = 0; c <= tableName.Columns.Count - 1; c++)
+                        {
+                            cellValue = tableName.Rows[r].Cells[c].Value.ToString();
+                            if (c != tableName.Columns.Count - 1)
+                            {
+                                if (cellValue.ToLower().Contains(txtBoxKeyword.Text.ToLower()))
+                                {
+                                    tableName.Rows[r].DefaultCellStyle.ForeColor = Color.Red;
+
+                                    findKeywordSuccessful = true;
+                                }
+                            }
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -3499,3 +4218,4 @@ namespace OutSystems_Log_Parser
         }
     }
 }
+
