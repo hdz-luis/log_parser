@@ -1334,25 +1334,25 @@ namespace OutSystems_Log_Parser
                     else
                     {
                         //filter the content from the table based on the datetime range
-                        queryDataGridViews(dataGridViewAndroidlogs, isoFrom, isoTo);
-                        queryDataGridViews(dataGridViewEmaillogs, isoFrom, isoTo);
-                        queryDataGridViews(dataGridViewErrorlogs, isoFrom, isoTo);
-                        queryDataGridViews(dataGridViewExtensionlogs, isoFrom, isoTo);
-                        queryDataGridViews(dataGridViewGenerallogs, isoFrom, isoTo);
-                        queryDataGridViews(dataGridViewIISDateTime, isoFrom, isoTo);
-                        queryDataGridViews(dataGridViewIISTimeTaken, isoFrom, isoTo);
-                        queryDataGridViews(dataGridViewIntegrationslogs, isoFrom, isoTo);
-                        queryDataGridViews(dataGridViewiOSlogs, isoFrom, isoTo);
-                        queryDataGridViews(dataGridViewScreenRequestslogs, isoFrom, isoTo);
-                        queryDataGridViews(dataGridViewServiceActionlogs, isoFrom, isoTo);
-                        queryDataGridViews(dataGridViewServiceStudiologs, isoFrom, isoTo);
-                        queryDataGridViews(dataGridViewGeneralTXTlogs, isoFrom, isoTo);
-                        queryDataGridViews(dataGridViewTimerlogs, isoFrom, isoTo);
-                        queryDataGridViews(dataGridViewTradWebRequests, isoFrom, isoTo);
-                        queryDataGridViews(dataGridViewBPTReportslogs, isoFrom, isoTo);
-                        queryDataGridViews(dataGridViewWinAppEventViewer, isoFrom, isoTo);
-                        queryDataGridViews(dataGridViewWinSysEventViewer, isoFrom, isoTo);
-                        queryDataGridViews(dataGridViewWinSecEventViewer, isoFrom, isoTo);
+                        queryDataGridViews(dataGridViewAndroidlogs, isoFrom, isoTo, txtBoxDetailAndroidLogs);
+                        queryDataGridViews(dataGridViewEmaillogs, isoFrom, isoTo, txtBoxDetailEmaillogs);
+                        queryDataGridViews(dataGridViewErrorlogs, isoFrom, isoTo, txtBoxDetailErrorLogs);
+                        queryDataGridViews(dataGridViewExtensionlogs, isoFrom, isoTo, txtBoxDetailExtensionlogs);
+                        queryDataGridViews(dataGridViewGenerallogs, isoFrom, isoTo, txtBoxDetailGenerallogs);
+                        queryDataGridViews(dataGridViewIISDateTime, isoFrom, isoTo, txtDetailIISlogs);
+                        queryDataGridViews(dataGridViewIISTimeTaken, isoFrom, isoTo, txtDetailIISlogs);
+                        queryDataGridViews(dataGridViewIntegrationslogs, isoFrom, isoTo, txtBoxDetailIntegrationlogs);
+                        queryDataGridViews(dataGridViewiOSlogs, isoFrom, isoTo, txtBoxDetailiOSLogs);
+                        queryDataGridViews(dataGridViewScreenRequestslogs, isoFrom, isoTo, txtBoxDetailScreenRequestslogs);
+                        queryDataGridViews(dataGridViewServiceActionlogs, isoFrom, isoTo, txtBoxDetailServiceActionlogs);
+                        queryDataGridViews(dataGridViewServiceStudiologs, isoFrom, isoTo, txtBoxDetailServiceStudioLogs);
+                        queryDataGridViews(dataGridViewGeneralTXTlogs, isoFrom, isoTo, txtBoxDetailGeneralTXTLogs);
+                        queryDataGridViews(dataGridViewTimerlogs, isoFrom, isoTo, txtBoxDetailTimerlogs);
+                        queryDataGridViews(dataGridViewTradWebRequests, isoFrom, isoTo, txtBoxDetailTradWebRequests);
+                        queryDataGridViews(dataGridViewBPTReportslogs, isoFrom, isoTo, txtBoxDetailBPTReportslogs);
+                        queryDataGridViews(dataGridViewWinAppEventViewer, isoFrom, isoTo, txtBoxDetailWinAppEventViewer);
+                        queryDataGridViews(dataGridViewWinSysEventViewer, isoFrom, isoTo, txtBoxDetailWinSysEventViewer);
+                        queryDataGridViews(dataGridViewWinSecEventViewer, isoFrom, isoTo, txtBoxDetailWinSecEventViewer);
 
                         btnFilter.Enabled = false;
                         dateTimePicker1.Enabled = false;
@@ -1484,12 +1484,15 @@ namespace OutSystems_Log_Parser
             }
         }
 
-        private void queryDataGridViews(DataGridView tableName, string from, string to)
+        private void queryDataGridViews(DataGridView tableName, string from, string to, TextBox txtbox)
         {
             try
             {
                 if (tableName.Rows.Count > 0)
                 {
+                    tableName.CurrentCell = null;
+                    clearTextboxes(txtbox);
+
                     string rowFilter = string.Format("DATE_TIME >= '" + from);
                     rowFilter += string.Format("' AND DATE_TIME <= '" + to + "'");
                     (tableName.DataSource as DataTable).DefaultView.RowFilter = rowFilter;
