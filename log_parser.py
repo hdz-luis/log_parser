@@ -197,6 +197,7 @@ myTimesTaken = []
 #all illegal space characters, control characters, ASCII characters, and emojis
 replacementDict = {}
 replacementDict.update(dict.fromkeys(range(4, 7), ""))
+replacementDict.update(dict.fromkeys(range(135, 136), ""))
 replacementDict.update(dict.fromkeys(range(166, 168), ""))
 replacementDict.update(dict.fromkeys(range(170, 172), ""))
 replacementDict.update(dict.fromkeys(range(176, 190), ""))
@@ -213,6 +214,9 @@ replacementDict.update(dict.fromkeys(range(8220, 8223), "\""))
 replacementDict.update(dict.fromkeys(range(9617, 9619), ""))
 replacementDict[129] = ""
 replacementDict[141] = ""
+replacementDict[143] = ""
+replacementDict[145] = ""
+replacementDict[154] = ""
 replacementDict[160] = ""
 replacementDict[161] = "!"
 replacementDict[164] = ""
