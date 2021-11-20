@@ -38,7 +38,7 @@ namespace OutSystems_Log_Parser
             {"Method", "cs-method", "The requested action, for example, a GET method."},
             {"URI Stem", "cs-uri-stem", "The target of the action, for example, Default.htm."},
             {"URI Query", "cs-uri-query", "The query, if any, that the client was trying to perform. A Universal Resource Identifier (URI) query is necessary only for dynamic pages."},
-            {"HTTP Protocol Status", "sc-status", "The HTTP status code."},
+            {"HTTP Status", "sc-status", "The HTTP status code."},
             {"Windows System Error Code", "sc-win32-status", "The Windows status code."},
             {"Bytes Sent", "sc-bytes", "The number of bytes that the server sent."},
             {"Bytes Received", "cs-bytes", "The number of bytes that the server received."},
@@ -48,7 +48,7 @@ namespace OutSystems_Log_Parser
             {"User Agent", "cs(User-Agent)", "The browser type that the client used."},
             {"Cookie", "cs(Cookie)", "The content of the cookie sent or received, if any."},
             {"Referrer", "cs(Referrer)", "The site that the user last visited. This site provided a link to the current site."},
-            {"HTTP Protocol Substatus", "sc-substatus", "The substatus error code."}
+            {"HTTP Substatus", "sc-substatus", "The substatus error code."}
         };
 
         private void listViewFields_Click(object sender, EventArgs e)

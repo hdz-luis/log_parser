@@ -45,6 +45,16 @@ namespace OutSystems_Log_Parser
             try
             {
                 //delete values at the time of browsing for another file
+                dateTimePicker1.Text = "";
+                dateTimePicker2.Text = "";
+                maskedTextBox1.Text = "";
+                maskedTextBox2.Text = "";
+                txtBoxKeyword.Text = "";
+
+                numericUpDownPercentage.Value = 20;
+
+                comBoxReport.SelectedIndex = -1;
+
                 clearTextboxes(txtBoxDetailErrorLogs);
                 clearTextboxes(txtBoxDetailGenerallogs);
                 clearTextboxes(txtBoxDetailIntegrationlogs);
@@ -109,6 +119,7 @@ namespace OutSystems_Log_Parser
                 clearTables(dataGridViewTradWebRequests);
                 clearTables(dataGridViewIISDateTime);
                 clearTables(dataGridViewIISTimeTaken);
+                clearTables(dataGridViewIISLINQreport);
                 clearTables(dataGridViewWinAppEventViewer);
                 clearTables(dataGridViewWinSysEventViewer);
                 clearTables(dataGridViewWinSecEventViewer);
@@ -522,6 +533,11 @@ namespace OutSystems_Log_Parser
                     btnSearchKeyword.Enabled = true;
                     btnSearchKeyword.BackColor = SystemColors.ControlLight;
                     txtBoxKeyword.Enabled = true;
+
+                    if (dataGridViewIISDateTime.Rows.Count > 0)
+                    {
+                        comBoxReport.Enabled = true;
+                    }
                 }
                 else
                 {
@@ -585,6 +601,10 @@ namespace OutSystems_Log_Parser
                 if (dt.Rows.Count > 0)
                 {
                     tableName.DataSource = dt;
+                }
+                foreach (DataGridViewColumn col in tableName.Columns)
+                {
+                    col.SortMode = DataGridViewColumnSortMode.NotSortable;
                 }
             }
             catch (Exception ex)
@@ -1387,7 +1407,7 @@ namespace OutSystems_Log_Parser
 
                 if (highlightError)
                 {
-                    string[] knownErrors_Errorlogs = { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "a fatal error has occurred", "communicationexception", "json deserialization", "compilation error", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "can't proceed", "truncated in table", "unknown reference expression type email" };
+                    string[] knownErrors_Errorlogs = { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "a fatal error has occurred", "communicationexception", "json deserialization", "compilation error", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "can't proceed", "truncated in table", "unknown reference expression type email", "unable to open service studio", "bad json escape sequence" };
                     string[] knownErrors_Generallogs = { "system cannot find" };
                     string[] knownErrors_WinAppEventViewer = { "ora-", "error closing", "cannot access", "error opening" };
                     string[] knownErrors_WinSysEventViewer = { "error closing", "timed out" };
@@ -1529,6 +1549,8 @@ namespace OutSystems_Log_Parser
 
             numericUpDownPercentage.Value = 20;
 
+            comBoxReport.SelectedIndex = -1;
+
             clearTextboxes(txtBoxDetailErrorLogs);
             clearTextboxes(txtBoxDetailGenerallogs);
             clearTextboxes(txtBoxDetailIntegrationlogs);
@@ -1593,6 +1615,7 @@ namespace OutSystems_Log_Parser
             clearTables(dataGridViewTradWebRequests);
             clearTables(dataGridViewIISDateTime);
             clearTables(dataGridViewIISTimeTaken);
+            clearTables(dataGridViewIISLINQreport);
             clearTables(dataGridViewWinAppEventViewer);
             clearTables(dataGridViewWinSysEventViewer);
             clearTables(dataGridViewWinSecEventViewer);
@@ -1991,6 +2014,11 @@ namespace OutSystems_Log_Parser
                     btnSearchKeyword.Enabled = true;
                     btnSearchKeyword.BackColor = SystemColors.ControlLight;
                     txtBoxKeyword.Enabled = true;
+
+                    if (dataGridViewIISDateTime.Rows.Count > 0)
+                    {
+                        comBoxReport.Enabled = true;
+                    }
                 }
                 else
                 {
@@ -2006,6 +2034,7 @@ namespace OutSystems_Log_Parser
                     btnScreenshot.Enabled = false;
                     btnSearchKeyword.Enabled = false;
                     txtBoxKeyword.Enabled = false;
+                    comBoxReport.Enabled = false;
                 }
             }
         }
@@ -2046,7 +2075,7 @@ namespace OutSystems_Log_Parser
 
             if (highlightError)
             {
-                string[] knownErrors_Errorlogs = { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "a fatal error has occurred", "communicationexception", "json deserialization", "compilation error", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "can't proceed", "truncated in table", "unknown reference expression type email" };
+                string[] knownErrors_Errorlogs = { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "a fatal error has occurred", "communicationexception", "json deserialization", "compilation error", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "can't proceed", "truncated in table", "unknown reference expression type email", "unable to open service studio", "bad json escape sequence" };
                 string[] knownErrors_Generallogs = { "system cannot find" };
                 string[] knownErrors_WinAppEventViewer = { "ora-", "error closing", "cannot access", "error opening" };
                 string[] knownErrors_WinSysEventViewer = { "error closing", "timed out" };
@@ -2458,7 +2487,7 @@ namespace OutSystems_Log_Parser
         {
             highlightError = true;
 
-            string[] knownErrors_Errorlogs = { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "a fatal error has occurred", "communicationexception", "json deserialization", "compilation error", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "can't proceed", "truncated in table", "unknown reference expression type email" };
+            string[] knownErrors_Errorlogs = { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "a fatal error has occurred", "communicationexception", "json deserialization", "compilation error", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "can't proceed", "truncated in table", "unknown reference expression type email", "unable to open service studio", "bad json escape sequence" };
             string[] knownErrors_Generallogs = { "system cannot find" };
             string[] knownErrors_WinAppEventViewer = { "ora-", "error closing", "cannot access", "error opening" };
             string[] knownErrors_WinSysEventViewer = { "error closing", "timed out" };
@@ -2645,6 +2674,7 @@ namespace OutSystems_Log_Parser
             btnClearFilter.Enabled = false;
             btnSearchKeyword.Enabled = false;
             txtBoxKeyword.Enabled = false;
+            comBoxReport.Enabled = false;
 
             dateTimePicker1.Value = DateTime.Now;
             dateTimePicker2.Value = DateTime.Now;
@@ -4148,7 +4178,7 @@ namespace OutSystems_Log_Parser
 
                 if (highlightError)
                 {
-                    string[] knownErrors_Errorlogs = { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "a fatal error has occurred", "communicationexception", "json deserialization", "compilation error", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "can't proceed", "truncated in table", "unknown reference expression type email" };
+                    string[] knownErrors_Errorlogs = { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "a fatal error has occurred", "communicationexception", "json deserialization", "compilation error", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "can't proceed", "truncated in table", "unknown reference expression type email", "unable to open service studio", "bad json escape sequence" };
                     string[] knownErrors_Generallogs = { "system cannot find" };
                     string[] knownErrors_WinAppEventViewer = { "ora-", "error closing", "cannot access", "error opening" };
                     string[] knownErrors_WinSysEventViewer = { "error closing", "timed out" };
@@ -4209,6 +4239,163 @@ namespace OutSystems_Log_Parser
                                     findKeywordSuccessful = true;
                                 }
                             }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void comBoxReport_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dataGridViewIISDateTime.Rows.Count > 0)
+                {
+                    if (comBoxReport.SelectedIndex > -1)
+                    {
+                        string report = comBoxReport.Text;
+
+                        if (report == "All pages hits")
+                        {
+                            var pageCountQuery = (dataGridViewIISDateTime.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[9].Value != null)
+                                .Select(r => r.Cells[9].Value)
+                                .GroupBy(pg => pg)
+                                    .OrderByDescending(g => g.Count())
+                                    .Select(g => new { PAGE = g.Key, HITS = g.Count() })).ToList();
+
+                            dataGridViewIISLINQreport.DataSource = pageCountQuery;
+                        }
+                        else if (report == "IPs generating traffic")
+                        {
+                            var ipCountQuery = (dataGridViewIISDateTime.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[5].Value != null)
+                                .Select(r => r.Cells[5].Value)
+                                .GroupBy(ip => ip)
+                                    .OrderByDescending(g => g.Count())
+                                    .Select(g => new { IP_ADDRESS = g.Key, VISITS = g.Count() })).ToList();
+
+                            dataGridViewIISLINQreport.DataSource = ipCountQuery;
+                        }
+                        else if (report == "All pages hits and the IPs hitting them")
+                        {
+                            var pagesIPCountQuery = (dataGridViewIISDateTime.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[9].Value != null && r.Cells[5].Value != null)
+                                .Select(r => new { Page = r.Cells[9].Value, IP = r.Cells[5].Value })
+                                .GroupBy(pageip => pageip)
+                                .OrderByDescending(g => g.Count())
+                                .Select(g => new { PAGE = g.Key.Page, IP_ADDRESS = g.Key.IP, HITS = g.Count() })).ToList();
+
+                            dataGridViewIISLINQreport.DataSource = pagesIPCountQuery;
+                        }
+                        else if (report == "All browsers")
+                        {
+                            var browsersCountQuery = (dataGridViewIISDateTime.Rows.Cast<DataGridViewRow>()
+                                    .Where(r => r.Cells[12].Value != null)
+                                    .Select(r => r.Cells[12].Value)
+                                    .GroupBy(br => br)
+                                        .OrderByDescending(g => g.Count())
+                                        .Select(g => new { BROWSER = g.Key, COUNT = g.Count() })).ToList();
+
+                            dataGridViewIISLINQreport.DataSource = browsersCountQuery;
+                        }
+                        else if (report == "All pages hits and their load time")
+                        {
+                            var pagesTimeTakenCountQuery = (dataGridViewIISDateTime.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[9].Value != null && r.Cells[1].Value != null)
+                                .Select(r => new { Page = r.Cells[9].Value, TimeTaken = r.Cells[1].Value })
+                                .GroupBy(pagetime => pagetime)
+                                .OrderByDescending(g => g.Count())
+                                .Select(g => new { PAGE = g.Key.Page, TIME_TAKEN = g.Key.TimeTaken, HITS = g.Count() })).ToList();
+
+                            dataGridViewIISLINQreport.DataSource = pagesTimeTakenCountQuery;
+                        }
+                        else if (report == "Slowest pages to load")
+                        {
+                            var pageTimeQuery = (dataGridViewIISDateTime.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[9].Value != null && r.Cells[1].Value != null)
+                                .Select(r => new { Page = r.Cells[9].Value, TimeTaken = r.Cells[1].Value })
+                                .GroupBy(pagetime => pagetime)
+                                .OrderByDescending(g => Convert.ToInt32(g.Key.TimeTaken))
+                                .Select(g => new { PAGE = g.Key.Page, TIME_TAKEN = g.Key.TimeTaken })).ToList();
+
+                            dataGridViewIISLINQreport.DataSource = pageTimeQuery;
+                        }
+                        else if (report == "Page load time per user")
+                        {
+                            var usernameTimeQuery = (dataGridViewIISDateTime.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[11].Value != null && r.Cells[1].Value != null)
+                                .Select(r => new { Username = r.Cells[11].Value, TimeTaken = r.Cells[1].Value })
+                                .GroupBy(usernametime => usernametime)
+                                .OrderByDescending(g => Convert.ToInt32(g.Key.TimeTaken))
+                                .Select(g => new { USERNAME = g.Key.Username, TIME_TAKEN = g.Key.TimeTaken })).ToList();
+
+                            dataGridViewIISLINQreport.DataSource = usernameTimeQuery;
+                        }
+                        else if (report == "Domains referring traffic to pages")
+                        {
+                            var refCountQuery = (dataGridViewIISDateTime.Rows.Cast<DataGridViewRow>()
+                                    .Where(r => r.Cells[13].Value != null)
+                                    .Select(r => r.Cells[13].Value)
+                                    .GroupBy(refs => refs)
+                                    .OrderByDescending(g => g.Count())
+                                    .Select(g => new { REFERRER = g.Key, COUNT = g.Count() })).ToList();
+
+                            dataGridViewIISLINQreport.DataSource = refCountQuery;
+                        }
+                        else if (report == "Referrer broken links")
+                        {
+                            var brokenLinksQuery = (dataGridViewIISDateTime.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[13].Value != null && r.Cells[9].Value != null && r.Cells[2].Value.Equals("404") && r.Cells[3].Value.Equals("0"))
+                                .Select(r => new { Referrer = r.Cells[13].Value, Page = r.Cells[9].Value, Http = r.Cells[2].Value, HttpSub = r.Cells[3].Value })
+                                .GroupBy(referrerpagehttp => referrerpagehttp)
+                                .OrderByDescending(g => g.Count())
+                                .Select(g => new { REFERRER = g.Key.Referrer, PAGE = g.Key.Page, HTTP_CODE = g.Key.Http, HTTP_SUBCODE = g.Key.HttpSub })).ToList();
+
+                            dataGridViewIISLINQreport.DataSource = brokenLinksQuery;
+                        }
+                        else if (report == "HTTP statuses")
+                        {
+                            var httpCountQuery = (dataGridViewIISDateTime.Rows.Cast<DataGridViewRow>()
+                                    .Where(r => r.Cells[2].Value != null)
+                                    .Select(r => r.Cells[2].Value)
+                                    .GroupBy(http => http)
+                                    .OrderByDescending(g => g.Count())
+                                    .Select(g => new { HTTP_CODE = g.Key, COUNT = g.Count() })).ToList();
+
+                            dataGridViewIISLINQreport.DataSource = httpCountQuery;
+                        }
+                        else if (report == "Windows errors")
+                        {
+                            var winErrCountQuery = (dataGridViewIISDateTime.Rows.Cast<DataGridViewRow>()
+                                    .Where(r => r.Cells[4].Value != null)
+                                    .Select(r => r.Cells[4].Value)
+                                    .GroupBy(winErr => winErr)
+                                    .OrderByDescending(g => g.Count())
+                                    .Select(g => new { WINDOWS_ERROR_CODE = g.Key, COUNT = g.Count() })).ToList();
+
+                            dataGridViewIISLINQreport.DataSource = winErrCountQuery;
+                        }
+                        else if (report == "500 errors per page and user")
+                        {
+                            var error500Query = (dataGridViewIISDateTime.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[9].Value != null && r.Cells[2].Value.Equals("500") && r.Cells[11].Value != null)
+                                .Select(r => new { Page = r.Cells[9].Value, HTTP = r.Cells[2].Value, Username = r.Cells[11].Value })
+                                .GroupBy(usernamepagehttp => usernamepagehttp)
+                                .OrderByDescending(g => g.Count())
+                                .Select(g => new { USERNAME = g.Key.Username, PAGE = g.Key.Page, HTTP_CODE = g.Key.HTTP, HITS = g.Count() })).ToList();
+
+                            dataGridViewIISLINQreport.DataSource = error500Query;
+                        }
+
+                        foreach (DataGridViewColumn col in dataGridViewIISLINQreport.Columns)
+                        {
+                            col.SortMode = DataGridViewColumnSortMode.NotSortable;
                         }
                     }
                 }

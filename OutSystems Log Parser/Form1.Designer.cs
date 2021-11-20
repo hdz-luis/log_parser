@@ -66,6 +66,7 @@
             this.txtBoxDetailTradWebRequests = new System.Windows.Forms.TextBox();
             this.dataGridViewTradWebRequests = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.dataGridViewIISLINQreport = new System.Windows.Forms.DataGridView();
             this.txtDetailIISlogs = new System.Windows.Forms.TextBox();
             this.dataGridViewIISTimeTaken = new System.Windows.Forms.DataGridView();
             this.dataGridViewIISDateTime = new System.Windows.Forms.DataGridView();
@@ -225,6 +226,8 @@
             this.btnSearchKeyword = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txtBoxKeyword = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.comBoxReport = new System.Windows.Forms.ComboBox();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -247,6 +250,7 @@
             this.tabPage13.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTradWebRequests)).BeginInit();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIISLINQreport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIISTimeTaken)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIISDateTime)).BeginInit();
             this.tabPage3.SuspendLayout();
@@ -853,6 +857,9 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage2.Controls.Add(this.comBoxReport);
+            this.tabPage2.Controls.Add(this.label4);
+            this.tabPage2.Controls.Add(this.dataGridViewIISLINQreport);
             this.tabPage2.Controls.Add(this.txtDetailIISlogs);
             this.tabPage2.Controls.Add(this.dataGridViewIISTimeTaken);
             this.tabPage2.Controls.Add(this.dataGridViewIISDateTime);
@@ -867,6 +874,21 @@
             this.tabPage2.Size = new System.Drawing.Size(1596, 729);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "IIS Logs";
+            // 
+            // dataGridViewIISLINQreport
+            // 
+            this.dataGridViewIISLINQreport.AllowUserToAddRows = false;
+            this.dataGridViewIISLINQreport.AllowUserToDeleteRows = false;
+            this.dataGridViewIISLINQreport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewIISLINQreport.Location = new System.Drawing.Point(8, 538);
+            this.dataGridViewIISLINQreport.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewIISLINQreport.MultiSelect = false;
+            this.dataGridViewIISLINQreport.Name = "dataGridViewIISLINQreport";
+            this.dataGridViewIISLINQreport.ReadOnly = true;
+            this.dataGridViewIISLINQreport.ShowEditingIcon = false;
+            this.dataGridViewIISLINQreport.Size = new System.Drawing.Size(1323, 183);
+            this.dataGridViewIISLINQreport.TabIndex = 21;
+            this.dataGridViewIISLINQreport.TabStop = false;
             // 
             // txtDetailIISlogs
             // 
@@ -886,13 +908,13 @@
             this.dataGridViewIISTimeTaken.AllowUserToAddRows = false;
             this.dataGridViewIISTimeTaken.AllowUserToDeleteRows = false;
             this.dataGridViewIISTimeTaken.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewIISTimeTaken.Location = new System.Drawing.Point(8, 413);
+            this.dataGridViewIISTimeTaken.Location = new System.Drawing.Point(8, 268);
             this.dataGridViewIISTimeTaken.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewIISTimeTaken.MultiSelect = false;
             this.dataGridViewIISTimeTaken.Name = "dataGridViewIISTimeTaken";
             this.dataGridViewIISTimeTaken.ReadOnly = true;
             this.dataGridViewIISTimeTaken.ShowEditingIcon = false;
-            this.dataGridViewIISTimeTaken.Size = new System.Drawing.Size(1323, 308);
+            this.dataGridViewIISTimeTaken.Size = new System.Drawing.Size(1323, 183);
             this.dataGridViewIISTimeTaken.TabIndex = 14;
             this.dataGridViewIISTimeTaken.TabStop = false;
             this.dataGridViewIISTimeTaken.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewIISTimeTaken_CellClick);
@@ -908,7 +930,7 @@
             this.dataGridViewIISDateTime.Name = "dataGridViewIISDateTime";
             this.dataGridViewIISDateTime.ReadOnly = true;
             this.dataGridViewIISDateTime.ShowEditingIcon = false;
-            this.dataGridViewIISDateTime.Size = new System.Drawing.Size(1323, 308);
+            this.dataGridViewIISDateTime.Size = new System.Drawing.Size(1323, 183);
             this.dataGridViewIISDateTime.TabIndex = 9;
             this.dataGridViewIISDateTime.TabStop = false;
             this.dataGridViewIISDateTime.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewIISDateTime_CellClick);
@@ -3080,6 +3102,42 @@
             this.txtBoxKeyword.Size = new System.Drawing.Size(141, 30);
             this.txtBoxKeyword.TabIndex = 7;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.RoyalBlue;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(8, 483);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(75, 25);
+            this.label4.TabIndex = 22;
+            this.label4.Text = "Report:";
+            // 
+            // comBoxReport
+            // 
+            this.comBoxReport.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comBoxReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comBoxReport.FormattingEnabled = true;
+            this.comBoxReport.Items.AddRange(new object[] {
+            "All pages hits",
+            "IPs generating traffic",
+            "All pages hits and the IPs hitting them",
+            "All browsers",
+            "All pages hits and their load time",
+            "Slowest pages to load",
+            "Page load time per user",
+            "Domains referring traffic to pages",
+            "Referrer broken links",
+            "HTTP statuses",
+            "Windows errors",
+            "500 errors per page and user"});
+            this.comBoxReport.Location = new System.Drawing.Point(80, 480);
+            this.comBoxReport.Name = "comBoxReport";
+            this.comBoxReport.Size = new System.Drawing.Size(390, 33);
+            this.comBoxReport.TabIndex = 23;
+            this.comBoxReport.TabStop = false;
+            this.comBoxReport.SelectedIndexChanged += new System.EventHandler(this.comBoxReport_SelectedIndexChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -3112,7 +3170,7 @@
             this.MinimumSize = new System.Drawing.Size(1649, 872);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "OutSystems Log Parser V.110621";
+            this.Text = "OutSystems Log Parser V.112021";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -3146,6 +3204,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTradWebRequests)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIISLINQreport)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIISTimeTaken)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIISDateTime)).EndInit();
             this.tabPage3.ResumeLayout(false);
@@ -3490,6 +3549,9 @@
         private System.Windows.Forms.DataGridView dataGridViewStagingModuleVersion;
         private System.Windows.Forms.TextBox txtBoxKeyword;
         private System.Windows.Forms.Button btnSearchKeyword;
+        private System.Windows.Forms.DataGridView dataGridViewIISLINQreport;
+        private System.Windows.Forms.ComboBox comBoxReport;
+        private System.Windows.Forms.Label label4;
     }
 }
 
