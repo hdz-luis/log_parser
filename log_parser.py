@@ -196,7 +196,7 @@ myTimesTaken = []
 
 #all illegal space characters, control characters, ASCII characters, and emojis
 replacementDict = {}
-replacementDict.update(dict.fromkeys(range(8220, 8221), ""))
+replacementDict.update(dict.fromkeys(range(4, 7), ""))
 replacementDict.update(dict.fromkeys(range(166, 168), ""))
 replacementDict.update(dict.fromkeys(range(170, 172), ""))
 replacementDict.update(dict.fromkeys(range(176, 190), ""))
@@ -207,21 +207,29 @@ replacementDict.update(dict.fromkeys(range(221, 223), ""))
 replacementDict.update(dict.fromkeys(range(228, 230), ""))
 replacementDict.update(dict.fromkeys(range(239, 240), ""))
 replacementDict.update(dict.fromkeys(range(246, 248), ""))
-replacementDict.update(dict.fromkeys(range(9617, 9619), ""))
 replacementDict.update(dict.fromkeys(range(8192, 8207), ""))
-replacementDict.update(dict.fromkeys(range(4, 7), ""))
-replacementDict[8240] = ""
-replacementDict[8218] = ""
-replacementDict[8211] = "-"
-replacementDict[353] = ""
+replacementDict.update(dict.fromkeys(range(8216, 8217), "'"))
+replacementDict.update(dict.fromkeys(range(8220, 8223), "\""))
+replacementDict.update(dict.fromkeys(range(9617, 9619), ""))
+replacementDict[129] = ""
+replacementDict[141] = ""
+replacementDict[160] = ""
+replacementDict[161] = "!"
 replacementDict[164] = ""
+replacementDict[173] = ""
 replacementDict[175] = "-"
 replacementDict[203] = ""
 replacementDict[235] = ""
 replacementDict[255] = ""
 replacementDict[305] = ""
+replacementDict[353] = ""
 replacementDict[402] = ""
+replacementDict[5760] = "-"
+replacementDict[6158] = ""
+replacementDict[8211] = "-"
 replacementDict[8215] = "_"
+replacementDict[8218] = ","
+replacementDict[8240] = ""
 replacementDict[8801] = "="
 replacementDict[9472] = "-"
 replacementDict[9474] = ""
@@ -248,12 +256,8 @@ replacementDict[9604] = ""
 replacementDict[9608] = ""
 replacementDict[9632] = ""
 replacementDict[12290] = ""
-replacementDict[160] = ""
-replacementDict[173] = ""
-replacementDict[129] = ""
-replacementDict[141] = ""
-replacementDict[5760] = "-"
-replacementDict[6158] = ""
+replacementDict[57425] = ""
+replacementDict[61137] = ""
 replacementDict[65279] = ""
 
 numOfLines = 6000
@@ -323,8 +327,8 @@ japaneseServiceStudioReportsOperationsLogsRegex = "^([\d\-]+)\|([\d\:A-Z ]+)\|(.
 generalTextLogsRegex = "^([\w]+)\:\s*?\[([\d\:\.]+)\]\s+([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)"
 generalTextLogsRegex2 = "^\[([\d\:\.]+)\]\s+([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)"
 
-iisLogsRegex = "^([\d\-]+)[ ]([\d\:]+)[ ]([\d\.\:]+)[ ](POST|PUT|PROPFIND|(?:n)?GET|OPTIONS|HEAD|ABCD|QUALYS|TRACE|SEARCH|RNDMMTD|TRACK|B(?:A)?DM(?:E)?T(?:H)?(?:O)?(?:D)?|CFYZ|DEBUG|MKCOL|INDEX|DELETE|PATCH|ACUNETIX)[ ]([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ]([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ]([\d]+)[ ]([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ]([\w\-\.\:]+)[ ]([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ]([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ]([\d]+)[ ]([\d]+)[ ]([\d]+)[ ]([\d]+)"
-negativeIisLogsRegex = "^((?!(?:[\d\-]+)[ ](?:[\d\:]+)[ ](?:[\d\.\:]+)[ ](?:POST|PUT|PROPFIND|(?:n)?GET|OPTIONS|HEAD|ABCD|QUALYS|TRACE|SEARCH|RNDMMTD|TRACK|B(?:A)?DM(?:E)?T(?:H)?(?:O)?(?:D)?|CFYZ|DEBUG|MKCOL|INDEX|DELETE|PATCH|ACUNETIX)[ ](?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ](?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ](?:[\d]+)[ ](?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ](?:[\w\-\.\:]+)[ ](?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ](?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ](?:[\d]+)[ ](?:[\d]+)[ ](?:[\d]+)[ ](?:[\d]+)).*)"
+iisLogsRegex = "^([\d\-]+)[ ]([\d\:]+)[ ]([\w\-\.\:\%]+)[ ](POST|PUT|PROPFIND|(?:n)?GET|OPTIONS|HEAD|ABCD|QUALYS|TRACE|SEARCH|RNDMMTD|TRACK|B(?:A)?DM(?:E)?T(?:H)?(?:O)?(?:D)?|CFYZ|DEBUG|MKCOL|INDEX|DELETE|PATCH|ACUNETIX)[ ]([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ]([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ]([\d]+)[ ]([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ]([\w\-\.\:\%]+)[ ]([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ]([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ]([\d]+)[ ]([\d]+)[ ]([\d]+)[ ]([\d]+)"
+negativeIisLogsRegex = "^((?!(?:[\d\-]+)[ ](?:[\d\:]+)[ ](?:[\w\-\.\:\%]+)[ ](?:POST|PUT|PROPFIND|(?:n)?GET|OPTIONS|HEAD|ABCD|QUALYS|TRACE|SEARCH|RNDMMTD|TRACK|B(?:A)?DM(?:E)?T(?:H)?(?:O)?(?:D)?|CFYZ|DEBUG|MKCOL|INDEX|DELETE|PATCH|ACUNETIX)[ ](?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ](?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ](?:[\d]+)[ ](?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ](?:[\w\-\.\:\%]+)[ ](?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ](?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ](?:[\d]+)[ ](?:[\d]+)[ ](?:[\d]+)[ ](?:[\d]+)).*)"
 nonMatchedIisLogsRegex = "^([\d\-]+)(.+)"
 japaneseIisLogsRegex = "^([\d\-]+)[ ]([\d\:]+)(.+)[ ]([\d]+)"
 
@@ -2567,20 +2571,20 @@ def sortLOGFile(directoryPath):
     #create a line graph with the compiled data
     createFolder("\\graphs\\")
 
-    fig, ax = plt.subplots()
-    ax.plot(myDateTimes, myTimesTaken)
+    #fig, ax = plt.subplots()
+    #ax.plot(myDateTimes, myTimesTaken)
     #reformat the timestamps to display the month-day hour:minutes
-    myFmt = mdates.DateFormatter("%m-%d %H:%M")
-    ax.xaxis.set_major_formatter(myFmt)
+    #myFmt = mdates.DateFormatter("%m-%d %H:%M")
+    #ax.xaxis.set_major_formatter(myFmt)
     #only display ten labels for the X and the Y axis
-    ax.xaxis.set_major_locator(plt.MaxNLocator(10))
-    ax.yaxis.set_major_locator(plt.MaxNLocator(10))
+    #ax.xaxis.set_major_locator(plt.MaxNLocator(10))
+    #ax.yaxis.set_major_locator(plt.MaxNLocator(10))
     #change the label's font size and rotate the labels from the X axis
-    ax.xaxis.set_tick_params(labelsize = 6)
-    ax.yaxis.set_tick_params(labelsize = 6)
-    plt.xticks(rotation = 45)
+    #ax.xaxis.set_tick_params(labelsize = 6)
+    #ax.yaxis.set_tick_params(labelsize = 6)
+    #plt.xticks(rotation = 45)
     #save a copy of the line graph and display a dialog window with the interactive line graph
-    plt.savefig(os.getcwd() + "\\graphs\\line_graph.png")
+    #plt.savefig(os.getcwd() + "\\graphs\\line_graph.png")
     #plt.show()
 
     del myDateTimes[:]
