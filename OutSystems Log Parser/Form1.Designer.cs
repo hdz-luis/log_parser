@@ -42,15 +42,30 @@
             this.dataGridViewErrorlogs = new System.Windows.Forms.DataGridView();
             this.txtBoxDetailErrorLogs = new System.Windows.Forms.TextBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.tabControl10 = new System.Windows.Forms.TabControl();
+            this.tabPage61 = new System.Windows.Forms.TabPage();
+            this.dataGridViewSlowSQLDurationlogs = new System.Windows.Forms.DataGridView();
+            this.dataGridViewSlowSQLlogs = new System.Windows.Forms.DataGridView();
+            this.txtBoxDetailsSlowSQLlogs = new System.Windows.Forms.TextBox();
+            this.tabPage62 = new System.Windows.Forms.TabPage();
+            this.dataGridViewSlowExtensionDurationlogs = new System.Windows.Forms.DataGridView();
+            this.txtBoxDetailsSlowExtensionlogs = new System.Windows.Forms.TextBox();
+            this.dataGridViewSlowExtensionlogs = new System.Windows.Forms.DataGridView();
             this.txtBoxDetailGenerallogs = new System.Windows.Forms.TextBox();
             this.dataGridViewGenerallogs = new System.Windows.Forms.DataGridView();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailsIntWebServiceslogs = new System.Windows.Forms.TextBox();
+            this.dataGridViewInWebServicesDurationlogs = new System.Windows.Forms.DataGridView();
+            this.dataGridViewIntWebServiceslogs = new System.Windows.Forms.DataGridView();
             this.txtBoxDetailIntegrationlogs = new System.Windows.Forms.TextBox();
             this.dataGridViewIntegrationslogs = new System.Windows.Forms.DataGridView();
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.txtBoxDetailScreenRequestslogs = new System.Windows.Forms.TextBox();
             this.dataGridViewScreenRequestslogs = new System.Windows.Forms.DataGridView();
             this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailsTimerTimerslogs = new System.Windows.Forms.TextBox();
+            this.dataGridViewTimerTimersDurationlogs = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTimerTimerslogs = new System.Windows.Forms.DataGridView();
             this.txtBoxDetailTimerlogs = new System.Windows.Forms.TextBox();
             this.dataGridViewTimerlogs = new System.Windows.Forms.DataGridView();
             this.tabPage10 = new System.Windows.Forms.TabPage();
@@ -63,9 +78,14 @@
             this.txtBoxDetailServiceActionlogs = new System.Windows.Forms.TextBox();
             this.dataGridViewServiceActionlogs = new System.Windows.Forms.DataGridView();
             this.tabPage13 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailTradWebRequestsScreenlogs = new System.Windows.Forms.TextBox();
+            this.dataGridViewTradWebRequestsScreenDurationlogs = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTradWebRequestsScreenlogs = new System.Windows.Forms.DataGridView();
             this.txtBoxDetailTradWebRequests = new System.Windows.Forms.TextBox();
             this.dataGridViewTradWebRequests = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.comBoxReport = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.dataGridViewIISLINQreport = new System.Windows.Forms.DataGridView();
             this.txtDetailIISlogs = new System.Windows.Forms.TextBox();
             this.dataGridViewIISTimeTaken = new System.Windows.Forms.DataGridView();
@@ -89,6 +109,9 @@
             this.tabPage18 = new System.Windows.Forms.TabPage();
             this.txtBoxDetailiOSLogs = new System.Windows.Forms.TextBox();
             this.dataGridViewiOSlogs = new System.Windows.Forms.DataGridView();
+            this.tabPage60 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailDeviceInformationlogs = new System.Windows.Forms.TextBox();
+            this.dataGridViewDeviceInformation = new System.Windows.Forms.DataGridView();
             this.tabPage19 = new System.Windows.Forms.TabPage();
             this.tabControl4 = new System.Windows.Forms.TabControl();
             this.tabPage20 = new System.Windows.Forms.TabPage();
@@ -226,20 +249,29 @@
             this.btnSearchKeyword = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txtBoxKeyword = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.comBoxReport = new System.Windows.Forms.ComboBox();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewErrorlogs)).BeginInit();
             this.tabPage6.SuspendLayout();
+            this.tabControl10.SuspendLayout();
+            this.tabPage61.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSlowSQLDurationlogs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSlowSQLlogs)).BeginInit();
+            this.tabPage62.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSlowExtensionDurationlogs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSlowExtensionlogs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewGenerallogs)).BeginInit();
             this.tabPage7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInWebServicesDurationlogs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIntWebServiceslogs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIntegrationslogs)).BeginInit();
             this.tabPage8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScreenRequestslogs)).BeginInit();
             this.tabPage9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTimerTimersDurationlogs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTimerTimerslogs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTimerlogs)).BeginInit();
             this.tabPage10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmaillogs)).BeginInit();
@@ -248,6 +280,8 @@
             this.tabPage12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewServiceActionlogs)).BeginInit();
             this.tabPage13.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTradWebRequestsScreenDurationlogs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTradWebRequestsScreenlogs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTradWebRequests)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIISLINQreport)).BeginInit();
@@ -267,6 +301,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAndroidlogs)).BeginInit();
             this.tabPage18.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewiOSlogs)).BeginInit();
+            this.tabPage60.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDeviceInformation)).BeginInit();
             this.tabPage19.SuspendLayout();
             this.tabControl4.SuspendLayout();
             this.tabPage20.SuspendLayout();
@@ -525,6 +561,7 @@
             // tabPage6
             // 
             this.tabPage6.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage6.Controls.Add(this.tabControl10);
             this.tabPage6.Controls.Add(this.txtBoxDetailGenerallogs);
             this.tabPage6.Controls.Add(this.dataGridViewGenerallogs);
             this.tabPage6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -536,6 +573,138 @@
             this.tabPage6.TabIndex = 1;
             this.tabPage6.Text = "General";
             // 
+            // tabControl10
+            // 
+            this.tabControl10.Controls.Add(this.tabPage61);
+            this.tabControl10.Controls.Add(this.tabPage62);
+            this.tabControl10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControl10.Location = new System.Drawing.Point(8, 254);
+            this.tabControl10.Margin = new System.Windows.Forms.Padding(4);
+            this.tabControl10.Name = "tabControl10";
+            this.tabControl10.SelectedIndex = 0;
+            this.tabControl10.Size = new System.Drawing.Size(1584, 413);
+            this.tabControl10.TabIndex = 16;
+            // 
+            // tabPage61
+            // 
+            this.tabPage61.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage61.Controls.Add(this.dataGridViewSlowSQLDurationlogs);
+            this.tabPage61.Controls.Add(this.dataGridViewSlowSQLlogs);
+            this.tabPage61.Controls.Add(this.txtBoxDetailsSlowSQLlogs);
+            this.tabPage61.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage61.Location = new System.Drawing.Point(4, 34);
+            this.tabPage61.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage61.Name = "tabPage61";
+            this.tabPage61.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage61.Size = new System.Drawing.Size(1576, 375);
+            this.tabPage61.TabIndex = 0;
+            this.tabPage61.Text = "SlowSQL";
+            // 
+            // dataGridViewSlowSQLDurationlogs
+            // 
+            this.dataGridViewSlowSQLDurationlogs.AllowUserToAddRows = false;
+            this.dataGridViewSlowSQLDurationlogs.AllowUserToDeleteRows = false;
+            this.dataGridViewSlowSQLDurationlogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewSlowSQLDurationlogs.Location = new System.Drawing.Point(5, 191);
+            this.dataGridViewSlowSQLDurationlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewSlowSQLDurationlogs.MultiSelect = false;
+            this.dataGridViewSlowSQLDurationlogs.Name = "dataGridViewSlowSQLDurationlogs";
+            this.dataGridViewSlowSQLDurationlogs.ReadOnly = true;
+            this.dataGridViewSlowSQLDurationlogs.ShowEditingIcon = false;
+            this.dataGridViewSlowSQLDurationlogs.Size = new System.Drawing.Size(1306, 179);
+            this.dataGridViewSlowSQLDurationlogs.TabIndex = 14;
+            this.dataGridViewSlowSQLDurationlogs.TabStop = false;
+            this.dataGridViewSlowSQLDurationlogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSlowSQLDurationlogs_CellClick);
+            // 
+            // dataGridViewSlowSQLlogs
+            // 
+            this.dataGridViewSlowSQLlogs.AllowUserToAddRows = false;
+            this.dataGridViewSlowSQLlogs.AllowUserToDeleteRows = false;
+            this.dataGridViewSlowSQLlogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewSlowSQLlogs.Location = new System.Drawing.Point(5, 8);
+            this.dataGridViewSlowSQLlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewSlowSQLlogs.MultiSelect = false;
+            this.dataGridViewSlowSQLlogs.Name = "dataGridViewSlowSQLlogs";
+            this.dataGridViewSlowSQLlogs.ReadOnly = true;
+            this.dataGridViewSlowSQLlogs.ShowEditingIcon = false;
+            this.dataGridViewSlowSQLlogs.Size = new System.Drawing.Size(1306, 179);
+            this.dataGridViewSlowSQLlogs.TabIndex = 13;
+            this.dataGridViewSlowSQLlogs.TabStop = false;
+            this.dataGridViewSlowSQLlogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSlowSQLlogs_CellClick);
+            // 
+            // txtBoxDetailsSlowSQLlogs
+            // 
+            this.txtBoxDetailsSlowSQLlogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailsSlowSQLlogs.Location = new System.Drawing.Point(1315, 8);
+            this.txtBoxDetailsSlowSQLlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailsSlowSQLlogs.Multiline = true;
+            this.txtBoxDetailsSlowSQLlogs.Name = "txtBoxDetailsSlowSQLlogs";
+            this.txtBoxDetailsSlowSQLlogs.ReadOnly = true;
+            this.txtBoxDetailsSlowSQLlogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailsSlowSQLlogs.Size = new System.Drawing.Size(250, 359);
+            this.txtBoxDetailsSlowSQLlogs.TabIndex = 12;
+            this.txtBoxDetailsSlowSQLlogs.TabStop = false;
+            // 
+            // tabPage62
+            // 
+            this.tabPage62.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage62.Controls.Add(this.dataGridViewSlowExtensionDurationlogs);
+            this.tabPage62.Controls.Add(this.txtBoxDetailsSlowExtensionlogs);
+            this.tabPage62.Controls.Add(this.dataGridViewSlowExtensionlogs);
+            this.tabPage62.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage62.Location = new System.Drawing.Point(4, 34);
+            this.tabPage62.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage62.Name = "tabPage62";
+            this.tabPage62.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage62.Size = new System.Drawing.Size(1576, 375);
+            this.tabPage62.TabIndex = 1;
+            this.tabPage62.Text = "SlowExtension";
+            // 
+            // dataGridViewSlowExtensionDurationlogs
+            // 
+            this.dataGridViewSlowExtensionDurationlogs.AllowUserToAddRows = false;
+            this.dataGridViewSlowExtensionDurationlogs.AllowUserToDeleteRows = false;
+            this.dataGridViewSlowExtensionDurationlogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewSlowExtensionDurationlogs.Location = new System.Drawing.Point(5, 191);
+            this.dataGridViewSlowExtensionDurationlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewSlowExtensionDurationlogs.MultiSelect = false;
+            this.dataGridViewSlowExtensionDurationlogs.Name = "dataGridViewSlowExtensionDurationlogs";
+            this.dataGridViewSlowExtensionDurationlogs.ReadOnly = true;
+            this.dataGridViewSlowExtensionDurationlogs.ShowEditingIcon = false;
+            this.dataGridViewSlowExtensionDurationlogs.Size = new System.Drawing.Size(1306, 179);
+            this.dataGridViewSlowExtensionDurationlogs.TabIndex = 16;
+            this.dataGridViewSlowExtensionDurationlogs.TabStop = false;
+            this.dataGridViewSlowExtensionDurationlogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSlowExtensionDurationlogs_CellClick);
+            // 
+            // txtBoxDetailsSlowExtensionlogs
+            // 
+            this.txtBoxDetailsSlowExtensionlogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailsSlowExtensionlogs.Location = new System.Drawing.Point(1315, 8);
+            this.txtBoxDetailsSlowExtensionlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailsSlowExtensionlogs.Multiline = true;
+            this.txtBoxDetailsSlowExtensionlogs.Name = "txtBoxDetailsSlowExtensionlogs";
+            this.txtBoxDetailsSlowExtensionlogs.ReadOnly = true;
+            this.txtBoxDetailsSlowExtensionlogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailsSlowExtensionlogs.Size = new System.Drawing.Size(250, 359);
+            this.txtBoxDetailsSlowExtensionlogs.TabIndex = 15;
+            this.txtBoxDetailsSlowExtensionlogs.TabStop = false;
+            // 
+            // dataGridViewSlowExtensionlogs
+            // 
+            this.dataGridViewSlowExtensionlogs.AllowUserToAddRows = false;
+            this.dataGridViewSlowExtensionlogs.AllowUserToDeleteRows = false;
+            this.dataGridViewSlowExtensionlogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewSlowExtensionlogs.Location = new System.Drawing.Point(5, 8);
+            this.dataGridViewSlowExtensionlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewSlowExtensionlogs.MultiSelect = false;
+            this.dataGridViewSlowExtensionlogs.Name = "dataGridViewSlowExtensionlogs";
+            this.dataGridViewSlowExtensionlogs.ReadOnly = true;
+            this.dataGridViewSlowExtensionlogs.ShowEditingIcon = false;
+            this.dataGridViewSlowExtensionlogs.Size = new System.Drawing.Size(1306, 179);
+            this.dataGridViewSlowExtensionlogs.TabIndex = 14;
+            this.dataGridViewSlowExtensionlogs.TabStop = false;
+            this.dataGridViewSlowExtensionlogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSlowExtensionlogs_CellClick);
+            // 
             // txtBoxDetailGenerallogs
             // 
             this.txtBoxDetailGenerallogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -545,7 +714,7 @@
             this.txtBoxDetailGenerallogs.Name = "txtBoxDetailGenerallogs";
             this.txtBoxDetailGenerallogs.ReadOnly = true;
             this.txtBoxDetailGenerallogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtBoxDetailGenerallogs.Size = new System.Drawing.Size(250, 659);
+            this.txtBoxDetailGenerallogs.Size = new System.Drawing.Size(250, 238);
             this.txtBoxDetailGenerallogs.TabIndex = 15;
             this.txtBoxDetailGenerallogs.TabStop = false;
             // 
@@ -560,7 +729,7 @@
             this.dataGridViewGenerallogs.Name = "dataGridViewGenerallogs";
             this.dataGridViewGenerallogs.ReadOnly = true;
             this.dataGridViewGenerallogs.ShowEditingIcon = false;
-            this.dataGridViewGenerallogs.Size = new System.Drawing.Size(1306, 659);
+            this.dataGridViewGenerallogs.Size = new System.Drawing.Size(1306, 238);
             this.dataGridViewGenerallogs.TabIndex = 14;
             this.dataGridViewGenerallogs.TabStop = false;
             this.dataGridViewGenerallogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewGenerallogs_CellClick);
@@ -568,6 +737,9 @@
             // tabPage7
             // 
             this.tabPage7.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage7.Controls.Add(this.txtBoxDetailsIntWebServiceslogs);
+            this.tabPage7.Controls.Add(this.dataGridViewInWebServicesDurationlogs);
+            this.tabPage7.Controls.Add(this.dataGridViewIntWebServiceslogs);
             this.tabPage7.Controls.Add(this.txtBoxDetailIntegrationlogs);
             this.tabPage7.Controls.Add(this.dataGridViewIntegrationslogs);
             this.tabPage7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -578,6 +750,51 @@
             this.tabPage7.TabIndex = 2;
             this.tabPage7.Text = "Integrations";
             // 
+            // txtBoxDetailsIntWebServiceslogs
+            // 
+            this.txtBoxDetailsIntWebServiceslogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailsIntWebServiceslogs.Location = new System.Drawing.Point(1318, 306);
+            this.txtBoxDetailsIntWebServiceslogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailsIntWebServiceslogs.Multiline = true;
+            this.txtBoxDetailsIntWebServiceslogs.Name = "txtBoxDetailsIntWebServiceslogs";
+            this.txtBoxDetailsIntWebServiceslogs.ReadOnly = true;
+            this.txtBoxDetailsIntWebServiceslogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailsIntWebServiceslogs.Size = new System.Drawing.Size(250, 364);
+            this.txtBoxDetailsIntWebServiceslogs.TabIndex = 19;
+            this.txtBoxDetailsIntWebServiceslogs.TabStop = false;
+            // 
+            // dataGridViewInWebServicesDurationlogs
+            // 
+            this.dataGridViewInWebServicesDurationlogs.AllowUserToAddRows = false;
+            this.dataGridViewInWebServicesDurationlogs.AllowUserToDeleteRows = false;
+            this.dataGridViewInWebServicesDurationlogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewInWebServicesDurationlogs.Location = new System.Drawing.Point(9, 491);
+            this.dataGridViewInWebServicesDurationlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewInWebServicesDurationlogs.MultiSelect = false;
+            this.dataGridViewInWebServicesDurationlogs.Name = "dataGridViewInWebServicesDurationlogs";
+            this.dataGridViewInWebServicesDurationlogs.ReadOnly = true;
+            this.dataGridViewInWebServicesDurationlogs.ShowEditingIcon = false;
+            this.dataGridViewInWebServicesDurationlogs.Size = new System.Drawing.Size(1306, 179);
+            this.dataGridViewInWebServicesDurationlogs.TabIndex = 18;
+            this.dataGridViewInWebServicesDurationlogs.TabStop = false;
+            this.dataGridViewInWebServicesDurationlogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewInWebServicesDurationlogs_CellClick);
+            // 
+            // dataGridViewIntWebServiceslogs
+            // 
+            this.dataGridViewIntWebServiceslogs.AllowUserToAddRows = false;
+            this.dataGridViewIntWebServiceslogs.AllowUserToDeleteRows = false;
+            this.dataGridViewIntWebServiceslogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewIntWebServiceslogs.Location = new System.Drawing.Point(9, 306);
+            this.dataGridViewIntWebServiceslogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewIntWebServiceslogs.MultiSelect = false;
+            this.dataGridViewIntWebServiceslogs.Name = "dataGridViewIntWebServiceslogs";
+            this.dataGridViewIntWebServiceslogs.ReadOnly = true;
+            this.dataGridViewIntWebServiceslogs.ShowEditingIcon = false;
+            this.dataGridViewIntWebServiceslogs.Size = new System.Drawing.Size(1306, 179);
+            this.dataGridViewIntWebServiceslogs.TabIndex = 17;
+            this.dataGridViewIntWebServiceslogs.TabStop = false;
+            this.dataGridViewIntWebServiceslogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewIntWebServiceslogs_CellClick);
+            // 
             // txtBoxDetailIntegrationlogs
             // 
             this.txtBoxDetailIntegrationlogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -587,7 +804,7 @@
             this.txtBoxDetailIntegrationlogs.Name = "txtBoxDetailIntegrationlogs";
             this.txtBoxDetailIntegrationlogs.ReadOnly = true;
             this.txtBoxDetailIntegrationlogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtBoxDetailIntegrationlogs.Size = new System.Drawing.Size(250, 659);
+            this.txtBoxDetailIntegrationlogs.Size = new System.Drawing.Size(250, 278);
             this.txtBoxDetailIntegrationlogs.TabIndex = 16;
             this.txtBoxDetailIntegrationlogs.TabStop = false;
             // 
@@ -602,7 +819,7 @@
             this.dataGridViewIntegrationslogs.Name = "dataGridViewIntegrationslogs";
             this.dataGridViewIntegrationslogs.ReadOnly = true;
             this.dataGridViewIntegrationslogs.ShowEditingIcon = false;
-            this.dataGridViewIntegrationslogs.Size = new System.Drawing.Size(1306, 659);
+            this.dataGridViewIntegrationslogs.Size = new System.Drawing.Size(1306, 278);
             this.dataGridViewIntegrationslogs.TabIndex = 15;
             this.dataGridViewIntegrationslogs.TabStop = false;
             this.dataGridViewIntegrationslogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewIntegrationslogs_CellClick);
@@ -652,6 +869,9 @@
             // tabPage9
             // 
             this.tabPage9.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage9.Controls.Add(this.txtBoxDetailsTimerTimerslogs);
+            this.tabPage9.Controls.Add(this.dataGridViewTimerTimersDurationlogs);
+            this.tabPage9.Controls.Add(this.dataGridViewTimerTimerslogs);
             this.tabPage9.Controls.Add(this.txtBoxDetailTimerlogs);
             this.tabPage9.Controls.Add(this.dataGridViewTimerlogs);
             this.tabPage9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -660,6 +880,51 @@
             this.tabPage9.Size = new System.Drawing.Size(1576, 675);
             this.tabPage9.TabIndex = 4;
             this.tabPage9.Text = "Timer";
+            // 
+            // txtBoxDetailsTimerTimerslogs
+            // 
+            this.txtBoxDetailsTimerTimerslogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailsTimerTimerslogs.Location = new System.Drawing.Point(1318, 307);
+            this.txtBoxDetailsTimerTimerslogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailsTimerTimerslogs.Multiline = true;
+            this.txtBoxDetailsTimerTimerslogs.Name = "txtBoxDetailsTimerTimerslogs";
+            this.txtBoxDetailsTimerTimerslogs.ReadOnly = true;
+            this.txtBoxDetailsTimerTimerslogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailsTimerTimerslogs.Size = new System.Drawing.Size(250, 363);
+            this.txtBoxDetailsTimerTimerslogs.TabIndex = 21;
+            this.txtBoxDetailsTimerTimerslogs.TabStop = false;
+            // 
+            // dataGridViewTimerTimersDurationlogs
+            // 
+            this.dataGridViewTimerTimersDurationlogs.AllowUserToAddRows = false;
+            this.dataGridViewTimerTimersDurationlogs.AllowUserToDeleteRows = false;
+            this.dataGridViewTimerTimersDurationlogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewTimerTimersDurationlogs.Location = new System.Drawing.Point(8, 491);
+            this.dataGridViewTimerTimersDurationlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewTimerTimersDurationlogs.MultiSelect = false;
+            this.dataGridViewTimerTimersDurationlogs.Name = "dataGridViewTimerTimersDurationlogs";
+            this.dataGridViewTimerTimersDurationlogs.ReadOnly = true;
+            this.dataGridViewTimerTimersDurationlogs.ShowEditingIcon = false;
+            this.dataGridViewTimerTimersDurationlogs.Size = new System.Drawing.Size(1306, 179);
+            this.dataGridViewTimerTimersDurationlogs.TabIndex = 20;
+            this.dataGridViewTimerTimersDurationlogs.TabStop = false;
+            this.dataGridViewTimerTimersDurationlogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTimerTimersDurationlogs_CellClick);
+            // 
+            // dataGridViewTimerTimerslogs
+            // 
+            this.dataGridViewTimerTimerslogs.AllowUserToAddRows = false;
+            this.dataGridViewTimerTimerslogs.AllowUserToDeleteRows = false;
+            this.dataGridViewTimerTimerslogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewTimerTimerslogs.Location = new System.Drawing.Point(8, 307);
+            this.dataGridViewTimerTimerslogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewTimerTimerslogs.MultiSelect = false;
+            this.dataGridViewTimerTimerslogs.Name = "dataGridViewTimerTimerslogs";
+            this.dataGridViewTimerTimerslogs.ReadOnly = true;
+            this.dataGridViewTimerTimerslogs.ShowEditingIcon = false;
+            this.dataGridViewTimerTimerslogs.Size = new System.Drawing.Size(1306, 179);
+            this.dataGridViewTimerTimerslogs.TabIndex = 19;
+            this.dataGridViewTimerTimerslogs.TabStop = false;
+            this.dataGridViewTimerTimerslogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTimerTimerslogs_CellClick);
             // 
             // txtBoxDetailTimerlogs
             // 
@@ -670,7 +935,7 @@
             this.txtBoxDetailTimerlogs.Name = "txtBoxDetailTimerlogs";
             this.txtBoxDetailTimerlogs.ReadOnly = true;
             this.txtBoxDetailTimerlogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtBoxDetailTimerlogs.Size = new System.Drawing.Size(250, 659);
+            this.txtBoxDetailTimerlogs.Size = new System.Drawing.Size(250, 278);
             this.txtBoxDetailTimerlogs.TabIndex = 18;
             this.txtBoxDetailTimerlogs.TabStop = false;
             // 
@@ -685,7 +950,7 @@
             this.dataGridViewTimerlogs.Name = "dataGridViewTimerlogs";
             this.dataGridViewTimerlogs.ReadOnly = true;
             this.dataGridViewTimerlogs.ShowEditingIcon = false;
-            this.dataGridViewTimerlogs.Size = new System.Drawing.Size(1306, 659);
+            this.dataGridViewTimerlogs.Size = new System.Drawing.Size(1306, 278);
             this.dataGridViewTimerlogs.TabIndex = 17;
             this.dataGridViewTimerlogs.TabStop = false;
             this.dataGridViewTimerlogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTimerlogs_CellClick);
@@ -816,6 +1081,9 @@
             // tabPage13
             // 
             this.tabPage13.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage13.Controls.Add(this.txtBoxDetailTradWebRequestsScreenlogs);
+            this.tabPage13.Controls.Add(this.dataGridViewTradWebRequestsScreenDurationlogs);
+            this.tabPage13.Controls.Add(this.dataGridViewTradWebRequestsScreenlogs);
             this.tabPage13.Controls.Add(this.txtBoxDetailTradWebRequests);
             this.tabPage13.Controls.Add(this.dataGridViewTradWebRequests);
             this.tabPage13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -824,6 +1092,51 @@
             this.tabPage13.Size = new System.Drawing.Size(1576, 675);
             this.tabPage13.TabIndex = 8;
             this.tabPage13.Text = "Traditional Web Requests";
+            // 
+            // txtBoxDetailTradWebRequestsScreenlogs
+            // 
+            this.txtBoxDetailTradWebRequestsScreenlogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailTradWebRequestsScreenlogs.Location = new System.Drawing.Point(1318, 306);
+            this.txtBoxDetailTradWebRequestsScreenlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailTradWebRequestsScreenlogs.Multiline = true;
+            this.txtBoxDetailTradWebRequestsScreenlogs.Name = "txtBoxDetailTradWebRequestsScreenlogs";
+            this.txtBoxDetailTradWebRequestsScreenlogs.ReadOnly = true;
+            this.txtBoxDetailTradWebRequestsScreenlogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailTradWebRequestsScreenlogs.Size = new System.Drawing.Size(250, 364);
+            this.txtBoxDetailTradWebRequestsScreenlogs.TabIndex = 25;
+            this.txtBoxDetailTradWebRequestsScreenlogs.TabStop = false;
+            // 
+            // dataGridViewTradWebRequestsScreenDurationlogs
+            // 
+            this.dataGridViewTradWebRequestsScreenDurationlogs.AllowUserToAddRows = false;
+            this.dataGridViewTradWebRequestsScreenDurationlogs.AllowUserToDeleteRows = false;
+            this.dataGridViewTradWebRequestsScreenDurationlogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewTradWebRequestsScreenDurationlogs.Location = new System.Drawing.Point(9, 491);
+            this.dataGridViewTradWebRequestsScreenDurationlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewTradWebRequestsScreenDurationlogs.MultiSelect = false;
+            this.dataGridViewTradWebRequestsScreenDurationlogs.Name = "dataGridViewTradWebRequestsScreenDurationlogs";
+            this.dataGridViewTradWebRequestsScreenDurationlogs.ReadOnly = true;
+            this.dataGridViewTradWebRequestsScreenDurationlogs.ShowEditingIcon = false;
+            this.dataGridViewTradWebRequestsScreenDurationlogs.Size = new System.Drawing.Size(1306, 179);
+            this.dataGridViewTradWebRequestsScreenDurationlogs.TabIndex = 24;
+            this.dataGridViewTradWebRequestsScreenDurationlogs.TabStop = false;
+            this.dataGridViewTradWebRequestsScreenDurationlogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTradWebRequestsScreenDurationlogs_CellClick);
+            // 
+            // dataGridViewTradWebRequestsScreenlogs
+            // 
+            this.dataGridViewTradWebRequestsScreenlogs.AllowUserToAddRows = false;
+            this.dataGridViewTradWebRequestsScreenlogs.AllowUserToDeleteRows = false;
+            this.dataGridViewTradWebRequestsScreenlogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewTradWebRequestsScreenlogs.Location = new System.Drawing.Point(9, 306);
+            this.dataGridViewTradWebRequestsScreenlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewTradWebRequestsScreenlogs.MultiSelect = false;
+            this.dataGridViewTradWebRequestsScreenlogs.Name = "dataGridViewTradWebRequestsScreenlogs";
+            this.dataGridViewTradWebRequestsScreenlogs.ReadOnly = true;
+            this.dataGridViewTradWebRequestsScreenlogs.ShowEditingIcon = false;
+            this.dataGridViewTradWebRequestsScreenlogs.Size = new System.Drawing.Size(1306, 179);
+            this.dataGridViewTradWebRequestsScreenlogs.TabIndex = 23;
+            this.dataGridViewTradWebRequestsScreenlogs.TabStop = false;
+            this.dataGridViewTradWebRequestsScreenlogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTradWebRequestsScreenlogs_CellClick);
             // 
             // txtBoxDetailTradWebRequests
             // 
@@ -834,7 +1147,7 @@
             this.txtBoxDetailTradWebRequests.Name = "txtBoxDetailTradWebRequests";
             this.txtBoxDetailTradWebRequests.ReadOnly = true;
             this.txtBoxDetailTradWebRequests.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtBoxDetailTradWebRequests.Size = new System.Drawing.Size(250, 659);
+            this.txtBoxDetailTradWebRequests.Size = new System.Drawing.Size(250, 278);
             this.txtBoxDetailTradWebRequests.TabIndex = 22;
             this.txtBoxDetailTradWebRequests.TabStop = false;
             // 
@@ -849,7 +1162,7 @@
             this.dataGridViewTradWebRequests.Name = "dataGridViewTradWebRequests";
             this.dataGridViewTradWebRequests.ReadOnly = true;
             this.dataGridViewTradWebRequests.ShowEditingIcon = false;
-            this.dataGridViewTradWebRequests.Size = new System.Drawing.Size(1306, 659);
+            this.dataGridViewTradWebRequests.Size = new System.Drawing.Size(1306, 278);
             this.dataGridViewTradWebRequests.TabIndex = 21;
             this.dataGridViewTradWebRequests.TabStop = false;
             this.dataGridViewTradWebRequests.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTradWebRequests_CellClick);
@@ -874,6 +1187,42 @@
             this.tabPage2.Size = new System.Drawing.Size(1596, 729);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "IIS Logs";
+            // 
+            // comBoxReport
+            // 
+            this.comBoxReport.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comBoxReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comBoxReport.FormattingEnabled = true;
+            this.comBoxReport.Items.AddRange(new object[] {
+            "All pages hits",
+            "IPs generating traffic",
+            "All pages hits and the IPs hitting them",
+            "All browsers",
+            "All pages hits and their load time",
+            "Slowest pages to load",
+            "Page load time per user",
+            "Domains referring traffic to pages",
+            "Referrer broken links",
+            "HTTP statuses",
+            "Windows errors",
+            "500 errors per page and user"});
+            this.comBoxReport.Location = new System.Drawing.Point(80, 480);
+            this.comBoxReport.Name = "comBoxReport";
+            this.comBoxReport.Size = new System.Drawing.Size(390, 33);
+            this.comBoxReport.TabIndex = 23;
+            this.comBoxReport.TabStop = false;
+            this.comBoxReport.SelectedIndexChanged += new System.EventHandler(this.comBoxReport_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.RoyalBlue;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(8, 483);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(75, 25);
+            this.label4.TabIndex = 22;
+            this.label4.Text = "Report:";
             // 
             // dataGridViewIISLINQreport
             // 
@@ -1104,6 +1453,7 @@
             // 
             this.tabControl3.Controls.Add(this.tabPage17);
             this.tabControl3.Controls.Add(this.tabPage18);
+            this.tabControl3.Controls.Add(this.tabPage60);
             this.tabControl3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl3.Location = new System.Drawing.Point(6, 8);
             this.tabControl3.Margin = new System.Windows.Forms.Padding(4);
@@ -1198,6 +1548,47 @@
             this.dataGridViewiOSlogs.TabStop = false;
             this.dataGridViewiOSlogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewiOSlogs_CellClick);
             // 
+            // tabPage60
+            // 
+            this.tabPage60.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage60.Controls.Add(this.txtBoxDetailDeviceInformationlogs);
+            this.tabPage60.Controls.Add(this.dataGridViewDeviceInformation);
+            this.tabPage60.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage60.Location = new System.Drawing.Point(4, 34);
+            this.tabPage60.Name = "tabPage60";
+            this.tabPage60.Size = new System.Drawing.Size(1576, 675);
+            this.tabPage60.TabIndex = 2;
+            this.tabPage60.Text = "Device Information";
+            // 
+            // txtBoxDetailDeviceInformationlogs
+            // 
+            this.txtBoxDetailDeviceInformationlogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailDeviceInformationlogs.Location = new System.Drawing.Point(1318, 8);
+            this.txtBoxDetailDeviceInformationlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailDeviceInformationlogs.Multiline = true;
+            this.txtBoxDetailDeviceInformationlogs.Name = "txtBoxDetailDeviceInformationlogs";
+            this.txtBoxDetailDeviceInformationlogs.ReadOnly = true;
+            this.txtBoxDetailDeviceInformationlogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailDeviceInformationlogs.Size = new System.Drawing.Size(250, 659);
+            this.txtBoxDetailDeviceInformationlogs.TabIndex = 16;
+            this.txtBoxDetailDeviceInformationlogs.TabStop = false;
+            // 
+            // dataGridViewDeviceInformation
+            // 
+            this.dataGridViewDeviceInformation.AllowUserToAddRows = false;
+            this.dataGridViewDeviceInformation.AllowUserToDeleteRows = false;
+            this.dataGridViewDeviceInformation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewDeviceInformation.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewDeviceInformation.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewDeviceInformation.MultiSelect = false;
+            this.dataGridViewDeviceInformation.Name = "dataGridViewDeviceInformation";
+            this.dataGridViewDeviceInformation.ReadOnly = true;
+            this.dataGridViewDeviceInformation.ShowEditingIcon = false;
+            this.dataGridViewDeviceInformation.Size = new System.Drawing.Size(1306, 659);
+            this.dataGridViewDeviceInformation.TabIndex = 15;
+            this.dataGridViewDeviceInformation.TabStop = false;
+            this.dataGridViewDeviceInformation.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDeviceInformation_CellClick);
+            // 
             // tabPage19
             // 
             this.tabPage19.BackColor = System.Drawing.Color.RoyalBlue;
@@ -1249,7 +1640,7 @@
             this.dataGridViewServiceStudiologs.Size = new System.Drawing.Size(1306, 659);
             this.dataGridViewServiceStudiologs.TabIndex = 13;
             this.dataGridViewServiceStudiologs.TabStop = false;
-            this.dataGridViewServiceStudiologs.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewServiceStudiologs_CellContentClick);
+            this.dataGridViewServiceStudiologs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewServiceStudiologs_CellClick);
             // 
             // txtBoxDetailServiceStudioLogs
             // 
@@ -1369,7 +1760,7 @@
             this.tabControl9.Controls.Add(this.tabPage58);
             this.tabControl9.Controls.Add(this.tabPage59);
             this.tabControl9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl9.Location = new System.Drawing.Point(4, 514);
+            this.tabControl9.Location = new System.Drawing.Point(6, 514);
             this.tabControl9.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl9.Name = "tabControl9";
             this.tabControl9.SelectedIndex = 0;
@@ -3102,42 +3493,6 @@
             this.txtBoxKeyword.Size = new System.Drawing.Size(141, 30);
             this.txtBoxKeyword.TabIndex = 7;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.RoyalBlue;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(8, 483);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(75, 25);
-            this.label4.TabIndex = 22;
-            this.label4.Text = "Report:";
-            // 
-            // comBoxReport
-            // 
-            this.comBoxReport.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comBoxReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comBoxReport.FormattingEnabled = true;
-            this.comBoxReport.Items.AddRange(new object[] {
-            "All pages hits",
-            "IPs generating traffic",
-            "All pages hits and the IPs hitting them",
-            "All browsers",
-            "All pages hits and their load time",
-            "Slowest pages to load",
-            "Page load time per user",
-            "Domains referring traffic to pages",
-            "Referrer broken links",
-            "HTTP statuses",
-            "Windows errors",
-            "500 errors per page and user"});
-            this.comBoxReport.Location = new System.Drawing.Point(80, 480);
-            this.comBoxReport.Name = "comBoxReport";
-            this.comBoxReport.Size = new System.Drawing.Size(390, 33);
-            this.comBoxReport.TabIndex = 23;
-            this.comBoxReport.TabStop = false;
-            this.comBoxReport.SelectedIndexChanged += new System.EventHandler(this.comBoxReport_SelectedIndexChanged);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -3170,7 +3525,7 @@
             this.MinimumSize = new System.Drawing.Size(1649, 872);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "OutSystems Log Parser V.112021";
+            this.Text = "OutSystems Log Parser V.112721";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -3180,15 +3535,28 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewErrorlogs)).EndInit();
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
+            this.tabControl10.ResumeLayout(false);
+            this.tabPage61.ResumeLayout(false);
+            this.tabPage61.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSlowSQLDurationlogs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSlowSQLlogs)).EndInit();
+            this.tabPage62.ResumeLayout(false);
+            this.tabPage62.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSlowExtensionDurationlogs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSlowExtensionlogs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewGenerallogs)).EndInit();
             this.tabPage7.ResumeLayout(false);
             this.tabPage7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInWebServicesDurationlogs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIntWebServiceslogs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIntegrationslogs)).EndInit();
             this.tabPage8.ResumeLayout(false);
             this.tabPage8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScreenRequestslogs)).EndInit();
             this.tabPage9.ResumeLayout(false);
             this.tabPage9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTimerTimersDurationlogs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTimerTimerslogs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTimerlogs)).EndInit();
             this.tabPage10.ResumeLayout(false);
             this.tabPage10.PerformLayout();
@@ -3201,6 +3569,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewServiceActionlogs)).EndInit();
             this.tabPage13.ResumeLayout(false);
             this.tabPage13.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTradWebRequestsScreenDurationlogs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTradWebRequestsScreenlogs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTradWebRequests)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
@@ -3226,6 +3596,9 @@
             this.tabPage18.ResumeLayout(false);
             this.tabPage18.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewiOSlogs)).EndInit();
+            this.tabPage60.ResumeLayout(false);
+            this.tabPage60.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDeviceInformation)).EndInit();
             this.tabPage19.ResumeLayout(false);
             this.tabControl4.ResumeLayout(false);
             this.tabPage20.ResumeLayout(false);
@@ -3552,6 +3925,27 @@
         private System.Windows.Forms.DataGridView dataGridViewIISLINQreport;
         private System.Windows.Forms.ComboBox comBoxReport;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TabPage tabPage60;
+        private System.Windows.Forms.TextBox txtBoxDetailDeviceInformationlogs;
+        private System.Windows.Forms.DataGridView dataGridViewDeviceInformation;
+        private System.Windows.Forms.TabControl tabControl10;
+        private System.Windows.Forms.TabPage tabPage61;
+        private System.Windows.Forms.DataGridView dataGridViewSlowSQLlogs;
+        private System.Windows.Forms.TextBox txtBoxDetailsSlowSQLlogs;
+        private System.Windows.Forms.TabPage tabPage62;
+        private System.Windows.Forms.TextBox txtBoxDetailsSlowExtensionlogs;
+        private System.Windows.Forms.DataGridView dataGridViewSlowExtensionlogs;
+        private System.Windows.Forms.DataGridView dataGridViewSlowSQLDurationlogs;
+        private System.Windows.Forms.DataGridView dataGridViewSlowExtensionDurationlogs;
+        private System.Windows.Forms.DataGridView dataGridViewInWebServicesDurationlogs;
+        private System.Windows.Forms.DataGridView dataGridViewIntWebServiceslogs;
+        private System.Windows.Forms.TextBox txtBoxDetailsIntWebServiceslogs;
+        private System.Windows.Forms.TextBox txtBoxDetailsTimerTimerslogs;
+        private System.Windows.Forms.DataGridView dataGridViewTimerTimersDurationlogs;
+        private System.Windows.Forms.DataGridView dataGridViewTimerTimerslogs;
+        private System.Windows.Forms.TextBox txtBoxDetailTradWebRequestsScreenlogs;
+        private System.Windows.Forms.DataGridView dataGridViewTradWebRequestsScreenDurationlogs;
+        private System.Windows.Forms.DataGridView dataGridViewTradWebRequestsScreenlogs;
     }
 }
 

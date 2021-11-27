@@ -57,18 +57,24 @@ namespace OutSystems_Log_Parser
 
                 clearTextboxes(txtBoxDetailErrorLogs);
                 clearTextboxes(txtBoxDetailGenerallogs);
+                clearTextboxes(txtBoxDetailsSlowSQLlogs);
+                clearTextboxes(txtBoxDetailsSlowExtensionlogs);
                 clearTextboxes(txtBoxDetailIntegrationlogs);
+                clearTextboxes(txtBoxDetailsIntWebServiceslogs);
                 clearTextboxes(txtBoxDetailScreenRequestslogs);
                 clearTextboxes(txtBoxDetailTimerlogs);
+                clearTextboxes(txtBoxDetailsTimerTimerslogs);
                 clearTextboxes(txtBoxDetailEmaillogs);
                 clearTextboxes(txtBoxDetailExtensionlogs);
                 clearTextboxes(txtBoxDetailServiceActionlogs);
                 clearTextboxes(txtBoxDetailTradWebRequests);
+                clearTextboxes(txtBoxDetailTradWebRequestsScreenlogs);
                 clearTextboxes(txtBoxDetailWinAppEventViewer);
                 clearTextboxes(txtBoxDetailWinSysEventViewer);
                 clearTextboxes(txtBoxDetailWinSecEventViewer);
                 clearTextboxes(txtBoxDetailAndroidLogs);
                 clearTextboxes(txtBoxDetailiOSLogs);
+                clearTextboxes(txtBoxDetailDeviceInformationlogs);
                 clearTextboxes(txtDetailIISlogs);
                 clearTextboxes(txtBoxDetailServiceStudioLogs);
                 clearTextboxes(txtBoxDetailGeneralTXTLogs);
@@ -110,13 +116,23 @@ namespace OutSystems_Log_Parser
 
                 clearTables(dataGridViewErrorlogs);
                 clearTables(dataGridViewGenerallogs);
+                clearTables(dataGridViewSlowSQLlogs);
+                clearTables(dataGridViewSlowSQLDurationlogs);
+                clearTables(dataGridViewSlowExtensionlogs);
+                clearTables(dataGridViewSlowExtensionDurationlogs);
                 clearTables(dataGridViewIntegrationslogs);
+                clearTables(dataGridViewIntWebServiceslogs);
+                clearTables(dataGridViewInWebServicesDurationlogs);
                 clearTables(dataGridViewScreenRequestslogs);
                 clearTables(dataGridViewTimerlogs);
+                clearTables(dataGridViewTimerTimerslogs);
+                clearTables(dataGridViewTimerTimersDurationlogs);
                 clearTables(dataGridViewEmaillogs);
                 clearTables(dataGridViewExtensionlogs);
                 clearTables(dataGridViewServiceActionlogs);
                 clearTables(dataGridViewTradWebRequests);
+                clearTables(dataGridViewTradWebRequestsScreenlogs);
+                clearTables(dataGridViewTradWebRequestsScreenDurationlogs);
                 clearTables(dataGridViewIISDateTime);
                 clearTables(dataGridViewIISTimeTaken);
                 clearTables(dataGridViewIISLINQreport);
@@ -125,6 +141,7 @@ namespace OutSystems_Log_Parser
                 clearTables(dataGridViewWinSecEventViewer);
                 clearTables(dataGridViewAndroidlogs);
                 clearTables(dataGridViewiOSlogs);
+                clearTables(dataGridViewDeviceInformation);
                 clearTables(dataGridViewServiceStudiologs);
                 clearTables(dataGridViewGeneralTXTlogs);
                 clearTables(dataGridViewBPTReportslogs);
@@ -200,6 +217,11 @@ namespace OutSystems_Log_Parser
                                     "USER_ID", "SESSION_ID", "ENVIRONMENT_INFORMATION", "ID", "TENANT_ID" };
                                 populateTables(relativePath + "\\error_logs.txt", delimiters, column_names, dataGridViewErrorlogs);
                             }
+                            else if (fileName == "device_information.txt")
+                            {
+                                string[] column_names = { "OPERATING_SYSTEM", "OPERATING_SYSTEM_VERSION", "DEVICE_MODEL", "CORDOVA_VERSION", "DEVICE_UUID" };
+                                populateTables(relativePath + "\\device_information.txt", delimiters, column_names, dataGridViewDeviceInformation);
+                            }
                             else if (fileName == "extension_logs.txt")
                             {
                                 string[] column_names = { "DATE_TIME", "DURATION", "APPLICATION_NAME", "APPLICATION_KEY", "ACTION_NAME",
@@ -213,6 +235,26 @@ namespace OutSystems_Log_Parser
                                     "APPLICATION_KEY", "ACTION_NAME", "ENTRYPOINT_NAME", "CLIENT_IP", "ESPACE_NAME", "ESPACE_ID",
                                     "USER_ID", "SESSION_ID", "ERROR_ID", "REQUEST_KEY", "TENANT_ID" };
                                 populateTables(relativePath + "\\general_logs.txt", delimiters, column_names, dataGridViewGenerallogs);
+                            }
+                            else if (fileName == "general_logs_slowsql.txt")
+                            {
+                                string[] column_names = { "DATE_TIME", "DURATION_MINUTES", "MODULE_NAME", "ACTION_NAME", "ESPACE_NAME" };
+                                populateTables(relativePath + "\\general_logs_slowsql.txt", delimiters, column_names, dataGridViewSlowSQLlogs);
+                            }
+                            else if (fileName == "general_logs_slowsql_duration.txt")
+                            {
+                                string[] column_names = { "DURATION_MINUTES", "DATE_TIME", "MODULE_NAME", "ACTION_NAME", "ESPACE_NAME" };
+                                populateTables(relativePath + "\\general_logs_slowsql_duration.txt", delimiters, column_names, dataGridViewSlowSQLDurationlogs);
+                            }
+                            else if (fileName == "general_logs_slowextension.txt")
+                            {
+                                string[] column_names = { "DATE_TIME", "DURATION_MINUTES", "MODULE_NAME", "ACTION_NAME", "ESPACE_NAME" };
+                                populateTables(relativePath + "\\general_logs_slowextension.txt", delimiters, column_names, dataGridViewSlowExtensionlogs);
+                            }
+                            else if (fileName == "general_logs_slowextension_duration.txt")
+                            {
+                                string[] column_names = { "DURATION_MINUTES", "DATE_TIME", "MODULE_NAME", "ACTION_NAME", "ESPACE_NAME" };
+                                populateTables(relativePath + "\\general_logs_slowextension_duration.txt", delimiters, column_names, dataGridViewSlowExtensionDurationlogs);
                             }
                             else if (fileName == "iis_logs.txt")
                             {
@@ -235,6 +277,16 @@ namespace OutSystems_Log_Parser
                                     "REQUEST_KEY", "TENANT_ID" };
                                 populateTables(relativePath + "\\integrations_logs.txt", delimiters, column_names, dataGridViewIntegrationslogs);
                             }
+                            else if (fileName == "integrations_logs_webservices.txt")
+                            {
+                                string[] column_names = { "DATE_TIME", "DURATION_MINUTES", "ACTION_NAME", "ACTION_TYPE", "ESPACE_NAME" };
+                                populateTables(relativePath + "\\integrations_logs_webservices.txt", delimiters, column_names, dataGridViewIntWebServiceslogs);
+                            }
+                            else if (fileName == "integrations_logs_webservices_duration.txt")
+                            {
+                                string[] column_names = { "DURATION_MINUTES", "DATE_TIME", "ACTION_NAME", "ACTION_TYPE", "ESPACE_NAME" };
+                                populateTables(relativePath + "\\integrations_logs_webservices_duration.txt", delimiters, column_names, dataGridViewInWebServicesDurationlogs);
+                            }
                             else if (fileName == "iOS_build_logs.txt")
                             {
                                 string[] column_names = { "DATE_TIME", "MESSAGE_TYPE", "ACTION_NAME", "MESSAGE" };
@@ -253,6 +305,16 @@ namespace OutSystems_Log_Parser
                                     "ACTION_NAME", "ACCESS_MODE", "EXECUTED_BY", "CLIENT_IP", "ESPACE_NAME", "ESPACE_ID",
                                     "USER_ID", "SESSION_ID", "SESSION_REQUESTS", "SESSION_BYTES", "VIEW_STATE_BYTES", "MS_IS_DN", "REQUEST_KEY", "TENANT_ID" };
                                 populateTables(relativePath + "\\screen_logs.txt", delimiters, column_names, dataGridViewTradWebRequests);
+                            }
+                            else if (fileName == "screen_logs_screens.txt")
+                            {
+                                string[] column_names = { "DATE_TIME", "DURATION_MINUTES", "SCREEN", "ESPACE_NAME" };
+                                populateTables(relativePath + "\\screen_logs_screens.txt", delimiters, column_names, dataGridViewTradWebRequestsScreenlogs);
+                            }
+                            else if (fileName == "screen_logs_screens_duration.txt")
+                            {
+                                string[] column_names = { "DURATION_MINUTES", "DATE_TIME", "SCREEN", "ESPACE_NAME" };
+                                populateTables(relativePath + "\\screen_logs_screens_duration.txt", delimiters, column_names, dataGridViewTradWebRequestsScreenDurationlogs);
                             }
                             else if (fileName == "service_action_logs.txt")
                             {
@@ -277,6 +339,16 @@ namespace OutSystems_Log_Parser
                                     "ESPACE_NAME", "ESPACE_ID", "CYCLIC_JOB_NAME", "CYCLIC_JOB_KEY", "SHOULD_HAVE_RUN_AT", "NEXT_RUN",
                                     "ERROR_ID", "REQUEST_KEY", "TENANT_ID" };
                                 populateTables(relativePath + "\\timer_logs.txt", delimiters, column_names, dataGridViewTimerlogs);
+                            }
+                            else if (fileName == "timer_logs_timers.txt")
+                            {
+                                string[] column_names = { "DATE_TIME", "DURATION_MINUTES", "CYCLIC_JOB_NAME", "ESPACE_NAME" };
+                                populateTables(relativePath + "\\timer_logs_timers.txt", delimiters, column_names, dataGridViewTimerTimerslogs);
+                            }
+                            else if (fileName == "timer_logs_timers_duration.txt")
+                            {
+                                string[] column_names = { "DURATION_MINUTES", "DATE_TIME", "CYCLIC_JOB_NAME", "ESPACE_NAME" };
+                                populateTables(relativePath + "\\timer_logs_timers_duration.txt", delimiters, column_names, dataGridViewTimerTimersDurationlogs);
                             }
                             else if (fileName == "bpt_troubleshootingreport_logs.txt")
                             {
@@ -1359,16 +1431,26 @@ namespace OutSystems_Log_Parser
                         queryDataGridViews(dataGridViewErrorlogs, isoFrom, isoTo, txtBoxDetailErrorLogs);
                         queryDataGridViews(dataGridViewExtensionlogs, isoFrom, isoTo, txtBoxDetailExtensionlogs);
                         queryDataGridViews(dataGridViewGenerallogs, isoFrom, isoTo, txtBoxDetailGenerallogs);
+                        queryDataGridViews(dataGridViewSlowSQLlogs, isoFrom, isoTo, txtBoxDetailsSlowSQLlogs);
+                        queryDataGridViews(dataGridViewSlowSQLDurationlogs, isoFrom, isoTo, txtBoxDetailsSlowSQLlogs);
+                        queryDataGridViews(dataGridViewSlowExtensionlogs, isoFrom, isoTo, txtBoxDetailsSlowExtensionlogs);
+                        queryDataGridViews(dataGridViewSlowSQLDurationlogs, isoFrom, isoTo, txtBoxDetailsSlowExtensionlogs);
                         queryDataGridViews(dataGridViewIISDateTime, isoFrom, isoTo, txtDetailIISlogs);
                         queryDataGridViews(dataGridViewIISTimeTaken, isoFrom, isoTo, txtDetailIISlogs);
                         queryDataGridViews(dataGridViewIntegrationslogs, isoFrom, isoTo, txtBoxDetailIntegrationlogs);
+                        queryDataGridViews(dataGridViewIntWebServiceslogs, isoFrom, isoTo, txtBoxDetailsIntWebServiceslogs);
+                        queryDataGridViews(dataGridViewInWebServicesDurationlogs, isoFrom, isoTo, txtBoxDetailsIntWebServiceslogs);
                         queryDataGridViews(dataGridViewiOSlogs, isoFrom, isoTo, txtBoxDetailiOSLogs);
                         queryDataGridViews(dataGridViewScreenRequestslogs, isoFrom, isoTo, txtBoxDetailScreenRequestslogs);
                         queryDataGridViews(dataGridViewServiceActionlogs, isoFrom, isoTo, txtBoxDetailServiceActionlogs);
                         queryDataGridViews(dataGridViewServiceStudiologs, isoFrom, isoTo, txtBoxDetailServiceStudioLogs);
                         queryDataGridViews(dataGridViewGeneralTXTlogs, isoFrom, isoTo, txtBoxDetailGeneralTXTLogs);
                         queryDataGridViews(dataGridViewTimerlogs, isoFrom, isoTo, txtBoxDetailTimerlogs);
+                        queryDataGridViews(dataGridViewTimerTimerslogs, isoFrom, isoTo, txtBoxDetailsTimerTimerslogs);
+                        queryDataGridViews(dataGridViewTimerTimersDurationlogs, isoFrom, isoTo, txtBoxDetailsTimerTimerslogs);
                         queryDataGridViews(dataGridViewTradWebRequests, isoFrom, isoTo, txtBoxDetailTradWebRequests);
+                        queryDataGridViews(dataGridViewTradWebRequestsScreenlogs, isoFrom, isoTo, txtBoxDetailTradWebRequestsScreenlogs);
+                        queryDataGridViews(dataGridViewTradWebRequestsScreenDurationlogs, isoFrom, isoTo, txtBoxDetailTradWebRequestsScreenlogs);
                         queryDataGridViews(dataGridViewBPTReportslogs, isoFrom, isoTo, txtBoxDetailBPTReportslogs);
                         queryDataGridViews(dataGridViewWinAppEventViewer, isoFrom, isoTo, txtBoxDetailWinAppEventViewer);
                         queryDataGridViews(dataGridViewWinSysEventViewer, isoFrom, isoTo, txtBoxDetailWinSysEventViewer);
@@ -1439,13 +1521,23 @@ namespace OutSystems_Log_Parser
                 {
                     highlightKeyword(dataGridViewErrorlogs);
                     highlightKeyword(dataGridViewGenerallogs);
+                    highlightKeyword(dataGridViewSlowSQLlogs);
+                    highlightKeyword(dataGridViewSlowSQLDurationlogs);
+                    highlightKeyword(dataGridViewSlowExtensionlogs);
+                    highlightKeyword(dataGridViewSlowExtensionDurationlogs);
                     highlightKeyword(dataGridViewIntegrationslogs);
+                    highlightKeyword(dataGridViewIntWebServiceslogs);
+                    highlightKeyword(dataGridViewInWebServicesDurationlogs);
                     highlightKeyword(dataGridViewScreenRequestslogs);
                     highlightKeyword(dataGridViewTimerlogs);
+                    highlightKeyword(dataGridViewTimerTimerslogs);
+                    highlightKeyword(dataGridViewTimerTimersDurationlogs);
                     highlightKeyword(dataGridViewEmaillogs);
                     highlightKeyword(dataGridViewExtensionlogs);
                     highlightKeyword(dataGridViewServiceActionlogs);
                     highlightKeyword(dataGridViewTradWebRequests);
+                    highlightKeyword(dataGridViewTradWebRequestsScreenlogs);
+                    highlightKeyword(dataGridViewTradWebRequestsScreenDurationlogs);
                     highlightKeyword(dataGridViewIISDateTime);
                     highlightKeyword(dataGridViewIISTimeTaken);
                     highlightKeyword(dataGridViewWinAppEventViewer);
@@ -1553,18 +1645,24 @@ namespace OutSystems_Log_Parser
 
             clearTextboxes(txtBoxDetailErrorLogs);
             clearTextboxes(txtBoxDetailGenerallogs);
+            clearTextboxes(txtBoxDetailsSlowSQLlogs);
+            clearTextboxes(txtBoxDetailsSlowExtensionlogs);
             clearTextboxes(txtBoxDetailIntegrationlogs);
+            clearTextboxes(txtBoxDetailsIntWebServiceslogs);
             clearTextboxes(txtBoxDetailScreenRequestslogs);
             clearTextboxes(txtBoxDetailTimerlogs);
+            clearTextboxes(txtBoxDetailsTimerTimerslogs);
             clearTextboxes(txtBoxDetailEmaillogs);
             clearTextboxes(txtBoxDetailExtensionlogs);
             clearTextboxes(txtBoxDetailServiceActionlogs);
             clearTextboxes(txtBoxDetailTradWebRequests);
+            clearTextboxes(txtBoxDetailTradWebRequestsScreenlogs);
             clearTextboxes(txtBoxDetailWinAppEventViewer);
             clearTextboxes(txtBoxDetailWinSysEventViewer);
             clearTextboxes(txtBoxDetailWinSecEventViewer);
             clearTextboxes(txtBoxDetailAndroidLogs);
             clearTextboxes(txtBoxDetailiOSLogs);
+            clearTextboxes(txtBoxDetailDeviceInformationlogs);
             clearTextboxes(txtDetailIISlogs);
             clearTextboxes(txtBoxDetailServiceStudioLogs);
             clearTextboxes(txtBoxDetailGeneralTXTLogs);
@@ -1606,13 +1704,23 @@ namespace OutSystems_Log_Parser
 
             clearTables(dataGridViewErrorlogs);
             clearTables(dataGridViewGenerallogs);
+            clearTables(dataGridViewSlowSQLlogs);
+            clearTables(dataGridViewSlowSQLDurationlogs);
+            clearTables(dataGridViewSlowExtensionlogs);
+            clearTables(dataGridViewSlowExtensionDurationlogs);
             clearTables(dataGridViewIntegrationslogs);
+            clearTables(dataGridViewIntWebServiceslogs);
+            clearTables(dataGridViewInWebServicesDurationlogs);
             clearTables(dataGridViewScreenRequestslogs);
             clearTables(dataGridViewTimerlogs);
+            clearTables(dataGridViewTimerTimerslogs);
+            clearTables(dataGridViewTimerTimersDurationlogs);
             clearTables(dataGridViewEmaillogs);
             clearTables(dataGridViewExtensionlogs);
             clearTables(dataGridViewServiceActionlogs);
             clearTables(dataGridViewTradWebRequests);
+            clearTables(dataGridViewTradWebRequestsScreenlogs);
+            clearTables(dataGridViewTradWebRequestsScreenDurationlogs);
             clearTables(dataGridViewIISDateTime);
             clearTables(dataGridViewIISTimeTaken);
             clearTables(dataGridViewIISLINQreport);
@@ -1621,6 +1729,7 @@ namespace OutSystems_Log_Parser
             clearTables(dataGridViewWinSecEventViewer);
             clearTables(dataGridViewAndroidlogs);
             clearTables(dataGridViewiOSlogs);
+            clearTables(dataGridViewDeviceInformation);
             clearTables(dataGridViewServiceStudiologs);
             clearTables(dataGridViewGeneralTXTlogs);
             clearTables(dataGridViewBPTReportslogs);
@@ -1684,6 +1793,11 @@ namespace OutSystems_Log_Parser
                                     "USER_ID", "SESSION_ID", "ENVIRONMENT_INFORMATION", "ID", "TENANT_ID" };
                         populateTables(relativePath + "\\error_logs.txt", delimiters, column_names, dataGridViewErrorlogs);
                     }
+                    else if (fileName == "device_information.txt")
+                    {
+                        string[] column_names = { "OPERATING_SYSTEM", "OPERATING_SYSTEM_VERSION", "DEVICE_MODEL", "CORDOVA_VERSION", "DEVICE_UUID" };
+                        populateTables(relativePath + "\\device_information.txt", delimiters, column_names, dataGridViewDeviceInformation);
+                    }
                     else if (fileName == "extension_logs.txt")
                     {
                         string[] column_names = { "DATE_TIME", "DURATION", "APPLICATION_NAME", "APPLICATION_KEY", "ACTION_NAME",
@@ -1697,6 +1811,26 @@ namespace OutSystems_Log_Parser
                                     "APPLICATION_KEY", "ACTION_NAME", "ENTRYPOINT_NAME", "CLIENT_IP", "ESPACE_NAME", "ESPACE_ID",
                                     "USER_ID", "SESSION_ID", "ERROR_ID", "REQUEST_KEY", "TENANT_ID" };
                         populateTables(relativePath + "\\general_logs.txt", delimiters, column_names, dataGridViewGenerallogs);
+                    }
+                    else if (fileName == "general_logs_slowsql.txt")
+                    {
+                        string[] column_names = { "DATE_TIME", "DURATION_MINUTES", "MODULE_NAME", "ACTION_NAME", "ESPACE_NAME" };
+                        populateTables(relativePath + "\\general_logs_slowsql.txt", delimiters, column_names, dataGridViewSlowSQLlogs);
+                    }
+                    else if (fileName == "general_logs_slowsql_duration.txt")
+                    {
+                        string[] column_names = { "DURATION_MINUTES", "DATE_TIME", "MODULE_NAME", "ACTION_NAME", "ESPACE_NAME" };
+                        populateTables(relativePath + "\\general_logs_slowsql_duration.txt", delimiters, column_names, dataGridViewSlowSQLDurationlogs);
+                    }
+                    else if (fileName == "general_logs_slowextension.txt")
+                    {
+                        string[] column_names = { "DATE_TIME", "DURATION_MINUTES", "MODULE_NAME", "ACTION_NAME", "ESPACE_NAME" };
+                        populateTables(relativePath + "\\general_logs_slowextension.txt", delimiters, column_names, dataGridViewSlowExtensionlogs);
+                    }
+                    else if (fileName == "general_logs_slowextension_duration.txt")
+                    {
+                        string[] column_names = { "DURATION_MINUTES", "DATE_TIME", "MODULE_NAME", "ACTION_NAME", "ESPACE_NAME" };
+                        populateTables(relativePath + "\\general_logs_slowextension_duration.txt", delimiters, column_names, dataGridViewSlowExtensionDurationlogs);
                     }
                     else if (fileName == "iis_logs.txt")
                     {
@@ -1719,6 +1853,16 @@ namespace OutSystems_Log_Parser
                                     "REQUEST_KEY", "TENANT_ID" };
                         populateTables(relativePath + "\\integrations_logs.txt", delimiters, column_names, dataGridViewIntegrationslogs);
                     }
+                    else if (fileName == "integrations_logs_webservices.txt")
+                    {
+                        string[] column_names = { "DATE_TIME", "DURATION_MINUTES", "ACTION_NAME", "ACTION_TYPE", "ESPACE_NAME" };
+                        populateTables(relativePath + "\\integrations_logs_webservices.txt", delimiters, column_names, dataGridViewIntWebServiceslogs);
+                    }
+                    else if (fileName == "integrations_logs_webservices_duration.txt")
+                    {
+                        string[] column_names = { "DURATION_MINUTES", "DATE_TIME", "ACTION_NAME", "ACTION_TYPE", "ESPACE_NAME" };
+                        populateTables(relativePath + "\\integrations_logs_webservices_duration.txt", delimiters, column_names, dataGridViewInWebServicesDurationlogs);
+                    }
                     else if (fileName == "iOS_build_logs.txt")
                     {
                         string[] column_names = { "DATE_TIME", "MESSAGE_TYPE", "ACTION_NAME", "MESSAGE" };
@@ -1737,6 +1881,16 @@ namespace OutSystems_Log_Parser
                                     "ACTION_NAME", "ACCESS_MODE", "EXECUTED_BY", "CLIENT_IP", "ESPACE_NAME", "ESPACE_ID",
                                     "USER_ID", "SESSION_ID", "SESSION_REQUESTS", "SESSION_BYTES", "VIEW_STATE_BYTES", "MS_IS_DN", "REQUEST_KEY", "TENANT_ID" };
                         populateTables(relativePath + "\\screen_logs.txt", delimiters, column_names, dataGridViewTradWebRequests);
+                    }
+                    else if (fileName == "screen_logs_screens.txt")
+                    {
+                        string[] column_names = { "DATE_TIME", "DURATION_MINUTES", "SCREEN", "ESPACE_NAME" };
+                        populateTables(relativePath + "\\screen_logs_screens.txt", delimiters, column_names, dataGridViewTradWebRequestsScreenlogs);
+                    }
+                    else if (fileName == "screen_logs_screens_duration.txt")
+                    {
+                        string[] column_names = { "DURATION_MINUTES", "DATE_TIME", "SCREEN", "ESPACE_NAME" };
+                        populateTables(relativePath + "\\screen_logs_screens_duration.txt", delimiters, column_names, dataGridViewTradWebRequestsScreenDurationlogs);
                     }
                     else if (fileName == "service_action_logs.txt")
                     {
@@ -1761,6 +1915,16 @@ namespace OutSystems_Log_Parser
                                     "ESPACE_NAME", "ESPACE_ID", "CYCLIC_JOB_NAME", "CYCLIC_JOB_KEY", "SHOULD_HAVE_RUN_AT", "NEXT_RUN",
                                     "ERROR_ID", "REQUEST_KEY", "TENANT_ID" };
                         populateTables(relativePath + "\\timer_logs.txt", delimiters, column_names, dataGridViewTimerlogs);
+                    }
+                    else if (fileName == "timer_logs_timers.txt")
+                    {
+                        string[] column_names = { "DATE_TIME", "DURATION_MINUTES", "CYCLIC_JOB_NAME", "ESPACE_NAME" };
+                        populateTables(relativePath + "\\timer_logs_timers.txt", delimiters, column_names, dataGridViewTimerTimerslogs);
+                    }
+                    else if (fileName == "timer_logs_timers_duration.txt")
+                    {
+                        string[] column_names = { "DURATION_MINUTES", "DATE_TIME", "CYCLIC_JOB_NAME", "ESPACE_NAME" };
+                        populateTables(relativePath + "\\timer_logs_timers_duration.txt", delimiters, column_names, dataGridViewTimerTimersDurationlogs);
                     }
                     else if (fileName == "bpt_troubleshootingreport_logs.txt")
                     {
@@ -2107,13 +2271,23 @@ namespace OutSystems_Log_Parser
             {
                 highlightKeyword(dataGridViewErrorlogs);
                 highlightKeyword(dataGridViewGenerallogs);
+                highlightKeyword(dataGridViewSlowSQLlogs);
+                highlightKeyword(dataGridViewSlowSQLDurationlogs);
+                highlightKeyword(dataGridViewSlowExtensionlogs);
+                highlightKeyword(dataGridViewSlowExtensionDurationlogs);
                 highlightKeyword(dataGridViewIntegrationslogs);
+                highlightKeyword(dataGridViewIntWebServiceslogs);
+                highlightKeyword(dataGridViewInWebServicesDurationlogs);
                 highlightKeyword(dataGridViewScreenRequestslogs);
                 highlightKeyword(dataGridViewTimerlogs);
+                highlightKeyword(dataGridViewTimerTimerslogs);
+                highlightKeyword(dataGridViewTimerTimersDurationlogs);
                 highlightKeyword(dataGridViewEmaillogs);
                 highlightKeyword(dataGridViewExtensionlogs);
                 highlightKeyword(dataGridViewServiceActionlogs);
                 highlightKeyword(dataGridViewTradWebRequests);
+                highlightKeyword(dataGridViewTradWebRequestsScreenlogs);
+                highlightKeyword(dataGridViewTradWebRequestsScreenDurationlogs);
                 highlightKeyword(dataGridViewIISDateTime);
                 highlightKeyword(dataGridViewIISTimeTaken);
                 highlightKeyword(dataGridViewWinAppEventViewer);
@@ -2541,13 +2715,23 @@ namespace OutSystems_Log_Parser
             {
                 highlightKeyword(dataGridViewErrorlogs);
                 highlightKeyword(dataGridViewGenerallogs);
+                highlightKeyword(dataGridViewSlowSQLlogs);
+                highlightKeyword(dataGridViewSlowSQLDurationlogs);
+                highlightKeyword(dataGridViewSlowExtensionlogs);
+                highlightKeyword(dataGridViewSlowExtensionDurationlogs);
                 highlightKeyword(dataGridViewIntegrationslogs);
+                highlightKeyword(dataGridViewIntWebServiceslogs);
+                highlightKeyword(dataGridViewInWebServicesDurationlogs);
                 highlightKeyword(dataGridViewScreenRequestslogs);
                 highlightKeyword(dataGridViewTimerlogs);
+                highlightKeyword(dataGridViewTimerTimerslogs);
+                highlightKeyword(dataGridViewTimerTimersDurationlogs);
                 highlightKeyword(dataGridViewEmaillogs);
                 highlightKeyword(dataGridViewExtensionlogs);
                 highlightKeyword(dataGridViewServiceActionlogs);
                 highlightKeyword(dataGridViewTradWebRequests);
+                highlightKeyword(dataGridViewTradWebRequestsScreenlogs);
+                highlightKeyword(dataGridViewTradWebRequestsScreenDurationlogs);
                 highlightKeyword(dataGridViewIISDateTime);
                 highlightKeyword(dataGridViewIISTimeTaken);
                 highlightKeyword(dataGridViewWinAppEventViewer);
@@ -2630,7 +2814,7 @@ namespace OutSystems_Log_Parser
         }
 
         //Beginning of the Service Studio Report tab code
-        private void dataGridViewServiceStudiologs_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridViewServiceStudiologs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
@@ -2692,19 +2876,25 @@ namespace OutSystems_Log_Parser
 
             createScreenshot("detailed_error_logs", txtDetailErrorLogs, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_general_logs", txtBoxDetailGenerallogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_slowsql_logs", txtBoxDetailsSlowSQLlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_slowextension_logs", txtBoxDetailsSlowExtensionlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_integrations_logs", txtBoxDetailIntegrationlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_integrations_webservices_logs", txtBoxDetailsIntWebServiceslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_screen_requests_logs", txtBoxDetailScreenRequestslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_timer_logs", txtBoxDetailTimerlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_timer_timers_logs", txtBoxDetailsTimerTimerslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_email_logs", txtBoxDetailEmaillogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_extension_logs", txtBoxDetailExtensionlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_service_action_logs", txtBoxDetailServiceActionlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_tradional_web_requests_logs", txtBoxDetailTradWebRequests.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_tradional_web_requests_screens_logs", txtBoxDetailTradWebRequestsScreenlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_windows_application_viewer_logs", txtBoxDetailWinAppEventViewer.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_windows_system_viewer_logs", txtBoxDetailWinSysEventViewer.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_windows_security_viewer_logs", txtBoxDetailWinSecEventViewer.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_android_logs", txtBoxDetailAndroidLogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_ios_logs", txtBoxDetailiOSLogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_iis_logs", txtDetailIISlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_device_information_logs", txtBoxDetailDeviceInformationlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_service_studio_logs", txtBoxDetailServiceStudioLogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_general_text_logs", txtBoxDetailGeneralTXTLogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_bpt_reports_logs", txtBoxDetailBPTReportslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
@@ -4101,13 +4291,23 @@ namespace OutSystems_Log_Parser
             {
                 highlightKeyword(dataGridViewErrorlogs);
                 highlightKeyword(dataGridViewGenerallogs);
+                highlightKeyword(dataGridViewSlowSQLlogs);
+                highlightKeyword(dataGridViewSlowSQLDurationlogs);
+                highlightKeyword(dataGridViewSlowExtensionlogs);
+                highlightKeyword(dataGridViewSlowExtensionDurationlogs);
                 highlightKeyword(dataGridViewIntegrationslogs);
+                highlightKeyword(dataGridViewIntWebServiceslogs);
+                highlightKeyword(dataGridViewInWebServicesDurationlogs);
                 highlightKeyword(dataGridViewScreenRequestslogs);
                 highlightKeyword(dataGridViewTimerlogs);
+                highlightKeyword(dataGridViewTimerTimerslogs);
+                highlightKeyword(dataGridViewTimerTimersDurationlogs);
                 highlightKeyword(dataGridViewEmaillogs);
                 highlightKeyword(dataGridViewExtensionlogs);
                 highlightKeyword(dataGridViewServiceActionlogs);
                 highlightKeyword(dataGridViewTradWebRequests);
+                highlightKeyword(dataGridViewTradWebRequestsScreenlogs);
+                highlightKeyword(dataGridViewTradWebRequestsScreenDurationlogs);
                 highlightKeyword(dataGridViewIISDateTime);
                 highlightKeyword(dataGridViewIISTimeTaken);
                 highlightKeyword(dataGridViewWinAppEventViewer);
@@ -4397,6 +4597,391 @@ namespace OutSystems_Log_Parser
                         {
                             col.SortMode = DataGridViewColumnSortMode.NotSortable;
                         }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewSlowSQLlogs_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewSlowSQLlogs.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewSlowSQLlogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailsSlowSQLlogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewSlowSQLDurationlogs_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewSlowSQLDurationlogs.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewSlowSQLDurationlogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailsSlowSQLlogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewIntWebServiceslogs_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewIntWebServiceslogs.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewIntWebServiceslogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailsIntWebServiceslogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewInWebServicesDurationlogs_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewInWebServicesDurationlogs.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewInWebServicesDurationlogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailsIntWebServiceslogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewTimerTimerslogs_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewTimerTimerslogs.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewTimerTimerslogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailsTimerTimerslogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewTimerTimersDurationlogs_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewTimerTimersDurationlogs.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewTimerTimersDurationlogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailsTimerTimerslogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewTradWebRequestsScreenlogs_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewTradWebRequestsScreenlogs.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewTradWebRequestsScreenlogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailTradWebRequestsScreenlogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewTradWebRequestsScreenDurationlogs_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewTradWebRequestsScreenDurationlogs.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewTradWebRequestsScreenDurationlogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailTradWebRequestsScreenlogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewSlowExtensionlogs_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewSlowExtensionlogs.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewSlowExtensionlogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailsSlowExtensionlogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewSlowExtensionDurationlogs_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewSlowExtensionDurationlogs.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewSlowExtensionDurationlogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailsSlowExtensionlogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void dataGridViewDeviceInformation_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    List<string> rowInfo = new List<string>();
+
+                    //gets a collection that contains all the rows
+                    DataGridViewRow row = this.dataGridViewDeviceInformation.Rows[e.RowIndex];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        {
+                            rowInfo.Add(dataGridViewDeviceInformation.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                        }
+                    }
+
+                    txtBoxDetailDeviceInformationlogs.Text = String.Join(Environment.NewLine, rowInfo);
+
+                    if (btnScreenshot.Enabled == false)
+                    {
+                        btnScreenshot.Enabled = true;
+                        btnScreenshot.BackColor = SystemColors.ControlLight;
                     }
                 }
             }
