@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OutSystems Log Parser.exe" size="1892352">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OutSystems Log Parser.exe" size="1910784">
       <assemblyIdentity name="OutSystems Log Parser" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>FEKlTHq44etmksE2391uEZW5nn27rh/q8cTHCDnDeBw=</dsig:DigestValue>
+        <dsig:DigestValue>dB/dNYV4XO1ImdUNJTqaU0wGVIw7dkhC5NwRn/6lwA4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
