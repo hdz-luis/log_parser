@@ -23,17 +23,146 @@ namespace OutSystems_Log_Parser
         int totalRowsCount;
         string myMessage = "";
         int myMessageCount;
+        string outputTXTfile = "";
         double percentageMessageCount;
         double roundedPercentageMessageCount;
-        bool removeGarbage = false;
-        bool removeGarbageSuccessful = false;
-        bool highlightError = false;
-        bool highlightErrorSuccessful = false;
-        bool findKeyword = false;
-        bool findKeywordSuccessful = false;
-        bool screenshotSuccessful = false;
-        bool datetimeFilterSuccessful = false;
+        bool bool_removeGarbage = false;
+        bool bool_removeGarbageSuccessful = false;
+        bool bool_highlightError = false;
+        bool bool_highlightErrorSuccessful = false;
+        bool bool_findKeyword = false;
+        bool bool_findKeywordSuccessful = false;
+        bool bool_screenshotSuccessful = false;
+        bool bool_datetimeFilterSuccessful = false;
         string currentWorkingDirectory = Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath);
+
+        delegate void TabControlClick(object sender, TabControlEventArgs e);
+
+        TabControlClick tabPage1_MyClick;
+        TabControlClick tabPage2_MyClick;
+        TabControlClick tabPage3_MyClick;
+        TabControlClick tabPage4_MyClick;
+        TabControlClick tabPage5_MyClick;
+        TabControlClick tabPage6_MyClick;
+        TabControlClick tabPage7_MyClick;
+        TabControlClick tabPage8_MyClick;
+        TabControlClick tabPage9_MyClick;
+        TabControlClick tabPage10_MyClick;
+        TabControlClick tabPage11_MyClick;
+        TabControlClick tabPage12_MyClick;
+        TabControlClick tabPage13_MyClick;
+        TabControlClick tabPage14_MyClick;
+        TabControlClick tabPage15_MyClick;
+        TabControlClick tabPage16_MyClick;
+        TabControlClick tabPage17_MyClick;
+        TabControlClick tabPage18_MyClick;
+        TabControlClick tabPage19_MyClick;
+        TabControlClick tabPage20_MyClick;
+        TabControlClick tabPage21_MyClick;
+        TabControlClick tabPage22_MyClick;
+        TabControlClick tabPage23_MyClick;
+        TabControlClick tabPage24_MyClick;
+        TabControlClick tabPage25_MyClick;
+        TabControlClick tabPage26_MyClick;
+        TabControlClick tabPage27_MyClick;
+        TabControlClick tabPage28_MyClick;
+        TabControlClick tabPage29_MyClick;
+        TabControlClick tabPage30_MyClick;
+        TabControlClick tabPage31_MyClick;
+        TabControlClick tabPage32_MyClick;
+        TabControlClick tabPage33_MyClick;
+        TabControlClick tabPage34_MyClick;
+        TabControlClick tabPage35_MyClick;
+        TabControlClick tabPage36_MyClick;
+        TabControlClick tabPage37_MyClick;
+        TabControlClick tabPage38_MyClick;
+        TabControlClick tabPage39_MyClick;
+        TabControlClick tabPage40_MyClick;
+        TabControlClick tabPage41_MyClick;
+        TabControlClick tabPage42_MyClick;
+        TabControlClick tabPage43_MyClick;
+        TabControlClick tabPage44_MyClick;
+        TabControlClick tabPage45_MyClick;
+        TabControlClick tabPage46_MyClick;
+        TabControlClick tabPage47_MyClick;
+        TabControlClick tabPage48_MyClick;
+        TabControlClick tabPage49_MyClick;
+        TabControlClick tabPage50_MyClick;
+        TabControlClick tabPage51_MyClick;
+        TabControlClick tabPage52_MyClick;
+        TabControlClick tabPage53_MyClick;
+        TabControlClick tabPage54_MyClick;
+        TabControlClick tabPage55_MyClick;
+        TabControlClick tabPage56_MyClick;
+        TabControlClick tabPage57_MyClick;
+        TabControlClick tabPage58_MyClick;
+        TabControlClick tabPage59_MyClick;
+        TabControlClick tabPage61_MyClick;
+        TabControlClick tabPage62_MyClick;
+
+        TabControlAction tabControlAction;
+
+        TabControlEventArgs tabControlEventArgsTab1;
+        TabControlEventArgs tabControlEventArgsTab2;
+        TabControlEventArgs tabControlEventArgsTab3;
+        TabControlEventArgs tabControlEventArgsTab4;
+        TabControlEventArgs tabControlEventArgsTab5;
+        TabControlEventArgs tabControlEventArgsTab6;
+        TabControlEventArgs tabControlEventArgsTab7;
+        TabControlEventArgs tabControlEventArgsTab8;
+        TabControlEventArgs tabControlEventArgsTab9;
+        TabControlEventArgs tabControlEventArgsTab10;
+        TabControlEventArgs tabControlEventArgsTab11;
+        TabControlEventArgs tabControlEventArgsTab12;
+        TabControlEventArgs tabControlEventArgsTab13;
+        TabControlEventArgs tabControlEventArgsTab14;
+        TabControlEventArgs tabControlEventArgsTab15;
+        TabControlEventArgs tabControlEventArgsTab16;
+        TabControlEventArgs tabControlEventArgsTab17;
+        TabControlEventArgs tabControlEventArgsTab18;
+        TabControlEventArgs tabControlEventArgsTab19;
+        TabControlEventArgs tabControlEventArgsTab20;
+        TabControlEventArgs tabControlEventArgsTab21;
+        TabControlEventArgs tabControlEventArgsTab22;
+        TabControlEventArgs tabControlEventArgsTab23;
+        TabControlEventArgs tabControlEventArgsTab24;
+        TabControlEventArgs tabControlEventArgsTab25;
+        TabControlEventArgs tabControlEventArgsTab26;
+        TabControlEventArgs tabControlEventArgsTab27;
+        TabControlEventArgs tabControlEventArgsTab28;
+        TabControlEventArgs tabControlEventArgsTab29;
+        TabControlEventArgs tabControlEventArgsTab30;
+        TabControlEventArgs tabControlEventArgsTab31;
+        TabControlEventArgs tabControlEventArgsTab32;
+        TabControlEventArgs tabControlEventArgsTab33;
+        TabControlEventArgs tabControlEventArgsTab34;
+        TabControlEventArgs tabControlEventArgsTab35;
+        TabControlEventArgs tabControlEventArgsTab36;
+        TabControlEventArgs tabControlEventArgsTab37;
+        TabControlEventArgs tabControlEventArgsTab38;
+        TabControlEventArgs tabControlEventArgsTab39;
+        TabControlEventArgs tabControlEventArgsTab40;
+        TabControlEventArgs tabControlEventArgsTab41;
+        TabControlEventArgs tabControlEventArgsTab42;
+        TabControlEventArgs tabControlEventArgsTab43;
+        TabControlEventArgs tabControlEventArgsTab44;
+        TabControlEventArgs tabControlEventArgsTab45;
+        TabControlEventArgs tabControlEventArgsTab46;
+        TabControlEventArgs tabControlEventArgsTab47;
+        TabControlEventArgs tabControlEventArgsTab48;
+        TabControlEventArgs tabControlEventArgsTab49;
+        TabControlEventArgs tabControlEventArgsTab50;
+        TabControlEventArgs tabControlEventArgsTab51;
+        TabControlEventArgs tabControlEventArgsTab52;
+        TabControlEventArgs tabControlEventArgsTab53;
+        TabControlEventArgs tabControlEventArgsTab54;
+        TabControlEventArgs tabControlEventArgsTab55;
+        TabControlEventArgs tabControlEventArgsTab56;
+        TabControlEventArgs tabControlEventArgsTab57;
+        TabControlEventArgs tabControlEventArgsTab58;
+        TabControlEventArgs tabControlEventArgsTab59;
+        TabControlEventArgs tabControlEventArgsTab61;
+        TabControlEventArgs tabControlEventArgsTab62;
 
         public Form1()
         {
@@ -610,6 +739,26 @@ namespace OutSystems_Log_Parser
                     {
                         comBoxReport.Enabled = true;
                     }
+
+                    if (dataGridViewSlowSQLlogs.Rows.Count > 0 || dataGridViewSlowExtensionlogs.Rows.Count > 0)
+                    {
+                        btnExportSlowSQLExtensionTables.Enabled = true;
+                    }
+
+                    if (dataGridViewIntWebServiceslogs.Rows.Count > 0)
+                    {
+                        btnExportWebServiceTable.Enabled = true;
+                    }
+
+                    if (dataGridViewTimerTimerslogs.Rows.Count > 0)
+                    {
+                        btnExportTimerTable.Enabled = true;
+                    }
+
+                    if (dataGridViewTradWebRequestsScreenlogs.Rows.Count > 0)
+                    {
+                        btnExportScreenTable.Enabled = true;
+                    }
                 }
                 else
                 {
@@ -780,571 +929,131 @@ namespace OutSystems_Log_Parser
             btnSearchKeyword.BackColor = SystemColors.ControlLight;
         }
 
+        private void btnExportSlowSQLExtensionTables_MouseEnter(object sender, EventArgs e)
+        {
+            btnExportSlowSQLExtensionTables.BackColor = Color.SpringGreen;
+        }
+
+        private void btnExportSlowSQLExtensionTables_MouseLeave(object sender, EventArgs e)
+        {
+            btnExportSlowSQLExtensionTables.BackColor = SystemColors.ControlLight;
+        }
+
+        private void btnExportWebServiceTable_MouseEnter(object sender, EventArgs e)
+        {
+            btnExportWebServiceTable.BackColor = Color.SpringGreen;
+        }
+
+        private void btnExportWebServiceTable_MouseLeave(object sender, EventArgs e)
+        {
+            btnExportWebServiceTable.BackColor = SystemColors.ControlLight;
+        }
+
+        private void btnExportTimerTable_MouseEnter(object sender, EventArgs e)
+        {
+            btnExportTimerTable.BackColor = Color.SpringGreen;
+        }
+
+        private void btnExportTimerTable_MouseLeave(object sender, EventArgs e)
+        {
+            btnExportTimerTable.BackColor = SystemColors.ControlLight;
+        }
+
+        private void btnExportScreenTable_MouseEnter(object sender, EventArgs e)
+        {
+            btnExportScreenTable.BackColor = Color.SpringGreen;
+        }
+
+        private void btnExportScreenTable_MouseLeave(object sender, EventArgs e)
+        {
+            btnExportScreenTable.BackColor = SystemColors.ControlLight;
+        }
+
         //Beginning of the Service Center Logs tab code
         private void dataGridViewErrorlogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewErrorlogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewErrorlogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailErrorLogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewErrorlogs, e, txtBoxDetailErrorLogs);
         }
 
         private void dataGridViewGenerallogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewGenerallogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewGenerallogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailGenerallogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewGenerallogs, e, txtBoxDetailGenerallogs);
         }
 
         private void dataGridViewIntegrationslogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewIntegrationslogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewIntegrationslogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailIntegrationlogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewIntegrationslogs, e, txtBoxDetailIntegrationlogs);
         }
 
         private void dataGridViewScreenRequestslogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewScreenRequestslogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewScreenRequestslogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailScreenRequestslogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewScreenRequestslogs, e, txtBoxDetailScreenRequestslogs);
         }
 
         private void dataGridViewTimerlogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewTimerlogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewTimerlogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailTimerlogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewTimerlogs, e, txtBoxDetailTimerlogs);
         }
 
         private void dataGridViewEmaillogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewEmaillogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewEmaillogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailEmaillogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewEmaillogs, e, txtBoxDetailEmaillogs);
         }
 
         private void dataGridViewExtensionlogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewExtensionlogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewExtensionlogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailExtensionlogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewExtensionlogs, e, txtBoxDetailExtensionlogs);
         }
 
         private void dataGridViewServiceActionlogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewServiceActionlogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewServiceActionlogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailServiceActionlogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewServiceActionlogs, e, txtBoxDetailServiceActionlogs);
         }
 
         private void dataGridViewTradWebRequests_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewTradWebRequests.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewTradWebRequests.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailTradWebRequests.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewTradWebRequests, e, txtBoxDetailTradWebRequests);
         }
         //End of the Service Center Logs tab code
 
         //Beginning of the Windows Event Viewer logs tab code
         private void dataGridViewWinAppEventViewer_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewWinAppEventViewer.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewWinAppEventViewer.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailWinAppEventViewer.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewWinAppEventViewer, e, txtBoxDetailWinAppEventViewer);
         }
 
         private void dataGridViewWinSysEventViewer_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewWinSysEventViewer.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewWinSysEventViewer.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailWinSysEventViewer.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewWinSysEventViewer, e, txtBoxDetailWinSysEventViewer);
         }
 
         private void dataGridViewWinSecEventViewer_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewWinSecEventViewer.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewWinSecEventViewer.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailWinSecEventViewer.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewWinSecEventViewer, e, txtBoxDetailWinSecEventViewer);
         }
         //End of the Windows Event Viewer logs tab code
 
         //Beginning of the Mobile logs tab code
         private void dataGridViewAndroidlogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewAndroidlogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewAndroidlogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailAndroidLogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewAndroidlogs, e, txtBoxDetailAndroidLogs);
         }
 
         private void dataGridViewiOSlogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewiOSlogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewiOSlogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailiOSLogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewiOSlogs, e, txtBoxDetailiOSLogs);
         }
         //End of the Mobile logs tab code
 
         //Beginning of the IIS tab code
         private void dataGridViewIISDateTime_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewIISDateTime.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewIISDateTime.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtDetailIISlogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewIISDateTime, e, txtDetailIISlogs);
         }
 
         private void dataGridViewIISTimeTaken_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewIISTimeTaken.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewIISTimeTaken.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtDetailIISlogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewIISTimeTaken, e, txtDetailIISlogs);
         }
         //End of the IIS tab code
 
@@ -1464,127 +1173,22 @@ namespace OutSystems_Log_Parser
                     }
                 }
 
-                if (removeGarbage)
+                if (bool_removeGarbage)
                 {
-                    removeGenericErrors(dataGridViewErrorlogs, 1, txtBoxDetailErrorLogs);
-                    //removeGenericErrors(dataGridViewGenerallogs, 1, txtBoxDetailGenerallogs);
-                    //removeGenericErrors2(dataGridViewIntegrationslogs, txtBoxDetailIntegrationlogs);
-                    //removeGenericErrors2(dataGridViewScreenRequestslogs, txtBoxDetailScreenRequestslogs);
-                    //removeGenericErrors2(dataGridViewTimerlogs, txtBoxDetailTimerlogs);
-                    //removeGenericErrors2(dataGridViewEmaillogs, txtBoxDetailEmaillogs);
-                    //removeGenericErrors2(dataGridViewExtensionlogs, txtBoxDetailExtensionlogs);
-                    //removeGenericErrors2(dataGridViewServiceActionlogs, txtBoxDetailServiceActionlogs);
-                    //removeGenericErrors2(dataGridViewTradWebRequests, txtBoxDetailTradWebRequests);
-                    //removeGenericErrors2(dataGridViewIISDateTime, txtDetailIISlogs);
-                    //removeGenericErrors2(dataGridViewIISTimeTaken, txtDetailIISlogs);
-                    removeGenericErrors(dataGridViewWinAppEventViewer, 2, txtBoxDetailWinAppEventViewer);
-                    removeGenericErrors(dataGridViewWinSysEventViewer, 2, txtBoxDetailWinSysEventViewer);
-                    removeGenericErrors(dataGridViewWinSecEventViewer, 2, txtBoxDetailWinSecEventViewer);
-                    removeGenericErrors(dataGridViewAndroidlogs, 3, txtBoxDetailAndroidLogs);
-                    removeGenericErrors(dataGridViewiOSlogs, 3, txtBoxDetailiOSLogs);
-                    removeGenericErrors(dataGridViewServiceStudiologs, 3, txtBoxDetailServiceStudioLogs);
-                    removeGenericErrors(dataGridViewGeneralTXTlogs, 2, txtBoxDetailGeneralTXTLogs);
-                    //removeGenericErrors(dataGridViewBPTReportslogs, txtBoxDetailBPTReportslogs);
+                    removeGarbage();
                 }
 
-                if (highlightError)
+                if (bool_highlightError)
                 {
-                    string[] knownErrors_Errorlogs = { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "a fatal error has occurred", "communicationexception", "json deserialization", "compilation error", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "can't proceed", "truncated in table", "unknown reference expression type email", "unable to open service studio", "bad json escape sequence" };
-                    string[] knownErrors_Generallogs = { "system cannot find" };
-                    string[] knownErrors_WinAppEventViewer = { "ora-", "error closing", "cannot access", "error opening" };
-                    string[] knownErrors_WinSysEventViewer = { "error closing", "timed out" };
-                    string[] knownErrors_AndroidiOSlogs = { "file is corrupt or invalid", "androidx library", "command finished with error code 0", "plugin is not going to work", "error: spawnsync sudo etimeout", "plugin doesn't support this project's cordova-android version", "failed to fetch plug", "archive failed", "build failed with the following error", "command failed with exit code", "signing certificate is invalid", "the ios deployment target", "verification failed" };
-                    string[] knownErrors_ServiceStudiologs = { "oneoftypedefinition", "http forbidden", "[not connected]" };
-
-                    highlightKnownErrors(dataGridViewErrorlogs, 1, knownErrors_Errorlogs);
-                    highlightKnownErrors(dataGridViewGenerallogs, 1, knownErrors_Generallogs);
-                    //highlightKnownErrors(dataGridViewIntegrationslogs);
-                    //highlightKnownErrors(dataGridViewScreenRequestslogs);
-                    //highlightKnownErrors(dataGridViewTimerlogs);
-                    //highlightKnownErrors(dataGridViewEmaillogs);
-                    //highlightKnownErrors(dataGridViewExtensionlogs);
-                    //highlightKnownErrors(dataGridViewServiceActionlogs);
-                    //highlightKnownErrors(dataGridViewTradWebRequests);
-                    //highlightKnownErrors(dataGridViewIISDateTime);
-                    //highlightKnownErrors(dataGridViewIISTimeTaken);
-                    highlightKnownErrors(dataGridViewWinAppEventViewer, 8, knownErrors_WinAppEventViewer);
-                    highlightKnownErrors(dataGridViewWinSysEventViewer, 8, knownErrors_WinSysEventViewer);
-                    //highlightKnownErrors(dataGridViewWinSecEventViewer, 8);
-                    highlightKnownErrors(dataGridViewAndroidlogs, 3, knownErrors_AndroidiOSlogs);
-                    highlightKnownErrors(dataGridViewiOSlogs, 3, knownErrors_AndroidiOSlogs);
-                    highlightKnownErrors(dataGridViewServiceStudiologs, 3, knownErrors_ServiceStudiologs);
-                    //highlightKnownErrors(dataGridViewGeneralTXTlogs, 2);
-                    //highlightKnownErrors(dataGridViewBPTReportslogs);
+                    highlightError();
                 }
 
-                if (findKeyword)
+                if (bool_findKeyword)
                 {
-                    highlightKeyword(dataGridViewErrorlogs);
-                    highlightKeyword(dataGridViewGenerallogs);
-                    highlightKeyword(dataGridViewSlowSQLlogs);
-                    highlightKeyword(dataGridViewSlowSQLDurationlogs);
-                    highlightKeyword(dataGridViewSlowExtensionlogs);
-                    highlightKeyword(dataGridViewSlowExtensionDurationlogs);
-                    highlightKeyword(dataGridViewIntegrationslogs);
-                    highlightKeyword(dataGridViewIntWebServiceslogs);
-                    highlightKeyword(dataGridViewInWebServicesDurationlogs);
-                    highlightKeyword(dataGridViewScreenRequestslogs);
-                    highlightKeyword(dataGridViewTimerlogs);
-                    highlightKeyword(dataGridViewTimerTimerslogs);
-                    highlightKeyword(dataGridViewTimerTimersDurationlogs);
-                    highlightKeyword(dataGridViewEmaillogs);
-                    highlightKeyword(dataGridViewExtensionlogs);
-                    highlightKeyword(dataGridViewServiceActionlogs);
-                    highlightKeyword(dataGridViewTradWebRequests);
-                    highlightKeyword(dataGridViewTradWebRequestsScreenlogs);
-                    highlightKeyword(dataGridViewTradWebRequestsScreenDurationlogs);
-                    highlightKeyword(dataGridViewIISDateTime);
-                    highlightKeyword(dataGridViewIISTimeTaken);
-                    highlightKeyword(dataGridViewWinAppEventViewer);
-                    highlightKeyword(dataGridViewWinSysEventViewer);
-                    highlightKeyword(dataGridViewWinSecEventViewer);
-                    highlightKeyword(dataGridViewAndroidlogs);
-                    highlightKeyword(dataGridViewiOSlogs);
-                    highlightKeyword(dataGridViewServiceStudiologs);
-                    highlightKeyword(dataGridViewGeneralTXTlogs);
-                    highlightKeyword(dataGridViewBPTReportslogs);
-                    highlightKeyword(dataGridViewEnvironmentCapabilitieslogs);
-                    highlightKeyword(dataGridViewEnvironmentslogs);
-                    highlightKeyword(dataGridViewFullErrorDumps);
-                    highlightKeyword(dataGridViewRoleslogs);
-                    highlightKeyword(dataGridViewRolesInApplicationslogs);
-                    highlightKeyword(dataGridViewRolesInTeamslogs);
-                    highlightKeyword(dataGridViewUserlogs);
-                    highlightKeyword(dataGridViewUserPoolslogs);
-                    highlightKeyword(dataGridViewSyncErrorslogs);
-                    highlightKeyword(dataGridViewStagingApplogs);
-                    highlightKeyword(dataGridViewStagingAppVerlogs);
-                    highlightKeyword(dataGridViewStagingAppVerModuleVerlogs);
-                    highlightKeyword(dataGridViewStagingChangelog);
-                    highlightKeyword(dataGridViewStagingConsumerElements);
-                    highlightKeyword(dataGridViewStagingEntityConfiguration);
-                    highlightKeyword(dataGridViewStagingEnvironmentAppicationCache);
-                    highlightKeyword(dataGridViewStagingEnvironmentApplicationModule);
-                    highlightKeyword(dataGridViewStagingEnvironmentApplicationVersion);
-                    highlightKeyword(dataGridViewStagingEnvironmentModuleCache);
-                    highlightKeyword(dataGridViewStagingEnvironmentModuleRunning);
-                    highlightKeyword(dataGridViewStagingModules);
-                    highlightKeyword(dataGridViewStagingModuleVersionRefererences);
-                    highlightKeyword(dataGridViewStagingProducerElements);
-                    highlightKeyword(dataGridViewStagingSiteProperties);
-                    highlightKeyword(dataGridViewStaginglogs);
-                    highlightKeyword(dataGridViewStagingApplicationVersion);
-                    highlightKeyword(dataGridViewStagingMessage);
-                    highlightKeyword(dataGridViewStagingModuleInconsistencies);
-                    highlightKeyword(dataGridViewStagingModuleVersion);
-                    highlightKeyword(dataGridViewStagingModuleVersionPublished);
-                    highlightKeyword(dataGridViewStagingModuleVersionUploaded);
-                    highlightKeyword(dataGridViewStagingOptions);
-                    highlightKeyword(dataGridViewStagingOutdatedApplication);
-                    highlightKeyword(dataGridViewStagingOutdatedModule);
+                    findKeyword();
                 }
 
-                if (datetimeFilterSuccessful)
+                if (bool_datetimeFilterSuccessful)
                 {
                     MessageBox.Show("The data was filtered by the datetime range provided", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -1609,7 +1213,7 @@ namespace OutSystems_Log_Parser
                     rowFilter += string.Format("' AND DATE_TIME <= '" + to + "'");
                     (tableName.DataSource as DataTable).DefaultView.RowFilter = rowFilter;
 
-                    datetimeFilterSuccessful = true;
+                    bool_datetimeFilterSuccessful = true;
                 }
             }
             catch (Exception ex)
@@ -1621,14 +1225,14 @@ namespace OutSystems_Log_Parser
 
         private void btnClearFilter_Click(object sender, EventArgs e)
         {
-            removeGarbage = false;
-            highlightError = false;
-            findKeyword = false;
-            removeGarbageSuccessful = false;
-            highlightErrorSuccessful = false;
-            findKeywordSuccessful = false;
-            screenshotSuccessful = false;
-            datetimeFilterSuccessful = false;
+            bool_removeGarbage = false;
+            bool_highlightError = false;
+            bool_findKeyword = false;
+            bool_removeGarbageSuccessful = false;
+            bool_highlightErrorSuccessful = false;
+            bool_findKeywordSuccessful = false;
+            bool_screenshotSuccessful = false;
+            bool_datetimeFilterSuccessful = false;
 
             dateTimePicker1.Text = "";
             dateTimePicker2.Text = "";
@@ -2183,6 +1787,26 @@ namespace OutSystems_Log_Parser
                     {
                         comBoxReport.Enabled = true;
                     }
+
+                    if (dataGridViewSlowSQLlogs.Rows.Count > 0 || dataGridViewSlowExtensionlogs.Rows.Count > 0)
+                    {
+                        btnExportSlowSQLExtensionTables.Enabled = true;
+                    }
+
+                    if (dataGridViewIntWebServiceslogs.Rows.Count > 0)
+                    {
+                        btnExportWebServiceTable.Enabled = true;
+                    }
+
+                    if (dataGridViewTimerTimerslogs.Rows.Count > 0)
+                    {
+                        btnExportTimerTable.Enabled = true;
+                    }
+
+                    if (dataGridViewTradWebRequestsScreenlogs.Rows.Count > 0)
+                    {
+                        btnExportScreenTable.Enabled = true;
+                    }
                 }
                 else
                 {
@@ -2199,6 +1823,10 @@ namespace OutSystems_Log_Parser
                     btnSearchKeyword.Enabled = false;
                     txtBoxKeyword.Enabled = false;
                     comBoxReport.Enabled = false;
+                    btnExportSlowSQLExtensionTables.Enabled = false;
+                    btnExportWebServiceTable.Enabled = false;
+                    btnExportTimerTable.Enabled = false;
+                    btnExportScreenTable.Enabled = false;
                 }
             }
         }
@@ -2215,126 +1843,21 @@ namespace OutSystems_Log_Parser
 
         private void btnRemoveGarbage_Click(object sender, EventArgs e)
         {
-            removeGarbage = true;
+            bool_removeGarbage = true;
 
-            removeGenericErrors(dataGridViewErrorlogs, 1, txtBoxDetailErrorLogs);
-            //removeGenericErrors(dataGridViewGenerallogs, 1, txtBoxDetailGenerallogs);
-            //removeGenericErrors2(dataGridViewIntegrationslogs, txtBoxDetailIntegrationlogs);
-            //removeGenericErrors2(dataGridViewScreenRequestslogs, txtBoxDetailScreenRequestslogs);
-            //removeGenericErrors2(dataGridViewTimerlogs, txtBoxDetailTimerlogs);
-            //removeGenericErrors2(dataGridViewEmaillogs, txtBoxDetailEmaillogs);
-            //removeGenericErrors2(dataGridViewExtensionlogs, txtBoxDetailExtensionlogs);
-            //removeGenericErrors2(dataGridViewServiceActionlogs, txtBoxDetailServiceActionlogs);
-            //removeGenericErrors2(dataGridViewTradWebRequests, txtBoxDetailTradWebRequests);
-            //removeGenericErrors2(dataGridViewIISDateTime, txtDetailIISlogs);
-            //removeGenericErrors2(dataGridViewIISTimeTaken, txtDetailIISlogs);
-            removeGenericErrors(dataGridViewWinAppEventViewer, 2, txtBoxDetailWinAppEventViewer);
-            removeGenericErrors(dataGridViewWinSysEventViewer, 2, txtBoxDetailWinSysEventViewer);
-            removeGenericErrors(dataGridViewWinSecEventViewer, 2, txtBoxDetailWinSecEventViewer);
-            removeGenericErrors(dataGridViewAndroidlogs, 3, txtBoxDetailAndroidLogs);
-            removeGenericErrors(dataGridViewiOSlogs, 3, txtBoxDetailiOSLogs);
-            removeGenericErrors(dataGridViewServiceStudiologs, 3, txtBoxDetailServiceStudioLogs);
-            removeGenericErrors(dataGridViewGeneralTXTlogs, 2, txtBoxDetailGeneralTXTLogs);
-            //removeGenericErrors(dataGridViewBPTReportslogs, txtBoxDetailBPTReportslogs);
+            removeGarbage();
 
-            if (highlightError)
+            if (bool_highlightError)
             {
-                string[] knownErrors_Errorlogs = { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "a fatal error has occurred", "communicationexception", "json deserialization", "compilation error", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "can't proceed", "truncated in table", "unknown reference expression type email", "unable to open service studio", "bad json escape sequence" };
-                string[] knownErrors_Generallogs = { "system cannot find" };
-                string[] knownErrors_WinAppEventViewer = { "ora-", "error closing", "cannot access", "error opening" };
-                string[] knownErrors_WinSysEventViewer = { "error closing", "timed out" };
-                string[] knownErrors_AndroidiOSlogs = { "file is corrupt or invalid", "androidx library", "command finished with error code 0", "plugin is not going to work", "error: spawnsync sudo etimeout", "plugin doesn't support this project's cordova-android version", "failed to fetch plug", "archive failed", "build failed with the following error", "command failed with exit code", "signing certificate is invalid", "the ios deployment target", "verification failed" };
-                string[] knownErrors_ServiceStudiologs = { "oneoftypedefinition", "http forbidden", "[not connected]" };
-
-                highlightKnownErrors(dataGridViewErrorlogs, 1, knownErrors_Errorlogs);
-                highlightKnownErrors(dataGridViewGenerallogs, 1, knownErrors_Generallogs);
-                //highlightKnownErrors(dataGridViewIntegrationslogs);
-                //highlightKnownErrors(dataGridViewScreenRequestslogs);
-                //highlightKnownErrors(dataGridViewTimerlogs);
-                //highlightKnownErrors(dataGridViewEmaillogs);
-                //highlightKnownErrors(dataGridViewExtensionlogs);
-                //highlightKnownErrors(dataGridViewServiceActionlogs);
-                //highlightKnownErrors(dataGridViewTradWebRequests);
-                //highlightKnownErrors(dataGridViewIISDateTime);
-                //highlightKnownErrors(dataGridViewIISTimeTaken);
-                highlightKnownErrors(dataGridViewWinAppEventViewer, 8, knownErrors_WinAppEventViewer);
-                highlightKnownErrors(dataGridViewWinSysEventViewer, 8, knownErrors_WinSysEventViewer);
-                //highlightKnownErrors(dataGridViewWinSecEventViewer, 8);
-                highlightKnownErrors(dataGridViewAndroidlogs, 3, knownErrors_AndroidiOSlogs);
-                highlightKnownErrors(dataGridViewiOSlogs, 3, knownErrors_AndroidiOSlogs);
-                highlightKnownErrors(dataGridViewServiceStudiologs, 3, knownErrors_ServiceStudiologs);
-                //highlightKnownErrors(dataGridViewGeneralTXTlogs, 2);
-                //highlightKnownErrors(dataGridViewBPTReportslogs);
+                highlightError();
             }
 
-            if (findKeyword)
+            if (bool_findKeyword)
             {
-                highlightKeyword(dataGridViewErrorlogs);
-                highlightKeyword(dataGridViewGenerallogs);
-                highlightKeyword(dataGridViewSlowSQLlogs);
-                highlightKeyword(dataGridViewSlowSQLDurationlogs);
-                highlightKeyword(dataGridViewSlowExtensionlogs);
-                highlightKeyword(dataGridViewSlowExtensionDurationlogs);
-                highlightKeyword(dataGridViewIntegrationslogs);
-                highlightKeyword(dataGridViewIntWebServiceslogs);
-                highlightKeyword(dataGridViewInWebServicesDurationlogs);
-                highlightKeyword(dataGridViewScreenRequestslogs);
-                highlightKeyword(dataGridViewTimerlogs);
-                highlightKeyword(dataGridViewTimerTimerslogs);
-                highlightKeyword(dataGridViewTimerTimersDurationlogs);
-                highlightKeyword(dataGridViewEmaillogs);
-                highlightKeyword(dataGridViewExtensionlogs);
-                highlightKeyword(dataGridViewServiceActionlogs);
-                highlightKeyword(dataGridViewTradWebRequests);
-                highlightKeyword(dataGridViewTradWebRequestsScreenlogs);
-                highlightKeyword(dataGridViewTradWebRequestsScreenDurationlogs);
-                highlightKeyword(dataGridViewIISDateTime);
-                highlightKeyword(dataGridViewIISTimeTaken);
-                highlightKeyword(dataGridViewWinAppEventViewer);
-                highlightKeyword(dataGridViewWinSysEventViewer);
-                highlightKeyword(dataGridViewWinSecEventViewer);
-                highlightKeyword(dataGridViewAndroidlogs);
-                highlightKeyword(dataGridViewiOSlogs);
-                highlightKeyword(dataGridViewServiceStudiologs);
-                highlightKeyword(dataGridViewGeneralTXTlogs);
-                highlightKeyword(dataGridViewBPTReportslogs);
-                highlightKeyword(dataGridViewEnvironmentCapabilitieslogs);
-                highlightKeyword(dataGridViewEnvironmentslogs);
-                highlightKeyword(dataGridViewFullErrorDumps);
-                highlightKeyword(dataGridViewRoleslogs);
-                highlightKeyword(dataGridViewRolesInApplicationslogs);
-                highlightKeyword(dataGridViewRolesInTeamslogs);
-                highlightKeyword(dataGridViewUserlogs);
-                highlightKeyword(dataGridViewUserPoolslogs);
-                highlightKeyword(dataGridViewSyncErrorslogs);
-                highlightKeyword(dataGridViewStagingApplogs);
-                highlightKeyword(dataGridViewStagingAppVerlogs);
-                highlightKeyword(dataGridViewStagingAppVerModuleVerlogs);
-                highlightKeyword(dataGridViewStagingChangelog);
-                highlightKeyword(dataGridViewStagingConsumerElements);
-                highlightKeyword(dataGridViewStagingEntityConfiguration);
-                highlightKeyword(dataGridViewStagingEnvironmentAppicationCache);
-                highlightKeyword(dataGridViewStagingEnvironmentApplicationModule);
-                highlightKeyword(dataGridViewStagingEnvironmentApplicationVersion);
-                highlightKeyword(dataGridViewStagingEnvironmentModuleCache);
-                highlightKeyword(dataGridViewStagingEnvironmentModuleRunning);
-                highlightKeyword(dataGridViewStagingModules);
-                highlightKeyword(dataGridViewStagingModuleVersionRefererences);
-                highlightKeyword(dataGridViewStagingProducerElements);
-                highlightKeyword(dataGridViewStagingSiteProperties);
-                highlightKeyword(dataGridViewStaginglogs);
-                highlightKeyword(dataGridViewStagingApplicationVersion);
-                highlightKeyword(dataGridViewStagingMessage);
-                highlightKeyword(dataGridViewStagingModuleInconsistencies);
-                highlightKeyword(dataGridViewStagingModuleVersion);
-                highlightKeyword(dataGridViewStagingModuleVersionPublished);
-                highlightKeyword(dataGridViewStagingModuleVersionUploaded);
-                highlightKeyword(dataGridViewStagingOptions);
-                highlightKeyword(dataGridViewStagingOutdatedApplication);
-                highlightKeyword(dataGridViewStagingOutdatedModule);
+                findKeyword();
             }
 
-            if (removeGarbageSuccessful)
+            if (bool_removeGarbageSuccessful)
             {
                 MessageBox.Show("Duplicate generic lines were hidden", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -2343,12 +1866,14 @@ namespace OutSystems_Log_Parser
             numericUpDownPercentage.Enabled = false;
         }
 
-        private void removeGenericErrors(DataGridView tableName, int columnIndex, TextBox txtbox)
+        private void removeGenericErrors(string dgvName, DataGridView tableName, int columnIndex, TextBox txtbox)
         {
             try
             {
-                if (tableName.Rows.Count > 0)
+                if (tableName.Rows.Count > 50)
                 {
+                    forceTabClick(dgvName);
+ 
                     totalRowsCount = tableName.RowCount;
 
                     var messageLineCountQuery = tableName.Rows.Cast<DataGridViewRow>()
@@ -2377,273 +1902,7 @@ namespace OutSystems_Log_Parser
                                     clearTextboxes(txtbox);
                                     row.Visible = false;
 
-                                    removeGarbageSuccessful = true;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
-        }
-
-        private void removeGenericErrors2(DataGridView tableName, TextBox txtbox)
-        {
-            try
-            {
-                totalRowsCount = tableName.RowCount;
-
-                if (tableName.Name.ToString() == "dataGridViewIntegrationslogs")
-                {
-                    var messageLineCountQuery = tableName.Rows.Cast<DataGridViewRow>()
-                    .Where(r => r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null && r.Cells[10].Value != null)
-                    .Select(r => new { Val2 = r.Cells[2].Value, Val3 = r.Cells[3].Value, Val4 = r.Cells[4].Value, Val5 = r.Cells[5].Value, Val6 = r.Cells[6].Value, Val7 = r.Cells[7].Value, Val8 = r.Cells[8].Value, Val9 = r.Cells[9].Value, Val10 = r.Cells[10].Value })
-                    .GroupBy(msg => msg)
-                        .OrderByDescending(msg => msg.Count())
-                        .Select(g => new { Message = g.Key, Count = g.Count() });
-
-                    foreach (var messageLineCount in messageLineCountQuery)
-                    {
-                        myMessage = messageLineCount.Message.ToString();
-                        myMessageCount = messageLineCount.Count;
-
-                        percentageMessageCount = ((double)myMessageCount / (double)totalRowsCount) * 100;
-
-                        roundedPercentageMessageCount = Math.Round(percentageMessageCount, 0, MidpointRounding.AwayFromZero);
-
-                        if (roundedPercentageMessageCount >= (double)numericUpDownPercentage.Value)
-                        {
-                            foreach (DataGridViewRow row in tableName.Rows)
-                            {
-                                string myString = row.Cells[2].Value.ToString() + row.Cells[3].Value.ToString() + row.Cells[4].Value.ToString() + row.Cells[5].Value.ToString() + row.Cells[6].Value.ToString() + row.Cells[7].Value.ToString() + row.Cells[8].Value.ToString() + row.Cells[9].Value.ToString() + row.Cells[10].Value.ToString();
-                                string myNewMessage = "";
-                                myNewMessage = Regex.Replace(myMessage, @"([\{\,]?[ ]Val[\d]{1,2}[ ][\=][ ]?)", "");
-                                myNewMessage = myNewMessage.Replace(" }", "");
-                                if (myString.Equals(myNewMessage))
-                                {
-                                    tableName.CurrentCell = null;
-                                    clearTextboxes(txtbox);
-                                    row.Visible = false;
-                                }
-                            }
-                        }
-                    }
-                }
-                else if (tableName.Name.ToString() == "dataGridViewScreenRequestslogs")
-                {
-                    var messageLineCountQuery = tableName.Rows.Cast<DataGridViewRow>()
-                    .Where(r => r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null && r.Cells[10].Value != null && r.Cells[11].Value != null && r.Cells[12].Value != null)
-                    .Select(r => new { Val2 = r.Cells[2].Value, Val3 = r.Cells[3].Value, Val4 = r.Cells[4].Value, Val5 = r.Cells[5].Value, Val6 = r.Cells[6].Value, Val7 = r.Cells[7].Value, Val8 = r.Cells[8].Value, Val9 = r.Cells[9].Value, Val10 = r.Cells[10].Value, Val11 = r.Cells[11].Value, Val12 = r.Cells[12].Value })
-                    .GroupBy(msg => msg)
-                        .OrderByDescending(msg => msg.Count())
-                        .Select(g => new { Message = g.Key, Count = g.Count() });
-
-                    foreach (var messageLineCount in messageLineCountQuery)
-                    {
-                        myMessage = messageLineCount.Message.ToString();
-                        myMessageCount = messageLineCount.Count;
-
-                        percentageMessageCount = ((double)myMessageCount / (double)totalRowsCount) * 100;
-
-                        roundedPercentageMessageCount = Math.Round(percentageMessageCount, 0, MidpointRounding.AwayFromZero);
-
-                        if (roundedPercentageMessageCount >= (double)numericUpDownPercentage.Value)
-                        {
-                            foreach (DataGridViewRow row in tableName.Rows)
-                            {
-                                string myString = row.Cells[2].Value.ToString() + row.Cells[3].Value.ToString() + row.Cells[4].Value.ToString() + row.Cells[5].Value.ToString() + row.Cells[6].Value.ToString() + row.Cells[7].Value.ToString() + row.Cells[8].Value.ToString() + row.Cells[9].Value.ToString() + row.Cells[10].Value.ToString() + row.Cells[11].Value.ToString() + row.Cells[12].Value.ToString();
-                                string myNewMessage = "";
-                                myNewMessage = Regex.Replace(myMessage, @"([\{\,]?[ ]Val[\d]{1,2}[ ][\=][ ]?)", "");
-                                myNewMessage = myNewMessage.Replace(" }", "");
-                                if (myString.Equals(myNewMessage))
-                                {
-                                    tableName.CurrentCell = null;
-                                    clearTextboxes(txtbox);
-                                    row.Visible = false;
-                                }
-                            }
-                        }
-                    }
-                }
-                else if (tableName.Name.ToString() == "dataGridViewTimerlogs")
-                {
-                    var messageLineCountQuery = tableName.Rows.Cast<DataGridViewRow>()
-                    .Where(r => r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null)
-                    .Select(r => new { Val2 = r.Cells[2].Value, Val3 = r.Cells[3].Value, Val4 = r.Cells[4].Value, Val5 = r.Cells[5].Value, Val6 = r.Cells[6].Value, Val7 = r.Cells[7].Value })
-                    .GroupBy(msg => msg)
-                        .OrderByDescending(msg => msg.Count())
-                        .Select(g => new { Message = g.Key, Count = g.Count() });
-
-                    foreach (var messageLineCount in messageLineCountQuery)
-                    {
-                        myMessage = messageLineCount.Message.ToString();
-                        myMessageCount = messageLineCount.Count;
-
-                        percentageMessageCount = ((double)myMessageCount / (double)totalRowsCount) * 100;
-
-                        roundedPercentageMessageCount = Math.Round(percentageMessageCount, 0, MidpointRounding.AwayFromZero);
-
-                        if (roundedPercentageMessageCount >= (double)numericUpDownPercentage.Value)
-                        {
-                            foreach (DataGridViewRow row in tableName.Rows)
-                            {
-                                string myString = row.Cells[2].Value.ToString() + row.Cells[3].Value.ToString() + row.Cells[4].Value.ToString() + row.Cells[5].Value.ToString() + row.Cells[6].Value.ToString() + row.Cells[7].Value.ToString();
-                                string myNewMessage = "";
-                                myNewMessage = Regex.Replace(myMessage, @"([\{\,]?[ ]Val[\d]{1,2}[ ][\=][ ]?)", "");
-                                myNewMessage = myNewMessage.Replace(" }", "");
-                                if (myString.Equals(myNewMessage))
-                                {
-                                    tableName.CurrentCell = null;
-                                    clearTextboxes(txtbox);
-                                    row.Visible = false;
-                                }
-                            }
-                        }
-                    }
-                }
-                else if (tableName.Name.ToString() == "dataGridViewEmaillogs")
-                {
-                    var messageLineCountQuery = tableName.Rows.Cast<DataGridViewRow>()
-                    .Where(r => r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null)
-                    .Select(r => new { Val3 = r.Cells[3].Value, Val4 = r.Cells[4].Value, Val5 = r.Cells[5].Value })
-                    .GroupBy(msg => msg)
-                        .OrderByDescending(msg => msg.Count())
-                        .Select(g => new { Message = g.Key, Count = g.Count() });
-
-                    foreach (var messageLineCount in messageLineCountQuery)
-                    {
-                        myMessage = messageLineCount.Message.ToString();
-                        myMessageCount = messageLineCount.Count;
-
-                        percentageMessageCount = ((double)myMessageCount / (double)totalRowsCount) * 100;
-
-                        roundedPercentageMessageCount = Math.Round(percentageMessageCount, 0, MidpointRounding.AwayFromZero);
-
-                        if (roundedPercentageMessageCount >= (double)numericUpDownPercentage.Value)
-                        {
-                            foreach (DataGridViewRow row in tableName.Rows)
-                            {
-                                string myString = row.Cells[3].Value.ToString() + row.Cells[4].Value.ToString() + row.Cells[5].Value.ToString();
-                                string myNewMessage = "";
-                                myNewMessage = Regex.Replace(myMessage, @"([\{\,]?[ ]Val[\d]{1,2}[ ][\=][ ]?)", "");
-                                myNewMessage = myNewMessage.Replace(" }", "");
-                                if (myString.Equals(myNewMessage))
-                                {
-                                    tableName.CurrentCell = null;
-                                    clearTextboxes(txtbox);
-                                    row.Visible = false;
-                                }
-                            }
-                        }
-                    }
-                }
-                else if (tableName.Name.ToString() == "dataGridViewExtensionlogs")
-                {
-                    var messageLineCountQuery = tableName.Rows.Cast<DataGridViewRow>()
-                    .Where(r => r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null)
-                    .Select(r => new { Val2 = r.Cells[2].Value, Val3 = r.Cells[3].Value, Val4 = r.Cells[4].Value, Val5 = r.Cells[5].Value, Val6 = r.Cells[6].Value, Val7 = r.Cells[7].Value })
-                    .GroupBy(msg => msg)
-                        .OrderByDescending(msg => msg.Count())
-                        .Select(g => new { Message = g.Key, Count = g.Count() });
-
-                    foreach (var messageLineCount in messageLineCountQuery)
-                    {
-                        myMessage = messageLineCount.Message.ToString();
-                        myMessageCount = messageLineCount.Count;
-
-                        percentageMessageCount = ((double)myMessageCount / (double)totalRowsCount) * 100;
-
-                        roundedPercentageMessageCount = Math.Round(percentageMessageCount, 0, MidpointRounding.AwayFromZero);
-
-                        if (roundedPercentageMessageCount >= (double)numericUpDownPercentage.Value)
-                        {
-                            foreach (DataGridViewRow row in tableName.Rows)
-                            {
-                                string myString = row.Cells[2].Value.ToString() + row.Cells[3].Value.ToString() + row.Cells[4].Value.ToString() + row.Cells[5].Value.ToString() + row.Cells[6].Value.ToString() + row.Cells[7].Value.ToString();
-                                string myNewMessage = "";
-                                myNewMessage = Regex.Replace(myMessage, @"([\{\,]?[ ]Val[\d]{1,2}[ ][\=][ ]?)", "");
-                                myNewMessage = myNewMessage.Replace(" }", "");
-                                if (myString.Equals(myNewMessage))
-                                {
-                                    tableName.CurrentCell = null;
-                                    clearTextboxes(txtbox);
-                                    row.Visible = false;
-                                }
-                            }
-                        }
-                    }
-                }
-                else if (tableName.Name.ToString() == "dataGridViewServiceActionlogs")
-                {
-                    var messageLineCountQuery = tableName.Rows.Cast<DataGridViewRow>()
-                    .Where(r => r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null)
-                    .Select(r => new { Val2 = r.Cells[2].Value, Val3 = r.Cells[3].Value, Val4 = r.Cells[4].Value, Val5 = r.Cells[5].Value })
-                    .GroupBy(msg => msg)
-                        .OrderByDescending(msg => msg.Count())
-                        .Select(g => new { Message = g.Key, Count = g.Count() });
-
-                    foreach (var messageLineCount in messageLineCountQuery)
-                    {
-                        myMessage = messageLineCount.Message.ToString();
-                        myMessageCount = messageLineCount.Count;
-
-                        percentageMessageCount = ((double)myMessageCount / (double)totalRowsCount) * 100;
-
-                        roundedPercentageMessageCount = Math.Round(percentageMessageCount, 0, MidpointRounding.AwayFromZero);
-
-                        if (roundedPercentageMessageCount >= (double)numericUpDownPercentage.Value)
-                        {
-                            foreach (DataGridViewRow row in tableName.Rows)
-                            {
-                                string myString = row.Cells[2].Value.ToString() + row.Cells[3].Value.ToString() + row.Cells[4].Value.ToString() + row.Cells[5].Value.ToString();
-                                string myNewMessage = "";
-                                myNewMessage = Regex.Replace(myMessage, @"([\{\,]?[ ]Val[\d]{1,2}[ ][\=][ ]?)", "");
-                                myNewMessage = myNewMessage.Replace(" }", "");
-                                if (myString.Equals(myNewMessage))
-                                {
-                                    tableName.CurrentCell = null;
-                                    clearTextboxes(txtbox);
-                                    row.Visible = false;
-                                }
-                            }
-                        }
-                    }
-                }
-                else if (tableName.Name.ToString() == "dataGridViewTradWebRequests")
-                {
-                    var messageLineCountQuery = tableName.Rows.Cast<DataGridViewRow>()
-                    .Where(r => r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null && r.Cells[10].Value != null && r.Cells[11].Value != null)
-                    .Select(r => new { Val2 = r.Cells[2].Value, Val3 = r.Cells[3].Value, Val4 = r.Cells[4].Value, Val5 = r.Cells[5].Value, Val6 = r.Cells[6].Value, Val7 = r.Cells[7].Value, Val8 = r.Cells[8].Value, Val9 = r.Cells[9].Value, Val10 = r.Cells[10].Value, Val11 = r.Cells[11].Value })
-                    .GroupBy(msg => msg)
-                        .OrderByDescending(msg => msg.Count())
-                        .Select(g => new { Message = g.Key, Count = g.Count() });
-
-                    foreach (var messageLineCount in messageLineCountQuery)
-                    {
-                        myMessage = messageLineCount.Message.ToString();
-                        myMessageCount = messageLineCount.Count;
-
-                        percentageMessageCount = ((double)myMessageCount / (double)totalRowsCount) * 100;
-
-                        roundedPercentageMessageCount = Math.Round(percentageMessageCount, 0, MidpointRounding.AwayFromZero);
-
-                        if (roundedPercentageMessageCount >= (double)numericUpDownPercentage.Value)
-                        {
-                            foreach (DataGridViewRow row in tableName.Rows)
-                            {
-                                string myString = row.Cells[2].Value.ToString() + row.Cells[3].Value.ToString() + row.Cells[4].Value.ToString() + row.Cells[5].Value.ToString() + row.Cells[6].Value.ToString() + row.Cells[7].Value.ToString() + row.Cells[8].Value.ToString() + row.Cells[9].Value.ToString() + row.Cells[10].Value.ToString() + row.Cells[11].Value.ToString();
-                                string myNewMessage = "";
-                                myNewMessage = Regex.Replace(myMessage, @"([\{\,]?[ ]Val[\d]{1,2}[ ][\=][ ]?)", "");
-                                myNewMessage = myNewMessage.Replace(" }", "");
-                                if (myString.Equals(myNewMessage))
-                                {
-                                    tableName.CurrentCell = null;
-                                    clearTextboxes(txtbox);
-                                    row.Visible = false;
+                                    bool_removeGarbageSuccessful = true;
                                 }
                             }
                         }
@@ -2659,126 +1918,21 @@ namespace OutSystems_Log_Parser
 
         private void btnHighlight_Click(object sender, EventArgs e)
         {
-            highlightError = true;
+            bool_highlightError = true;
 
-            string[] knownErrors_Errorlogs = { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "a fatal error has occurred", "communicationexception", "json deserialization", "compilation error", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "can't proceed", "truncated in table", "unknown reference expression type email", "unable to open service studio", "bad json escape sequence" };
-            string[] knownErrors_Generallogs = { "system cannot find" };
-            string[] knownErrors_WinAppEventViewer = { "ora-", "error closing", "cannot access", "error opening" };
-            string[] knownErrors_WinSysEventViewer = { "error closing", "timed out" };
-            string[] knownErrors_AndroidiOSlogs = { "file is corrupt or invalid", "androidx library", "command finished with error code 0", "plugin is not going to work", "error: spawnsync sudo etimeout", "plugin doesn't support this project's cordova-android version", "failed to fetch plug", "archive failed", "build failed with the following error", "command failed with exit code", "signing certificate is invalid", "the ios deployment target", "verification failed" };
-            string[] knownErrors_ServiceStudiologs = { "oneoftypedefinition", "http forbidden", "[not connected]" };
+            highlightError();
 
-            highlightKnownErrors(dataGridViewErrorlogs, 1, knownErrors_Errorlogs);
-            highlightKnownErrors(dataGridViewGenerallogs, 1, knownErrors_Generallogs);
-            //highlightKnownErrors(dataGridViewIntegrationslogs);
-            //highlightKnownErrors(dataGridViewScreenRequestslogs);
-            //highlightKnownErrors(dataGridViewTimerlogs);
-            //highlightKnownErrors(dataGridViewEmaillogs);
-            //highlightKnownErrors(dataGridViewExtensionlogs);
-            //highlightKnownErrors(dataGridViewServiceActionlogs);
-            //highlightKnownErrors(dataGridViewTradWebRequests);
-            //highlightKnownErrors(dataGridViewIISDateTime);
-            //highlightKnownErrors(dataGridViewIISTimeTaken);
-            highlightKnownErrors(dataGridViewWinAppEventViewer, 8, knownErrors_WinAppEventViewer);
-            highlightKnownErrors(dataGridViewWinSysEventViewer, 8, knownErrors_WinSysEventViewer);
-            //highlightKnownErrors(dataGridViewWinSecEventViewer, 8);
-            highlightKnownErrors(dataGridViewAndroidlogs, 3, knownErrors_AndroidiOSlogs);
-            highlightKnownErrors(dataGridViewiOSlogs, 3, knownErrors_AndroidiOSlogs);
-            highlightKnownErrors(dataGridViewServiceStudiologs, 3, knownErrors_ServiceStudiologs);
-            //highlightKnownErrors(dataGridViewGeneralTXTlogs, 2);
-            //highlightKnownErrors(dataGridViewBPTReportslogs);
-
-            if (removeGarbage)
+            if (bool_removeGarbage)
             {
-                removeGenericErrors(dataGridViewErrorlogs, 1, txtBoxDetailErrorLogs);
-                //removeGenericErrors(dataGridViewGenerallogs, 1, txtBoxDetailGenerallogs);
-                //removeGenericErrors2(dataGridViewIntegrationslogs, txtBoxDetailIntegrationlogs);
-                //removeGenericErrors2(dataGridViewScreenRequestslogs, txtBoxDetailScreenRequestslogs);
-                //removeGenericErrors2(dataGridViewTimerlogs, txtBoxDetailTimerlogs);
-                //removeGenericErrors2(dataGridViewEmaillogs, txtBoxDetailEmaillogs);
-                //removeGenericErrors2(dataGridViewExtensionlogs, txtBoxDetailExtensionlogs);
-                //removeGenericErrors2(dataGridViewServiceActionlogs, txtBoxDetailServiceActionlogs);
-                //removeGenericErrors2(dataGridViewTradWebRequests, txtBoxDetailTradWebRequests);
-                //removeGenericErrors2(dataGridViewIISDateTime, txtDetailIISlogs);
-                //removeGenericErrors2(dataGridViewIISTimeTaken, txtDetailIISlogs);
-                removeGenericErrors(dataGridViewWinAppEventViewer, 2, txtBoxDetailWinAppEventViewer);
-                removeGenericErrors(dataGridViewWinSysEventViewer, 2, txtBoxDetailWinSysEventViewer);
-                removeGenericErrors(dataGridViewWinSecEventViewer, 2, txtBoxDetailWinSecEventViewer);
-                removeGenericErrors(dataGridViewAndroidlogs, 3, txtBoxDetailAndroidLogs);
-                removeGenericErrors(dataGridViewiOSlogs, 3, txtBoxDetailiOSLogs);
-                removeGenericErrors(dataGridViewServiceStudiologs, 3, txtBoxDetailServiceStudioLogs);
-                removeGenericErrors(dataGridViewGeneralTXTlogs, 2, txtBoxDetailGeneralTXTLogs);
-                //removeGenericErrors(dataGridViewBPTReportslogs, txtBoxDetailBPTReportslogs);
+                removeGarbage();
             }
 
-            if (findKeyword)
+            if (bool_findKeyword)
             {
-                highlightKeyword(dataGridViewErrorlogs);
-                highlightKeyword(dataGridViewGenerallogs);
-                highlightKeyword(dataGridViewSlowSQLlogs);
-                highlightKeyword(dataGridViewSlowSQLDurationlogs);
-                highlightKeyword(dataGridViewSlowExtensionlogs);
-                highlightKeyword(dataGridViewSlowExtensionDurationlogs);
-                highlightKeyword(dataGridViewIntegrationslogs);
-                highlightKeyword(dataGridViewIntWebServiceslogs);
-                highlightKeyword(dataGridViewInWebServicesDurationlogs);
-                highlightKeyword(dataGridViewScreenRequestslogs);
-                highlightKeyword(dataGridViewTimerlogs);
-                highlightKeyword(dataGridViewTimerTimerslogs);
-                highlightKeyword(dataGridViewTimerTimersDurationlogs);
-                highlightKeyword(dataGridViewEmaillogs);
-                highlightKeyword(dataGridViewExtensionlogs);
-                highlightKeyword(dataGridViewServiceActionlogs);
-                highlightKeyword(dataGridViewTradWebRequests);
-                highlightKeyword(dataGridViewTradWebRequestsScreenlogs);
-                highlightKeyword(dataGridViewTradWebRequestsScreenDurationlogs);
-                highlightKeyword(dataGridViewIISDateTime);
-                highlightKeyword(dataGridViewIISTimeTaken);
-                highlightKeyword(dataGridViewWinAppEventViewer);
-                highlightKeyword(dataGridViewWinSysEventViewer);
-                highlightKeyword(dataGridViewWinSecEventViewer);
-                highlightKeyword(dataGridViewAndroidlogs);
-                highlightKeyword(dataGridViewiOSlogs);
-                highlightKeyword(dataGridViewServiceStudiologs);
-                highlightKeyword(dataGridViewGeneralTXTlogs);
-                highlightKeyword(dataGridViewBPTReportslogs);
-                highlightKeyword(dataGridViewEnvironmentCapabilitieslogs);
-                highlightKeyword(dataGridViewEnvironmentslogs);
-                highlightKeyword(dataGridViewFullErrorDumps);
-                highlightKeyword(dataGridViewRoleslogs);
-                highlightKeyword(dataGridViewRolesInApplicationslogs);
-                highlightKeyword(dataGridViewRolesInTeamslogs);
-                highlightKeyword(dataGridViewUserlogs);
-                highlightKeyword(dataGridViewUserPoolslogs);
-                highlightKeyword(dataGridViewSyncErrorslogs);
-                highlightKeyword(dataGridViewStagingApplogs);
-                highlightKeyword(dataGridViewStagingAppVerlogs);
-                highlightKeyword(dataGridViewStagingAppVerModuleVerlogs);
-                highlightKeyword(dataGridViewStagingChangelog);
-                highlightKeyword(dataGridViewStagingConsumerElements);
-                highlightKeyword(dataGridViewStagingEntityConfiguration);
-                highlightKeyword(dataGridViewStagingEnvironmentAppicationCache);
-                highlightKeyword(dataGridViewStagingEnvironmentApplicationModule);
-                highlightKeyword(dataGridViewStagingEnvironmentApplicationVersion);
-                highlightKeyword(dataGridViewStagingEnvironmentModuleCache);
-                highlightKeyword(dataGridViewStagingEnvironmentModuleRunning);
-                highlightKeyword(dataGridViewStagingModules);
-                highlightKeyword(dataGridViewStagingModuleVersionRefererences);
-                highlightKeyword(dataGridViewStagingProducerElements);
-                highlightKeyword(dataGridViewStagingSiteProperties);
-                highlightKeyword(dataGridViewStaginglogs);
-                highlightKeyword(dataGridViewStagingApplicationVersion);
-                highlightKeyword(dataGridViewStagingMessage);
-                highlightKeyword(dataGridViewStagingModuleInconsistencies);
-                highlightKeyword(dataGridViewStagingModuleVersion);
-                highlightKeyword(dataGridViewStagingModuleVersionPublished);
-                highlightKeyword(dataGridViewStagingModuleVersionUploaded);
-                highlightKeyword(dataGridViewStagingOptions);
-                highlightKeyword(dataGridViewStagingOutdatedApplication);
-                highlightKeyword(dataGridViewStagingOutdatedModule);
+                findKeyword();
             }
 
-            if (highlightErrorSuccessful)
+            if (bool_highlightErrorSuccessful)
             {
                 MessageBox.Show("Known errors were highlighted", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -2786,21 +1940,23 @@ namespace OutSystems_Log_Parser
             btnHighlight.Enabled = false;
         }
 
-        private void highlightKnownErrors(DataGridView tableName, int columnIndex, string[] errorsList)
+        private void highlightKnownErrors(string dgvName, DataGridView tableName, int columnIndex, string[] errorsList)
         {
             try
             {
                 if (tableName.Rows.Count > 0)
                 {
+                    forceTabClick(dgvName);
+
                     foreach (string error in errorsList)
                     {
                         foreach (DataGridViewRow row in tableName.Rows)
                         {
                             if (row.Cells[columnIndex].Value.ToString().ToLower().Contains(error))
-                            {
+                            { 
                                 row.DefaultCellStyle.BackColor = Color.Yellow;
 
-                                highlightErrorSuccessful = true;
+                                bool_highlightErrorSuccessful = true;
                             }
                         }
                     }
@@ -2816,36 +1972,74 @@ namespace OutSystems_Log_Parser
         //Beginning of the Service Studio Report tab code
         private void dataGridViewServiceStudiologs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewServiceStudiologs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewServiceStudiologs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailServiceStudioLogs.Text = String.Join(Environment.NewLine, rowInfo);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewServiceStudiologs, e, txtBoxDetailServiceStudioLogs);
         }
         //End of Service Studio Report tab code
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            tabPage1_MyClick = new TabControlClick(tabPage1_Click);
+            tabPage2_MyClick = new TabControlClick(tabPage2_Click);
+            tabPage3_MyClick = new TabControlClick(tabPage3_Click);
+            tabPage4_MyClick = new TabControlClick(tabPage4_Click);
+            tabPage5_MyClick = new TabControlClick(tabPage5_Click);
+            tabPage6_MyClick = new TabControlClick(tabPage6_Click);
+            tabPage7_MyClick = new TabControlClick(tabPage7_Click);
+            tabPage8_MyClick = new TabControlClick(tabPage8_Click);
+            tabPage9_MyClick = new TabControlClick(tabPage9_Click);
+            tabPage10_MyClick = new TabControlClick(tabPage10_Click);
+            tabPage11_MyClick = new TabControlClick(tabPage11_Click);
+            tabPage12_MyClick = new TabControlClick(tabPage12_Click);
+            tabPage13_MyClick = new TabControlClick(tabPage13_Click);
+            tabPage14_MyClick = new TabControlClick(tabPage14_Click);
+            tabPage15_MyClick = new TabControlClick(tabPage15_Click);
+            tabPage16_MyClick = new TabControlClick(tabPage16_Click);
+            tabPage17_MyClick = new TabControlClick(tabPage17_Click);
+            tabPage18_MyClick = new TabControlClick(tabPage18_Click);
+            tabPage19_MyClick = new TabControlClick(tabPage19_Click);
+            tabPage20_MyClick = new TabControlClick(tabPage20_Click);
+            tabPage21_MyClick = new TabControlClick(tabPage21_Click);
+            tabPage22_MyClick = new TabControlClick(tabPage22_Click);
+            tabPage23_MyClick = new TabControlClick(tabPage23_Click);
+            tabPage24_MyClick = new TabControlClick(tabPage24_Click);
+            tabPage25_MyClick = new TabControlClick(tabPage25_Click);
+            tabPage26_MyClick = new TabControlClick(tabPage26_Click);
+            tabPage27_MyClick = new TabControlClick(tabPage27_Click);
+            tabPage28_MyClick = new TabControlClick(tabPage28_Click);
+            tabPage29_MyClick = new TabControlClick(tabPage29_Click);
+            tabPage30_MyClick = new TabControlClick(tabPage30_Click);
+            tabPage31_MyClick = new TabControlClick(tabPage31_Click);
+            tabPage32_MyClick = new TabControlClick(tabPage32_Click);
+            tabPage33_MyClick = new TabControlClick(tabPage33_Click);
+            tabPage34_MyClick = new TabControlClick(tabPage34_Click);
+            tabPage35_MyClick = new TabControlClick(tabPage35_Click);
+            tabPage36_MyClick = new TabControlClick(tabPage36_Click);
+            tabPage37_MyClick = new TabControlClick(tabPage37_Click);
+            tabPage38_MyClick = new TabControlClick(tabPage38_Click);
+            tabPage39_MyClick = new TabControlClick(tabPage39_Click);
+            tabPage40_MyClick = new TabControlClick(tabPage40_Click);
+            tabPage41_MyClick = new TabControlClick(tabPage41_Click);
+            tabPage42_MyClick = new TabControlClick(tabPage42_Click);
+            tabPage43_MyClick = new TabControlClick(tabPage43_Click);
+            tabPage44_MyClick = new TabControlClick(tabPage44_Click);
+            tabPage45_MyClick = new TabControlClick(tabPage45_Click);
+            tabPage46_MyClick = new TabControlClick(tabPage46_Click);
+            tabPage47_MyClick = new TabControlClick(tabPage47_Click);
+            tabPage48_MyClick = new TabControlClick(tabPage48_Click);
+            tabPage49_MyClick = new TabControlClick(tabPage49_Click);
+            tabPage50_MyClick = new TabControlClick(tabPage50_Click);
+            tabPage51_MyClick = new TabControlClick(tabPage51_Click);
+            tabPage52_MyClick = new TabControlClick(tabPage52_Click);
+            tabPage53_MyClick = new TabControlClick(tabPage53_Click);
+            tabPage54_MyClick = new TabControlClick(tabPage54_Click);
+            tabPage55_MyClick = new TabControlClick(tabPage55_Click);
+            tabPage56_MyClick = new TabControlClick(tabPage56_Click);
+            tabPage57_MyClick = new TabControlClick(tabPage57_Click);
+            tabPage58_MyClick = new TabControlClick(tabPage58_Click);
+            tabPage59_MyClick = new TabControlClick(tabPage59_Click);
+            tabPage61_MyClick = new TabControlClick(tabPage61_Click);
+            tabPage62_MyClick = new TabControlClick(tabPage62_Click);
+
             btnFilter.Enabled = false;
             dateTimePicker1.Enabled = false;
             maskedTextBox1.Enabled = false;
@@ -2859,6 +2053,10 @@ namespace OutSystems_Log_Parser
             btnSearchKeyword.Enabled = false;
             txtBoxKeyword.Enabled = false;
             comBoxReport.Enabled = false;
+            btnExportSlowSQLExtensionTables.Enabled = false;
+            btnExportWebServiceTable.Enabled = false;
+            btnExportTimerTable.Enabled = false;
+            btnExportScreenTable.Enabled = false;
 
             dateTimePicker1.Value = DateTime.Now;
             dateTimePicker2.Value = DateTime.Now;
@@ -2933,7 +2131,7 @@ namespace OutSystems_Log_Parser
             createScreenshot("detailed_staging_oudated_application_logs", txtBoxDetailStagingOutdatedApplication.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_staging_oudated_module_logs", txtBoxDetailStagingOutdatedModule.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
 
-            if (screenshotSuccessful)
+            if (bool_screenshotSuccessful)
             {
                 MessageBox.Show("A screenshot of the error was taken", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -3006,7 +2204,7 @@ namespace OutSystems_Log_Parser
 
                     img.Save(screenshotsFolder + "\\" + filename + "_" + timeStamp + ".jpg");
 
-                    screenshotSuccessful = true;
+                    bool_screenshotSuccessful = true;
                 }
             }
             catch (Exception ex)
@@ -3018,1426 +2216,236 @@ namespace OutSystems_Log_Parser
 
         private void dataGridViewGeneralTXTlogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewGeneralTXTlogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewGeneralTXTlogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailGeneralTXTLogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewGeneralTXTlogs, e, txtBoxDetailGeneralTXTLogs);
         }
 
         private void dataGridViewBPTReportslogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewBPTReportslogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewBPTReportslogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailBPTReportslogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewBPTReportslogs, e, txtBoxDetailBPTReportslogs);
         }
 
         private void dataGridViewEnvironmentCapabilitieslogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewEnvironmentCapabilitieslogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewEnvironmentCapabilitieslogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailEnvironmentCapabilitieslogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewEnvironmentCapabilitieslogs, e, txtBoxDetailEnvironmentCapabilitieslogs);
         }
 
         private void dataGridViewEnvironmentslogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewEnvironmentslogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewEnvironmentslogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailEnvironmentslogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewEnvironmentslogs, e, txtBoxDetailEnvironmentslogs);
         }
 
         private void dataGridViewFullErrorDumps_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewFullErrorDumps.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewFullErrorDumps.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailFullErrorDumpslogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewFullErrorDumps, e, txtBoxDetailFullErrorDumpslogs);
         }
 
         private void dataGridViewRoleslogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewRoleslogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewRoleslogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailRoleslogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewRoleslogs, e, txtBoxDetailRoleslogs);
         }
 
         private void dataGridViewRolesInApplicationslogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewRolesInApplicationslogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewRolesInApplicationslogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailRolesInApplicationslogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewRolesInApplicationslogs, e, txtBoxDetailRolesInApplicationslogs);
         }
 
         private void dataGridViewRolesInTeamslogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewRolesInTeamslogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewRolesInTeamslogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailRolesInTeamslogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewRolesInTeamslogs, e, txtBoxDetailRolesInTeamslogs);
         }
 
         private void dataGridViewSyncErrorslogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewSyncErrorslogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewSyncErrorslogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailSyncErrorslogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewSyncErrorslogs, e, txtBoxDetailSyncErrorslogs);
         }
 
         private void dataGridViewUserlogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewUserlogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewUserlogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailUserlogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewUserlogs, e, txtBoxDetailUserlogs);
         }
 
         private void dataGridViewUserPoolslogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewUserPoolslogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewUserPoolslogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailUserPoolslogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewUserPoolslogs, e, txtBoxDetailUserPoolslogs);
         }
 
         private void dataGridViewStagingApplogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewStagingApplogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewStagingApplogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailStagingApplogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewStagingApplogs, e, txtBoxDetailStagingApplogs);
         }
 
         private void dataGridViewStagingAppVerlogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewStagingAppVerlogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewStagingAppVerlogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailStagingAppVerlogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewStagingAppVerlogs, e, txtBoxDetailStagingAppVerlogs);
         }
 
         private void dataGridViewStagingAppVerModuleVerlogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewStagingAppVerModuleVerlogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewStagingAppVerModuleVerlogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailStagingAppVerModuleVerlogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewStagingAppVerModuleVerlogs, e, txtBoxDetailStagingAppVerModuleVerlogs);
         }
 
         private void dataGridViewStagingChangelog_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewStagingChangelog.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewStagingChangelog.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailStagingChangelog.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewStagingChangelog, e, txtBoxDetailStagingChangelog);
         }
 
         private void dataGridViewStagingConsumerElements_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewStagingConsumerElements.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewStagingConsumerElements.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailStagingConsumerElementslogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewStagingConsumerElements, e, txtBoxDetailStagingConsumerElementslogs);
         }
 
         private void dataGridViewStagingEntityConfiguration_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewStagingEntityConfiguration.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewStagingEntityConfiguration.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailStagingEntityConfiguration.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewStagingEntityConfiguration, e, txtBoxDetailStagingEntityConfiguration);
         }
 
         private void dataGridViewStagingEnvironmentAppicationCache_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewStagingEnvironmentAppicationCache.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewStagingEnvironmentAppicationCache.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailStagingEnvironmentApplicationCache.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewStagingEnvironmentAppicationCache, e, txtBoxDetailStagingEnvironmentApplicationCache);
         }
 
         private void dataGridViewStagingEnvironmentApplicationModule_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewStagingEnvironmentApplicationModule.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewStagingEnvironmentApplicationModule.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailStagingEnvironmentApplicationModule.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewStagingEnvironmentApplicationModule, e, txtBoxDetailStagingEnvironmentApplicationModule);
         }
 
         private void dataGridViewStagingEnvironmentApplicationVersion_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewStagingEnvironmentApplicationVersion.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewStagingEnvironmentApplicationVersion.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailStagingEnviromentApplicationVersion.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewStagingEnvironmentApplicationVersion, e, txtBoxDetailStagingEnviromentApplicationVersion);
         }
 
         private void dataGridViewStagingEnvironmentModuleCache_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewStagingEnvironmentModuleCache.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewStagingEnvironmentModuleCache.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailStagingEnvironmentModuleCache.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewStagingEnvironmentModuleCache, e, txtBoxDetailStagingEnvironmentModuleCache);
         }
 
         private void dataGridViewStagingEnvironmentModuleRunning_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewStagingEnvironmentModuleRunning.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewStagingEnvironmentModuleRunning.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailStagingEnvironmentModuleRunning.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewStagingEnvironmentModuleRunning, e, txtBoxDetailStagingEnvironmentModuleRunning);
         }
 
         private void dataGridViewStagingModules_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewStagingModules.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewStagingModules.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailStagingModules.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewStagingModules, e, txtBoxDetailStagingModules);
         }
 
         private void dataGridViewStagingModuleVersionRefererences_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewStagingModuleVersionRefererences.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewStagingModuleVersionRefererences.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailStagingModuleVersionReferences.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewStagingModuleVersionRefererences, e, txtBoxDetailStagingModuleVersionReferences);
         }
 
         private void dataGridViewStagingProducerElements_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewStagingProducerElements.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewStagingProducerElements.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailStagingProducerElements.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewStagingProducerElements, e, txtBoxDetailStagingProducerElements);
         }
 
         private void dataGridViewStagingSiteProperties_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewStagingSiteProperties.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewStagingSiteProperties.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailStagingSiteProperties.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewStagingSiteProperties, e, txtBoxDetailStagingSiteProperties);
         }
 
         private void dataGridViewStaginglogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewStaginglogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewStaginglogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailStaginglogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewStaginglogs, e, txtBoxDetailStaginglogs);
         }
 
         private void dataGridViewStagingApplicationVersion_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewStagingApplicationVersion.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewStagingApplicationVersion.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailStagingApplicationVersion.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewStagingApplicationVersion, e, txtBoxDetailStagingApplicationVersion);
         }
 
         private void dataGridViewStagingMessage_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewStagingMessage.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewStagingMessage.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailStagingMessage.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewStagingMessage, e, txtBoxDetailStagingMessage);
         }
 
         private void dataGridViewStagingModuleInconsistencies_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewStagingModuleInconsistencies.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewStagingModuleInconsistencies.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailStagingModuleInconsistencies.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewStagingModuleInconsistencies, e, txtBoxDetailStagingModuleInconsistencies);
         }
 
         private void dataGridViewStagingModuleVersion_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewStagingModuleVersion.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewStagingModuleVersion.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailStagingModuleVersion.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewStagingModuleVersion, e, txtBoxDetailStagingModuleVersion);
         }
 
         private void dataGridViewStagingModuleVersionPublished_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewStagingModuleVersionPublished.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewStagingModuleVersionPublished.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailStagingModuleVersionPublished.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewStagingModuleVersionPublished, e, txtBoxDetailStagingModuleVersionPublished);
         }
 
         private void dataGridViewStagingModuleVersionUploaded_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewStagingModuleVersionUploaded.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewStagingModuleVersionUploaded.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailStagingModuleVersionUploaded.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewStagingModuleVersionUploaded, e, txtBoxDetailStagingModuleVersionUploaded);
         }
 
         private void dataGridViewStagingOptions_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewStagingOptions.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewStagingOptions.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailStagingOptions.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewStagingOptions, e, txtBoxDetailStagingOptions);
         }
 
         private void dataGridViewStagingOutdatedApplication_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewStagingOutdatedApplication.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewStagingOutdatedApplication.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailStagingOutdatedApplication.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewStagingOutdatedApplication, e, txtBoxDetailStagingOutdatedApplication);
         }
 
         private void dataGridViewStagingOutdatedModule_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewStagingOutdatedModule.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewStagingOutdatedModule.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailStagingOutdatedModule.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewStagingOutdatedModule, e, txtBoxDetailStagingOutdatedModule);
         }
 
         private void btnSearchKeyword_Click(object sender, EventArgs e)
         {
-            findKeyword = true;
+            bool_findKeyword = true;
 
-            if (string.IsNullOrEmpty(txtBoxKeyword.Text))
+            findKeyword();
+
+            if (bool_removeGarbage)
             {
-                MessageBox.Show("Please enter a keyword to search for", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                txtBoxKeyword.BackColor = Color.Orange;
-                txtBoxKeyword.Focus();
+                removeGarbage();
             }
-            else
+
+            if (bool_highlightError)
             {
-                highlightKeyword(dataGridViewErrorlogs);
-                highlightKeyword(dataGridViewGenerallogs);
-                highlightKeyword(dataGridViewSlowSQLlogs);
-                highlightKeyword(dataGridViewSlowSQLDurationlogs);
-                highlightKeyword(dataGridViewSlowExtensionlogs);
-                highlightKeyword(dataGridViewSlowExtensionDurationlogs);
-                highlightKeyword(dataGridViewIntegrationslogs);
-                highlightKeyword(dataGridViewIntWebServiceslogs);
-                highlightKeyword(dataGridViewInWebServicesDurationlogs);
-                highlightKeyword(dataGridViewScreenRequestslogs);
-                highlightKeyword(dataGridViewTimerlogs);
-                highlightKeyword(dataGridViewTimerTimerslogs);
-                highlightKeyword(dataGridViewTimerTimersDurationlogs);
-                highlightKeyword(dataGridViewEmaillogs);
-                highlightKeyword(dataGridViewExtensionlogs);
-                highlightKeyword(dataGridViewServiceActionlogs);
-                highlightKeyword(dataGridViewTradWebRequests);
-                highlightKeyword(dataGridViewTradWebRequestsScreenlogs);
-                highlightKeyword(dataGridViewTradWebRequestsScreenDurationlogs);
-                highlightKeyword(dataGridViewIISDateTime);
-                highlightKeyword(dataGridViewIISTimeTaken);
-                highlightKeyword(dataGridViewWinAppEventViewer);
-                highlightKeyword(dataGridViewWinSysEventViewer);
-                highlightKeyword(dataGridViewWinSecEventViewer);
-                highlightKeyword(dataGridViewAndroidlogs);
-                highlightKeyword(dataGridViewiOSlogs);
-                highlightKeyword(dataGridViewServiceStudiologs);
-                highlightKeyword(dataGridViewGeneralTXTlogs);
-                highlightKeyword(dataGridViewBPTReportslogs);
-                highlightKeyword(dataGridViewEnvironmentCapabilitieslogs);
-                highlightKeyword(dataGridViewEnvironmentslogs);
-                highlightKeyword(dataGridViewFullErrorDumps);
-                highlightKeyword(dataGridViewRoleslogs);
-                highlightKeyword(dataGridViewRolesInApplicationslogs);
-                highlightKeyword(dataGridViewRolesInTeamslogs);
-                highlightKeyword(dataGridViewUserlogs);
-                highlightKeyword(dataGridViewUserPoolslogs);
-                highlightKeyword(dataGridViewSyncErrorslogs);
-                highlightKeyword(dataGridViewStagingApplogs);
-                highlightKeyword(dataGridViewStagingAppVerlogs);
-                highlightKeyword(dataGridViewStagingAppVerModuleVerlogs);
-                highlightKeyword(dataGridViewStagingChangelog);
-                highlightKeyword(dataGridViewStagingConsumerElements);
-                highlightKeyword(dataGridViewStagingEntityConfiguration);
-                highlightKeyword(dataGridViewStagingEnvironmentAppicationCache);
-                highlightKeyword(dataGridViewStagingEnvironmentApplicationModule);
-                highlightKeyword(dataGridViewStagingEnvironmentApplicationVersion);
-                highlightKeyword(dataGridViewStagingEnvironmentModuleCache);
-                highlightKeyword(dataGridViewStagingEnvironmentModuleRunning);
-                highlightKeyword(dataGridViewStagingModules);
-                highlightKeyword(dataGridViewStagingModuleVersionRefererences);
-                highlightKeyword(dataGridViewStagingProducerElements);
-                highlightKeyword(dataGridViewStagingSiteProperties);
-                highlightKeyword(dataGridViewStaginglogs);
-                highlightKeyword(dataGridViewStagingApplicationVersion);
-                highlightKeyword(dataGridViewStagingMessage);
-                highlightKeyword(dataGridViewStagingModuleInconsistencies);
-                highlightKeyword(dataGridViewStagingModuleVersion);
-                highlightKeyword(dataGridViewStagingModuleVersionPublished);
-                highlightKeyword(dataGridViewStagingModuleVersionUploaded);
-                highlightKeyword(dataGridViewStagingOptions);
-                highlightKeyword(dataGridViewStagingOutdatedApplication);
-                highlightKeyword(dataGridViewStagingOutdatedModule);
-
-                if (removeGarbage)
-                {
-                    removeGenericErrors(dataGridViewErrorlogs, 1, txtBoxDetailErrorLogs);
-                    //removeGenericErrors(dataGridViewGenerallogs, 1, txtBoxDetailGenerallogs);
-                    //removeGenericErrors2(dataGridViewIntegrationslogs, txtBoxDetailIntegrationlogs);
-                    //removeGenericErrors2(dataGridViewScreenRequestslogs, txtBoxDetailScreenRequestslogs);
-                    //removeGenericErrors2(dataGridViewTimerlogs, txtBoxDetailTimerlogs);
-                    //removeGenericErrors2(dataGridViewEmaillogs, txtBoxDetailEmaillogs);
-                    //removeGenericErrors2(dataGridViewExtensionlogs, txtBoxDetailExtensionlogs);
-                    //removeGenericErrors2(dataGridViewServiceActionlogs, txtBoxDetailServiceActionlogs);
-                    //removeGenericErrors2(dataGridViewTradWebRequests, txtBoxDetailTradWebRequests);
-                    //removeGenericErrors2(dataGridViewIISDateTime, txtDetailIISlogs);
-                    //removeGenericErrors2(dataGridViewIISTimeTaken, txtDetailIISlogs);
-                    removeGenericErrors(dataGridViewWinAppEventViewer, 2, txtBoxDetailWinAppEventViewer);
-                    removeGenericErrors(dataGridViewWinSysEventViewer, 2, txtBoxDetailWinSysEventViewer);
-                    removeGenericErrors(dataGridViewWinSecEventViewer, 2, txtBoxDetailWinSecEventViewer);
-                    removeGenericErrors(dataGridViewAndroidlogs, 3, txtBoxDetailAndroidLogs);
-                    removeGenericErrors(dataGridViewiOSlogs, 3, txtBoxDetailiOSLogs);
-                    removeGenericErrors(dataGridViewServiceStudiologs, 3, txtBoxDetailServiceStudioLogs);
-                    removeGenericErrors(dataGridViewGeneralTXTlogs, 2, txtBoxDetailGeneralTXTLogs);
-                    //removeGenericErrors(dataGridViewBPTReportslogs, txtBoxDetailBPTReportslogs);
-                }
-
-                if (highlightError)
-                {
-                    string[] knownErrors_Errorlogs = { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "a fatal error has occurred", "communicationexception", "json deserialization", "compilation error", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "can't proceed", "truncated in table", "unknown reference expression type email", "unable to open service studio", "bad json escape sequence" };
-                    string[] knownErrors_Generallogs = { "system cannot find" };
-                    string[] knownErrors_WinAppEventViewer = { "ora-", "error closing", "cannot access", "error opening" };
-                    string[] knownErrors_WinSysEventViewer = { "error closing", "timed out" };
-                    string[] knownErrors_AndroidiOSlogs = { "file is corrupt or invalid", "androidx library", "command finished with error code 0", "plugin is not going to work", "error: spawnsync sudo etimeout", "plugin doesn't support this project's cordova-android version", "failed to fetch plug", "archive failed", "build failed with the following error", "command failed with exit code", "signing certificate is invalid", "the ios deployment target", "verification failed" };
-                    string[] knownErrors_ServiceStudiologs = { "oneoftypedefinition", "http forbidden", "[not connected]" };
-
-                    highlightKnownErrors(dataGridViewErrorlogs, 1, knownErrors_Errorlogs);
-                    highlightKnownErrors(dataGridViewGenerallogs, 1, knownErrors_Generallogs);
-                    //highlightKnownErrors(dataGridViewIntegrationslogs);
-                    //highlightKnownErrors(dataGridViewScreenRequestslogs);
-                    //highlightKnownErrors(dataGridViewTimerlogs);
-                    //highlightKnownErrors(dataGridViewEmaillogs);
-                    //highlightKnownErrors(dataGridViewExtensionlogs);
-                    //highlightKnownErrors(dataGridViewServiceActionlogs);
-                    //highlightKnownErrors(dataGridViewTradWebRequests);
-                    //highlightKnownErrors(dataGridViewIISDateTime);
-                    //highlightKnownErrors(dataGridViewIISTimeTaken);
-                    highlightKnownErrors(dataGridViewWinAppEventViewer, 8, knownErrors_WinAppEventViewer);
-                    highlightKnownErrors(dataGridViewWinSysEventViewer, 8, knownErrors_WinSysEventViewer);
-                    //highlightKnownErrors(dataGridViewWinSecEventViewer, 8);
-                    highlightKnownErrors(dataGridViewAndroidlogs, 3, knownErrors_AndroidiOSlogs);
-                    highlightKnownErrors(dataGridViewiOSlogs, 3, knownErrors_AndroidiOSlogs);
-                    highlightKnownErrors(dataGridViewServiceStudiologs, 3, knownErrors_ServiceStudiologs);
-                    //highlightKnownErrors(dataGridViewGeneralTXTlogs, 2);
-                    //highlightKnownErrors(dataGridViewBPTReportslogs);
-                }
-
-                if (findKeywordSuccessful)
-                {
-                    MessageBox.Show("The keyword was found", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-
-                btnSearchKeyword.Enabled = false;
-                txtBoxKeyword.Enabled = false;
+                highlightError();
             }
+
+            if (bool_findKeywordSuccessful)
+            {
+                MessageBox.Show("The keyword was found", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            btnSearchKeyword.Enabled = false;
+            txtBoxKeyword.Enabled = false;
         }
 
-        private void highlightKeyword(DataGridView tableName)
+        private void highlightKeyword(DataGridView tableName, string dgvName)
         {
             try
             {
                 if (tableName.Rows.Count > 0)
                 {
-                    //search for the value anywhere on the table, meaning, any row and any column
-                    string cellValue = "";
+                    forceTabClick(dgvName);
+
+                    //search for the value in all of the table's rows
+                    string rowValues = "";
 
                     for (int r = 0; r <= tableName.Rows.Count - 1; r++)
                     {
                         for (int c = 0; c <= tableName.Columns.Count - 1; c++)
                         {
-                            cellValue = tableName.Rows[r].Cells[c].Value.ToString();
-                            if (c != tableName.Columns.Count - 1)
+                            rowValues = rowValues + tableName.Rows[r].Cells[c].Value.ToString() + " ";
+                            if (c == tableName.Columns.Count - 1)
                             {
-                                if (cellValue.ToLower().Contains(txtBoxKeyword.Text.ToLower()))
+                                if (rowValues.ToLower().Contains(txtBoxKeyword.Text.ToLower()))
                                 {
                                     tableName.Rows[r].DefaultCellStyle.ForeColor = Color.Red;
 
-                                    findKeywordSuccessful = true;
+                                    bool_findKeywordSuccessful = true;
+
+                                    rowValues = "";
                                 }
+                                rowValues = "";
                             }
                         }
                     }
@@ -4609,321 +2617,61 @@ namespace OutSystems_Log_Parser
 
         private void dataGridViewSlowSQLlogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewSlowSQLlogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewSlowSQLlogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailsSlowSQLlogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewSlowSQLlogs, e, txtBoxDetailsSlowSQLlogs);
         }
 
         private void dataGridViewSlowSQLDurationlogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewSlowSQLDurationlogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewSlowSQLDurationlogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailsSlowSQLlogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewSlowSQLDurationlogs, e, txtBoxDetailsSlowSQLlogs);
         }
 
         private void dataGridViewIntWebServiceslogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewIntWebServiceslogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewIntWebServiceslogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailsIntWebServiceslogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewIntWebServiceslogs, e, txtBoxDetailsIntWebServiceslogs);
         }
 
         private void dataGridViewInWebServicesDurationlogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewInWebServicesDurationlogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewInWebServicesDurationlogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailsIntWebServiceslogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewInWebServicesDurationlogs, e, txtBoxDetailsIntWebServiceslogs);
         }
 
         private void dataGridViewTimerTimerslogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewTimerTimerslogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewTimerTimerslogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailsTimerTimerslogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewTimerTimerslogs, e, txtBoxDetailsTimerTimerslogs);
         }
 
         private void dataGridViewTimerTimersDurationlogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewTimerTimersDurationlogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewTimerTimersDurationlogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailsTimerTimerslogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewTimerTimersDurationlogs, e, txtBoxDetailsTimerTimerslogs);
         }
 
         private void dataGridViewTradWebRequestsScreenlogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewTradWebRequestsScreenlogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewTradWebRequestsScreenlogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailTradWebRequestsScreenlogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewTradWebRequestsScreenlogs, e, txtBoxDetailTradWebRequestsScreenlogs);
         }
 
         private void dataGridViewTradWebRequestsScreenDurationlogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewTradWebRequestsScreenDurationlogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewTradWebRequestsScreenDurationlogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailTradWebRequestsScreenlogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewTradWebRequestsScreenDurationlogs, e, txtBoxDetailTradWebRequestsScreenlogs);
         }
 
         private void dataGridViewSlowExtensionlogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    List<string> rowInfo = new List<string>();
-
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewSlowExtensionlogs.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
-                        {
-                            rowInfo.Add(dataGridViewSlowExtensionlogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
-                        }
-                    }
-
-                    txtBoxDetailsSlowExtensionlogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
-                    {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
+            cellClick(dataGridViewSlowExtensionlogs, e, txtBoxDetailsSlowExtensionlogs);
         }
 
         private void dataGridViewSlowExtensionDurationlogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            cellClick(dataGridViewSlowExtensionDurationlogs, e, txtBoxDetailsSlowExtensionlogs);
+        }
+
+        private void dataGridViewDeviceInformation_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            cellClick(dataGridViewDeviceInformation, e, txtBoxDetailDeviceInformationlogs);
+        }
+
+        private void cellClick(DataGridView tableName, DataGridViewCellEventArgs e, TextBox txtbox)
+        {
             try
             {
                 if (e.RowIndex >= 0)
@@ -4931,17 +2679,17 @@ namespace OutSystems_Log_Parser
                     List<string> rowInfo = new List<string>();
 
                     //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewSlowExtensionDurationlogs.Rows[e.RowIndex];
+                    DataGridViewRow row = tableName.Rows[e.RowIndex];
 
                     foreach (DataGridViewCell cell in row.Cells)
                     {
                         if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
                         {
-                            rowInfo.Add(dataGridViewSlowExtensionDurationlogs.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                            rowInfo.Add(tableName.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
                         }
                     }
 
-                    txtBoxDetailsSlowExtensionlogs.Text = String.Join(Environment.NewLine, rowInfo);
+                    txtbox.Text = String.Join(Environment.NewLine, rowInfo);
 
                     if (btnScreenshot.Enabled == false)
                     {
@@ -4957,38 +2705,1044 @@ namespace OutSystems_Log_Parser
             }
         }
 
-        private void dataGridViewDeviceInformation_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void removeGarbage()
         {
-            try
+            removeGenericErrors("dataGridViewErrorlogs", dataGridViewErrorlogs, 1, txtBoxDetailErrorLogs);
+            removeGenericErrors("dataGridViewWinAppEventViewer", dataGridViewWinAppEventViewer, 2, txtBoxDetailWinAppEventViewer);
+            removeGenericErrors("dataGridViewWinSysEventViewer", dataGridViewWinSysEventViewer, 2, txtBoxDetailWinSysEventViewer);
+            removeGenericErrors("dataGridViewWinSecEventViewer", dataGridViewWinSecEventViewer, 2, txtBoxDetailWinSecEventViewer);
+            removeGenericErrors("dataGridViewAndroidlogs", dataGridViewAndroidlogs, 3, txtBoxDetailAndroidLogs);
+            removeGenericErrors("dataGridViewiOSlogs", dataGridViewiOSlogs, 3, txtBoxDetailiOSLogs);
+            removeGenericErrors("dataGridViewServiceStudiologs", dataGridViewServiceStudiologs, 3, txtBoxDetailServiceStudioLogs);
+            removeGenericErrors("dataGridViewGeneralTXTlogs", dataGridViewGeneralTXTlogs, 2, txtBoxDetailGeneralTXTLogs);
+        }
+
+        private void highlightError()
+        {
+            string[] knownErrors_Errorlogs = { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "a fatal error has occurred", "communicationexception", "json deserialization", "compilation error", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "can't proceed", "truncated in table", "unknown reference expression type email", "unable to open service studio", "bad json escape sequence" };
+            string[] knownErrors_Generallogs = { "system cannot find" };
+            string[] knownErrors_WinAppEventViewer = { "ora-", "error closing", "cannot access", "error opening" };
+            string[] knownErrors_WinSysEventViewer = { "error closing", "timed out" };
+            string[] knownErrors_AndroidiOSlogs = { "file is corrupt or invalid", "androidx library", "command finished with error code 0", "plugin is not going to work", "error: spawnsync sudo etimeout", "plugin doesn't support this project's cordova-android version", "failed to fetch plug", "archive failed", "build failed with the following error", "command failed with exit code", "signing certificate is invalid", "the ios deployment target", "verification failed" };
+            string[] knownErrors_ServiceStudiologs = { "oneoftypedefinition", "http forbidden", "[not connected]" };
+
+            highlightKnownErrors("dataGridViewErrorlogs", dataGridViewErrorlogs, 1, knownErrors_Errorlogs);
+            highlightKnownErrors("dataGridViewGenerallogs", dataGridViewGenerallogs, 1, knownErrors_Generallogs);
+            highlightKnownErrors("dataGridViewWinAppEventViewer", dataGridViewWinAppEventViewer, 2, knownErrors_WinAppEventViewer);
+            highlightKnownErrors("dataGridViewWinSysEventViewer", dataGridViewWinSysEventViewer, 2, knownErrors_WinSysEventViewer);
+            highlightKnownErrors("dataGridViewAndroidlogs", dataGridViewAndroidlogs, 3, knownErrors_AndroidiOSlogs);
+            highlightKnownErrors("dataGridViewiOSlogs", dataGridViewiOSlogs, 3, knownErrors_AndroidiOSlogs);
+            highlightKnownErrors("dataGridViewServiceStudiologs", dataGridViewServiceStudiologs, 3, knownErrors_ServiceStudiologs);
+        }
+
+        private void findKeyword()
+        {
+            if (string.IsNullOrEmpty(txtBoxKeyword.Text))
             {
-                if (e.RowIndex >= 0)
+                MessageBox.Show("Please enter a keyword to search for", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                txtBoxKeyword.BackColor = Color.Orange;
+                txtBoxKeyword.Focus();
+            }
+            else
+            {
+                highlightKeyword(dataGridViewErrorlogs, "dataGridViewErrorlogs");
+                highlightKeyword(dataGridViewGenerallogs, "dataGridViewGenerallogs");
+                highlightKeyword(dataGridViewSlowSQLlogs, "dataGridViewSlowSQLlogs");
+                highlightKeyword(dataGridViewSlowSQLDurationlogs, "dataGridViewSlowSQLDurationlogs");
+                highlightKeyword(dataGridViewSlowExtensionlogs, "dataGridViewSlowExtensionlogs");
+                highlightKeyword(dataGridViewSlowExtensionDurationlogs, "dataGridViewSlowExtensionDurationlogs");
+                highlightKeyword(dataGridViewIntegrationslogs, "dataGridViewIntegrationslogs");
+                highlightKeyword(dataGridViewIntWebServiceslogs, "dataGridViewIntWebServiceslogs");
+                highlightKeyword(dataGridViewInWebServicesDurationlogs, "dataGridViewInWebServicesDurationlogs");
+                highlightKeyword(dataGridViewScreenRequestslogs, "dataGridViewScreenRequestslogs");
+                highlightKeyword(dataGridViewTimerlogs, "dataGridViewTimerlogs");
+                highlightKeyword(dataGridViewTimerTimerslogs, "dataGridViewTimerTimerslogs");
+                highlightKeyword(dataGridViewTimerTimersDurationlogs, "dataGridViewTimerTimersDurationlogs");
+                highlightKeyword(dataGridViewEmaillogs, "dataGridViewEmaillogs");
+                highlightKeyword(dataGridViewExtensionlogs, "dataGridViewExtensionlogs");
+                highlightKeyword(dataGridViewServiceActionlogs, "dataGridViewServiceActionlogs");
+                highlightKeyword(dataGridViewTradWebRequests, "dataGridViewTradWebRequests");
+                highlightKeyword(dataGridViewTradWebRequestsScreenlogs, "dataGridViewTradWebRequestsScreenlogs");
+                highlightKeyword(dataGridViewTradWebRequestsScreenDurationlogs, "dataGridViewTradWebRequestsScreenDurationlogs");
+                highlightKeyword(dataGridViewIISDateTime, "dataGridViewIISDateTime");
+                highlightKeyword(dataGridViewIISTimeTaken, "dataGridViewIISTimeTaken");
+                highlightKeyword(dataGridViewWinAppEventViewer, "dataGridViewWinAppEventViewer");
+                highlightKeyword(dataGridViewWinSysEventViewer, "dataGridViewWinSysEventViewer");
+                highlightKeyword(dataGridViewWinSecEventViewer, "dataGridViewWinSecEventViewer");
+                highlightKeyword(dataGridViewAndroidlogs, "dataGridViewAndroidlogs");
+                highlightKeyword(dataGridViewiOSlogs, "dataGridViewiOSlogs");
+                highlightKeyword(dataGridViewServiceStudiologs, "dataGridViewServiceStudiologs");
+                highlightKeyword(dataGridViewGeneralTXTlogs, "dataGridViewGeneralTXTlogs");
+                highlightKeyword(dataGridViewBPTReportslogs, "dataGridViewBPTReportslogs");
+                highlightKeyword(dataGridViewEnvironmentCapabilitieslogs, "dataGridViewEnvironmentCapabilitieslogs");
+                highlightKeyword(dataGridViewEnvironmentslogs, "dataGridViewEnvironmentslogs");
+                highlightKeyword(dataGridViewFullErrorDumps, "dataGridViewFullErrorDumps");
+                highlightKeyword(dataGridViewRoleslogs, "dataGridViewRoleslogs");
+                highlightKeyword(dataGridViewRolesInApplicationslogs, "dataGridViewRolesInApplicationslogs");
+                highlightKeyword(dataGridViewRolesInTeamslogs, "dataGridViewRolesInTeamslogs");
+                highlightKeyword(dataGridViewUserlogs, "dataGridViewUserlogs");
+                highlightKeyword(dataGridViewUserPoolslogs, "dataGridViewUserPoolslogs");
+                highlightKeyword(dataGridViewSyncErrorslogs, "dataGridViewSyncErrorslogs");
+                highlightKeyword(dataGridViewStagingApplogs, "dataGridViewStagingApplogs");
+                highlightKeyword(dataGridViewStagingAppVerlogs, "dataGridViewStagingAppVerlogs");
+                highlightKeyword(dataGridViewStagingAppVerModuleVerlogs, "dataGridViewStagingAppVerModuleVerlogs");
+                highlightKeyword(dataGridViewStagingChangelog, "dataGridViewStagingChangelog");
+                highlightKeyword(dataGridViewStagingConsumerElements, "dataGridViewStagingConsumerElements");
+                highlightKeyword(dataGridViewStagingEntityConfiguration, "dataGridViewStagingEntityConfiguration");
+                highlightKeyword(dataGridViewStagingEnvironmentAppicationCache, "dataGridViewStagingEnvironmentAppicationCache");
+                highlightKeyword(dataGridViewStagingEnvironmentApplicationModule, "dataGridViewStagingEnvironmentApplicationModule");
+                highlightKeyword(dataGridViewStagingEnvironmentApplicationVersion, "dataGridViewStagingEnvironmentApplicationVersion");
+                highlightKeyword(dataGridViewStagingEnvironmentModuleCache, "dataGridViewStagingEnvironmentModuleCache");
+                highlightKeyword(dataGridViewStagingEnvironmentModuleRunning, "dataGridViewStagingEnvironmentModuleRunning");
+                highlightKeyword(dataGridViewStagingModules, "dataGridViewStagingModules");
+                highlightKeyword(dataGridViewStagingModuleVersionRefererences, "dataGridViewStagingModuleVersionRefererences");
+                highlightKeyword(dataGridViewStagingProducerElements, "dataGridViewStagingProducerElements");
+                highlightKeyword(dataGridViewStagingSiteProperties, "dataGridViewStagingSiteProperties");
+                highlightKeyword(dataGridViewStaginglogs, "dataGridViewStaginglogs");
+                highlightKeyword(dataGridViewStagingApplicationVersion, "dataGridViewStagingApplicationVersion");
+                highlightKeyword(dataGridViewStagingMessage, "dataGridViewStagingMessage");
+                highlightKeyword(dataGridViewStagingModuleInconsistencies, "dataGridViewStagingModuleInconsistencies");
+                highlightKeyword(dataGridViewStagingModuleVersion, "dataGridViewStagingModuleVersion");
+                highlightKeyword(dataGridViewStagingModuleVersionPublished, "dataGridViewStagingModuleVersionPublished");
+                highlightKeyword(dataGridViewStagingModuleVersionUploaded, "dataGridViewStagingModuleVersionUploaded");
+                highlightKeyword(dataGridViewStagingOptions, "dataGridViewStagingOptions");
+                highlightKeyword(dataGridViewStagingOutdatedApplication, "dataGridViewStagingOutdatedApplication");
+                highlightKeyword(dataGridViewStagingOutdatedModule, "dataGridViewStagingOutdatedModule");
+            }
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+            tabControl.SelectedTab = tabPage1;
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+            tabControl.SelectedTab = tabPage2;
+        }
+
+        private void tabPage3_Click(object sender, EventArgs e)
+        {
+            tabControl.SelectedTab = tabPage3;
+        }
+
+        private void tabPage4_Click(object sender, EventArgs e)
+        {
+            tabControl.SelectedTab = tabPage4;
+        }
+
+        private void tabPage5_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = tabPage5;
+        }
+
+        private void tabPage6_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = tabPage6;
+        }
+
+        private void tabPage7_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = tabPage7;
+        }
+
+        private void tabPage8_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = tabPage8;
+        }
+
+        private void tabPage9_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = tabPage9;
+        }
+
+        private void tabPage10_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = tabPage10;
+        }
+
+        private void tabPage11_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = tabPage11;
+        }
+
+        private void tabPage12_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = tabPage12;
+        }
+
+        private void tabPage13_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = tabPage13;
+        }
+
+        private void tabPage14_Click(object sender, EventArgs e)
+        {
+            tabControl2.SelectedTab = tabPage14;
+        }
+
+        private void tabPage15_Click(object sender, EventArgs e)
+        {
+            tabControl2.SelectedTab = tabPage15;
+        }
+
+        private void tabPage16_Click(object sender, EventArgs e)
+        {
+            tabControl2.SelectedTab = tabPage16;
+        }
+
+        private void tabPage17_Click(object sender, EventArgs e)
+        {
+            tabControl3.SelectedTab = tabPage17;
+        }
+
+        private void tabPage18_Click(object sender, EventArgs e)
+        {
+            tabControl3.SelectedTab = tabPage18;
+        }
+
+        private void tabPage19_Click(object sender, EventArgs e)
+        {
+            tabControl.SelectedTab = tabPage19;
+        }
+
+        private void tabPage20_Click(object sender, EventArgs e)
+        {
+            tabControl4.SelectedTab = tabPage20;
+        }
+
+        private void tabPage21_Click(object sender, EventArgs e)
+        {
+            tabControl4.SelectedTab = tabPage21;
+        }
+
+        private void tabPage22_Click(object sender, EventArgs e)
+        {
+            tabControl.SelectedTab = tabPage22;
+        }
+
+        private void tabPage23_Click(object sender, EventArgs e)
+        {
+            tabControl.SelectedTab = tabPage23;
+        }
+
+        private void tabPage24_Click(object sender, EventArgs e)
+        {
+            tabControl.SelectedTab = tabPage24;
+        }
+
+        private void tabPage25_Click(object sender, EventArgs e)
+        {
+            tabControl.SelectedTab = tabPage25;
+        }
+
+        private void tabPage26_Click(object sender, EventArgs e)
+        {
+            tabControl5.SelectedTab = tabPage26;
+        }
+
+        private void tabPage27_Click(object sender, EventArgs e)
+        {
+            tabControl5.SelectedTab = tabPage27;
+        }
+
+        private void tabPage28_Click(object sender, EventArgs e)
+        {
+            tabControl5.SelectedTab = tabPage28;
+        }
+
+        private void tabPage29_Click(object sender, EventArgs e)
+        {
+            tabControl6.SelectedTab = tabPage29;
+        }
+
+        private void tabPage30_Click(object sender, EventArgs e)
+        {
+            tabControl6.SelectedTab = tabPage30;
+        }
+
+        private void tabPage31_Click(object sender, EventArgs e)
+        {
+            tabControl6.SelectedTab = tabPage31;
+        }
+
+        private void tabPage32_Click(object sender, EventArgs e)
+        {
+            tabControl6.SelectedTab = tabPage32;
+        }
+
+        private void tabPage33_Click(object sender, EventArgs e)
+        {
+            tabControl6.SelectedTab = tabPage33;
+        }
+
+        private void tabPage34_Click(object sender, EventArgs e)
+        {
+            tabControl6.SelectedTab = tabPage34;
+        }
+
+        private void tabPage35_Click(object sender, EventArgs e)
+        {
+            tabControl7.SelectedTab = tabPage35;
+        }
+
+        private void tabPage36_Click(object sender, EventArgs e)
+        {
+            tabControl7.SelectedTab = tabPage36;
+        }
+
+        private void tabPage37_Click(object sender, EventArgs e)
+        {
+            tabControl7.SelectedTab = tabPage37;
+        }
+
+        private void tabPage38_Click(object sender, EventArgs e)
+        {
+            tabControl7.SelectedTab = tabPage38;
+        }
+
+        private void tabPage39_Click(object sender, EventArgs e)
+        {
+            tabControl7.SelectedTab = tabPage39;
+        }
+
+        private void tabPage40_Click(object sender, EventArgs e)
+        {
+            tabControl7.SelectedTab = tabPage40;
+        }
+
+        private void tabPage41_Click(object sender, EventArgs e)
+        {
+            tabControl7.SelectedTab = tabPage41;
+        }
+
+        private void tabPage42_Click(object sender, EventArgs e)
+        {
+            tabControl7.SelectedTab = tabPage42;
+        }
+
+        private void tabPage43_Click(object sender, EventArgs e)
+        {
+            tabControl7.SelectedTab = tabPage43;
+        }
+
+        private void tabPage44_Click(object sender, EventArgs e)
+        {
+            tabControl7.SelectedTab = tabPage44;
+        }
+
+        private void tabPage45_Click(object sender, EventArgs e)
+        {
+            tabControl8.SelectedTab = tabPage45;
+        }
+
+        private void tabPage46_Click(object sender, EventArgs e)
+        {
+            tabControl8.SelectedTab = tabPage46;
+        }
+
+        private void tabPage47_Click(object sender, EventArgs e)
+        {
+            tabControl8.SelectedTab = tabPage47;
+        }
+
+        private void tabPage48_Click(object sender, EventArgs e)
+        {
+            tabControl8.SelectedTab = tabPage48;
+        }
+
+        private void tabPage49_Click(object sender, EventArgs e)
+        {
+            tabControl8.SelectedTab = tabPage49;
+        }
+
+        private void tabPage50_Click(object sender, EventArgs e)
+        {
+            tabControl8.SelectedTab = tabPage50;
+        }
+
+        private void tabPage51_Click(object sender, EventArgs e)
+        {
+            tabControl8.SelectedTab = tabPage51;
+        }
+
+        private void tabPage52_Click(object sender, EventArgs e)
+        {
+            tabControl8.SelectedTab = tabPage52;
+        }
+
+        private void tabPage53_Click(object sender, EventArgs e)
+        {
+            tabControl8.SelectedTab = tabPage53;
+        }
+
+        private void tabPage54_Click(object sender, EventArgs e)
+        {
+            tabControl8.SelectedTab = tabPage54;
+        }
+
+        private void tabPage55_Click(object sender, EventArgs e)
+        {
+            tabControl9.SelectedTab = tabPage55;
+        }
+
+        private void tabPage56_Click(object sender, EventArgs e)
+        {
+            tabControl9.SelectedTab = tabPage56;
+        }
+
+        private void tabPage57_Click(object sender, EventArgs e)
+        {
+            tabControl9.SelectedTab = tabPage57;
+        }
+
+        private void tabPage58_Click(object sender, EventArgs e)
+        {
+            tabControl9.SelectedTab = tabPage58;
+        }
+
+        private void tabPage59_Click(object sender, EventArgs e)
+        {
+            tabControl9.SelectedTab = tabPage59;
+        }
+
+        private void tabPage61_Click(object sender, EventArgs e)
+        {
+            tabControl10.SelectedTab = tabPage61;
+        }
+
+        private void tabPage62_Click(object sender, EventArgs e)
+        {
+            tabControl10.SelectedTab = tabPage62;
+        }
+
+        private void forceTabClick(string dgvName)
+        {
+            object sender = new object();
+            tabControlAction = TabControlAction.Selected;
+
+            if (dgvName == "dataGridViewErrorlogs")
+            {
+                tabControlEventArgsTab1 = new TabControlEventArgs(tabPage1, 0, tabControlAction);
+                tabPage1_MyClick(sender, tabControlEventArgsTab1);
+                tabPage1_Click(sender, tabControlEventArgsTab1);
+
+                tabControlEventArgsTab5 = new TabControlEventArgs(tabPage5, 1, tabControlAction);
+                tabPage5_MyClick(sender, tabControlEventArgsTab5);
+                tabPage5_Click(sender, tabControlEventArgsTab5);
+            }
+            else if (dgvName == "dataGridViewGenerallogs")
+            {
+                tabControlEventArgsTab1 = new TabControlEventArgs(tabPage1, 0, tabControlAction);
+                tabPage1_MyClick(sender, tabControlEventArgsTab1);
+                tabPage1_Click(sender, tabControlEventArgsTab1);
+
+                tabControlEventArgsTab6 = new TabControlEventArgs(tabPage6, 1, tabControlAction);
+                tabPage6_MyClick(sender, tabControlEventArgsTab6);
+                tabPage6_Click(sender, tabControlEventArgsTab6);
+            }
+            else if (dgvName == "dataGridViewSlowSQLlogs" || dgvName == "dataGridViewSlowSQLDurationlogs")
+            {
+                tabControlEventArgsTab1 = new TabControlEventArgs(tabPage1, 0, tabControlAction);
+                tabPage1_MyClick(sender, tabControlEventArgsTab1);
+                tabPage1_Click(sender, tabControlEventArgsTab1);
+
+                tabControlEventArgsTab6 = new TabControlEventArgs(tabPage6, 1, tabControlAction);
+                tabPage6_MyClick(sender, tabControlEventArgsTab6);
+                tabPage6_Click(sender, tabControlEventArgsTab6);
+
+                tabControlEventArgsTab61 = new TabControlEventArgs(tabPage61, 2, tabControlAction);
+                tabPage61_MyClick(sender, tabControlEventArgsTab61);
+                tabPage61_Click(sender, tabControlEventArgsTab61);
+            }
+            else if (dgvName == "dataGridViewSlowExtensionlogs" || dgvName == "dataGridViewSlowExtensionDurationlogs")
+            {
+                tabControlEventArgsTab1 = new TabControlEventArgs(tabPage1, 0, tabControlAction);
+                tabPage1_MyClick(sender, tabControlEventArgsTab1);
+                tabPage1_Click(sender, tabControlEventArgsTab1);
+
+                tabControlEventArgsTab6 = new TabControlEventArgs(tabPage6, 1, tabControlAction);
+                tabPage6_MyClick(sender, tabControlEventArgsTab6);
+                tabPage6_Click(sender, tabControlEventArgsTab6);
+
+                tabControlEventArgsTab62 = new TabControlEventArgs(tabPage62, 2, tabControlAction);
+                tabPage62_MyClick(sender, tabControlEventArgsTab62);
+                tabPage62_Click(sender, tabControlEventArgsTab62);
+            }
+            else if (dgvName == "dataGridViewIntegrationslogs" || dgvName == "dataGridViewIntWebServiceslogs" || dgvName == "dataGridViewInWebServicesDurationlogs")
+            {
+                tabControlEventArgsTab1 = new TabControlEventArgs(tabPage1, 0, tabControlAction);
+                tabPage1_MyClick(sender, tabControlEventArgsTab1);
+                tabPage1_Click(sender, tabControlEventArgsTab1);
+
+                tabControlEventArgsTab7 = new TabControlEventArgs(tabPage7, 1, tabControlAction);
+                tabPage7_MyClick(sender, tabControlEventArgsTab7);
+                tabPage7_Click(sender, tabControlEventArgsTab7);
+            }
+            else if (dgvName == "dataGridViewScreenRequestslogs")
+            {
+                tabControlEventArgsTab1 = new TabControlEventArgs(tabPage1, 0, tabControlAction);
+                tabPage1_MyClick(sender, tabControlEventArgsTab1);
+                tabPage1_Click(sender, tabControlEventArgsTab1);
+
+                tabControlEventArgsTab8 = new TabControlEventArgs(tabPage8, 1, tabControlAction);
+                tabPage8_MyClick(sender, tabControlEventArgsTab8);
+                tabPage8_Click(sender, tabControlEventArgsTab8);
+            }
+            else if (dgvName == "dataGridViewTimerlogs" || dgvName == "dataGridViewTimerTimerslogs" || dgvName == "dataGridViewTimerTimersDurationlogs")
+            {
+                tabControlEventArgsTab1 = new TabControlEventArgs(tabPage1, 0, tabControlAction);
+                tabPage1_MyClick(sender, tabControlEventArgsTab1);
+                tabPage1_Click(sender, tabControlEventArgsTab1);
+
+                tabControlEventArgsTab9 = new TabControlEventArgs(tabPage9, 1, tabControlAction);
+                tabPage9_MyClick(sender, tabControlEventArgsTab9);
+                tabPage9_Click(sender, tabControlEventArgsTab9);
+            }
+            else if (dgvName == "dataGridViewEmaillogs")
+            {
+                tabControlEventArgsTab1 = new TabControlEventArgs(tabPage1, 0, tabControlAction);
+                tabPage1_MyClick(sender, tabControlEventArgsTab1);
+                tabPage1_Click(sender, tabControlEventArgsTab1);
+
+                tabControlEventArgsTab10 = new TabControlEventArgs(tabPage10, 1, tabControlAction);
+                tabPage10_MyClick(sender, tabControlEventArgsTab10);
+                tabPage10_Click(sender, tabControlEventArgsTab10);
+            }
+            else if (dgvName == "dataGridViewExtensionlogs")
+            {
+                tabControlEventArgsTab1 = new TabControlEventArgs(tabPage1, 0, tabControlAction);
+                tabPage1_MyClick(sender, tabControlEventArgsTab1);
+                tabPage1_Click(sender, tabControlEventArgsTab1);
+
+                tabControlEventArgsTab11 = new TabControlEventArgs(tabPage11, 1, tabControlAction);
+                tabPage11_MyClick(sender, tabControlEventArgsTab11);
+                tabPage11_Click(sender, tabControlEventArgsTab11);
+            }
+            else if (dgvName == "dataGridViewServiceActionlogs")
+            {
+                tabControlEventArgsTab1 = new TabControlEventArgs(tabPage1, 0, tabControlAction);
+                tabPage1_MyClick(sender, tabControlEventArgsTab1);
+                tabPage1_Click(sender, tabControlEventArgsTab1);
+
+                tabControlEventArgsTab12 = new TabControlEventArgs(tabPage12, 1, tabControlAction);
+                tabPage12_MyClick(sender, tabControlEventArgsTab12);
+                tabPage12_Click(sender, tabControlEventArgsTab12);
+            }
+            else if (dgvName == "dataGridViewTradWebRequests" || dgvName == "dataGridViewTradWebRequestsScreenlogs" || dgvName == "dataGridViewTradWebRequestsScreenDurationlogs")
+            {
+                tabControlEventArgsTab1 = new TabControlEventArgs(tabPage1, 0, tabControlAction);
+                tabPage1_MyClick(sender, tabControlEventArgsTab1);
+                tabPage1_Click(sender, tabControlEventArgsTab1);
+
+                tabControlEventArgsTab13 = new TabControlEventArgs(tabPage13, 1, tabControlAction);
+                tabPage13_MyClick(sender, tabControlEventArgsTab13);
+                tabPage13_Click(sender, tabControlEventArgsTab13);
+            }
+            else if (dgvName == "dataGridViewIISDateTime" || dgvName == "dataGridViewIISTimeTaken")
+            {
+                tabControlEventArgsTab2 = new TabControlEventArgs(tabPage2, 0, tabControlAction);
+                tabPage2_MyClick(sender, tabControlEventArgsTab2);
+                tabPage2_Click(sender, tabControlEventArgsTab2);
+            }
+            else if (dgvName == "dataGridViewWinAppEventViewer")
+            {
+                tabControlEventArgsTab3 = new TabControlEventArgs(tabPage3, 0, tabControlAction);
+                tabPage3_MyClick(sender, tabControlEventArgsTab3);
+                tabPage3_Click(sender, tabControlEventArgsTab3);
+
+                tabControlEventArgsTab14 = new TabControlEventArgs(tabPage14, 1, tabControlAction);
+                tabPage14_MyClick(sender, tabControlEventArgsTab14);
+                tabPage14_Click(sender, tabControlEventArgsTab14);
+            }
+            else if (dgvName == "dataGridViewWinSysEventViewer")
+            {
+                tabControlEventArgsTab3 = new TabControlEventArgs(tabPage3, 0, tabControlAction);
+                tabPage3_MyClick(sender, tabControlEventArgsTab3);
+                tabPage3_Click(sender, tabControlEventArgsTab3);
+
+                tabControlEventArgsTab15 = new TabControlEventArgs(tabPage15, 1, tabControlAction);
+                tabPage15_MyClick(sender, tabControlEventArgsTab15);
+                tabPage15_Click(sender, tabControlEventArgsTab15);
+            }
+            else if (dgvName == "dataGridViewWinSecEventViewer")
+            {
+                tabControlEventArgsTab3 = new TabControlEventArgs(tabPage3, 0, tabControlAction);
+                tabPage3_MyClick(sender, tabControlEventArgsTab3);
+                tabPage3_Click(sender, tabControlEventArgsTab3);
+
+                tabControlEventArgsTab16 = new TabControlEventArgs(tabPage16, 1, tabControlAction);
+                tabPage16_MyClick(sender, tabControlEventArgsTab16);
+                tabPage16_Click(sender, tabControlEventArgsTab16);
+            }
+            else if (dgvName == "dataGridViewAndroidlogs")
+            {
+                tabControlEventArgsTab4 = new TabControlEventArgs(tabPage4, 0, tabControlAction);
+                tabPage4_MyClick(sender, tabControlEventArgsTab4);
+                tabPage4_Click(sender, tabControlEventArgsTab4);
+
+                tabControlEventArgsTab17 = new TabControlEventArgs(tabPage17, 1, tabControlAction);
+                tabPage17_MyClick(sender, tabControlEventArgsTab17);
+                tabPage17_Click(sender, tabControlEventArgsTab17);
+            }
+            else if (dgvName == "dataGridViewiOSlogs")
+            {
+                tabControlEventArgsTab4 = new TabControlEventArgs(tabPage4, 0, tabControlAction);
+                tabPage4_MyClick(sender, tabControlEventArgsTab4);
+                tabPage4_Click(sender, tabControlEventArgsTab4);
+
+                tabControlEventArgsTab18 = new TabControlEventArgs(tabPage18, 1, tabControlAction);
+                tabPage18_MyClick(sender, tabControlEventArgsTab18);
+                tabPage18_Click(sender, tabControlEventArgsTab18);
+            }
+            else if (dgvName == "dataGridViewServiceStudiologs")
+            {
+                tabControlEventArgsTab19 = new TabControlEventArgs(tabPage19, 0, tabControlAction);
+                tabPage19_MyClick(sender, tabControlEventArgsTab19);
+                tabPage19_Click(sender, tabControlEventArgsTab19);
+
+                tabControlEventArgsTab20 = new TabControlEventArgs(tabPage20, 1, tabControlAction);
+                tabPage20_MyClick(sender, tabControlEventArgsTab20);
+                tabPage20_Click(sender, tabControlEventArgsTab20);
+            }
+            else if (dgvName == "dataGridViewGeneralTXTlogs")
+            {
+                tabControlEventArgsTab19 = new TabControlEventArgs(tabPage19, 0, tabControlAction);
+                tabPage19_MyClick(sender, tabControlEventArgsTab19);
+                tabPage19_Click(sender, tabControlEventArgsTab19);
+
+                tabControlEventArgsTab21 = new TabControlEventArgs(tabPage21, 1, tabControlAction);
+                tabPage21_MyClick(sender, tabControlEventArgsTab21);
+                tabPage21_Click(sender, tabControlEventArgsTab21);
+            }
+            else if (dgvName == "dataGridViewBPTReportslogs")
+            {
+                tabControlEventArgsTab22 = new TabControlEventArgs(tabPage22, 0, tabControlAction);
+                tabPage22_MyClick(sender, tabControlEventArgsTab22);
+                tabPage22_Click(sender, tabControlEventArgsTab22);
+            }
+            else if (dgvName == "dataGridViewEnvironmentCapabilitieslogs")
+            {
+                tabControlEventArgsTab24 = new TabControlEventArgs(tabPage24, 0, tabControlAction);
+                tabPage24_MyClick(sender, tabControlEventArgsTab24);
+                tabPage24_Click(sender, tabControlEventArgsTab24);
+
+                tabControlEventArgsTab26 = new TabControlEventArgs(tabPage26, 1, tabControlAction);
+                tabPage26_MyClick(sender, tabControlEventArgsTab26);
+                tabPage26_Click(sender, tabControlEventArgsTab26);
+            }
+            else if (dgvName == "dataGridViewEnvironmentslogs")
+            {
+                tabControlEventArgsTab24 = new TabControlEventArgs(tabPage24, 0, tabControlAction);
+                tabPage24_MyClick(sender, tabControlEventArgsTab24);
+                tabPage24_Click(sender, tabControlEventArgsTab24);
+
+                tabControlEventArgsTab27 = new TabControlEventArgs(tabPage27, 1, tabControlAction);
+                tabPage27_MyClick(sender, tabControlEventArgsTab27);
+                tabPage27_Click(sender, tabControlEventArgsTab27);
+            }
+            else if (dgvName == "dataGridViewFullErrorDumps")
+            {
+                tabControlEventArgsTab24 = new TabControlEventArgs(tabPage24, 0, tabControlAction);
+                tabPage24_MyClick(sender, tabControlEventArgsTab24);
+                tabPage24_Click(sender, tabControlEventArgsTab24);
+
+                tabControlEventArgsTab28 = new TabControlEventArgs(tabPage28, 1, tabControlAction);
+                tabPage28_MyClick(sender, tabControlEventArgsTab28);
+                tabPage28_Click(sender, tabControlEventArgsTab28);
+            }
+            else if (dgvName == "dataGridViewRoleslogs")
+            {
+                tabControlEventArgsTab25 = new TabControlEventArgs(tabPage25, 0, tabControlAction);
+                tabPage25_MyClick(sender, tabControlEventArgsTab25);
+                tabPage25_Click(sender, tabControlEventArgsTab25);
+
+                tabControlEventArgsTab29 = new TabControlEventArgs(tabPage29, 1, tabControlAction);
+                tabPage29_MyClick(sender, tabControlEventArgsTab29);
+                tabPage29_Click(sender, tabControlEventArgsTab29);
+            }
+            else if (dgvName == "dataGridViewRolesInApplicationslogs")
+            {
+                tabControlEventArgsTab25 = new TabControlEventArgs(tabPage25, 0, tabControlAction);
+                tabPage25_MyClick(sender, tabControlEventArgsTab25);
+                tabPage25_Click(sender, tabControlEventArgsTab25);
+
+                tabControlEventArgsTab30 = new TabControlEventArgs(tabPage30, 1, tabControlAction);
+                tabPage30_MyClick(sender, tabControlEventArgsTab30);
+                tabPage30_Click(sender, tabControlEventArgsTab30);
+            }
+            else if (dgvName == "dataGridViewRolesInTeamslogs")
+            {
+                tabControlEventArgsTab25 = new TabControlEventArgs(tabPage25, 0, tabControlAction);
+                tabPage25_MyClick(sender, tabControlEventArgsTab25);
+                tabPage25_Click(sender, tabControlEventArgsTab25);
+
+                tabControlEventArgsTab31 = new TabControlEventArgs(tabPage31, 1, tabControlAction);
+                tabPage31_MyClick(sender, tabControlEventArgsTab31);
+                tabPage31_Click(sender, tabControlEventArgsTab31);
+            }
+            else if (dgvName == "dataGridViewUserlogs")
+            {
+                tabControlEventArgsTab25 = new TabControlEventArgs(tabPage25, 0, tabControlAction);
+                tabPage25_MyClick(sender, tabControlEventArgsTab25);
+                tabPage25_Click(sender, tabControlEventArgsTab25);
+
+                tabControlEventArgsTab33 = new TabControlEventArgs(tabPage33, 1, tabControlAction);
+                tabPage33_MyClick(sender, tabControlEventArgsTab33);
+                tabPage33_Click(sender, tabControlEventArgsTab33);
+            }
+            else if (dgvName == "dataGridViewUserPoolslogs")
+            {
+                tabControlEventArgsTab25 = new TabControlEventArgs(tabPage25, 0, tabControlAction);
+                tabPage25_MyClick(sender, tabControlEventArgsTab25);
+                tabPage25_Click(sender, tabControlEventArgsTab25);
+
+                tabControlEventArgsTab34 = new TabControlEventArgs(tabPage34, 1, tabControlAction);
+                tabPage34_MyClick(sender, tabControlEventArgsTab34);
+                tabPage34_Click(sender, tabControlEventArgsTab34);
+            }
+            else if (dgvName == "dataGridViewSyncErrorslogs")
+            {
+                tabControlEventArgsTab25 = new TabControlEventArgs(tabPage25, 0, tabControlAction);
+                tabPage25_MyClick(sender, tabControlEventArgsTab25);
+                tabPage25_Click(sender, tabControlEventArgsTab25);
+
+                tabControlEventArgsTab32 = new TabControlEventArgs(tabPage32, 1, tabControlAction);
+                tabPage32_MyClick(sender, tabControlEventArgsTab32);
+                tabPage32_Click(sender, tabControlEventArgsTab32);
+            }
+            else if (dgvName == "dataGridViewStagingApplogs")
+            {
+                tabControlEventArgsTab23 = new TabControlEventArgs(tabPage23, 0, tabControlAction);
+                tabPage23_MyClick(sender, tabControlEventArgsTab23);
+                tabPage23_Click(sender, tabControlEventArgsTab23);
+
+                tabControlEventArgsTab35 = new TabControlEventArgs(tabPage35, 1, tabControlAction);
+                tabPage35_MyClick(sender, tabControlEventArgsTab35);
+                tabPage35_Click(sender, tabControlEventArgsTab35);
+            }
+            else if (dgvName == "dataGridViewStagingAppVerlogs")
+            {
+                tabControlEventArgsTab23 = new TabControlEventArgs(tabPage23, 0, tabControlAction);
+                tabPage23_MyClick(sender, tabControlEventArgsTab23);
+                tabPage23_Click(sender, tabControlEventArgsTab23);
+
+                tabControlEventArgsTab36 = new TabControlEventArgs(tabPage36, 1, tabControlAction);
+                tabPage36_MyClick(sender, tabControlEventArgsTab36);
+                tabPage36_Click(sender, tabControlEventArgsTab36);
+            }
+            else if (dgvName == "dataGridViewStagingAppVerModuleVerlogs")
+            {
+                tabControlEventArgsTab23 = new TabControlEventArgs(tabPage23, 0, tabControlAction);
+                tabPage23_MyClick(sender, tabControlEventArgsTab23);
+                tabPage23_Click(sender, tabControlEventArgsTab23);
+
+                tabControlEventArgsTab37 = new TabControlEventArgs(tabPage37, 1, tabControlAction);
+                tabPage37_MyClick(sender, tabControlEventArgsTab37);
+                tabPage37_Click(sender, tabControlEventArgsTab37);
+            }
+            else if (dgvName == "dataGridViewStagingChangelog")
+            {
+                tabControlEventArgsTab23 = new TabControlEventArgs(tabPage23, 0, tabControlAction);
+                tabPage23_MyClick(sender, tabControlEventArgsTab23);
+                tabPage23_Click(sender, tabControlEventArgsTab23);
+
+                tabControlEventArgsTab38 = new TabControlEventArgs(tabPage38, 1, tabControlAction);
+                tabPage38_MyClick(sender, tabControlEventArgsTab38);
+                tabPage38_Click(sender, tabControlEventArgsTab38);
+            }
+            else if (dgvName == "dataGridViewStagingConsumerElements")
+            {
+                tabControlEventArgsTab23 = new TabControlEventArgs(tabPage23, 0, tabControlAction);
+                tabPage23_MyClick(sender, tabControlEventArgsTab23);
+                tabPage23_Click(sender, tabControlEventArgsTab23);
+
+                tabControlEventArgsTab39 = new TabControlEventArgs(tabPage39, 1, tabControlAction);
+                tabPage39_MyClick(sender, tabControlEventArgsTab39);
+                tabPage39_Click(sender, tabControlEventArgsTab39);
+            }
+            else if (dgvName == "dataGridViewStagingEntityConfiguration")
+            {
+                tabControlEventArgsTab23 = new TabControlEventArgs(tabPage23, 0, tabControlAction);
+                tabPage23_MyClick(sender, tabControlEventArgsTab23);
+                tabPage23_Click(sender, tabControlEventArgsTab23);
+
+                tabControlEventArgsTab40 = new TabControlEventArgs(tabPage40, 1, tabControlAction);
+                tabPage40_MyClick(sender, tabControlEventArgsTab40);
+                tabPage40_Click(sender, tabControlEventArgsTab40);
+            }
+            else if (dgvName == "dataGridViewStagingEnvironmentAppicationCache")
+            {
+                tabControlEventArgsTab23 = new TabControlEventArgs(tabPage23, 0, tabControlAction);
+                tabPage23_MyClick(sender, tabControlEventArgsTab23);
+                tabPage23_Click(sender, tabControlEventArgsTab23);
+
+                tabControlEventArgsTab41 = new TabControlEventArgs(tabPage41, 1, tabControlAction);
+                tabPage41_MyClick(sender, tabControlEventArgsTab41);
+                tabPage41_Click(sender, tabControlEventArgsTab41);
+            }
+            else if (dgvName == "dataGridViewStagingEnvironmentApplicationModule")
+            {
+                tabControlEventArgsTab23 = new TabControlEventArgs(tabPage23, 0, tabControlAction);
+                tabPage23_MyClick(sender, tabControlEventArgsTab23);
+                tabPage23_Click(sender, tabControlEventArgsTab23);
+
+                tabControlEventArgsTab42 = new TabControlEventArgs(tabPage42, 1, tabControlAction);
+                tabPage42_MyClick(sender, tabControlEventArgsTab42);
+                tabPage42_Click(sender, tabControlEventArgsTab42);
+            }
+            else if (dgvName == "dataGridViewStagingEnvironmentApplicationVersion")
+            {
+                tabControlEventArgsTab23 = new TabControlEventArgs(tabPage23, 0, tabControlAction);
+                tabPage23_MyClick(sender, tabControlEventArgsTab23);
+                tabPage23_Click(sender, tabControlEventArgsTab23);
+
+                tabControlEventArgsTab43 = new TabControlEventArgs(tabPage43, 1, tabControlAction);
+                tabPage43_MyClick(sender, tabControlEventArgsTab43);
+                tabPage43_Click(sender, tabControlEventArgsTab43);
+            }
+            else if (dgvName == "dataGridViewStagingEnvironmentModuleCache")
+            {
+                tabControlEventArgsTab23 = new TabControlEventArgs(tabPage23, 0, tabControlAction);
+                tabPage23_MyClick(sender, tabControlEventArgsTab23);
+                tabPage23_Click(sender, tabControlEventArgsTab23);
+
+                tabControlEventArgsTab44 = new TabControlEventArgs(tabPage44, 1, tabControlAction);
+                tabPage44_MyClick(sender, tabControlEventArgsTab44);
+                tabPage44_Click(sender, tabControlEventArgsTab44);
+            }
+            else if (dgvName == "dataGridViewStagingEnvironmentModuleRunning")
+            {
+                tabControlEventArgsTab23 = new TabControlEventArgs(tabPage23, 0, tabControlAction);
+                tabPage23_MyClick(sender, tabControlEventArgsTab23);
+                tabPage23_Click(sender, tabControlEventArgsTab23);
+
+                tabControlEventArgsTab45 = new TabControlEventArgs(tabPage45, 1, tabControlAction);
+                tabPage45_MyClick(sender, tabControlEventArgsTab45);
+                tabPage45_Click(sender, tabControlEventArgsTab45);
+            }
+            else if (dgvName == "dataGridViewStagingModules")
+            {
+                tabControlEventArgsTab23 = new TabControlEventArgs(tabPage23, 0, tabControlAction);
+                tabPage23_MyClick(sender, tabControlEventArgsTab23);
+                tabPage23_Click(sender, tabControlEventArgsTab23);
+
+                tabControlEventArgsTab46 = new TabControlEventArgs(tabPage46, 1, tabControlAction);
+                tabPage46_MyClick(sender, tabControlEventArgsTab46);
+                tabPage46_Click(sender, tabControlEventArgsTab46);
+            }
+            else if (dgvName == "dataGridViewStagingModuleVersionRefererences")
+            {
+                tabControlEventArgsTab23 = new TabControlEventArgs(tabPage23, 0, tabControlAction);
+                tabPage23_MyClick(sender, tabControlEventArgsTab23);
+                tabPage23_Click(sender, tabControlEventArgsTab23);
+
+                tabControlEventArgsTab47 = new TabControlEventArgs(tabPage47, 1, tabControlAction);
+                tabPage47_MyClick(sender, tabControlEventArgsTab47);
+                tabPage47_Click(sender, tabControlEventArgsTab47);
+            }
+            else if (dgvName == "dataGridViewStagingProducerElements")
+            {
+                tabControlEventArgsTab23 = new TabControlEventArgs(tabPage23, 0, tabControlAction);
+                tabPage23_MyClick(sender, tabControlEventArgsTab23);
+                tabPage23_Click(sender, tabControlEventArgsTab23);
+
+                tabControlEventArgsTab48 = new TabControlEventArgs(tabPage48, 1, tabControlAction);
+                tabPage48_MyClick(sender, tabControlEventArgsTab48);
+                tabPage48_Click(sender, tabControlEventArgsTab48);
+            }
+            else if (dgvName == "dataGridViewStagingSiteProperties")
+            {
+                tabControlEventArgsTab23 = new TabControlEventArgs(tabPage23, 0, tabControlAction);
+                tabPage23_MyClick(sender, tabControlEventArgsTab23);
+                tabPage23_Click(sender, tabControlEventArgsTab23);
+
+                tabControlEventArgsTab49 = new TabControlEventArgs(tabPage49, 1, tabControlAction);
+                tabPage49_MyClick(sender, tabControlEventArgsTab49);
+                tabPage49_Click(sender, tabControlEventArgsTab49);
+            }
+            else if (dgvName == "dataGridViewStaginglogs")
+            {
+                tabControlEventArgsTab23 = new TabControlEventArgs(tabPage23, 0, tabControlAction);
+                tabPage23_MyClick(sender, tabControlEventArgsTab23);
+                tabPage23_Click(sender, tabControlEventArgsTab23);
+
+                tabControlEventArgsTab50 = new TabControlEventArgs(tabPage50, 1, tabControlAction);
+                tabPage50_MyClick(sender, tabControlEventArgsTab50);
+                tabPage50_Click(sender, tabControlEventArgsTab50);
+            }
+            else if (dgvName == "dataGridViewStagingApplicationVersion")
+            {
+                tabControlEventArgsTab23 = new TabControlEventArgs(tabPage23, 0, tabControlAction);
+                tabPage23_MyClick(sender, tabControlEventArgsTab23);
+                tabPage23_Click(sender, tabControlEventArgsTab23);
+
+                tabControlEventArgsTab51 = new TabControlEventArgs(tabPage51, 1, tabControlAction);
+                tabPage51_MyClick(sender, tabControlEventArgsTab51);
+                tabPage51_Click(sender, tabControlEventArgsTab51);
+            }
+            else if (dgvName == "dataGridViewStagingMessage")
+            {
+                tabControlEventArgsTab23 = new TabControlEventArgs(tabPage23, 0, tabControlAction);
+                tabPage23_MyClick(sender, tabControlEventArgsTab23);
+                tabPage23_Click(sender, tabControlEventArgsTab23);
+
+                tabControlEventArgsTab52 = new TabControlEventArgs(tabPage52, 1, tabControlAction);
+                tabPage52_MyClick(sender, tabControlEventArgsTab52);
+                tabPage52_Click(sender, tabControlEventArgsTab52);
+            }
+            else if (dgvName == "dataGridViewStagingModuleInconsistencies")
+            {
+                tabControlEventArgsTab23 = new TabControlEventArgs(tabPage23, 0, tabControlAction);
+                tabPage23_MyClick(sender, tabControlEventArgsTab23);
+                tabPage23_Click(sender, tabControlEventArgsTab23);
+
+                tabControlEventArgsTab53 = new TabControlEventArgs(tabPage53, 1, tabControlAction);
+                tabPage53_MyClick(sender, tabControlEventArgsTab53);
+                tabPage53_Click(sender, tabControlEventArgsTab53);
+            }
+            else if (dgvName == "dataGridViewStagingModuleVersion")
+            {
+                tabControlEventArgsTab23 = new TabControlEventArgs(tabPage23, 0, tabControlAction);
+                tabPage23_MyClick(sender, tabControlEventArgsTab23);
+                tabPage23_Click(sender, tabControlEventArgsTab23);
+
+                tabControlEventArgsTab54 = new TabControlEventArgs(tabPage54, 1, tabControlAction);
+                tabPage54_MyClick(sender, tabControlEventArgsTab54);
+                tabPage54_Click(sender, tabControlEventArgsTab54);
+            }
+            else if (dgvName == "dataGridViewStagingModuleVersionPublished")
+            {
+                tabControlEventArgsTab23 = new TabControlEventArgs(tabPage23, 0, tabControlAction);
+                tabPage23_MyClick(sender, tabControlEventArgsTab23);
+                tabPage23_Click(sender, tabControlEventArgsTab23);
+
+                tabControlEventArgsTab55 = new TabControlEventArgs(tabPage55, 1, tabControlAction);
+                tabPage55_MyClick(sender, tabControlEventArgsTab55);
+                tabPage55_Click(sender, tabControlEventArgsTab55);
+            }
+            else if (dgvName == "dataGridViewStagingModuleVersionUploaded")
+            {
+                tabControlEventArgsTab23 = new TabControlEventArgs(tabPage23, 0, tabControlAction);
+                tabPage23_MyClick(sender, tabControlEventArgsTab23);
+                tabPage23_Click(sender, tabControlEventArgsTab23);
+
+                tabControlEventArgsTab56 = new TabControlEventArgs(tabPage56, 1, tabControlAction);
+                tabPage56_MyClick(sender, tabControlEventArgsTab56);
+                tabPage56_Click(sender, tabControlEventArgsTab56);
+            }
+            else if (dgvName == "dataGridViewStagingOptions")
+            {
+                tabControlEventArgsTab23 = new TabControlEventArgs(tabPage23, 0, tabControlAction);
+                tabPage23_MyClick(sender, tabControlEventArgsTab23);
+                tabPage23_Click(sender, tabControlEventArgsTab23);
+
+                tabControlEventArgsTab57 = new TabControlEventArgs(tabPage57, 1, tabControlAction);
+                tabPage57_MyClick(sender, tabControlEventArgsTab57);
+                tabPage57_Click(sender, tabControlEventArgsTab57);
+            }
+            else if (dgvName == "dataGridViewStagingOutdatedApplication")
+            {
+                tabControlEventArgsTab23 = new TabControlEventArgs(tabPage23, 0, tabControlAction);
+                tabPage23_MyClick(sender, tabControlEventArgsTab23);
+                tabPage23_Click(sender, tabControlEventArgsTab23);
+
+                tabControlEventArgsTab58 = new TabControlEventArgs(tabPage58, 1, tabControlAction);
+                tabPage58_MyClick(sender, tabControlEventArgsTab58);
+                tabPage58_Click(sender, tabControlEventArgsTab58);
+            }
+            else if (dgvName == "dataGridViewStagingOutdatedModule")
+            {
+                tabControlEventArgsTab23 = new TabControlEventArgs(tabPage23, 0, tabControlAction);
+                tabPage23_MyClick(sender, tabControlEventArgsTab23);
+                tabPage23_Click(sender, tabControlEventArgsTab23);
+
+                tabControlEventArgsTab59 = new TabControlEventArgs(tabPage59, 1, tabControlAction);
+                tabPage59_MyClick(sender, tabControlEventArgsTab59);
+                tabPage59_Click(sender, tabControlEventArgsTab59);
+            }
+        }
+
+        private void btnExportSlowSQLExtensionTables_Click(object sender, EventArgs e)
+        {
+            exportTableContent(dataGridViewSlowSQLDurationlogs, "\\slow_sql_table.txt", "|");
+            exportTableContent(dataGridViewSlowExtensionDurationlogs, "\\slow_extension_table.txt", "|");
+        }
+
+        private void btnExportWebServiceTable_Click(object sender, EventArgs e)
+        {
+            exportTableContent(dataGridViewInWebServicesDurationlogs, "\\webservices_table.txt", "|");
+        }
+
+        private void btnExportTimerTable_Click(object sender, EventArgs e)
+        {
+            exportTableContent(dataGridViewTimerTimersDurationlogs, "\\timers_table.txt", "|");
+        }
+
+        private void btnExportScreenTable_Click(object sender, EventArgs e)
+        {
+            exportTableContent(dataGridViewTradWebRequestsScreenDurationlogs, "\\screens_table.txt", "|");
+        }
+
+        private void exportTableContent(DataGridView tableName, string txtFile, string delimiter)
+        {
+            if (tableName.Rows.Count > 0)
+            {
+                outputTXTfile = currentWorkingDirectory + txtFile;
+
+                try
                 {
-                    List<string> rowInfo = new List<string>();
+                    //This line of code creates a text file for the data export.
+                    StreamWriter exportFile = new StreamWriter(outputTXTfile);
+                    string eLine = "";
 
-                    //gets a collection that contains all the rows
-                    DataGridViewRow row = this.dataGridViewDeviceInformation.Rows[e.RowIndex];
-
-                    foreach (DataGridViewCell cell in row.Cells)
+                    //This for loop loops through the headers
+                    for (int h = 0; h <= tableName.Columns.Count - 1; h++)
                     {
-                        if (cell.Value.ToString() != null && cell.Value.ToString().Trim() != string.Empty)
+                        eLine = eLine + tableName.Columns[h].HeaderText;
+                        if (h != tableName.Columns.Count - 1)
                         {
-                            rowInfo.Add(dataGridViewDeviceInformation.Columns[cell.ColumnIndex].Name + Environment.NewLine + cell.Value.ToString() + Environment.NewLine);
+                            //Add a text delimiter in order
+                            //to separate each field in the text file.
+                            eLine = eLine + delimiter;
+                        }
+                        else
+                        {
+                            //The exported text is written to the text file, one line at a time.
+                            exportFile.WriteLine(eLine);
+                            eLine = "";
                         }
                     }
 
-                    txtBoxDetailDeviceInformationlogs.Text = String.Join(Environment.NewLine, rowInfo);
-
-                    if (btnScreenshot.Enabled == false)
+                    //This for loop loops through each row in the table
+                    for (int r = 0; r <= tableName.Rows.Count - 1; r++)
                     {
-                        btnScreenshot.Enabled = true;
-                        btnScreenshot.BackColor = SystemColors.ControlLight;
+                        //This for loop loops through each column, and the row number
+                        //is passed from the for loop above.
+                        for (int c = 0; c <= tableName.Columns.Count - 1; c++)
+                        {
+                            eLine = eLine + tableName.Rows[r].Cells[c].Value;
+                            if (c != tableName.Columns.Count - 1)
+                            {
+                                //Add a text delimiter in order
+                                //to separate each field in the text file.
+                                eLine = eLine + delimiter;
+                            }
+                        }
+                        //The exported text is written to the text file, one line at a time.
+                        exportFile.WriteLine(eLine);
+                        eLine = "";
                     }
+
+                    exportFile.Close();
+                    MessageBox.Show("Exported the data to the following file:" + Environment.NewLine + outputTXTfile, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                    throw;
+                }
             }
         }
     }
