@@ -329,6 +329,23 @@ replacementDict[65533] = ""
 
 numOfLines = 6000
 constant = 6000
+numOfAndroidLogs = 0
+numOfEmailLogs = 0
+numOfErrorLogs = 0
+numOfExtensionLogs = 0
+numOfGeneralLogs = 0
+numOfGeneralTXTLogs = 0
+numOfIISLogs = 0
+numOfIntegrationsLogs = 0
+numOfiOSLogs = 0
+numOfMobileRequestsLogs = 0
+numOfServiceActionLogs = 0
+numOfServiceStudioReports = 0
+numOfTimerLogs = 0
+numOfScreenLogs = 0
+numOfWinAppEvViewerLogs = 0
+numOfWinSecEvViewerLogs = 0
+numOfWinSysEvViewerLogs = 0
 
 errorLogsRegex = r"^([\d]+)\|([\w\-]+)\|([\d\-\:\. ]+)\|([\w\'\/\=\+ ]+)?\|([\d]+)\|([\d]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w\-\(\)\.\* ]+)?\|([\w\.\(\)]+)?\|([\w\-]+)?\|([\w]+)?\|([\w\-\.\,\(\)\[\]\/\& ]+)?\|([\w\-]+)?"
 negativeErrorLogsRegex = r"^((?!(?:[\d]+)\|(?:[\w\-]+)\|(?:[\d\-\:\. ]+)\|(?:[\w\'\/\=\+ ]+)?\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w\-\(\)\.\* ]+)?\|(?:[\w\.\(\)]+)?\|(?:[\w\-]+)?\|(?:[\w]+)?\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)?\|(?:[\w\-]+)?).*)"
@@ -465,6 +482,46 @@ def createFolder(fldPath):
     if not os.path.exists(os.path.dirname(fldName)):
         os.makedirs(os.path.dirname(fldName))
 
+def populateList(txtFile, rawList, cleanList):
+    with codecs.open(txtFile, "r", "utf-8", "ignore") as linesFromText:
+        rawList = linesFromText.readlines()
+
+    rawList.sort()
+    #remove duplicate records from the list
+    cleanList = list(set(rawList))
+    cleanList.sort()
+
+    #remove empty elements from the list
+    cleanList = list(filter(lambda x: x != "\n", cleanList))
+
+    with codecs.open(txtFile, "w", "utf-8", "ignore") as linesToText:
+        linesToText.writelines(cleanList)
+
+    del rawList[:]
+    del cleanList[:]
+
+def writeToFile(absolutePath, txtFile, rawList, cleanList):
+    if not "infrastructurereport" in absolutePath.lower() and not "stagingreport" in absolutePath.lower() and not "userpermissionsreport" in absolutePath.lower():
+        rawList.sort()
+        #remove duplicate records from the list
+        cleanList = list(set(rawList))
+        cleanList.sort()
+
+        with codecs.open(txtFile, "a+", "utf-8", "ignore") as linesFromDateRange:
+            linesFromDateRange.seek(0)
+            if len(linesFromDateRange.read(100)) > 0:
+                linesFromDateRange.writelines("\n")
+            linesFromDateRange.writelines(cleanList)
+    else:
+        with codecs.open(txtFile, "a+", "utf-8", "ignore") as linesFromDateRange:
+            linesFromDateRange.seek(0)
+            if len(linesFromDateRange.read(100)) > 0:
+                linesFromDateRange.writelines("\n")
+            linesFromDateRange.writelines(rawList)
+
+    del rawList[:]
+    del cleanList[:]
+
 def normalizeLines(string):
     string = string.replace("|", " ")
     string = string.replace("\t", " ")
@@ -537,6 +594,9 @@ def readSplitFilesXLSX(cycleNum, filename, ext, _fromDate, _toDate):
               "2- The customer switched the columns of the spreadsheet.\n3- The customer modified the dates on the spreadsheet.\n")
 
 def readErrorLogs(searchLines, _fromDate, _toDate):
+    global numOfErrorLogs
+    numOfErrorLogs+=1
+
     outText = ""
     nonMatchedOutText = ""
     JPText = ""
@@ -733,6 +793,9 @@ def readErrorLogs(searchLines, _fromDate, _toDate):
                         myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
 
 def readGeneralLogs(searchLines, _fromDate, _toDate):
+    global numOfGeneralLogs
+    numOfGeneralLogs+=1
+
     outText = ""
     nonMatchedOutText = ""
     JPText = ""
@@ -909,6 +972,9 @@ def readGeneralLogs(searchLines, _fromDate, _toDate):
                         myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
 
 def readIntegrationsLogs(searchLines, _fromDate, _toDate):
+    global numOfIntegrationsLogs
+    numOfIntegrationsLogs+=1
+
     outText = ""
     nonMatchedOutText = ""
     JPText = ""
@@ -1037,6 +1103,9 @@ def readIntegrationsLogs(searchLines, _fromDate, _toDate):
                         myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
 
 def readMobileRequestsLogs(searchLines, _fromDate, _toDate):
+    global numOfMobileRequestsLogs
+    numOfMobileRequestsLogs+=1
+
     outText = ""
     nonMatchedOutText = ""
     JPText = ""
@@ -1145,6 +1214,9 @@ def readMobileRequestsLogs(searchLines, _fromDate, _toDate):
                         myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
 
 def readTimerLogs(searchLines, _fromDate, _toDate):
+    global numOfTimerLogs
+    numOfTimerLogs+=1
+
     outText = ""
     nonMatchedOutText = ""
     JPText = ""
@@ -1249,6 +1321,9 @@ def readTimerLogs(searchLines, _fromDate, _toDate):
                         myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
 
 def readEmailLogs(searchLines, _fromDate, _toDate):
+    global numOfEmailLogs
+    numOfEmailLogs+=1
+
     outText = ""
     nonMatchedOutText = ""
     JPText = ""
@@ -1371,6 +1446,9 @@ def readEmailLogs(searchLines, _fromDate, _toDate):
                         myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
 
 def readExtensionLogs(searchLines, _fromDate, _toDate):
+    global numOfExtensionLogs
+    numOfExtensionLogs+=1
+
     outText = ""
     nonMatchedOutText = ""
     JPText = ""
@@ -1479,6 +1557,9 @@ def readExtensionLogs(searchLines, _fromDate, _toDate):
                         myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
 
 def readServiceActionLogs(searchLines, _fromDate, _toDate):
+    global numOfServiceActionLogs
+    numOfServiceActionLogs+=1
+
     outText = ""
     nonMatchedOutText = ""
     JPText = ""
@@ -1605,6 +1686,9 @@ def readServiceActionLogs(searchLines, _fromDate, _toDate):
                         myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
 
 def readScreenLogs(searchLines, _fromDate, _toDate):
+    global numOfScreenLogs
+    numOfScreenLogs+=1
+
     outText = ""
     nonMatchedOutText = ""
     JPText = ""
@@ -1808,6 +1892,13 @@ def readBPTTroubleshootingReportLogs(searchLines, _fromDate, _toDate):
                     myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
 
 def readiOSAndroidLogs(filename, searchLines, _fromDate, _toDate):
+    if "iosbuildlog" in filename.lower():
+        global numOfiOSLogs
+        numOfiOSLogs+=1
+    elif "androidbuildlog" in filename.lower():
+        global numOfAndroidLogs
+        numOfAndroidLogs+=1
+
     #split the fields and rearrange them to combine them all later
     regex = re.compile(androidiOSBuildLogsRegex, re.MULTILINE + re.IGNORECASE)
     for match in regex.finditer(searchLines):
@@ -1914,6 +2005,9 @@ def readiOSAndroidLogs(filename, searchLines, _fromDate, _toDate):
                         myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
 
 def readServiceStudioReportLogs(searchLines3, _fromDate, _toDate):
+    global numOfServiceStudioReports
+    numOfServiceStudioReports+=1
+
     #split the fields and rearrange them to combine them all later
     regex1 = re.findall(serviceStudioReportsDetailsRegex, searchLines3)
     if regex1:
@@ -2069,6 +2163,9 @@ def readServiceStudioReportLogs(searchLines3, _fromDate, _toDate):
         os.remove(tempFilePath)
 
 def readGeneralTextLogs(searchLines, _fromDate, _toDate):
+    global numOfGeneralTXTLogs
+    numOfGeneralTXTLogs+=1
+
     #split the fields and rearrange them to combine them all later
     searchLines2 = normalizeLines(searchLines)
     searchLines2 = searchLines2.replace("LoaderExceptions:", "LoaderException:")
@@ -2424,37 +2521,52 @@ def xlsxtxtFile(absolutePath, filename, ext, _fromDate, _toDate):
         createFolder("\\filtered_data_files\\")
         if "ErrorLog" in filename:
             outFilename = "error_logs" + ext
+            writeToFile(absolutePath, os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
+            if numOfErrorLogs > 1:
+                populateList(os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
         elif "GeneralLog" in filename:
             outFilename = "general_logs" + ext
+            writeToFile(absolutePath, os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
+            if numOfGeneralLogs > 1:
+                populateList(os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
         elif "IntegrationsLog" in filename:
             outFilename = "integrations_logs" + ext
+            writeToFile(absolutePath, os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
+            if numOfIntegrationsLogs > 1:
+                populateList(os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
         elif "TimerLog" in filename:
             outFilename = "timer_logs" + ext
+            writeToFile(absolutePath, os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
+            if numOfTimerLogs > 1:
+                populateList(os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
         elif "EmailLog" in filename:
             outFilename = "email_logs" + ext
+            writeToFile(absolutePath, os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
+            if numOfEmailLogs > 1:
+                populateList(os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
         elif "ExtensionLog" in filename:
             outFilename = "extension_logs" + ext
+            writeToFile(absolutePath, os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
+            if numOfExtensionLogs > 1:
+                populateList(os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
         elif "MobileRequestsLog" in filename:
             outFilename = "mobile_requests_logs" + ext
+            writeToFile(absolutePath, os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
+            if numOfMobileRequestsLogs > 1:
+                populateList(os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
         elif "ServiceActionLog" in filename:
             outFilename = "service_action_logs" + ext
+            writeToFile(absolutePath, os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
+            if numOfServiceActionLogs > 1:
+                populateList(os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
         elif "ScreenLog" in filename:
             outFilename = "screen_logs" + ext
+            writeToFile(absolutePath, os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
+            if numOfScreenLogs > 1:
+                populateList(os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
         elif "troubleshootingreport" in filename.lower():
             outFilename = "bpt_troubleshootingreport_logs" + ext
-
-        myLinesFromDateRange.sort()
-        #remove duplicate records from the list
-        myFinalLinesFromDateRange = list(set(myLinesFromDateRange))
-        myFinalLinesFromDateRange.sort()
-
-        with codecs.open(os.getcwd() + "\\filtered_data_files\\" + outFilename, "a+", "utf-8", "ignore") as linesFromDateRange:
-            linesFromDateRange.seek(0)
-            if len(linesFromDateRange.read(100)) > 0:
-                linesFromDateRange.writelines("\n")
-            linesFromDateRange.writelines(myFinalLinesFromDateRange)
-        del myLinesFromDateRange[:]
-        del myFinalLinesFromDateRange[:]
+            writeToFile(absolutePath, os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
     else:
         print("No data was found within the specified date range.")
 
@@ -3114,37 +3226,27 @@ def txtFile(absolutePath, filename, filenameWithExt, ext, _fromDate, _toDate):
         createFolder("\\filtered_data_files\\")
         if "iosbuildlog" in filename.lower():
             outFilename = "iOS_build_logs" + ext
+            writeToFile(absolutePath, os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
+            if numOfiOSLogs > 1:
+                populateList(os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
         elif "androidbuildlog" in filename.lower():
             outFilename = "android_build_logs" + ext
+            writeToFile(absolutePath, os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
+            if numOfAndroidLogs > 1:
+                populateList(os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
         elif "studio" in filename.lower() and "report" in filename.lower():
             outFilename = "service_studio_report" + ext
+            writeToFile(absolutePath, os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
+            if numOfServiceStudioReports > 1:
+                populateList(os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
         elif "general" in filename.lower():
             outFilename = "general_text_logs" + ext
+            writeToFile(absolutePath, os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
+            if numOfGeneralTXTLogs > 1:
+                populateList(os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
         elif "fullerrordump" == filename.lower():
             outFilename = "full_error_dump_logs" + ext
-
-        if not "infrastructurereport" in absolutePath.lower() and not "stagingreport" in absolutePath.lower() and not "userpermissionsreport" in absolutePath.lower():
-            myLinesFromDateRange.sort()
-            #remove duplicate records from the list
-            myFinalLinesFromDateRange = list(set(myLinesFromDateRange))
-            myFinalLinesFromDateRange.sort()
-
-            with codecs.open(os.getcwd() + "\\filtered_data_files\\" + outFilename, "a+", "utf-8", "ignore") as linesFromDateRange:
-                linesFromDateRange.seek(0)
-                if len(linesFromDateRange.read(100)) > 0:
-                    linesFromDateRange.writelines("\n")
-                linesFromDateRange.writelines(myFinalLinesFromDateRange)
-            del myLinesFromDateRange[:]
-            del myFinalLinesFromDateRange[:]
-
-        else:
-            with codecs.open(os.getcwd() + "\\filtered_data_files\\" + outFilename, "a+", "utf-8", "ignore") as linesFromDateRange:
-                linesFromDateRange.seek(0)
-                if len(linesFromDateRange.read(100)) > 0:
-                    linesFromDateRange.writelines("\n")
-                linesFromDateRange.writelines(myLinesFromDateRange)
-            del myLinesFromDateRange[:]
-                
+            writeToFile(absolutePath, os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
     else:
         if not "errordump" == filename.lower():
             print("No data was found within the specified date range.")
@@ -3152,6 +3254,9 @@ def txtFile(absolutePath, filename, filenameWithExt, ext, _fromDate, _toDate):
     print("Closing: " + filenameWithExt)
 
 def logFile(absolutePath, filenameWithExt, ext, _fromDate, _toDate):
+    global numOfIISLogs
+    numOfIISLogs+=1
+
     #pattern for filenames: u_exYYMMDD.log
     print("Reading: " + filenameWithExt)
 
@@ -3269,19 +3374,9 @@ def logFile(absolutePath, filenameWithExt, ext, _fromDate, _toDate):
     if len(myLinesFromDateRange) > 0:
         createFolder("\\filtered_data_files\\")
         outFilename = "iis_logs" + ext
-
-        myLinesFromDateRange.sort()
-        #remove duplicate records from the list
-        myFinalLinesFromDateRange = list(set(myLinesFromDateRange))
-        myFinalLinesFromDateRange.sort()
-
-        with codecs.open(os.getcwd() + "\\filtered_data_files\\" + outFilename, "a+", "utf-8", "ignore") as linesFromDateRange:
-            linesFromDateRange.seek(0)
-            if len(linesFromDateRange.read(100)) > 0:
-                linesFromDateRange.writelines("\n")
-            linesFromDateRange.writelines(myFinalLinesFromDateRange)
-        del myLinesFromDateRange[:]
-        del myFinalLinesFromDateRange[:]
+        writeToFile(absolutePath, os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
+        if numOfIISLogs > 1:
+            populateList(os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
     else:
         print("No data was found within the specified date range.")
 
@@ -3289,6 +3384,8 @@ def logFile(absolutePath, filenameWithExt, ext, _fromDate, _toDate):
     sortLOGFile()
 
 def sortLOGFile():
+    print("Sorting the content from the IIS logs")
+
     try:
         outText = ""
 
@@ -3448,25 +3545,36 @@ def evtxFile(absolutePath, filenameWithExt, ext, _fromDate, _toDate):
 
     if len(myLinesFromDateRange) > 0:
         createFolder("\\filtered_data_files\\")
-        outFilename = "windows_" + channel.lower() + "_event_viewer_logs" + ext
 
-        myLinesFromDateRange.sort()
-        #remove duplicate records from the list
-        myFinalLinesFromDateRange = list(set(myLinesFromDateRange))
-        myFinalLinesFromDateRange.sort()
+        if channel.lower() == "application":
+            global numOfWinAppEvViewerLogs
+            numOfWinAppEvViewerLogs+=1
 
-        with codecs.open(os.getcwd() + "\\filtered_data_files\\" + outFilename, "a+", "utf-8", "ignore") as linesFromDateRange:
-            linesFromDateRange.seek(0)
-            if len(linesFromDateRange.read(100)) > 0:
-                linesFromDateRange.writelines("\n")
-            linesFromDateRange.writelines(myFinalLinesFromDateRange)
-        del myLinesFromDateRange[:]
-        del myFinalLinesFromDateRange[:]
+            outFilename = "windows_" + channel.lower() + "_event_viewer_logs" + ext
+            writeToFile(absolutePath, os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
+            if numOfWinAppEvViewerLogs > 1:
+                populateList(os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
+        elif channel.lower() == "security":
+            global numOfWinSecEvViewerLogs
+            numOfWinSecEvViewerLogs+=1
+
+            outFilename = "windows_" + channel.lower() + "_event_viewer_logs" + ext
+            writeToFile(absolutePath, os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
+            if numOfWinSecEvViewerLogs > 1:
+                populateList(os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
+        elif channel.lower() == "system":
+            global numOfWinSysEvViewerLogs
+            numOfWinSysEvViewerLogs+=1
+
+            outFilename = "windows_" + channel.lower() + "_event_viewer_logs" + ext
+            writeToFile(absolutePath, os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
+            if numOfWinSysEvViewerLogs > 1:
+                populateList(os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
     else:
         print("No data was found within the specified date range.")
 
     print("Closing: " + filenameWithExt)
-    
+
 #the following line displays the absolute path of the folder where Python was installed on your PC. Uncomment only when necessary.
 #print("PYTHON WAS INSTALLED HERE -> " + os.path.dirname(sys.executable))
 
