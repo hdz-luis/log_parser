@@ -2439,6 +2439,7 @@ namespace OutSystems_Log_Parser
                             {
                                 if (rowValues.ToLower().Contains(txtBoxKeyword.Text.ToLower()))
                                 {
+                                    tableName.Rows[r].DefaultCellStyle.BackColor = Color.FromArgb(255, 240, 240);
                                     tableName.Rows[r].DefaultCellStyle.ForeColor = Color.Red;
 
                                     bool_findKeywordSuccessful = true;

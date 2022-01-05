@@ -42,6 +42,7 @@
             this.dataGridViewErrorlogs = new System.Windows.Forms.DataGridView();
             this.txtBoxDetailErrorLogs = new System.Windows.Forms.TextBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.btnExportSlowSQLExtensionTables = new System.Windows.Forms.Button();
             this.tabControl10 = new System.Windows.Forms.TabControl();
             this.tabPage61 = new System.Windows.Forms.TabPage();
             this.dataGridViewSlowSQLDurationlogs = new System.Windows.Forms.DataGridView();
@@ -54,6 +55,7 @@
             this.txtBoxDetailGenerallogs = new System.Windows.Forms.TextBox();
             this.dataGridViewGenerallogs = new System.Windows.Forms.DataGridView();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.btnExportWebServiceTable = new System.Windows.Forms.Button();
             this.txtBoxDetailsIntWebServiceslogs = new System.Windows.Forms.TextBox();
             this.dataGridViewInWebServicesDurationlogs = new System.Windows.Forms.DataGridView();
             this.dataGridViewIntWebServiceslogs = new System.Windows.Forms.DataGridView();
@@ -63,6 +65,7 @@
             this.txtBoxDetailScreenRequestslogs = new System.Windows.Forms.TextBox();
             this.dataGridViewScreenRequestslogs = new System.Windows.Forms.DataGridView();
             this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.btnExportTimerTable = new System.Windows.Forms.Button();
             this.txtBoxDetailsTimerTimerslogs = new System.Windows.Forms.TextBox();
             this.dataGridViewTimerTimersDurationlogs = new System.Windows.Forms.DataGridView();
             this.dataGridViewTimerTimerslogs = new System.Windows.Forms.DataGridView();
@@ -78,6 +81,7 @@
             this.txtBoxDetailServiceActionlogs = new System.Windows.Forms.TextBox();
             this.dataGridViewServiceActionlogs = new System.Windows.Forms.DataGridView();
             this.tabPage13 = new System.Windows.Forms.TabPage();
+            this.btnExportScreenTable = new System.Windows.Forms.Button();
             this.txtBoxDetailTradWebRequestsScreenlogs = new System.Windows.Forms.TextBox();
             this.dataGridViewTradWebRequestsScreenDurationlogs = new System.Windows.Forms.DataGridView();
             this.dataGridViewTradWebRequestsScreenlogs = new System.Windows.Forms.DataGridView();
@@ -249,10 +253,6 @@
             this.btnSearchKeyword = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txtBoxKeyword = new System.Windows.Forms.TextBox();
-            this.btnExportSlowSQLExtensionTables = new System.Windows.Forms.Button();
-            this.btnExportWebServiceTable = new System.Windows.Forms.Button();
-            this.btnExportTimerTable = new System.Windows.Forms.Button();
-            this.btnExportScreenTable = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -578,6 +578,23 @@
             this.tabPage6.TabIndex = 1;
             this.tabPage6.Text = "General";
             // 
+            // btnExportSlowSQLExtensionTables
+            // 
+            this.btnExportSlowSQLExtensionTables.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportSlowSQLExtensionTables.BackgroundImage")));
+            this.btnExportSlowSQLExtensionTables.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnExportSlowSQLExtensionTables.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportSlowSQLExtensionTables.Location = new System.Drawing.Point(8, 636);
+            this.btnExportSlowSQLExtensionTables.Margin = new System.Windows.Forms.Padding(4);
+            this.btnExportSlowSQLExtensionTables.Name = "btnExportSlowSQLExtensionTables";
+            this.btnExportSlowSQLExtensionTables.Size = new System.Drawing.Size(64, 32);
+            this.btnExportSlowSQLExtensionTables.TabIndex = 15;
+            this.btnExportSlowSQLExtensionTables.Text = ",";
+            this.toolTip1.SetToolTip(this.btnExportSlowSQLExtensionTables, "Export table content.");
+            this.btnExportSlowSQLExtensionTables.UseVisualStyleBackColor = true;
+            this.btnExportSlowSQLExtensionTables.Click += new System.EventHandler(this.btnExportSlowSQLExtensionTables_Click);
+            this.btnExportSlowSQLExtensionTables.MouseEnter += new System.EventHandler(this.btnExportSlowSQLExtensionTables_MouseEnter);
+            this.btnExportSlowSQLExtensionTables.MouseLeave += new System.EventHandler(this.btnExportSlowSQLExtensionTables_MouseLeave);
+            // 
             // tabControl10
             // 
             this.tabControl10.Controls.Add(this.tabPage61);
@@ -756,6 +773,23 @@
             this.tabPage7.TabIndex = 2;
             this.tabPage7.Text = "Integrations";
             // 
+            // btnExportWebServiceTable
+            // 
+            this.btnExportWebServiceTable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportWebServiceTable.BackgroundImage")));
+            this.btnExportWebServiceTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnExportWebServiceTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportWebServiceTable.Location = new System.Drawing.Point(9, 635);
+            this.btnExportWebServiceTable.Margin = new System.Windows.Forms.Padding(4);
+            this.btnExportWebServiceTable.Name = "btnExportWebServiceTable";
+            this.btnExportWebServiceTable.Size = new System.Drawing.Size(64, 32);
+            this.btnExportWebServiceTable.TabIndex = 20;
+            this.btnExportWebServiceTable.Text = ",";
+            this.toolTip1.SetToolTip(this.btnExportWebServiceTable, "Export table content.");
+            this.btnExportWebServiceTable.UseVisualStyleBackColor = true;
+            this.btnExportWebServiceTable.Click += new System.EventHandler(this.btnExportWebServiceTable_Click);
+            this.btnExportWebServiceTable.MouseEnter += new System.EventHandler(this.btnExportWebServiceTable_MouseEnter);
+            this.btnExportWebServiceTable.MouseLeave += new System.EventHandler(this.btnExportWebServiceTable_MouseLeave);
+            // 
             // txtBoxDetailsIntWebServiceslogs
             // 
             this.txtBoxDetailsIntWebServiceslogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -887,6 +921,23 @@
             this.tabPage9.Size = new System.Drawing.Size(1576, 675);
             this.tabPage9.TabIndex = 4;
             this.tabPage9.Text = "Timer";
+            // 
+            // btnExportTimerTable
+            // 
+            this.btnExportTimerTable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportTimerTable.BackgroundImage")));
+            this.btnExportTimerTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnExportTimerTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportTimerTable.Location = new System.Drawing.Point(8, 636);
+            this.btnExportTimerTable.Margin = new System.Windows.Forms.Padding(4);
+            this.btnExportTimerTable.Name = "btnExportTimerTable";
+            this.btnExportTimerTable.Size = new System.Drawing.Size(64, 32);
+            this.btnExportTimerTable.TabIndex = 22;
+            this.btnExportTimerTable.Text = ",";
+            this.toolTip1.SetToolTip(this.btnExportTimerTable, "Export table content.");
+            this.btnExportTimerTable.UseVisualStyleBackColor = true;
+            this.btnExportTimerTable.Click += new System.EventHandler(this.btnExportTimerTable_Click);
+            this.btnExportTimerTable.MouseEnter += new System.EventHandler(this.btnExportTimerTable_MouseEnter);
+            this.btnExportTimerTable.MouseLeave += new System.EventHandler(this.btnExportTimerTable_MouseLeave);
             // 
             // txtBoxDetailsTimerTimerslogs
             // 
@@ -1100,6 +1151,23 @@
             this.tabPage13.Size = new System.Drawing.Size(1576, 675);
             this.tabPage13.TabIndex = 8;
             this.tabPage13.Text = "Traditional Web Requests";
+            // 
+            // btnExportScreenTable
+            // 
+            this.btnExportScreenTable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportScreenTable.BackgroundImage")));
+            this.btnExportScreenTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnExportScreenTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportScreenTable.Location = new System.Drawing.Point(10, 635);
+            this.btnExportScreenTable.Margin = new System.Windows.Forms.Padding(4);
+            this.btnExportScreenTable.Name = "btnExportScreenTable";
+            this.btnExportScreenTable.Size = new System.Drawing.Size(64, 32);
+            this.btnExportScreenTable.TabIndex = 26;
+            this.btnExportScreenTable.Text = ",";
+            this.toolTip1.SetToolTip(this.btnExportScreenTable, "Export table content.");
+            this.btnExportScreenTable.UseVisualStyleBackColor = true;
+            this.btnExportScreenTable.Click += new System.EventHandler(this.btnExportScreenTable_Click);
+            this.btnExportScreenTable.MouseEnter += new System.EventHandler(this.btnExportScreenTable_MouseEnter);
+            this.btnExportScreenTable.MouseLeave += new System.EventHandler(this.btnExportScreenTable_MouseLeave);
             // 
             // txtBoxDetailTradWebRequestsScreenlogs
             // 
@@ -3501,74 +3569,6 @@
             this.txtBoxKeyword.Size = new System.Drawing.Size(141, 30);
             this.txtBoxKeyword.TabIndex = 7;
             // 
-            // btnExportSlowSQLExtensionTables
-            // 
-            this.btnExportSlowSQLExtensionTables.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportSlowSQLExtensionTables.BackgroundImage")));
-            this.btnExportSlowSQLExtensionTables.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnExportSlowSQLExtensionTables.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportSlowSQLExtensionTables.Location = new System.Drawing.Point(8, 636);
-            this.btnExportSlowSQLExtensionTables.Margin = new System.Windows.Forms.Padding(4);
-            this.btnExportSlowSQLExtensionTables.Name = "btnExportSlowSQLExtensionTables";
-            this.btnExportSlowSQLExtensionTables.Size = new System.Drawing.Size(64, 32);
-            this.btnExportSlowSQLExtensionTables.TabIndex = 15;
-            this.btnExportSlowSQLExtensionTables.Text = ",";
-            this.toolTip1.SetToolTip(this.btnExportSlowSQLExtensionTables, "Export table content.");
-            this.btnExportSlowSQLExtensionTables.UseVisualStyleBackColor = true;
-            this.btnExportSlowSQLExtensionTables.Click += new System.EventHandler(this.btnExportSlowSQLExtensionTables_Click);
-            this.btnExportSlowSQLExtensionTables.MouseEnter += new System.EventHandler(this.btnExportSlowSQLExtensionTables_MouseEnter);
-            this.btnExportSlowSQLExtensionTables.MouseLeave += new System.EventHandler(this.btnExportSlowSQLExtensionTables_MouseLeave);
-            // 
-            // btnExportWebServiceTable
-            // 
-            this.btnExportWebServiceTable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportWebServiceTable.BackgroundImage")));
-            this.btnExportWebServiceTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnExportWebServiceTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportWebServiceTable.Location = new System.Drawing.Point(9, 635);
-            this.btnExportWebServiceTable.Margin = new System.Windows.Forms.Padding(4);
-            this.btnExportWebServiceTable.Name = "btnExportWebServiceTable";
-            this.btnExportWebServiceTable.Size = new System.Drawing.Size(64, 32);
-            this.btnExportWebServiceTable.TabIndex = 20;
-            this.btnExportWebServiceTable.Text = ",";
-            this.toolTip1.SetToolTip(this.btnExportWebServiceTable, "Export table content.");
-            this.btnExportWebServiceTable.UseVisualStyleBackColor = true;
-            this.btnExportWebServiceTable.Click += new System.EventHandler(this.btnExportWebServiceTable_Click);
-            this.btnExportWebServiceTable.MouseEnter += new System.EventHandler(this.btnExportWebServiceTable_MouseEnter);
-            this.btnExportWebServiceTable.MouseLeave += new System.EventHandler(this.btnExportWebServiceTable_MouseLeave);
-            // 
-            // btnExportTimerTable
-            // 
-            this.btnExportTimerTable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportTimerTable.BackgroundImage")));
-            this.btnExportTimerTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnExportTimerTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportTimerTable.Location = new System.Drawing.Point(8, 636);
-            this.btnExportTimerTable.Margin = new System.Windows.Forms.Padding(4);
-            this.btnExportTimerTable.Name = "btnExportTimerTable";
-            this.btnExportTimerTable.Size = new System.Drawing.Size(64, 32);
-            this.btnExportTimerTable.TabIndex = 22;
-            this.btnExportTimerTable.Text = ",";
-            this.toolTip1.SetToolTip(this.btnExportTimerTable, "Export table content.");
-            this.btnExportTimerTable.UseVisualStyleBackColor = true;
-            this.btnExportTimerTable.Click += new System.EventHandler(this.btnExportTimerTable_Click);
-            this.btnExportTimerTable.MouseEnter += new System.EventHandler(this.btnExportTimerTable_MouseEnter);
-            this.btnExportTimerTable.MouseLeave += new System.EventHandler(this.btnExportTimerTable_MouseLeave);
-            // 
-            // btnExportScreenTable
-            // 
-            this.btnExportScreenTable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportScreenTable.BackgroundImage")));
-            this.btnExportScreenTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnExportScreenTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportScreenTable.Location = new System.Drawing.Point(10, 635);
-            this.btnExportScreenTable.Margin = new System.Windows.Forms.Padding(4);
-            this.btnExportScreenTable.Name = "btnExportScreenTable";
-            this.btnExportScreenTable.Size = new System.Drawing.Size(64, 32);
-            this.btnExportScreenTable.TabIndex = 26;
-            this.btnExportScreenTable.Text = ",";
-            this.toolTip1.SetToolTip(this.btnExportScreenTable, "Export table content.");
-            this.btnExportScreenTable.UseVisualStyleBackColor = true;
-            this.btnExportScreenTable.Click += new System.EventHandler(this.btnExportScreenTable_Click);
-            this.btnExportScreenTable.MouseEnter += new System.EventHandler(this.btnExportScreenTable_MouseEnter);
-            this.btnExportScreenTable.MouseLeave += new System.EventHandler(this.btnExportScreenTable_MouseLeave);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -3601,7 +3601,7 @@
             this.MinimumSize = new System.Drawing.Size(1649, 872);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "OutSystems Log Parser V.121121";
+            this.Text = "OutSystems Log Parser V.010422";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
