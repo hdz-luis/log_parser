@@ -443,6 +443,22 @@ def splitDirectory2(root, file):
 def searchDirectory(directoryPath, _fromDate, _toDate):
     #search for the files with the raw data in the specified directory
     for root, subFolders, files in os.walk(directoryPath):
+        if "infrastructurereport" in root.lower():
+            for f in files:
+                absolutePathOfFile, filePathWithoutFilename, filenameWithExt, filenameWithoutExt, extension = splitDirectory(root, f)
+
+                if extension == ".xlsx":
+                    xlsxFile(absolutePathOfFile, filePathWithoutFilename, filenameWithoutExt, ".txt", _fromDate, _toDate)
+                elif extension == ".txt":
+                    txtFile(absolutePathOfFile, filenameWithoutExt, filenameWithExt, extension, _fromDate, _toDate)
+
+        elif "stagingreport" in root.lower() or "userpermissionsreport" in root.lower():
+            for f in files:
+                absolutePathOfFile, filePathWithoutFilename, filenameWithExt, filenameWithoutExt, extension = splitDirectory(root, f)
+
+                if extension == ".xlsx":
+                    xlsxFile(absolutePathOfFile, filePathWithoutFilename, filenameWithoutExt, ".txt", _fromDate, _toDate)
+
         for s in subFolders:
             if "infrastructurereport" in s.lower():
                 absolutePathOfFile2 = os.path.join(root, s)
