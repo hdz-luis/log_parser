@@ -15,9 +15,16 @@ namespace OutSystems_Log_Parser
 {
     public partial class Form1 : Form
     {
+        string category = "";
         string fullPath = "";
         string relativePath = "";
         string[] filesPaths;
+        string[] knownErrors_Errorlogs;
+        string[] knownErrors_Generallogs;
+        string[] knownErrors_WinAppEventViewer;
+        string[] knownErrors_WinSysEventViewer;
+        string[] knownErrors_AndroidiOSlogs;
+        string[] knownErrors_ServiceStudiologs;
         string fileName = "";
         char delimiters = '|';
         int totalRowsCount;
@@ -367,23 +374,13 @@ namespace OutSystems_Log_Parser
                             }
                             else if (fileName == "general_logs_slowsql.txt")
                             {
-                                string[] column_names = { "DATE_TIME", "DURATION_MINUTES", "MODULE_NAME", "ACTION_NAME", "ESPACE_NAME" };
+                                string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "MODULE_NAME", "ACTION_NAME", "ESPACE_NAME" };
                                 populateTables(relativePath + "\\general_logs_slowsql.txt", delimiters, column_names, dataGridViewSlowSQLlogs);
-                            }
-                            else if (fileName == "general_logs_slowsql_duration.txt")
-                            {
-                                string[] column_names = { "DURATION_MINUTES", "DATE_TIME", "MODULE_NAME", "ACTION_NAME", "ESPACE_NAME" };
-                                populateTables(relativePath + "\\general_logs_slowsql_duration.txt", delimiters, column_names, dataGridViewSlowSQLDurationlogs);
                             }
                             else if (fileName == "general_logs_slowextension.txt")
                             {
-                                string[] column_names = { "DATE_TIME", "DURATION_MINUTES", "MODULE_NAME", "ACTION_NAME", "ESPACE_NAME" };
+                                string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "MODULE_NAME", "ACTION_NAME", "ESPACE_NAME" };
                                 populateTables(relativePath + "\\general_logs_slowextension.txt", delimiters, column_names, dataGridViewSlowExtensionlogs);
-                            }
-                            else if (fileName == "general_logs_slowextension_duration.txt")
-                            {
-                                string[] column_names = { "DURATION_MINUTES", "DATE_TIME", "MODULE_NAME", "ACTION_NAME", "ESPACE_NAME" };
-                                populateTables(relativePath + "\\general_logs_slowextension_duration.txt", delimiters, column_names, dataGridViewSlowExtensionDurationlogs);
                             }
                             else if (fileName == "iis_logs.txt")
                             {
@@ -408,13 +405,8 @@ namespace OutSystems_Log_Parser
                             }
                             else if (fileName == "integrations_logs_webservices.txt")
                             {
-                                string[] column_names = { "DATE_TIME", "DURATION_MINUTES", "ACTION_NAME", "ACTION_TYPE", "ESPACE_NAME" };
+                                string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "ACTION_NAME", "ACTION_TYPE", "ESPACE_NAME", "MODULE_NAME" , "MESSAGE", "STACK", "ENVIRONMENT_INFORMATION", "ERROR_ID" };
                                 populateTables(relativePath + "\\integrations_logs_webservices.txt", delimiters, column_names, dataGridViewIntWebServiceslogs);
-                            }
-                            else if (fileName == "integrations_logs_webservices_duration.txt")
-                            {
-                                string[] column_names = { "DURATION_MINUTES", "DATE_TIME", "ACTION_NAME", "ACTION_TYPE", "ESPACE_NAME" };
-                                populateTables(relativePath + "\\integrations_logs_webservices_duration.txt", delimiters, column_names, dataGridViewInWebServicesDurationlogs);
                             }
                             else if (fileName == "iOS_build_logs.txt")
                             {
@@ -437,13 +429,8 @@ namespace OutSystems_Log_Parser
                             }
                             else if (fileName == "screen_logs_screens.txt")
                             {
-                                string[] column_names = { "DATE_TIME", "DURATION_MINUTES", "SCREEN", "ESPACE_NAME" };
+                                string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "SCREEN", "ESPACE_NAME" };
                                 populateTables(relativePath + "\\screen_logs_screens.txt", delimiters, column_names, dataGridViewTradWebRequestsScreenlogs);
-                            }
-                            else if (fileName == "screen_logs_screens_duration.txt")
-                            {
-                                string[] column_names = { "DURATION_MINUTES", "DATE_TIME", "SCREEN", "ESPACE_NAME" };
-                                populateTables(relativePath + "\\screen_logs_screens_duration.txt", delimiters, column_names, dataGridViewTradWebRequestsScreenDurationlogs);
                             }
                             else if (fileName == "service_action_logs.txt")
                             {
@@ -471,13 +458,8 @@ namespace OutSystems_Log_Parser
                             }
                             else if (fileName == "timer_logs_timers.txt")
                             {
-                                string[] column_names = { "DATE_TIME", "DURATION_MINUTES", "CYCLIC_JOB_NAME", "ESPACE_NAME" };
+                                string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "CYCLIC_JOB_NAME", "ESPACE_NAME" };
                                 populateTables(relativePath + "\\timer_logs_timers.txt", delimiters, column_names, dataGridViewTimerTimerslogs);
-                            }
-                            else if (fileName == "timer_logs_timers_duration.txt")
-                            {
-                                string[] column_names = { "DURATION_MINUTES", "DATE_TIME", "CYCLIC_JOB_NAME", "ESPACE_NAME" };
-                                populateTables(relativePath + "\\timer_logs_timers_duration.txt", delimiters, column_names, dataGridViewTimerTimersDurationlogs);
                             }
                             else if (fileName == "bpt_troubleshootingreport_logs.txt")
                             {
@@ -727,8 +709,7 @@ namespace OutSystems_Log_Parser
                     btnRemoveGarbage.Enabled = true;
                     btnRemoveGarbage.BackColor = SystemColors.ControlLight;
                     numericUpDownPercentage.Enabled = true;
-                    btnHighlight.Enabled = true;
-                    btnHighlight.BackColor = SystemColors.ControlLight;
+                    comBoxIssueCategory.Enabled = true;
                     btnClearFilter.Enabled = true;
                     btnClearFilter.BackColor = SystemColors.ControlLight;
                     btnSearchKeyword.Enabled = true;
@@ -742,22 +723,22 @@ namespace OutSystems_Log_Parser
 
                     if (dataGridViewSlowSQLlogs.Rows.Count > 0 || dataGridViewSlowExtensionlogs.Rows.Count > 0)
                     {
-                        btnExportSlowSQLExtensionTables.Enabled = true;
+                        chkBoxSortSlowSQLExtension.Enabled = true;
                     }
 
                     if (dataGridViewIntWebServiceslogs.Rows.Count > 0)
                     {
-                        btnExportWebServiceTable.Enabled = true;
+                        chkBoxSortWebServices.Enabled = true;
                     }
 
                     if (dataGridViewTimerTimerslogs.Rows.Count > 0)
                     {
-                        btnExportTimerTable.Enabled = true;
+                        chkBoxSortTimers.Enabled = true;
                     }
 
                     if (dataGridViewTradWebRequestsScreenlogs.Rows.Count > 0)
                     {
-                        btnExportScreenTable.Enabled = true;
+                        chkBoxSortTradWebRequestsScreens.Enabled = true;
                     }
                 }
                 else
@@ -1180,7 +1161,8 @@ namespace OutSystems_Log_Parser
 
                 if (bool_highlightError)
                 {
-                    highlightError();
+                    category = comBoxIssueCategory.Text;
+                    highlightError(category);
                 }
 
                 if (bool_findKeyword)
@@ -1244,6 +1226,8 @@ namespace OutSystems_Log_Parser
             txtBoxKeyword.BackColor = SystemColors.Window;
 
             numericUpDownPercentage.Value = 20;
+
+            comBoxIssueCategory.SelectedIndex = -1;
 
             comBoxReport.SelectedIndex = -1;
 
@@ -1418,23 +1402,13 @@ namespace OutSystems_Log_Parser
                     }
                     else if (fileName == "general_logs_slowsql.txt")
                     {
-                        string[] column_names = { "DATE_TIME", "DURATION_MINUTES", "MODULE_NAME", "ACTION_NAME", "ESPACE_NAME" };
+                        string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "MODULE_NAME", "ACTION_NAME", "ESPACE_NAME" };
                         populateTables(relativePath + "\\general_logs_slowsql.txt", delimiters, column_names, dataGridViewSlowSQLlogs);
-                    }
-                    else if (fileName == "general_logs_slowsql_duration.txt")
-                    {
-                        string[] column_names = { "DURATION_MINUTES", "DATE_TIME", "MODULE_NAME", "ACTION_NAME", "ESPACE_NAME" };
-                        populateTables(relativePath + "\\general_logs_slowsql_duration.txt", delimiters, column_names, dataGridViewSlowSQLDurationlogs);
                     }
                     else if (fileName == "general_logs_slowextension.txt")
                     {
-                        string[] column_names = { "DATE_TIME", "DURATION_MINUTES", "MODULE_NAME", "ACTION_NAME", "ESPACE_NAME" };
+                        string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "MODULE_NAME", "ACTION_NAME", "ESPACE_NAME" };
                         populateTables(relativePath + "\\general_logs_slowextension.txt", delimiters, column_names, dataGridViewSlowExtensionlogs);
-                    }
-                    else if (fileName == "general_logs_slowextension_duration.txt")
-                    {
-                        string[] column_names = { "DURATION_MINUTES", "DATE_TIME", "MODULE_NAME", "ACTION_NAME", "ESPACE_NAME" };
-                        populateTables(relativePath + "\\general_logs_slowextension_duration.txt", delimiters, column_names, dataGridViewSlowExtensionDurationlogs);
                     }
                     else if (fileName == "iis_logs.txt")
                     {
@@ -1459,13 +1433,8 @@ namespace OutSystems_Log_Parser
                     }
                     else if (fileName == "integrations_logs_webservices.txt")
                     {
-                        string[] column_names = { "DATE_TIME", "DURATION_MINUTES", "ACTION_NAME", "ACTION_TYPE", "ESPACE_NAME" };
+                        string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "ACTION_NAME", "ACTION_TYPE", "ESPACE_NAME", "MODULE_NAME", "MESSAGE", "STACK", "ENVIRONMENT_INFORMATION", "ERROR_ID" };
                         populateTables(relativePath + "\\integrations_logs_webservices.txt", delimiters, column_names, dataGridViewIntWebServiceslogs);
-                    }
-                    else if (fileName == "integrations_logs_webservices_duration.txt")
-                    {
-                        string[] column_names = { "DURATION_MINUTES", "DATE_TIME", "ACTION_NAME", "ACTION_TYPE", "ESPACE_NAME" };
-                        populateTables(relativePath + "\\integrations_logs_webservices_duration.txt", delimiters, column_names, dataGridViewInWebServicesDurationlogs);
                     }
                     else if (fileName == "iOS_build_logs.txt")
                     {
@@ -1488,13 +1457,8 @@ namespace OutSystems_Log_Parser
                     }
                     else if (fileName == "screen_logs_screens.txt")
                     {
-                        string[] column_names = { "DATE_TIME", "DURATION_MINUTES", "SCREEN", "ESPACE_NAME" };
+                        string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "SCREEN", "ESPACE_NAME" };
                         populateTables(relativePath + "\\screen_logs_screens.txt", delimiters, column_names, dataGridViewTradWebRequestsScreenlogs);
-                    }
-                    else if (fileName == "screen_logs_screens_duration.txt")
-                    {
-                        string[] column_names = { "DURATION_MINUTES", "DATE_TIME", "SCREEN", "ESPACE_NAME" };
-                        populateTables(relativePath + "\\screen_logs_screens_duration.txt", delimiters, column_names, dataGridViewTradWebRequestsScreenDurationlogs);
                     }
                     else if (fileName == "service_action_logs.txt")
                     {
@@ -1522,13 +1486,8 @@ namespace OutSystems_Log_Parser
                     }
                     else if (fileName == "timer_logs_timers.txt")
                     {
-                        string[] column_names = { "DATE_TIME", "DURATION_MINUTES", "CYCLIC_JOB_NAME", "ESPACE_NAME" };
+                        string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "CYCLIC_JOB_NAME", "ESPACE_NAME" };
                         populateTables(relativePath + "\\timer_logs_timers.txt", delimiters, column_names, dataGridViewTimerTimerslogs);
-                    }
-                    else if (fileName == "timer_logs_timers_duration.txt")
-                    {
-                        string[] column_names = { "DURATION_MINUTES", "DATE_TIME", "CYCLIC_JOB_NAME", "ESPACE_NAME" };
-                        populateTables(relativePath + "\\timer_logs_timers_duration.txt", delimiters, column_names, dataGridViewTimerTimersDurationlogs);
                     }
                     else if (fileName == "bpt_troubleshootingreport_logs.txt")
                     {
@@ -1776,12 +1735,16 @@ namespace OutSystems_Log_Parser
                     btnRemoveGarbage.Enabled = true;
                     btnRemoveGarbage.BackColor = SystemColors.ControlLight;
                     numericUpDownPercentage.Enabled = true;
-                    btnHighlight.Enabled = true;
-                    btnHighlight.BackColor = SystemColors.ControlLight;
+                    comBoxIssueCategory.Enabled = true;
+                    btnHighlight.Enabled = false;
                     btnScreenshot.Enabled = false;
                     btnSearchKeyword.Enabled = true;
                     btnSearchKeyword.BackColor = SystemColors.ControlLight;
                     txtBoxKeyword.Enabled = true;
+                    chkBoxSortSlowSQLExtension.Checked = false;
+                    chkBoxSortWebServices.Checked = false;
+                    chkBoxSortTimers.Checked = false;
+                    chkBoxSortTradWebRequestsScreens.Checked = false;
 
                     if (dataGridViewIISDateTime.Rows.Count > 0)
                     {
@@ -1790,22 +1753,22 @@ namespace OutSystems_Log_Parser
 
                     if (dataGridViewSlowSQLlogs.Rows.Count > 0 || dataGridViewSlowExtensionlogs.Rows.Count > 0)
                     {
-                        btnExportSlowSQLExtensionTables.Enabled = true;
+                        chkBoxSortSlowSQLExtension.Enabled = true;
                     }
 
                     if (dataGridViewIntWebServiceslogs.Rows.Count > 0)
                     {
-                        btnExportWebServiceTable.Enabled = true;
+                        chkBoxSortWebServices.Enabled = true;
                     }
 
                     if (dataGridViewTimerTimerslogs.Rows.Count > 0)
                     {
-                        btnExportTimerTable.Enabled = true;
+                        chkBoxSortTimers.Enabled = true;
                     }
 
                     if (dataGridViewTradWebRequestsScreenlogs.Rows.Count > 0)
                     {
-                        btnExportScreenTable.Enabled = true;
+                        chkBoxSortTradWebRequestsScreens.Enabled = true;
                     }
                 }
                 else
@@ -1817,12 +1780,21 @@ namespace OutSystems_Log_Parser
                     maskedTextBox2.Enabled = false;
                     btnRemoveGarbage.Enabled = false;
                     numericUpDownPercentage.Enabled = false;
+                    comBoxIssueCategory.Enabled = false;
                     btnHighlight.Enabled = false;
                     btnClearFilter.Enabled = false;
                     btnScreenshot.Enabled = false;
                     btnSearchKeyword.Enabled = false;
                     txtBoxKeyword.Enabled = false;
                     comBoxReport.Enabled = false;
+                    chkBoxSortSlowSQLExtension.Checked = false;
+                    chkBoxSortWebServices.Checked = false;
+                    chkBoxSortTimers.Checked = false;
+                    chkBoxSortTradWebRequestsScreens.Checked = false;
+                    chkBoxSortSlowSQLExtension.Enabled = false;
+                    chkBoxSortWebServices.Enabled = false;
+                    chkBoxSortTimers.Enabled = false;
+                    chkBoxSortTradWebRequestsScreens.Enabled = false;
                     btnExportSlowSQLExtensionTables.Enabled = false;
                     btnExportWebServiceTable.Enabled = false;
                     btnExportTimerTable.Enabled = false;
@@ -1849,7 +1821,8 @@ namespace OutSystems_Log_Parser
 
             if (bool_highlightError)
             {
-                highlightError();
+                category = comBoxIssueCategory.Text;
+                highlightError(category);
             }
 
             if (bool_findKeyword)
@@ -1873,7 +1846,7 @@ namespace OutSystems_Log_Parser
                 if (tableName.Rows.Count > 50)
                 {
                     forceTabClick(dgvName);
- 
+
                     totalRowsCount = tableName.RowCount;
 
                     var messageLineCountQuery = tableName.Rows.Cast<DataGridViewRow>()
@@ -1918,9 +1891,12 @@ namespace OutSystems_Log_Parser
 
         private void btnHighlight_Click(object sender, EventArgs e)
         {
+            comBoxIssueCategory.Enabled = false;
+
             bool_highlightError = true;
 
-            highlightError();
+            category = comBoxIssueCategory.Text;
+            highlightError(category);
 
             if (bool_removeGarbage)
             {
@@ -1953,7 +1929,7 @@ namespace OutSystems_Log_Parser
                         foreach (DataGridViewRow row in tableName.Rows)
                         {
                             if (row.Cells[columnIndex].Value.ToString().ToLower().Contains(error))
-                            { 
+                            {
                                 row.DefaultCellStyle.BackColor = Color.Yellow;
 
                                 bool_highlightErrorSuccessful = true;
@@ -2047,12 +2023,18 @@ namespace OutSystems_Log_Parser
             maskedTextBox2.Enabled = false;
             btnRemoveGarbage.Enabled = false;
             numericUpDownPercentage.Enabled = false;
+            comBoxIssueCategory.Enabled = false;
             btnHighlight.Enabled = false;
             btnScreenshot.Enabled = false;
             btnClearFilter.Enabled = false;
             btnSearchKeyword.Enabled = false;
             txtBoxKeyword.Enabled = false;
             comBoxReport.Enabled = false;
+            chkBoxSortSlowSQLExtension.Checked = false;
+            chkBoxSortSlowSQLExtension.Enabled = false;
+            chkBoxSortWebServices.Enabled = false;
+            chkBoxSortTimers.Enabled = false;
+            chkBoxSortTradWebRequestsScreens.Enabled = false;
             btnExportSlowSQLExtensionTables.Enabled = false;
             btnExportWebServiceTable.Enabled = false;
             btnExportTimerTable.Enabled = false;
@@ -2072,64 +2054,64 @@ namespace OutSystems_Log_Parser
                 txtDetailErrorLogs = "DATE_TIME: " + row.Cells["DATE_TIME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "MESSAGE: " + row.Cells["MESSAGE"].Value.ToString() + Environment.NewLine + Environment.NewLine + "STACK: " + row.Cells["STACK"].Value.ToString() + Environment.NewLine + Environment.NewLine + "MODULE_NAME: " + row.Cells["MODULE_NAME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "APPLICATION_NAME: " + row.Cells["APPLICATION_NAME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "SERVER: " + row.Cells["SERVER"].Value.ToString() + Environment.NewLine + Environment.NewLine + "ENVIRONMENT_INFORMATION: " + row.Cells["ENVIRONMENT_INFORMATION"].Value.ToString();
             }
 
-            createScreenshot("detailed_error_logs", txtDetailErrorLogs, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_general_logs", txtBoxDetailGenerallogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_slowsql_logs", txtBoxDetailsSlowSQLlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_slowextension_logs", txtBoxDetailsSlowExtensionlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_integrations_logs", txtBoxDetailIntegrationlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_integrations_webservices_logs", txtBoxDetailsIntWebServiceslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_screen_requests_logs", txtBoxDetailScreenRequestslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_timer_logs", txtBoxDetailTimerlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_timer_timers_logs", txtBoxDetailsTimerTimerslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_email_logs", txtBoxDetailEmaillogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_extension_logs", txtBoxDetailExtensionlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_service_action_logs", txtBoxDetailServiceActionlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_tradional_web_requests_logs", txtBoxDetailTradWebRequests.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_tradional_web_requests_screens_logs", txtBoxDetailTradWebRequestsScreenlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_windows_application_viewer_logs", txtBoxDetailWinAppEventViewer.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_windows_system_viewer_logs", txtBoxDetailWinSysEventViewer.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_windows_security_viewer_logs", txtBoxDetailWinSecEventViewer.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_android_logs", txtBoxDetailAndroidLogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_ios_logs", txtBoxDetailiOSLogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_iis_logs", txtDetailIISlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_device_information_logs", txtBoxDetailDeviceInformationlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_service_studio_logs", txtBoxDetailServiceStudioLogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_general_text_logs", txtBoxDetailGeneralTXTLogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_bpt_reports_logs", txtBoxDetailBPTReportslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_environment_capabilities_logs", txtBoxDetailEnvironmentCapabilitieslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_environments_logs", txtBoxDetailEnvironmentslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_full_error_dump_logs", txtBoxDetailFullErrorDumpslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_roles_logs", txtBoxDetailRoleslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_roles_in_applications_logs", txtBoxDetailRolesInApplicationslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_roles_in_teams_logs", txtBoxDetailRolesInTeamslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_sync_error_logs", txtBoxDetailSyncErrorslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_user_logs", txtBoxDetailUserlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_user_pool_logs", txtBoxDetailUserPoolslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_application_logs", txtBoxDetailStagingApplogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_application_version_logs", txtBoxDetailStagingAppVerlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_application_version_module_version_logs", txtBoxDetailStagingAppVerModuleVerlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_change_logs", txtBoxDetailStagingChangelog.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_consumer_elements_logs", txtBoxDetailStagingConsumerElementslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_entity_configurations_logs", txtBoxDetailStagingEntityConfiguration.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_environment_application_version_logs", txtBoxDetailStagingEnviromentApplicationVersion.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_environment_application_cache_logs", txtBoxDetailStagingEnvironmentApplicationCache.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_environment_application_module_logs", txtBoxDetailStagingEnvironmentApplicationModule.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_environment_module_cache_logs", txtBoxDetailStagingEnvironmentModuleCache.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_environment_module_running_logs", txtBoxDetailStagingEnvironmentModuleRunning.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_module_version_references_logs", txtBoxDetailStagingModuleVersionReferences.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_modules_logs", txtBoxDetailStagingModules.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_producer_elements_logs", txtBoxDetailStagingProducerElements.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_site_properties_logs", txtBoxDetailStagingSiteProperties.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_staging_logs", txtBoxDetailStaginglogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_staging_application_version_logs", txtBoxDetailStagingApplicationVersion.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_staging_message_logs", txtBoxDetailStagingMessage.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_staging_module_inconsistency_logs", txtBoxDetailStagingModuleInconsistencies.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_staging_module_version_logs", txtBoxDetailStagingModuleVersion.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_staging_module_version_publish_logs", txtBoxDetailStagingModuleVersionPublished.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_staging_module_version_upload_logs", txtBoxDetailStagingModuleVersionUploaded.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_staging_option_logs", txtBoxDetailStagingOptions.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_staging_oudated_application_logs", txtBoxDetailStagingOutdatedApplication.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_staging_oudated_module_logs", txtBoxDetailStagingOutdatedModule.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_error_logs", txtBoxDetailErrorLogs, txtDetailErrorLogs, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_general_logs", txtBoxDetailGenerallogs, txtBoxDetailGenerallogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_slowsql_logs", txtBoxDetailsSlowSQLlogs, txtBoxDetailsSlowSQLlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_slowextension_logs", txtBoxDetailsSlowExtensionlogs, txtBoxDetailsSlowExtensionlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_integrations_logs", txtBoxDetailIntegrationlogs, txtBoxDetailIntegrationlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_integrations_webservices_logs", txtBoxDetailsIntWebServiceslogs, txtBoxDetailsIntWebServiceslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_screen_requests_logs", txtBoxDetailScreenRequestslogs, txtBoxDetailScreenRequestslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_timer_logs", txtBoxDetailTimerlogs, txtBoxDetailTimerlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_timer_timers_logs", txtBoxDetailsTimerTimerslogs, txtBoxDetailsTimerTimerslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_email_logs", txtBoxDetailEmaillogs, txtBoxDetailEmaillogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_extension_logs", txtBoxDetailExtensionlogs, txtBoxDetailExtensionlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_service_action_logs", txtBoxDetailServiceActionlogs, txtBoxDetailServiceActionlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_tradional_web_requests_logs", txtBoxDetailTradWebRequests, txtBoxDetailTradWebRequests.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_tradional_web_requests_screens_logs", txtBoxDetailTradWebRequestsScreenlogs, txtBoxDetailTradWebRequestsScreenlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_windows_application_viewer_logs", txtBoxDetailWinAppEventViewer, txtBoxDetailWinAppEventViewer.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_windows_system_viewer_logs", txtBoxDetailWinSysEventViewer, txtBoxDetailWinSysEventViewer.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_windows_security_viewer_logs", txtBoxDetailWinSecEventViewer, txtBoxDetailWinSecEventViewer.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_android_logs", txtBoxDetailAndroidLogs, txtBoxDetailAndroidLogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_ios_logs", txtBoxDetailiOSLogs, txtBoxDetailiOSLogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_iis_logs", txtDetailIISlogs, txtDetailIISlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_device_information_logs", txtBoxDetailDeviceInformationlogs, txtBoxDetailDeviceInformationlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_service_studio_logs", txtBoxDetailServiceStudioLogs, txtBoxDetailServiceStudioLogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_general_text_logs", txtBoxDetailGeneralTXTLogs, txtBoxDetailGeneralTXTLogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_bpt_reports_logs", txtBoxDetailBPTReportslogs, txtBoxDetailBPTReportslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_environment_capabilities_logs", txtBoxDetailEnvironmentCapabilitieslogs, txtBoxDetailEnvironmentCapabilitieslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_environments_logs", txtBoxDetailEnvironmentslogs, txtBoxDetailEnvironmentslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_full_error_dump_logs", txtBoxDetailFullErrorDumpslogs, txtBoxDetailFullErrorDumpslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_roles_logs", txtBoxDetailRoleslogs, txtBoxDetailRoleslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_roles_in_applications_logs", txtBoxDetailRolesInApplicationslogs, txtBoxDetailRolesInApplicationslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_roles_in_teams_logs", txtBoxDetailRolesInTeamslogs, txtBoxDetailRolesInTeamslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_sync_error_logs", txtBoxDetailSyncErrorslogs, txtBoxDetailSyncErrorslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_user_logs", txtBoxDetailUserlogs, txtBoxDetailUserlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_user_pool_logs", txtBoxDetailUserPoolslogs, txtBoxDetailUserPoolslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_application_logs", txtBoxDetailStagingApplogs, txtBoxDetailStagingApplogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_application_version_logs", txtBoxDetailStagingAppVerlogs, txtBoxDetailStagingAppVerlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_application_version_module_version_logs", txtBoxDetailStagingAppVerModuleVerlogs, txtBoxDetailStagingAppVerModuleVerlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_change_logs", txtBoxDetailStagingChangelog, txtBoxDetailStagingChangelog.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_consumer_elements_logs", txtBoxDetailStagingConsumerElementslogs, txtBoxDetailStagingConsumerElementslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_entity_configurations_logs", txtBoxDetailStagingEntityConfiguration, txtBoxDetailStagingEntityConfiguration.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_environment_application_version_logs", txtBoxDetailStagingEnviromentApplicationVersion, txtBoxDetailStagingEnviromentApplicationVersion.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_environment_application_cache_logs", txtBoxDetailStagingEnvironmentApplicationCache, txtBoxDetailStagingEnvironmentApplicationCache.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_environment_application_module_logs", txtBoxDetailStagingEnvironmentApplicationModule, txtBoxDetailStagingEnvironmentApplicationModule.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_environment_module_cache_logs", txtBoxDetailStagingEnvironmentModuleCache, txtBoxDetailStagingEnvironmentModuleCache.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_environment_module_running_logs", txtBoxDetailStagingEnvironmentModuleRunning, txtBoxDetailStagingEnvironmentModuleRunning.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_module_version_references_logs", txtBoxDetailStagingModuleVersionReferences, txtBoxDetailStagingModuleVersionReferences.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_modules_logs", txtBoxDetailStagingModules, txtBoxDetailStagingModules.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_producer_elements_logs", txtBoxDetailStagingProducerElements, txtBoxDetailStagingProducerElements.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_site_properties_logs", txtBoxDetailStagingSiteProperties, txtBoxDetailStagingSiteProperties.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_staging_logs", txtBoxDetailStaginglogs, txtBoxDetailStaginglogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_staging_application_version_logs", txtBoxDetailStagingApplicationVersion, txtBoxDetailStagingApplicationVersion.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_staging_message_logs", txtBoxDetailStagingMessage, txtBoxDetailStagingMessage.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_staging_module_inconsistency_logs", txtBoxDetailStagingModuleInconsistencies, txtBoxDetailStagingModuleInconsistencies.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_staging_module_version_logs", txtBoxDetailStagingModuleVersion, txtBoxDetailStagingModuleVersion.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_staging_module_version_publish_logs", txtBoxDetailStagingModuleVersionPublished, txtBoxDetailStagingModuleVersionPublished.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_staging_module_version_upload_logs", txtBoxDetailStagingModuleVersionUploaded, txtBoxDetailStagingModuleVersionUploaded.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_staging_option_logs", txtBoxDetailStagingOptions, txtBoxDetailStagingOptions.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_staging_oudated_application_logs", txtBoxDetailStagingOutdatedApplication, txtBoxDetailStagingOutdatedApplication.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_staging_oudated_module_logs", txtBoxDetailStagingOutdatedModule, txtBoxDetailStagingOutdatedModule.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
 
             if (bool_screenshotSuccessful)
             {
@@ -2138,7 +2120,7 @@ namespace OutSystems_Log_Parser
 
         }
 
-        private void createScreenshot(String filename, String text, Font font, Color textColor, Color backColor)
+        private void createScreenshot(String filename, TextBox txtbox, String text, Font font, Color textColor, Color backColor)
         {
             try
             {
@@ -2205,6 +2187,8 @@ namespace OutSystems_Log_Parser
                     img.Save(screenshotsFolder + "\\" + filename + "_" + timeStamp + ".jpg");
 
                     bool_screenshotSuccessful = true;
+
+                    clearTextboxes(txtbox);
                 }
             }
             catch (Exception ex)
@@ -2407,7 +2391,8 @@ namespace OutSystems_Log_Parser
 
             if (bool_highlightError)
             {
-                highlightError();
+                category = comBoxIssueCategory.Text;
+                highlightError(category);
             }
 
             if (bool_findKeywordSuccessful)
@@ -2718,22 +2703,70 @@ namespace OutSystems_Log_Parser
             removeGenericErrors("dataGridViewGeneralTXTlogs", dataGridViewGeneralTXTlogs, 2, txtBoxDetailGeneralTXTLogs);
         }
 
-        private void highlightError()
+        private void highlightError(string ctg)
         {
-            string[] knownErrors_Errorlogs = { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "a fatal error has occurred", "communicationexception", "json deserialization", "compilation error", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "can't proceed", "truncated in table", "unknown reference expression type email", "unable to open service studio", "bad json escape sequence" };
-            string[] knownErrors_Generallogs = { "system cannot find" };
-            string[] knownErrors_WinAppEventViewer = { "ora-", "error closing", "cannot access", "error opening" };
-            string[] knownErrors_WinSysEventViewer = { "error closing", "timed out" };
-            string[] knownErrors_AndroidiOSlogs = { "file is corrupt or invalid", "androidx library", "command finished with error code 0", "plugin is not going to work", "error: spawnsync sudo etimeout", "plugin doesn't support this project's cordova-android version", "failed to fetch plug", "archive failed", "build failed with the following error", "command failed with exit code", "signing certificate is invalid", "the ios deployment target", "verification failed" };
-            string[] knownErrors_ServiceStudiologs = { "oneoftypedefinition", "http forbidden", "[not connected]" };
+            if (ctg == "Building Mobile App")
+            {
+                knownErrors_AndroidiOSlogs = new string[] { "command finished with error code 0", "plugin is not going to work", "plugin doesn't support this project's cordova-android version", "failed to fetch plug", "archive failed", "build failed with the following error", "command failed with exit code", "the ios deployment target", "kotlin", "cordovaerror" };
 
-            highlightKnownErrors("dataGridViewErrorlogs", dataGridViewErrorlogs, 1, knownErrors_Errorlogs);
-            highlightKnownErrors("dataGridViewGenerallogs", dataGridViewGenerallogs, 1, knownErrors_Generallogs);
-            highlightKnownErrors("dataGridViewWinAppEventViewer", dataGridViewWinAppEventViewer, 2, knownErrors_WinAppEventViewer);
-            highlightKnownErrors("dataGridViewWinSysEventViewer", dataGridViewWinSysEventViewer, 2, knownErrors_WinSysEventViewer);
-            highlightKnownErrors("dataGridViewAndroidlogs", dataGridViewAndroidlogs, 3, knownErrors_AndroidiOSlogs);
-            highlightKnownErrors("dataGridViewiOSlogs", dataGridViewiOSlogs, 3, knownErrors_AndroidiOSlogs);
-            highlightKnownErrors("dataGridViewServiceStudiologs", dataGridViewServiceStudiologs, 3, knownErrors_ServiceStudiologs);
+                highlightKnownErrors("dataGridViewAndroidlogs", dataGridViewAndroidlogs, 3, knownErrors_AndroidiOSlogs);
+                highlightKnownErrors("dataGridViewiOSlogs", dataGridViewiOSlogs, 3, knownErrors_AndroidiOSlogs);
+            }
+            else if (ctg == "Compilation")
+            {
+                knownErrors_Errorlogs = new string[] { "compilation error", "can't proceed" };
+
+                highlightKnownErrors("dataGridViewErrorlogs", dataGridViewErrorlogs, 1, knownErrors_Errorlogs);
+
+            }
+            else if (ctg == "Content Security Policy (CSP)")
+            {
+                knownErrors_Errorlogs = new string[] { "violated-directive" };
+
+                highlightKnownErrors("dataGridViewErrorlogs", dataGridViewErrorlogs, 1, knownErrors_Errorlogs);
+            }
+            else if (ctg == "Database")
+            {
+                knownErrors_Errorlogs = new string[] { "truncated in table" };
+                knownErrors_WinAppEventViewer = new string[] { "ora-", "error closing", "error opening" };
+                knownErrors_WinSysEventViewer = new string[] { "error closing", "timed out" };
+
+                highlightKnownErrors("dataGridViewErrorlogs", dataGridViewErrorlogs, 1, knownErrors_Errorlogs);
+                highlightKnownErrors("dataGridViewWinAppEventViewer", dataGridViewWinAppEventViewer, 2, knownErrors_WinAppEventViewer);
+                highlightKnownErrors("dataGridViewWinSysEventViewer", dataGridViewWinSysEventViewer, 2, knownErrors_WinSysEventViewer);
+            }
+            else if (ctg == "Logic")
+            {
+                knownErrors_Errorlogs = new string[] { "url rewrite module error", "an error occurred in task", "a fatal error has occurred", "json deserialization", "unknown reference expression type email", "bad json escape sequence" };
+                knownErrors_Generallogs = new string[] { "system cannot find" };
+                knownErrors_WinAppEventViewer = new string[] { "error closing", "error opening" };
+                knownErrors_WinSysEventViewer = new string[] { "error closing", "timed out" };
+                knownErrors_AndroidiOSlogs = new string[] { "androidx library", "error: spawnsync sudo etimeout", "verification failed" };
+                knownErrors_ServiceStudiologs = new string[] { "oneoftypedefinition" };
+
+                highlightKnownErrors("dataGridViewErrorlogs", dataGridViewErrorlogs, 1, knownErrors_Errorlogs);
+                highlightKnownErrors("dataGridViewGenerallogs", dataGridViewGenerallogs, 1, knownErrors_Generallogs);
+                highlightKnownErrors("dataGridViewWinAppEventViewer", dataGridViewWinAppEventViewer, 2, knownErrors_WinAppEventViewer);
+                highlightKnownErrors("dataGridViewWinSysEventViewer", dataGridViewWinSysEventViewer, 2, knownErrors_WinSysEventViewer);
+                highlightKnownErrors("dataGridViewAndroidlogs", dataGridViewAndroidlogs, 3, knownErrors_AndroidiOSlogs);
+                highlightKnownErrors("dataGridViewiOSlogs", dataGridViewiOSlogs, 3, knownErrors_AndroidiOSlogs);
+                highlightKnownErrors("dataGridViewServiceStudiologs", dataGridViewServiceStudiologs, 3, knownErrors_ServiceStudiologs);
+            }
+            else if (ctg == "Network")
+            {
+                knownErrors_Errorlogs = new string[] { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "communicationexception", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "unable to open service studio", "invalid authentication token"};
+                knownErrors_WinAppEventViewer = new string[] { "error closing", "cannot access", "error opening" };
+                knownErrors_WinSysEventViewer = new string[] { "error closing", "timed out" };
+                knownErrors_AndroidiOSlogs = new string[] { "file is corrupt or invalid", "error: spawnsync sudo etimeout", "signing certificate is invalid", "verification failed" };
+                knownErrors_ServiceStudiologs = new string[] { "http forbidden", "[not connected]" };
+
+                highlightKnownErrors("dataGridViewErrorlogs", dataGridViewErrorlogs, 1, knownErrors_Errorlogs);
+                highlightKnownErrors("dataGridViewWinAppEventViewer", dataGridViewWinAppEventViewer, 2, knownErrors_WinAppEventViewer);
+                highlightKnownErrors("dataGridViewWinSysEventViewer", dataGridViewWinSysEventViewer, 2, knownErrors_WinSysEventViewer);
+                highlightKnownErrors("dataGridViewAndroidlogs", dataGridViewAndroidlogs, 3, knownErrors_AndroidiOSlogs);
+                highlightKnownErrors("dataGridViewiOSlogs", dataGridViewiOSlogs, 3, knownErrors_AndroidiOSlogs);
+                highlightKnownErrors("dataGridViewServiceStudiologs", dataGridViewServiceStudiologs, 3, knownErrors_ServiceStudiologs);
+            }
         }
 
         private void findKeyword()
@@ -3744,6 +3777,101 @@ namespace OutSystems_Log_Parser
                     MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
                     throw;
                 }
+            }
+        }
+
+        private void comBoxIssueCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comBoxIssueCategory.SelectedIndex > -1)
+            {
+                if (btnHighlight.Enabled == false)
+                {
+                    btnHighlight.Enabled = true;
+                    btnHighlight.BackColor = SystemColors.ControlLight;
+                }
+            }
+        }
+
+        private void chkBoxSortSlowSQLExtension_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkBoxSortSlowSQLExtension.Checked == true)
+            {
+                if (dataGridViewSlowSQLlogs.Rows.Count > 0)
+                {
+                    var sortSlowSQLDuration = (dataGridViewSlowSQLlogs.Rows.Cast<DataGridViewRow>()
+                        .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null)
+                        .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ModuleName = r.Cells[2].Value, ActionName = r.Cells[3].Value, EspaceName = r.Cells[4].Value })
+                        .GroupBy(usernametime => usernametime)
+                        .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                        .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, MODULE_NAME = g.Key.ModuleName, ACTION_NAME = g.Key.ActionName, ESPACE_NAME = g.Key.EspaceName })).ToList();
+
+                    dataGridViewSlowSQLDurationlogs.DataSource = sortSlowSQLDuration;
+                }
+
+                if (dataGridViewSlowExtensionlogs.Rows.Count > 0)
+                {
+                    var sortSlowExtensionDuration = (dataGridViewSlowExtensionlogs.Rows.Cast<DataGridViewRow>()
+                        .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null)
+                        .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ModuleName = r.Cells[2].Value, ActionName = r.Cells[3].Value, EspaceName = r.Cells[4].Value })
+                        .GroupBy(usernametime => usernametime)
+                        .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                        .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, MODULE_NAME = g.Key.ModuleName, ACTION_NAME = g.Key.ActionName, ESPACE_NAME = g.Key.EspaceName })).ToList();
+
+                    dataGridViewSlowExtensionDurationlogs.DataSource = sortSlowExtensionDuration;
+                }
+
+                btnExportSlowSQLExtensionTables.Enabled = true;
+            }
+        }
+
+        private void chkBoxSortWebServices_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkBoxSortWebServices.Checked == true)
+            {
+                var sortWebServicesDuration = (dataGridViewIntWebServiceslogs.Rows.Cast<DataGridViewRow>()
+                            .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null)
+                            .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ActionName = r.Cells[2].Value, ActionType = r.Cells[3].Value, EspaceName = r.Cells[4].Value, ModuleName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
+                            .GroupBy(srtwebsrvs => srtwebsrvs)
+                            .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                            .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, ACTION_NAME = g.Key.ActionName, ACTION_TYPE = g.Key.ActionType, ESPACE_NAME = g.Key.EspaceName, MODULE_NAME = g.Key.ModuleName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+
+                dataGridViewInWebServicesDurationlogs.DataSource = sortWebServicesDuration;
+
+                btnExportWebServiceTable.Enabled = true;
+            }
+        }
+
+        private void chkBoxSortTimers_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkBoxSortTimers.Checked == true)
+            {
+                var sortTimersDuration = (dataGridViewTimerTimerslogs.Rows.Cast<DataGridViewRow>()
+                            .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null)
+                            .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, CyclicJobNameName = r.Cells[2].Value, EspaceName = r.Cells[3].Value })
+                            .GroupBy(usernametime => usernametime)
+                            .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                            .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, CYCLIC_JOB_NAME = g.Key.CyclicJobNameName, ESPACE_NAME = g.Key.EspaceName })).ToList();
+
+                dataGridViewTimerTimersDurationlogs.DataSource = sortTimersDuration;
+
+                btnExportTimerTable.Enabled = true;
+            }
+        }
+
+        private void chkBoxSortTradWebRequestsScreens_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkBoxSortTradWebRequestsScreens.Checked == true)
+            {
+                var sortScreenssDuration = (dataGridViewTradWebRequestsScreenlogs.Rows.Cast<DataGridViewRow>()
+                            .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null)
+                            .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, Screen = r.Cells[2].Value, EspaceName = r.Cells[3].Value })
+                            .GroupBy(usernametime => usernametime)
+                            .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                            .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, SCREEN = g.Key.Screen, ESPACE_NAME = g.Key.EspaceName })).ToList();
+
+                dataGridViewTradWebRequestsScreenDurationlogs.DataSource = sortScreenssDuration;
+
+                btnExportScreenTable.Enabled = true;
             }
         }
     }
