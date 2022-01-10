@@ -226,35 +226,25 @@ myAndroidOSVersionList = []
 myiOSVersionList = []
 androidOSVersionOccurrencesList = []
 iOSOSVersionOccurrencesList = []
+errorLogsList = []
 generalLogsList = []
 integrationsLogsList = []
 slowSQLList = []
-slowSQLList2 = []
 mySlowSQLList = []
-slowSQLActionNameList = []
-slowSQLActionNameOccurrencesList = []
 slowExtensionList = []
-slowExtensionList2 = []
 mySlowExtensionList = []
-slowExtensionActionNameList = []
-slowExtensionActionNameOccurrencesList = []
+errorsList = []
+errorsList2 = []
 webServicesList = []
-myWebServicesList = []
 webServicesList2 = []
-integrationsActionNameList = []
-integrationsActionNameOccurrencesList = []
+webServicesErrorsList = []
+myWebServicesErrorsList = []
 timerLogsList = []
 timersList = []
-timersList2 = []
-timerCyclicJobNameList = []
 myTimersList = []
-timerCyclicJobNameListOccurrencesList = []
 screenLogsList = []
 screensList = []
-screensList2 = []
-screenNamesList = []
 myScreensList = []
-screenNamesListOccurrencesList = []
 
 #all illegal space characters, control characters, and ASCII characters
 replacementDict = {}
@@ -2587,77 +2577,30 @@ def xlsxtxtFile(absolutePath, filename, ext, _fromDate, _toDate):
         print("No data was found within the specified date range.")
 
     try:
-        #populate list with the general_logs file
-        if not os.path.exists(os.path.dirname(os.getcwd() + "\\graphs\\SlowSQL\\")) and not os.path.exists(os.path.dirname(os.getcwd() + "\\graphs\\SlowExtension\\")):
+        if not os.path.exists(os.getcwd() + "\\filtered_data_files\\general_logs_slowsql.txt") and not os.path.exists(os.getcwd() + "\\filtered_data_files\\general_logs_slowextension.txt"):
+            #populate list with the general_logs file
             with codecs.open(os.getcwd() + "\\filtered_data_files\\general_logs.txt", "r", "utf-8", "ignore") as linesFromText:
                 generalLogsList = linesFromText.readlines()
 
+            print("Sorting the content from the SlowSQLs and the SlowExtensions")
+
             for g, gn in enumerate(generalLogsList):
-                regex = re.search(r"^([\d\-\: ]+)\|.*?\|(SLOWSQL|SLOWEXTENSION)(?:(?:.+?\|){2})([\w\(\)\.]+|\s*?)\|(?:(?:.+?\|){2})([\w]+|\s*?)\|.+", generalLogsList[g].strip())
+                regex = re.search(r"^([\d\-\: ]+)\|.*?([\d]+)\s*?ms.*?\|(SLOWSQL|SLOWEXTENSION)(?:(?:.+?\|){2})([\w\(\)\.]+|\s*?)\|(?:(?:.+?\|){2})([\w]+|\s*?)\|.+", generalLogsList[g].strip())
                 if regex:
                     timestamp = regex.group(1)
-                    moduleName = regex.group(2)
-                    actionName = regex.group(3)
-                    eSpaceName = regex.group(4)
+                    duration = regex.group(2)
+                    moduleName = regex.group(3)
+                    actionName = regex.group(4)
+                    eSpaceName = regex.group(5)
 
-                    if len(actionName.strip()) > 0:
-                        if "slowsql" == moduleName.lower():
-                            if not g + 1 > len(generalLogsList) - 1:
-                                myRegex = re.search(r"^([\d\-\: ]+)\|.+", generalLogsList[g+1].strip())
-                                if myRegex:
-                                    timestamp2 = myRegex.group(1)
+                    #duration is in milliseconds and it needs to be converted to seconds
+                    seconds = int(duration)/1000
 
-                                    #remove the seconds from the timestamps
-                                    _timestamp = timestamp[0:16]
-                                    _timestamp2 = timestamp2[0:16]
+                    if "slowsql" == moduleName.lower():
+                        slowSQLList.append(timestamp + "|" + str(seconds) + "|" + moduleName + "|" + actionName + "|" + eSpaceName + "\n")
 
-                                    #convert the timestamps to datetime
-                                    d1 = datetime.strptime(_timestamp, "%Y-%m-%d %H:%M")
-                                    d2 = datetime.strptime(_timestamp2, "%Y-%m-%d %H:%M")
-
-                                    #subtract both timestamps to get the duration time
-                                    diffTime = d2 - d1
-                                    strDiffTime = str(diffTime)
-
-                                    #convert duration time to minutes (whole value)
-                                    delta = timedelta(hours=int(strDiffTime.split(":")[0]), minutes=int(strDiffTime.split(":")[1]))
-                                    minutes = delta.total_seconds()/60
-                                    strMinutes = str(minutes)
-                                    _minutes = strMinutes.split('.')[0]
-
-                                    if int(_minutes) > 0:
-                                        slowSQLList.append(timestamp + "|" + _minutes + "|" + moduleName + "|" + actionName + "|" + eSpaceName + "\n")
-                                        slowSQLList2.append(actionName + "|" + timestamp + "|" + _minutes + "\n")
-                                        slowSQLActionNameList.append(actionName)
-
-                        elif "slowextension" == moduleName.lower():
-                            if not g + 1 > len(generalLogsList) - 1:
-                                    myRegex = re.search(r"^([\d\-\: ]+)\|.+", generalLogsList[g+1].strip())
-                                    if myRegex:
-                                        timestamp2 = myRegex.group(1)
-
-                                        #remove the seconds from the timestamps
-                                        _timestamp = timestamp[0:16]
-                                        _timestamp2 = timestamp2[0:16]
-
-                                        #convert the timestamps to datetime
-                                        d1 = datetime.strptime(_timestamp, "%Y-%m-%d %H:%M")
-                                        d2 = datetime.strptime(_timestamp2, "%Y-%m-%d %H:%M")
-
-                                        #subtract both timestamps to get the duration time
-                                        diffTime = d2 - d1
-                                        strDiffTime = str(diffTime)
-
-                                        #convert duration time to minutes (whole value)
-                                        delta = timedelta(hours=int(strDiffTime.split(":")[0]), minutes=int(strDiffTime.split(":")[1]))
-                                        minutes = delta.total_seconds()/60
-                                        strMinutes = str(minutes)
-                                        _minutes = strMinutes.split('.')[0]
-
-                                        if int(_minutes) > 0:
-                                            slowExtensionList.append(timestamp + "|" + _minutes + "|" + moduleName + "|" + actionName + "|" + eSpaceName + "\n")
-                                            slowExtensionList2.append(actionName + "|" + timestamp + "|" + _minutes + "\n")
-                                            slowExtensionActionNameList.append(actionName)
+                    elif "slowextension" == moduleName.lower():
+                        slowExtensionList.append(timestamp + "|" + str(seconds) + "|" + moduleName + "|" + actionName + "|" + eSpaceName + "\n")
                 g+=1
 
             mySlowSQLList = list(set(slowSQLList))
@@ -2666,302 +2609,125 @@ def xlsxtxtFile(absolutePath, filename, ext, _fromDate, _toDate):
             mySlowExtensionList = list(set(slowExtensionList))
             mySlowExtensionList.sort()
 
-            slowSQLList2.sort()
-            slowSQLActionNameList.sort()
-            slowSQLActionNameOccurrences = Counter(slowSQLActionNameList)
-
-            slowExtensionList2.sort()
-            slowExtensionActionNameList.sort()
-            slowExtensionActionNameOccurrences = Counter(slowExtensionActionNameList)
-
             del generalLogsList[:]
 
-            for z, zn in enumerate(slowSQLActionNameList):
-                slowSQLActionNameOccurrencesList.append(slowSQLActionNameList[z] + "|" + str(slowSQLActionNameOccurrences[slowSQLActionNameList[z]]) + "\n")
-                z+=1
-            slowSQLActionNameOccurrencesList.sort()
-
-            for y, yn in enumerate(slowExtensionActionNameList):
-                slowExtensionActionNameOccurrencesList.append(slowExtensionActionNameList[y] + "|" + str(slowExtensionActionNameOccurrences[slowExtensionActionNameList[y]]) + "\n")
-                y+=1
-            slowExtensionActionNameOccurrencesList.sort()
-
             if len(mySlowSQLList) > 0:
-                print("Sorting the content from the SlowSQLs")
-                #create a line graph with the compiled data
-                createFolder("\\graphs\\SlowSQL\\")
-                
-                for a, an in enumerate(mySlowSQLList):
-                    count = 1
-                    #each action name is a different file
-                    with codecs.open(os.getcwd() + "\\graphs\\SlowSQL\\" + mySlowSQLList[a].split("|")[3].strip() + ".html", "w", "utf-8", "ignore") as linesToText4:
-                        linesToText4.writelines("<!doctype html>\n<body>\n<div id=\"container\" style=\"width: 1000px; height: 800px;\"></div>\n<script src=\"https://cdn.anychart.com/releases/v8/js/anychart-base.min.js\" type=\"text/javascript\"></script>\n<script>\n\tanychart.onDocumentReady(function() {\n\t\t//create CSV string\n\t\tvar csvString = 'Timestamp;Duration*' +\n")
-                        #compare the action names
-                        for b, bn in enumerate(slowSQLActionNameOccurrencesList):
-                            if slowSQLActionNameOccurrencesList[b].split("|")[0].strip() == mySlowSQLList[a].split("|")[3].strip() and slowSQLActionNameOccurrencesList[b].split("|")[0].strip() == slowSQLList2[b].split("|")[0].strip():
-                                #use the timestamp and the duration time for the graph
-                                if count == int(slowSQLActionNameOccurrencesList[b].split("|")[1].strip()):
-                                    linesToText4.writelines("\t\t\t'" + slowSQLList2[b].split("|")[1].strip() + "|" + slowSQLList2[b].split("|")[2].strip() + "';\n\n")
-                                else:
-                                    linesToText4.writelines("\t\t\t'" + slowSQLList2[b].split("|")[1].strip() + "|" + slowSQLList2[b].split("|")[2].strip() + "*' +\n")
-                                    count+=1
-                            b+=1
-                        linesToText4.writelines("\t\t//create an area chart\n\t\tvar chart = anychart.line();\n\n\t\t//create the area series based on CSV data\n\t\tchart.line(csvString, {ignoreFirstRow: true, columnsSeparator: \"|\", rowsSeparator: \"*\"});\n\n\t\t//display a chart\n\t\tchart.container('container').draw();\n\n\t\tchart.xAxis().title(\"Timestamp\");\n\t\tchart.yAxis().title(\"Duration (Minutes)\");\n\n\t\t//set ticks interval\n\t\tchart.yScale().ticks().interval(60);\n\n\t\t//set minor ticks interval\n\t\tchart.yScale().minorTicks().interval(30);\n\n\t\t//settings\n\t\tchart.tooltip().fontColor(\"red\");\n\n\t\t//tooltip padding for all series on a chart\n\t\tchart.tooltip().padding().left(20);\n\n\t\t//background color\n\t\tchart.tooltip().background().fill(\"black\");\n});\n</script>\n</body>\n</html>")
-                    a+=1
-
                 with codecs.open(os.getcwd() + "\\filtered_data_files\\general_logs_slowsql.txt", "w", "utf-8", "ignore") as reportFile:
                     reportFile.writelines(mySlowSQLList)
 
-                #sort the data by the duration time to perform an action
-                with codecs.open(os.getcwd() + "\\filtered_data_files\\general_logs_slowsql.txt", "r", "utf-8", "ignore") as linesFromText2:
-                    searchLines = linesFromText2.read()
-                    regex = re.compile("^([\d\-\: ]+)\|([\d]+)\|(.+)", re.MULTILINE + re.IGNORECASE)
-                    for match in regex.finditer(searchLines):
-                        dateTime = match.group(1)
-                        timeTaken = match.group(2)
-                        tail = match.group(3)
-
-                        outText = timeTaken + "|" + dateTime + "|" + tail + "\n"
-                        _timeTaken = int(timeTaken)
-
-                        if not outText in myLOGlines:
-                            myLOGlines.append(outText)
-
-                        if not _timeTaken in myTimeTaken:
-                            myTimeTaken.append(_timeTaken)
-
-                        myDateTimes.append(dateTime)
-                        myTimesTaken.append(_timeTaken)
-
-                myTimeTaken.sort()
-
-                minimum = min(myTimeTaken)
-                maximum = max(myTimeTaken)
-
-                with codecs.open(os.getcwd() + "\\filtered_data_files\\general_logs_slowsql_duration.txt", "w", "utf-8", "ignore") as linesToText3:
-                    while maximum >= minimum:
-                        if maximum in myTimeTaken:
-                            for t, tt in enumerate(myLOGlines):
-                                time = [int(w) for w in myLOGlines[t].split("|") if w.isdigit()]
-                                if maximum == time[0]:
-                                    linesToText3.writelines(myLOGlines[t])
-                                t+=1
-                        maximum-=1
-
-                print("Saved the line graphs from the SlowSQLs") 
                 del slowSQLList[:]
-                del slowSQLList2[:]
-                del slowSQLActionNameList[:]
                 del mySlowSQLList[:]
-                del slowSQLActionNameOccurrencesList[:]
-                del myLOGlines[:]
-                del myTimeTaken[:]
-                del myDateTimes[:]
-                del myTimesTaken[:]
 
             if len(mySlowExtensionList) > 0:
-                print("Sorting the content from the SlowExtensions")
-                #create a line graph with the compiled data
-                createFolder("\\graphs\\SlowExtension\\")
-                
-                for c, cn in enumerate(mySlowExtensionList):
-                    count = 1
-                    #each action name is a different file
-                    with codecs.open(os.getcwd() + "\\graphs\\SlowExtension\\" + mySlowExtensionList[c].split("|")[3].strip() + ".html", "w", "utf-8", "ignore") as linesToText4:
-                        linesToText4.writelines("<!doctype html>\n<body>\n<div id=\"container\" style=\"width: 1000px; height: 800px;\"></div>\n<script src=\"https://cdn.anychart.com/releases/v8/js/anychart-base.min.js\" type=\"text/javascript\"></script>\n<script>\n\tanychart.onDocumentReady(function() {\n\t\t//create CSV string\n\t\tvar csvString = 'Timestamp;Duration*' +\n")
-                        #compare the action names
-                        for d, dn in enumerate(slowExtensionActionNameOccurrencesList):
-                            if slowExtensionActionNameOccurrencesList[d].split("|")[0].strip() == mySlowExtensionList[c].split("|")[3].strip() and slowExtensionActionNameOccurrencesList[d].split("|")[0].strip() == slowExtensionList2[d].split("|")[0].strip():
-                                #use the timestamp and the duration time for the graph
-                                if count == int(slowExtensionActionNameOccurrencesList[d].split("|")[1].strip()):
-                                    linesToText4.writelines("\t\t\t'" + slowExtensionList2[d].split("|")[1].strip() + "|" + slowExtensionList2[d].split("|")[2].strip() + "';\n\n")
-                                else:
-                                    linesToText4.writelines("\t\t\t'" + slowExtensionList2[d].split("|")[1].strip() + "|" + slowExtensionList2[d].split("|")[2].strip() + "*' +\n")
-                                    count+=1
-                            d+=1
-                        linesToText4.writelines("\t\t//create an area chart\n\t\tvar chart = anychart.line();\n\n\t\t//create the area series based on CSV data\n\t\tchart.line(csvString, {ignoreFirstRow: true, columnsSeparator: \"|\", rowsSeparator: \"*\"});\n\n\t\t//display a chart\n\t\tchart.container('container').draw();\n\n\t\tchart.xAxis().title(\"Timestamp\");\n\t\tchart.yAxis().title(\"Duration (Minutes)\");\n\n\t\t//set ticks interval\n\t\tchart.yScale().ticks().interval(60);\n\n\t\t//set minor ticks interval\n\t\tchart.yScale().minorTicks().interval(30);\n\n\t\t//settings\n\t\tchart.tooltip().fontColor(\"red\");\n\n\t\t//tooltip padding for all series on a chart\n\t\tchart.tooltip().padding().left(20);\n\n\t\t//background color\n\t\tchart.tooltip().background().fill(\"black\");\n});\n</script>\n</body>\n</html>")
-                    c+=1
-
                 with codecs.open(os.getcwd() + "\\filtered_data_files\\general_logs_slowextension.txt", "w", "utf-8", "ignore") as reportFile3:
                     reportFile3.writelines(mySlowExtensionList)
 
-                #sort the data by the duration time to perform an action
-                with codecs.open(os.getcwd() + "\\filtered_data_files\\general_logs_slowextension.txt", "r", "utf-8", "ignore") as linesFromText2:
-                    searchLines = linesFromText2.read()
-                    regex = re.compile("^([\d\-\: ]+)\|([\d]+)\|(.+)", re.MULTILINE + re.IGNORECASE)
-                    for match in regex.finditer(searchLines):
-                        dateTime = match.group(1)
-                        timeTaken = match.group(2)
-                        tail = match.group(3)
-
-                        outText = timeTaken + "|" + dateTime + "|" + tail + "\n"
-                        _timeTaken = int(timeTaken)
-
-                        if not outText in myLOGlines:
-                            myLOGlines.append(outText)
-
-                        if not _timeTaken in myTimeTaken:
-                            myTimeTaken.append(_timeTaken)
-
-                        myDateTimes.append(dateTime)
-                        myTimesTaken.append(_timeTaken)
-
-                myTimeTaken.sort()
-
-                minimum = min(myTimeTaken)
-                maximum = max(myTimeTaken)
-
-                with codecs.open(os.getcwd() + "\\filtered_data_files\\general_logs_slowextension_duration.txt", "w", "utf-8", "ignore") as linesToText3:
-                    while maximum >= minimum:
-                        if maximum in myTimeTaken:
-                            for t, tt in enumerate(myLOGlines):
-                                time = [int(w) for w in myLOGlines[t].split("|") if w.isdigit()]
-                                if maximum == time[0]:
-                                    linesToText3.writelines(myLOGlines[t])
-                                t+=1
-                        maximum-=1
-
-                print("Saved the line graphs from the SlowExtensions") 
-                del slowExtensionList[:]
-                del slowExtensionList2[:]
-                del slowExtensionActionNameList[:]
-                del mySlowExtensionList[:]
-                del slowExtensionActionNameOccurrencesList[:]
-                del myLOGlines[:]
-                del myTimeTaken[:]
-                del myDateTimes[:]
-                del myTimesTaken[:]
+                    del slowExtensionList[:]
+                    del mySlowExtensionList[:]
 
     except FileNotFoundError as fileError:
         pass
 
     try:
-        #populate list with the integrations_logs file
-        if not os.path.exists(os.path.dirname(os.getcwd() + "\\graphs\\Integrations\\")):
+        if not os.path.exists(os.getcwd() + "\\filtered_data_files\\integrations_logs_webservices.txt"):
+            #populate list with the integrations_logs file and the error_logs file
             with codecs.open(os.getcwd() + "\\filtered_data_files\\integrations_logs.txt", "r", "utf-8", "ignore") as linesFromText:
                 integrationsLogsList = linesFromText.readlines()
-            
+
+            with codecs.open(os.getcwd() + "\\filtered_data_files\\error_logs.txt", "r", "utf-8", "ignore") as linesFromText2:
+                errorLogsList = linesFromText2.readlines()
+
+            print("Sorting the content from the Integrations")
+                
             for i, inte in enumerate(integrationsLogsList):
-                regex = re.search(r"^([\d\-\:\. ]+)\|([\d]+)\|(?:(?:.+?\|){2})([\w\/\.\-\(\) ]+)\|([\w\(\) ]+)\|(?:(?:.+?\|){3})([\w\.]+|\s*?)\|.+", integrationsLogsList[i].strip())
+                regex = re.search(r"^([\d\-\:\. ]+)\|([\d]+)\|(?:(?:.+?\|){2})([\w\/\.\-\(\) ]+)\|([\w\(\) ]+)\|(?:(?:.+?\|){3})([\w\.]+|\s*?)\|(?:[\d]+)\|([\w\-]+|\s*?)\|.+", integrationsLogsList[i].strip())
                 if regex:
                     timestamp = regex.group(1)
                     duration = regex.group(2)
                     actionName = regex.group(3)
                     actionType = regex.group(4)
                     eSpaceName = regex.group(5)
+                    errorID = regex.group(6)
 
-                    #duration is in milliseconds and it needs to be converted to minutes
+                    if eSpaceName == "None":
+                        eSpaceName == " "
+
+                    if errorID == "None":
+                        errorID == " "
+
+                    #duration is in milliseconds and it needs to be converted to seconds
                     seconds = int(duration)/1000
-                    if seconds > 60:
-                        minutes = seconds/60
-                        if minutes > 0:
-                            if "." in str(minutes):
-                                ind = str(minutes).index(".")
-                                _minutes = str(minutes)[:ind]
-                                webServicesList.append(timestamp + "|" + _minutes + "|" + actionName + "|" + actionType + "|" + eSpaceName + "\n")
-                                webServicesList2.append(actionName + "|" + timestamp + "|" + _minutes + "\n")
-                                integrationsActionNameList.append(actionName)
-                            else:
-                                webServicesList.append(timestamp + "|" + str(minutes) + "|" + actionName + "|" + actionType + "|" + eSpaceName + "\n")
-                                webServicesList2.append(actionName + "|" + timestamp + "|" + str(minutes) + "\n")
-                                integrationsActionNameList.append(actionName)
+                    webServicesList.append(timestamp + "|" + str(seconds) + "|" + actionName + "|" + actionType + "|" + eSpaceName + "|" + errorID + "\n")
+                    webServicesList2.append(errorID + "\n")
                 i+=1
 
-            myWebServicesList = list(set(webServicesList))
-            myWebServicesList.sort()
+            for e, err in enumerate(errorLogsList):
+                regex = re.search(r"^(?:[\d\-\:\. ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|(?:(?:.*?\|){6})([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\-]+)\|(?:[\d]+)", errorLogsList[e].strip())
+                if regex:
+                    message = regex.group(1)
+                    stack = regex.group(2)
+                    moduleName = regex.group(3)
+                    environmentInformation = regex.group(4)
+                    iD = regex.group(5)
 
-            webServicesList2.sort()
-            integrationsActionNameList.sort()
-            integrationsActionNameOccurrences = Counter(integrationsActionNameList)
+                    if message == "None":
+                        message == " "
+
+                    if stack == "None":
+                        stack == " "
+
+                    if moduleName == "None":
+                        moduleName == " "
+
+                    if environmentInformation == "None":
+                        environmentInformation == " "
+
+                    errorsList.append(iD + "|" + message + "|" + stack + "|" + moduleName + "|" + environmentInformation + "\n")
+                    errorsList2.append(iD + "\n")
+                e+=1
 
             del integrationsLogsList[:]
+            del errorLogsList[:]
 
-            for z, zn in enumerate(integrationsActionNameList):
-                integrationsActionNameOccurrencesList.append(integrationsActionNameList[z] + "|" + str(integrationsActionNameOccurrences[integrationsActionNameList[z]]) + "\n")
-                z+=1
-            integrationsActionNameOccurrencesList.sort()
+            for a, b in enumerate(webServicesList2):
+                if len(webServicesList2[a].strip()) > 0:
+                    if webServicesList2[a] in errorsList2:
+                        ind2 = errorsList2.index(webServicesList2[a])
+                        item2 = errorsList[ind2].split("|")
+                        item1 = webServicesList[a].split("|")
+                        webServicesErrorsList.append(item1[0] + "|" + item1[1] + "|" + item1[2] + "|" + item1[3] + "|" + item1[4] + "|" + item2[3] + "|" + item2[1] + "|" + item2[2] + "|" + item2[4].strip() + "|" + item1[5].strip() + "\n")
+                a+=1
 
-            if len(myWebServicesList) > 0:
-                print("Sorting the content from the Integrations")
-                #create a line graph with the compiled data
-                createFolder("\\graphs\\Integrations\\")
+            for c, d in enumerate(webServicesList):
+                item3 = webServicesList[c].split("|")
+                if item3[5].strip() == "None":
+                    webServicesErrorsList.append(item3[0] + "|" + item3[1] + "|" + item3[2] + "|" + item3[3] + "|" + item3[4] + "|||||\n")
+                c+=1
 
-                for e, en in enumerate(myWebServicesList):
-                    count = 1
-                    #each action name is a different file
-                    with codecs.open(os.getcwd() + "\\graphs\\Integrations\\" + myWebServicesList[e].split("|")[2].strip() + ".html", "w", "utf-8", "ignore") as linesToText4:
-                        linesToText4.writelines("<!doctype html>\n<body>\n<div id=\"container\" style=\"width: 1000px; height: 800px;\"></div>\n<script src=\"https://cdn.anychart.com/releases/v8/js/anychart-base.min.js\" type=\"text/javascript\"></script>\n<script>\n\tanychart.onDocumentReady(function() {\n\t\t//create CSV string\n\t\tvar csvString = 'Timestamp;Duration*' +\n")
-                        #compare the action names
-                        for f, fn in enumerate(integrationsActionNameOccurrencesList):
-                            if integrationsActionNameOccurrencesList[f].split("|")[0].strip() == myWebServicesList[e].split("|")[2].strip() and integrationsActionNameOccurrencesList[f].split("|")[0].strip() == webServicesList2[f].split("|")[0].strip():
-                                #use the timestamp and the duration time for the graph
-                                if count == int(integrationsActionNameOccurrencesList[f].split("|")[1].strip()):
-                                    linesToText4.writelines("\t\t\t'" + webServicesList2[f].split("|")[1].strip() + "|" + webServicesList2[f].split("|")[2].strip() + "';\n\n")
-                                else:
-                                    linesToText4.writelines("\t\t\t'" + webServicesList2[f].split("|")[1].strip() + "|" + webServicesList2[f].split("|")[2].strip() + "*' +\n")
-                                    count+=1
-                            f+=1
-                        linesToText4.writelines("\t\t//create an area chart\n\t\tvar chart = anychart.line();\n\n\t\t//create the area series based on CSV data\n\t\tchart.line(csvString, {ignoreFirstRow: true, columnsSeparator: \"|\", rowsSeparator: \"*\"});\n\n\t\t//display a chart\n\t\tchart.container('container').draw();\n\n\t\tchart.xAxis().title(\"Timestamp\");\n\t\tchart.yAxis().title(\"Duration (Minutes)\");\n\n\t\t//set ticks interval\n\t\tchart.yScale().ticks().interval(60);\n\n\t\t//set minor ticks interval\n\t\tchart.yScale().minorTicks().interval(30);\n\n\t\t//settings\n\t\tchart.tooltip().fontColor(\"red\");\n\n\t\t//tooltip padding for all series on a chart\n\t\tchart.tooltip().padding().left(20);\n\n\t\t//background color\n\t\tchart.tooltip().background().fill(\"black\");\n});\n</script>\n</body>\n</html>")
-                    e+=1
+            del webServicesList[:]
+            del webServicesList2[:]
+            del errorsList[:]
+            del errorsList2[:]
 
+            myWebServicesErrorsList = list(set(webServicesErrorsList))
+            myWebServicesErrorsList.sort()
+
+            if len(myWebServicesErrorsList) > 0:
                 with codecs.open(os.getcwd() + "\\filtered_data_files\\integrations_logs_webservices.txt", "w", "utf-8", "ignore") as reportFile:
-                    reportFile.writelines(myWebServicesList)
+                    reportFile.writelines(myWebServicesErrorsList)
 
-                #sort the data by the duration time to perform an action
-                with codecs.open(os.getcwd() + "\\filtered_data_files\\integrations_logs_webservices.txt", "r", "utf-8", "ignore") as linesFromText2:
-                    searchLines = linesFromText2.read()
-                    regex = re.compile("^([\d\-\: ]+)\|([\d]+)\|(.+)", re.MULTILINE + re.IGNORECASE)
-                    for match in regex.finditer(searchLines):
-                        dateTime = match.group(1)
-                        timeTaken = match.group(2)
-                        tail = match.group(3)
-
-                        outText = timeTaken + "|" + dateTime + "|" + tail + "\n"
-                        _timeTaken = int(timeTaken)
-
-                        if not outText in myLOGlines:
-                            myLOGlines.append(outText)
-
-                        if not _timeTaken in myTimeTaken:
-                            myTimeTaken.append(_timeTaken)
-
-                        myDateTimes.append(dateTime)
-                        myTimesTaken.append(_timeTaken)
-
-                myTimeTaken.sort()
-
-                minimum = min(myTimeTaken)
-                maximum = max(myTimeTaken)
-
-                with codecs.open(os.getcwd() + "\\filtered_data_files\\integrations_logs_webservices_duration.txt", "w", "utf-8", "ignore") as linesToText3:
-                    while maximum >= minimum:
-                        if maximum in myTimeTaken:
-                            for t, tt in enumerate(myLOGlines):
-                                time = [int(w) for w in myLOGlines[t].split("|") if w.isdigit()]
-                                if maximum == time[0]:
-                                    linesToText3.writelines(myLOGlines[t])
-                                t+=1
-                        maximum-=1
-
-                    print("Saved the line graphs from the Integrations") 
-                    del webServicesList[:]
-                    del webServicesList2 [:]
-                    del integrationsActionNameList[:]
-                    del myWebServicesList[:]
-                    del integrationsActionNameOccurrencesList[:]
-                    del myLOGlines[:]
-                    del myTimeTaken[:]
-                    del myDateTimes[:]
-                    del myTimesTaken[:]
+                del myWebServicesErrorsList[:]
 
     except FileNotFoundError as fileError:
         pass
 
     try:
-        #populate list with the timer_logs file
-        if not os.path.exists(os.path.dirname(os.getcwd() + "\\graphs\\Timers\\")):
+        if not os.path.exists(os.getcwd() + "\\filtered_data_files\\timer_logs_timers.txt"):
+            #populate list with the timer_logs file
             with codecs.open(os.getcwd() + "\\filtered_data_files\\timer_logs.txt", "r", "utf-8", "ignore") as linesFromText:
                 timerLogsList = linesFromText.readlines()
+
+            print("Sorting the content from the Timers")
             
             for t, ti in enumerate(timerLogsList):
                 regex = re.search(r"^([\d\-\:\. ]+)\|([\d]+)\|(?:(?:.+?\|){3})([\w\.]+)\|(?:.+?\|)([\w]+)\|.+", timerLogsList[t].strip())
@@ -2971,118 +2737,33 @@ def xlsxtxtFile(absolutePath, filename, ext, _fromDate, _toDate):
                     eSpaceName = regex.group(3)
                     cyclicJobName = regex.group(4)
 
-                    #duration is in milliseconds and it needs to be converted to minutes
+                    #duration is in milliseconds and it needs to be converted to seconds
                     seconds = int(duration)/1000
-                    if seconds > 60:
-                        minutes = seconds/60
-                        if minutes > 0:
-                            if "." in str(minutes):
-                                ind = str(minutes).index(".")
-                                _minutes = str(minutes)[:ind]
-                                timersList.append(timestamp + "|" + _minutes + "|" + cyclicJobName + "|" + eSpaceName + "\n")
-                                timersList2.append(cyclicJobName + "|" + timestamp + "|" + _minutes + "\n")
-                                timerCyclicJobNameList.append(cyclicJobName)
-                            else:
-                                timersList.append(timestamp + "|" + str(minutes) + "|" + cyclicJobName + "|" + eSpaceName + "\n")
-                                timersList2.append(cyclicJobName + "|" + timestamp + "|" + str(minutes) + "\n")
-                                timerCyclicJobNameList.append(cyclicJobName)
+                    timersList.append(timestamp + "|" + str(seconds) + "|" + cyclicJobName + "|" + eSpaceName + "\n")
                 t+=1
 
             myTimersList = list(set(timersList))
             myTimersList.sort()
 
-            timersList2.sort()
-            timerCyclicJobNameList.sort()
-            timerCyclicJobNameListOccurrences = Counter(timerCyclicJobNameList)
-
             del timerLogsList[:]
 
-            for z, zn in enumerate(timerCyclicJobNameList):
-                timerCyclicJobNameListOccurrencesList.append(timerCyclicJobNameList[z] + "|" + str(timerCyclicJobNameListOccurrences[timerCyclicJobNameList[z]]) + "\n")
-                z+=1
-            timerCyclicJobNameListOccurrencesList.sort()
-
-            if len(myTimersList) > 0 and len(timerCyclicJobNameListOccurrencesList) > 0:
-                print("Sorting the content from the Timers")
-                #create a line graph with the compiled data
-                createFolder("\\graphs\\Timers\\")
-
-                for e, en in enumerate(myTimersList):
-                    count = 1
-                    #each action name is a different file
-                    with codecs.open(os.getcwd() + "\\graphs\\Timers\\" + myTimersList[e].split("|")[2].strip() + ".html", "w", "utf-8", "ignore") as linesToText4:
-                        linesToText4.writelines("<!doctype html>\n<body>\n<div id=\"container\" style=\"width: 1000px; height: 800px;\"></div>\n<script src=\"https://cdn.anychart.com/releases/v8/js/anychart-base.min.js\" type=\"text/javascript\"></script>\n<script>\n\tanychart.onDocumentReady(function() {\n\t\t//create CSV string\n\t\tvar csvString = 'Timestamp;Duration*' +\n")
-                        #compare the action names
-                        for f, fn in enumerate(timerCyclicJobNameListOccurrencesList):
-                            if timerCyclicJobNameListOccurrencesList[f].split("|")[0].strip() == myTimersList[e].split("|")[2].strip() and timerCyclicJobNameListOccurrencesList[f].split("|")[0].strip() == timersList2[f].split("|")[0].strip():
-                                #use the timestamp and the duration time for the graph
-                                if count == int(timerCyclicJobNameListOccurrencesList[f].split("|")[1].strip()):
-                                    linesToText4.writelines("\t\t\t'" + timersList2[f].split("|")[1].strip() + "|" + timersList2[f].split("|")[2].strip() + "';\n\n")
-                                else:
-                                    linesToText4.writelines("\t\t\t'" + timersList2[f].split("|")[1].strip() + "|" + timersList2[f].split("|")[2].strip() + "*' +\n")
-                                    count+=1
-                            f+=1
-                        linesToText4.writelines("\t\t//create an area chart\n\t\tvar chart = anychart.line();\n\n\t\t//create the area series based on CSV data\n\t\tchart.line(csvString, {ignoreFirstRow: true, columnsSeparator: \"|\", rowsSeparator: \"*\"});\n\n\t\t//display a chart\n\t\tchart.container('container').draw();\n\n\t\tchart.xAxis().title(\"Timestamp\");\n\t\tchart.yAxis().title(\"Duration (Minutes)\");\n\n\t\t//set ticks interval\n\t\tchart.yScale().ticks().interval(60);\n\n\t\t//set minor ticks interval\n\t\tchart.yScale().minorTicks().interval(30);\n\n\t\t//settings\n\t\tchart.tooltip().fontColor(\"red\");\n\n\t\t//tooltip padding for all series on a chart\n\t\tchart.tooltip().padding().left(20);\n\n\t\t//background color\n\t\tchart.tooltip().background().fill(\"black\");\n});\n</script>\n</body>\n</html>")
-                    e+=1
-
+            if len(myTimersList) > 0:
                 with codecs.open(os.getcwd() + "\\filtered_data_files\\timer_logs_timers.txt", "w", "utf-8", "ignore") as reportFile:
                     reportFile.writelines(myTimersList)
 
-                #sort the data by the duration time to perform an action
-                with codecs.open(os.getcwd() + "\\filtered_data_files\\timer_logs_timers.txt", "r", "utf-8", "ignore") as linesFromText2:
-                    searchLines = linesFromText2.read()
-                    regex = re.compile("^([\d\-\: ]+)\|([\d]+)\|(.+)", re.MULTILINE + re.IGNORECASE)
-                    for match in regex.finditer(searchLines):
-                        dateTime = match.group(1)
-                        timeTaken = match.group(2)
-                        tail = match.group(3)
-
-                        outText = timeTaken + "|" + dateTime + "|" + tail + "\n"
-                        _timeTaken = int(timeTaken)
-
-                        if not outText in myLOGlines:
-                            myLOGlines.append(outText)
-
-                        if not _timeTaken in myTimeTaken:
-                            myTimeTaken.append(_timeTaken)
-
-                        myDateTimes.append(dateTime)
-                        myTimesTaken.append(_timeTaken)
-
-                myTimeTaken.sort()
-
-                minimum = min(myTimeTaken)
-                maximum = max(myTimeTaken)
-
-                with codecs.open(os.getcwd() + "\\filtered_data_files\\timer_logs_timers_duration.txt", "w", "utf-8", "ignore") as linesToText3:
-                    while maximum >= minimum:
-                        if maximum in myTimeTaken:
-                            for t, tt in enumerate(myLOGlines):
-                                time = [int(w) for w in myLOGlines[t].split("|") if w.isdigit()]
-                                if maximum == time[0]:
-                                    linesToText3.writelines(myLOGlines[t])
-                                t+=1
-                        maximum-=1
-
-                    print("Saved the line graphs from the Timers") 
-                    del timersList[:]
-                    del timersList2 [:]
-                    del timerCyclicJobNameList[:]
-                    del myTimersList[:]
-                    del timerCyclicJobNameListOccurrencesList[:]
-                    del myLOGlines[:]
-                    del myTimeTaken[:]
-                    del myDateTimes[:]
-                    del myTimesTaken[:]
+                del timersList[:]
+                del myTimersList[:]
 
     except FileNotFoundError as fileError:
         pass
 
     try:
-        #populate list with the screen_logs file
-        if not os.path.exists(os.path.dirname(os.getcwd() + "\\graphs\\Screens\\")):
+        if not os.path.exists(os.getcwd() + "\\filtered_data_files\\screen_logs_screens.txt"):
+            #populate list with the screen_logs file
             with codecs.open(os.getcwd() + "\\filtered_data_files\\screen_logs.txt", "r", "utf-8", "ignore") as linesFromText:
                 screenLogsList = linesFromText.readlines()
+
+            print("Sorting the content from the Screens")
             
             for s, sc in enumerate(screenLogsList):
                 regex = re.search(r"^([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|(?:(?:.+?\|){7})([\w\.]+)\|.+", screenLogsList[s].strip())
@@ -3092,109 +2773,22 @@ def xlsxtxtFile(absolutePath, filename, ext, _fromDate, _toDate):
                     screen = regex.group(3)
                     eSpaceName = regex.group(4)
 
-                    #duration is in milliseconds and it needs to be converted to minutes
+                    #duration is in milliseconds and it needs to be converted to seconds
                     seconds = int(duration)/1000
-                    if seconds > 60:
-                        minutes = seconds/60
-                        if minutes > 0:
-                            if "." in str(minutes):
-                                ind = str(minutes).index(".")
-                                _minutes = str(minutes)[:ind]
-                                screensList.append(timestamp + "|" + _minutes + "|" + screen + "|" + eSpaceName + "\n")
-                                screensList2.append(screen + "|" + timestamp + "|" + _minutes + "\n")
-                                screenNamesList.append(screen)
-                            else:
-                                screensList.append(timestamp + "|" + str(minutes) + "|" + screen + "|" + eSpaceName + "\n")
-                                screensList2.append(screen + "|" + timestamp + "|" + str(minutes) + "\n")
-                                screenNamesList.append(screen)
+                    screensList.append(timestamp + "|" + str(seconds) + "|" + screen + "|" + eSpaceName + "\n")
                 s+=1
 
             myScreensList = list(set(screensList))
             myScreensList.sort()
 
-            screensList2.sort()
-            screenNamesList.sort()
-            screenNamesListOccurrences = Counter(screenNamesList)
-
             del screenLogsList[:]
 
-            for z, zn in enumerate(screenNamesList):
-                screenNamesListOccurrencesList.append(screenNamesList[z] + "|" + str(screenNamesListOccurrences[screenNamesList[z]]) + "\n")
-                z+=1
-            screenNamesListOccurrencesList.sort()
-
-            if len(myScreensList) > 0 and len(screenNamesListOccurrencesList) > 0:
-                print("Sorting the content from the Screens")
-                #create a line graph with the compiled data
-                createFolder("\\graphs\\Screens\\")
-
-                for e, en in enumerate(myScreensList):
-                    count = 1
-                    #each action name is a different file
-                    with codecs.open(os.getcwd() + "\\graphs\\Screens\\" + myScreensList[e].split("|")[2].strip() + ".html", "w", "utf-8", "ignore") as linesToText4:
-                        linesToText4.writelines("<!doctype html>\n<body>\n<div id=\"container\" style=\"width: 1000px; height: 800px;\"></div>\n<script src=\"https://cdn.anychart.com/releases/v8/js/anychart-base.min.js\" type=\"text/javascript\"></script>\n<script>\n\tanychart.onDocumentReady(function() {\n\t\t//create CSV string\n\t\tvar csvString = 'Timestamp;Duration*' +\n")
-                        #compare the action names
-                        for f, fn in enumerate(screenNamesListOccurrencesList):
-                            if screenNamesListOccurrencesList[f].split("|")[0].strip() == myScreensList[e].split("|")[2].strip() and screenNamesListOccurrencesList[f].split("|")[0].strip() == screensList2[f].split("|")[0].strip():
-                                #use the timestamp and the duration time for the graph
-                                if count == int(screenNamesListOccurrencesList[f].split("|")[1].strip()):
-                                    linesToText4.writelines("\t\t\t'" + screensList2[f].split("|")[1].strip() + "|" + screensList2[f].split("|")[2].strip() + "';\n\n")
-                                else:
-                                    linesToText4.writelines("\t\t\t'" + screensList2[f].split("|")[1].strip() + "|" + screensList2[f].split("|")[2].strip() + "*' +\n")
-                                    count+=1
-                            f+=1
-                        linesToText4.writelines("\t\t//create an area chart\n\t\tvar chart = anychart.line();\n\n\t\t//create the area series based on CSV data\n\t\tchart.line(csvString, {ignoreFirstRow: true, columnsSeparator: \"|\", rowsSeparator: \"*\"});\n\n\t\t//display a chart\n\t\tchart.container('container').draw();\n\n\t\tchart.xAxis().title(\"Timestamp\");\n\t\tchart.yAxis().title(\"Duration (Minutes)\");\n\n\t\t//set ticks interval\n\t\tchart.yScale().ticks().interval(60);\n\n\t\t//set minor ticks interval\n\t\tchart.yScale().minorTicks().interval(30);\n\n\t\t//settings\n\t\tchart.tooltip().fontColor(\"red\");\n\n\t\t//tooltip padding for all series on a chart\n\t\tchart.tooltip().padding().left(20);\n\n\t\t//background color\n\t\tchart.tooltip().background().fill(\"black\");\n});\n</script>\n</body>\n</html>")
-                    e+=1
-
+            if len(myScreensList) > 0:
                 with codecs.open(os.getcwd() + "\\filtered_data_files\\screen_logs_screens.txt", "w", "utf-8", "ignore") as reportFile:
                     reportFile.writelines(myScreensList)
 
-                #sort the data by the duration time to perform an action
-                with codecs.open(os.getcwd() + "\\filtered_data_files\\screen_logs_screens.txt", "r", "utf-8", "ignore") as linesFromText2:
-                    searchLines = linesFromText2.read()
-                    regex = re.compile("^([\d\-\: ]+)\|([\d]+)\|(.+)", re.MULTILINE + re.IGNORECASE)
-                    for match in regex.finditer(searchLines):
-                        dateTime = match.group(1)
-                        timeTaken = match.group(2)
-                        tail = match.group(3)
-
-                        outText = timeTaken + "|" + dateTime + "|" + tail + "\n"
-                        _timeTaken = int(timeTaken)
-
-                        if not outText in myLOGlines:
-                            myLOGlines.append(outText)
-
-                        if not _timeTaken in myTimeTaken:
-                            myTimeTaken.append(_timeTaken)
-
-                        myDateTimes.append(dateTime)
-                        myTimesTaken.append(_timeTaken)
-
-                myTimeTaken.sort()
-
-                minimum = min(myTimeTaken)
-                maximum = max(myTimeTaken)
-
-                with codecs.open(os.getcwd() + "\\filtered_data_files\\screen_logs_screens_duration.txt", "w", "utf-8", "ignore") as linesToText3:
-                    while maximum >= minimum:
-                        if maximum in myTimeTaken:
-                            for t, tt in enumerate(myLOGlines):
-                                time = [int(w) for w in myLOGlines[t].split("|") if w.isdigit()]
-                                if maximum == time[0]:
-                                    linesToText3.writelines(myLOGlines[t])
-                                t+=1
-                        maximum-=1
-
-                    print("Saved the line graphs from the Screens") 
-                    del screensList[:]
-                    del screensList2 [:]
-                    del screenNamesList[:]
-                    del myScreensList[:]
-                    del screenNamesListOccurrencesList[:]
-                    del myLOGlines[:]
-                    del myTimeTaken[:]
-                    del myDateTimes[:]
-                    del myTimesTaken[:]
+                del screensList[:]
+                del myScreensList[:]
 
     except FileNotFoundError as fileError:
         pass
