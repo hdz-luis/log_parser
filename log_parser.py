@@ -226,13 +226,18 @@ myAndroidOSVersionList = []
 myiOSVersionList = []
 androidOSVersionOccurrencesList = []
 iOSOSVersionOccurrencesList = []
+myiOSOSVersionOccurrencesList = []
 errorLogsList = []
 generalLogsList = []
 integrationsLogsList = []
 slowSQLList = []
-mySlowSQLList = []
+slowSQLList2 = []
+slowSQLErrorsList = []
+mySlowSQLErrorsList = []
 slowExtensionList = []
-mySlowExtensionList = []
+slowExtensionList2= []
+slowExtensionErrorsList = []
+mySlowExtensionErrorsList = []
 errorsList = []
 errorsList2 = []
 webServicesList = []
@@ -241,7 +246,24 @@ webServicesErrorsList = []
 myWebServicesErrorsList = []
 timerLogsList = []
 timersList = []
-myTimersList = []
+timersList2 = []
+timersErrorsList = []
+myTimersErrorsList = []
+mobileRequestsLogsList = []
+mobileRequestsScreenList = []
+mobileRequestsScreenList2 = []
+mobileRequestsScreenErrorsList = []
+myMobileRequestsScreenErrorsList = []
+extensionLogsList = []
+extensionList = []
+extensionList2 = []
+extensionErrorsList = []
+myExtensionErrorsList = []
+serviceActionLogsList = []
+serviceActionList = []
+serviceActionList2 = []
+serviceActionErrorsList = []
+myServiceActionErrorsList = []
 screenLogsList = []
 screensList = []
 myScreensList = []
@@ -341,26 +363,31 @@ errorLogsRegex = r"^([\d]+)\|([\w\-]+)\|([\d\-\:\. ]+)\|([\w\'\/\=\+ ]+)?\|([\d]
 negativeErrorLogsRegex = r"^((?!(?:[\d]+)\|(?:[\w\-]+)\|(?:[\d\-\:\. ]+)\|(?:[\w\'\/\=\+ ]+)?\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w\-\(\)\.\* ]+)?\|(?:[\w\.\(\)]+)?\|(?:[\w\-]+)?\|(?:[\w]+)?\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)?\|(?:[\w\-]+)?).*)"
 nonMatchedErrorLogsRegex = r"^((?:.*?\|){2})([\d\-]+)(.+)"
 japaneseErrorLogsRegex = r"^([\d]+)\|(.*?)\|([\d\-\:\. ]+)\|(.*?)?\|([\d]+)\|([\d]+)\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?"
+errorLogsContentRegex = r"^(?:[\d\-\:\. ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|(?:(?:.*?\|){6})([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\-]+)\|(?:[\d]+)"
 
 generalLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\w\+\/\=\' ]+)?\|([\d]+)\|([\d]+)\|([\w\-]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w]+)?\|([\w\-\.\:\# ]+)?\|([\w\-]+)?\|([\w\-\(\)\.\* ]+)?\|([\w\(\)\.]+)?\|([\w\-\.\:\;\% ]+)?\|([\w]+)?\|([\w\-\.\,\(\)\[\]\/\& ]+)?\|([\w\-]+)?\|([\w\@\.\\]+)?"
 negativeGeneralLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\w\+\/\=\' ]+)?\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w]+)?\|(?:[\w\-\.\:\# ]+)?\|(?:[\w\-]+)?\|(?:[\w\-\(\)\.\* ]+)?\|(?:[\w\(\)\.]+)?\|(?:[\w\-\.\:\;\% ]+)?\|(?:[\w]+)?\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)?\|(?:[\w\-]+)?\|(?:[\w\@\.\\]+)?).*)"
 nonMatchedGeneralLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseGeneralLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|(.*?)?\|([\d]+)\|([\d]+)\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?"
+generalLogsContentRegex = r"^([\d\-\: ]+)\|.*?([\d]+)\s*?ms.*?\|(SLOWSQL|SLOWEXTENSION)\|([\w\(\)\. ]+)\|.+?\|([\w\(\)\.]+|\s*?)\|(?:(?:.*?\|){2})([\w]+|\s*?)\|(?:(?:.*?\|){3})([\w\-]+|\s*?)?\|.+"
 
 integrationsLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w\.\:\;\-\% ]+)?\|([\w\:\/\\\.\,\-\=\%\&\?\~\(\)\{\}]+)?\|([\w\/\.\-\(\) ]+)\|([\w\(\) ]+)\|([\d]+)\|([\w\-]+)?\|([\w\-]+)\|([\w\-\:]+)\|([\w\.]+)?\|([\w\-\.\,\(\)\[\]\/\& ]+)?\|([\w\-]+)?"
 negativeIntegrationsLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w\.\:\;\-\% ]+)?\|(?:[\w\:\/\\\.\,\-\=\%\&\?\~\(\)\{\}]+)?\|(?:[\w\/\.\-\(\) ]+)\|(?:[\w\(\) ]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w\-]+)\|(?:[\w\-\:]+)\|(?:[\w\.]+)?\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)?\|(?:[\w\-]+)?).*)"
 nonMatchedIntegrationsLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseIntegrationsLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|(.*?)?\|(.*?)?\|(.*?)\|(.*?)\|([\d]+)\|(.*?)?\|(.*?)\|(.*?)\|(.*?)?\|(.*?)?\|(.*?)?"
+integrationsLogsContentRegex = r"^([\d\-\:\. ]+)\|([\d]+)\|([\w\-\.\,\(\)\[\]\/\& ]+).+?\|([\w\/\.\-\(\) ]+)\|([\w\(\) ]+)\|(?:(?:.+?\|){3})([\w\.]+|\s*?)\|(?:[\d]+)\|([\w\-]+|\s*?)\|.+"
 
 mobileRequestsLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\.\-\:\;\% ]+)\|([\w\:\/\\\.\-\=\%\&\?]+)\|([\d]+)\|([\w\-]+)\|([\w\-]+)?\|([\d]+)\|([\w\-\:]+)\|([\w\/\+\=]+)?\|([\d]+)\|([\w\.]+)\|([\w\-\.\,\(\)\[\]\/\& ]+)\|([\w\-]+)"
 negativeMobileRequestsLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w\.\-\:\;\% ]+)\|(?:[\w\:\/\\\.\-\=\%\&\?]+)\|(?:[\d]+)\|(?:[\w\-]+)\|(?:[\w\-]+)?\|(?:[\d]+)\|(?:[\w\-\:]+)\|(?:[\w\/\+\=]+)?\|(?:[\d]+)\|(?:[\w\.]+)\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)\|(?:[\w\-]+)).*)"
 nonMatchedMobileRequestsLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseMobileRequestsLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|(.*?)\|(.*?)\|(.*?)\|([\d]+)\|(.*?)\|(.*?)?\|([\d]+)\|(.*?)\|(.*?)?\|([\d]+)\|(.*?)\|(.*?)\|(.*?)"
+mobileRequestsLogsContentRegex = r"^([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\-\.\,\(\)\[\]\/\& ]+)\|(?:(?:.*?\|){4})([\w\.]+)\|(?:(?:.*?\|){4})([\w\-]+|\s*?)\|.+"
 
 timerLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w\-]+)\|([\d]+)\|([\w\-]+)\|([\w\-]+)?\|([\d\-\:\. ]+)\|([\d\-\:\. ]+)\|([\w\-\:]+)?\|([\w\.]+)\|([\w\-\.\,\(\)\[\]\/\& ]+)\|([\w\-]+)\|([\w]+)"
 negativeTimerLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w\-]+)\|(?:[\d]+)\|(?:[\w\-]+)\|(?:[\w\-]+)?\|(?:[\d\-\:\. ]+)\|(?:[\d\-\:\. ]+)\|(?:[\w\-\:]+)?\|(?:[\w\.]+)\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)\|(?:[\w\-]+)\|(?:[\w]+)).*)"
 nonMatchedTimerLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseTimerLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|(.*?)\|([\d]+)\|(.*?)\|(.*?)?\|([\d\-\:\. ]+)\|([\d\-\:\. ]+)\|(.*?)?\|(.*?)\|(.*?)\|(.*?)\|(.*?)"
+timerLogsContentRegex = r"^([\d\-\:\. ]+)\|([\d]+)\|([\w\-\.\,\(\)\[\]\/\& ]+)\|(?:(?:.+?\|){2})([\w\.]+)\|(?:.+?\|)([\w]+)\|(?:(?:.*?\|){2})(?:[\d\-\:\. ]+)\|([\w\-]+|\s*?)\|.+"
 
 emailLogsRegex = r"^([\d]+)\|([\w]+)\|([\w\-\:\. ]+)\|([\w\-\:\. ]+)?\|([\d]+)\|([\w\@\.\,\- ]+)\|([\w\@\.\,\- ]+)\|([\w\@\.\-]+)?\|([\w\@\.\-]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)\|([\w]+)\|([\w]+)\|([\d]+)\|([\w\@\.\-]+)"
 negativeEmailLogsRegex = r"^((?!(?:[\d]+)\|(?:[\w]+)\|(?:[\w\-\:\. ]+)\|(?:[\w\-\:\. ]+)?\|(?:[\d]+)\|(?:[\w\@\.\,\- ]+)\|(?:[\w\@\.\,\- ]+)\|(?:[\w\@\.\-]+)?\|(?:[\w\@\.\-]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w]+)\|(?:[\d]+)\|(?:[\w\@\.\-]+)).*)"
@@ -371,16 +398,19 @@ extensionLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\/\'\=\+]
 negativeExtensionLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w\/\'\=\+]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\-]+)\|(?:[\w\-]+)?\|(?:[\w\-\:]+)\|(?:[\w\.]+)\|(?:[\w]+)\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)\|(?:[\w\-]+)\|(?:[\w\@\.\\]+)?).*)"
 nonMatchedExtensionLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseExtensionLogsRegex = r"^([\d]+)\|(.*?)\|(.*?)\|(.*?)?\|([\d]+)\|(.*?)\|(.*?)\|(.*?)?\|(.*?)?\|(.*?)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)\|(.*?)\|(.*?)\|([\d]+)\|(.*?)"
+extensionLogsContentRegex = r"^([\d\-\:\. ]+)\|([\d]+)\|([\w\-\.\,\(\)\[\]\/\& ]+)\|.*?\|([\w]+)\|.*?\|([\w\.]+)\|(?:(?:.*?\|){5})([\w]+)\|([\w\-]+|\s*?)\|.+"
 
 serviceActionLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)?\|([\w\/\'\=\+]+)\|([\d]+)\|([\w\-]+)?\|([\w\-]+)\|([\w\-\:]+)\|([\w\-\(\)\.\* ]+)?\|([\w\.\(\)]+)\|([\d]+)\|([\w\.\:\;\-\% ]+)\|([\w\:\/\\\.\-\=\%\&\?]+)\|([\w\.]+)\|([\w\-\.\,\(\)\[\]\/\& ]+)\|([\w\-]+)\|([\w\@\.\\]+)?\|([\w\-\:]+)"
 negativeServiceActionLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\d]+)?\|(?:[\w\/\'\=\+]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w\-]+)\|(?:[\w\-\:]+)\|(?:[\w\-\(\)\.\* ]+)?\|(?:[\w\.\(\)]+)\|(?:[\d]+)\|(?:[\w\.\:\;\-\% ]+)\|(?:[\w\:\/\\\.\-\=\%\&\?]+)\|(?:[\w\.]+)\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)\|(?:[\w\-]+)\|(?:[\w\@\.\\]+)?\|(?:[\w\-\:]+)).*)"
 nonMatchedServiceActionLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseServiceActionLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)?\|(.*?)\|([\d]+)\|(.*?)?\|(.*?)\|(.*?)\|(.*?)?\|(.*?)\|([\d]+)\|(.*?)\|(.*?)\|(.*?)\|(.*?)\|(.*?)\|(.*?)?\|(.*?)"
+serviceActionLogsContentRegex = r"^([\d\-\:\. ]+)\|([\d]+)\|([\w\-\.\,\(\)\[\]\/\& ]+)\|.*?\|([\w\.\(\)]+)\|(?:(?:.*?\|)){4}([\w\.]+)\|(?:(?:.*?\|){5})([\w\-]+|\s*?)\|.+"
 
 screenLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\/\'\=\+]+)\|([\d]+)\|([\d]+)\|([\w\-\:\. ]+)?\|([\w]+)\|([\w\-]+)\|([\d]+)\|([\d]+)\|([\d]+)\|([\w]+)\|([\w\-\:]+)\|([\w\(\)\.]+)?\|([\w\-\:\. ]+)\|([\w\.]+)\|([\w\-\.\,\(\)\[\]\/\& ]+)\|([\w\-]+)"
 negativeScreenLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w\/\'\=\+]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\-\:\. ]+)?\|(?:[\w]+)\|(?:[\w\-]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w\-\:]+)\|(?:[\w\(\)\.]+)?\|(?:[\w\-\:\. ]+)\|(?:[\w\.]+)\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)\|(?:[\w\-]+)).*)"
 nonMatchedScreenLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseScreenLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|(.*?)\|(.*?)\|([\d]+)\|([\d]+)\|(.*?)?\|(.*?)\|(.*?)\|([\d]+)\|([\d]+)\|([\d]+)\|(.*?)\|(.*?)\|(.*?)?\|(.*?)\|(.*?)\|(.*?)\|(.*?)"
+screenLogsContentRegex = r"^([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w]+)\|([\w\-\.\,\(\)\[\]\/\& ]+)\|.*?\|([\w\(\)\.]+|\s*?)\|(?:(?:.*?\|){3})([\w\.]+)\|.+"
 
 bptTroubleshootingReportsRegex = "^([\d]+)\|([\w]+)\|([\w]+)\|([\w]+)\|([\d]+)\|([\d\-\:\. ]+)\|([\d\-\:\. ]+)\|([\w\d\-\:\. ]+)?\|([\w\? ]+)\|([\w]+)\|([\d]+)\|([\w\-]+)?\|([\w ]+)\|([\d\-\:\. ]+)((?:\|)(?:[\w\d\-\:\. ]+))?((?:\|)(?:[\w\d\-\:\. ]+))?((?:\|)(?:[\w\d\-\:\. ]+))?"
 negativeBptTroubleshootingReportsRegex = "^((?!(?:[\d]+)\|(?:[\w]+)\|(?:[\w]+)\|(?:[\w]+)\|(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d\-\:\. ]+)\|(?:[\w\d\-\:\. ]+)?\|(?:[\w\? ]+)\|(?:[\w]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w ]+)\|(?:[\d\-\:\. ]+)(?:(?:\|)(?:[\w\d\-\:\. ]+))?(?:(?:\|)(?:[\w\d\-\:\. ]+))?(?:(?:\|)(?:[\w\d\-\:\. ]+))?).*)"
@@ -431,9 +461,11 @@ def splitDirectory2(root, file):
     return absolutePathOfFile, filePathWithoutFilename, filenameWithoutExt, extension
 
 def searchDirectory(directoryPath, _fromDate, _toDate):
+    readStagingInfrastructureUserPermissionReports = False
     #search for the files with the raw data in the specified directory
     for root, subFolders, files in os.walk(directoryPath):
         if "infrastructurereport" in root.lower():
+            readStagingInfrastructureUserPermissionReports = True
             for f in files:
                 absolutePathOfFile, filePathWithoutFilename, filenameWithExt, filenameWithoutExt, extension = splitDirectory(root, f)
 
@@ -443,6 +475,7 @@ def searchDirectory(directoryPath, _fromDate, _toDate):
                     txtFile(absolutePathOfFile, filenameWithoutExt, filenameWithExt, extension, _fromDate, _toDate)
 
         elif "stagingreport" in root.lower() or "userpermissionsreport" in root.lower():
+            readStagingInfrastructureUserPermissionReports = True
             for f in files:
                 absolutePathOfFile, filePathWithoutFilename, filenameWithExt, filenameWithoutExt, extension = splitDirectory(root, f)
 
@@ -450,25 +483,26 @@ def searchDirectory(directoryPath, _fromDate, _toDate):
                     xlsxFile(absolutePathOfFile, filePathWithoutFilename, filenameWithoutExt, ".txt", _fromDate, _toDate)
 
         for s in subFolders:
-            if "infrastructurereport" in s.lower():
-                absolutePathOfFile2 = os.path.join(root, s)
-                for root2, subFolders2, files2 in os.walk(absolutePathOfFile2):
-                    for f2 in files2:
-                        absolutePathOfFile, filePathWithoutFilename, filenameWithoutExt, extension = splitDirectory2(root2, f2)
+            if readStagingInfrastructureUserPermissionReports:
+                if "infrastructurereport" in s.lower():
+                    absolutePathOfFile2 = os.path.join(root, s)
+                    for root2, subFolders2, files2 in os.walk(absolutePathOfFile2):
+                        for f2 in files2:
+                            absolutePathOfFile, filePathWithoutFilename, filenameWithoutExt, extension = splitDirectory2(root2, f2)
 
-                        if extension == ".xlsx":
-                            xlsxFile(absolutePathOfFile, filePathWithoutFilename, filenameWithoutExt, ".txt", _fromDate, _toDate)
-                        elif extension == ".txt":
-                            txtFile(absolutePathOfFile, filenameWithoutExt, f2, extension, _fromDate, _toDate)
+                            if extension == ".xlsx":
+                                xlsxFile(absolutePathOfFile, filePathWithoutFilename, filenameWithoutExt, ".txt", _fromDate, _toDate)
+                            elif extension == ".txt":
+                                txtFile(absolutePathOfFile, filenameWithoutExt, f2, extension, _fromDate, _toDate)
 
-            elif "stagingreport" in s.lower() or "userpermissionsreport" in s.lower():
-                absolutePathOfFile3 = os.path.join(root, s)
-                for root3, subFolders3, files3 in os.walk(absolutePathOfFile3):
-                    for f3 in files3:
-                        absolutePathOfFile, filePathWithoutFilename, filenameWithoutExt, extension = splitDirectory2(root3, f3)
+                elif "stagingreport" in s.lower() or "userpermissionsreport" in s.lower():
+                    absolutePathOfFile3 = os.path.join(root, s)
+                    for root3, subFolders3, files3 in os.walk(absolutePathOfFile3):
+                        for f3 in files3:
+                            absolutePathOfFile, filePathWithoutFilename, filenameWithoutExt, extension = splitDirectory2(root3, f3)
 
-                        if extension == ".xlsx":
-                            xlsxFile(absolutePathOfFile, filePathWithoutFilename, filenameWithoutExt, ".txt", _fromDate, _toDate)
+                            if extension == ".xlsx":
+                                xlsxFile(absolutePathOfFile, filePathWithoutFilename, filenameWithoutExt, ".txt", _fromDate, _toDate)
 
         for f in files:
             if not "infrastructurereport" in root.lower() and not "stagingreport" in root.lower() and not "userpermissionsreport" in root.lower():
@@ -977,6 +1011,139 @@ def readGeneralLogs(searchLines, _fromDate, _toDate):
 
                         myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
 
+def sortGeneralLogsContent(outFile1, outFile2, logsFile1, logsFile2, logsFile1Regex, logsFile2Regex):
+    try:
+        if not os.path.exists(outFile1) and not os.path.exists(outFile2):
+            #populate list with the general_logs file
+            with codecs.open(logsFile1, "r", "utf-8", "ignore") as linesFromText:
+                generalLogsList = linesFromText.readlines()
+
+            with codecs.open(logsFile2, "r", "utf-8", "ignore") as linesFromText2:
+                errorLogsList = linesFromText2.readlines()
+
+            print("Sorting the content from the SlowSQLs and the SlowExtensions")
+
+            for g, gn in enumerate(generalLogsList):
+                regex = re.search(logsFile1Regex, generalLogsList[g].strip())
+                if regex:
+                    timestamp = regex.group(1)
+                    duration = regex.group(2)
+                    moduleName = regex.group(3)
+                    applicationName = regex.group(4)
+                    actionName = regex.group(5)
+                    eSpaceName = regex.group(6)
+                    errorID = regex.group(7)
+
+                    if applicationName == "None":
+                        applicationName == " "
+
+                    if actionName == "None":
+                        actionName == " "
+
+                    if eSpaceName == "None":
+                        eSpaceName == " "
+
+                    if errorID == "None":
+                        errorID == " "
+
+                    #duration is in milliseconds and it needs to be converted to seconds
+                    seconds = int(duration)/1000
+
+                    if "slowsql" == moduleName.lower():
+                        slowSQLList.append(timestamp + "|" + str(seconds) + "|" + moduleName + "|" + applicationName + "|" + actionName + "|" + eSpaceName + "|" + errorID + "\n")
+                        slowSQLList2.append(errorID + "\n")
+
+                    elif "slowextension" == moduleName.lower():
+                        slowExtensionList.append(timestamp + "|" + str(seconds) + "|" + moduleName + "|" + applicationName + "|" + actionName + "|" + eSpaceName + "|" + errorID + "\n")
+                        slowExtensionList2.append(errorID + "\n")
+                g+=1
+
+            for e, err in enumerate(errorLogsList):
+                regex = re.search(logsFile2Regex, errorLogsList[e].strip())
+                if regex:
+                    message = regex.group(1)
+                    stack = regex.group(2)
+                    moduleName = regex.group(3)
+                    environmentInformation = regex.group(4)
+                    iD = regex.group(5)
+
+                    if message == "None":
+                        message == " "
+
+                    if stack == "None":
+                        stack == " "
+
+                    if moduleName == "None":
+                        moduleName == " "
+
+                    if environmentInformation == "None":
+                        environmentInformation == " "
+
+                    errorsList.append(iD + "|" + message + "|" + stack + "|" + moduleName + "|" + environmentInformation + "\n")
+                    errorsList2.append(iD + "\n")
+                e+=1
+
+            del generalLogsList[:]
+            del errorLogsList[:]
+
+            for element in slowSQLList2:
+                if len(element.strip()) > 0:
+                    if element in errorsList2:
+                        ind2 = errorsList2.index(element)
+                        item2 = errorsList[ind2].split("|")
+                        ind1 = slowSQLList2.index(element)
+                        item1 = slowSQLList[ind1].split("|")
+                        slowSQLErrorsList.append(item1[0] + "|" + item1[1] + "|" + item1[2] + "|" + item1[3] + "|" + item1[4] + "|" + item1[5] + "|" + item2[1] + "|" + item2[2] + "|" + item2[4].strip() + "|" + item1[6].strip() + "\n")
+
+            for elm in slowSQLList:
+                item3 = elm.split("|")
+                if not len(item3[6].strip()) > 0:
+                    slowSQLErrorsList.append(item3[0] + "|" + item3[1] + "|" + item3[2] + "|" + item3[3] + "|" + item3[4] + "|" + item3[5] + "||||\n")
+
+            for element in slowExtensionList2:
+                if len(element.strip()) > 0:
+                    if element in errorsList2:
+                        ind2 = errorsList2.index(element)
+                        item2 = errorsList[ind2].split("|")
+                        ind1 = slowExtensionList2.index(element)
+                        item1 = slowExtensionList[ind1].split("|")
+                        slowExtensionErrorsList.append(item1[0] + "|" + item1[1] + "|" + item1[2] + "|" + item1[3] + "|" + item1[4] + "|" + item1[5] + "|" + item2[1] + "|" + item2[2] + "|" + item2[4].strip() + "|" + item1[6].strip() + "\n")
+
+            for elm in slowExtensionList:
+                item3 = elm.split("|")
+                if not len(item3[6].strip()) > 0:
+                    slowExtensionErrorsList.append(item3[0] + "|" + item3[1] + "|" + item3[2] + "|" + item3[3] + "|" + item3[4] + "|" + item3[5] + "||||\n")
+
+            del slowSQLList[:]
+            del slowSQLList2[:]
+            del slowExtensionList[:]
+            del slowExtensionList2[:]
+            del errorsList[:]
+            del errorsList2[:]
+
+            mySlowSQLErrorsList = list(set(slowSQLErrorsList))
+            mySlowSQLErrorsList.sort()
+
+            mySlowExtensionErrorsList = list(set(slowExtensionErrorsList))
+            mySlowExtensionErrorsList.sort()
+
+            if len(mySlowSQLErrorsList) > 0:
+                with codecs.open(outFile1, "w", "utf-8", "ignore") as reportFile:
+                    reportFile.writelines(mySlowSQLErrorsList)
+
+                del slowSQLErrorsList[:]
+                del mySlowSQLErrorsList[:]
+
+            if len(mySlowExtensionErrorsList) > 0:
+                with codecs.open(outFile2, "w", "utf-8", "ignore") as reportFile3:
+                    reportFile3.writelines(mySlowExtensionErrorsList)
+
+                del slowExtensionErrorsList[:]
+                del mySlowExtensionErrorsList[:]
+
+    except FileNotFoundError as fileError:
+        pass
+
 def readIntegrationsLogs(searchLines, _fromDate, _toDate):
     global numOfIntegrationsLogs
     numOfIntegrationsLogs+=1
@@ -1108,6 +1275,104 @@ def readIntegrationsLogs(searchLines, _fromDate, _toDate):
 
                         myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
 
+def sortIntegrationsLogsContent(outFile1, logsFile1, logsFile2, logsFile1Regex, logsFile2Regex):
+    try:
+        if not os.path.exists(outFile1):
+            #populate list with the integrations_logs file and the error_logs file
+            with codecs.open(logsFile1, "r", "utf-8", "ignore") as linesFromText:
+                integrationsLogsList = linesFromText.readlines()
+
+            with codecs.open(logsFile2, "r", "utf-8", "ignore") as linesFromText2:
+                errorLogsList = linesFromText2.readlines()
+
+            print("Sorting the content from the Integrations")
+                
+            for i, inte in enumerate(integrationsLogsList):
+                regex = re.search(logsFile1Regex, integrationsLogsList[i].strip())
+                if regex:
+                    timestamp = regex.group(1)
+                    duration = regex.group(2)
+                    applicationName = regex.group(3)
+                    actionName = regex.group(4)
+                    actionType = regex.group(5)
+                    eSpaceName = regex.group(6)
+                    errorID = regex.group(7)
+
+                    if applicationName == "None":
+                        applicationName == " "
+
+                    if eSpaceName == "None":
+                        eSpaceName == " "
+
+                    if errorID == "None":
+                        errorID == " "
+
+                    #duration is in milliseconds and it needs to be converted to seconds
+                    seconds = int(duration)/1000
+                    webServicesList.append(timestamp + "|" + str(seconds) + "|" + applicationName + "|" + actionName + "|" + actionType + "|" + eSpaceName + "|" + errorID + "\n")
+                    webServicesList2.append(errorID + "\n")
+                i+=1
+
+            for e, err in enumerate(errorLogsList):
+                regex = re.search(logsFile2Regex, errorLogsList[e].strip())
+                if regex:
+                    message = regex.group(1)
+                    stack = regex.group(2)
+                    moduleName = regex.group(3)
+                    environmentInformation = regex.group(4)
+                    iD = regex.group(5)
+
+                    if message == "None":
+                        message == " "
+
+                    if stack == "None":
+                        stack == " "
+
+                    if moduleName == "None":
+                        moduleName == " "
+
+                    if environmentInformation == "None":
+                        environmentInformation == " "
+
+                    errorsList.append(iD + "|" + message + "|" + stack + "|" + moduleName + "|" + environmentInformation + "\n")
+                    errorsList2.append(iD + "\n")
+                e+=1
+
+            del integrationsLogsList[:]
+            del errorLogsList[:]
+
+            for element in webServicesList2:
+                if len(element.strip()) > 0:
+                    if element in errorsList2:
+                        ind2 = errorsList2.index(element)
+                        item2 = errorsList[ind2].split("|")
+                        ind1 = webServicesList2.index(element)
+                        item1 = webServicesList[ind1].split("|")
+                        webServicesErrorsList.append(item1[0] + "|" + item1[1] + "|" + item2[3] + "|" + item1[2] + "|" + item1[3] + "|" + item1[4] + "|" + item1[5] + "|" + item2[1] + "|" + item2[2] + "|" + item2[4].strip() + "|" + item1[6].strip() + "\n")
+
+            for elm in webServicesList:
+                item3 = elm.split("|")
+                if not len(item3[6].strip()) > 0:
+                    webServicesErrorsList.append(item3[0] + "|" + item3[1] + "||" + item3[2] + "|" + item3[3] + "|" + item3[4] + "|" + item3[5] + "|||\n")
+
+            del webServicesList[:]
+            del webServicesList2[:]
+            del errorsList[:]
+            del errorsList2[:]
+
+            myWebServicesErrorsList = list(set(webServicesErrorsList))
+            myWebServicesErrorsList.sort()
+
+            if len(myWebServicesErrorsList) > 0:
+                with codecs.open(outFile1, "w", "utf-8", "ignore") as reportFile:
+                    reportFile.writelines(myWebServicesErrorsList)
+
+                del webServicesErrorsList[:]
+                del myWebServicesErrorsList[:]
+
+    except FileNotFoundError as fileError:
+        pass
+
 def readMobileRequestsLogs(searchLines, _fromDate, _toDate):
     global numOfMobileRequestsLogs
     numOfMobileRequestsLogs+=1
@@ -1219,6 +1484,97 @@ def readMobileRequestsLogs(searchLines, _fromDate, _toDate):
 
                         myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
 
+def sortMobileRequestsLogsContent(outFile1, logsFile1, logsFile2, logsFile1Regex, logsFile2Regex):
+    try:
+        if not os.path.exists(outFile1):
+            #populate list with the timer_logs file
+            with codecs.open(logsFile1, "r", "utf-8", "ignore") as linesFromText:
+                mobileRequestsLogsList = linesFromText.readlines()
+
+            with codecs.open(logsFile2, "r", "utf-8", "ignore") as linesFromText2:
+                errorLogsList = linesFromText2.readlines()
+
+            print("Sorting the content from the Mobile Requests Screens")
+            
+            for m, mo in enumerate(mobileRequestsLogsList):
+                regex = re.search(logsFile1Regex, mobileRequestsLogsList[m].strip())
+                if regex:
+                    timestamp = regex.group(1)
+                    duration = regex.group(2)
+                    screen = regex.group(3)
+                    applicationName = regex.group(4)
+                    eSpaceName = regex.group(5)
+                    errorID = regex.group(6)
+
+                    if errorID == "None":
+                        errorID == " "
+
+                    #duration is in milliseconds and it needs to be converted to seconds
+                    seconds = int(duration)/1000
+                    mobileRequestsScreenList.append(timestamp + "|" + str(seconds) + "|" + screen + "|" + applicationName + "|" + eSpaceName + "|" + errorID + "\n")
+                    mobileRequestsScreenList2.append(errorID + "\n")
+                m+=1
+
+            for e, err in enumerate(errorLogsList):
+                regex = re.search(logsFile2Regex, errorLogsList[e].strip())
+                if regex:
+                    message = regex.group(1)
+                    stack = regex.group(2)
+                    moduleName = regex.group(3)
+                    environmentInformation = regex.group(4)
+                    iD = regex.group(5)
+
+                    if message == "None":
+                        message == " "
+
+                    if stack == "None":
+                        stack == " "
+
+                    if moduleName == "None":
+                        moduleName == " "
+
+                    if environmentInformation == "None":
+                        environmentInformation == " "
+
+                    errorsList.append(iD + "|" + message + "|" + stack + "|" + moduleName + "|" + environmentInformation + "\n")
+                    errorsList2.append(iD + "\n")
+                e+=1
+
+            del mobileRequestsLogsList[:]
+            del errorLogsList[:]
+
+            for element in mobileRequestsScreenList2:
+                if len(element.strip()) > 0:
+                    if element in errorsList2:
+                        ind2 = errorsList2.index(element)
+                        item2 = errorsList[ind2].split("|")
+                        ind1 = mobileRequestsScreenList2.index(element)
+                        item1 = mobileRequestsScreenList[ind1].split("|")
+                        mobileRequestsScreenErrorsList.append(item1[0] + "|" + item1[1] + "|" + item1[2] + "|" + item2[3] + "|" + item1[3] + "|" + item1[4] + "|" + item2[1] + "|" + item2[2] + "|" + item2[4].strip() + "|" + item1[5].strip() + "\n")
+
+            for elm in mobileRequestsScreenList:
+                item3 = elm.split("|")
+                if not len(item3[5].strip()) > 0:
+                    mobileRequestsScreenErrorsList.append(item3[0] + "|" + item3[1] + "|" + item3[2] + "||" + item3[3] + "|" + item3[4] + "||||\n")
+
+            del mobileRequestsScreenList[:]
+            del mobileRequestsScreenList2[:]
+            del errorsList[:]
+            del errorsList2[:]
+
+            myMobileRequestsScreenErrorsList = list(set(mobileRequestsScreenErrorsList))
+            myMobileRequestsScreenErrorsList.sort()
+
+            if len(myMobileRequestsScreenErrorsList) > 0:
+                with codecs.open(outFile1, "w", "utf-8", "ignore") as reportFile:
+                    reportFile.writelines(myMobileRequestsScreenErrorsList)
+
+                del mobileRequestsScreenErrorsList[:]
+                del myMobileRequestsScreenErrorsList[:]
+
+    except FileNotFoundError as fileError:
+        pass
+
 def readTimerLogs(searchLines, _fromDate, _toDate):
     global numOfTimerLogs
     numOfTimerLogs+=1
@@ -1326,6 +1682,97 @@ def readTimerLogs(searchLines, _fromDate, _toDate):
 
                         myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
 
+def sortTimerLogsContent(outFile1, logsFile1, logsFile2, logsFile1Regex, logsFile2Regex):
+    try:
+        if not os.path.exists(outFile1):
+            #populate list with the timer_logs file
+            with codecs.open(logsFile1, "r", "utf-8", "ignore") as linesFromText:
+                timerLogsList = linesFromText.readlines()
+
+            with codecs.open(logsFile2, "r", "utf-8", "ignore") as linesFromText2:
+                errorLogsList = linesFromText2.readlines()
+
+            print("Sorting the content from the Timers")
+            
+            for t, ti in enumerate(timerLogsList):
+                regex = re.search(logsFile1Regex, timerLogsList[t].strip())
+                if regex:
+                    timestamp = regex.group(1)
+                    duration = regex.group(2)
+                    applicationName = regex.group(3)
+                    eSpaceName = regex.group(4)
+                    cyclicJobName = regex.group(5)
+                    errorID = regex.group(6)
+
+                    if errorID == "None":
+                        errorID == " "
+
+                    #duration is in milliseconds and it needs to be converted to seconds
+                    seconds = int(duration)/1000
+                    timersList.append(timestamp + "|" + str(seconds) + "|" + applicationName + "|" + cyclicJobName + "|" + eSpaceName + "|" + errorID + "\n")
+                    timersList2.append(errorID + "\n")
+                t+=1
+
+            for e, err in enumerate(errorLogsList):
+                regex = re.search(logsFile2Regex, errorLogsList[e].strip())
+                if regex:
+                    message = regex.group(1)
+                    stack = regex.group(2)
+                    moduleName = regex.group(3)
+                    environmentInformation = regex.group(4)
+                    iD = regex.group(5)
+
+                    if message == "None":
+                        message == " "
+
+                    if stack == "None":
+                        stack == " "
+
+                    if moduleName == "None":
+                        moduleName == " "
+
+                    if environmentInformation == "None":
+                        environmentInformation == " "
+
+                    errorsList.append(iD + "|" + message + "|" + stack + "|" + moduleName + "|" + environmentInformation + "\n")
+                    errorsList2.append(iD + "\n")
+                e+=1
+
+            del timerLogsList[:]
+            del errorLogsList[:]
+
+            for element in timersList2:
+                if len(element.strip()) > 0:
+                    if element in errorsList2:
+                        ind2 = errorsList2.index(element)
+                        item2 = errorsList[ind2].split("|")
+                        ind1 = timersList2.index(element)
+                        item1 = timersList[ind1].split("|")
+                        timersErrorsList.append(item1[0] + "|" + item1[1] + "|" + item1[3] + "|" + item2[3] + "|" + item1[2] + "|" + item1[4] + "|" + item2[1] + "|" + item2[2] + "|" + item2[4].strip() + "|" + item1[5].strip() + "\n")
+
+            for elm in timersList:
+                item3 = elm.split("|")
+                if not len(item3[5].strip()) > 0:
+                    timersErrorsList.append(item3[0] + "|" + item3[1] + "|" + item3[3] + "||" + item3[2] + "|" + item3[4] + "||||\n")
+
+            del timersList[:]
+            del timersList2[:]
+            del errorsList[:]
+            del errorsList2[:]
+
+            myTimersErrorsList = list(set(timersErrorsList))
+            myTimersErrorsList.sort()
+
+            if len(myTimersErrorsList) > 0:
+                with codecs.open(outFile1, "w", "utf-8", "ignore") as reportFile:
+                    reportFile.writelines(myTimersErrorsList)
+
+                del timersErrorsList[:]
+                del myTimersErrorsList[:]
+
+    except FileNotFoundError as fileError:
+        pass
+
 def readEmailLogs(searchLines, _fromDate, _toDate):
     global numOfEmailLogs
     numOfEmailLogs+=1
@@ -1359,7 +1806,7 @@ def readEmailLogs(searchLines, _fromDate, _toDate):
             messageID = match.group(17)
                                     
             date = created[0:10]
-            time = created[12:19]
+            time = created[11:19]
             time = time.replace(".", "")
 
             _date = datetime.strptime(date, "%Y-%m-%d").date()
@@ -1562,6 +2009,98 @@ def readExtensionLogs(searchLines, _fromDate, _toDate):
 
                         myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
 
+def sortExtensionLogsContent(outFile1, logsFile1, logsFile2, logsFile1Regex, logsFile2Regex):
+    try:
+        if not os.path.exists(outFile1):
+            #populate list with the timer_logs file
+            with codecs.open(logsFile1, "r", "utf-8", "ignore") as linesFromText:
+                extensionLogsList = linesFromText.readlines()
+
+            with codecs.open(logsFile2, "r", "utf-8", "ignore") as linesFromText2:
+                errorLogsList = linesFromText2.readlines()
+
+            print("Sorting the content from the Extensions")
+            
+            for x, ex in enumerate(extensionLogsList):
+                regex = re.search(logsFile1Regex, extensionLogsList[x].strip())
+                if regex:
+                    timestamp = regex.group(1)
+                    duration = regex.group(2)
+                    applicationName = regex.group(3)
+                    actionName = regex.group(4)
+                    eSpaceName = regex.group(5)
+                    extensionName = regex.group(6)
+                    errorID = regex.group(7)
+
+                    if errorID == "None":
+                        errorID == " "
+
+                    #duration is in milliseconds and it needs to be converted to seconds
+                    seconds = int(duration)/1000
+                    extensionList.append(timestamp + "|" + str(seconds) + "|" + applicationName + "|" + actionName + "|" + eSpaceName + "|" + extensionName + "|" + errorID + "\n")
+                    extensionList2.append(errorID + "\n")
+                x+=1
+
+            for e, err in enumerate(errorLogsList):
+                regex = re.search(logsFile2Regex, errorLogsList[e].strip())
+                if regex:
+                    message = regex.group(1)
+                    stack = regex.group(2)
+                    moduleName = regex.group(3)
+                    environmentInformation = regex.group(4)
+                    iD = regex.group(5)
+
+                    if message == "None":
+                        message == " "
+
+                    if stack == "None":
+                        stack == " "
+
+                    if moduleName == "None":
+                        moduleName == " "
+
+                    if environmentInformation == "None":
+                        environmentInformation == " "
+
+                    errorsList.append(iD + "|" + message + "|" + stack + "|" + moduleName + "|" + environmentInformation + "\n")
+                    errorsList2.append(iD + "\n")
+                e+=1
+
+            del extensionLogsList[:]
+            del errorLogsList[:]
+
+            for element in extensionList2:
+                if len(element.strip()) > 0:
+                    if element in errorsList2:
+                        ind2 = errorsList2.index(element)
+                        item2 = errorsList[ind2].split("|")
+                        ind1 = extensionList2.index(element)
+                        item1 = extensionList[ind1].split("|")
+                        extensionErrorsList.append(item1[0] + "|" + item1[1] + "|" + item1[5] + "|" + item2[3] + "|" + item1[2] + "|" + item1[3] + "|" + item1[4] + "|" + item2[1] + "|" + item2[2] + "|" + item2[4].strip() + "|" + item1[6].strip() + "\n")
+
+            for elm in extensionList:
+                item3 = elm.split("|")
+                if not len(item3[6].strip()) > 0:
+                    extensionErrorsList.append(item3[0] + "|" + item3[1] + "|" + item3[5] + "||" + item3[2] + "|" + item3[3] + "|" + item3[4] + "||||\n")
+
+            del extensionList[:]
+            del extensionList2[:]
+            del errorsList[:]
+            del errorsList2[:]
+
+            myExtensionErrorsList = list(set(extensionErrorsList))
+            myExtensionErrorsList.sort()
+
+            if len(myExtensionErrorsList) > 0:
+                with codecs.open(outFile1, "w", "utf-8", "ignore") as reportFile:
+                    reportFile.writelines(myExtensionErrorsList)
+
+                del extensionErrorsList[:]
+                del myExtensionErrorsList[:]
+
+    except FileNotFoundError as fileError:
+        pass
+
 def readServiceActionLogs(searchLines, _fromDate, _toDate):
     global numOfServiceActionLogs
     numOfServiceActionLogs+=1
@@ -1691,6 +2230,97 @@ def readServiceActionLogs(searchLines, _fromDate, _toDate):
 
                         myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
 
+def sortServiceActionLogsContent(outFile1, logsFile1, logsFile2, logsFile1Regex, logsFile2Regex):
+    try:
+        if not os.path.exists(os.getcwd() + "\\filtered_data_files\\service_action_logs_service_actions.txt"):
+            #populate list with the timer_logs file
+            with codecs.open(os.getcwd() + "\\filtered_data_files\\service_action_logs.txt", "r", "utf-8", "ignore") as linesFromText:
+                serviceActionLogsList = linesFromText.readlines()
+
+            with codecs.open(os.getcwd() + "\\filtered_data_files\\error_logs.txt", "r", "utf-8", "ignore") as linesFromText2:
+                errorLogsList = linesFromText2.readlines()
+
+            print("Sorting the content from the Service Actions")
+            
+            for s, se in enumerate(serviceActionLogsList):
+                regex = re.search(logsFile1Regex, serviceActionLogsList[s].strip())
+                if regex:
+                    timestamp = regex.group(1)
+                    duration = regex.group(2)
+                    applicationName = regex.group(3)
+                    actionName = regex.group(4)
+                    eSpaceName = regex.group(5)
+                    errorID = regex.group(6)
+
+                    if errorID == "None":
+                        errorID == " "
+
+                    #duration is in milliseconds and it needs to be converted to seconds
+                    seconds = int(duration)/1000
+                    serviceActionList.append(timestamp + "|" + str(seconds) + "|" + applicationName + "|" + actionName + "|" + eSpaceName + "|" + errorID + "\n")
+                    serviceActionList2.append(errorID + "\n")
+                s+=1
+
+            for e, err in enumerate(errorLogsList):
+                regex = re.search(logsFile2Regex, errorLogsList[e].strip())
+                if regex:
+                    message = regex.group(1)
+                    stack = regex.group(2)
+                    moduleName = regex.group(3)
+                    environmentInformation = regex.group(4)
+                    iD = regex.group(5)
+
+                    if message == "None":
+                        message == " "
+
+                    if stack == "None":
+                        stack == " "
+
+                    if moduleName == "None":
+                        moduleName == " "
+
+                    if environmentInformation == "None":
+                        environmentInformation == " "
+
+                    errorsList.append(iD + "|" + message + "|" + stack + "|" + moduleName + "|" + environmentInformation + "\n")
+                    errorsList2.append(iD + "\n")
+                e+=1
+
+            del serviceActionLogsList[:]
+            del errorLogsList[:]
+
+            for element in serviceActionList2:
+                if len(element.strip()) > 0:
+                    if element in errorsList2:
+                        ind2 = errorsList2.index(element)
+                        item2 = errorsList[ind2].split("|")
+                        ind1 = serviceActionList2.index(element)
+                        item1 = serviceActionList[ind1].split("|")
+                        serviceActionErrorsList.append(item1[0] + "|" + item1[1] + "|" + item1[3] + "|" + item2[3] + "|" + item1[2] + "|" + item1[4] + "|" + item2[1] + "|" + item2[2] + "|" + item2[4].strip() + "|" + item1[5].strip() + "\n")
+
+            for elm in serviceActionList:
+                item3 = elm.split("|")
+                if not len(item3[5].strip()) > 0:
+                    serviceActionErrorsList.append(item3[0] + "|" + item3[1] + "|" + item3[3] + "||" + item3[2] + "|" + item3[4] + "||||\n")
+
+            del serviceActionList[:]
+            del serviceActionList2[:]
+            del errorsList[:]
+            del errorsList2[:]
+
+            myServiceActionErrorsList = list(set(serviceActionErrorsList))
+            myServiceActionErrorsList.sort()
+
+            if len(myServiceActionErrorsList) > 0:
+                with codecs.open(outFile1, "w", "utf-8", "ignore") as reportFile:
+                    reportFile.writelines(myServiceActionErrorsList)
+
+                del serviceActionErrorsList[:]
+                del myServiceActionErrorsList[:]
+
+    except FileNotFoundError as fileError:
+        pass
+
 def readScreenLogs(searchLines, _fromDate, _toDate):
     global numOfScreenLogs
     numOfScreenLogs+=1
@@ -1809,6 +2439,49 @@ def readScreenLogs(searchLines, _fromDate, _toDate):
                         nonMatchedOutText = "ScreenLog -> " + nonMatchedLine2 + "\n"
 
                         myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
+
+def sortScreenLogsContent(outFile1, logsFile1, logsFile1Regex):
+    try:
+        if not os.path.exists(outFile1):
+            #populate list with the screen_logs file
+            with codecs.open(logsFile1, "r", "utf-8", "ignore") as linesFromText:
+                screenLogsList = linesFromText.readlines()
+
+            print("Sorting the content from the Screens")
+            
+            for s, sc in enumerate(screenLogsList):
+                regex = re.search(logsFile1Regex, screenLogsList[s].strip())
+                if regex:
+                    timestamp = regex.group(1)
+                    duration = regex.group(2)
+                    screen = regex.group(3)
+                    screenType = regex.group(4)
+                    applicationName = regex.group(5)
+                    actionName = regex.group(6)
+                    eSpaceName = regex.group(7)
+
+                    if actionName == "None":
+                        actionName == " "
+
+                    #duration is in milliseconds and it needs to be converted to seconds
+                    seconds = int(duration)/1000
+                    screensList.append(timestamp + "|" + str(seconds) + "|" + screen + "|" + screenType + "|" + applicationName + "|" + actionName + "|" + eSpaceName + "\n")
+                s+=1
+
+            del screenLogsList[:]
+
+            myScreensList = list(set(screensList))
+            myScreensList.sort()
+
+            if len(myScreensList) > 0:
+                with codecs.open(outFile1, "w", "utf-8", "ignore") as reportFile:
+                    reportFile.writelines(myScreensList)
+
+                del screensList[:]
+                del myScreensList[:]
+
+    except FileNotFoundError as fileError:
+        pass
 
 def readBPTTroubleshootingReportLogs(searchLines, _fromDate, _toDate):
     outText = ""
@@ -2442,66 +3115,6 @@ def xlsxtxtFile(absolutePath, filename, ext, _fromDate, _toDate):
         except FileNotFoundError as fileError:
             pass
 
-    if len(androidOSVersionList) > 0:
-        androidOSVersionList.sort()
-        androidOccurrences = Counter(androidOSVersionList)
-        #remove duplicate records from the list
-        myAndroidOSVersionList = list(set(androidOSVersionList))
-        myAndroidOSVersionList.sort()
-
-        for o, osv in enumerate(myAndroidOSVersionList):
-            androidOSVersionOccurrencesList.append(myAndroidOSVersionList[o] + "|" + str(androidOccurrences[myAndroidOSVersionList[o]]) + "\n")
-            o+=1
-
-        print("Sorting the content from the Android versions")
-        #create a bar graph with the compiled data
-        createFolder("\\graphs\\AndroidVersions\\")
-
-        with codecs.open(os.getcwd() + "\\graphs\\AndroidVersions\\android_bar_graph_mobile_error_logs.html", "w", "utf-8", "ignore") as linesToText4:
-            linesToText4.writelines("<!doctype html>\n<body>\n<div id=\"container\" style=\"width: 1000px; height: 800px;\"></div>\n<script src=\"https://cdn.anychart.com/releases/v8/js/anychart-base.min.js\" type=\"text/javascript\"></script>\n<script>\n\tanychart.onDocumentReady(function() {\n\t\t//create CSV string\n\t\tvar csvString = 'Version;Count*' +\n")
-            for x, elm in enumerate(androidOSVersionOccurrencesList):
-                if x == len(androidOSVersionOccurrencesList) - 1:
-                    linesToText4.writelines("\t\t\t'" + androidOSVersionOccurrencesList[x].strip() + "';\n\n")
-                else:
-                    linesToText4.writelines("\t\t\t'" + androidOSVersionOccurrencesList[x].strip() + "*' +\n")
-                x+=1
-            linesToText4.writelines("\t\t//create an area chart\n\t\tvar chart = anychart.bar();\n\n\t\t//create the area series based on CSV data\n\t\tchart.bar(csvString, {ignoreFirstRow: true, columnsSeparator: \"|\", rowsSeparator: \"*\"});\n\n\t\t//display a chart\n\t\tchart.container('container').draw();\n\n\t\tchart.xAxis().title(\"Version\");\n\t\tchart.yAxis().title(\"Android\");\n\n\t\t//set ticks interval\n\t\tchart.yScale().ticks().interval(1000);\n\n\t\t//set minor ticks interval\n\t\tchart.yScale().minorTicks().interval(500);\n\n\t\t//settings\n\t\tchart.tooltip().fontColor(\"red\");\n\n\t\t//tooltip padding for all series on a chart\n\t\tchart.tooltip().padding().left(20);\n\n\t\t//background color\n\t\tchart.tooltip().background().fill(\"black\");\n});\n</script>\n</body>\n</html>")
-
-        print("Saved the bar graph from the Android versions") 
-        del androidOSVersionList[:]
-        del myAndroidOSVersionList[:]
-        del androidOSVersionOccurrencesList[:]
-
-    if len(iosOSVersionList) > 0:
-        iosOSVersionList.sort()
-        iOSOccurrences = Counter(iosOSVersionList)
-        #remove duplicate records from the list
-        myiOSVersionList = list(set(iosOSVersionList))
-        myiOSVersionList.sort()
-
-        for o, osv in enumerate(myiOSVersionList):
-            iOSOSVersionOccurrencesList.append(myiOSVersionList[o] + "|" + str(iOSOccurrences[myiOSVersionList[o]]) + "\n")
-            o+=1
-
-        print("Sorting the content from the iOS versions")
-        #create a bar graph with the compiled data
-        createFolder("\\graphs\\iOSVersions\\")
-
-        with codecs.open(os.getcwd() + "\\graphs\\iOSVersions\\ios_bar_graph_mobile_error_logs.html", "w", "utf-8", "ignore") as linesToText4:
-            linesToText4.writelines("<!doctype html>\n<body>\n<div id=\"container\" style=\"width: 1000px; height: 800px;\"></div>\n<script src=\"https://cdn.anychart.com/releases/v8/js/anychart-base.min.js\" type=\"text/javascript\"></script>\n<script>\n\tanychart.onDocumentReady(function() {\n\t\t//create CSV string\n\t\tvar csvString = 'Version;Count*' +\n")
-            for x, elm in enumerate(iOSOSVersionOccurrencesList):
-                if x == len(iOSOSVersionOccurrencesList) - 1:
-                    linesToText4.writelines("\t\t\t'" + iOSOSVersionOccurrencesList[x].strip() + "';\n\n")
-                else:
-                    linesToText4.writelines("\t\t\t'" + iOSOSVersionOccurrencesList[x].strip() + "*' +\n")
-                x+=1
-            linesToText4.writelines("\t\t//create an area chart\n\t\tvar chart = anychart.bar();\n\n\t\t//create the area series based on CSV data\n\t\tchart.bar(csvString, {ignoreFirstRow: true, columnsSeparator: \"|\", rowsSeparator: \"*\"});\n\n\t\t//display a chart\n\t\tchart.container('container').draw();\n\n\t\tchart.xAxis().title(\"Version\");\n\t\tchart.yAxis().title(\"iOS\");\n\n\t\t//set ticks interval\n\t\tchart.yScale().ticks().interval(1000);\n\n\t\t//set minor ticks interval\n\t\tchart.yScale().minorTicks().interval(500);\n\n\t\t//settings\n\t\tchart.tooltip().fontColor(\"red\");\n\n\t\t//tooltip padding for all series on a chart\n\t\tchart.tooltip().padding().left(20);\n\n\t\t//background color\n\t\tchart.tooltip().background().fill(\"black\");\n});\n</script>\n</body>\n</html>")
-
-        print("Saved the bar graph from the iOS versions") 
-        del iosOSVersionList[:]
-        del myiOSVersionList[:]
-        del iOSOSVersionOccurrencesList[:]
-
     if len(deviceInformationList) > 0:
         createFolder("\\filtered_data_files\\")
         deviceInformationList.sort()
@@ -2509,13 +3122,53 @@ def xlsxtxtFile(absolutePath, filename, ext, _fromDate, _toDate):
         myDeviceInformationList = list(set(deviceInformationList))
         myDeviceInformationList.sort()
 
-        with codecs.open(os.getcwd() + "\\filtered_data_files\\device_information.txt", "a+", "utf-8", "ignore") as linesDeviceInformation:
-            linesDeviceInformation.seek(0)
-            if len(linesDeviceInformation.read(100)) > 0:
-                linesDeviceInformation.writelines("\n")
-            linesDeviceInformation.writelines(myDeviceInformationList)
-        del deviceInformationList[:]
-        del myDeviceInformationList[:]
+        if len(androidOSVersionList) > 0:
+            print("Sorting the content from the Android versions")
+            
+            androidOSVersionList.sort()
+            androidOccurrences = Counter(androidOSVersionList)
+            #remove duplicate records from the list
+            myAndroidOSVersionList = list(set(androidOSVersionList))
+            myAndroidOSVersionList.sort()
+
+            for element in myDeviceInformationList:
+                item1 = element.split("|")
+                if item1[1] in myAndroidOSVersionList:
+                    ind2 = myAndroidOSVersionList.index(item1[1])
+                    androidOSVersionOccurrencesList.append(item1[0] + "|" + item1[1] + "|" + str(androidOccurrences[myAndroidOSVersionList[ind2]]) + "|" + item1[2] + "|" + item1[3] + "|" + item1[4].strip() + "\n")
+
+            writeToFile(absolutePath, os.getcwd() + "\\filtered_data_files\\device_information.txt", myandroidOSVersionOccurrencesList, myandroidOSVersionOccurrencesList)
+            if numOfErrorLogs > 1:
+                populateList(os.getcwd() + "\\filtered_data_files\\device_information.txt", myandroidOSVersionOccurrencesList, myandroidOSVersionOccurrencesList)
+
+            del deviceInformationList[:]
+            del myDeviceInformationList[:]
+            del androidOSVersionList[:]
+            del myAndroidOSVersionList[:]
+
+        if len(iosOSVersionList) > 0:
+            print("Sorting the content from the iOS versions")
+            
+            iosOSVersionList.sort()
+            iOSOccurrences = Counter(iosOSVersionList)
+            #remove duplicate records from the list
+            myiOSVersionList = list(set(iosOSVersionList))
+            myiOSVersionList.sort()
+
+            for element in myDeviceInformationList:
+                item1 = element.split("|")
+                if item1[1] in myiOSVersionList:
+                    ind2 = myiOSVersionList.index(item1[1])
+                    iOSOSVersionOccurrencesList.append(item1[0] + "|" + item1[1] + "|" + str(iOSOccurrences[myiOSVersionList[ind2]]) + "|" + item1[2] + "|" + item1[3] + "|" + item1[4].strip() + "\n")
+
+            writeToFile(absolutePath, os.getcwd() + "\\filtered_data_files\\device_information.txt", iOSOSVersionOccurrencesList, myiOSOSVersionOccurrencesList)
+            if numOfErrorLogs > 1:
+                populateList(os.getcwd() + "\\filtered_data_files\\device_information.txt", iOSOSVersionOccurrencesList, myiOSOSVersionOccurrencesList)
+
+            del deviceInformationList[:]
+            del myDeviceInformationList[:]
+            del iosOSVersionList[:]
+            del myiOSVersionList[:]
 
     if len(myNonMatchedValidLinesFromDateRange) > 0:
         createFolder("\\nonmatched_valid_lines\\")
@@ -2576,222 +3229,14 @@ def xlsxtxtFile(absolutePath, filename, ext, _fromDate, _toDate):
     else:
         print("No data was found within the specified date range.")
 
-    try:
-        if not os.path.exists(os.getcwd() + "\\filtered_data_files\\general_logs_slowsql.txt") and not os.path.exists(os.getcwd() + "\\filtered_data_files\\general_logs_slowextension.txt"):
-            #populate list with the general_logs file
-            with codecs.open(os.getcwd() + "\\filtered_data_files\\general_logs.txt", "r", "utf-8", "ignore") as linesFromText:
-                generalLogsList = linesFromText.readlines()
-
-            print("Sorting the content from the SlowSQLs and the SlowExtensions")
-
-            for g, gn in enumerate(generalLogsList):
-                regex = re.search(r"^([\d\-\: ]+)\|.*?([\d]+)\s*?ms.*?\|(SLOWSQL|SLOWEXTENSION)(?:(?:.+?\|){2})([\w\(\)\.]+|\s*?)\|(?:(?:.+?\|){2})([\w]+|\s*?)\|.+", generalLogsList[g].strip())
-                if regex:
-                    timestamp = regex.group(1)
-                    duration = regex.group(2)
-                    moduleName = regex.group(3)
-                    actionName = regex.group(4)
-                    eSpaceName = regex.group(5)
-
-                    #duration is in milliseconds and it needs to be converted to seconds
-                    seconds = int(duration)/1000
-
-                    if "slowsql" == moduleName.lower():
-                        slowSQLList.append(timestamp + "|" + str(seconds) + "|" + moduleName + "|" + actionName + "|" + eSpaceName + "\n")
-
-                    elif "slowextension" == moduleName.lower():
-                        slowExtensionList.append(timestamp + "|" + str(seconds) + "|" + moduleName + "|" + actionName + "|" + eSpaceName + "\n")
-                g+=1
-
-            mySlowSQLList = list(set(slowSQLList))
-            mySlowSQLList.sort()
-
-            mySlowExtensionList = list(set(slowExtensionList))
-            mySlowExtensionList.sort()
-
-            del generalLogsList[:]
-
-            if len(mySlowSQLList) > 0:
-                with codecs.open(os.getcwd() + "\\filtered_data_files\\general_logs_slowsql.txt", "w", "utf-8", "ignore") as reportFile:
-                    reportFile.writelines(mySlowSQLList)
-
-                del slowSQLList[:]
-                del mySlowSQLList[:]
-
-            if len(mySlowExtensionList) > 0:
-                with codecs.open(os.getcwd() + "\\filtered_data_files\\general_logs_slowextension.txt", "w", "utf-8", "ignore") as reportFile3:
-                    reportFile3.writelines(mySlowExtensionList)
-
-                    del slowExtensionList[:]
-                    del mySlowExtensionList[:]
-
-    except FileNotFoundError as fileError:
-        pass
-
-    try:
-        if not os.path.exists(os.getcwd() + "\\filtered_data_files\\integrations_logs_webservices.txt"):
-            #populate list with the integrations_logs file and the error_logs file
-            with codecs.open(os.getcwd() + "\\filtered_data_files\\integrations_logs.txt", "r", "utf-8", "ignore") as linesFromText:
-                integrationsLogsList = linesFromText.readlines()
-
-            with codecs.open(os.getcwd() + "\\filtered_data_files\\error_logs.txt", "r", "utf-8", "ignore") as linesFromText2:
-                errorLogsList = linesFromText2.readlines()
-
-            print("Sorting the content from the Integrations")
-                
-            for i, inte in enumerate(integrationsLogsList):
-                regex = re.search(r"^([\d\-\:\. ]+)\|([\d]+)\|(?:(?:.+?\|){2})([\w\/\.\-\(\) ]+)\|([\w\(\) ]+)\|(?:(?:.+?\|){3})([\w\.]+|\s*?)\|(?:[\d]+)\|([\w\-]+|\s*?)\|.+", integrationsLogsList[i].strip())
-                if regex:
-                    timestamp = regex.group(1)
-                    duration = regex.group(2)
-                    actionName = regex.group(3)
-                    actionType = regex.group(4)
-                    eSpaceName = regex.group(5)
-                    errorID = regex.group(6)
-
-                    if eSpaceName == "None":
-                        eSpaceName == " "
-
-                    if errorID == "None":
-                        errorID == " "
-
-                    #duration is in milliseconds and it needs to be converted to seconds
-                    seconds = int(duration)/1000
-                    webServicesList.append(timestamp + "|" + str(seconds) + "|" + actionName + "|" + actionType + "|" + eSpaceName + "|" + errorID + "\n")
-                    webServicesList2.append(errorID + "\n")
-                i+=1
-
-            for e, err in enumerate(errorLogsList):
-                regex = re.search(r"^(?:[\d\-\:\. ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|(?:(?:.*?\|){6})([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\-]+)\|(?:[\d]+)", errorLogsList[e].strip())
-                if regex:
-                    message = regex.group(1)
-                    stack = regex.group(2)
-                    moduleName = regex.group(3)
-                    environmentInformation = regex.group(4)
-                    iD = regex.group(5)
-
-                    if message == "None":
-                        message == " "
-
-                    if stack == "None":
-                        stack == " "
-
-                    if moduleName == "None":
-                        moduleName == " "
-
-                    if environmentInformation == "None":
-                        environmentInformation == " "
-
-                    errorsList.append(iD + "|" + message + "|" + stack + "|" + moduleName + "|" + environmentInformation + "\n")
-                    errorsList2.append(iD + "\n")
-                e+=1
-
-            del integrationsLogsList[:]
-            del errorLogsList[:]
-
-            for a, b in enumerate(webServicesList2):
-                if len(webServicesList2[a].strip()) > 0:
-                    if webServicesList2[a] in errorsList2:
-                        ind2 = errorsList2.index(webServicesList2[a])
-                        item2 = errorsList[ind2].split("|")
-                        item1 = webServicesList[a].split("|")
-                        webServicesErrorsList.append(item1[0] + "|" + item1[1] + "|" + item1[2] + "|" + item1[3] + "|" + item1[4] + "|" + item2[3] + "|" + item2[1] + "|" + item2[2] + "|" + item2[4].strip() + "|" + item1[5].strip() + "\n")
-                a+=1
-
-            for c, d in enumerate(webServicesList):
-                item3 = webServicesList[c].split("|")
-                if item3[5].strip() == "None":
-                    webServicesErrorsList.append(item3[0] + "|" + item3[1] + "|" + item3[2] + "|" + item3[3] + "|" + item3[4] + "|||||\n")
-                c+=1
-
-            del webServicesList[:]
-            del webServicesList2[:]
-            del errorsList[:]
-            del errorsList2[:]
-
-            myWebServicesErrorsList = list(set(webServicesErrorsList))
-            myWebServicesErrorsList.sort()
-
-            if len(myWebServicesErrorsList) > 0:
-                with codecs.open(os.getcwd() + "\\filtered_data_files\\integrations_logs_webservices.txt", "w", "utf-8", "ignore") as reportFile:
-                    reportFile.writelines(myWebServicesErrorsList)
-
-                del myWebServicesErrorsList[:]
-
-    except FileNotFoundError as fileError:
-        pass
-
-    try:
-        if not os.path.exists(os.getcwd() + "\\filtered_data_files\\timer_logs_timers.txt"):
-            #populate list with the timer_logs file
-            with codecs.open(os.getcwd() + "\\filtered_data_files\\timer_logs.txt", "r", "utf-8", "ignore") as linesFromText:
-                timerLogsList = linesFromText.readlines()
-
-            print("Sorting the content from the Timers")
-            
-            for t, ti in enumerate(timerLogsList):
-                regex = re.search(r"^([\d\-\:\. ]+)\|([\d]+)\|(?:(?:.+?\|){3})([\w\.]+)\|(?:.+?\|)([\w]+)\|.+", timerLogsList[t].strip())
-                if regex:
-                    timestamp = regex.group(1)
-                    duration = regex.group(2)
-                    eSpaceName = regex.group(3)
-                    cyclicJobName = regex.group(4)
-
-                    #duration is in milliseconds and it needs to be converted to seconds
-                    seconds = int(duration)/1000
-                    timersList.append(timestamp + "|" + str(seconds) + "|" + cyclicJobName + "|" + eSpaceName + "\n")
-                t+=1
-
-            myTimersList = list(set(timersList))
-            myTimersList.sort()
-
-            del timerLogsList[:]
-
-            if len(myTimersList) > 0:
-                with codecs.open(os.getcwd() + "\\filtered_data_files\\timer_logs_timers.txt", "w", "utf-8", "ignore") as reportFile:
-                    reportFile.writelines(myTimersList)
-
-                del timersList[:]
-                del myTimersList[:]
-
-    except FileNotFoundError as fileError:
-        pass
-
-    try:
-        if not os.path.exists(os.getcwd() + "\\filtered_data_files\\screen_logs_screens.txt"):
-            #populate list with the screen_logs file
-            with codecs.open(os.getcwd() + "\\filtered_data_files\\screen_logs.txt", "r", "utf-8", "ignore") as linesFromText:
-                screenLogsList = linesFromText.readlines()
-
-            print("Sorting the content from the Screens")
-            
-            for s, sc in enumerate(screenLogsList):
-                regex = re.search(r"^([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|(?:(?:.+?\|){7})([\w\.]+)\|.+", screenLogsList[s].strip())
-                if regex:
-                    timestamp = regex.group(1)
-                    duration = regex.group(2)
-                    screen = regex.group(3)
-                    eSpaceName = regex.group(4)
-
-                    #duration is in milliseconds and it needs to be converted to seconds
-                    seconds = int(duration)/1000
-                    screensList.append(timestamp + "|" + str(seconds) + "|" + screen + "|" + eSpaceName + "\n")
-                s+=1
-
-            myScreensList = list(set(screensList))
-            myScreensList.sort()
-
-            del screenLogsList[:]
-
-            if len(myScreensList) > 0:
-                with codecs.open(os.getcwd() + "\\filtered_data_files\\screen_logs_screens.txt", "w", "utf-8", "ignore") as reportFile:
-                    reportFile.writelines(myScreensList)
-
-                del screensList[:]
-                del myScreensList[:]
-
-    except FileNotFoundError as fileError:
-        pass
+    #read the content from the filtered files to create the detailed tables
+    sortGeneralLogsContent(os.getcwd() + "\\filtered_data_files\\general_logs_slowsql.txt", os.getcwd() + "\\filtered_data_files\\general_logs_slowextension.txt", os.getcwd() + "\\filtered_data_files\\general_logs.txt", os.getcwd() + "\\filtered_data_files\\error_logs.txt", generalLogsContentRegex, errorLogsContentRegex)
+    sortIntegrationsLogsContent(os.getcwd() + "\\filtered_data_files\\integrations_logs_webservices.txt", os.getcwd() + "\\filtered_data_files\\integrations_logs.txt", os.getcwd() + "\\filtered_data_files\\error_logs.txt", integrationsLogsContentRegex, errorLogsContentRegex)
+    sortMobileRequestsLogsContent(os.getcwd() + "\\filtered_data_files\\mobile_requests_logs_screens.txt", os.getcwd() + "\\filtered_data_files\\mobile_requests_logs.txt", os.getcwd() + "\\filtered_data_files\\error_logs.txt", mobileRequestsLogsContentRegex, errorLogsContentRegex)
+    sortTimerLogsContent(os.getcwd() + "\\filtered_data_files\\timer_logs_timers.txt", os.getcwd() + "\\filtered_data_files\\timer_logs.txt", os.getcwd() + "\\filtered_data_files\\error_logs.txt", timerLogsContentRegex, errorLogsContentRegex)
+    sortExtensionLogsContent(os.getcwd() + "\\filtered_data_files\\extension_logs_extensions.txt", os.getcwd() + "\\filtered_data_files\\extension_logs.txt", os.getcwd() + "\\filtered_data_files\\error_logs.txt", extensionLogsContentRegex, errorLogsContentRegex)
+    sortServiceActionLogsContent(os.getcwd() + "\\filtered_data_files\\service_action_logs_service_actions.txt", os.getcwd() + "\\filtered_data_files\\service_action_logs.txt", os.getcwd() + "\\filtered_data_files\\error_logs.txt", serviceActionLogsContentRegex, errorLogsContentRegex)
+    sortScreenLogsContent(os.getcwd() + "\\filtered_data_files\\screen_logs_screens.txt", os.getcwd() + "\\filtered_data_files\\screen_logs.txt", screenLogsContentRegex)
 
     print("Closing: " + filename + ".txt")
 
@@ -2903,7 +3348,10 @@ def logFile(absolutePath, filenameWithExt, ext, _fromDate, _toDate):
                     _date = datetime.strptime(date, "%Y-%m-%d").date()
                         
                     if _fromDate <= _date <= _toDate:
-                        myLinesFromDateRange.append(date + " " + time + "|" + timeTaken + "|" + httpCode + "|" + httpSubCode + "|" + windowsCode + "|" + clientIP + "|" + serverIP + "|" + serverPort + "|" + method + "|" + uriStem + "|" + uriQuery + "|" + username + "|" + browser + "|" + referrer + "\n")
+                        #timeTaken is in milliseconds and it needs to be converted to seconds
+                        seconds = int(timeTaken)/1000
+
+                        myLinesFromDateRange.append(date + " " + time + "|" + str(seconds) + "|" + httpCode + "|" + httpSubCode + "|" + windowsCode + "|" + clientIP + "|" + serverIP + "|" + serverPort + "|" + method + "|" + uriStem + "|" + uriQuery + "|" + username + "|" + browser + "|" + referrer + "\n")
 
                 #capture all the lines that didn't match the regex
                 negativeRegex = re.compile(negativeIisLogsRegex, re.MULTILINE + re.IGNORECASE)
@@ -2964,7 +3412,10 @@ def logFile(absolutePath, filenameWithExt, ext, _fromDate, _toDate):
                                     windowsCode = regex2.group(14)
                                     timeTaken = regex2.group(15)
 
-                                    myLinesFromDateRange.append(date + " " + time + "|" + timeTaken + "|" + httpCode + "|" + httpSubCode + "|" + windowsCode + "|" + clientIP + "|" + serverIP + "|" + serverPort + "|" + method + "|" + uriStem + "|" + uriQuery + "|" + username + "|" + browser + "|" + referrer + "\n")
+                                    #timeTaken is in milliseconds and it needs to be converted to seconds
+                                    seconds = int(timeTaken)/1000
+
+                                    myLinesFromDateRange.append(date + " " + time + "|" + str(seconds) + "|" + httpCode + "|" + httpSubCode + "|" + windowsCode + "|" + clientIP + "|" + serverIP + "|" + serverPort + "|" + method + "|" + uriStem + "|" + uriQuery + "|" + username + "|" + browser + "|" + referrer + "\n")
 
                                 if not regex2:
                                     nonMatchedOutText = "IISLog -> " + newNonMatchedLine2 + "\n"
@@ -2991,110 +3442,6 @@ def logFile(absolutePath, filenameWithExt, ext, _fromDate, _toDate):
         print("No data was found within the specified date range.")
 
     print("Closing: " + filenameWithExt)
-    sortLOGFile()
-
-def sortLOGFile():
-    print("Sorting the content from the IIS logs")
-
-    try:
-        outText = ""
-
-        #sort the data by time taken to perform a task
-        with codecs.open(os.getcwd() + "\\filtered_data_files\\iis_logs.txt", "r", "utf-8", "ignore") as linesFromText2:
-            searchLines = linesFromText2.read()
-            regex = re.compile("^([\d\-\: ]+)\|([\d]+)\|(.+)", re.MULTILINE + re.IGNORECASE)
-            for match in regex.finditer(searchLines):
-                dateTime = match.group(1)
-                timeTaken = match.group(2)
-                tail = match.group(3)
-
-                outText = timeTaken + "|" + dateTime + "|" + tail + "\n"
-                _timeTaken = int(timeTaken)
-
-                if not outText in myLOGlines:
-                    myLOGlines.append(outText)
-
-                if not _timeTaken in myTimeTaken:
-                    myTimeTaken.append(_timeTaken)
-
-                myDateTimes.append(dateTime)
-                myTimesTaken.append(_timeTaken)
-
-        myTimeTaken.sort()
-
-        minimum = min(myTimeTaken)
-        maximum = max(myTimeTaken)
-
-        with codecs.open(os.getcwd() + "\\filtered_data_files\\iis_logs_timetaken.txt", "w", "utf-8", "ignore") as linesToText3:
-            while maximum >= minimum:
-                if maximum in myTimeTaken:
-                    for t, tt in enumerate(myLOGlines):
-                        time = [int(w) for w in myLOGlines[t].split("|") if w.isdigit()]
-                        if maximum == time[0]:
-                            linesToText3.writelines(myLOGlines[t])
-                        t+=1
-                maximum-=1
-
-        #fig, ax = plt.subplots()
-        #ax.plot(myDateTimes, myTimesTaken)
-        #reformat the timestamps to display the month-day hour:minutes
-        #myFmt = mdates.DateFormatter("%m-%d %H:%M")
-        #ax.xaxis.set_major_formatter(myFmt)
-        #only display ten labels for the X and the Y axis
-        #ax.xaxis.set_major_locator(plt.MaxNLocator(10))
-        #ax.yaxis.set_major_locator(plt.MaxNLocator(10))
-        #change the label's font size and rotate the labels from the X axis
-        #ax.xaxis.set_tick_params(labelsize = 6)
-        #ax.yaxis.set_tick_params(labelsize = 6)
-        #plt.xticks(rotation = 45)
-        #save a copy of the line graph and display a dialog window with the interactive line graph
-        #plt.savefig(os.getcwd() + "\\graphs\\line_graph.png")
-        #plt.show()
-
-        with codecs.open(os.getcwd() + "\\filtered_data_files\\iis_logs_timetaken.txt", "r", "utf-8", "ignore") as linesFromText4:
-            searchLines3 = linesFromText4.read()
-            regex2 = re.compile("^([\d]+)\|([\d\-\: ]+)\|.+", re.MULTILINE + re.IGNORECASE)
-            for match2 in regex2.finditer(searchLines3):
-                time_taken_ = match2.group(1)
-                date_time_ = match2.group(2)
-
-                #duration is in milliseconds and it needs to be converted to minutes
-                seconds = int(time_taken_)/1000
-                if seconds > 60:
-                    minutes = seconds/60
-                    if minutes > 0:
-                        if "." in str(minutes):
-                            ind = str(minutes).index(".")
-                            _minutes = str(minutes)[:ind]
-                            iisLineGraphList.append(date_time_ + "|" + _minutes + "\n")
-                        else:
-                            iisLineGraphList.append(date_time_ + "|" + str(minutes) + "\n")
-
-        if len(iisLineGraphList) > 0:
-            #create a line graph with the compiled data
-            createFolder("\\graphs\\IIS\\")
-
-            with codecs.open(os.getcwd() + "\\graphs\\IIS\\iis_line_graph_timetaken.html", "w", "utf-8", "ignore") as linesToText4:
-                linesToText4.writelines("<!doctype html>\n<body>\n<div id=\"container\" style=\"width: 1000px; height: 800px;\"></div>\n<script src=\"https://cdn.anychart.com/releases/v8/js/anychart-base.min.js\" type=\"text/javascript\"></script>\n<script>\n\tanychart.onDocumentReady(function() {\n\t\t//create CSV string\n\t\tvar csvString = 'Timestamp;Time*' +\n")
-                for x, elm in enumerate(iisLineGraphList):
-                    if x == len(iisLineGraphList) - 1:
-                        linesToText4.writelines("\t\t\t'" + iisLineGraphList[x].strip() + "';\n\n")
-                    else:
-                        linesToText4.writelines("\t\t\t'" + iisLineGraphList[x].strip() + "*' +\n")
-                    x+=1
-                linesToText4.writelines("\t\t//create an area chart\n\t\tvar chart = anychart.line();\n\n\t\t//create the area series based on CSV data\n\t\tchart.line(csvString, {ignoreFirstRow: true, columnsSeparator: \"|\", rowsSeparator: \"*\"});\n\n\t\t//display a chart\n\t\tchart.container('container').draw();\n\n\t\tchart.xAxis().title(\"Timestamp\");\n\t\tchart.yAxis().title(\"Time Taken (Minutes)\");\n\n\t\t//set ticks interval\n\t\tchart.yScale().ticks().interval(60);\n\n\t\t//set minor ticks interval\n\t\tchart.yScale().minorTicks().interval(30);\n\n\t\t//settings\n\t\tchart.tooltip().fontColor(\"red\");\n\n\t\t//tooltip padding for all series on a chart\n\t\tchart.tooltip().padding().left(20);\n\n\t\t//background color\n\t\tchart.tooltip().background().fill(\"black\");\n});\n</script>\n</body>\n</html>")
-
-            print("Saved the line graph from the IIS logs")     
-
-        del myLOGlines[:]
-        del myTimeTaken[:]
-        del myDateTimes[:]
-        del myTimesTaken[:]
-        del iisLineGraphList[:]
-        outText = ""
-
-    except FileNotFoundError as fileError:
-        pass
 
 def evtxFile(absolutePath, filenameWithExt, ext, _fromDate, _toDate):
     print("Reading: " + filenameWithExt)
