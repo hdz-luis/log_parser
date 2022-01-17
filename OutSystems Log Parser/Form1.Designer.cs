@@ -64,6 +64,11 @@
             this.txtBoxDetailIntegrationlogs = new System.Windows.Forms.TextBox();
             this.dataGridViewIntegrationslogs = new System.Windows.Forms.DataGridView();
             this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.chkBoxSortScrReqScreens = new System.Windows.Forms.CheckBox();
+            this.btnExportScrReqScreenTable = new System.Windows.Forms.Button();
+            this.txtBoxDetailScrReqScreenlogs = new System.Windows.Forms.TextBox();
+            this.dataGridViewScrReqScreenDurationlogs = new System.Windows.Forms.DataGridView();
+            this.dataGridViewScreenRequestsScreenlogs = new System.Windows.Forms.DataGridView();
             this.txtBoxDetailScreenRequestslogs = new System.Windows.Forms.TextBox();
             this.dataGridViewScreenRequestslogs = new System.Windows.Forms.DataGridView();
             this.tabPage9 = new System.Windows.Forms.TabPage();
@@ -78,9 +83,19 @@
             this.txtBoxDetailEmaillogs = new System.Windows.Forms.TextBox();
             this.dataGridViewEmaillogs = new System.Windows.Forms.DataGridView();
             this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.chkBoxSortExtensions = new System.Windows.Forms.CheckBox();
+            this.btnExportExtensionsTable = new System.Windows.Forms.Button();
+            this.txtBoxDetailExtExtensionlogs = new System.Windows.Forms.TextBox();
+            this.dataGridViewExtensionsDurationlogs = new System.Windows.Forms.DataGridView();
+            this.dataGridViewExtensionLogsExtensions = new System.Windows.Forms.DataGridView();
             this.txtBoxDetailExtensionlogs = new System.Windows.Forms.TextBox();
             this.dataGridViewExtensionlogs = new System.Windows.Forms.DataGridView();
             this.tabPage12 = new System.Windows.Forms.TabPage();
+            this.chkBoxSortServiceActions = new System.Windows.Forms.CheckBox();
+            this.btnExportServiceActionsTable = new System.Windows.Forms.Button();
+            this.txtBoxDetailSrvActServicelogs = new System.Windows.Forms.TextBox();
+            this.dataGridViewSrvActServiceDurationlogs = new System.Windows.Forms.DataGridView();
+            this.dataGridViewSrvActServicelogs = new System.Windows.Forms.DataGridView();
             this.txtBoxDetailServiceActionlogs = new System.Windows.Forms.TextBox();
             this.dataGridViewServiceActionlogs = new System.Windows.Forms.DataGridView();
             this.tabPage13 = new System.Windows.Forms.TabPage();
@@ -92,6 +107,10 @@
             this.txtBoxDetailTradWebRequests = new System.Windows.Forms.TextBox();
             this.dataGridViewTradWebRequests = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnExportIISLINQTable = new System.Windows.Forms.Button();
+            this.txtBoxDetailsIISLINQ = new System.Windows.Forms.TextBox();
+            this.chkBoxSortIIS = new System.Windows.Forms.CheckBox();
+            this.btnExportIISTable = new System.Windows.Forms.Button();
             this.comBoxReport = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dataGridViewIISLINQreport = new System.Windows.Forms.DataGridView();
@@ -118,6 +137,10 @@
             this.txtBoxDetailiOSLogs = new System.Windows.Forms.TextBox();
             this.dataGridViewiOSlogs = new System.Windows.Forms.DataGridView();
             this.tabPage60 = new System.Windows.Forms.TabPage();
+            this.txtBoxDetailDevInfoCount = new System.Windows.Forms.TextBox();
+            this.chkBoxSortDevinfo = new System.Windows.Forms.CheckBox();
+            this.btnExportDevInfoTable = new System.Windows.Forms.Button();
+            this.dataGridViewDevInfoCount = new System.Windows.Forms.DataGridView();
             this.txtBoxDetailDeviceInformationlogs = new System.Windows.Forms.TextBox();
             this.dataGridViewDeviceInformation = new System.Windows.Forms.DataGridView();
             this.tabPage19 = new System.Windows.Forms.TabPage();
@@ -279,6 +302,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIntWebServiceslogs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIntegrationslogs)).BeginInit();
             this.tabPage8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScrReqScreenDurationlogs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScreenRequestsScreenlogs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScreenRequestslogs)).BeginInit();
             this.tabPage9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTimerTimersDurationlogs)).BeginInit();
@@ -287,8 +312,12 @@
             this.tabPage10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmaillogs)).BeginInit();
             this.tabPage11.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewExtensionsDurationlogs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewExtensionLogsExtensions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewExtensionlogs)).BeginInit();
             this.tabPage12.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSrvActServiceDurationlogs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSrvActServicelogs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewServiceActionlogs)).BeginInit();
             this.tabPage13.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTradWebRequestsScreenDurationlogs)).BeginInit();
@@ -313,6 +342,7 @@
             this.tabPage18.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewiOSlogs)).BeginInit();
             this.tabPage60.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDevInfoCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDeviceInformation)).BeginInit();
             this.tabPage19.SuspendLayout();
             this.tabControl4.SuspendLayout();
@@ -429,7 +459,7 @@
             this.linkIISFields.DisabledLinkColor = System.Drawing.Color.Silver;
             this.linkIISFields.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.linkIISFields.LinkColor = System.Drawing.Color.Black;
-            this.linkIISFields.Location = new System.Drawing.Point(8, 26);
+            this.linkIISFields.Location = new System.Drawing.Point(8, 9);
             this.linkIISFields.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkIISFields.Name = "linkIISFields";
             this.linkIISFields.Size = new System.Drawing.Size(153, 25);
@@ -447,7 +477,7 @@
             this.linkWinSyscodes.DisabledLinkColor = System.Drawing.Color.Silver;
             this.linkWinSyscodes.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.linkWinSyscodes.LinkColor = System.Drawing.Color.Black;
-            this.linkWinSyscodes.Location = new System.Drawing.Point(365, 26);
+            this.linkWinSyscodes.Location = new System.Drawing.Point(365, 9);
             this.linkWinSyscodes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkWinSyscodes.Name = "linkWinSyscodes";
             this.linkWinSyscodes.Size = new System.Drawing.Size(274, 25);
@@ -465,7 +495,7 @@
             this.linkHTTPcodes.DisabledLinkColor = System.Drawing.Color.Silver;
             this.linkHTTPcodes.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.linkHTTPcodes.LinkColor = System.Drawing.Color.Black;
-            this.linkHTTPcodes.Location = new System.Drawing.Point(170, 26);
+            this.linkHTTPcodes.Location = new System.Drawing.Point(170, 9);
             this.linkHTTPcodes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkHTTPcodes.Name = "linkHTTPcodes";
             this.linkHTTPcodes.Size = new System.Drawing.Size(189, 25);
@@ -900,6 +930,11 @@
             // tabPage8
             // 
             this.tabPage8.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage8.Controls.Add(this.chkBoxSortScrReqScreens);
+            this.tabPage8.Controls.Add(this.btnExportScrReqScreenTable);
+            this.tabPage8.Controls.Add(this.txtBoxDetailScrReqScreenlogs);
+            this.tabPage8.Controls.Add(this.dataGridViewScrReqScreenDurationlogs);
+            this.tabPage8.Controls.Add(this.dataGridViewScreenRequestsScreenlogs);
             this.tabPage8.Controls.Add(this.txtBoxDetailScreenRequestslogs);
             this.tabPage8.Controls.Add(this.dataGridViewScreenRequestslogs);
             this.tabPage8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -910,6 +945,80 @@
             this.tabPage8.TabIndex = 3;
             this.tabPage8.Text = "Screen Requests";
             // 
+            // chkBoxSortScrReqScreens
+            // 
+            this.chkBoxSortScrReqScreens.AutoSize = true;
+            this.chkBoxSortScrReqScreens.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkBoxSortScrReqScreens.Location = new System.Drawing.Point(8, 605);
+            this.chkBoxSortScrReqScreens.Name = "chkBoxSortScrReqScreens";
+            this.chkBoxSortScrReqScreens.Size = new System.Drawing.Size(171, 29);
+            this.chkBoxSortScrReqScreens.TabIndex = 31;
+            this.chkBoxSortScrReqScreens.Text = "Sort by duration";
+            this.chkBoxSortScrReqScreens.UseVisualStyleBackColor = true;
+            this.chkBoxSortScrReqScreens.CheckedChanged += new System.EventHandler(this.chkBoxSortScrReqScreens_CheckedChanged);
+            // 
+            // btnExportScrReqScreenTable
+            // 
+            this.btnExportScrReqScreenTable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportScrReqScreenTable.BackgroundImage")));
+            this.btnExportScrReqScreenTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnExportScrReqScreenTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportScrReqScreenTable.Location = new System.Drawing.Point(195, 602);
+            this.btnExportScrReqScreenTable.Margin = new System.Windows.Forms.Padding(4);
+            this.btnExportScrReqScreenTable.Name = "btnExportScrReqScreenTable";
+            this.btnExportScrReqScreenTable.Size = new System.Drawing.Size(64, 32);
+            this.btnExportScrReqScreenTable.TabIndex = 30;
+            this.btnExportScrReqScreenTable.Text = ",";
+            this.toolTip1.SetToolTip(this.btnExportScrReqScreenTable, "Export table content.");
+            this.btnExportScrReqScreenTable.UseVisualStyleBackColor = true;
+            this.btnExportScrReqScreenTable.Click += new System.EventHandler(this.btnExportScrReqScreenTable_Click);
+            this.btnExportScrReqScreenTable.MouseEnter += new System.EventHandler(this.btnExportScrReqScreenTable_MouseEnter);
+            this.btnExportScrReqScreenTable.MouseLeave += new System.EventHandler(this.btnExportScrReqScreenTable_MouseLeave);
+            // 
+            // txtBoxDetailScrReqScreenlogs
+            // 
+            this.txtBoxDetailScrReqScreenlogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailScrReqScreenlogs.Location = new System.Drawing.Point(1318, 305);
+            this.txtBoxDetailScrReqScreenlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailScrReqScreenlogs.Multiline = true;
+            this.txtBoxDetailScrReqScreenlogs.Name = "txtBoxDetailScrReqScreenlogs";
+            this.txtBoxDetailScrReqScreenlogs.ReadOnly = true;
+            this.txtBoxDetailScrReqScreenlogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailScrReqScreenlogs.Size = new System.Drawing.Size(250, 293);
+            this.txtBoxDetailScrReqScreenlogs.TabIndex = 29;
+            this.txtBoxDetailScrReqScreenlogs.TabStop = false;
+            // 
+            // dataGridViewScrReqScreenDurationlogs
+            // 
+            this.dataGridViewScrReqScreenDurationlogs.AllowUserToAddRows = false;
+            this.dataGridViewScrReqScreenDurationlogs.AllowUserToDeleteRows = false;
+            this.dataGridViewScrReqScreenDurationlogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewScrReqScreenDurationlogs.Location = new System.Drawing.Point(9, 455);
+            this.dataGridViewScrReqScreenDurationlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewScrReqScreenDurationlogs.MultiSelect = false;
+            this.dataGridViewScrReqScreenDurationlogs.Name = "dataGridViewScrReqScreenDurationlogs";
+            this.dataGridViewScrReqScreenDurationlogs.ReadOnly = true;
+            this.dataGridViewScrReqScreenDurationlogs.ShowEditingIcon = false;
+            this.dataGridViewScrReqScreenDurationlogs.Size = new System.Drawing.Size(1304, 143);
+            this.dataGridViewScrReqScreenDurationlogs.TabIndex = 28;
+            this.dataGridViewScrReqScreenDurationlogs.TabStop = false;
+            this.dataGridViewScrReqScreenDurationlogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewScrReqScreenDurationlogs_CellClick);
+            // 
+            // dataGridViewScreenRequestsScreenlogs
+            // 
+            this.dataGridViewScreenRequestsScreenlogs.AllowUserToAddRows = false;
+            this.dataGridViewScreenRequestsScreenlogs.AllowUserToDeleteRows = false;
+            this.dataGridViewScreenRequestsScreenlogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewScreenRequestsScreenlogs.Location = new System.Drawing.Point(9, 305);
+            this.dataGridViewScreenRequestsScreenlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewScreenRequestsScreenlogs.MultiSelect = false;
+            this.dataGridViewScreenRequestsScreenlogs.Name = "dataGridViewScreenRequestsScreenlogs";
+            this.dataGridViewScreenRequestsScreenlogs.ReadOnly = true;
+            this.dataGridViewScreenRequestsScreenlogs.ShowEditingIcon = false;
+            this.dataGridViewScreenRequestsScreenlogs.Size = new System.Drawing.Size(1304, 143);
+            this.dataGridViewScreenRequestsScreenlogs.TabIndex = 27;
+            this.dataGridViewScreenRequestsScreenlogs.TabStop = false;
+            this.dataGridViewScreenRequestsScreenlogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewScreenRequestsScreenlogs_CellClick);
+            // 
             // txtBoxDetailScreenRequestslogs
             // 
             this.txtBoxDetailScreenRequestslogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -919,7 +1028,7 @@
             this.txtBoxDetailScreenRequestslogs.Name = "txtBoxDetailScreenRequestslogs";
             this.txtBoxDetailScreenRequestslogs.ReadOnly = true;
             this.txtBoxDetailScreenRequestslogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtBoxDetailScreenRequestslogs.Size = new System.Drawing.Size(250, 627);
+            this.txtBoxDetailScreenRequestslogs.Size = new System.Drawing.Size(250, 278);
             this.txtBoxDetailScreenRequestslogs.TabIndex = 17;
             this.txtBoxDetailScreenRequestslogs.TabStop = false;
             // 
@@ -934,7 +1043,7 @@
             this.dataGridViewScreenRequestslogs.Name = "dataGridViewScreenRequestslogs";
             this.dataGridViewScreenRequestslogs.ReadOnly = true;
             this.dataGridViewScreenRequestslogs.ShowEditingIcon = false;
-            this.dataGridViewScreenRequestslogs.Size = new System.Drawing.Size(1306, 627);
+            this.dataGridViewScreenRequestslogs.Size = new System.Drawing.Size(1306, 278);
             this.dataGridViewScreenRequestslogs.TabIndex = 16;
             this.dataGridViewScreenRequestslogs.TabStop = false;
             this.dataGridViewScreenRequestslogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewScreenRequestslogs_CellClick);
@@ -1103,6 +1212,11 @@
             // tabPage11
             // 
             this.tabPage11.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage11.Controls.Add(this.chkBoxSortExtensions);
+            this.tabPage11.Controls.Add(this.btnExportExtensionsTable);
+            this.tabPage11.Controls.Add(this.txtBoxDetailExtExtensionlogs);
+            this.tabPage11.Controls.Add(this.dataGridViewExtensionsDurationlogs);
+            this.tabPage11.Controls.Add(this.dataGridViewExtensionLogsExtensions);
             this.tabPage11.Controls.Add(this.txtBoxDetailExtensionlogs);
             this.tabPage11.Controls.Add(this.dataGridViewExtensionlogs);
             this.tabPage11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1111,6 +1225,80 @@
             this.tabPage11.Size = new System.Drawing.Size(1576, 641);
             this.tabPage11.TabIndex = 6;
             this.tabPage11.Text = "Extension";
+            // 
+            // chkBoxSortExtensions
+            // 
+            this.chkBoxSortExtensions.AutoSize = true;
+            this.chkBoxSortExtensions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkBoxSortExtensions.Location = new System.Drawing.Point(8, 606);
+            this.chkBoxSortExtensions.Name = "chkBoxSortExtensions";
+            this.chkBoxSortExtensions.Size = new System.Drawing.Size(171, 29);
+            this.chkBoxSortExtensions.TabIndex = 26;
+            this.chkBoxSortExtensions.Text = "Sort by duration";
+            this.chkBoxSortExtensions.UseVisualStyleBackColor = true;
+            this.chkBoxSortExtensions.CheckedChanged += new System.EventHandler(this.chkBoxSortExtensions_CheckedChanged);
+            // 
+            // btnExportExtensionsTable
+            // 
+            this.btnExportExtensionsTable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportExtensionsTable.BackgroundImage")));
+            this.btnExportExtensionsTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnExportExtensionsTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportExtensionsTable.Location = new System.Drawing.Point(195, 603);
+            this.btnExportExtensionsTable.Margin = new System.Windows.Forms.Padding(4);
+            this.btnExportExtensionsTable.Name = "btnExportExtensionsTable";
+            this.btnExportExtensionsTable.Size = new System.Drawing.Size(64, 32);
+            this.btnExportExtensionsTable.TabIndex = 25;
+            this.btnExportExtensionsTable.Text = ",";
+            this.toolTip1.SetToolTip(this.btnExportExtensionsTable, "Export table content.");
+            this.btnExportExtensionsTable.UseVisualStyleBackColor = true;
+            this.btnExportExtensionsTable.Click += new System.EventHandler(this.btnExportExtensionsTable_Click);
+            this.btnExportExtensionsTable.MouseEnter += new System.EventHandler(this.btnExportExtensionsTable_MouseEnter);
+            this.btnExportExtensionsTable.MouseLeave += new System.EventHandler(this.btnExportExtensionsTable_MouseLeave);
+            // 
+            // txtBoxDetailExtExtensionlogs
+            // 
+            this.txtBoxDetailExtExtensionlogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailExtExtensionlogs.Location = new System.Drawing.Point(1318, 306);
+            this.txtBoxDetailExtExtensionlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailExtExtensionlogs.Multiline = true;
+            this.txtBoxDetailExtExtensionlogs.Name = "txtBoxDetailExtExtensionlogs";
+            this.txtBoxDetailExtExtensionlogs.ReadOnly = true;
+            this.txtBoxDetailExtExtensionlogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailExtExtensionlogs.Size = new System.Drawing.Size(250, 293);
+            this.txtBoxDetailExtExtensionlogs.TabIndex = 24;
+            this.txtBoxDetailExtExtensionlogs.TabStop = false;
+            // 
+            // dataGridViewExtensionsDurationlogs
+            // 
+            this.dataGridViewExtensionsDurationlogs.AllowUserToAddRows = false;
+            this.dataGridViewExtensionsDurationlogs.AllowUserToDeleteRows = false;
+            this.dataGridViewExtensionsDurationlogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewExtensionsDurationlogs.Location = new System.Drawing.Point(9, 456);
+            this.dataGridViewExtensionsDurationlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewExtensionsDurationlogs.MultiSelect = false;
+            this.dataGridViewExtensionsDurationlogs.Name = "dataGridViewExtensionsDurationlogs";
+            this.dataGridViewExtensionsDurationlogs.ReadOnly = true;
+            this.dataGridViewExtensionsDurationlogs.ShowEditingIcon = false;
+            this.dataGridViewExtensionsDurationlogs.Size = new System.Drawing.Size(1304, 143);
+            this.dataGridViewExtensionsDurationlogs.TabIndex = 23;
+            this.dataGridViewExtensionsDurationlogs.TabStop = false;
+            this.dataGridViewExtensionsDurationlogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewExtensionsDurationlogs_CellClick);
+            // 
+            // dataGridViewExtensionLogsExtensions
+            // 
+            this.dataGridViewExtensionLogsExtensions.AllowUserToAddRows = false;
+            this.dataGridViewExtensionLogsExtensions.AllowUserToDeleteRows = false;
+            this.dataGridViewExtensionLogsExtensions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewExtensionLogsExtensions.Location = new System.Drawing.Point(9, 306);
+            this.dataGridViewExtensionLogsExtensions.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewExtensionLogsExtensions.MultiSelect = false;
+            this.dataGridViewExtensionLogsExtensions.Name = "dataGridViewExtensionLogsExtensions";
+            this.dataGridViewExtensionLogsExtensions.ReadOnly = true;
+            this.dataGridViewExtensionLogsExtensions.ShowEditingIcon = false;
+            this.dataGridViewExtensionLogsExtensions.Size = new System.Drawing.Size(1304, 143);
+            this.dataGridViewExtensionLogsExtensions.TabIndex = 22;
+            this.dataGridViewExtensionLogsExtensions.TabStop = false;
+            this.dataGridViewExtensionLogsExtensions.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewExtensionLogsExtensions_CellClick);
             // 
             // txtBoxDetailExtensionlogs
             // 
@@ -1121,7 +1309,7 @@
             this.txtBoxDetailExtensionlogs.Name = "txtBoxDetailExtensionlogs";
             this.txtBoxDetailExtensionlogs.ReadOnly = true;
             this.txtBoxDetailExtensionlogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtBoxDetailExtensionlogs.Size = new System.Drawing.Size(250, 627);
+            this.txtBoxDetailExtensionlogs.Size = new System.Drawing.Size(250, 278);
             this.txtBoxDetailExtensionlogs.TabIndex = 20;
             this.txtBoxDetailExtensionlogs.TabStop = false;
             // 
@@ -1136,7 +1324,7 @@
             this.dataGridViewExtensionlogs.Name = "dataGridViewExtensionlogs";
             this.dataGridViewExtensionlogs.ReadOnly = true;
             this.dataGridViewExtensionlogs.ShowEditingIcon = false;
-            this.dataGridViewExtensionlogs.Size = new System.Drawing.Size(1306, 627);
+            this.dataGridViewExtensionlogs.Size = new System.Drawing.Size(1306, 278);
             this.dataGridViewExtensionlogs.TabIndex = 19;
             this.dataGridViewExtensionlogs.TabStop = false;
             this.dataGridViewExtensionlogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewExtensionlogs_CellClick);
@@ -1144,6 +1332,11 @@
             // tabPage12
             // 
             this.tabPage12.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage12.Controls.Add(this.chkBoxSortServiceActions);
+            this.tabPage12.Controls.Add(this.btnExportServiceActionsTable);
+            this.tabPage12.Controls.Add(this.txtBoxDetailSrvActServicelogs);
+            this.tabPage12.Controls.Add(this.dataGridViewSrvActServiceDurationlogs);
+            this.tabPage12.Controls.Add(this.dataGridViewSrvActServicelogs);
             this.tabPage12.Controls.Add(this.txtBoxDetailServiceActionlogs);
             this.tabPage12.Controls.Add(this.dataGridViewServiceActionlogs);
             this.tabPage12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1152,6 +1345,80 @@
             this.tabPage12.Size = new System.Drawing.Size(1576, 641);
             this.tabPage12.TabIndex = 7;
             this.tabPage12.Text = "Service Action";
+            // 
+            // chkBoxSortServiceActions
+            // 
+            this.chkBoxSortServiceActions.AutoSize = true;
+            this.chkBoxSortServiceActions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkBoxSortServiceActions.Location = new System.Drawing.Point(8, 606);
+            this.chkBoxSortServiceActions.Name = "chkBoxSortServiceActions";
+            this.chkBoxSortServiceActions.Size = new System.Drawing.Size(171, 29);
+            this.chkBoxSortServiceActions.TabIndex = 31;
+            this.chkBoxSortServiceActions.Text = "Sort by duration";
+            this.chkBoxSortServiceActions.UseVisualStyleBackColor = true;
+            this.chkBoxSortServiceActions.CheckedChanged += new System.EventHandler(this.chkBoxSortServiceActions_CheckedChanged);
+            // 
+            // btnExportServiceActionsTable
+            // 
+            this.btnExportServiceActionsTable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportServiceActionsTable.BackgroundImage")));
+            this.btnExportServiceActionsTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnExportServiceActionsTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportServiceActionsTable.Location = new System.Drawing.Point(195, 603);
+            this.btnExportServiceActionsTable.Margin = new System.Windows.Forms.Padding(4);
+            this.btnExportServiceActionsTable.Name = "btnExportServiceActionsTable";
+            this.btnExportServiceActionsTable.Size = new System.Drawing.Size(64, 32);
+            this.btnExportServiceActionsTable.TabIndex = 30;
+            this.btnExportServiceActionsTable.Text = ",";
+            this.toolTip1.SetToolTip(this.btnExportServiceActionsTable, "Export table content.");
+            this.btnExportServiceActionsTable.UseVisualStyleBackColor = true;
+            this.btnExportServiceActionsTable.Click += new System.EventHandler(this.btnExportServiceActionsTable_Click);
+            this.btnExportServiceActionsTable.MouseEnter += new System.EventHandler(this.btnExportServiceActionsTable_MouseEnter);
+            this.btnExportServiceActionsTable.MouseLeave += new System.EventHandler(this.btnExportServiceActionsTable_MouseLeave);
+            // 
+            // txtBoxDetailSrvActServicelogs
+            // 
+            this.txtBoxDetailSrvActServicelogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailSrvActServicelogs.Location = new System.Drawing.Point(1318, 306);
+            this.txtBoxDetailSrvActServicelogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailSrvActServicelogs.Multiline = true;
+            this.txtBoxDetailSrvActServicelogs.Name = "txtBoxDetailSrvActServicelogs";
+            this.txtBoxDetailSrvActServicelogs.ReadOnly = true;
+            this.txtBoxDetailSrvActServicelogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailSrvActServicelogs.Size = new System.Drawing.Size(250, 293);
+            this.txtBoxDetailSrvActServicelogs.TabIndex = 29;
+            this.txtBoxDetailSrvActServicelogs.TabStop = false;
+            // 
+            // dataGridViewSrvActServiceDurationlogs
+            // 
+            this.dataGridViewSrvActServiceDurationlogs.AllowUserToAddRows = false;
+            this.dataGridViewSrvActServiceDurationlogs.AllowUserToDeleteRows = false;
+            this.dataGridViewSrvActServiceDurationlogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewSrvActServiceDurationlogs.Location = new System.Drawing.Point(9, 456);
+            this.dataGridViewSrvActServiceDurationlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewSrvActServiceDurationlogs.MultiSelect = false;
+            this.dataGridViewSrvActServiceDurationlogs.Name = "dataGridViewSrvActServiceDurationlogs";
+            this.dataGridViewSrvActServiceDurationlogs.ReadOnly = true;
+            this.dataGridViewSrvActServiceDurationlogs.ShowEditingIcon = false;
+            this.dataGridViewSrvActServiceDurationlogs.Size = new System.Drawing.Size(1304, 143);
+            this.dataGridViewSrvActServiceDurationlogs.TabIndex = 28;
+            this.dataGridViewSrvActServiceDurationlogs.TabStop = false;
+            this.dataGridViewSrvActServiceDurationlogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSrvActServiceDurationlogs_CellClick);
+            // 
+            // dataGridViewSrvActServicelogs
+            // 
+            this.dataGridViewSrvActServicelogs.AllowUserToAddRows = false;
+            this.dataGridViewSrvActServicelogs.AllowUserToDeleteRows = false;
+            this.dataGridViewSrvActServicelogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewSrvActServicelogs.Location = new System.Drawing.Point(9, 306);
+            this.dataGridViewSrvActServicelogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewSrvActServicelogs.MultiSelect = false;
+            this.dataGridViewSrvActServicelogs.Name = "dataGridViewSrvActServicelogs";
+            this.dataGridViewSrvActServicelogs.ReadOnly = true;
+            this.dataGridViewSrvActServicelogs.ShowEditingIcon = false;
+            this.dataGridViewSrvActServicelogs.Size = new System.Drawing.Size(1304, 143);
+            this.dataGridViewSrvActServicelogs.TabIndex = 27;
+            this.dataGridViewSrvActServicelogs.TabStop = false;
+            this.dataGridViewSrvActServicelogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSrvActServicelogs_CellClick);
             // 
             // txtBoxDetailServiceActionlogs
             // 
@@ -1162,7 +1429,7 @@
             this.txtBoxDetailServiceActionlogs.Name = "txtBoxDetailServiceActionlogs";
             this.txtBoxDetailServiceActionlogs.ReadOnly = true;
             this.txtBoxDetailServiceActionlogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtBoxDetailServiceActionlogs.Size = new System.Drawing.Size(250, 627);
+            this.txtBoxDetailServiceActionlogs.Size = new System.Drawing.Size(250, 278);
             this.txtBoxDetailServiceActionlogs.TabIndex = 21;
             this.txtBoxDetailServiceActionlogs.TabStop = false;
             // 
@@ -1177,7 +1444,7 @@
             this.dataGridViewServiceActionlogs.Name = "dataGridViewServiceActionlogs";
             this.dataGridViewServiceActionlogs.ReadOnly = true;
             this.dataGridViewServiceActionlogs.ShowEditingIcon = false;
-            this.dataGridViewServiceActionlogs.Size = new System.Drawing.Size(1306, 627);
+            this.dataGridViewServiceActionlogs.Size = new System.Drawing.Size(1306, 278);
             this.dataGridViewServiceActionlogs.TabIndex = 20;
             this.dataGridViewServiceActionlogs.TabStop = false;
             this.dataGridViewServiceActionlogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewServiceActionlogs_CellClick);
@@ -1305,6 +1572,10 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage2.Controls.Add(this.btnExportIISLINQTable);
+            this.tabPage2.Controls.Add(this.txtBoxDetailsIISLINQ);
+            this.tabPage2.Controls.Add(this.chkBoxSortIIS);
+            this.tabPage2.Controls.Add(this.btnExportIISTable);
             this.tabPage2.Controls.Add(this.comBoxReport);
             this.tabPage2.Controls.Add(this.label4);
             this.tabPage2.Controls.Add(this.dataGridViewIISLINQreport);
@@ -1322,6 +1593,65 @@
             this.tabPage2.Size = new System.Drawing.Size(1596, 695);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "IIS Logs";
+            // 
+            // btnExportIISLINQTable
+            // 
+            this.btnExportIISLINQTable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportIISLINQTable.BackgroundImage")));
+            this.btnExportIISLINQTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnExportIISLINQTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportIISLINQTable.Location = new System.Drawing.Point(477, 470);
+            this.btnExportIISLINQTable.Margin = new System.Windows.Forms.Padding(4);
+            this.btnExportIISLINQTable.Name = "btnExportIISLINQTable";
+            this.btnExportIISLINQTable.Size = new System.Drawing.Size(64, 32);
+            this.btnExportIISLINQTable.TabIndex = 27;
+            this.btnExportIISLINQTable.Text = ",";
+            this.toolTip1.SetToolTip(this.btnExportIISLINQTable, "Export table content.");
+            this.btnExportIISLINQTable.UseVisualStyleBackColor = true;
+            this.btnExportIISLINQTable.Click += new System.EventHandler(this.btnExportIISLINQTable_Click);
+            this.btnExportIISLINQTable.MouseEnter += new System.EventHandler(this.btnExportIISLINQTable_MouseEnter);
+            this.btnExportIISLINQTable.MouseLeave += new System.EventHandler(this.btnExportIISLINQTable_MouseLeave);
+            // 
+            // txtBoxDetailsIISLINQ
+            // 
+            this.txtBoxDetailsIISLINQ.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailsIISLINQ.Location = new System.Drawing.Point(1338, 508);
+            this.txtBoxDetailsIISLINQ.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailsIISLINQ.Multiline = true;
+            this.txtBoxDetailsIISLINQ.Name = "txtBoxDetailsIISLINQ";
+            this.txtBoxDetailsIISLINQ.ReadOnly = true;
+            this.txtBoxDetailsIISLINQ.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailsIISLINQ.Size = new System.Drawing.Size(250, 177);
+            this.txtBoxDetailsIISLINQ.TabIndex = 26;
+            this.txtBoxDetailsIISLINQ.TabStop = false;
+            // 
+            // chkBoxSortIIS
+            // 
+            this.chkBoxSortIIS.AutoSize = true;
+            this.chkBoxSortIIS.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkBoxSortIIS.Location = new System.Drawing.Point(1080, 440);
+            this.chkBoxSortIIS.Name = "chkBoxSortIIS";
+            this.chkBoxSortIIS.Size = new System.Drawing.Size(171, 29);
+            this.chkBoxSortIIS.TabIndex = 25;
+            this.chkBoxSortIIS.Text = "Sort by duration";
+            this.chkBoxSortIIS.UseVisualStyleBackColor = true;
+            this.chkBoxSortIIS.CheckedChanged += new System.EventHandler(this.chkBoxSortIIS_CheckedChanged);
+            // 
+            // btnExportIISTable
+            // 
+            this.btnExportIISTable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportIISTable.BackgroundImage")));
+            this.btnExportIISTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnExportIISTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportIISTable.Location = new System.Drawing.Point(1267, 437);
+            this.btnExportIISTable.Margin = new System.Windows.Forms.Padding(4);
+            this.btnExportIISTable.Name = "btnExportIISTable";
+            this.btnExportIISTable.Size = new System.Drawing.Size(64, 32);
+            this.btnExportIISTable.TabIndex = 24;
+            this.btnExportIISTable.Text = ",";
+            this.toolTip1.SetToolTip(this.btnExportIISTable, "Export table content.");
+            this.btnExportIISTable.UseVisualStyleBackColor = true;
+            this.btnExportIISTable.Click += new System.EventHandler(this.btnExportIISTable_Click);
+            this.btnExportIISTable.MouseEnter += new System.EventHandler(this.btnExportIISTable_MouseEnter);
+            this.btnExportIISTable.MouseLeave += new System.EventHandler(this.btnExportIISTable_MouseLeave);
             // 
             // comBoxReport
             // 
@@ -1373,17 +1703,18 @@
             this.dataGridViewIISLINQreport.Size = new System.Drawing.Size(1323, 177);
             this.dataGridViewIISLINQreport.TabIndex = 21;
             this.dataGridViewIISLINQreport.TabStop = false;
+            this.dataGridViewIISLINQreport.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewIISLINQreport_CellClick);
             // 
             // txtDetailIISlogs
             // 
             this.txtDetailIISlogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDetailIISlogs.Location = new System.Drawing.Point(1339, 77);
+            this.txtDetailIISlogs.Location = new System.Drawing.Point(1339, 44);
             this.txtDetailIISlogs.Margin = new System.Windows.Forms.Padding(4);
             this.txtDetailIISlogs.Multiline = true;
             this.txtDetailIISlogs.Name = "txtDetailIISlogs";
             this.txtDetailIISlogs.ReadOnly = true;
             this.txtDetailIISlogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtDetailIISlogs.Size = new System.Drawing.Size(250, 608);
+            this.txtDetailIISlogs.Size = new System.Drawing.Size(250, 386);
             this.txtDetailIISlogs.TabIndex = 20;
             this.txtDetailIISlogs.TabStop = false;
             // 
@@ -1392,13 +1723,13 @@
             this.dataGridViewIISTimeTaken.AllowUserToAddRows = false;
             this.dataGridViewIISTimeTaken.AllowUserToDeleteRows = false;
             this.dataGridViewIISTimeTaken.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewIISTimeTaken.Location = new System.Drawing.Point(8, 268);
+            this.dataGridViewIISTimeTaken.Location = new System.Drawing.Point(8, 240);
             this.dataGridViewIISTimeTaken.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewIISTimeTaken.MultiSelect = false;
             this.dataGridViewIISTimeTaken.Name = "dataGridViewIISTimeTaken";
             this.dataGridViewIISTimeTaken.ReadOnly = true;
             this.dataGridViewIISTimeTaken.ShowEditingIcon = false;
-            this.dataGridViewIISTimeTaken.Size = new System.Drawing.Size(1323, 183);
+            this.dataGridViewIISTimeTaken.Size = new System.Drawing.Size(1323, 190);
             this.dataGridViewIISTimeTaken.TabIndex = 14;
             this.dataGridViewIISTimeTaken.TabStop = false;
             this.dataGridViewIISTimeTaken.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewIISTimeTaken_CellClick);
@@ -1408,13 +1739,13 @@
             this.dataGridViewIISDateTime.AllowUserToAddRows = false;
             this.dataGridViewIISDateTime.AllowUserToDeleteRows = false;
             this.dataGridViewIISDateTime.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewIISDateTime.Location = new System.Drawing.Point(8, 77);
+            this.dataGridViewIISDateTime.Location = new System.Drawing.Point(8, 44);
             this.dataGridViewIISDateTime.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewIISDateTime.MultiSelect = false;
             this.dataGridViewIISDateTime.Name = "dataGridViewIISDateTime";
             this.dataGridViewIISDateTime.ReadOnly = true;
             this.dataGridViewIISDateTime.ShowEditingIcon = false;
-            this.dataGridViewIISDateTime.Size = new System.Drawing.Size(1323, 183);
+            this.dataGridViewIISDateTime.Size = new System.Drawing.Size(1323, 190);
             this.dataGridViewIISDateTime.TabIndex = 9;
             this.dataGridViewIISDateTime.TabStop = false;
             this.dataGridViewIISDateTime.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewIISDateTime_CellClick);
@@ -1686,6 +2017,10 @@
             // tabPage60
             // 
             this.tabPage60.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage60.Controls.Add(this.txtBoxDetailDevInfoCount);
+            this.tabPage60.Controls.Add(this.chkBoxSortDevinfo);
+            this.tabPage60.Controls.Add(this.btnExportDevInfoTable);
+            this.tabPage60.Controls.Add(this.dataGridViewDevInfoCount);
             this.tabPage60.Controls.Add(this.txtBoxDetailDeviceInformationlogs);
             this.tabPage60.Controls.Add(this.dataGridViewDeviceInformation);
             this.tabPage60.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1694,6 +2029,64 @@
             this.tabPage60.Size = new System.Drawing.Size(1576, 641);
             this.tabPage60.TabIndex = 2;
             this.tabPage60.Text = "Device Information";
+            // 
+            // txtBoxDetailDevInfoCount
+            // 
+            this.txtBoxDetailDevInfoCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailDevInfoCount.Location = new System.Drawing.Point(1318, 403);
+            this.txtBoxDetailDevInfoCount.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailDevInfoCount.Multiline = true;
+            this.txtBoxDetailDevInfoCount.Name = "txtBoxDetailDevInfoCount";
+            this.txtBoxDetailDevInfoCount.ReadOnly = true;
+            this.txtBoxDetailDevInfoCount.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailDevInfoCount.Size = new System.Drawing.Size(250, 187);
+            this.txtBoxDetailDevInfoCount.TabIndex = 24;
+            this.txtBoxDetailDevInfoCount.TabStop = false;
+            // 
+            // chkBoxSortDevinfo
+            // 
+            this.chkBoxSortDevinfo.AutoSize = true;
+            this.chkBoxSortDevinfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkBoxSortDevinfo.Location = new System.Drawing.Point(9, 602);
+            this.chkBoxSortDevinfo.Name = "chkBoxSortDevinfo";
+            this.chkBoxSortDevinfo.Size = new System.Drawing.Size(149, 29);
+            this.chkBoxSortDevinfo.TabIndex = 23;
+            this.chkBoxSortDevinfo.Text = "Sort by count";
+            this.chkBoxSortDevinfo.UseVisualStyleBackColor = true;
+            this.chkBoxSortDevinfo.CheckedChanged += new System.EventHandler(this.chkBoxSortDevinfo_CheckedChanged);
+            // 
+            // btnExportDevInfoTable
+            // 
+            this.btnExportDevInfoTable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportDevInfoTable.BackgroundImage")));
+            this.btnExportDevInfoTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnExportDevInfoTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportDevInfoTable.Location = new System.Drawing.Point(196, 599);
+            this.btnExportDevInfoTable.Margin = new System.Windows.Forms.Padding(4);
+            this.btnExportDevInfoTable.Name = "btnExportDevInfoTable";
+            this.btnExportDevInfoTable.Size = new System.Drawing.Size(64, 32);
+            this.btnExportDevInfoTable.TabIndex = 22;
+            this.btnExportDevInfoTable.Text = ",";
+            this.toolTip1.SetToolTip(this.btnExportDevInfoTable, "Export table content.");
+            this.btnExportDevInfoTable.UseVisualStyleBackColor = true;
+            this.btnExportDevInfoTable.Click += new System.EventHandler(this.btnExportDevInfoTable_Click);
+            this.btnExportDevInfoTable.MouseEnter += new System.EventHandler(this.btnExportDevInfoTable_MouseEnter);
+            this.btnExportDevInfoTable.MouseLeave += new System.EventHandler(this.btnExportDevInfoTable_MouseLeave);
+            // 
+            // dataGridViewDevInfoCount
+            // 
+            this.dataGridViewDevInfoCount.AllowUserToAddRows = false;
+            this.dataGridViewDevInfoCount.AllowUserToDeleteRows = false;
+            this.dataGridViewDevInfoCount.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewDevInfoCount.Location = new System.Drawing.Point(9, 403);
+            this.dataGridViewDevInfoCount.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewDevInfoCount.MultiSelect = false;
+            this.dataGridViewDevInfoCount.Name = "dataGridViewDevInfoCount";
+            this.dataGridViewDevInfoCount.ReadOnly = true;
+            this.dataGridViewDevInfoCount.ShowEditingIcon = false;
+            this.dataGridViewDevInfoCount.Size = new System.Drawing.Size(1304, 187);
+            this.dataGridViewDevInfoCount.TabIndex = 18;
+            this.dataGridViewDevInfoCount.TabStop = false;
+            this.dataGridViewDevInfoCount.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDevInfoCount_CellClick);
             // 
             // txtBoxDetailDeviceInformationlogs
             // 
@@ -1704,7 +2097,7 @@
             this.txtBoxDetailDeviceInformationlogs.Name = "txtBoxDetailDeviceInformationlogs";
             this.txtBoxDetailDeviceInformationlogs.ReadOnly = true;
             this.txtBoxDetailDeviceInformationlogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtBoxDetailDeviceInformationlogs.Size = new System.Drawing.Size(250, 627);
+            this.txtBoxDetailDeviceInformationlogs.Size = new System.Drawing.Size(250, 374);
             this.txtBoxDetailDeviceInformationlogs.TabIndex = 16;
             this.txtBoxDetailDeviceInformationlogs.TabStop = false;
             // 
@@ -1719,7 +2112,7 @@
             this.dataGridViewDeviceInformation.Name = "dataGridViewDeviceInformation";
             this.dataGridViewDeviceInformation.ReadOnly = true;
             this.dataGridViewDeviceInformation.ShowEditingIcon = false;
-            this.dataGridViewDeviceInformation.Size = new System.Drawing.Size(1306, 627);
+            this.dataGridViewDeviceInformation.Size = new System.Drawing.Size(1306, 374);
             this.dataGridViewDeviceInformation.TabIndex = 15;
             this.dataGridViewDeviceInformation.TabStop = false;
             this.dataGridViewDeviceInformation.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDeviceInformation_CellClick);
@@ -3704,7 +4097,7 @@
             this.MinimumSize = new System.Drawing.Size(1649, 872);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "OutSystems Log Parser V.010822";
+            this.Text = "OutSystems Log Parser V.011622";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -3731,6 +4124,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIntegrationslogs)).EndInit();
             this.tabPage8.ResumeLayout(false);
             this.tabPage8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScrReqScreenDurationlogs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScreenRequestsScreenlogs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScreenRequestslogs)).EndInit();
             this.tabPage9.ResumeLayout(false);
             this.tabPage9.PerformLayout();
@@ -3742,9 +4137,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmaillogs)).EndInit();
             this.tabPage11.ResumeLayout(false);
             this.tabPage11.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewExtensionsDurationlogs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewExtensionLogsExtensions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewExtensionlogs)).EndInit();
             this.tabPage12.ResumeLayout(false);
             this.tabPage12.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSrvActServiceDurationlogs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSrvActServicelogs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewServiceActionlogs)).EndInit();
             this.tabPage13.ResumeLayout(false);
             this.tabPage13.PerformLayout();
@@ -3777,6 +4176,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewiOSlogs)).EndInit();
             this.tabPage60.ResumeLayout(false);
             this.tabPage60.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDevInfoCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDeviceInformation)).EndInit();
             this.tabPage19.ResumeLayout(false);
             this.tabControl4.ResumeLayout(false);
@@ -4136,6 +4536,29 @@
         private System.Windows.Forms.CheckBox chkBoxSortWebServices;
         private System.Windows.Forms.CheckBox chkBoxSortTimers;
         private System.Windows.Forms.CheckBox chkBoxSortTradWebRequestsScreens;
+        private System.Windows.Forms.CheckBox chkBoxSortExtensions;
+        private System.Windows.Forms.Button btnExportExtensionsTable;
+        private System.Windows.Forms.TextBox txtBoxDetailExtExtensionlogs;
+        private System.Windows.Forms.DataGridView dataGridViewExtensionsDurationlogs;
+        private System.Windows.Forms.DataGridView dataGridViewExtensionLogsExtensions;
+        private System.Windows.Forms.CheckBox chkBoxSortScrReqScreens;
+        private System.Windows.Forms.Button btnExportScrReqScreenTable;
+        private System.Windows.Forms.TextBox txtBoxDetailScrReqScreenlogs;
+        private System.Windows.Forms.DataGridView dataGridViewScrReqScreenDurationlogs;
+        private System.Windows.Forms.DataGridView dataGridViewScreenRequestsScreenlogs;
+        private System.Windows.Forms.CheckBox chkBoxSortServiceActions;
+        private System.Windows.Forms.Button btnExportServiceActionsTable;
+        private System.Windows.Forms.TextBox txtBoxDetailSrvActServicelogs;
+        private System.Windows.Forms.DataGridView dataGridViewSrvActServiceDurationlogs;
+        private System.Windows.Forms.DataGridView dataGridViewSrvActServicelogs;
+        private System.Windows.Forms.CheckBox chkBoxSortIIS;
+        private System.Windows.Forms.Button btnExportIISTable;
+        private System.Windows.Forms.TextBox txtBoxDetailsIISLINQ;
+        private System.Windows.Forms.CheckBox chkBoxSortDevinfo;
+        private System.Windows.Forms.Button btnExportDevInfoTable;
+        private System.Windows.Forms.DataGridView dataGridViewDevInfoCount;
+        private System.Windows.Forms.TextBox txtBoxDetailDevInfoCount;
+        private System.Windows.Forms.Button btnExportIISLINQTable;
     }
 }
 

@@ -198,11 +198,14 @@ namespace OutSystems_Log_Parser
                 clearTextboxes(txtBoxDetailIntegrationlogs);
                 clearTextboxes(txtBoxDetailsIntWebServiceslogs);
                 clearTextboxes(txtBoxDetailScreenRequestslogs);
+                clearTextboxes(txtBoxDetailScrReqScreenlogs);
                 clearTextboxes(txtBoxDetailTimerlogs);
                 clearTextboxes(txtBoxDetailsTimerTimerslogs);
                 clearTextboxes(txtBoxDetailEmaillogs);
                 clearTextboxes(txtBoxDetailExtensionlogs);
+                clearTextboxes(txtBoxDetailExtExtensionlogs);
                 clearTextboxes(txtBoxDetailServiceActionlogs);
+                clearTextboxes(txtBoxDetailSrvActServicelogs);
                 clearTextboxes(txtBoxDetailTradWebRequests);
                 clearTextboxes(txtBoxDetailTradWebRequestsScreenlogs);
                 clearTextboxes(txtBoxDetailWinAppEventViewer);
@@ -211,7 +214,9 @@ namespace OutSystems_Log_Parser
                 clearTextboxes(txtBoxDetailAndroidLogs);
                 clearTextboxes(txtBoxDetailiOSLogs);
                 clearTextboxes(txtBoxDetailDeviceInformationlogs);
+                clearTextboxes(txtBoxDetailDevInfoCount);
                 clearTextboxes(txtDetailIISlogs);
+                clearTextboxes(txtBoxDetailsIISLINQ);
                 clearTextboxes(txtBoxDetailServiceStudioLogs);
                 clearTextboxes(txtBoxDetailGeneralTXTLogs);
                 clearTextboxes(txtBoxDetailBPTReportslogs);
@@ -260,12 +265,18 @@ namespace OutSystems_Log_Parser
                 clearTables(dataGridViewIntWebServiceslogs);
                 clearTables(dataGridViewInWebServicesDurationlogs);
                 clearTables(dataGridViewScreenRequestslogs);
+                clearTables(dataGridViewScreenRequestsScreenlogs);
+                clearTables(dataGridViewScrReqScreenDurationlogs);
                 clearTables(dataGridViewTimerlogs);
                 clearTables(dataGridViewTimerTimerslogs);
                 clearTables(dataGridViewTimerTimersDurationlogs);
                 clearTables(dataGridViewEmaillogs);
                 clearTables(dataGridViewExtensionlogs);
+                clearTables(dataGridViewExtensionLogsExtensions);
+                clearTables(dataGridViewExtensionsDurationlogs);
                 clearTables(dataGridViewServiceActionlogs);
+                clearTables(dataGridViewSrvActServicelogs);
+                clearTables(dataGridViewSrvActServiceDurationlogs);
                 clearTables(dataGridViewTradWebRequests);
                 clearTables(dataGridViewTradWebRequestsScreenlogs);
                 clearTables(dataGridViewTradWebRequestsScreenDurationlogs);
@@ -278,6 +289,7 @@ namespace OutSystems_Log_Parser
                 clearTables(dataGridViewAndroidlogs);
                 clearTables(dataGridViewiOSlogs);
                 clearTables(dataGridViewDeviceInformation);
+                clearTables(dataGridViewDevInfoCount);
                 clearTables(dataGridViewServiceStudiologs);
                 clearTables(dataGridViewGeneralTXTlogs);
                 clearTables(dataGridViewBPTReportslogs);
@@ -355,7 +367,7 @@ namespace OutSystems_Log_Parser
                             }
                             else if (fileName == "device_information.txt")
                             {
-                                string[] column_names = { "OPERATING_SYSTEM", "OPERATING_SYSTEM_VERSION", "DEVICE_MODEL", "CORDOVA_VERSION", "DEVICE_UUID" };
+                                string[] column_names = { "OPERATING_SYSTEM", "OPERATING_SYSTEM_VERSION", "COUNT", "DEVICE_MODEL", "CORDOVA_VERSION", "DEVICE_UUID" };
                                 populateTables(relativePath + "\\device_information.txt", delimiters, column_names, dataGridViewDeviceInformation);
                             }
                             else if (fileName == "extension_logs.txt")
@@ -364,6 +376,11 @@ namespace OutSystems_Log_Parser
                                     "EXECUTED_BY", "ESPACE_NAME", "ESPACE_ID", "USERNAME", "USER_ID", "SESSION_ID", "EXTENSION_ID",
                                     "EXTENSION_NAME", "ERROR_ID", "REQUEST_KEY", "TENANT_ID" };
                                 populateTables(relativePath + "\\extension_logs.txt", delimiters, column_names, dataGridViewExtensionlogs);
+                            }
+                            else if (fileName == "extension_logs_extensions.txt")
+                            {
+                                string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "EXTENSION_NAME", "MODULE_NAME", "APPLICATION_NAME", "ACTION_NAME", "ESPACE_NAME", "MESSAGE", "STACK", "ENVIRONMENT_INFORMATION", "ERROR_ID" };
+                                populateTables(relativePath + "\\extension_logs_extensions.txt", delimiters, column_names, dataGridViewExtensionLogsExtensions);
                             }
                             else if (fileName == "general_logs.txt")
                             {
@@ -374,27 +391,20 @@ namespace OutSystems_Log_Parser
                             }
                             else if (fileName == "general_logs_slowsql.txt")
                             {
-                                string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "MODULE_NAME", "ACTION_NAME", "ESPACE_NAME" };
+                                string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "MODULE_NAME", "APPLICATION_NAME", "ACTION_NAME", "ESPACE_NAME", "MESSAGE", "STACK", "ENVIRONMENT_INFORMATION", "ERROR_ID" };
                                 populateTables(relativePath + "\\general_logs_slowsql.txt", delimiters, column_names, dataGridViewSlowSQLlogs);
                             }
                             else if (fileName == "general_logs_slowextension.txt")
                             {
-                                string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "MODULE_NAME", "ACTION_NAME", "ESPACE_NAME" };
+                                string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "MODULE_NAME", "APPLICATION_NAME", "ACTION_NAME", "ESPACE_NAME", "MESSAGE", "STACK", "ENVIRONMENT_INFORMATION", "ERROR_ID" };
                                 populateTables(relativePath + "\\general_logs_slowextension.txt", delimiters, column_names, dataGridViewSlowExtensionlogs);
                             }
                             else if (fileName == "iis_logs.txt")
                             {
-                                string[] column_names = { "DATE_TIME", "TIME_TAKEN", "HTTP_CODE", "HTTP_SUBCODE", "WINDOWS_ERROR_CODE",
+                                string[] column_names = { "DATE_TIME", "TIME_TAKEN_SECONDS", "HTTP_CODE", "HTTP_SUBCODE", "WINDOWS_ERROR_CODE",
                                     "CLIENT_IP", "SERVER_IP", "SERVER_PORT", "METHOD", "URI_STEM", "URI_QUERY", "USERNAME", "BROWSER",
                                     "REFERRER" };
                                 populateTables(relativePath + "\\iis_logs.txt", delimiters, column_names, dataGridViewIISDateTime);
-                            }
-                            else if (fileName == "iis_logs_timetaken.txt")
-                            {
-                                string[] column_names = { "TIME_TAKEN", "DATE_TIME", "HTTP_CODE", "HTTP_SUBCODE", "WINDOWS_ERROR_CODE",
-                                    "CLIENT_IP", "SERVER_IP", "SERVER_PORT", "METHOD", "URI_STEM", "URI_QUERY", "USERNAME", "BROWSER",
-                                    "REFERRER" };
-                                populateTables(relativePath + "\\iis_logs_timetaken.txt", delimiters, column_names, dataGridViewIISTimeTaken);
                             }
                             else if (fileName == "integrations_logs.txt")
                             {
@@ -405,7 +415,7 @@ namespace OutSystems_Log_Parser
                             }
                             else if (fileName == "integrations_logs_webservices.txt")
                             {
-                                string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "ACTION_NAME", "ACTION_TYPE", "ESPACE_NAME", "MODULE_NAME" , "MESSAGE", "STACK", "ENVIRONMENT_INFORMATION", "ERROR_ID" };
+                                string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "MODULE_NAME", "APPLICATION_NAME", "ACTION_NAME", "ACTION_TYPE", "ESPACE_NAME", "MESSAGE", "STACK", "ENVIRONMENT_INFORMATION", "ERROR_ID" };
                                 populateTables(relativePath + "\\integrations_logs_webservices.txt", delimiters, column_names, dataGridViewIntWebServiceslogs);
                             }
                             else if (fileName == "iOS_build_logs.txt")
@@ -420,6 +430,11 @@ namespace OutSystems_Log_Parser
                                     "ERROR_ID", "REQUEST_KEY", "TENANT_ID" };
                                 populateTables(relativePath + "\\mobile_requests_logs.txt", delimiters, column_names, dataGridViewScreenRequestslogs);
                             }
+                            else if (fileName == "mobile_requests_logs_screens.txt")
+                            {
+                                string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "SCREEN", "MODULE_NAME", "APPLICATION_NAME", "ESPACE_NAME", "MESSAGE", "STACK", "ENVIRONMENT_INFORMATION", "ERROR_ID" };
+                                populateTables(relativePath + "\\mobile_requests_logs_screens.txt", delimiters, column_names, dataGridViewScreenRequestsScreenlogs);
+                            }
                             else if (fileName == "screen_logs.txt")
                             {
                                 string[] column_names = { "DATE_TIME", "DURATION", "SCREEN", "SCREEN_TYPE", "APPLICATION_NAME", "APPLICATION_KEY",
@@ -429,7 +444,7 @@ namespace OutSystems_Log_Parser
                             }
                             else if (fileName == "screen_logs_screens.txt")
                             {
-                                string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "SCREEN", "ESPACE_NAME" };
+                                string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "SCREEN", "SCREEN_TYPE", "APPLICATION_NAME", "ACTION_NAME", "ESPACE_NAME" };
                                 populateTables(relativePath + "\\screen_logs_screens.txt", delimiters, column_names, dataGridViewTradWebRequestsScreenlogs);
                             }
                             else if (fileName == "service_action_logs.txt")
@@ -438,6 +453,11 @@ namespace OutSystems_Log_Parser
                                     "ENTRYPOINT_NAME", "ENDPOINT", "EXECUTED_BY", "ESPACE_NAME", "ESPACE_ID", "USERNAME", "LOGIN_ID",
                                     "USER_ID", "SESSION_ID", "ERROR_ID", "REQUEST_KEY", "ORIGINAL_REQUEST_KEY", "TENANT_ID" };
                                 populateTables(relativePath + "\\service_action_logs.txt", delimiters, column_names, dataGridViewServiceActionlogs);
+                            }
+                            else if (fileName == "service_action_logs_service_actions.txt")
+                            {
+                                string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "ACTION_NAME", "MODULE_NAME", "APPLICATION_NAME", "ESPACE_NAME", "MESSAGE", "STACK", "ENVIRONMENT_INFORMATION", "ERROR_ID" };
+                                populateTables(relativePath + "\\service_action_logs_service_actions.txt", delimiters, column_names, dataGridViewSrvActServicelogs);
                             }
                             else if (fileName == "service_studio_report.txt")
                             {
@@ -458,7 +478,7 @@ namespace OutSystems_Log_Parser
                             }
                             else if (fileName == "timer_logs_timers.txt")
                             {
-                                string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "CYCLIC_JOB_NAME", "ESPACE_NAME" };
+                                string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "CYCLIC_JOB_NAME", "MODULE_NAME", "APPLICATION_NAME", "ESPACE_NAME", "MESSAGE", "STACK", "ENVIRONMENT_INFORMATION", "ERROR_ID" };
                                 populateTables(relativePath + "\\timer_logs_timers.txt", delimiters, column_names, dataGridViewTimerTimerslogs);
                             }
                             else if (fileName == "bpt_troubleshootingreport_logs.txt")
@@ -718,6 +738,7 @@ namespace OutSystems_Log_Parser
 
                     if (dataGridViewIISDateTime.Rows.Count > 0)
                     {
+                        chkBoxSortIIS.Enabled = true;
                         comBoxReport.Enabled = true;
                     }
 
@@ -731,14 +752,34 @@ namespace OutSystems_Log_Parser
                         chkBoxSortWebServices.Enabled = true;
                     }
 
+                    if (dataGridViewScreenRequestsScreenlogs.Rows.Count > 0)
+                    {
+                        chkBoxSortScrReqScreens.Enabled = true;
+                    }
+
                     if (dataGridViewTimerTimerslogs.Rows.Count > 0)
                     {
                         chkBoxSortTimers.Enabled = true;
                     }
 
+                    if (dataGridViewExtensionLogsExtensions.Rows.Count > 0)
+                    {
+                        chkBoxSortExtensions.Enabled = true;
+                    }
+
+                    if (dataGridViewSrvActServicelogs.Rows.Count > 0)
+                    {
+                        chkBoxSortServiceActions.Enabled = true;
+                    }
+
                     if (dataGridViewTradWebRequestsScreenlogs.Rows.Count > 0)
                     {
                         chkBoxSortTradWebRequestsScreens.Enabled = true;
+                    }
+
+                    if (dataGridViewDeviceInformation.Rows.Count > 0)
+                    {
+                        chkBoxSortDevinfo.Enabled = true;
                     }
                 }
                 else
@@ -950,6 +991,66 @@ namespace OutSystems_Log_Parser
             btnExportScreenTable.BackColor = SystemColors.ControlLight;
         }
 
+        private void btnExportScrReqScreenTable_MouseEnter(object sender, EventArgs e)
+        {
+            btnExportScrReqScreenTable.BackColor = Color.SpringGreen;
+        }
+
+        private void btnExportScrReqScreenTable_MouseLeave(object sender, EventArgs e)
+        {
+            btnExportScrReqScreenTable.BackColor = SystemColors.ControlLight;
+        }
+
+        private void btnExportExtensionsTable_MouseEnter(object sender, EventArgs e)
+        {
+            btnExportExtensionsTable.BackColor = Color.SpringGreen;
+        }
+
+        private void btnExportExtensionsTable_MouseLeave(object sender, EventArgs e)
+        {
+            btnExportExtensionsTable.BackColor = SystemColors.ControlLight;
+        }
+
+        private void btnExportServiceActionsTable_MouseEnter(object sender, EventArgs e)
+        {
+            btnExportServiceActionsTable.BackColor = Color.SpringGreen;
+        }
+
+        private void btnExportServiceActionsTable_MouseLeave(object sender, EventArgs e)
+        {
+            btnExportServiceActionsTable.BackColor = SystemColors.ControlLight;
+        }
+
+        private void btnExportIISTable_MouseEnter(object sender, EventArgs e)
+        {
+            btnExportIISTable.BackColor = Color.SpringGreen;
+        }
+
+        private void btnExportIISTable_MouseLeave(object sender, EventArgs e)
+        {
+            btnExportIISTable.BackColor = SystemColors.ControlLight;
+        }
+
+        private void btnExportDevInfoTable_MouseEnter(object sender, EventArgs e)
+        {
+            btnExportDevInfoTable.BackColor = Color.SpringGreen;
+        }
+
+        private void btnExportDevInfoTable_MouseLeave(object sender, EventArgs e)
+        {
+            btnExportDevInfoTable.BackColor = SystemColors.ControlLight;
+        }
+
+        private void btnExportIISLINQTable_MouseEnter(object sender, EventArgs e)
+        {
+            btnExportIISLINQTable.BackColor = Color.SpringGreen;
+        }
+
+        private void btnExportIISLINQTable_MouseLeave(object sender, EventArgs e)
+        {
+            btnExportIISLINQTable.BackColor = SystemColors.ControlLight;
+        }
+
         //Beginning of the Service Center Logs tab code
         private void dataGridViewErrorlogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -1036,6 +1137,11 @@ namespace OutSystems_Log_Parser
         {
             cellClick(dataGridViewIISTimeTaken, e, txtDetailIISlogs);
         }
+
+        private void dataGridViewIISLINQreport_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            cellClick(dataGridViewIISLINQreport, e, txtBoxDetailsIISLINQ);
+        }
         //End of the IIS tab code
 
         private void btnFilter_Click(object sender, EventArgs e)
@@ -1120,6 +1226,8 @@ namespace OutSystems_Log_Parser
                         queryDataGridViews(dataGridViewEmaillogs, isoFrom, isoTo, txtBoxDetailEmaillogs);
                         queryDataGridViews(dataGridViewErrorlogs, isoFrom, isoTo, txtBoxDetailErrorLogs);
                         queryDataGridViews(dataGridViewExtensionlogs, isoFrom, isoTo, txtBoxDetailExtensionlogs);
+                        queryDataGridViews(dataGridViewExtensionLogsExtensions, isoFrom, isoTo, txtBoxDetailExtExtensionlogs);
+                        queryDataGridViews(dataGridViewExtensionsDurationlogs, isoFrom, isoTo, txtBoxDetailExtExtensionlogs);
                         queryDataGridViews(dataGridViewGenerallogs, isoFrom, isoTo, txtBoxDetailGenerallogs);
                         queryDataGridViews(dataGridViewSlowSQLlogs, isoFrom, isoTo, txtBoxDetailsSlowSQLlogs);
                         queryDataGridViews(dataGridViewSlowSQLDurationlogs, isoFrom, isoTo, txtBoxDetailsSlowSQLlogs);
@@ -1132,7 +1240,11 @@ namespace OutSystems_Log_Parser
                         queryDataGridViews(dataGridViewInWebServicesDurationlogs, isoFrom, isoTo, txtBoxDetailsIntWebServiceslogs);
                         queryDataGridViews(dataGridViewiOSlogs, isoFrom, isoTo, txtBoxDetailiOSLogs);
                         queryDataGridViews(dataGridViewScreenRequestslogs, isoFrom, isoTo, txtBoxDetailScreenRequestslogs);
+                        queryDataGridViews(dataGridViewScreenRequestsScreenlogs, isoFrom, isoTo, txtBoxDetailScrReqScreenlogs);
+                        queryDataGridViews(dataGridViewScrReqScreenDurationlogs, isoFrom, isoTo, txtBoxDetailScrReqScreenlogs);
                         queryDataGridViews(dataGridViewServiceActionlogs, isoFrom, isoTo, txtBoxDetailServiceActionlogs);
+                        queryDataGridViews(dataGridViewSrvActServicelogs, isoFrom, isoTo, txtBoxDetailSrvActServicelogs);
+                        queryDataGridViews(dataGridViewSrvActServiceDurationlogs, isoFrom, isoTo, txtBoxDetailSrvActServicelogs);
                         queryDataGridViews(dataGridViewServiceStudiologs, isoFrom, isoTo, txtBoxDetailServiceStudioLogs);
                         queryDataGridViews(dataGridViewGeneralTXTlogs, isoFrom, isoTo, txtBoxDetailGeneralTXTLogs);
                         queryDataGridViews(dataGridViewTimerlogs, isoFrom, isoTo, txtBoxDetailTimerlogs);
@@ -1238,11 +1350,14 @@ namespace OutSystems_Log_Parser
             clearTextboxes(txtBoxDetailIntegrationlogs);
             clearTextboxes(txtBoxDetailsIntWebServiceslogs);
             clearTextboxes(txtBoxDetailScreenRequestslogs);
+            clearTextboxes(txtBoxDetailScrReqScreenlogs);
             clearTextboxes(txtBoxDetailTimerlogs);
             clearTextboxes(txtBoxDetailsTimerTimerslogs);
             clearTextboxes(txtBoxDetailEmaillogs);
             clearTextboxes(txtBoxDetailExtensionlogs);
+            clearTextboxes(txtBoxDetailExtExtensionlogs);
             clearTextboxes(txtBoxDetailServiceActionlogs);
+            clearTextboxes(txtBoxDetailSrvActServicelogs);
             clearTextboxes(txtBoxDetailTradWebRequests);
             clearTextboxes(txtBoxDetailTradWebRequestsScreenlogs);
             clearTextboxes(txtBoxDetailWinAppEventViewer);
@@ -1251,7 +1366,9 @@ namespace OutSystems_Log_Parser
             clearTextboxes(txtBoxDetailAndroidLogs);
             clearTextboxes(txtBoxDetailiOSLogs);
             clearTextboxes(txtBoxDetailDeviceInformationlogs);
+            clearTextboxes(txtBoxDetailDevInfoCount);
             clearTextboxes(txtDetailIISlogs);
+            clearTextboxes(txtBoxDetailsIISLINQ);
             clearTextboxes(txtBoxDetailServiceStudioLogs);
             clearTextboxes(txtBoxDetailGeneralTXTLogs);
             clearTextboxes(txtBoxDetailBPTReportslogs);
@@ -1300,12 +1417,18 @@ namespace OutSystems_Log_Parser
             clearTables(dataGridViewIntWebServiceslogs);
             clearTables(dataGridViewInWebServicesDurationlogs);
             clearTables(dataGridViewScreenRequestslogs);
+            clearTables(dataGridViewScreenRequestsScreenlogs);
+            clearTables(dataGridViewScrReqScreenDurationlogs);
             clearTables(dataGridViewTimerlogs);
             clearTables(dataGridViewTimerTimerslogs);
             clearTables(dataGridViewTimerTimersDurationlogs);
             clearTables(dataGridViewEmaillogs);
             clearTables(dataGridViewExtensionlogs);
+            clearTables(dataGridViewExtensionLogsExtensions);
+            clearTables(dataGridViewExtensionsDurationlogs);
             clearTables(dataGridViewServiceActionlogs);
+            clearTables(dataGridViewSrvActServicelogs);
+            clearTables(dataGridViewSrvActServiceDurationlogs);
             clearTables(dataGridViewTradWebRequests);
             clearTables(dataGridViewTradWebRequestsScreenlogs);
             clearTables(dataGridViewTradWebRequestsScreenDurationlogs);
@@ -1318,6 +1441,7 @@ namespace OutSystems_Log_Parser
             clearTables(dataGridViewAndroidlogs);
             clearTables(dataGridViewiOSlogs);
             clearTables(dataGridViewDeviceInformation);
+            clearTables(dataGridViewDevInfoCount);
             clearTables(dataGridViewServiceStudiologs);
             clearTables(dataGridViewGeneralTXTlogs);
             clearTables(dataGridViewBPTReportslogs);
@@ -1383,7 +1507,7 @@ namespace OutSystems_Log_Parser
                     }
                     else if (fileName == "device_information.txt")
                     {
-                        string[] column_names = { "OPERATING_SYSTEM", "OPERATING_SYSTEM_VERSION", "DEVICE_MODEL", "CORDOVA_VERSION", "DEVICE_UUID" };
+                        string[] column_names = { "OPERATING_SYSTEM", "OPERATING_SYSTEM_VERSION", "COUNT", "DEVICE_MODEL", "CORDOVA_VERSION", "DEVICE_UUID" };
                         populateTables(relativePath + "\\device_information.txt", delimiters, column_names, dataGridViewDeviceInformation);
                     }
                     else if (fileName == "extension_logs.txt")
@@ -1392,6 +1516,11 @@ namespace OutSystems_Log_Parser
                                     "EXECUTED_BY", "ESPACE_NAME", "ESPACE_ID", "USERNAME", "USER_ID", "SESSION_ID", "EXTENSION_ID",
                                     "EXTENSION_NAME", "ERROR_ID", "REQUEST_KEY", "TENANT_ID" };
                         populateTables(relativePath + "\\extension_logs.txt", delimiters, column_names, dataGridViewExtensionlogs);
+                    }
+                    else if (fileName == "extension_logs_extensions.txt")
+                    {
+                        string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "EXTENSION_NAME", "MODULE_NAME", "APPLICATION_NAME", "ACTION_NAME", "ESPACE_NAME", "MESSAGE", "STACK", "ENVIRONMENT_INFORMATION", "ERROR_ID" };
+                        populateTables(relativePath + "\\extension_logs_extensions.txt", delimiters, column_names, dataGridViewExtensionLogsExtensions);
                     }
                     else if (fileName == "general_logs.txt")
                     {
@@ -1402,27 +1531,20 @@ namespace OutSystems_Log_Parser
                     }
                     else if (fileName == "general_logs_slowsql.txt")
                     {
-                        string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "MODULE_NAME", "ACTION_NAME", "ESPACE_NAME" };
+                        string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "MODULE_NAME", "APPLICATION_NAME", "ACTION_NAME", "ESPACE_NAME", "MESSAGE", "STACK", "ENVIRONMENT_INFORMATION", "ERROR_ID" };
                         populateTables(relativePath + "\\general_logs_slowsql.txt", delimiters, column_names, dataGridViewSlowSQLlogs);
                     }
                     else if (fileName == "general_logs_slowextension.txt")
                     {
-                        string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "MODULE_NAME", "ACTION_NAME", "ESPACE_NAME" };
+                        string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "MODULE_NAME", "APPLICATION_NAME", "ACTION_NAME", "ESPACE_NAME", "MESSAGE", "STACK", "ENVIRONMENT_INFORMATION", "ERROR_ID" };
                         populateTables(relativePath + "\\general_logs_slowextension.txt", delimiters, column_names, dataGridViewSlowExtensionlogs);
                     }
                     else if (fileName == "iis_logs.txt")
                     {
-                        string[] column_names = { "DATE_TIME", "TIME_TAKEN", "HTTP_CODE", "HTTP_SUBCODE", "WINDOWS_ERROR_CODE",
+                        string[] column_names = { "DATE_TIME", "TIME_TAKEN_SECONDS", "HTTP_CODE", "HTTP_SUBCODE", "WINDOWS_ERROR_CODE",
                                     "CLIENT_IP", "SERVER_IP", "SERVER_PORT", "METHOD", "URI_STEM", "URI_QUERY", "USERNAME", "BROWSER",
                                     "REFERRER" };
                         populateTables(relativePath + "\\iis_logs.txt", delimiters, column_names, dataGridViewIISDateTime);
-                    }
-                    else if (fileName == "iis_logs_timetaken.txt")
-                    {
-                        string[] column_names = { "TIME_TAKEN", "DATE_TIME", "HTTP_CODE", "HTTP_SUBCODE", "WINDOWS_ERROR_CODE",
-                                    "CLIENT_IP", "SERVER_IP", "SERVER_PORT", "METHOD", "URI_STEM", "URI_QUERY", "USERNAME", "BROWSER",
-                                    "REFERRER" };
-                        populateTables(relativePath + "\\iis_logs_timetaken.txt", delimiters, column_names, dataGridViewIISTimeTaken);
                     }
                     else if (fileName == "integrations_logs.txt")
                     {
@@ -1433,7 +1555,7 @@ namespace OutSystems_Log_Parser
                     }
                     else if (fileName == "integrations_logs_webservices.txt")
                     {
-                        string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "ACTION_NAME", "ACTION_TYPE", "ESPACE_NAME", "MODULE_NAME", "MESSAGE", "STACK", "ENVIRONMENT_INFORMATION", "ERROR_ID" };
+                        string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "MODULE_NAME", "APPLICATION_NAME", "ACTION_NAME", "ACTION_TYPE", "ESPACE_NAME", "MESSAGE", "STACK", "ENVIRONMENT_INFORMATION", "ERROR_ID" };
                         populateTables(relativePath + "\\integrations_logs_webservices.txt", delimiters, column_names, dataGridViewIntWebServiceslogs);
                     }
                     else if (fileName == "iOS_build_logs.txt")
@@ -1448,6 +1570,11 @@ namespace OutSystems_Log_Parser
                                     "ERROR_ID", "REQUEST_KEY", "TENANT_ID" };
                         populateTables(relativePath + "\\mobile_requests_logs.txt", delimiters, column_names, dataGridViewScreenRequestslogs);
                     }
+                    else if (fileName == "mobile_requests_logs_screens.txt")
+                    {
+                        string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "SCREEN", "MODULE_NAME", "APPLICATION_NAME", "ESPACE_NAME", "MESSAGE", "STACK", "ENVIRONMENT_INFORMATION", "ERROR_ID" };
+                        populateTables(relativePath + "\\mobile_requests_logs_screens.txt", delimiters, column_names, dataGridViewScreenRequestsScreenlogs);
+                    }
                     else if (fileName == "screen_logs.txt")
                     {
                         string[] column_names = { "DATE_TIME", "DURATION", "SCREEN", "SCREEN_TYPE", "APPLICATION_NAME", "APPLICATION_KEY",
@@ -1457,7 +1584,7 @@ namespace OutSystems_Log_Parser
                     }
                     else if (fileName == "screen_logs_screens.txt")
                     {
-                        string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "SCREEN", "ESPACE_NAME" };
+                        string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "SCREEN", "SCREEN_TYPE", "APPLICATION_NAME", "ACTION_NAME", "ESPACE_NAME" };
                         populateTables(relativePath + "\\screen_logs_screens.txt", delimiters, column_names, dataGridViewTradWebRequestsScreenlogs);
                     }
                     else if (fileName == "service_action_logs.txt")
@@ -1466,6 +1593,11 @@ namespace OutSystems_Log_Parser
                                     "ENTRYPOINT_NAME", "ENDPOINT", "EXECUTED_BY", "ESPACE_NAME", "ESPACE_ID", "USERNAME", "LOGIN_ID",
                                     "USER_ID", "SESSION_ID", "ERROR_ID", "REQUEST_KEY", "ORIGINAL_REQUEST_KEY", "TENANT_ID" };
                         populateTables(relativePath + "\\service_action_logs.txt", delimiters, column_names, dataGridViewServiceActionlogs);
+                    }
+                    else if (fileName == "service_action_logs_service_actions.txt")
+                    {
+                        string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "ACTION_NAME", "MODULE_NAME", "APPLICATION_NAME", "ESPACE_NAME", "MESSAGE", "STACK", "ENVIRONMENT_INFORMATION", "ERROR_ID" };
+                        populateTables(relativePath + "\\service_action_logs_service_actions.txt", delimiters, column_names, dataGridViewSrvActServicelogs);
                     }
                     else if (fileName == "service_studio_report.txt")
                     {
@@ -1486,7 +1618,7 @@ namespace OutSystems_Log_Parser
                     }
                     else if (fileName == "timer_logs_timers.txt")
                     {
-                        string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "CYCLIC_JOB_NAME", "ESPACE_NAME" };
+                        string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "CYCLIC_JOB_NAME", "MODULE_NAME", "APPLICATION_NAME", "ESPACE_NAME", "MESSAGE", "STACK", "ENVIRONMENT_INFORMATION", "ERROR_ID" };
                         populateTables(relativePath + "\\timer_logs_timers.txt", delimiters, column_names, dataGridViewTimerTimerslogs);
                     }
                     else if (fileName == "bpt_troubleshootingreport_logs.txt")
@@ -1743,11 +1875,17 @@ namespace OutSystems_Log_Parser
                     txtBoxKeyword.Enabled = true;
                     chkBoxSortSlowSQLExtension.Checked = false;
                     chkBoxSortWebServices.Checked = false;
+                    chkBoxSortScrReqScreens.Checked = false;
                     chkBoxSortTimers.Checked = false;
+                    chkBoxSortExtensions.Checked = false;
+                    chkBoxSortServiceActions.Checked = false;
                     chkBoxSortTradWebRequestsScreens.Checked = false;
+                    chkBoxSortIIS.Checked = false;
+                    chkBoxSortDevinfo.Checked = false;
 
                     if (dataGridViewIISDateTime.Rows.Count > 0)
                     {
+                        chkBoxSortIIS.Enabled = true;
                         comBoxReport.Enabled = true;
                     }
 
@@ -1761,14 +1899,34 @@ namespace OutSystems_Log_Parser
                         chkBoxSortWebServices.Enabled = true;
                     }
 
+                    if (dataGridViewScreenRequestsScreenlogs.Rows.Count > 0)
+                    {
+                        chkBoxSortScrReqScreens.Enabled = true;
+                    }
+
                     if (dataGridViewTimerTimerslogs.Rows.Count > 0)
                     {
                         chkBoxSortTimers.Enabled = true;
                     }
 
+                    if (dataGridViewExtensionLogsExtensions.Rows.Count > 0)
+                    {
+                        chkBoxSortExtensions.Enabled = true;
+                    }
+
+                    if (dataGridViewSrvActServicelogs.Rows.Count > 0)
+                    {
+                        chkBoxSortServiceActions.Enabled = true;
+                    }
+
                     if (dataGridViewTradWebRequestsScreenlogs.Rows.Count > 0)
                     {
                         chkBoxSortTradWebRequestsScreens.Enabled = true;
+                    }
+
+                    if (dataGridViewDeviceInformation.Rows.Count > 0)
+                    {
+                        chkBoxSortDevinfo.Enabled = true;
                     }
                 }
                 else
@@ -1789,16 +1947,32 @@ namespace OutSystems_Log_Parser
                     comBoxReport.Enabled = false;
                     chkBoxSortSlowSQLExtension.Checked = false;
                     chkBoxSortWebServices.Checked = false;
+                    chkBoxSortScrReqScreens.Checked = false;
                     chkBoxSortTimers.Checked = false;
+                    chkBoxSortExtensions.Checked = false;
+                    chkBoxSortServiceActions.Checked = false;
                     chkBoxSortTradWebRequestsScreens.Checked = false;
+                    chkBoxSortIIS.Checked = false;
+                    chkBoxSortDevinfo.Checked = false;
                     chkBoxSortSlowSQLExtension.Enabled = false;
                     chkBoxSortWebServices.Enabled = false;
+                    chkBoxSortScrReqScreens.Enabled = false;
                     chkBoxSortTimers.Enabled = false;
+                    chkBoxSortExtensions.Enabled = false;
+                    chkBoxSortServiceActions.Enabled = false;
                     chkBoxSortTradWebRequestsScreens.Enabled = false;
+                    chkBoxSortIIS.Enabled = false;
+                    chkBoxSortDevinfo.Enabled = false;
                     btnExportSlowSQLExtensionTables.Enabled = false;
                     btnExportWebServiceTable.Enabled = false;
+                    btnExportScrReqScreenTable.Enabled = false;
                     btnExportTimerTable.Enabled = false;
+                    btnExportExtensionsTable.Enabled = false;
+                    btnExportServiceActionsTable.Enabled = false;
                     btnExportScreenTable.Enabled = false;
+                    btnExportIISTable.Enabled = false;
+                    btnExportIISLINQTable.Enabled = false;
+                    btnExportDevInfoTable.Enabled = false;
                 }
             }
         }
@@ -2031,14 +2205,33 @@ namespace OutSystems_Log_Parser
             txtBoxKeyword.Enabled = false;
             comBoxReport.Enabled = false;
             chkBoxSortSlowSQLExtension.Checked = false;
+            chkBoxSortWebServices.Checked = false;
+            chkBoxSortScrReqScreens.Checked = false;
+            chkBoxSortTimers.Checked = false;
+            chkBoxSortExtensions.Checked = false;
+            chkBoxSortServiceActions.Checked = false;
+            chkBoxSortTradWebRequestsScreens.Checked = false;
+            chkBoxSortIIS.Checked = false;
+            chkBoxSortDevinfo.Checked = false;
             chkBoxSortSlowSQLExtension.Enabled = false;
             chkBoxSortWebServices.Enabled = false;
+            chkBoxSortScrReqScreens.Enabled = false;
             chkBoxSortTimers.Enabled = false;
+            chkBoxSortExtensions.Enabled = false;
+            chkBoxSortServiceActions.Enabled = false;
             chkBoxSortTradWebRequestsScreens.Enabled = false;
+            chkBoxSortIIS.Enabled = false;
+            chkBoxSortDevinfo.Enabled = false;
             btnExportSlowSQLExtensionTables.Enabled = false;
             btnExportWebServiceTable.Enabled = false;
+            btnExportScrReqScreenTable.Enabled = false;
             btnExportTimerTable.Enabled = false;
+            btnExportExtensionsTable.Enabled = false;
+            btnExportServiceActionsTable.Enabled = false;
             btnExportScreenTable.Enabled = false;
+            btnExportIISTable.Enabled = false;
+            btnExportIISLINQTable.Enabled = false;
+            btnExportDevInfoTable.Enabled = false;
 
             dateTimePicker1.Value = DateTime.Now;
             dateTimePicker2.Value = DateTime.Now;
@@ -2061,11 +2254,14 @@ namespace OutSystems_Log_Parser
             createScreenshot("detailed_integrations_logs", txtBoxDetailIntegrationlogs, txtBoxDetailIntegrationlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_integrations_webservices_logs", txtBoxDetailsIntWebServiceslogs, txtBoxDetailsIntWebServiceslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_screen_requests_logs", txtBoxDetailScreenRequestslogs, txtBoxDetailScreenRequestslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_screen_requests_screen_logs", txtBoxDetailScrReqScreenlogs, txtBoxDetailScrReqScreenlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_timer_logs", txtBoxDetailTimerlogs, txtBoxDetailTimerlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_timer_timers_logs", txtBoxDetailsTimerTimerslogs, txtBoxDetailsTimerTimerslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_email_logs", txtBoxDetailEmaillogs, txtBoxDetailEmaillogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_extension_logs", txtBoxDetailExtensionlogs, txtBoxDetailExtensionlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_extension_extensions_logs", txtBoxDetailExtExtensionlogs, txtBoxDetailExtExtensionlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_service_action_logs", txtBoxDetailServiceActionlogs, txtBoxDetailServiceActionlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_service_action_serviceactions_logs", txtBoxDetailSrvActServicelogs, txtBoxDetailSrvActServicelogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_tradional_web_requests_logs", txtBoxDetailTradWebRequests, txtBoxDetailTradWebRequests.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_tradional_web_requests_screens_logs", txtBoxDetailTradWebRequestsScreenlogs, txtBoxDetailTradWebRequestsScreenlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_windows_application_viewer_logs", txtBoxDetailWinAppEventViewer, txtBoxDetailWinAppEventViewer.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
@@ -2075,6 +2271,7 @@ namespace OutSystems_Log_Parser
             createScreenshot("detailed_ios_logs", txtBoxDetailiOSLogs, txtBoxDetailiOSLogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_iis_logs", txtDetailIISlogs, txtDetailIISlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_device_information_logs", txtBoxDetailDeviceInformationlogs, txtBoxDetailDeviceInformationlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_dev_info_count_logs", txtBoxDetailDevInfoCount, txtBoxDetailDevInfoCount.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_service_studio_logs", txtBoxDetailServiceStudioLogs, txtBoxDetailServiceStudioLogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_general_text_logs", txtBoxDetailGeneralTXTLogs, txtBoxDetailGeneralTXTLogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
             createScreenshot("detailed_bpt_reports_logs", txtBoxDetailBPTReportslogs, txtBoxDetailBPTReportslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
@@ -2505,7 +2702,7 @@ namespace OutSystems_Log_Parser
                                 .Select(r => new { Page = r.Cells[9].Value, TimeTaken = r.Cells[1].Value })
                                 .GroupBy(pagetime => pagetime)
                                 .OrderByDescending(g => g.Count())
-                                .Select(g => new { PAGE = g.Key.Page, TIME_TAKEN = g.Key.TimeTaken, HITS = g.Count() })).ToList();
+                                .Select(g => new { PAGE = g.Key.Page, TIME_TAKEN_SECONDS = g.Key.TimeTaken, HITS = g.Count() })).ToList();
 
                             dataGridViewIISLINQreport.DataSource = pagesTimeTakenCountQuery;
                         }
@@ -2515,8 +2712,8 @@ namespace OutSystems_Log_Parser
                                 .Where(r => r.Cells[9].Value != null && r.Cells[1].Value != null)
                                 .Select(r => new { Page = r.Cells[9].Value, TimeTaken = r.Cells[1].Value })
                                 .GroupBy(pagetime => pagetime)
-                                .OrderByDescending(g => Convert.ToInt32(g.Key.TimeTaken))
-                                .Select(g => new { PAGE = g.Key.Page, TIME_TAKEN = g.Key.TimeTaken })).ToList();
+                                .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                                .Select(g => new { PAGE = g.Key.Page, TIME_TAKEN_SECONDS = g.Key.TimeTaken })).ToList();
 
                             dataGridViewIISLINQreport.DataSource = pageTimeQuery;
                         }
@@ -2526,8 +2723,8 @@ namespace OutSystems_Log_Parser
                                 .Where(r => r.Cells[11].Value != null && r.Cells[1].Value != null)
                                 .Select(r => new { Username = r.Cells[11].Value, TimeTaken = r.Cells[1].Value })
                                 .GroupBy(usernametime => usernametime)
-                                .OrderByDescending(g => Convert.ToInt32(g.Key.TimeTaken))
-                                .Select(g => new { USERNAME = g.Key.Username, TIME_TAKEN = g.Key.TimeTaken })).ToList();
+                                .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                                .Select(g => new { USERNAME = g.Key.Username, TIME_TAKEN_SECONDS = g.Key.TimeTaken })).ToList();
 
                             dataGridViewIISLINQreport.DataSource = usernameTimeQuery;
                         }
@@ -2592,6 +2789,7 @@ namespace OutSystems_Log_Parser
                             col.SortMode = DataGridViewColumnSortMode.NotSortable;
                         }
                     }
+                    btnExportIISLINQTable.Enabled = true;
                 }
             }
             catch (Exception ex)
@@ -2654,6 +2852,41 @@ namespace OutSystems_Log_Parser
         private void dataGridViewDeviceInformation_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             cellClick(dataGridViewDeviceInformation, e, txtBoxDetailDeviceInformationlogs);
+        }
+
+        private void dataGridViewDevInfoCount_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            cellClick(dataGridViewDevInfoCount, e, txtBoxDetailDevInfoCount);
+        }
+
+        private void dataGridViewScreenRequestsScreenlogs_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            cellClick(dataGridViewScreenRequestsScreenlogs, e, txtBoxDetailScrReqScreenlogs);
+        }
+
+        private void dataGridViewScrReqScreenDurationlogs_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            cellClick(dataGridViewScrReqScreenDurationlogs, e, txtBoxDetailScrReqScreenlogs);
+        }
+
+        private void dataGridViewExtensionLogsExtensions_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            cellClick(dataGridViewExtensionLogsExtensions, e, txtBoxDetailExtExtensionlogs);
+        }
+
+        private void dataGridViewExtensionsDurationlogs_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            cellClick(dataGridViewExtensionsDurationlogs, e, txtBoxDetailExtExtensionlogs);
+        }
+
+        private void dataGridViewSrvActServicelogs_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            cellClick(dataGridViewSrvActServicelogs, e, txtBoxDetailSrvActServicelogs);
+        }
+
+        private void dataGridViewSrvActServiceDurationlogs_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            cellClick(dataGridViewSrvActServiceDurationlogs, e, txtBoxDetailSrvActServicelogs);
         }
 
         private void cellClick(DataGridView tableName, DataGridViewCellEventArgs e, TextBox txtbox)
@@ -2790,12 +3023,18 @@ namespace OutSystems_Log_Parser
                 highlightKeyword(dataGridViewIntWebServiceslogs, "dataGridViewIntWebServiceslogs");
                 highlightKeyword(dataGridViewInWebServicesDurationlogs, "dataGridViewInWebServicesDurationlogs");
                 highlightKeyword(dataGridViewScreenRequestslogs, "dataGridViewScreenRequestslogs");
+                highlightKeyword(dataGridViewScreenRequestsScreenlogs, "dataGridViewScreenRequestsScreenlogs");
+                highlightKeyword(dataGridViewScrReqScreenDurationlogs, "dataGridViewScrReqScreenDurationlogs");
                 highlightKeyword(dataGridViewTimerlogs, "dataGridViewTimerlogs");
                 highlightKeyword(dataGridViewTimerTimerslogs, "dataGridViewTimerTimerslogs");
                 highlightKeyword(dataGridViewTimerTimersDurationlogs, "dataGridViewTimerTimersDurationlogs");
                 highlightKeyword(dataGridViewEmaillogs, "dataGridViewEmaillogs");
                 highlightKeyword(dataGridViewExtensionlogs, "dataGridViewExtensionlogs");
+                highlightKeyword(dataGridViewExtensionLogsExtensions, "dataGridViewExtensionLogsExtensions");
+                highlightKeyword(dataGridViewExtensionsDurationlogs, "dataGridViewExtensionsDurationlogs");
                 highlightKeyword(dataGridViewServiceActionlogs, "dataGridViewServiceActionlogs");
+                highlightKeyword(dataGridViewSrvActServicelogs, "dataGridViewSrvActServicelogs");
+                highlightKeyword(dataGridViewSrvActServiceDurationlogs, "dataGridViewSrvActServiceDurationlogs");
                 highlightKeyword(dataGridViewTradWebRequests, "dataGridViewTradWebRequests");
                 highlightKeyword(dataGridViewTradWebRequestsScreenlogs, "dataGridViewTradWebRequestsScreenlogs");
                 highlightKeyword(dataGridViewTradWebRequestsScreenDurationlogs, "dataGridViewTradWebRequestsScreenDurationlogs");
@@ -3214,7 +3453,7 @@ namespace OutSystems_Log_Parser
                 tabPage7_MyClick(sender, tabControlEventArgsTab7);
                 tabPage7_Click(sender, tabControlEventArgsTab7);
             }
-            else if (dgvName == "dataGridViewScreenRequestslogs")
+            else if (dgvName == "dataGridViewScreenRequestslogs" || dgvName == "dataGridViewScreenRequestsScreenlogs" || dgvName == "dataGridViewScrReqScreenDurationlogs")
             {
                 tabControlEventArgsTab1 = new TabControlEventArgs(tabPage1, 0, tabControlAction);
                 tabPage1_MyClick(sender, tabControlEventArgsTab1);
@@ -3244,7 +3483,7 @@ namespace OutSystems_Log_Parser
                 tabPage10_MyClick(sender, tabControlEventArgsTab10);
                 tabPage10_Click(sender, tabControlEventArgsTab10);
             }
-            else if (dgvName == "dataGridViewExtensionlogs")
+            else if (dgvName == "dataGridViewExtensionlogs" || dgvName == "dataGridViewExtensionLogsExtensions" || dgvName == "dataGridViewExtensionsDurationlogs")
             {
                 tabControlEventArgsTab1 = new TabControlEventArgs(tabPage1, 0, tabControlAction);
                 tabPage1_MyClick(sender, tabControlEventArgsTab1);
@@ -3254,7 +3493,7 @@ namespace OutSystems_Log_Parser
                 tabPage11_MyClick(sender, tabControlEventArgsTab11);
                 tabPage11_Click(sender, tabControlEventArgsTab11);
             }
-            else if (dgvName == "dataGridViewServiceActionlogs")
+            else if (dgvName == "dataGridViewServiceActionlogs" || dgvName == "dataGridViewSrvActServicelogs" || dgvName == "dataGridViewSrvActServiceDurationlogs")
             {
                 tabControlEventArgsTab1 = new TabControlEventArgs(tabPage1, 0, tabControlAction);
                 tabPage1_MyClick(sender, tabControlEventArgsTab1);
@@ -3799,11 +4038,11 @@ namespace OutSystems_Log_Parser
                 if (dataGridViewSlowSQLlogs.Rows.Count > 0)
                 {
                     var sortSlowSQLDuration = (dataGridViewSlowSQLlogs.Rows.Cast<DataGridViewRow>()
-                        .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null)
-                        .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ModuleName = r.Cells[2].Value, ActionName = r.Cells[3].Value, EspaceName = r.Cells[4].Value })
-                        .GroupBy(usernametime => usernametime)
+                        .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null)
+                        .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ModuleName = r.Cells[2].Value, ApplicationName = r.Cells[3].Value, ActionName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
+                        .GroupBy(slowsqltime => slowsqltime)
                         .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
-                        .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, MODULE_NAME = g.Key.ModuleName, ACTION_NAME = g.Key.ActionName, ESPACE_NAME = g.Key.EspaceName })).ToList();
+                        .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
 
                     dataGridViewSlowSQLDurationlogs.DataSource = sortSlowSQLDuration;
                 }
@@ -3811,11 +4050,11 @@ namespace OutSystems_Log_Parser
                 if (dataGridViewSlowExtensionlogs.Rows.Count > 0)
                 {
                     var sortSlowExtensionDuration = (dataGridViewSlowExtensionlogs.Rows.Cast<DataGridViewRow>()
-                        .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null)
-                        .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ModuleName = r.Cells[2].Value, ActionName = r.Cells[3].Value, EspaceName = r.Cells[4].Value })
-                        .GroupBy(usernametime => usernametime)
+                        .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null)
+                        .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ModuleName = r.Cells[2].Value, ApplicationName = r.Cells[3].Value, ActionName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
+                        .GroupBy(slowexttime => slowexttime)
                         .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
-                        .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, MODULE_NAME = g.Key.ModuleName, ACTION_NAME = g.Key.ActionName, ESPACE_NAME = g.Key.EspaceName })).ToList();
+                        .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
 
                     dataGridViewSlowExtensionDurationlogs.DataSource = sortSlowExtensionDuration;
                 }
@@ -3829,11 +4068,11 @@ namespace OutSystems_Log_Parser
             if (chkBoxSortWebServices.Checked == true)
             {
                 var sortWebServicesDuration = (dataGridViewIntWebServiceslogs.Rows.Cast<DataGridViewRow>()
-                            .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null)
-                            .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ActionName = r.Cells[2].Value, ActionType = r.Cells[3].Value, EspaceName = r.Cells[4].Value, ModuleName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
+                            .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null && r.Cells[10].Value != null)
+                            .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ModuleName = r.Cells[2].Value, ApplicationName = r.Cells[3].Value, ActionName = r.Cells[4].Value, ActionType = r.Cells[5].Value, EspaceName = r.Cells[6].Value, Message = r.Cells[7].Value, Stack = r.Cells[8].Value, EnvironmentInformation = r.Cells[9].Value, ErrorID = r.Cells[10].Value })
                             .GroupBy(srtwebsrvs => srtwebsrvs)
                             .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
-                            .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, ACTION_NAME = g.Key.ActionName, ACTION_TYPE = g.Key.ActionType, ESPACE_NAME = g.Key.EspaceName, MODULE_NAME = g.Key.ModuleName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+                            .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ACTION_TYPE = g.Key.ActionType, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
 
                 dataGridViewInWebServicesDurationlogs.DataSource = sortWebServicesDuration;
 
@@ -3846,11 +4085,11 @@ namespace OutSystems_Log_Parser
             if (chkBoxSortTimers.Checked == true)
             {
                 var sortTimersDuration = (dataGridViewTimerTimerslogs.Rows.Cast<DataGridViewRow>()
-                            .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null)
-                            .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, CyclicJobNameName = r.Cells[2].Value, EspaceName = r.Cells[3].Value })
+                            .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null)
+                            .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, CyclicJobNameName = r.Cells[2].Value, ModuleName = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
                             .GroupBy(usernametime => usernametime)
                             .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
-                            .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, CYCLIC_JOB_NAME = g.Key.CyclicJobNameName, ESPACE_NAME = g.Key.EspaceName })).ToList();
+                            .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, CYCLIC_JOB_NAME = g.Key.CyclicJobNameName, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK =g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
 
                 dataGridViewTimerTimersDurationlogs.DataSource = sortTimersDuration;
 
@@ -3863,16 +4102,131 @@ namespace OutSystems_Log_Parser
             if (chkBoxSortTradWebRequestsScreens.Checked == true)
             {
                 var sortScreenssDuration = (dataGridViewTradWebRequestsScreenlogs.Rows.Cast<DataGridViewRow>()
-                            .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null)
-                            .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, Screen = r.Cells[2].Value, EspaceName = r.Cells[3].Value })
-                            .GroupBy(usernametime => usernametime)
+                            .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null)
+                            .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, Screen = r.Cells[2].Value, ScreenType = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, ActionName = r.Cells[5].Value, EspaceName = r.Cells[6].Value })
+                            .GroupBy(srtscreens => srtscreens)
                             .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
-                            .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, SCREEN = g.Key.Screen, ESPACE_NAME = g.Key.EspaceName })).ToList();
+                            .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, SCREEN = g.Key.Screen, SCREEN_TYPE = g.Key.ScreenType, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ESPACE_NAME = g.Key.EspaceName })).ToList();
 
                 dataGridViewTradWebRequestsScreenDurationlogs.DataSource = sortScreenssDuration;
 
                 btnExportScreenTable.Enabled = true;
             }
+        }
+
+        private void chkBoxSortExtensions_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkBoxSortExtensions.Checked == true)
+            {
+                var sortExtensionsDuration = (dataGridViewExtensionLogsExtensions.Rows.Cast<DataGridViewRow>()
+                            .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null && r.Cells[10].Value != null)
+                            .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ExtensionName = r.Cells[2].Value, ModuleName = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, ActionName = r.Cells[5].Value, EspaceName = r.Cells[6].Value, Message = r.Cells[7].Value, Stack = r.Cells[8].Value, EnvironmentInformation = r.Cells[9].Value, ErrorID = r.Cells[10].Value })
+                            .GroupBy(srtexts => srtexts)
+                            .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                            .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, EXTENSION_NAME = g.Key.ExtensionName, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+
+                dataGridViewExtensionsDurationlogs.DataSource = sortExtensionsDuration;
+
+                btnExportExtensionsTable.Enabled = true;
+            }
+        }
+
+        private void btnExportExtensionsTable_Click(object sender, EventArgs e)
+        {
+            exportTableContent(dataGridViewExtensionsDurationlogs, "\\extensions_table.txt", "|");
+        }
+
+        private void chkBoxSortScrReqScreens_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkBoxSortScrReqScreens.Checked == true)
+            {
+                var sortScrReqScreenDuration = (dataGridViewScreenRequestsScreenlogs.Rows.Cast<DataGridViewRow>()
+                            .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null)
+                            .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ScreenName = r.Cells[2].Value, ModuleName = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
+                            .GroupBy(srtscrreqs => srtscrreqs)
+                            .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                            .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, SCREEN = g.Key.ScreenName, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+
+                dataGridViewScrReqScreenDurationlogs.DataSource = sortScrReqScreenDuration;
+
+                btnExportScrReqScreenTable.Enabled = true;
+            }
+        }
+
+        private void btnExportScrReqScreenTable_Click(object sender, EventArgs e)
+        {
+            exportTableContent(dataGridViewScrReqScreenDurationlogs, "\\mobile_requests_screen_table.txt", "|");
+        }
+
+        private void chkBoxSortServiceActions_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkBoxSortServiceActions.Checked == true)
+            {
+                var sortServiceActionsDuration = (dataGridViewSrvActServicelogs.Rows.Cast<DataGridViewRow>()
+                            .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null)
+                            .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ActionName = r.Cells[2].Value, ModuleName = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
+                            .GroupBy(srtsrvacts => srtsrvacts)
+                            .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                            .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, ACTION_NAME = g.Key.ActionName, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+
+                dataGridViewSrvActServiceDurationlogs.DataSource = sortServiceActionsDuration;
+
+                btnExportServiceActionsTable.Enabled = true;
+            }
+        }
+
+        private void btnExportServiceActionsTable_Click(object sender, EventArgs e)
+        {
+            exportTableContent(dataGridViewSrvActServiceDurationlogs, "\\service_actions_table.txt", "|");
+        }
+
+        private void chkBoxSortIIS_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkBoxSortIIS.Checked == true)
+            {
+                var sortIISDuration = (dataGridViewIISDateTime.Rows.Cast<DataGridViewRow>()
+                            .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null && r.Cells[10].Value != null && r.Cells[11].Value != null && r.Cells[12].Value != null && r.Cells[13].Value != null)
+                            .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, HttpCode = r.Cells[2].Value, HttpSubcode = r.Cells[3].Value, WindowsErrorCode = r.Cells[4].Value, Clientip = r.Cells[5].Value, Serverip = r.Cells[6].Value, ServerPort = r.Cells[7].Value, Method = r.Cells[8].Value, UriStem = r.Cells[9].Value, UriQuery = r.Cells[10].Value, Username = r.Cells[11].Value, Browser = r.Cells[12].Value, Referrer = r.Cells[13].Value })
+                            .GroupBy(srtiistime => srtiistime)
+                            .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                            .Select(g => new { TIME_TAKEN_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, HTTP_CODE = g.Key.HttpCode, HTTP_SUBCODE = g.Key.HttpSubcode, WINDOWS_ERROR_CODE = g.Key.WindowsErrorCode, CLIENT_IP = g.Key.Clientip, SERVER_IP = g.Key.Serverip, SERVER_PORT = g.Key.ServerPort, METHOD = g.Key.Method, URI_STEM = g.Key.UriStem, URI_QUERY = g.Key.UriQuery, USERNAME = g.Key.Username, BROWSER = g.Key.Browser, REFERRER = g.Key.Referrer })).ToList();
+
+                dataGridViewIISTimeTaken.DataSource = sortIISDuration;
+
+                btnExportIISTable.Enabled = true;
+            }
+        }
+
+        private void chkBoxSortDevinfo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkBoxSortDevinfo.Checked == true)
+            {
+                var sortDeviceInformationCount = (dataGridViewDeviceInformation.Rows.Cast<DataGridViewRow>()
+                            .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null)
+                            .Select(r => new { OperatingSystem = r.Cells[0].Value, OperatingSystemVersion = r.Cells[1].Value, Count = r.Cells[2].Value, DeviceModel = r.Cells[3].Value, CordovaVersion = r.Cells[4].Value, DeviceUUID = r.Cells[5].Value })
+                            .GroupBy(srtwebsrvs => srtwebsrvs)
+                            .OrderByDescending(g => Convert.ToInt32(g.Key.Count))
+                            .Select(g => new { COUNT = g.Key.Count, OPERATING_SYSTEM = g.Key.OperatingSystem, OPERATING_SYTEM_VERSION = g.Key.OperatingSystemVersion, DEVICE_MODEL = g.Key.DeviceModel, CORDOVA_VERSION = g.Key.CordovaVersion, DEVICE_UUID = g.Key.DeviceUUID })).ToList();
+
+                dataGridViewDevInfoCount.DataSource = sortDeviceInformationCount;
+
+                btnExportDevInfoTable.Enabled = true;
+            }
+        }
+
+        private void btnExportIISLINQTable_Click(object sender, EventArgs e)
+        {
+            exportTableContent(dataGridViewIISLINQreport, "\\iis_logs_linq_report_table.txt", "|");
+        }
+
+        private void btnExportIISTable_Click(object sender, EventArgs e)
+        {
+            exportTableContent(dataGridViewIISTimeTaken, "\\iis_logs_timetaken_table.txt", "|");
+        }
+
+        private void btnExportDevInfoTable_Click(object sender, EventArgs e)
+        {
+            exportTableContent(dataGridViewDevInfoCount, "\\device_information_count_table.txt", "|");
         }
     }
 }
