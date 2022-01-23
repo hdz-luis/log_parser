@@ -80,6 +80,11 @@
             this.txtBoxDetailTimerlogs = new System.Windows.Forms.TextBox();
             this.dataGridViewTimerlogs = new System.Windows.Forms.DataGridView();
             this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.chkBoxSortEmails = new System.Windows.Forms.CheckBox();
+            this.btnExportEmailsTable = new System.Windows.Forms.Button();
+            this.txtBoxDetailsEmailEmailslogs = new System.Windows.Forms.TextBox();
+            this.dataGridViewEmailEmailsDurationlogs = new System.Windows.Forms.DataGridView();
+            this.dataGridViewEmailEmailslogs = new System.Windows.Forms.DataGridView();
             this.txtBoxDetailEmaillogs = new System.Windows.Forms.TextBox();
             this.dataGridViewEmaillogs = new System.Windows.Forms.DataGridView();
             this.tabPage11 = new System.Windows.Forms.TabPage();
@@ -278,11 +283,15 @@
             this.numericUpDownPercentage = new System.Windows.Forms.NumericUpDown();
             this.btnScreenshot = new System.Windows.Forms.Button();
             this.btnSearchKeyword = new System.Windows.Forms.Button();
+            this.btnFilterFIeld = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txtBoxKeyword = new System.Windows.Forms.TextBox();
             this.comBoxIssueCategory = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.comBoxField = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.comBoxFilterField = new System.Windows.Forms.ComboBox();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -310,6 +319,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTimerTimerslogs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTimerlogs)).BeginInit();
             this.tabPage10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmailEmailsDurationlogs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmailEmailslogs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmaillogs)).BeginInit();
             this.tabPage11.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewExtensionsDurationlogs)).BeginInit();
@@ -1171,6 +1182,11 @@
             // tabPage10
             // 
             this.tabPage10.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabPage10.Controls.Add(this.chkBoxSortEmails);
+            this.tabPage10.Controls.Add(this.btnExportEmailsTable);
+            this.tabPage10.Controls.Add(this.txtBoxDetailsEmailEmailslogs);
+            this.tabPage10.Controls.Add(this.dataGridViewEmailEmailsDurationlogs);
+            this.tabPage10.Controls.Add(this.dataGridViewEmailEmailslogs);
             this.tabPage10.Controls.Add(this.txtBoxDetailEmaillogs);
             this.tabPage10.Controls.Add(this.dataGridViewEmaillogs);
             this.tabPage10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1179,6 +1195,80 @@
             this.tabPage10.Size = new System.Drawing.Size(1576, 641);
             this.tabPage10.TabIndex = 5;
             this.tabPage10.Text = "Email";
+            // 
+            // chkBoxSortEmails
+            // 
+            this.chkBoxSortEmails.AutoSize = true;
+            this.chkBoxSortEmails.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkBoxSortEmails.Location = new System.Drawing.Point(8, 606);
+            this.chkBoxSortEmails.Name = "chkBoxSortEmails";
+            this.chkBoxSortEmails.Size = new System.Drawing.Size(171, 29);
+            this.chkBoxSortEmails.TabIndex = 28;
+            this.chkBoxSortEmails.Text = "Sort by duration";
+            this.chkBoxSortEmails.UseVisualStyleBackColor = true;
+            this.chkBoxSortEmails.CheckedChanged += new System.EventHandler(this.chkBoxSortEmails_CheckedChanged);
+            // 
+            // btnExportEmailsTable
+            // 
+            this.btnExportEmailsTable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportEmailsTable.BackgroundImage")));
+            this.btnExportEmailsTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnExportEmailsTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportEmailsTable.Location = new System.Drawing.Point(195, 604);
+            this.btnExportEmailsTable.Margin = new System.Windows.Forms.Padding(4);
+            this.btnExportEmailsTable.Name = "btnExportEmailsTable";
+            this.btnExportEmailsTable.Size = new System.Drawing.Size(64, 32);
+            this.btnExportEmailsTable.TabIndex = 27;
+            this.btnExportEmailsTable.Text = ",";
+            this.toolTip1.SetToolTip(this.btnExportEmailsTable, "Export table content.");
+            this.btnExportEmailsTable.UseVisualStyleBackColor = true;
+            this.btnExportEmailsTable.Click += new System.EventHandler(this.btnExportEmailsTable_Click);
+            this.btnExportEmailsTable.MouseEnter += new System.EventHandler(this.btnExportEmailsTable_MouseEnter);
+            this.btnExportEmailsTable.MouseLeave += new System.EventHandler(this.btnExportEmailsTable_MouseLeave);
+            // 
+            // txtBoxDetailsEmailEmailslogs
+            // 
+            this.txtBoxDetailsEmailEmailslogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxDetailsEmailEmailslogs.Location = new System.Drawing.Point(1318, 308);
+            this.txtBoxDetailsEmailEmailslogs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDetailsEmailEmailslogs.Multiline = true;
+            this.txtBoxDetailsEmailEmailslogs.Name = "txtBoxDetailsEmailEmailslogs";
+            this.txtBoxDetailsEmailEmailslogs.ReadOnly = true;
+            this.txtBoxDetailsEmailEmailslogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxDetailsEmailEmailslogs.Size = new System.Drawing.Size(250, 294);
+            this.txtBoxDetailsEmailEmailslogs.TabIndex = 26;
+            this.txtBoxDetailsEmailEmailslogs.TabStop = false;
+            // 
+            // dataGridViewEmailEmailsDurationlogs
+            // 
+            this.dataGridViewEmailEmailsDurationlogs.AllowUserToAddRows = false;
+            this.dataGridViewEmailEmailsDurationlogs.AllowUserToDeleteRows = false;
+            this.dataGridViewEmailEmailsDurationlogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewEmailEmailsDurationlogs.Location = new System.Drawing.Point(8, 459);
+            this.dataGridViewEmailEmailsDurationlogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewEmailEmailsDurationlogs.MultiSelect = false;
+            this.dataGridViewEmailEmailsDurationlogs.Name = "dataGridViewEmailEmailsDurationlogs";
+            this.dataGridViewEmailEmailsDurationlogs.ReadOnly = true;
+            this.dataGridViewEmailEmailsDurationlogs.ShowEditingIcon = false;
+            this.dataGridViewEmailEmailsDurationlogs.Size = new System.Drawing.Size(1304, 143);
+            this.dataGridViewEmailEmailsDurationlogs.TabIndex = 25;
+            this.dataGridViewEmailEmailsDurationlogs.TabStop = false;
+            this.dataGridViewEmailEmailsDurationlogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewEmailEmailsDurationlogs_CellClick);
+            // 
+            // dataGridViewEmailEmailslogs
+            // 
+            this.dataGridViewEmailEmailslogs.AllowUserToAddRows = false;
+            this.dataGridViewEmailEmailslogs.AllowUserToDeleteRows = false;
+            this.dataGridViewEmailEmailslogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewEmailEmailslogs.Location = new System.Drawing.Point(8, 308);
+            this.dataGridViewEmailEmailslogs.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewEmailEmailslogs.MultiSelect = false;
+            this.dataGridViewEmailEmailslogs.Name = "dataGridViewEmailEmailslogs";
+            this.dataGridViewEmailEmailslogs.ReadOnly = true;
+            this.dataGridViewEmailEmailslogs.ShowEditingIcon = false;
+            this.dataGridViewEmailEmailslogs.Size = new System.Drawing.Size(1304, 143);
+            this.dataGridViewEmailEmailslogs.TabIndex = 24;
+            this.dataGridViewEmailEmailslogs.TabStop = false;
+            this.dataGridViewEmailEmailslogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewEmailEmailslogs_CellClick);
             // 
             // txtBoxDetailEmaillogs
             // 
@@ -1189,7 +1279,7 @@
             this.txtBoxDetailEmaillogs.Name = "txtBoxDetailEmaillogs";
             this.txtBoxDetailEmaillogs.ReadOnly = true;
             this.txtBoxDetailEmaillogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtBoxDetailEmaillogs.Size = new System.Drawing.Size(250, 627);
+            this.txtBoxDetailEmaillogs.Size = new System.Drawing.Size(250, 278);
             this.txtBoxDetailEmaillogs.TabIndex = 19;
             this.txtBoxDetailEmaillogs.TabStop = false;
             // 
@@ -1204,7 +1294,7 @@
             this.dataGridViewEmaillogs.Name = "dataGridViewEmaillogs";
             this.dataGridViewEmaillogs.ReadOnly = true;
             this.dataGridViewEmaillogs.ShowEditingIcon = false;
-            this.dataGridViewEmaillogs.Size = new System.Drawing.Size(1306, 627);
+            this.dataGridViewEmaillogs.Size = new System.Drawing.Size(1306, 278);
             this.dataGridViewEmaillogs.TabIndex = 18;
             this.dataGridViewEmaillogs.TabStop = false;
             this.dataGridViewEmaillogs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewEmaillogs_CellClick);
@@ -3896,11 +3986,11 @@
             this.btnClearFilter.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnClearFilter.BackgroundImage")));
             this.btnClearFilter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnClearFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClearFilter.Location = new System.Drawing.Point(1070, 11);
+            this.btnClearFilter.Location = new System.Drawing.Point(1524, 11);
             this.btnClearFilter.Margin = new System.Windows.Forms.Padding(4);
             this.btnClearFilter.Name = "btnClearFilter";
             this.btnClearFilter.Size = new System.Drawing.Size(64, 32);
-            this.btnClearFilter.TabIndex = 13;
+            this.btnClearFilter.TabIndex = 17;
             this.btnClearFilter.Text = ",";
             this.toolTip1.SetToolTip(this.btnClearFilter, "Undo all the changes.");
             this.btnClearFilter.UseVisualStyleBackColor = true;
@@ -3913,11 +4003,11 @@
             this.btnRemoveGarbage.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnRemoveGarbage.BackgroundImage")));
             this.btnRemoveGarbage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnRemoveGarbage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRemoveGarbage.Location = new System.Drawing.Point(1070, 51);
+            this.btnRemoveGarbage.Location = new System.Drawing.Point(1524, 51);
             this.btnRemoveGarbage.Margin = new System.Windows.Forms.Padding(4);
             this.btnRemoveGarbage.Name = "btnRemoveGarbage";
             this.btnRemoveGarbage.Size = new System.Drawing.Size(64, 32);
-            this.btnRemoveGarbage.TabIndex = 10;
+            this.btnRemoveGarbage.TabIndex = 16;
             this.toolTip1.SetToolTip(this.btnRemoveGarbage, "Hide duplicate generic lines.");
             this.btnRemoveGarbage.UseVisualStyleBackColor = true;
             this.btnRemoveGarbage.Click += new System.EventHandler(this.btnRemoveGarbage_Click);
@@ -3929,11 +4019,11 @@
             this.btnHighlight.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnHighlight.BackgroundImage")));
             this.btnHighlight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnHighlight.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHighlight.Location = new System.Drawing.Point(804, 51);
+            this.btnHighlight.Location = new System.Drawing.Point(1341, 51);
             this.btnHighlight.Margin = new System.Windows.Forms.Padding(4);
             this.btnHighlight.Name = "btnHighlight";
             this.btnHighlight.Size = new System.Drawing.Size(64, 32);
-            this.btnHighlight.TabIndex = 11;
+            this.btnHighlight.TabIndex = 13;
             this.toolTip1.SetToolTip(this.btnHighlight, "Highlight known errors.");
             this.btnHighlight.UseVisualStyleBackColor = true;
             this.btnHighlight.Click += new System.EventHandler(this.btnHighlight_Click);
@@ -3948,7 +4038,7 @@
             0,
             0,
             0});
-            this.numericUpDownPercentage.Location = new System.Drawing.Point(974, 51);
+            this.numericUpDownPercentage.Location = new System.Drawing.Point(1440, 51);
             this.numericUpDownPercentage.Maximum = new decimal(new int[] {
             30,
             0,
@@ -3962,7 +4052,7 @@
             this.numericUpDownPercentage.Name = "numericUpDownPercentage";
             this.numericUpDownPercentage.ReadOnly = true;
             this.numericUpDownPercentage.Size = new System.Drawing.Size(53, 30);
-            this.numericUpDownPercentage.TabIndex = 9;
+            this.numericUpDownPercentage.TabIndex = 15;
             this.toolTip1.SetToolTip(this.numericUpDownPercentage, "Higher percentage value will hide less duplicate generic lines.");
             this.numericUpDownPercentage.Value = new decimal(new int[] {
             20,
@@ -3975,11 +4065,11 @@
             this.btnScreenshot.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnScreenshot.BackgroundImage")));
             this.btnScreenshot.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnScreenshot.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnScreenshot.Location = new System.Drawing.Point(887, 51);
+            this.btnScreenshot.Location = new System.Drawing.Point(1410, 10);
             this.btnScreenshot.Margin = new System.Windows.Forms.Padding(4);
             this.btnScreenshot.Name = "btnScreenshot";
             this.btnScreenshot.Size = new System.Drawing.Size(64, 32);
-            this.btnScreenshot.TabIndex = 12;
+            this.btnScreenshot.TabIndex = 14;
             this.toolTip1.SetToolTip(this.btnScreenshot, "Take a screenshot of the error.");
             this.btnScreenshot.UseVisualStyleBackColor = true;
             this.btnScreenshot.Click += new System.EventHandler(this.btnScreenshot_Click);
@@ -3991,23 +4081,39 @@
             this.btnSearchKeyword.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSearchKeyword.BackgroundImage")));
             this.btnSearchKeyword.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnSearchKeyword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearchKeyword.Location = new System.Drawing.Point(342, 49);
+            this.btnSearchKeyword.Location = new System.Drawing.Point(1338, 10);
             this.btnSearchKeyword.Margin = new System.Windows.Forms.Padding(4);
             this.btnSearchKeyword.Name = "btnSearchKeyword";
             this.btnSearchKeyword.Size = new System.Drawing.Size(64, 32);
-            this.btnSearchKeyword.TabIndex = 8;
+            this.btnSearchKeyword.TabIndex = 11;
             this.toolTip1.SetToolTip(this.btnSearchKeyword, "Search for a keyword.");
             this.btnSearchKeyword.UseVisualStyleBackColor = true;
             this.btnSearchKeyword.Click += new System.EventHandler(this.btnSearchKeyword_Click);
             this.btnSearchKeyword.MouseEnter += new System.EventHandler(this.btnSearchKeyword_MouseEnter);
             this.btnSearchKeyword.MouseLeave += new System.EventHandler(this.btnSearchKeyword_MouseLeave);
             // 
+            // btnFilterFIeld
+            // 
+            this.btnFilterFIeld.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFilterFIeld.BackgroundImage")));
+            this.btnFilterFIeld.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnFilterFIeld.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFilterFIeld.Location = new System.Drawing.Point(887, 50);
+            this.btnFilterFIeld.Margin = new System.Windows.Forms.Padding(4);
+            this.btnFilterFIeld.Name = "btnFilterFIeld";
+            this.btnFilterFIeld.Size = new System.Drawing.Size(64, 32);
+            this.btnFilterFIeld.TabIndex = 9;
+            this.toolTip1.SetToolTip(this.btnFilterFIeld, "Filter the data by a field.");
+            this.btnFilterFIeld.UseVisualStyleBackColor = true;
+            this.btnFilterFIeld.Click += new System.EventHandler(this.btnFilterFIeld_Click);
+            this.btnFilterFIeld.MouseEnter += new System.EventHandler(this.btnFilterFIeld_MouseEnter);
+            this.btnFilterFIeld.MouseLeave += new System.EventHandler(this.btnFilterFIeld_MouseLeave);
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.RoyalBlue;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(1033, 51);
+            this.label3.Location = new System.Drawing.Point(1493, 54);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(30, 25);
             this.label3.TabIndex = 14;
@@ -4016,10 +4122,10 @@
             // txtBoxKeyword
             // 
             this.txtBoxKeyword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxKeyword.Location = new System.Drawing.Point(194, 50);
+            this.txtBoxKeyword.Location = new System.Drawing.Point(1067, 10);
             this.txtBoxKeyword.Name = "txtBoxKeyword";
-            this.txtBoxKeyword.Size = new System.Drawing.Size(141, 30);
-            this.txtBoxKeyword.TabIndex = 7;
+            this.txtBoxKeyword.Size = new System.Drawing.Size(264, 30);
+            this.txtBoxKeyword.TabIndex = 10;
             // 
             // comBoxIssueCategory
             // 
@@ -4033,10 +4139,10 @@
             "Database",
             "Logic",
             "Network"});
-            this.comBoxIssueCategory.Location = new System.Drawing.Point(500, 50);
+            this.comBoxIssueCategory.Location = new System.Drawing.Point(1037, 49);
             this.comBoxIssueCategory.Name = "comBoxIssueCategory";
             this.comBoxIssueCategory.Size = new System.Drawing.Size(297, 33);
-            this.comBoxIssueCategory.TabIndex = 26;
+            this.comBoxIssueCategory.TabIndex = 12;
             this.comBoxIssueCategory.TabStop = false;
             this.comBoxIssueCategory.SelectedIndexChanged += new System.EventHandler(this.comBoxIssueCategory_SelectedIndexChanged);
             // 
@@ -4045,7 +4151,7 @@
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.RoyalBlue;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(429, 53);
+            this.label5.Location = new System.Drawing.Point(966, 53);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 25);
             this.label5.TabIndex = 25;
@@ -4056,11 +4162,53 @@
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.RoyalBlue;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(93, 52);
+            this.label6.Location = new System.Drawing.Point(966, 13);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(95, 25);
             this.label6.TabIndex = 27;
             this.label6.Text = "Keyword:";
+            // 
+            // comBoxField
+            // 
+            this.comBoxField.AutoCompleteCustomSource.AddRange(new string[] {
+            "Action Name",
+            "Application Name",
+            "Cyclic Job Name",
+            "Espace Name",
+            "Extension Name",
+            "Module Name"});
+            this.comBoxField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comBoxField.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comBoxField.FormattingEnabled = true;
+            this.comBoxField.Location = new System.Drawing.Point(159, 49);
+            this.comBoxField.Name = "comBoxField";
+            this.comBoxField.Size = new System.Drawing.Size(192, 33);
+            this.comBoxField.TabIndex = 7;
+            this.comBoxField.TabStop = false;
+            this.comBoxField.SelectedIndexChanged += new System.EventHandler(this.comBoxField_SelectedIndexChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.RoyalBlue;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(93, 53);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(60, 25);
+            this.label7.TabIndex = 29;
+            this.label7.Text = "Field:";
+            // 
+            // comBoxFilterField
+            // 
+            this.comBoxFilterField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comBoxFilterField.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comBoxFilterField.FormattingEnabled = true;
+            this.comBoxFilterField.Location = new System.Drawing.Point(357, 49);
+            this.comBoxFilterField.Name = "comBoxFilterField";
+            this.comBoxFilterField.Size = new System.Drawing.Size(523, 33);
+            this.comBoxFilterField.TabIndex = 8;
+            this.comBoxFilterField.TabStop = false;
+            this.comBoxFilterField.SelectedIndexChanged += new System.EventHandler(this.comBoxFilterField_SelectedIndexChanged);
             // 
             // Form1
             // 
@@ -4069,6 +4217,10 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1631, 825);
+            this.Controls.Add(this.btnFilterFIeld);
+            this.Controls.Add(this.comBoxFilterField);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.comBoxField);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.comBoxIssueCategory);
             this.Controls.Add(this.label5);
@@ -4097,7 +4249,7 @@
             this.MinimumSize = new System.Drawing.Size(1649, 872);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "OutSystems Log Parser V.011622";
+            this.Text = "OutSystems Log Parser V.012122";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -4134,6 +4286,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTimerlogs)).EndInit();
             this.tabPage10.ResumeLayout(false);
             this.tabPage10.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmailEmailsDurationlogs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmailEmailslogs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmaillogs)).EndInit();
             this.tabPage11.ResumeLayout(false);
             this.tabPage11.PerformLayout();
@@ -4559,6 +4713,15 @@
         private System.Windows.Forms.DataGridView dataGridViewDevInfoCount;
         private System.Windows.Forms.TextBox txtBoxDetailDevInfoCount;
         private System.Windows.Forms.Button btnExportIISLINQTable;
+        private System.Windows.Forms.CheckBox chkBoxSortEmails;
+        private System.Windows.Forms.Button btnExportEmailsTable;
+        private System.Windows.Forms.TextBox txtBoxDetailsEmailEmailslogs;
+        private System.Windows.Forms.DataGridView dataGridViewEmailEmailsDurationlogs;
+        private System.Windows.Forms.DataGridView dataGridViewEmailEmailslogs;
+        private System.Windows.Forms.ComboBox comBoxField;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox comBoxFilterField;
+        private System.Windows.Forms.Button btnFilterFIeld;
     }
 }
 

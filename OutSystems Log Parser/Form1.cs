@@ -19,6 +19,7 @@ namespace OutSystems_Log_Parser
         string fullPath = "";
         string relativePath = "";
         string[] filesPaths;
+        string[] lineOfContents;
         string[] knownErrors_Errorlogs;
         string[] knownErrors_Generallogs;
         string[] knownErrors_WinAppEventViewer;
@@ -41,6 +42,12 @@ namespace OutSystems_Log_Parser
         bool bool_findKeywordSuccessful = false;
         bool bool_screenshotSuccessful = false;
         bool bool_datetimeFilterSuccessful = false;
+        bool bool_fieldFilterSuccessful = false;
+        int countFindKeyword = 0;
+        List<string> keywordsSaved = new List<string>();
+        Font myScreenshotFont = new Font("Times New Roman", 10);
+        Color myScreenshotForeColor = Color.Gold;
+        Color myScreenshotBackColor = Color.Black;
         string currentWorkingDirectory = Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath);
 
         delegate void TabControlClick(object sender, TabControlEventArgs e);
@@ -190,6 +197,10 @@ namespace OutSystems_Log_Parser
                 numericUpDownPercentage.Value = 20;
 
                 comBoxReport.SelectedIndex = -1;
+                comBoxField.SelectedIndex = -1;
+                comBoxFilterField.SelectedIndex = -1;
+
+                comBoxField.Items.Clear();
 
                 clearTextboxes(txtBoxDetailErrorLogs);
                 clearTextboxes(txtBoxDetailGenerallogs);
@@ -202,6 +213,7 @@ namespace OutSystems_Log_Parser
                 clearTextboxes(txtBoxDetailTimerlogs);
                 clearTextboxes(txtBoxDetailsTimerTimerslogs);
                 clearTextboxes(txtBoxDetailEmaillogs);
+                clearTextboxes(txtBoxDetailsEmailEmailslogs);
                 clearTextboxes(txtBoxDetailExtensionlogs);
                 clearTextboxes(txtBoxDetailExtExtensionlogs);
                 clearTextboxes(txtBoxDetailServiceActionlogs);
@@ -271,6 +283,8 @@ namespace OutSystems_Log_Parser
                 clearTables(dataGridViewTimerTimerslogs);
                 clearTables(dataGridViewTimerTimersDurationlogs);
                 clearTables(dataGridViewEmaillogs);
+                clearTables(dataGridViewEmailEmailslogs);
+                clearTables(dataGridViewEmailEmailsDurationlogs);
                 clearTables(dataGridViewExtensionlogs);
                 clearTables(dataGridViewExtensionLogsExtensions);
                 clearTables(dataGridViewExtensionsDurationlogs);
@@ -353,10 +367,16 @@ namespace OutSystems_Log_Parser
                             }
                             else if (fileName == "email_logs.txt")
                             {
-                                string[] column_names = { "DATE_TIME", "SENT", "LAST_ERROR", "FROM", "TO", "SUBJECT",
-                                    "CC", "BCC", "NAME", "SIZE", "MESSAGE_ID", "ACTIVITY", "EMAIL_DEFINITION", "STORE_CONTENT",
+                                string[] column_names = { "DATE_TIME", "SENT", "ERROR_ID", "FROM", "TO", "SUBJECT",
+                                    "CC", "BCC", "ESPACE_NAME", "SIZE", "MESSAGE_ID", "ACTIVITY", "EMAIL_DEFINITION", "STORE_CONTENT",
                                     "IS_TEST_EMAIL", "ID", "TENANT_ID" };
                                 populateTables(relativePath + "\\email_logs.txt", delimiters, column_names, dataGridViewEmaillogs);
+                            }
+                            else if (fileName == "email_logs_emails.txt")
+                            {
+                                string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "MODULE_NAME", "APPLICATION_NAME", "ESPACE_NAME", "MESSAGE",
+                                    "STACK", "FROM", "TO", "SUBJECT", "CC", "BCC", "IS_TEST_EMAIL", "ENVIRONMENT_INFORMATION", "ERROR_ID" };
+                                populateTables(relativePath + "\\email_logs_emails.txt", delimiters, column_names, dataGridViewEmailEmailslogs);
                             }
                             else if (fileName == "error_logs.txt")
                             {
@@ -480,6 +500,30 @@ namespace OutSystems_Log_Parser
                             {
                                 string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "CYCLIC_JOB_NAME", "MODULE_NAME", "APPLICATION_NAME", "ESPACE_NAME", "MESSAGE", "STACK", "ENVIRONMENT_INFORMATION", "ERROR_ID" };
                                 populateTables(relativePath + "\\timer_logs_timers.txt", delimiters, column_names, dataGridViewTimerTimerslogs);
+                            }
+                            else if (fileName == "filter_action_names.txt")
+                            {
+                                comBoxField.Items.Add("Action Name");
+                            }
+                            else if (fileName == "filter_application_names.txt")
+                            {
+                                comBoxField.Items.Add("Application Name");
+                            }
+                            else if (fileName == "filter_cyclic_job_names.txt")
+                            {
+                                comBoxField.Items.Add("Cyclic Job Name");
+                            }
+                            else if (fileName == "filter_espace_names.txt")
+                            {
+                                comBoxField.Items.Add("Espace Name");
+                            }
+                            else if (fileName == "filter_extension_names.txt")
+                            {
+                                comBoxField.Items.Add("Extension Name");
+                            }
+                            else if (fileName == "filter_module_names.txt")
+                            {
+                                comBoxField.Items.Add("Module Name");
                             }
                             else if (fileName == "bpt_troubleshootingreport_logs.txt")
                             {
@@ -735,6 +779,7 @@ namespace OutSystems_Log_Parser
                     btnSearchKeyword.Enabled = true;
                     btnSearchKeyword.BackColor = SystemColors.ControlLight;
                     txtBoxKeyword.Enabled = true;
+                    comBoxField.Enabled = true;
 
                     if (dataGridViewIISDateTime.Rows.Count > 0)
                     {
@@ -760,6 +805,11 @@ namespace OutSystems_Log_Parser
                     if (dataGridViewTimerTimerslogs.Rows.Count > 0)
                     {
                         chkBoxSortTimers.Enabled = true;
+                    }
+
+                    if (dataGridViewEmailEmailslogs.Rows.Count > 0)
+                    {
+                        chkBoxSortEmails.Enabled = true;
                     }
 
                     if (dataGridViewExtensionLogsExtensions.Rows.Count > 0)
@@ -901,6 +951,16 @@ namespace OutSystems_Log_Parser
             btnFilter.BackColor = SystemColors.ControlLight;
         }
 
+        private void btnFilterFIeld_MouseEnter(object sender, EventArgs e)
+        {
+            btnFilterFIeld.BackColor = Color.SpringGreen;
+        }
+
+        private void btnFilterFIeld_MouseLeave(object sender, EventArgs e)
+        {
+            btnFilterFIeld.BackColor = SystemColors.ControlLight;
+        }
+
         private void btnClearFilter_MouseEnter(object sender, EventArgs e)
         {
             btnClearFilter.BackColor = Color.SpringGreen;
@@ -979,6 +1039,16 @@ namespace OutSystems_Log_Parser
         private void btnExportTimerTable_MouseLeave(object sender, EventArgs e)
         {
             btnExportTimerTable.BackColor = SystemColors.ControlLight;
+        }
+
+        private void btnExportEmailsTable_MouseEnter(object sender, EventArgs e)
+        {
+            btnExportEmailsTable.BackColor = Color.SpringGreen;
+        }
+
+        private void btnExportEmailsTable_MouseLeave(object sender, EventArgs e)
+        {
+            btnExportEmailsTable.BackColor = SystemColors.ControlLight;
         }
 
         private void btnExportScreenTable_MouseEnter(object sender, EventArgs e)
@@ -1224,6 +1294,8 @@ namespace OutSystems_Log_Parser
                         //filter the content from the table based on the datetime range
                         queryDataGridViews(dataGridViewAndroidlogs, isoFrom, isoTo, txtBoxDetailAndroidLogs);
                         queryDataGridViews(dataGridViewEmaillogs, isoFrom, isoTo, txtBoxDetailEmaillogs);
+                        queryDataGridViews(dataGridViewEmailEmailslogs, isoFrom, isoTo, txtBoxDetailsEmailEmailslogs);
+                        queryDataGridViews(dataGridViewEmailEmailsDurationlogs, isoFrom, isoTo, txtBoxDetailsEmailEmailslogs);
                         queryDataGridViews(dataGridViewErrorlogs, isoFrom, isoTo, txtBoxDetailErrorLogs);
                         queryDataGridViews(dataGridViewExtensionlogs, isoFrom, isoTo, txtBoxDetailExtensionlogs);
                         queryDataGridViews(dataGridViewExtensionLogsExtensions, isoFrom, isoTo, txtBoxDetailExtExtensionlogs);
@@ -1263,6 +1335,52 @@ namespace OutSystems_Log_Parser
                         maskedTextBox1.Enabled = false;
                         dateTimePicker2.Enabled = false;
                         maskedTextBox2.Enabled = false;
+
+                        if (dataGridViewIISDateTime.Rows.Count == 0)
+                        {
+                            chkBoxSortIIS.Enabled = false; ;
+                            comBoxReport.Enabled = false;
+                        }
+
+                        if (dataGridViewSlowSQLlogs.Rows.Count == 0 || dataGridViewSlowExtensionlogs.Rows.Count == 0)
+                        {
+                            chkBoxSortSlowSQLExtension.Enabled = false;
+                        }
+
+                        if (dataGridViewIntWebServiceslogs.Rows.Count == 0)
+                        {
+                            chkBoxSortWebServices.Enabled = false;
+                        }
+
+                        if (dataGridViewScreenRequestsScreenlogs.Rows.Count == 0)
+                        {
+                            chkBoxSortScrReqScreens.Enabled = false;
+                        }
+
+                        if (dataGridViewTimerTimerslogs.Rows.Count == 0)
+                        {
+                            chkBoxSortTimers.Enabled = false;
+                        }
+
+                        if (dataGridViewEmailEmailslogs.Rows.Count == 0)
+                        {
+                            chkBoxSortEmails.Enabled = false;
+                        }
+
+                        if (dataGridViewExtensionLogsExtensions.Rows.Count == 0)
+                        {
+                            chkBoxSortExtensions.Enabled = false;
+                        }
+
+                        if (dataGridViewSrvActServicelogs.Rows.Count == 0)
+                        {
+                            chkBoxSortServiceActions.Enabled = false;
+                        }
+
+                        if (dataGridViewTradWebRequestsScreenlogs.Rows.Count == 0)
+                        {
+                            chkBoxSortTradWebRequestsScreens.Enabled = false;
+                        }
                     }
                 }
 
@@ -1276,12 +1394,12 @@ namespace OutSystems_Log_Parser
                     category = comBoxIssueCategory.Text;
                     highlightError(category);
                 }
-
+                
                 if (bool_findKeyword)
                 {
-                    findKeyword();
+                    findKeyword2();
                 }
-
+                
                 if (bool_datetimeFilterSuccessful)
                 {
                     MessageBox.Show("The data was filtered by the datetime range provided", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1327,6 +1445,7 @@ namespace OutSystems_Log_Parser
             bool_findKeywordSuccessful = false;
             bool_screenshotSuccessful = false;
             bool_datetimeFilterSuccessful = false;
+            bool_fieldFilterSuccessful = false;
 
             dateTimePicker1.Text = "";
             dateTimePicker2.Text = "";
@@ -1340,8 +1459,12 @@ namespace OutSystems_Log_Parser
             numericUpDownPercentage.Value = 20;
 
             comBoxIssueCategory.SelectedIndex = -1;
-
+            comBoxField.SelectedIndex = -1;
+            comBoxFilterField.SelectedIndex = -1;
             comBoxReport.SelectedIndex = -1;
+
+            comBoxField.Items.Clear();
+            keywordsSaved.Clear();
 
             clearTextboxes(txtBoxDetailErrorLogs);
             clearTextboxes(txtBoxDetailGenerallogs);
@@ -1354,6 +1477,7 @@ namespace OutSystems_Log_Parser
             clearTextboxes(txtBoxDetailTimerlogs);
             clearTextboxes(txtBoxDetailsTimerTimerslogs);
             clearTextboxes(txtBoxDetailEmaillogs);
+            clearTextboxes(txtBoxDetailsEmailEmailslogs);
             clearTextboxes(txtBoxDetailExtensionlogs);
             clearTextboxes(txtBoxDetailExtExtensionlogs);
             clearTextboxes(txtBoxDetailServiceActionlogs);
@@ -1423,6 +1547,8 @@ namespace OutSystems_Log_Parser
             clearTables(dataGridViewTimerTimerslogs);
             clearTables(dataGridViewTimerTimersDurationlogs);
             clearTables(dataGridViewEmaillogs);
+            clearTables(dataGridViewEmailEmailslogs);
+            clearTables(dataGridViewEmailEmailsDurationlogs);
             clearTables(dataGridViewExtensionlogs);
             clearTables(dataGridViewExtensionLogsExtensions);
             clearTables(dataGridViewExtensionsDurationlogs);
@@ -1493,10 +1619,16 @@ namespace OutSystems_Log_Parser
                     }
                     else if (fileName == "email_logs.txt")
                     {
-                        string[] column_names = { "DATE_TIME", "SENT", "LAST_ERROR", "FROM", "TO", "SUBJECT",
-                                    "CC", "BCC", "NAME", "SIZE", "MESSAGE_ID", "ACTIVITY", "EMAIL_DEFINITION", "STORE_CONTENT",
+                        string[] column_names = { "DATE_TIME", "SENT", "ERROR_ID", "FROM", "TO", "SUBJECT",
+                                    "CC", "BCC", "ESPACE_NAME", "SIZE", "MESSAGE_ID", "ACTIVITY", "EMAIL_DEFINITION", "STORE_CONTENT",
                                     "IS_TEST_EMAIL", "ID", "TENANT_ID" };
                         populateTables(relativePath + "\\email_logs.txt", delimiters, column_names, dataGridViewEmaillogs);
+                    }
+                    else if (fileName == "email_logs_emails.txt")
+                    {
+                        string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "MODULE_NAME", "APPLICATION_NAME", "ESPACE_NAME", "MESSAGE",
+                                    "STACK", "FROM", "TO", "SUBJECT", "CC", "BCC", "IS_TEST_EMAIL", "ENVIRONMENT_INFORMATION", "ERROR_ID" };
+                        populateTables(relativePath + "\\email_logs_emails.txt", delimiters, column_names, dataGridViewEmailEmailslogs);
                     }
                     else if (fileName == "error_logs.txt")
                     {
@@ -1620,6 +1752,30 @@ namespace OutSystems_Log_Parser
                     {
                         string[] column_names = { "DATE_TIME", "DURATION_SECONDS", "CYCLIC_JOB_NAME", "MODULE_NAME", "APPLICATION_NAME", "ESPACE_NAME", "MESSAGE", "STACK", "ENVIRONMENT_INFORMATION", "ERROR_ID" };
                         populateTables(relativePath + "\\timer_logs_timers.txt", delimiters, column_names, dataGridViewTimerTimerslogs);
+                    }
+                    else if (fileName == "filter_action_names.txt")
+                    {
+                        comBoxField.Items.Add("Action Name");
+                    }
+                    else if (fileName == "filter_application_names.txt")
+                    {
+                        comBoxField.Items.Add("Application Name");
+                    }
+                    else if (fileName == "filter_cyclic_job_names.txt")
+                    {
+                        comBoxField.Items.Add("Cyclic Job Name");
+                    }
+                    else if (fileName == "filter_espace_names.txt")
+                    {
+                        comBoxField.Items.Add("Espace Name");
+                    }
+                    else if (fileName == "filter_extension_names.txt")
+                    {
+                        comBoxField.Items.Add("Extension Name");
+                    }
+                    else if (fileName == "filter_module_names.txt")
+                    {
+                        comBoxField.Items.Add("Module Name");
                     }
                     else if (fileName == "bpt_troubleshootingreport_logs.txt")
                     {
@@ -1868,6 +2024,8 @@ namespace OutSystems_Log_Parser
                     btnRemoveGarbage.BackColor = SystemColors.ControlLight;
                     numericUpDownPercentage.Enabled = true;
                     comBoxIssueCategory.Enabled = true;
+                    comBoxField.Enabled = true;
+                    btnFilterFIeld.Enabled = false;
                     btnHighlight.Enabled = false;
                     btnScreenshot.Enabled = false;
                     btnSearchKeyword.Enabled = true;
@@ -1877,6 +2035,7 @@ namespace OutSystems_Log_Parser
                     chkBoxSortWebServices.Checked = false;
                     chkBoxSortScrReqScreens.Checked = false;
                     chkBoxSortTimers.Checked = false;
+                    chkBoxSortEmails.Checked = false;
                     chkBoxSortExtensions.Checked = false;
                     chkBoxSortServiceActions.Checked = false;
                     chkBoxSortTradWebRequestsScreens.Checked = false;
@@ -1909,6 +2068,11 @@ namespace OutSystems_Log_Parser
                         chkBoxSortTimers.Enabled = true;
                     }
 
+                    if (dataGridViewEmailEmailslogs.Rows.Count > 0)
+                    {
+                        chkBoxSortEmails.Enabled = true;
+                    }
+
                     if (dataGridViewExtensionLogsExtensions.Rows.Count > 0)
                     {
                         chkBoxSortExtensions.Enabled = true;
@@ -1932,6 +2096,7 @@ namespace OutSystems_Log_Parser
                 else
                 {
                     btnFilter.Enabled = false;
+                    btnFilterFIeld.Enabled = false;
                     dateTimePicker1.Enabled = false;
                     maskedTextBox1.Enabled = false;
                     dateTimePicker2.Enabled = false;
@@ -1945,10 +2110,13 @@ namespace OutSystems_Log_Parser
                     btnSearchKeyword.Enabled = false;
                     txtBoxKeyword.Enabled = false;
                     comBoxReport.Enabled = false;
+                    comBoxField.Enabled = false;
+                    comBoxFilterField.Enabled = false;
                     chkBoxSortSlowSQLExtension.Checked = false;
                     chkBoxSortWebServices.Checked = false;
                     chkBoxSortScrReqScreens.Checked = false;
                     chkBoxSortTimers.Checked = false;
+                    chkBoxSortEmails.Checked = false;
                     chkBoxSortExtensions.Checked = false;
                     chkBoxSortServiceActions.Checked = false;
                     chkBoxSortTradWebRequestsScreens.Checked = false;
@@ -1958,6 +2126,7 @@ namespace OutSystems_Log_Parser
                     chkBoxSortWebServices.Enabled = false;
                     chkBoxSortScrReqScreens.Enabled = false;
                     chkBoxSortTimers.Enabled = false;
+                    chkBoxSortEmails.Enabled = false;
                     chkBoxSortExtensions.Enabled = false;
                     chkBoxSortServiceActions.Enabled = false;
                     chkBoxSortTradWebRequestsScreens.Enabled = false;
@@ -1967,6 +2136,7 @@ namespace OutSystems_Log_Parser
                     btnExportWebServiceTable.Enabled = false;
                     btnExportScrReqScreenTable.Enabled = false;
                     btnExportTimerTable.Enabled = false;
+                    btnExportEmailsTable.Enabled = false;
                     btnExportExtensionsTable.Enabled = false;
                     btnExportServiceActionsTable.Enabled = false;
                     btnExportScreenTable.Enabled = false;
@@ -2001,7 +2171,7 @@ namespace OutSystems_Log_Parser
 
             if (bool_findKeyword)
             {
-                findKeyword();
+                findKeyword2();
             }
 
             if (bool_removeGarbageSuccessful)
@@ -2075,11 +2245,6 @@ namespace OutSystems_Log_Parser
             if (bool_removeGarbage)
             {
                 removeGarbage();
-            }
-
-            if (bool_findKeyword)
-            {
-                findKeyword();
             }
 
             if (bool_highlightErrorSuccessful)
@@ -2191,6 +2356,7 @@ namespace OutSystems_Log_Parser
             tabPage62_MyClick = new TabControlClick(tabPage62_Click);
 
             btnFilter.Enabled = false;
+            btnFilterFIeld.Enabled = false;
             dateTimePicker1.Enabled = false;
             maskedTextBox1.Enabled = false;
             dateTimePicker2.Enabled = false;
@@ -2198,6 +2364,8 @@ namespace OutSystems_Log_Parser
             btnRemoveGarbage.Enabled = false;
             numericUpDownPercentage.Enabled = false;
             comBoxIssueCategory.Enabled = false;
+            comBoxField.Enabled = false;
+            comBoxFilterField.Enabled = false;
             btnHighlight.Enabled = false;
             btnScreenshot.Enabled = false;
             btnClearFilter.Enabled = false;
@@ -2208,6 +2376,7 @@ namespace OutSystems_Log_Parser
             chkBoxSortWebServices.Checked = false;
             chkBoxSortScrReqScreens.Checked = false;
             chkBoxSortTimers.Checked = false;
+            chkBoxSortEmails.Checked = false;
             chkBoxSortExtensions.Checked = false;
             chkBoxSortServiceActions.Checked = false;
             chkBoxSortTradWebRequestsScreens.Checked = false;
@@ -2217,6 +2386,7 @@ namespace OutSystems_Log_Parser
             chkBoxSortWebServices.Enabled = false;
             chkBoxSortScrReqScreens.Enabled = false;
             chkBoxSortTimers.Enabled = false;
+            chkBoxSortEmails.Enabled = false;
             chkBoxSortExtensions.Enabled = false;
             chkBoxSortServiceActions.Enabled = false;
             chkBoxSortTradWebRequestsScreens.Enabled = false;
@@ -2226,6 +2396,7 @@ namespace OutSystems_Log_Parser
             btnExportWebServiceTable.Enabled = false;
             btnExportScrReqScreenTable.Enabled = false;
             btnExportTimerTable.Enabled = false;
+            btnExportEmailsTable.Enabled = false;
             btnExportExtensionsTable.Enabled = false;
             btnExportServiceActionsTable.Enabled = false;
             btnExportScreenTable.Enabled = false;
@@ -2240,75 +2411,112 @@ namespace OutSystems_Log_Parser
         private void btnScreenshot_Click(object sender, EventArgs e)
         {
             string txtDetailErrorLogs = "";
+            string txtWinAppEventVieLogs = "";
+            string txtWinSecEventVieLogs = "";
+            string txtWinSysEventVieLogs = "";
+            string txtDetailAndromob = "";
+            string txtDetailIOSmob = "";
+            string txtDetailSerStudioRpt = "";
 
             if (!string.IsNullOrEmpty(txtBoxDetailErrorLogs.Text))
             {
                 DataGridViewRow row = this.dataGridViewErrorlogs.Rows[dataGridViewErrorlogs.CurrentCell.RowIndex];
-                txtDetailErrorLogs = "DATE_TIME: " + row.Cells["DATE_TIME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "MESSAGE: " + row.Cells["MESSAGE"].Value.ToString() + Environment.NewLine + Environment.NewLine + "STACK: " + row.Cells["STACK"].Value.ToString() + Environment.NewLine + Environment.NewLine + "MODULE_NAME: " + row.Cells["MODULE_NAME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "APPLICATION_NAME: " + row.Cells["APPLICATION_NAME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "SERVER: " + row.Cells["SERVER"].Value.ToString() + Environment.NewLine + Environment.NewLine + "ENVIRONMENT_INFORMATION: " + row.Cells["ENVIRONMENT_INFORMATION"].Value.ToString();
+                txtDetailErrorLogs = "DATE_TIME: " + row.Cells["DATE_TIME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "MESSAGE: " + row.Cells["MESSAGE"].Value.ToString() + Environment.NewLine + Environment.NewLine + "STACK: " + row.Cells["STACK"].Value.ToString() + Environment.NewLine + Environment.NewLine + "MODULE_NAME: " + row.Cells["MODULE_NAME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "APPLICATION_NAME: " + row.Cells["APPLICATION_NAME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "ESPACE_NAME: " + row.Cells["ESPACE_NAME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "SERVER: " + row.Cells["SERVER"].Value.ToString() + Environment.NewLine + Environment.NewLine + "ENVIRONMENT_INFORMATION: " + row.Cells["ENVIRONMENT_INFORMATION"].Value.ToString();
+            }
+            else if (!string.IsNullOrEmpty(txtBoxDetailAndroidLogs.Text))
+            {
+                DataGridViewRow row = this.dataGridViewAndroidlogs.Rows[dataGridViewAndroidlogs.CurrentCell.RowIndex];
+                txtDetailAndromob = "DATE_TIME: " + row.Cells["DATE_TIME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "ACTION_NAME: " + row.Cells["ACTION_NAME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "MESSAGE: " + row.Cells["MESSAGE"].Value.ToString();
+            }
+            else if (!string.IsNullOrEmpty(txtBoxDetailiOSLogs.Text))
+            {
+                DataGridViewRow row = this.dataGridViewiOSlogs.Rows[dataGridViewiOSlogs.CurrentCell.RowIndex];
+                txtDetailIOSmob = "DATE_TIME: " + row.Cells["DATE_TIME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "ACTION_NAME: " + row.Cells["ACTION_NAME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "MESSAGE: " + row.Cells["MESSAGE"].Value.ToString();
+            }
+            else if (!string.IsNullOrEmpty(txtBoxDetailServiceStudioLogs.Text))
+            {
+                DataGridViewRow row = this.dataGridViewServiceStudiologs.Rows[dataGridViewServiceStudiologs.CurrentCell.RowIndex];
+                txtDetailSerStudioRpt = "DATE_TIME: " + row.Cells["DATE_TIME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "ACTION_NAME: " + row.Cells["ACTION_NAME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "MESSAGE: " + row.Cells["MESSAGE"].Value.ToString();
+            }
+            else if (!string.IsNullOrEmpty(txtBoxDetailWinAppEventViewer.Text))
+            {
+                DataGridViewRow row = this.dataGridViewWinAppEventViewer.Rows[dataGridViewWinAppEventViewer.CurrentCell.RowIndex];
+                txtWinAppEventVieLogs = "DATE_TIME: " + row.Cells["DATE_TIME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "LEVEL: " + row.Cells["LEVEL"].Value.ToString() + Environment.NewLine + Environment.NewLine + "MESSAGE: " + row.Cells["MESSAGE"].Value.ToString() + Environment.NewLine + Environment.NewLine + "SOURCE: " + row.Cells["PROVIDER_NAME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "COMPUTER: " + row.Cells["COMPUTER"].Value.ToString();
+            }
+            else if (!string.IsNullOrEmpty(txtBoxDetailWinSecEventViewer.Text))
+            {
+                DataGridViewRow row = this.dataGridViewWinSecEventViewer.Rows[dataGridViewWinSecEventViewer.CurrentCell.RowIndex];
+                txtWinSecEventVieLogs = "DATE_TIME: " + row.Cells["DATE_TIME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "LEVEL: " + row.Cells["LEVEL"].Value.ToString() + Environment.NewLine + Environment.NewLine + "MESSAGE: " + row.Cells["MESSAGE"].Value.ToString() + Environment.NewLine + Environment.NewLine + "SOURCE: " + row.Cells["PROVIDER_NAME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "COMPUTER: " + row.Cells["COMPUTER"].Value.ToString();
+            }
+            else if (!string.IsNullOrEmpty(txtBoxDetailWinSysEventViewer.Text))
+            {
+                DataGridViewRow row = this.dataGridViewWinSysEventViewer.Rows[dataGridViewWinSysEventViewer.CurrentCell.RowIndex];
+                txtWinSysEventVieLogs = "DATE_TIME: " + row.Cells["DATE_TIME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "LEVEL: " + row.Cells["LEVEL"].Value.ToString() + Environment.NewLine + Environment.NewLine + "MESSAGE: " + row.Cells["MESSAGE"].Value.ToString() + Environment.NewLine + Environment.NewLine + "SOURCE: " + row.Cells["PROVIDER_NAME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "COMPUTER: " + row.Cells["COMPUTER"].Value.ToString();
             }
 
-            createScreenshot("detailed_error_logs", txtBoxDetailErrorLogs, txtDetailErrorLogs, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_general_logs", txtBoxDetailGenerallogs, txtBoxDetailGenerallogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_slowsql_logs", txtBoxDetailsSlowSQLlogs, txtBoxDetailsSlowSQLlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_slowextension_logs", txtBoxDetailsSlowExtensionlogs, txtBoxDetailsSlowExtensionlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_integrations_logs", txtBoxDetailIntegrationlogs, txtBoxDetailIntegrationlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_integrations_webservices_logs", txtBoxDetailsIntWebServiceslogs, txtBoxDetailsIntWebServiceslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_screen_requests_logs", txtBoxDetailScreenRequestslogs, txtBoxDetailScreenRequestslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_screen_requests_screen_logs", txtBoxDetailScrReqScreenlogs, txtBoxDetailScrReqScreenlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_timer_logs", txtBoxDetailTimerlogs, txtBoxDetailTimerlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_timer_timers_logs", txtBoxDetailsTimerTimerslogs, txtBoxDetailsTimerTimerslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_email_logs", txtBoxDetailEmaillogs, txtBoxDetailEmaillogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_extension_logs", txtBoxDetailExtensionlogs, txtBoxDetailExtensionlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_extension_extensions_logs", txtBoxDetailExtExtensionlogs, txtBoxDetailExtExtensionlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_service_action_logs", txtBoxDetailServiceActionlogs, txtBoxDetailServiceActionlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_service_action_serviceactions_logs", txtBoxDetailSrvActServicelogs, txtBoxDetailSrvActServicelogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_tradional_web_requests_logs", txtBoxDetailTradWebRequests, txtBoxDetailTradWebRequests.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_tradional_web_requests_screens_logs", txtBoxDetailTradWebRequestsScreenlogs, txtBoxDetailTradWebRequestsScreenlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_windows_application_viewer_logs", txtBoxDetailWinAppEventViewer, txtBoxDetailWinAppEventViewer.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_windows_system_viewer_logs", txtBoxDetailWinSysEventViewer, txtBoxDetailWinSysEventViewer.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_windows_security_viewer_logs", txtBoxDetailWinSecEventViewer, txtBoxDetailWinSecEventViewer.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_android_logs", txtBoxDetailAndroidLogs, txtBoxDetailAndroidLogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_ios_logs", txtBoxDetailiOSLogs, txtBoxDetailiOSLogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_iis_logs", txtDetailIISlogs, txtDetailIISlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_device_information_logs", txtBoxDetailDeviceInformationlogs, txtBoxDetailDeviceInformationlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_dev_info_count_logs", txtBoxDetailDevInfoCount, txtBoxDetailDevInfoCount.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_service_studio_logs", txtBoxDetailServiceStudioLogs, txtBoxDetailServiceStudioLogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_general_text_logs", txtBoxDetailGeneralTXTLogs, txtBoxDetailGeneralTXTLogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_bpt_reports_logs", txtBoxDetailBPTReportslogs, txtBoxDetailBPTReportslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_environment_capabilities_logs", txtBoxDetailEnvironmentCapabilitieslogs, txtBoxDetailEnvironmentCapabilitieslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_environments_logs", txtBoxDetailEnvironmentslogs, txtBoxDetailEnvironmentslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_full_error_dump_logs", txtBoxDetailFullErrorDumpslogs, txtBoxDetailFullErrorDumpslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_roles_logs", txtBoxDetailRoleslogs, txtBoxDetailRoleslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_roles_in_applications_logs", txtBoxDetailRolesInApplicationslogs, txtBoxDetailRolesInApplicationslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_roles_in_teams_logs", txtBoxDetailRolesInTeamslogs, txtBoxDetailRolesInTeamslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_sync_error_logs", txtBoxDetailSyncErrorslogs, txtBoxDetailSyncErrorslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_user_logs", txtBoxDetailUserlogs, txtBoxDetailUserlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_user_pool_logs", txtBoxDetailUserPoolslogs, txtBoxDetailUserPoolslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_application_logs", txtBoxDetailStagingApplogs, txtBoxDetailStagingApplogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_application_version_logs", txtBoxDetailStagingAppVerlogs, txtBoxDetailStagingAppVerlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_application_version_module_version_logs", txtBoxDetailStagingAppVerModuleVerlogs, txtBoxDetailStagingAppVerModuleVerlogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_change_logs", txtBoxDetailStagingChangelog, txtBoxDetailStagingChangelog.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_consumer_elements_logs", txtBoxDetailStagingConsumerElementslogs, txtBoxDetailStagingConsumerElementslogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_entity_configurations_logs", txtBoxDetailStagingEntityConfiguration, txtBoxDetailStagingEntityConfiguration.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_environment_application_version_logs", txtBoxDetailStagingEnviromentApplicationVersion, txtBoxDetailStagingEnviromentApplicationVersion.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_environment_application_cache_logs", txtBoxDetailStagingEnvironmentApplicationCache, txtBoxDetailStagingEnvironmentApplicationCache.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_environment_application_module_logs", txtBoxDetailStagingEnvironmentApplicationModule, txtBoxDetailStagingEnvironmentApplicationModule.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_environment_module_cache_logs", txtBoxDetailStagingEnvironmentModuleCache, txtBoxDetailStagingEnvironmentModuleCache.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_environment_module_running_logs", txtBoxDetailStagingEnvironmentModuleRunning, txtBoxDetailStagingEnvironmentModuleRunning.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_module_version_references_logs", txtBoxDetailStagingModuleVersionReferences, txtBoxDetailStagingModuleVersionReferences.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_modules_logs", txtBoxDetailStagingModules, txtBoxDetailStagingModules.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_producer_elements_logs", txtBoxDetailStagingProducerElements, txtBoxDetailStagingProducerElements.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_site_properties_logs", txtBoxDetailStagingSiteProperties, txtBoxDetailStagingSiteProperties.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_staging_logs", txtBoxDetailStaginglogs, txtBoxDetailStaginglogs.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_staging_application_version_logs", txtBoxDetailStagingApplicationVersion, txtBoxDetailStagingApplicationVersion.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_staging_message_logs", txtBoxDetailStagingMessage, txtBoxDetailStagingMessage.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_staging_module_inconsistency_logs", txtBoxDetailStagingModuleInconsistencies, txtBoxDetailStagingModuleInconsistencies.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_staging_module_version_logs", txtBoxDetailStagingModuleVersion, txtBoxDetailStagingModuleVersion.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_staging_module_version_publish_logs", txtBoxDetailStagingModuleVersionPublished, txtBoxDetailStagingModuleVersionPublished.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_staging_module_version_upload_logs", txtBoxDetailStagingModuleVersionUploaded, txtBoxDetailStagingModuleVersionUploaded.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_staging_option_logs", txtBoxDetailStagingOptions, txtBoxDetailStagingOptions.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_staging_oudated_application_logs", txtBoxDetailStagingOutdatedApplication, txtBoxDetailStagingOutdatedApplication.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
-            createScreenshot("detailed_staging_oudated_module_logs", txtBoxDetailStagingOutdatedModule, txtBoxDetailStagingOutdatedModule.Text, new Font("Times New Roman", 10), Color.Black, SystemColors.ControlLight);
+            createScreenshot("detailed_error_logs", txtBoxDetailErrorLogs, txtDetailErrorLogs, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_general_logs", txtBoxDetailGenerallogs, txtBoxDetailGenerallogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_slowsql_logs", txtBoxDetailsSlowSQLlogs, txtBoxDetailsSlowSQLlogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_slowextension_logs", txtBoxDetailsSlowExtensionlogs, txtBoxDetailsSlowExtensionlogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_integrations_logs", txtBoxDetailIntegrationlogs, txtBoxDetailIntegrationlogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_integrations_webservices_logs", txtBoxDetailsIntWebServiceslogs, txtBoxDetailsIntWebServiceslogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_screen_requests_logs", txtBoxDetailScreenRequestslogs, txtBoxDetailScreenRequestslogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_screen_requests_screen_logs", txtBoxDetailScrReqScreenlogs, txtBoxDetailScrReqScreenlogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_timer_logs", txtBoxDetailTimerlogs, txtBoxDetailTimerlogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_timer_timers_logs", txtBoxDetailsTimerTimerslogs, txtBoxDetailsTimerTimerslogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_email_logs", txtBoxDetailEmaillogs, txtBoxDetailEmaillogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_email_emails_logs", txtBoxDetailsEmailEmailslogs, txtBoxDetailsEmailEmailslogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_extension_logs", txtBoxDetailExtensionlogs, txtBoxDetailExtensionlogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_extension_extensions_logs", txtBoxDetailExtExtensionlogs, txtBoxDetailExtExtensionlogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_service_action_logs", txtBoxDetailServiceActionlogs, txtBoxDetailServiceActionlogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_service_action_serviceactions_logs", txtBoxDetailSrvActServicelogs, txtBoxDetailSrvActServicelogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_tradional_web_requests_logs", txtBoxDetailTradWebRequests, txtBoxDetailTradWebRequests.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_tradional_web_requests_screens_logs", txtBoxDetailTradWebRequestsScreenlogs, txtBoxDetailTradWebRequestsScreenlogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_windows_application_viewer_logs", txtBoxDetailWinAppEventViewer, txtWinAppEventVieLogs, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_windows_system_viewer_logs", txtBoxDetailWinSysEventViewer, txtWinSysEventVieLogs, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_windows_security_viewer_logs", txtBoxDetailWinSecEventViewer, txtWinSecEventVieLogs, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_android_logs", txtBoxDetailAndroidLogs, txtDetailAndromob, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_ios_logs", txtBoxDetailiOSLogs, txtDetailIOSmob, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_iis_logs", txtDetailIISlogs, txtDetailIISlogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_device_information_logs", txtBoxDetailDeviceInformationlogs, txtBoxDetailDeviceInformationlogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_dev_info_count_logs", txtBoxDetailDevInfoCount, txtBoxDetailDevInfoCount.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_service_studio_logs", txtBoxDetailServiceStudioLogs, txtDetailSerStudioRpt, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_general_text_logs", txtBoxDetailGeneralTXTLogs, txtBoxDetailGeneralTXTLogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_bpt_reports_logs", txtBoxDetailBPTReportslogs, txtBoxDetailBPTReportslogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_environment_capabilities_logs", txtBoxDetailEnvironmentCapabilitieslogs, txtBoxDetailEnvironmentCapabilitieslogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_environments_logs", txtBoxDetailEnvironmentslogs, txtBoxDetailEnvironmentslogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_full_error_dump_logs", txtBoxDetailFullErrorDumpslogs, txtBoxDetailFullErrorDumpslogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_roles_logs", txtBoxDetailRoleslogs, txtBoxDetailRoleslogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_roles_in_applications_logs", txtBoxDetailRolesInApplicationslogs, txtBoxDetailRolesInApplicationslogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_roles_in_teams_logs", txtBoxDetailRolesInTeamslogs, txtBoxDetailRolesInTeamslogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_sync_error_logs", txtBoxDetailSyncErrorslogs, txtBoxDetailSyncErrorslogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_user_logs", txtBoxDetailUserlogs, txtBoxDetailUserlogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_user_pool_logs", txtBoxDetailUserPoolslogs, txtBoxDetailUserPoolslogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_application_logs", txtBoxDetailStagingApplogs, txtBoxDetailStagingApplogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_application_version_logs", txtBoxDetailStagingAppVerlogs, txtBoxDetailStagingAppVerlogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_application_version_module_version_logs", txtBoxDetailStagingAppVerModuleVerlogs, txtBoxDetailStagingAppVerModuleVerlogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_change_logs", txtBoxDetailStagingChangelog, txtBoxDetailStagingChangelog.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_consumer_elements_logs", txtBoxDetailStagingConsumerElementslogs, txtBoxDetailStagingConsumerElementslogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_entity_configurations_logs", txtBoxDetailStagingEntityConfiguration, txtBoxDetailStagingEntityConfiguration.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_environment_application_version_logs", txtBoxDetailStagingEnviromentApplicationVersion, txtBoxDetailStagingEnviromentApplicationVersion.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_environment_application_cache_logs", txtBoxDetailStagingEnvironmentApplicationCache, txtBoxDetailStagingEnvironmentApplicationCache.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_environment_application_module_logs", txtBoxDetailStagingEnvironmentApplicationModule, txtBoxDetailStagingEnvironmentApplicationModule.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_environment_module_cache_logs", txtBoxDetailStagingEnvironmentModuleCache, txtBoxDetailStagingEnvironmentModuleCache.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_environment_module_running_logs", txtBoxDetailStagingEnvironmentModuleRunning, txtBoxDetailStagingEnvironmentModuleRunning.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_module_version_references_logs", txtBoxDetailStagingModuleVersionReferences, txtBoxDetailStagingModuleVersionReferences.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_modules_logs", txtBoxDetailStagingModules, txtBoxDetailStagingModules.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_producer_elements_logs", txtBoxDetailStagingProducerElements, txtBoxDetailStagingProducerElements.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_site_properties_logs", txtBoxDetailStagingSiteProperties, txtBoxDetailStagingSiteProperties.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_staging_logs", txtBoxDetailStaginglogs, txtBoxDetailStaginglogs.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_staging_application_version_logs", txtBoxDetailStagingApplicationVersion, txtBoxDetailStagingApplicationVersion.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_staging_message_logs", txtBoxDetailStagingMessage, txtBoxDetailStagingMessage.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_staging_module_inconsistency_logs", txtBoxDetailStagingModuleInconsistencies, txtBoxDetailStagingModuleInconsistencies.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_staging_module_version_logs", txtBoxDetailStagingModuleVersion, txtBoxDetailStagingModuleVersion.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_staging_module_version_publish_logs", txtBoxDetailStagingModuleVersionPublished, txtBoxDetailStagingModuleVersionPublished.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_staging_module_version_upload_logs", txtBoxDetailStagingModuleVersionUploaded, txtBoxDetailStagingModuleVersionUploaded.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_staging_option_logs", txtBoxDetailStagingOptions, txtBoxDetailStagingOptions.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_staging_oudated_application_logs", txtBoxDetailStagingOutdatedApplication, txtBoxDetailStagingOutdatedApplication.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
+            createScreenshot("detailed_staging_oudated_module_logs", txtBoxDetailStagingOutdatedModule, txtBoxDetailStagingOutdatedModule.Text, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
 
             if (bool_screenshotSuccessful)
             {
@@ -2321,13 +2529,13 @@ namespace OutSystems_Log_Parser
         {
             try
             {
-                if (!string.IsNullOrEmpty(text))
+                if (!string.IsNullOrEmpty(text.Trim()))
                 {
                     //first, create a dummy bitmap just to get a graphics object
                     Image img = new Bitmap(1, 1);
                     Graphics drawing = Graphics.FromImage(img);
 
-                    //insert a new line after every 10 words
+                    //insert a new line after every 7 words
                     StringBuilder sb = new StringBuilder(text);
                     int spaces = 0;
                     int length = sb.Length;
@@ -2337,7 +2545,7 @@ namespace OutSystems_Log_Parser
                         {
                             spaces++;
                         }
-                        if (spaces == 10)
+                        if (spaces == 7)
                         {
                             sb.Insert(i, Environment.NewLine);
                             spaces = 0;
@@ -2577,31 +2785,53 @@ namespace OutSystems_Log_Parser
 
         private void btnSearchKeyword_Click(object sender, EventArgs e)
         {
-            bool_findKeyword = true;
-
-            findKeyword();
-
-            if (bool_removeGarbage)
+            if (string.IsNullOrEmpty(txtBoxKeyword.Text))
             {
-                removeGarbage();
-            }
+                MessageBox.Show("Please enter a keyword to search for", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            if (bool_highlightError)
+                txtBoxKeyword.BackColor = Color.Orange;
+                txtBoxKeyword.Focus();
+            }
+            else
             {
-                category = comBoxIssueCategory.Text;
-                highlightError(category);
-            }
+                bool_findKeyword = true;
 
-            if (bool_findKeywordSuccessful)
-            {
-                MessageBox.Show("The keyword was found", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+                keywordsSaved.Add(txtBoxKeyword.Text);
 
-            btnSearchKeyword.Enabled = false;
-            txtBoxKeyword.Enabled = false;
+                countFindKeyword++;
+
+                findKeyword();
+
+                if (bool_removeGarbage)
+                {
+                    removeGarbage();
+                }
+
+                if (bool_highlightError)
+                {
+                    category = comBoxIssueCategory.Text;
+                    highlightError(category);
+                }
+
+                if (countFindKeyword != 5)
+                {
+                    txtBoxKeyword.Text = "";
+                }
+
+                if (countFindKeyword == 5)
+                {
+                    btnSearchKeyword.Enabled = false;
+                    txtBoxKeyword.Enabled = false;
+                }
+
+                if (bool_findKeywordSuccessful)
+                {
+                    MessageBox.Show("The keyword was found", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
 
-        private void highlightKeyword(DataGridView tableName, string dgvName)
+        private void highlightKeyword(DataGridView tableName, string dgvName, string myKeyword, int myCount)
         {
             try
             {
@@ -2619,10 +2849,33 @@ namespace OutSystems_Log_Parser
                             rowValues = rowValues + tableName.Rows[r].Cells[c].Value.ToString() + " ";
                             if (c == tableName.Columns.Count - 1)
                             {
-                                if (rowValues.ToLower().Contains(txtBoxKeyword.Text.ToLower()))
+                                if (rowValues.ToLower().Contains(myKeyword.ToLower()))
                                 {
-                                    tableName.Rows[r].DefaultCellStyle.BackColor = Color.FromArgb(255, 240, 240);
-                                    tableName.Rows[r].DefaultCellStyle.ForeColor = Color.Red;
+                                    if (myCount == 1)
+                                    {
+                                        tableName.Rows[r].DefaultCellStyle.BackColor = Color.FromArgb(255, 240, 240);
+                                        tableName.Rows[r].DefaultCellStyle.ForeColor = Color.Red;
+                                    }
+                                    else if (myCount == 2)
+                                    {
+                                        tableName.Rows[r].DefaultCellStyle.BackColor = Color.FromArgb(255, 247, 183);
+                                        tableName.Rows[r].DefaultCellStyle.ForeColor = Color.FromArgb(255, 108, 0);
+                                    }
+                                    if (myCount == 3)
+                                    {
+                                        tableName.Rows[r].DefaultCellStyle.BackColor = Color.FromArgb(245, 213, 255);
+                                        tableName.Rows[r].DefaultCellStyle.ForeColor = Color.Purple;
+                                    }
+                                    if (myCount == 4)
+                                    {
+                                        tableName.Rows[r].DefaultCellStyle.BackColor = Color.FromArgb(213, 255, 219);
+                                        tableName.Rows[r].DefaultCellStyle.ForeColor = Color.DarkGreen;
+                                    }
+                                    if (myCount == 5)
+                                    {
+                                        tableName.Rows[r].DefaultCellStyle.BackColor = Color.FromArgb(225, 255, 253);
+                                        tableName.Rows[r].DefaultCellStyle.ForeColor = Color.FromArgb(2, 181, 208);
+                                    }
 
                                     bool_findKeywordSuccessful = true;
 
@@ -2829,6 +3082,16 @@ namespace OutSystems_Log_Parser
             cellClick(dataGridViewTimerTimersDurationlogs, e, txtBoxDetailsTimerTimerslogs);
         }
 
+        private void dataGridViewEmailEmailslogs_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            cellClick(dataGridViewEmailEmailslogs, e, txtBoxDetailsEmailEmailslogs);
+        }
+
+        private void dataGridViewEmailEmailsDurationlogs_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            cellClick(dataGridViewEmailEmailsDurationlogs, e, txtBoxDetailsEmailEmailslogs);
+        }
+
         private void dataGridViewTradWebRequestsScreenlogs_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             cellClick(dataGridViewTradWebRequestsScreenlogs, e, txtBoxDetailTradWebRequestsScreenlogs);
@@ -2960,7 +3223,7 @@ namespace OutSystems_Log_Parser
             }
             else if (ctg == "Database")
             {
-                knownErrors_Errorlogs = new string[] { "truncated in table" };
+                knownErrors_Errorlogs = new string[] { "truncated in table", "dequeuing" };
                 knownErrors_WinAppEventViewer = new string[] { "ora-", "error closing", "error opening" };
                 knownErrors_WinSysEventViewer = new string[] { "error closing", "timed out" };
 
@@ -2970,7 +3233,7 @@ namespace OutSystems_Log_Parser
             }
             else if (ctg == "Logic")
             {
-                knownErrors_Errorlogs = new string[] { "url rewrite module error", "an error occurred in task", "a fatal error has occurred", "json deserialization", "unknown reference expression type email", "bad json escape sequence" };
+                knownErrors_Errorlogs = new string[] { "url rewrite module error", "an error occurred in task", "a fatal error has occurred", "json deserialization", "unknown reference expression type email", "bad json escape sequence", "dequeuing" };
                 knownErrors_Generallogs = new string[] { "system cannot find" };
                 knownErrors_WinAppEventViewer = new string[] { "error closing", "error opening" };
                 knownErrors_WinSysEventViewer = new string[] { "error closing", "timed out" };
@@ -3004,84 +3267,164 @@ namespace OutSystems_Log_Parser
 
         private void findKeyword()
         {
-            if (string.IsNullOrEmpty(txtBoxKeyword.Text))
+            foreach (string k in keywordsSaved)
             {
-                MessageBox.Show("Please enter a keyword to search for", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                int idx = keywordsSaved.IndexOf(k);
 
-                txtBoxKeyword.BackColor = Color.Orange;
-                txtBoxKeyword.Focus();
+                if (idx+1 == countFindKeyword)
+                {
+                    highlightKeyword(dataGridViewErrorlogs, "dataGridViewErrorlogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewGenerallogs, "dataGridViewGenerallogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewSlowSQLlogs, "dataGridViewSlowSQLlogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewSlowSQLDurationlogs, "dataGridViewSlowSQLDurationlogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewSlowExtensionlogs, "dataGridViewSlowExtensionlogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewSlowExtensionDurationlogs, "dataGridViewSlowExtensionDurationlogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewIntegrationslogs, "dataGridViewIntegrationslogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewIntWebServiceslogs, "dataGridViewIntWebServiceslogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewInWebServicesDurationlogs, "dataGridViewInWebServicesDurationlogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewScreenRequestslogs, "dataGridViewScreenRequestslogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewScreenRequestsScreenlogs, "dataGridViewScreenRequestsScreenlogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewScrReqScreenDurationlogs, "dataGridViewScrReqScreenDurationlogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewTimerlogs, "dataGridViewTimerlogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewTimerTimerslogs, "dataGridViewTimerTimerslogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewTimerTimersDurationlogs, "dataGridViewTimerTimersDurationlogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewEmaillogs, "dataGridViewEmaillogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewEmailEmailslogs, "dataGridViewEmailEmailslogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewEmailEmailsDurationlogs, "dataGridViewEmailEmailsDurationlogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewExtensionlogs, "dataGridViewExtensionlogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewExtensionLogsExtensions, "dataGridViewExtensionLogsExtensions", k, countFindKeyword);
+                    highlightKeyword(dataGridViewExtensionsDurationlogs, "dataGridViewExtensionsDurationlogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewServiceActionlogs, "dataGridViewServiceActionlogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewSrvActServicelogs, "dataGridViewSrvActServicelogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewSrvActServiceDurationlogs, "dataGridViewSrvActServiceDurationlogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewTradWebRequests, "dataGridViewTradWebRequests", k, countFindKeyword);
+                    highlightKeyword(dataGridViewTradWebRequestsScreenlogs, "dataGridViewTradWebRequestsScreenlogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewTradWebRequestsScreenDurationlogs, "dataGridViewTradWebRequestsScreenDurationlogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewIISDateTime, "dataGridViewIISDateTime", k, countFindKeyword);
+                    highlightKeyword(dataGridViewIISTimeTaken, "dataGridViewIISTimeTaken", k, countFindKeyword);
+                    highlightKeyword(dataGridViewWinAppEventViewer, "dataGridViewWinAppEventViewer", k, countFindKeyword);
+                    highlightKeyword(dataGridViewWinSysEventViewer, "dataGridViewWinSysEventViewer", k, countFindKeyword);
+                    highlightKeyword(dataGridViewWinSecEventViewer, "dataGridViewWinSecEventViewer", k, countFindKeyword);
+                    highlightKeyword(dataGridViewAndroidlogs, "dataGridViewAndroidlogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewiOSlogs, "dataGridViewiOSlogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewServiceStudiologs, "dataGridViewServiceStudiologs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewGeneralTXTlogs, "dataGridViewGeneralTXTlogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewBPTReportslogs, "dataGridViewBPTReportslogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewEnvironmentCapabilitieslogs, "dataGridViewEnvironmentCapabilitieslogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewEnvironmentslogs, "dataGridViewEnvironmentslogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewFullErrorDumps, "dataGridViewFullErrorDumps", k, countFindKeyword);
+                    highlightKeyword(dataGridViewRoleslogs, "dataGridViewRoleslogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewRolesInApplicationslogs, "dataGridViewRolesInApplicationslogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewRolesInTeamslogs, "dataGridViewRolesInTeamslogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewUserlogs, "dataGridViewUserlogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewUserPoolslogs, "dataGridViewUserPoolslogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewSyncErrorslogs, "dataGridViewSyncErrorslogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewStagingApplogs, "dataGridViewStagingApplogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewStagingAppVerlogs, "dataGridViewStagingAppVerlogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewStagingAppVerModuleVerlogs, "dataGridViewStagingAppVerModuleVerlogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewStagingChangelog, "dataGridViewStagingChangelog", k, countFindKeyword);
+                    highlightKeyword(dataGridViewStagingConsumerElements, "dataGridViewStagingConsumerElements", k, countFindKeyword);
+                    highlightKeyword(dataGridViewStagingEntityConfiguration, "dataGridViewStagingEntityConfiguration", k, countFindKeyword);
+                    highlightKeyword(dataGridViewStagingEnvironmentAppicationCache, "dataGridViewStagingEnvironmentAppicationCache", k, countFindKeyword);
+                    highlightKeyword(dataGridViewStagingEnvironmentApplicationModule, "dataGridViewStagingEnvironmentApplicationModule", k, countFindKeyword);
+                    highlightKeyword(dataGridViewStagingEnvironmentApplicationVersion, "dataGridViewStagingEnvironmentApplicationVersion", k, countFindKeyword);
+                    highlightKeyword(dataGridViewStagingEnvironmentModuleCache, "dataGridViewStagingEnvironmentModuleCache", k, countFindKeyword);
+                    highlightKeyword(dataGridViewStagingEnvironmentModuleRunning, "dataGridViewStagingEnvironmentModuleRunning", k, countFindKeyword);
+                    highlightKeyword(dataGridViewStagingModules, "dataGridViewStagingModules", k, countFindKeyword);
+                    highlightKeyword(dataGridViewStagingModuleVersionRefererences, "dataGridViewStagingModuleVersionRefererences", k, countFindKeyword);
+                    highlightKeyword(dataGridViewStagingProducerElements, "dataGridViewStagingProducerElements", k, countFindKeyword);
+                    highlightKeyword(dataGridViewStagingSiteProperties, "dataGridViewStagingSiteProperties", k, countFindKeyword);
+                    highlightKeyword(dataGridViewStaginglogs, "dataGridViewStaginglogs", k, countFindKeyword);
+                    highlightKeyword(dataGridViewStagingApplicationVersion, "dataGridViewStagingApplicationVersion", k, countFindKeyword);
+                    highlightKeyword(dataGridViewStagingMessage, "dataGridViewStagingMessage", k, countFindKeyword);
+                    highlightKeyword(dataGridViewStagingModuleInconsistencies, "dataGridViewStagingModuleInconsistencies", k, countFindKeyword);
+                    highlightKeyword(dataGridViewStagingModuleVersion, "dataGridViewStagingModuleVersion", k, countFindKeyword);
+                    highlightKeyword(dataGridViewStagingModuleVersionPublished, "dataGridViewStagingModuleVersionPublished", k, countFindKeyword);
+                    highlightKeyword(dataGridViewStagingModuleVersionUploaded, "dataGridViewStagingModuleVersionUploaded", k, countFindKeyword);
+                    highlightKeyword(dataGridViewStagingOptions, "dataGridViewStagingOptions", k, countFindKeyword);
+                    highlightKeyword(dataGridViewStagingOutdatedApplication, "dataGridViewStagingOutdatedApplication", k, countFindKeyword);
+                    highlightKeyword(dataGridViewStagingOutdatedModule, "dataGridViewStagingOutdatedModule", k, countFindKeyword);
+                }
             }
-            else
+        }
+
+        private void findKeyword2()
+        {
+            foreach (string k in keywordsSaved)
             {
-                highlightKeyword(dataGridViewErrorlogs, "dataGridViewErrorlogs");
-                highlightKeyword(dataGridViewGenerallogs, "dataGridViewGenerallogs");
-                highlightKeyword(dataGridViewSlowSQLlogs, "dataGridViewSlowSQLlogs");
-                highlightKeyword(dataGridViewSlowSQLDurationlogs, "dataGridViewSlowSQLDurationlogs");
-                highlightKeyword(dataGridViewSlowExtensionlogs, "dataGridViewSlowExtensionlogs");
-                highlightKeyword(dataGridViewSlowExtensionDurationlogs, "dataGridViewSlowExtensionDurationlogs");
-                highlightKeyword(dataGridViewIntegrationslogs, "dataGridViewIntegrationslogs");
-                highlightKeyword(dataGridViewIntWebServiceslogs, "dataGridViewIntWebServiceslogs");
-                highlightKeyword(dataGridViewInWebServicesDurationlogs, "dataGridViewInWebServicesDurationlogs");
-                highlightKeyword(dataGridViewScreenRequestslogs, "dataGridViewScreenRequestslogs");
-                highlightKeyword(dataGridViewScreenRequestsScreenlogs, "dataGridViewScreenRequestsScreenlogs");
-                highlightKeyword(dataGridViewScrReqScreenDurationlogs, "dataGridViewScrReqScreenDurationlogs");
-                highlightKeyword(dataGridViewTimerlogs, "dataGridViewTimerlogs");
-                highlightKeyword(dataGridViewTimerTimerslogs, "dataGridViewTimerTimerslogs");
-                highlightKeyword(dataGridViewTimerTimersDurationlogs, "dataGridViewTimerTimersDurationlogs");
-                highlightKeyword(dataGridViewEmaillogs, "dataGridViewEmaillogs");
-                highlightKeyword(dataGridViewExtensionlogs, "dataGridViewExtensionlogs");
-                highlightKeyword(dataGridViewExtensionLogsExtensions, "dataGridViewExtensionLogsExtensions");
-                highlightKeyword(dataGridViewExtensionsDurationlogs, "dataGridViewExtensionsDurationlogs");
-                highlightKeyword(dataGridViewServiceActionlogs, "dataGridViewServiceActionlogs");
-                highlightKeyword(dataGridViewSrvActServicelogs, "dataGridViewSrvActServicelogs");
-                highlightKeyword(dataGridViewSrvActServiceDurationlogs, "dataGridViewSrvActServiceDurationlogs");
-                highlightKeyword(dataGridViewTradWebRequests, "dataGridViewTradWebRequests");
-                highlightKeyword(dataGridViewTradWebRequestsScreenlogs, "dataGridViewTradWebRequestsScreenlogs");
-                highlightKeyword(dataGridViewTradWebRequestsScreenDurationlogs, "dataGridViewTradWebRequestsScreenDurationlogs");
-                highlightKeyword(dataGridViewIISDateTime, "dataGridViewIISDateTime");
-                highlightKeyword(dataGridViewIISTimeTaken, "dataGridViewIISTimeTaken");
-                highlightKeyword(dataGridViewWinAppEventViewer, "dataGridViewWinAppEventViewer");
-                highlightKeyword(dataGridViewWinSysEventViewer, "dataGridViewWinSysEventViewer");
-                highlightKeyword(dataGridViewWinSecEventViewer, "dataGridViewWinSecEventViewer");
-                highlightKeyword(dataGridViewAndroidlogs, "dataGridViewAndroidlogs");
-                highlightKeyword(dataGridViewiOSlogs, "dataGridViewiOSlogs");
-                highlightKeyword(dataGridViewServiceStudiologs, "dataGridViewServiceStudiologs");
-                highlightKeyword(dataGridViewGeneralTXTlogs, "dataGridViewGeneralTXTlogs");
-                highlightKeyword(dataGridViewBPTReportslogs, "dataGridViewBPTReportslogs");
-                highlightKeyword(dataGridViewEnvironmentCapabilitieslogs, "dataGridViewEnvironmentCapabilitieslogs");
-                highlightKeyword(dataGridViewEnvironmentslogs, "dataGridViewEnvironmentslogs");
-                highlightKeyword(dataGridViewFullErrorDumps, "dataGridViewFullErrorDumps");
-                highlightKeyword(dataGridViewRoleslogs, "dataGridViewRoleslogs");
-                highlightKeyword(dataGridViewRolesInApplicationslogs, "dataGridViewRolesInApplicationslogs");
-                highlightKeyword(dataGridViewRolesInTeamslogs, "dataGridViewRolesInTeamslogs");
-                highlightKeyword(dataGridViewUserlogs, "dataGridViewUserlogs");
-                highlightKeyword(dataGridViewUserPoolslogs, "dataGridViewUserPoolslogs");
-                highlightKeyword(dataGridViewSyncErrorslogs, "dataGridViewSyncErrorslogs");
-                highlightKeyword(dataGridViewStagingApplogs, "dataGridViewStagingApplogs");
-                highlightKeyword(dataGridViewStagingAppVerlogs, "dataGridViewStagingAppVerlogs");
-                highlightKeyword(dataGridViewStagingAppVerModuleVerlogs, "dataGridViewStagingAppVerModuleVerlogs");
-                highlightKeyword(dataGridViewStagingChangelog, "dataGridViewStagingChangelog");
-                highlightKeyword(dataGridViewStagingConsumerElements, "dataGridViewStagingConsumerElements");
-                highlightKeyword(dataGridViewStagingEntityConfiguration, "dataGridViewStagingEntityConfiguration");
-                highlightKeyword(dataGridViewStagingEnvironmentAppicationCache, "dataGridViewStagingEnvironmentAppicationCache");
-                highlightKeyword(dataGridViewStagingEnvironmentApplicationModule, "dataGridViewStagingEnvironmentApplicationModule");
-                highlightKeyword(dataGridViewStagingEnvironmentApplicationVersion, "dataGridViewStagingEnvironmentApplicationVersion");
-                highlightKeyword(dataGridViewStagingEnvironmentModuleCache, "dataGridViewStagingEnvironmentModuleCache");
-                highlightKeyword(dataGridViewStagingEnvironmentModuleRunning, "dataGridViewStagingEnvironmentModuleRunning");
-                highlightKeyword(dataGridViewStagingModules, "dataGridViewStagingModules");
-                highlightKeyword(dataGridViewStagingModuleVersionRefererences, "dataGridViewStagingModuleVersionRefererences");
-                highlightKeyword(dataGridViewStagingProducerElements, "dataGridViewStagingProducerElements");
-                highlightKeyword(dataGridViewStagingSiteProperties, "dataGridViewStagingSiteProperties");
-                highlightKeyword(dataGridViewStaginglogs, "dataGridViewStaginglogs");
-                highlightKeyword(dataGridViewStagingApplicationVersion, "dataGridViewStagingApplicationVersion");
-                highlightKeyword(dataGridViewStagingMessage, "dataGridViewStagingMessage");
-                highlightKeyword(dataGridViewStagingModuleInconsistencies, "dataGridViewStagingModuleInconsistencies");
-                highlightKeyword(dataGridViewStagingModuleVersion, "dataGridViewStagingModuleVersion");
-                highlightKeyword(dataGridViewStagingModuleVersionPublished, "dataGridViewStagingModuleVersionPublished");
-                highlightKeyword(dataGridViewStagingModuleVersionUploaded, "dataGridViewStagingModuleVersionUploaded");
-                highlightKeyword(dataGridViewStagingOptions, "dataGridViewStagingOptions");
-                highlightKeyword(dataGridViewStagingOutdatedApplication, "dataGridViewStagingOutdatedApplication");
-                highlightKeyword(dataGridViewStagingOutdatedModule, "dataGridViewStagingOutdatedModule");
+                int idx = keywordsSaved.IndexOf(k);
+
+                highlightKeyword(dataGridViewErrorlogs, "dataGridViewErrorlogs", k, idx + 1);
+                highlightKeyword(dataGridViewGenerallogs, "dataGridViewGenerallogs", k, idx + 1);
+                highlightKeyword(dataGridViewSlowSQLlogs, "dataGridViewSlowSQLlogs", k, idx + 1);
+                highlightKeyword(dataGridViewSlowSQLDurationlogs, "dataGridViewSlowSQLDurationlogs", k, idx + 1);
+                highlightKeyword(dataGridViewSlowExtensionlogs, "dataGridViewSlowExtensionlogs", k, idx + 1);
+                highlightKeyword(dataGridViewSlowExtensionDurationlogs, "dataGridViewSlowExtensionDurationlogs", k, idx + 1);
+                highlightKeyword(dataGridViewIntegrationslogs, "dataGridViewIntegrationslogs", k, idx + 1);
+                highlightKeyword(dataGridViewIntWebServiceslogs, "dataGridViewIntWebServiceslogs", k, idx + 1);
+                highlightKeyword(dataGridViewInWebServicesDurationlogs, "dataGridViewInWebServicesDurationlogs", k, idx + 1);
+                highlightKeyword(dataGridViewScreenRequestslogs, "dataGridViewScreenRequestslogs", k, idx + 1);
+                highlightKeyword(dataGridViewScreenRequestsScreenlogs, "dataGridViewScreenRequestsScreenlogs", k, idx + 1);
+                highlightKeyword(dataGridViewScrReqScreenDurationlogs, "dataGridViewScrReqScreenDurationlogs", k, idx + 1);
+                highlightKeyword(dataGridViewTimerlogs, "dataGridViewTimerlogs", k, idx + 1);
+                highlightKeyword(dataGridViewTimerTimerslogs, "dataGridViewTimerTimerslogs", k, idx + 1);
+                highlightKeyword(dataGridViewTimerTimersDurationlogs, "dataGridViewTimerTimersDurationlogs", k, idx + 1);
+                highlightKeyword(dataGridViewEmaillogs, "dataGridViewEmaillogs", k, idx + 1);
+                highlightKeyword(dataGridViewEmailEmailslogs, "dataGridViewEmailEmailslogs", k, idx + 1);
+                highlightKeyword(dataGridViewEmailEmailsDurationlogs, "dataGridViewEmailEmailsDurationlogs", k, idx + 1);
+                highlightKeyword(dataGridViewExtensionlogs, "dataGridViewExtensionlogs", k, idx + 1);
+                highlightKeyword(dataGridViewExtensionLogsExtensions, "dataGridViewExtensionLogsExtensions", k, idx + 1);
+                highlightKeyword(dataGridViewExtensionsDurationlogs, "dataGridViewExtensionsDurationlogs", k, idx + 1);
+                highlightKeyword(dataGridViewServiceActionlogs, "dataGridViewServiceActionlogs", k, idx + 1);
+                highlightKeyword(dataGridViewSrvActServicelogs, "dataGridViewSrvActServicelogs", k, idx + 1);
+                highlightKeyword(dataGridViewSrvActServiceDurationlogs, "dataGridViewSrvActServiceDurationlogs", k, idx + 1);
+                highlightKeyword(dataGridViewTradWebRequests, "dataGridViewTradWebRequests", k, idx + 1);
+                highlightKeyword(dataGridViewTradWebRequestsScreenlogs, "dataGridViewTradWebRequestsScreenlogs", k, idx + 1);
+                highlightKeyword(dataGridViewTradWebRequestsScreenDurationlogs, "dataGridViewTradWebRequestsScreenDurationlogs", k, idx + 1);
+                highlightKeyword(dataGridViewIISDateTime, "dataGridViewIISDateTime", k, idx + 1);
+                highlightKeyword(dataGridViewIISTimeTaken, "dataGridViewIISTimeTaken", k, idx + 1);
+                highlightKeyword(dataGridViewWinAppEventViewer, "dataGridViewWinAppEventViewer", k, idx + 1);
+                highlightKeyword(dataGridViewWinSysEventViewer, "dataGridViewWinSysEventViewer", k, idx + 1);
+                highlightKeyword(dataGridViewWinSecEventViewer, "dataGridViewWinSecEventViewer", k, idx + 1);
+                highlightKeyword(dataGridViewAndroidlogs, "dataGridViewAndroidlogs", k, idx + 1);
+                highlightKeyword(dataGridViewiOSlogs, "dataGridViewiOSlogs", k, idx + 1);
+                highlightKeyword(dataGridViewServiceStudiologs, "dataGridViewServiceStudiologs", k, idx + 1);
+                highlightKeyword(dataGridViewGeneralTXTlogs, "dataGridViewGeneralTXTlogs", k, idx + 1);
+                highlightKeyword(dataGridViewBPTReportslogs, "dataGridViewBPTReportslogs", k, idx + 1);
+                highlightKeyword(dataGridViewEnvironmentCapabilitieslogs, "dataGridViewEnvironmentCapabilitieslogs", k, idx + 1);
+                highlightKeyword(dataGridViewEnvironmentslogs, "dataGridViewEnvironmentslogs", k, idx + 1);
+                highlightKeyword(dataGridViewFullErrorDumps, "dataGridViewFullErrorDumps", k, idx + 1);
+                highlightKeyword(dataGridViewRoleslogs, "dataGridViewRoleslogs", k, idx + 1);
+                highlightKeyword(dataGridViewRolesInApplicationslogs, "dataGridViewRolesInApplicationslogs", k, idx + 1);
+                highlightKeyword(dataGridViewRolesInTeamslogs, "dataGridViewRolesInTeamslogs", k, idx + 1);
+                highlightKeyword(dataGridViewUserlogs, "dataGridViewUserlogs", k, idx + 1);
+                highlightKeyword(dataGridViewUserPoolslogs, "dataGridViewUserPoolslogs", k, idx + 1);
+                highlightKeyword(dataGridViewSyncErrorslogs, "dataGridViewSyncErrorslogs", k, idx + 1);
+                highlightKeyword(dataGridViewStagingApplogs, "dataGridViewStagingApplogs", k, idx + 1);
+                highlightKeyword(dataGridViewStagingAppVerlogs, "dataGridViewStagingAppVerlogs", k, idx + 1);
+                highlightKeyword(dataGridViewStagingAppVerModuleVerlogs, "dataGridViewStagingAppVerModuleVerlogs", k, idx + 1);
+                highlightKeyword(dataGridViewStagingChangelog, "dataGridViewStagingChangelog", k, idx + 1);
+                highlightKeyword(dataGridViewStagingConsumerElements, "dataGridViewStagingConsumerElements", k, idx + 1);
+                highlightKeyword(dataGridViewStagingEntityConfiguration, "dataGridViewStagingEntityConfiguration", k, idx + 1);
+                highlightKeyword(dataGridViewStagingEnvironmentAppicationCache, "dataGridViewStagingEnvironmentAppicationCache", k, idx + 1);
+                highlightKeyword(dataGridViewStagingEnvironmentApplicationModule, "dataGridViewStagingEnvironmentApplicationModule", k, idx + 1);
+                highlightKeyword(dataGridViewStagingEnvironmentApplicationVersion, "dataGridViewStagingEnvironmentApplicationVersion", k, idx + 1);
+                highlightKeyword(dataGridViewStagingEnvironmentModuleCache, "dataGridViewStagingEnvironmentModuleCache", k, idx + 1);
+                highlightKeyword(dataGridViewStagingEnvironmentModuleRunning, "dataGridViewStagingEnvironmentModuleRunning", k, idx + 1);
+                highlightKeyword(dataGridViewStagingModules, "dataGridViewStagingModules", k, idx + 1);
+                highlightKeyword(dataGridViewStagingModuleVersionRefererences, "dataGridViewStagingModuleVersionRefererences", k, idx + 1);
+                highlightKeyword(dataGridViewStagingProducerElements, "dataGridViewStagingProducerElements", k, idx + 1);
+                highlightKeyword(dataGridViewStagingSiteProperties, "dataGridViewStagingSiteProperties", k, idx + 1);
+                highlightKeyword(dataGridViewStaginglogs, "dataGridViewStaginglogs", k, idx + 1);
+                highlightKeyword(dataGridViewStagingApplicationVersion, "dataGridViewStagingApplicationVersion", k, idx + 1);
+                highlightKeyword(dataGridViewStagingMessage, "dataGridViewStagingMessage", k, idx + 1);
+                highlightKeyword(dataGridViewStagingModuleInconsistencies, "dataGridViewStagingModuleInconsistencies", k, idx + 1);
+                highlightKeyword(dataGridViewStagingModuleVersion, "dataGridViewStagingModuleVersion", k, idx + 1);
+                highlightKeyword(dataGridViewStagingModuleVersionPublished, "dataGridViewStagingModuleVersionPublished", k, idx + 1);
+                highlightKeyword(dataGridViewStagingModuleVersionUploaded, "dataGridViewStagingModuleVersionUploaded", k, idx + 1);
+                highlightKeyword(dataGridViewStagingOptions, "dataGridViewStagingOptions", k, idx + 1);
+                highlightKeyword(dataGridViewStagingOutdatedApplication, "dataGridViewStagingOutdatedApplication", k, idx + 1);
+                highlightKeyword(dataGridViewStagingOutdatedModule, "dataGridViewStagingOutdatedModule", k, idx + 1);
             }
         }
 
@@ -3473,7 +3816,7 @@ namespace OutSystems_Log_Parser
                 tabPage9_MyClick(sender, tabControlEventArgsTab9);
                 tabPage9_Click(sender, tabControlEventArgsTab9);
             }
-            else if (dgvName == "dataGridViewEmaillogs")
+            else if (dgvName == "dataGridViewEmaillogs" || dgvName == "dataGridViewEmailEmailslogs" || dgvName == "dataGridViewEmailEmailsDurationlogs")
             {
                 tabControlEventArgsTab1 = new TabControlEventArgs(tabPage1, 0, tabControlAction);
                 tabPage1_MyClick(sender, tabControlEventArgsTab1);
@@ -4033,101 +4376,141 @@ namespace OutSystems_Log_Parser
 
         private void chkBoxSortSlowSQLExtension_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkBoxSortSlowSQLExtension.Checked == true)
+            try
             {
-                if (dataGridViewSlowSQLlogs.Rows.Count > 0)
+                if (chkBoxSortSlowSQLExtension.Checked == true)
                 {
-                    var sortSlowSQLDuration = (dataGridViewSlowSQLlogs.Rows.Cast<DataGridViewRow>()
-                        .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null)
-                        .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ModuleName = r.Cells[2].Value, ApplicationName = r.Cells[3].Value, ActionName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
-                        .GroupBy(slowsqltime => slowsqltime)
-                        .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
-                        .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+                    if (dataGridViewSlowSQLlogs.Rows.Count > 0)
+                    {
+                        var sortSlowSQLDuration = (dataGridViewSlowSQLlogs.Rows.Cast<DataGridViewRow>()
+                            .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null)
+                            .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ModuleName = r.Cells[2].Value, ApplicationName = r.Cells[3].Value, ActionName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
+                            .GroupBy(slowsqltime => slowsqltime)
+                            .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                            .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
 
-                    dataGridViewSlowSQLDurationlogs.DataSource = sortSlowSQLDuration;
+                        dataGridViewSlowSQLDurationlogs.DataSource = sortSlowSQLDuration;
+                    }
+
+                    if (dataGridViewSlowExtensionlogs.Rows.Count > 0)
+                    {
+                        var sortSlowExtensionDuration = (dataGridViewSlowExtensionlogs.Rows.Cast<DataGridViewRow>()
+                            .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null)
+                            .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ModuleName = r.Cells[2].Value, ApplicationName = r.Cells[3].Value, ActionName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
+                            .GroupBy(slowexttime => slowexttime)
+                            .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                            .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+
+                        dataGridViewSlowExtensionDurationlogs.DataSource = sortSlowExtensionDuration;
+                    }
+
+                    btnExportSlowSQLExtensionTables.Enabled = true;
                 }
-
-                if (dataGridViewSlowExtensionlogs.Rows.Count > 0)
-                {
-                    var sortSlowExtensionDuration = (dataGridViewSlowExtensionlogs.Rows.Cast<DataGridViewRow>()
-                        .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null)
-                        .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ModuleName = r.Cells[2].Value, ApplicationName = r.Cells[3].Value, ActionName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
-                        .GroupBy(slowexttime => slowexttime)
-                        .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
-                        .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
-
-                    dataGridViewSlowExtensionDurationlogs.DataSource = sortSlowExtensionDuration;
-                }
-
-                btnExportSlowSQLExtensionTables.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
             }
         }
 
         private void chkBoxSortWebServices_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkBoxSortWebServices.Checked == true)
+            try
             {
-                var sortWebServicesDuration = (dataGridViewIntWebServiceslogs.Rows.Cast<DataGridViewRow>()
-                            .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null && r.Cells[10].Value != null)
-                            .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ModuleName = r.Cells[2].Value, ApplicationName = r.Cells[3].Value, ActionName = r.Cells[4].Value, ActionType = r.Cells[5].Value, EspaceName = r.Cells[6].Value, Message = r.Cells[7].Value, Stack = r.Cells[8].Value, EnvironmentInformation = r.Cells[9].Value, ErrorID = r.Cells[10].Value })
-                            .GroupBy(srtwebsrvs => srtwebsrvs)
-                            .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
-                            .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ACTION_TYPE = g.Key.ActionType, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+                if (chkBoxSortWebServices.Checked == true)
+                {
+                    var sortWebServicesDuration = (dataGridViewIntWebServiceslogs.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null && r.Cells[10].Value != null)
+                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ModuleName = r.Cells[2].Value, ApplicationName = r.Cells[3].Value, ActionName = r.Cells[4].Value, ActionType = r.Cells[5].Value, EspaceName = r.Cells[6].Value, Message = r.Cells[7].Value, Stack = r.Cells[8].Value, EnvironmentInformation = r.Cells[9].Value, ErrorID = r.Cells[10].Value })
+                                .GroupBy(srtwebsrvs => srtwebsrvs)
+                                .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                                .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ACTION_TYPE = g.Key.ActionType, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
 
-                dataGridViewInWebServicesDurationlogs.DataSource = sortWebServicesDuration;
+                    dataGridViewInWebServicesDurationlogs.DataSource = sortWebServicesDuration;
 
-                btnExportWebServiceTable.Enabled = true;
+                    btnExportWebServiceTable.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
             }
         }
 
         private void chkBoxSortTimers_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkBoxSortTimers.Checked == true)
+            try
             {
-                var sortTimersDuration = (dataGridViewTimerTimerslogs.Rows.Cast<DataGridViewRow>()
-                            .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null)
-                            .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, CyclicJobNameName = r.Cells[2].Value, ModuleName = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
-                            .GroupBy(usernametime => usernametime)
-                            .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
-                            .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, CYCLIC_JOB_NAME = g.Key.CyclicJobNameName, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK =g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+                if (chkBoxSortTimers.Checked == true)
+                {
+                    var sortTimersDuration = (dataGridViewTimerTimerslogs.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null)
+                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, CyclicJobNameName = r.Cells[2].Value, ModuleName = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
+                                .GroupBy(srttimers => srttimers)
+                                .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                                .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, CYCLIC_JOB_NAME = g.Key.CyclicJobNameName, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
 
-                dataGridViewTimerTimersDurationlogs.DataSource = sortTimersDuration;
+                    dataGridViewTimerTimersDurationlogs.DataSource = sortTimersDuration;
 
-                btnExportTimerTable.Enabled = true;
+                    btnExportTimerTable.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
             }
         }
 
         private void chkBoxSortTradWebRequestsScreens_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkBoxSortTradWebRequestsScreens.Checked == true)
+            try
             {
-                var sortScreenssDuration = (dataGridViewTradWebRequestsScreenlogs.Rows.Cast<DataGridViewRow>()
-                            .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null)
-                            .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, Screen = r.Cells[2].Value, ScreenType = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, ActionName = r.Cells[5].Value, EspaceName = r.Cells[6].Value })
-                            .GroupBy(srtscreens => srtscreens)
-                            .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
-                            .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, SCREEN = g.Key.Screen, SCREEN_TYPE = g.Key.ScreenType, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ESPACE_NAME = g.Key.EspaceName })).ToList();
+                if (chkBoxSortTradWebRequestsScreens.Checked == true)
+                {
+                    var sortScreenssDuration = (dataGridViewTradWebRequestsScreenlogs.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null)
+                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, Screen = r.Cells[2].Value, ScreenType = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, ActionName = r.Cells[5].Value, EspaceName = r.Cells[6].Value })
+                                .GroupBy(srtscreens => srtscreens)
+                                .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                                .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, SCREEN = g.Key.Screen, SCREEN_TYPE = g.Key.ScreenType, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ESPACE_NAME = g.Key.EspaceName })).ToList();
 
-                dataGridViewTradWebRequestsScreenDurationlogs.DataSource = sortScreenssDuration;
+                    dataGridViewTradWebRequestsScreenDurationlogs.DataSource = sortScreenssDuration;
 
-                btnExportScreenTable.Enabled = true;
+                    btnExportScreenTable.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
             }
         }
 
         private void chkBoxSortExtensions_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkBoxSortExtensions.Checked == true)
+            try
             {
-                var sortExtensionsDuration = (dataGridViewExtensionLogsExtensions.Rows.Cast<DataGridViewRow>()
-                            .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null && r.Cells[10].Value != null)
-                            .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ExtensionName = r.Cells[2].Value, ModuleName = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, ActionName = r.Cells[5].Value, EspaceName = r.Cells[6].Value, Message = r.Cells[7].Value, Stack = r.Cells[8].Value, EnvironmentInformation = r.Cells[9].Value, ErrorID = r.Cells[10].Value })
-                            .GroupBy(srtexts => srtexts)
-                            .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
-                            .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, EXTENSION_NAME = g.Key.ExtensionName, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+                if (chkBoxSortExtensions.Checked == true)
+                {
+                    var sortExtensionsDuration = (dataGridViewExtensionLogsExtensions.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null && r.Cells[10].Value != null)
+                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ExtensionName = r.Cells[2].Value, ModuleName = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, ActionName = r.Cells[5].Value, EspaceName = r.Cells[6].Value, Message = r.Cells[7].Value, Stack = r.Cells[8].Value, EnvironmentInformation = r.Cells[9].Value, ErrorID = r.Cells[10].Value })
+                                .GroupBy(srtexts => srtexts)
+                                .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                                .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, EXTENSION_NAME = g.Key.ExtensionName, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
 
-                dataGridViewExtensionsDurationlogs.DataSource = sortExtensionsDuration;
+                    dataGridViewExtensionsDurationlogs.DataSource = sortExtensionsDuration;
 
-                btnExportExtensionsTable.Enabled = true;
+                    btnExportExtensionsTable.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
             }
         }
 
@@ -4138,18 +4521,26 @@ namespace OutSystems_Log_Parser
 
         private void chkBoxSortScrReqScreens_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkBoxSortScrReqScreens.Checked == true)
+            try
             {
-                var sortScrReqScreenDuration = (dataGridViewScreenRequestsScreenlogs.Rows.Cast<DataGridViewRow>()
-                            .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null)
-                            .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ScreenName = r.Cells[2].Value, ModuleName = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
-                            .GroupBy(srtscrreqs => srtscrreqs)
-                            .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
-                            .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, SCREEN = g.Key.ScreenName, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+                if (chkBoxSortScrReqScreens.Checked == true)
+                {
+                    var sortScrReqScreenDuration = (dataGridViewScreenRequestsScreenlogs.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null)
+                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ScreenName = r.Cells[2].Value, ModuleName = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
+                                .GroupBy(srtscrreqs => srtscrreqs)
+                                .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                                .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, SCREEN = g.Key.ScreenName, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
 
-                dataGridViewScrReqScreenDurationlogs.DataSource = sortScrReqScreenDuration;
+                    dataGridViewScrReqScreenDurationlogs.DataSource = sortScrReqScreenDuration;
 
-                btnExportScrReqScreenTable.Enabled = true;
+                    btnExportScrReqScreenTable.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
             }
         }
 
@@ -4160,18 +4551,26 @@ namespace OutSystems_Log_Parser
 
         private void chkBoxSortServiceActions_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkBoxSortServiceActions.Checked == true)
+            try
             {
-                var sortServiceActionsDuration = (dataGridViewSrvActServicelogs.Rows.Cast<DataGridViewRow>()
-                            .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null)
-                            .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ActionName = r.Cells[2].Value, ModuleName = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
-                            .GroupBy(srtsrvacts => srtsrvacts)
-                            .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
-                            .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, ACTION_NAME = g.Key.ActionName, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+                if (chkBoxSortServiceActions.Checked == true)
+                {
+                    var sortServiceActionsDuration = (dataGridViewSrvActServicelogs.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null)
+                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ActionName = r.Cells[2].Value, ModuleName = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
+                                .GroupBy(srtsrvacts => srtsrvacts)
+                                .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                                .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, ACTION_NAME = g.Key.ActionName, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
 
-                dataGridViewSrvActServiceDurationlogs.DataSource = sortServiceActionsDuration;
+                    dataGridViewSrvActServiceDurationlogs.DataSource = sortServiceActionsDuration;
 
-                btnExportServiceActionsTable.Enabled = true;
+                    btnExportServiceActionsTable.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
             }
         }
 
@@ -4182,35 +4581,51 @@ namespace OutSystems_Log_Parser
 
         private void chkBoxSortIIS_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkBoxSortIIS.Checked == true)
+            try
             {
-                var sortIISDuration = (dataGridViewIISDateTime.Rows.Cast<DataGridViewRow>()
-                            .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null && r.Cells[10].Value != null && r.Cells[11].Value != null && r.Cells[12].Value != null && r.Cells[13].Value != null)
-                            .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, HttpCode = r.Cells[2].Value, HttpSubcode = r.Cells[3].Value, WindowsErrorCode = r.Cells[4].Value, Clientip = r.Cells[5].Value, Serverip = r.Cells[6].Value, ServerPort = r.Cells[7].Value, Method = r.Cells[8].Value, UriStem = r.Cells[9].Value, UriQuery = r.Cells[10].Value, Username = r.Cells[11].Value, Browser = r.Cells[12].Value, Referrer = r.Cells[13].Value })
-                            .GroupBy(srtiistime => srtiistime)
-                            .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
-                            .Select(g => new { TIME_TAKEN_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, HTTP_CODE = g.Key.HttpCode, HTTP_SUBCODE = g.Key.HttpSubcode, WINDOWS_ERROR_CODE = g.Key.WindowsErrorCode, CLIENT_IP = g.Key.Clientip, SERVER_IP = g.Key.Serverip, SERVER_PORT = g.Key.ServerPort, METHOD = g.Key.Method, URI_STEM = g.Key.UriStem, URI_QUERY = g.Key.UriQuery, USERNAME = g.Key.Username, BROWSER = g.Key.Browser, REFERRER = g.Key.Referrer })).ToList();
+                if (chkBoxSortIIS.Checked == true)
+                {
+                    var sortIISDuration = (dataGridViewIISDateTime.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null && r.Cells[10].Value != null && r.Cells[11].Value != null && r.Cells[12].Value != null && r.Cells[13].Value != null)
+                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, HttpCode = r.Cells[2].Value, HttpSubcode = r.Cells[3].Value, WindowsErrorCode = r.Cells[4].Value, Clientip = r.Cells[5].Value, Serverip = r.Cells[6].Value, ServerPort = r.Cells[7].Value, Method = r.Cells[8].Value, UriStem = r.Cells[9].Value, UriQuery = r.Cells[10].Value, Username = r.Cells[11].Value, Browser = r.Cells[12].Value, Referrer = r.Cells[13].Value })
+                                .GroupBy(srtiistime => srtiistime)
+                                .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                                .Select(g => new { TIME_TAKEN_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, HTTP_CODE = g.Key.HttpCode, HTTP_SUBCODE = g.Key.HttpSubcode, WINDOWS_ERROR_CODE = g.Key.WindowsErrorCode, CLIENT_IP = g.Key.Clientip, SERVER_IP = g.Key.Serverip, SERVER_PORT = g.Key.ServerPort, METHOD = g.Key.Method, URI_STEM = g.Key.UriStem, URI_QUERY = g.Key.UriQuery, USERNAME = g.Key.Username, BROWSER = g.Key.Browser, REFERRER = g.Key.Referrer })).ToList();
 
-                dataGridViewIISTimeTaken.DataSource = sortIISDuration;
+                    dataGridViewIISTimeTaken.DataSource = sortIISDuration;
 
-                btnExportIISTable.Enabled = true;
+                    btnExportIISTable.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
             }
         }
 
         private void chkBoxSortDevinfo_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkBoxSortDevinfo.Checked == true)
+            try
             {
-                var sortDeviceInformationCount = (dataGridViewDeviceInformation.Rows.Cast<DataGridViewRow>()
-                            .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null)
-                            .Select(r => new { OperatingSystem = r.Cells[0].Value, OperatingSystemVersion = r.Cells[1].Value, Count = r.Cells[2].Value, DeviceModel = r.Cells[3].Value, CordovaVersion = r.Cells[4].Value, DeviceUUID = r.Cells[5].Value })
-                            .GroupBy(srtwebsrvs => srtwebsrvs)
-                            .OrderByDescending(g => Convert.ToInt32(g.Key.Count))
-                            .Select(g => new { COUNT = g.Key.Count, OPERATING_SYSTEM = g.Key.OperatingSystem, OPERATING_SYTEM_VERSION = g.Key.OperatingSystemVersion, DEVICE_MODEL = g.Key.DeviceModel, CORDOVA_VERSION = g.Key.CordovaVersion, DEVICE_UUID = g.Key.DeviceUUID })).ToList();
+                if (chkBoxSortDevinfo.Checked == true)
+                {
+                    var sortDeviceInformationCount = (dataGridViewDeviceInformation.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null)
+                                .Select(r => new { OperatingSystem = r.Cells[0].Value, OperatingSystemVersion = r.Cells[1].Value, Count = r.Cells[2].Value })
+                                .GroupBy(srtdevinfo => srtdevinfo)
+                                .OrderByDescending(g => Convert.ToInt32(g.Key.Count))
+                                .Select(g => new { COUNT = g.Key.Count, OPERATING_SYSTEM = g.Key.OperatingSystem, OPERATING_SYTEM_VERSION = g.Key.OperatingSystemVersion })).ToList();
 
-                dataGridViewDevInfoCount.DataSource = sortDeviceInformationCount;
+                    dataGridViewDevInfoCount.DataSource = sortDeviceInformationCount;
 
-                btnExportDevInfoTable.Enabled = true;
+                    btnExportDevInfoTable.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
             }
         }
 
@@ -4227,6 +4642,239 @@ namespace OutSystems_Log_Parser
         private void btnExportDevInfoTable_Click(object sender, EventArgs e)
         {
             exportTableContent(dataGridViewDevInfoCount, "\\device_information_count_table.txt", "|");
+        }
+
+        private void chkBoxSortEmails_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (chkBoxSortEmails.Checked == true)
+                {
+                    var sortEmailsDuration = (dataGridViewEmailEmailslogs.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null && r.Cells[10].Value != null && r.Cells[11].Value != null && r.Cells[12].Value != null && r.Cells[13].Value != null && r.Cells[14].Value != null)
+                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ModuleName = r.Cells[2].Value, ApplicationName = r.Cells[3].Value, EspaceName = r.Cells[4].Value, Message = r.Cells[5].Value, Stack = r.Cells[6].Value, From = r.Cells[7].Value, To = r.Cells[8].Value, Subject = r.Cells[9].Value, cc = r.Cells[10].Value, bcc = r.Cells[11].Value, IsTestEmail = r.Cells[12].Value, EnvironmentInformation = r.Cells[13].Value, ErrorId = r.Cells[14].Value })
+                                .GroupBy(srtemails => srtemails)
+                                .OrderByDescending(g => Convert.ToInt32(g.Key.TimeTaken))
+                                .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, FROM = g.Key.From, TO = g.Key.To, SUBJECT = g.Key.Subject, CC = g.Key.cc, BCC = g.Key.bcc, IS_TEST_EMAIL = g.Key.IsTestEmail, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorId })).ToList();
+
+                    dataGridViewEmailEmailsDurationlogs.DataSource = sortEmailsDuration;
+
+                    btnExportEmailsTable.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void btnExportEmailsTable_Click(object sender, EventArgs e)
+        {
+            exportTableContent(dataGridViewEmailEmailsDurationlogs, "\\emails_table.txt", "|");
+        }
+
+        private void comBoxField_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comBoxField.SelectedIndex > -1)
+            {
+                string field = comBoxField.Text;
+
+                if (field == "Action Name")
+                {
+                    loadTXT("filter_action_names.txt");
+                }
+                else if (field == "Application Name")
+                {
+                    loadTXT("filter_application_names.txt");
+                }
+                else if (field == "Cyclic Job Name")
+                {
+                    loadTXT("filter_cyclic_job_names.txt");
+                }
+                else if (field == "Espace Name")
+                {
+                    loadTXT("filter_espace_names.txt");
+                }
+                else if (field == "Extension Name")
+                {
+                    loadTXT("filter_extension_names.txt");
+                }
+                else if (field == "Module Name")
+                {
+                    loadTXT("filter_module_names.txt");
+                }
+            }
+        }
+
+        private void loadTXT(string txtFile)
+        {
+            try
+            {
+                if (comBoxFilterField.Enabled == false)
+                {
+                    comBoxFilterField.Enabled = true;
+                }
+
+                comBoxFilterField.Items.Clear();
+
+                if (lineOfContents != null)
+                {
+                    Array.Clear(lineOfContents, 0, lineOfContents.Length);
+                }
+
+                lineOfContents = File.ReadAllLines(relativePath + "\\" + txtFile);
+                foreach (var line in lineOfContents)
+                {
+                    if (!string.IsNullOrEmpty(line.Trim()))
+                    {
+                        comBoxFilterField.Items.Add(line);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void btnFilterFIeld_Click(object sender, EventArgs e)
+        {
+            //filter the content from the table based on the field selected
+            queryDataGridViews2(dataGridViewEmaillogs, txtBoxDetailEmaillogs);
+            queryDataGridViews2(dataGridViewEmailEmailslogs, txtBoxDetailsEmailEmailslogs);
+            queryDataGridViews2(dataGridViewEmailEmailsDurationlogs, txtBoxDetailsEmailEmailslogs);
+            queryDataGridViews2(dataGridViewErrorlogs, txtBoxDetailErrorLogs);
+            queryDataGridViews2(dataGridViewExtensionlogs, txtBoxDetailExtensionlogs);
+            queryDataGridViews2(dataGridViewExtensionLogsExtensions, txtBoxDetailExtExtensionlogs);
+            queryDataGridViews2(dataGridViewExtensionsDurationlogs, txtBoxDetailExtExtensionlogs);
+            queryDataGridViews2(dataGridViewGenerallogs, txtBoxDetailGenerallogs);
+            queryDataGridViews2(dataGridViewSlowSQLlogs, txtBoxDetailsSlowSQLlogs);
+            queryDataGridViews2(dataGridViewSlowSQLDurationlogs, txtBoxDetailsSlowSQLlogs);
+            queryDataGridViews2(dataGridViewSlowExtensionlogs, txtBoxDetailsSlowExtensionlogs);
+            queryDataGridViews2(dataGridViewSlowSQLDurationlogs, txtBoxDetailsSlowExtensionlogs);
+            queryDataGridViews2(dataGridViewIntegrationslogs, txtBoxDetailIntegrationlogs);
+            queryDataGridViews2(dataGridViewIntWebServiceslogs, txtBoxDetailsIntWebServiceslogs);
+            queryDataGridViews2(dataGridViewInWebServicesDurationlogs, txtBoxDetailsIntWebServiceslogs);
+            queryDataGridViews2(dataGridViewScreenRequestslogs, txtBoxDetailScreenRequestslogs);
+            queryDataGridViews2(dataGridViewScreenRequestsScreenlogs, txtBoxDetailScrReqScreenlogs);
+            queryDataGridViews2(dataGridViewScrReqScreenDurationlogs, txtBoxDetailScrReqScreenlogs);
+            queryDataGridViews2(dataGridViewServiceActionlogs, txtBoxDetailServiceActionlogs);
+            queryDataGridViews2(dataGridViewSrvActServicelogs, txtBoxDetailSrvActServicelogs);
+            queryDataGridViews2(dataGridViewSrvActServiceDurationlogs, txtBoxDetailSrvActServicelogs);
+            queryDataGridViews2(dataGridViewTimerlogs, txtBoxDetailTimerlogs);
+            queryDataGridViews2(dataGridViewTimerTimerslogs, txtBoxDetailsTimerTimerslogs);
+            queryDataGridViews2(dataGridViewTimerTimersDurationlogs, txtBoxDetailsTimerTimerslogs);
+            queryDataGridViews2(dataGridViewTradWebRequests, txtBoxDetailTradWebRequests);
+            queryDataGridViews2(dataGridViewTradWebRequestsScreenlogs, txtBoxDetailTradWebRequestsScreenlogs);
+            queryDataGridViews2(dataGridViewTradWebRequestsScreenDurationlogs, txtBoxDetailTradWebRequestsScreenlogs);
+
+            btnFilterFIeld.Enabled = false;
+            comBoxField.Enabled = false;
+            comBoxFilterField.Enabled = false;
+
+            if (dataGridViewSlowSQLlogs.Rows.Count == 0 || dataGridViewSlowExtensionlogs.Rows.Count == 0)
+            {
+                chkBoxSortSlowSQLExtension.Enabled = false;
+            }
+
+            if (dataGridViewIntWebServiceslogs.Rows.Count == 0)
+            {
+                chkBoxSortWebServices.Enabled = false;
+            }
+
+            if (dataGridViewScreenRequestsScreenlogs.Rows.Count == 0)
+            {
+                chkBoxSortScrReqScreens.Enabled = false;
+            }
+
+            if (dataGridViewTimerTimerslogs.Rows.Count == 0)
+            {
+                chkBoxSortTimers.Enabled = false;
+            }
+
+            if (dataGridViewEmailEmailslogs.Rows.Count == 0)
+            {
+                chkBoxSortEmails.Enabled = false;
+            }
+
+            if (dataGridViewExtensionLogsExtensions.Rows.Count == 0)
+            {
+                chkBoxSortExtensions.Enabled = false;
+            }
+
+            if (dataGridViewSrvActServicelogs.Rows.Count == 0)
+            {
+                chkBoxSortServiceActions.Enabled = false;
+            }
+
+            if (dataGridViewTradWebRequestsScreenlogs.Rows.Count == 0)
+            {
+                chkBoxSortTradWebRequestsScreens.Enabled = false;
+            }
+
+            if (bool_removeGarbage)
+            {
+                removeGarbage();
+            }
+
+            if (bool_highlightError)
+            {
+                category = comBoxIssueCategory.Text;
+                highlightError(category);
+            }
+            
+            if (bool_findKeyword)
+            {
+                findKeyword2();
+            }
+            
+            if (bool_fieldFilterSuccessful)
+            {
+                MessageBox.Show("The data was filtered by the field selected", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void queryDataGridViews2(DataGridView tableName, TextBox txtbox)
+        {
+            try
+            {
+                string fieldName = comBoxField.Text;
+                string fieldSelected = comBoxFilterField.Text;
+
+                fieldName = fieldName.Replace(" ", "_");
+
+                if (tableName.Rows.Count > 0)
+                {
+                    if (tableName.Columns.Contains(fieldName.ToUpper()))
+                    {
+                        tableName.CurrentCell = null;
+                        clearTextboxes(txtbox);
+
+                        string rowFilter = string.Format(tableName.Columns[fieldName.ToUpper()].HeaderText.ToString() + " LIKE '%" + fieldSelected + "%'");
+                        (tableName.DataSource as DataTable).DefaultView.RowFilter = rowFilter;
+
+                        bool_fieldFilterSuccessful = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                throw;
+            }
+        }
+
+        private void comBoxFilterField_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comBoxFilterField.SelectedIndex > -1)
+            {
+                if (btnFilterFIeld.Enabled == false)
+                {
+                    btnFilterFIeld.Enabled = true;
+                }
+            }
         }
     }
 }
