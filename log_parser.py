@@ -8,8 +8,6 @@ from lxml import etree
 import Evtx.Evtx as evtx
 from collections import Counter
 from datetime import datetime, timedelta
-#import matplotlib.pyplot as plt
-#import matplotlib.dates as mdates
 
 """
 OutSystems Log Parser
@@ -219,14 +217,15 @@ myFileExt = []
 myDateTimes = []
 myTimesTaken = []
 androidOSVersionList = []
-iosOSVersionList = []
-deviceInformationList = []
-myDeviceInformationList = []
 myAndroidOSVersionList = []
-myiOSVersionList = []
 androidOSVersionOccurrencesList = []
+myandroidOSVersionOccurrencesList = []
+iosOSVersionList = []
+myiOSVersionList = []
 iOSOSVersionOccurrencesList = []
 myiOSOSVersionOccurrencesList = []
+deviceInformationList = []
+myDeviceInformationList = []
 errorLogsList = []
 generalLogsList = []
 integrationsLogsList = []
@@ -249,6 +248,11 @@ timersList = []
 timersList2 = []
 timersErrorsList = []
 myTimersErrorsList = []
+emailLogsList = []
+emailsList = []
+emailsList2 = []
+emailsErrorsList = []
+myEmailErrorsList = []
 mobileRequestsLogsList = []
 mobileRequestsScreenList = []
 mobileRequestsScreenList2 = []
@@ -267,6 +271,18 @@ myServiceActionErrorsList = []
 screenLogsList = []
 screensList = []
 myScreensList = []
+moduleNamesList = []
+myModuleNamesList = []
+applicationNamesList = []
+myApplicationNamesList = []
+actionNamesList = []
+myActionNamesList = []
+extensionNamesList = []
+myExtensionNamesList = []
+espaceNamesList = []
+myEspaceNamesList = []
+cyclicJobNamesList = []
+myCyclicJobNamesList = []
 
 #all illegal space characters, control characters, and ASCII characters
 replacementDict = {}
@@ -364,6 +380,7 @@ negativeErrorLogsRegex = r"^((?!(?:[\d]+)\|(?:[\w\-]+)\|(?:[\d\-\:\. ]+)\|(?:[\w
 nonMatchedErrorLogsRegex = r"^((?:.*?\|){2})([\d\-]+)(.+)"
 japaneseErrorLogsRegex = r"^([\d]+)\|(.*?)\|([\d\-\:\. ]+)\|(.*?)?\|([\d]+)\|([\d]+)\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?"
 errorLogsContentRegex = r"^(?:[\d\-\:\. ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|(?:(?:.*?\|){6})([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\-]+)\|(?:[\d]+)"
+errorLogsContentRegex2 = r"^(?:[\d\-\:\. ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\-\.\,\(\)\[\]\/\& ]+)\|(?:(?:.*?\|){5})([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\-]+)\|(?:[\d]+)"
 
 generalLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\w\+\/\=\' ]+)?\|([\d]+)\|([\d]+)\|([\w\-]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w]+)?\|([\w\-\.\:\# ]+)?\|([\w\-]+)?\|([\w\-\(\)\.\* ]+)?\|([\w\(\)\.]+)?\|([\w\-\.\:\;\% ]+)?\|([\w]+)?\|([\w\-\.\,\(\)\[\]\/\& ]+)?\|([\w\-]+)?\|([\w\@\.\\]+)?"
 negativeGeneralLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\w\+\/\=\' ]+)?\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w]+)?\|(?:[\w\-\.\:\# ]+)?\|(?:[\w\-]+)?\|(?:[\w\-\(\)\.\* ]+)?\|(?:[\w\(\)\.]+)?\|(?:[\w\-\.\:\;\% ]+)?\|(?:[\w]+)?\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)?\|(?:[\w\-]+)?\|(?:[\w\@\.\\]+)?).*)"
@@ -393,6 +410,7 @@ emailLogsRegex = r"^([\d]+)\|([\w]+)\|([\w\-\:\. ]+)\|([\w\-\:\. ]+)?\|([\d]+)\|
 negativeEmailLogsRegex = r"^((?!(?:[\d]+)\|(?:[\w]+)\|(?:[\w\-\:\. ]+)\|(?:[\w\-\:\. ]+)?\|(?:[\d]+)\|(?:[\w\@\.\,\- ]+)\|(?:[\w\@\.\,\- ]+)\|(?:[\w\@\.\-]+)?\|(?:[\w\@\.\-]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w]+)\|(?:[\d]+)\|(?:[\w\@\.\-]+)).*)"
 nonMatchedEmailLogsRegex = r"^((?:.*?\|){10})([\d\-]+)(.+)"
 japaneseEmailLogsRegex = r"^([\d]+)\|(.*?)\|(.*?)\|(.*?)?\|([\d]+)\|(.*?)\|(.*?)\|(.*?)?\|(.*?)?\|(.*?)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)\|(.*?)\|(.*?)\|([\d]+)\|(.*?)"
+emailLogsContentRegex = r"^([\d\-\:\. ]+)\|([\w\-\:\. ]+)\|([\w\-\:\. ]+)\|([\w\@\.\,\- ]+)\|([\w\@\.\,\- ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\@\.\-]+|\s*?)\|([\w\@\.\-]+|\s*?)\|([\w]+)\|(?:(?:.*?\|){5})([\w]+)\|.+"
 
 extensionLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\/\'\=\+]+)\|([\d]+)\|([\d]+)\|([\d]+)\|([\w\-]+)\|([\w\-]+)?\|([\w\-\:]+)\|([\w\.]+)\|([\w]+)\|([\w\-\.\,\(\)\[\]\/\& ]+)\|([\w\-]+)\|([\w\@\.\\]+)?"
 negativeExtensionLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w\/\'\=\+]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\-]+)\|(?:[\w\-]+)?\|(?:[\w\-\:]+)\|(?:[\w\.]+)\|(?:[\w]+)\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)\|(?:[\w\-]+)\|(?:[\w\@\.\\]+)?).*)"
@@ -536,6 +554,22 @@ def populateList(txtFile, rawList, cleanList):
 
     with codecs.open(txtFile, "w", "utf-8", "ignore") as linesToText:
         linesToText.writelines(cleanList)
+
+    del rawList[:]
+    del cleanList[:]
+
+def cleanListFunc(txtFile, rawList, cleanList):
+    if len(rawList) > 0:
+        rawList.sort()
+        #remove duplicate records from the list
+        cleanList = list(set(rawList))
+        cleanList.sort()
+
+        #remove empty elements from the list
+        cleanList = list(filter(lambda x: x != " \n", cleanList))
+
+        with codecs.open(txtFile, "w", "utf-8", "ignore") as linesFromtTxtFile:
+            linesFromtTxtFile.writelines(cleanList)
 
     del rawList[:]
     del cleanList[:]
@@ -738,6 +772,11 @@ def readErrorLogs(searchLines, _fromDate, _toDate):
                 if applicationKey == None:
                     applicationKey = " "
 
+                moduleNamesList.append(moduleName + "\n")
+                applicationNamesList.append(applicationName + "\n")
+                actionNamesList.append(actionName + "\n")
+                espaceNamesList.append(eSpaceName + "\n")
+
                 outText = date + " " + time + "|" + message + "|" + stack + "|" + moduleName + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + entryPointName + "|" + server + "|" + eSpaceName + "|" + eSpaceID + "|" + userID + "|" + sessionID + "|" + environmentInformation + "|" + iD + "|" + tenantID + "\n"
 
                 tempFile.writelines(outText)
@@ -822,6 +861,11 @@ def readErrorLogs(searchLines, _fromDate, _toDate):
 
                             if JPapplicationKey == None:
                                 JPapplicationKey = " "
+
+                            moduleNamesList.append(JPmoduleName + "\n")
+                            applicationNamesList.append(JPapplicationName + "\n")
+                            actionNamesList.append(JPactionName + "\n")
+                            espaceNamesList.append(JPeSpaceName + "\n")
 
                             JPText = JPdate + " " + JPtime + "|" + JPmessage + "|" + JPstack + "|" + JPmoduleName + "|" + JPapplicationName + "|" + JPapplicationKey + "|" + JPactionName + "|" + JPentryPointName + "|" + JPserver + "|" + JPeSpaceName + "|" + JPeSpaceID + "|" + JPuserID + "|" + JPsessionID + "|" + JPenvironmentInformation + "|" + JPiD + "|" + JPtenantID + "\n"
 
@@ -910,6 +954,11 @@ def readGeneralLogs(searchLines, _fromDate, _toDate):
 
                 if username == None:
                     username = " "
+
+                moduleNamesList.append(moduleName + "\n")
+                applicationNamesList.append(applicationName + "\n")
+                actionNamesList.append(actionName + "\n")
+                espaceNamesList.append(eSpaceName + "\n")
 
                 outText = date + " " + time + "|" + message + "|" + messageType + "|" + moduleName + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + entryPointName + "|" + clientIP + "|" + eSpaceName + "|" + eSpaceID + "|" + userID + "|" + sessionID + "|" + errorID + "|" + requestKey + "|" + tenantID + "\n"
 
@@ -1001,6 +1050,11 @@ def readGeneralLogs(searchLines, _fromDate, _toDate):
 
                             if JPusername == None:
                                 JPusername = " "
+
+                            moduleNamesList.append(JPmoduleName + "\n")
+                            applicationNamesList.append(JPapplicationName + "\n")
+                            actionNamesList.append(JPactionName + "\n")
+                            espaceNamesList.append(JPeSpaceName + "\n")
 
                             JPText = JPdate + " " + JPtime + "|" + JPmessage + "|" + JPmessageType + "|" + JPmoduleName + "|" + JPapplicationName + "|" + JPapplicationKey + "|" + JPactionName + "|" + JPentryPointName + "|" + JPclientIP + "|" + JPeSpaceName + "|" + JPeSpaceID + "|" + JPuserID + "|" + JPsessionID + "|" + JPerrorID + "|" + JPrequestKey + "|" + JPtenantID + "\n"
 
@@ -1199,6 +1253,10 @@ def readIntegrationsLogs(searchLines, _fromDate, _toDate):
                 if applicationKey == None:
                     applicationKey = " "
 
+                applicationNamesList.append(applicationName + "\n")
+                actionNamesList.append(actionName + "\n")
+                espaceNamesList.append(eSpaceName + "\n")
+
                 outText = date + " " + time + "|" + duration + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + actionType + "|" + source + "|" + endpoint + "|" + executedBy + "|" + eSpaceName + "|" + eSpaceID + "|" + errorID + "|" + requestKey + "|" + tenantID + "\n"
 
                 tempFile.writelines(outText)
@@ -1265,6 +1323,10 @@ def readIntegrationsLogs(searchLines, _fromDate, _toDate):
 
                             if JPapplicationKey == None:
                                 JPapplicationKey = " "
+
+                            applicationNamesList.append(JPapplicationName + "\n")
+                            actionNamesList.append(JPactionName + "\n")
+                            espaceNamesList.append(JPeSpaceName + "\n")
 
                             JPText  = JPdate + " " + JPtime + "|" + JPduration + "|" + JPapplicationName + "|" + JPapplicationKey + "|" + JPactionName + "|" + JPactionType + "|" + JPsource + "|" + JPendpoint + "|" + JPexecutedBy + "|" + JPeSpaceName + "|" + JPeSpaceID + "|" + JPerrorID + "|" + JPrequestKey + "|" + JPtenantID + "\n"
 
@@ -1353,7 +1415,7 @@ def sortIntegrationsLogsContent(outFile1, logsFile1, logsFile2, logsFile1Regex, 
             for elm in webServicesList:
                 item3 = elm.split("|")
                 if not len(item3[6].strip()) > 0:
-                    webServicesErrorsList.append(item3[0] + "|" + item3[1] + "||" + item3[2] + "|" + item3[3] + "|" + item3[4] + "|" + item3[5] + "|||\n")
+                    webServicesErrorsList.append(item3[0] + "|" + item3[1] + "||" + item3[2] + "|" + item3[3] + "|" + item3[4] + "|" + item3[5] + "||||\n")
 
             del webServicesList[:]
             del webServicesList2[:]
@@ -1418,6 +1480,9 @@ def readMobileRequestsLogs(searchLines, _fromDate, _toDate):
                 if loginID == None:
                     loginID = " "
 
+                applicationNamesList.append(applicationName + "\n")
+                espaceNamesList.append(eSpaceName + "\n")
+
                 outText = date + " " + time + "|" + duration + "|" + screen + "|" + applicationName + "|" + applicationKey + "|" + source + "|" + endpoint + "|" + executedBy + "|" + eSpaceName + "|" + eSpaceID + "|" + loginID + "|" + userID + "|" + cycle + "|" + errorID + "|" + requestKey + "|" + tenantID + "\n"
 
                 tempFile.writelines(outText)
@@ -1474,6 +1539,9 @@ def readMobileRequestsLogs(searchLines, _fromDate, _toDate):
 
                             if JPloginID == None:
                                 JPloginID = " "
+
+                            applicationNamesList.append(JPapplicationName + "\n")
+                            espaceNamesList.append(JPeSpaceName + "\n")
 
                             JPText = JPdate + " " + JPtime + "|" + JPduration + "|" + JPscreen + "|" + JPapplicationName + "|" + JPapplicationKey + "|" + JPsource + "|" + JPendpoint + "|" + JPexecutedBy + "|" + JPeSpaceName + "|" + JPeSpaceID + "|" + JPloginID + "|" + JPuserID + "|" + JPcycle + "|" + JPerrorID + "|" + JPrequestKey + "|" + JPtenantID + "\n"
 
@@ -1618,6 +1686,10 @@ def readTimerLogs(searchLines, _fromDate, _toDate):
                 if requestKey == None:
                     requestKey = " "
 
+                applicationNamesList.append(applicationName + "\n")
+                espaceNamesList.append(eSpaceName + "\n")
+                cyclicJobNamesList.append(cyclicJobName + "\n")
+
                 outText = date + " " + time + "|" + duration + "|" + applicationName + "|" + applicationKey + "|" + executedBy + "|" + eSpaceName + "|" + eSpaceID + "|" + cyclicJobName + "|" + cyclicJobKey + "|" + shouldHaveRunAt + "|" + nextRun + "|" + errorID + "|" + requestKey + "|" + tenantID + "\n"
 
                 tempFile.writelines(outText)
@@ -1672,6 +1744,10 @@ def readTimerLogs(searchLines, _fromDate, _toDate):
 
                             if JPrequestKey == None:
                                 JPrequestKey = " "
+
+                            applicationNamesList.append(JPapplicationName + "\n")
+                            espaceNamesList.append(JPeSpaceName + "\n")
+                            cyclicJobNamesList.append(JPcyclicJobName + "\n")
 
                             JPText = JPdate + " " + JPtime + "|" + JPduration + "|" + JPapplicationName + "|" + JPapplicationKey + "|" + JPexecutedBy + "|" + JPeSpaceName + "|" + JPeSpaceID + "|" + JPcyclicJobName + "|" + JPcyclicJobKey + "|" + JPshouldHaveRunAt + "|" + JPnextRun + "|" + JPerrorID + "|" + JPrequestKey + "|" + JPtenantID + "\n"
 
@@ -1788,9 +1864,9 @@ def readEmailLogs(searchLines, _fromDate, _toDate):
         regex = re.compile(emailLogsRegex, re.MULTILINE + re.IGNORECASE)
         for match in regex.finditer(searchLines):
             iD = match.group(1)
-            name = match.group(2)
+            eSpaceName = match.group(2)
             sent = match.group(3)
-            lastError = match.group(4)#null
+            errorID = match.group(4)#null
             tenantID = match.group(5)
             from_ = match.group(6)
             to = match.group(7)
@@ -1813,8 +1889,8 @@ def readEmailLogs(searchLines, _fromDate, _toDate):
 
             if _fromDate <= _date <= _toDate:
 
-                if lastError == None:
-                    lastError = " "
+                if errorID == None:
+                    errorID = " "
 
                 if cc == None:
                     cc = " "
@@ -1825,7 +1901,9 @@ def readEmailLogs(searchLines, _fromDate, _toDate):
                 if subject == None:
                     subject = " "
 
-                outText = date + " " + time + "|" + sent + "|" + lastError + "|" + from_ + "|" + to + "|" + subject + "|" + cc + "|" + bcc + "|" + name + "|" + size + "|" + messageID + "|" + activity + "|" + emailDefinition + "|" + storeContent + "|" + isTestEmail + "|" + iD + "|" + tenantID + "\n"
+                espaceNamesList.append(eSpaceName + "\n")
+
+                outText = date + " " + time + "|" + sent + "|" + errorID + "|" + from_ + "|" + to + "|" + subject + "|" + cc + "|" + bcc + "|" + eSpaceName + "|" + size + "|" + messageID + "|" + activity + "|" + emailDefinition + "|" + storeContent + "|" + isTestEmail + "|" + iD + "|" + tenantID + "\n"
 
                 tempFile.writelines(outText)
 
@@ -1856,9 +1934,9 @@ def readEmailLogs(searchLines, _fromDate, _toDate):
                         JPRegex = re.search(japaneseEmailLogsRegex, nonMatchedLine2)
                         if JPRegex:
                             JPiD = JPRegex.group(1)
-                            JPname = JPRegex.group(2)
+                            JPeSpaceName = JPRegex.group(2)
                             JPsent = JPRegex.group(3)
-                            JPlastError = JPRegex.group(4)#null
+                            JPerrorID = JPRegex.group(4)#null
                             JPtenantID = JPRegex.group(5)
                             JPfrom_ = JPRegex.group(6)
                             JPto = JPRegex.group(7)
@@ -1877,8 +1955,8 @@ def readEmailLogs(searchLines, _fromDate, _toDate):
                             JPtime = JPcreated[12:19]
                             JPtime = JPtime.replace(".", "")
 
-                            if JPlastError == None:
-                                JPlastError = " "
+                            if JPerrorID == None:
+                                JPerrorID = " "
 
                             if JPcc == None:
                                 JPcc = " "
@@ -1889,7 +1967,9 @@ def readEmailLogs(searchLines, _fromDate, _toDate):
                             if JPsubject == None:
                                 JPsubject = " "
 
-                            JPText = JPdate + " " + JPtime + "|" + JPsent + "|" + JPlastError + "|" + JPfrom_ + "|" + JPto + "|" + JPsubject + "|" + JPcc + "|" + JPbcc + "|" + JPname + "|" + JPsize + "|" + JPmessageID + "|" + JPactivity + "|" + JPemailDefinition + "|" + JPstoreContent + "|" + JPisTestEmail + "|" + JPiD + "|" + JPtenantID + "\n"
+                            espaceNamesList.append(JPeSpaceName + "\n")
+
+                            JPText = JPdate + " " + JPtime + "|" + JPsent + "|" + JPerrorID + "|" + JPfrom_ + "|" + JPto + "|" + JPsubject + "|" + JPcc + "|" + JPbcc + "|" + JPeSpaceName + "|" + JPsize + "|" + JPmessageID + "|" + JPactivity + "|" + JPemailDefinition + "|" + JPstoreContent + "|" + JPisTestEmail + "|" + JPiD + "|" + JPtenantID + "\n"
 
                             tempFile.writelines(JPText)
 
@@ -1897,6 +1977,138 @@ def readEmailLogs(searchLines, _fromDate, _toDate):
                         nonMatchedOutText = "EmailLog -> " + nonMatchedLine2 + "\n"
 
                         myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
+
+def sortEmailLogsContent(outFile1, logsFile1, logsFile2, logsFile1Regex, logsFile2Regex):
+    try:
+        if not os.path.exists(outFile1):
+            #populate list with the email_logs file
+            with codecs.open(logsFile1, "r", "utf-8", "ignore") as linesFromText:
+                emailLogsList = linesFromText.readlines()
+
+            with codecs.open(logsFile2, "r", "utf-8", "ignore") as linesFromText2:
+                errorLogsList = linesFromText2.readlines()
+
+            print("Sorting the content from the Emails")
+            
+            for em, eml in enumerate(emailLogsList):
+                regex = re.search(logsFile1Regex, emailLogsList[em].strip())
+                if regex:
+                    timestamp = regex.group(1)
+                    sent = regex.group(2)
+                    errorID = regex.group(3)
+                    from_ = regex.group(4)
+                    to = regex.group(5)
+                    subject = regex.group(6)
+                    cc = regex.group(7)
+                    bcc = regex.group(8)
+                    eSpaceName = regex.group(9)
+                    isTestEmail = regex.group(10)
+
+                    if sent == "None":
+                        sent = " "
+
+                    if errorID == "None":
+                        errorID == " "
+
+                    if cc == "None":
+                        cc = " "
+
+                    if bcc == "None":
+                        bcc = " "
+
+                    if subject == "None":
+                        subject = " "
+
+                    #subtract the sentDateTime by the timestamp to get the duration
+                    _timestamp = datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S")
+
+                    if len(sent.strip()) > 0:
+                        date = sent[0:10]
+                        time = sent[11:19]
+                        time = time.replace(".", "")
+                        _datetime = date + " " + time
+
+                        sentDateTime = datetime.strptime(_datetime, "%Y-%m-%d %H:%M:%S")
+
+                        diffTime = sentDateTime - _timestamp
+                        strDiffTime = str(diffTime)
+
+                        #convert duration time to seconds (whole value)
+                        delta = timedelta(hours=int(strDiffTime.split(":")[0]), minutes=int(strDiffTime.split(":")[1]), seconds=int(strDiffTime.split(":")[2]))
+                        secs = delta.total_seconds()
+                        strSecs = str(secs)
+                        _seconds = strSecs.split(".")[0]
+
+                        emailsList.append(timestamp + "|" + _seconds + "|" + eSpaceName + "|" + from_ + "|" + to + "|" + subject + "|" + cc + "|" + bcc + "|" + isTestEmail + "|" + errorID + "\n")
+                        emailsList2.append(errorID + "\n")
+                    else:
+                        emailsList.append(timestamp + "|-1|" + eSpaceName + "|" + from_ + "|" + to + "|" + subject + "|" + cc + "|" + bcc + "|" + isTestEmail + "|" + errorID + "\n")
+                        emailsList2.append(errorID + "\n")
+                em+=1
+
+            for e, err in enumerate(errorLogsList):
+                regex = re.search(logsFile2Regex, errorLogsList[e].strip())
+                if regex:
+                    message = regex.group(1)
+                    stack = regex.group(2)
+                    moduleName = regex.group(3)
+                    applicationName = regex.group(4)
+                    environmentInformation = regex.group(5)
+                    iD = regex.group(6)
+
+                    if message == "None":
+                        message == " "
+
+                    if stack == "None":
+                        stack == " "
+
+                    if moduleName == "None":
+                        moduleName == " "
+
+                    if applicationName == "None":
+                        applicationName == " "
+
+                    if environmentInformation == "None":
+                        environmentInformation == " "
+
+                    errorsList.append(iD + "|" + message + "|" + stack + "|" + moduleName + "|" + applicationName + "|" + environmentInformation + "\n")
+                    errorsList2.append(iD + "\n")
+                e+=1
+
+            del emailLogsList[:]
+            del errorLogsList[:]
+
+            for element in emailsList2:
+                if len(element.strip()) > 0:
+                    if element in errorsList2:
+                        ind2 = errorsList2.index(element)
+                        item2 = errorsList[ind2].split("|")
+                        ind1 = emailsList2.index(element)
+                        item1 = emailsList[ind1].split("|")
+                        emailsErrorsList.append(item1[0] + "|" + item1[1] + "|" + item2[3] + "|" + item2[4] + "|" + item1[2] + "|" + item2[1] + "|" + item2[2] + "|" + item1[3] + "|" + item1[4] + "|" + item1[5] + "|" + item1[6] + "|" + item1[7] + "|" + item1[8] + "|" + item2[5].strip() + "|" + item1[9].strip() + "\n")
+
+            for elm in emailsList:
+                item3 = elm.split("|")
+                if not len(item3[9].strip()) > 0:
+                    emailsErrorsList.append(item3[0] + "|" + item3[1] + "|||" + item3[2] + "|||" + item3[3] + "|" + item3[4] + "|" + item3[5] + "|" + item3[6] + "|" + item3[7] + "|" + item3[8] + "||\n")
+
+            del emailsList[:]
+            del emailsList2[:]
+            del errorsList[:]
+            del errorsList2[:]
+
+            myEmailErrorsList = list(set(emailsErrorsList))
+            myEmailErrorsList.sort()
+
+            if len(myEmailErrorsList) > 0:
+                with codecs.open(outFile1, "w", "utf-8", "ignore") as reportFile:
+                    reportFile.writelines(myEmailErrorsList)
+
+                del emailsErrorsList[:]
+                del myEmailErrorsList[:]
+
+    except FileNotFoundError as fileError:
+        pass
 
 def readExtensionLogs(searchLines, _fromDate, _toDate):
     global numOfExtensionLogs
@@ -1942,6 +2154,11 @@ def readExtensionLogs(searchLines, _fromDate, _toDate):
 
                 if username == None:
                     username = " "
+
+                applicationNamesList.append(applicationName + "\n")
+                actionNamesList.append(actionName + "\n")
+                espaceNamesList.append(eSpaceName + "\n")
+                extensionNamesList.append(extensionName + "\n")
 
                 outText = date + " " + time + "|" + duration + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + executedBy + "|" + eSpaceName + "|" + eSpaceID + "|" + username + "|" + userID + "|" + sessionID + "|" + extensionID + "|" + extensionName + "|" + errorID + "|" + requestKey + "|" + tenantID + "\n"
 
@@ -1999,6 +2216,11 @@ def readExtensionLogs(searchLines, _fromDate, _toDate):
 
                             if JPusername == None:
                                 JPusername = " "
+
+                            applicationNamesList.append(JPapplicationName + "\n")
+                            actionNamesList.append(JPactionName + "\n")
+                            espaceNamesList.append(JPeSpaceName + "\n")
+                            extensionNamesList.append(JPextensionName + "\n")
 
                             JPText = JPdate + " " + JPtime + "|" + JPduration + "|" + JPapplicationName + "|" + JPapplicationKey + "|" + JPactionName + "|" + JPexecutedBy + "|" + JPeSpaceName + "|" + JPeSpaceID + "|" + JPusername + "|" + JPuserID + "|" + JPsessionID + "|" + JPextensionID + "|" + JPextensionName + "|" + JPerrorID + "|" + JPrequestKey + "|" + JPtenantID + "\n"
 
@@ -2155,6 +2377,10 @@ def readServiceActionLogs(searchLines, _fromDate, _toDate):
                 if username == None:
                     username = " "
 
+                applicationNamesList.append(applicationName + "\n")
+                actionNamesList.append(actionName + "\n")
+                espaceNamesList.append(eSpaceName + "\n")
+
                 outText = date + " " + time + "|" + duration + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + source + "|" + entrypointName + "|" + endpoint + "|" + executedBy + "|" + eSpaceName + "|" + eSpaceID + "|" + username + "|" + loginID + "|" + userID + "|" + sessionID + "|" + errorID + "|" + requestKey + "|" + originalRequestKey + "|" + tenantID + "\n"
 
                 tempFile.writelines(outText)
@@ -2220,6 +2446,10 @@ def readServiceActionLogs(searchLines, _fromDate, _toDate):
 
                             if JPusername == None:
                                 JPusername = " "
+
+                            applicationNamesList.append(JPapplicationName + "\n")
+                            actionNamesList.append(JPactionName + "\n")
+                            espaceNamesList.append(JPeSpaceName + "\n")
 
                             JPText = JPdate + " " + JPtime + "|" + JPduration + "|" + JPapplicationName + "|" + JPapplicationKey + "|" + JPactionName + "|" + JPsource + "|" + JPentrypointName + "|" + JPendpoint + "|" + JPexecutedBy + "|" + JPeSpaceName + "|" + JPeSpaceID + "|" + JPusername + "|" + JPloginID + "|" + JPuserID + "|" + JPsessionID + "|" + JPerrorID + "|" + JPrequestKey + "|" + JPoriginalRequestKey + "|" + JPtenantID + "\n"
 
@@ -2370,6 +2600,10 @@ def readScreenLogs(searchLines, _fromDate, _toDate):
                 if actionName == None:
                     actionName = " "
 
+                applicationNamesList.append(applicationName + "\n")
+                actionNamesList.append(actionName + "\n")
+                espaceNamesList.append(eSpaceName + "\n")
+
                 outText = date + " " + time + "|" + duration + "|" + screen + "|" + screenType + "|" + applicationName + "|" + applicationKey + "|" + actionName + "|" + accessMode + "|" + executedBy + "|" + clientIP + "|" + eSpaceName + "|" + eSpaceID + "|" + userID + "|" + sessionID + "|" + sessionRequests + "|" + sessionBytes + "|" + viewstateBytes + "|" + msisdn + "|" + requestKey + "|" + tenantID + "\n"
 
                 tempFile.writelines(outText)
@@ -2430,6 +2664,10 @@ def readScreenLogs(searchLines, _fromDate, _toDate):
 
                             if JPactionName == None:
                                 JPactionName = " "
+
+                            applicationNamesList.append(JPapplicationName + "\n")
+                            actionNamesList.append(JPactionName + "\n")
+                            espaceNamesList.append(JPeSpaceName + "\n")
 
                             JPText = JPdate + " " + JPtime + "|" + JPduration + "|" + JPscreen + "|" + JPscreenType + "|" + JPapplicationName + "|" + JPapplicationKey + "|" + JPactionName + "|" + JPaccessMode + "|" + JPexecutedBy + "|" + JPclientIP + "|" + JPeSpaceName + "|" + JPeSpaceID + "|" + JPuserID + "|" + JPsessionID + "|" + JPsessionRequests + "|" + JPsessionBytes + "|" + JPviewstateBytes + "|" + JPmsisdn + "|" + JPrequestKey + "|" + JPtenantID + "\n"
 
@@ -3137,9 +3375,9 @@ def xlsxtxtFile(absolutePath, filename, ext, _fromDate, _toDate):
                     ind2 = myAndroidOSVersionList.index(item1[1])
                     androidOSVersionOccurrencesList.append(item1[0] + "|" + item1[1] + "|" + str(androidOccurrences[myAndroidOSVersionList[ind2]]) + "|" + item1[2] + "|" + item1[3] + "|" + item1[4].strip() + "\n")
 
-            writeToFile(absolutePath, os.getcwd() + "\\filtered_data_files\\device_information.txt", myandroidOSVersionOccurrencesList, myandroidOSVersionOccurrencesList)
+            writeToFile(absolutePath, os.getcwd() + "\\filtered_data_files\\device_information.txt", androidOSVersionOccurrencesList, myandroidOSVersionOccurrencesList)
             if numOfErrorLogs > 1:
-                populateList(os.getcwd() + "\\filtered_data_files\\device_information.txt", myandroidOSVersionOccurrencesList, myandroidOSVersionOccurrencesList)
+                populateList(os.getcwd() + "\\filtered_data_files\\device_information.txt", androidOSVersionOccurrencesList, myandroidOSVersionOccurrencesList)
 
             del deviceInformationList[:]
             del myDeviceInformationList[:]
@@ -3234,9 +3472,18 @@ def xlsxtxtFile(absolutePath, filename, ext, _fromDate, _toDate):
     sortIntegrationsLogsContent(os.getcwd() + "\\filtered_data_files\\integrations_logs_webservices.txt", os.getcwd() + "\\filtered_data_files\\integrations_logs.txt", os.getcwd() + "\\filtered_data_files\\error_logs.txt", integrationsLogsContentRegex, errorLogsContentRegex)
     sortMobileRequestsLogsContent(os.getcwd() + "\\filtered_data_files\\mobile_requests_logs_screens.txt", os.getcwd() + "\\filtered_data_files\\mobile_requests_logs.txt", os.getcwd() + "\\filtered_data_files\\error_logs.txt", mobileRequestsLogsContentRegex, errorLogsContentRegex)
     sortTimerLogsContent(os.getcwd() + "\\filtered_data_files\\timer_logs_timers.txt", os.getcwd() + "\\filtered_data_files\\timer_logs.txt", os.getcwd() + "\\filtered_data_files\\error_logs.txt", timerLogsContentRegex, errorLogsContentRegex)
+    sortEmailLogsContent(os.getcwd() + "\\filtered_data_files\\email_logs_emails.txt", os.getcwd() + "\\filtered_data_files\\email_logs.txt", os.getcwd() + "\\filtered_data_files\\error_logs.txt", emailLogsContentRegex, errorLogsContentRegex2)
     sortExtensionLogsContent(os.getcwd() + "\\filtered_data_files\\extension_logs_extensions.txt", os.getcwd() + "\\filtered_data_files\\extension_logs.txt", os.getcwd() + "\\filtered_data_files\\error_logs.txt", extensionLogsContentRegex, errorLogsContentRegex)
     sortServiceActionLogsContent(os.getcwd() + "\\filtered_data_files\\service_action_logs_service_actions.txt", os.getcwd() + "\\filtered_data_files\\service_action_logs.txt", os.getcwd() + "\\filtered_data_files\\error_logs.txt", serviceActionLogsContentRegex, errorLogsContentRegex)
     sortScreenLogsContent(os.getcwd() + "\\filtered_data_files\\screen_logs_screens.txt", os.getcwd() + "\\filtered_data_files\\screen_logs.txt", screenLogsContentRegex)
+
+    #create files to be used as filters
+    cleanListFunc(os.getcwd() + "\\filtered_data_files\\filter_module_names.txt", moduleNamesList, myModuleNamesList)
+    cleanListFunc(os.getcwd() + "\\filtered_data_files\\filter_application_names.txt", applicationNamesList, myApplicationNamesList)
+    cleanListFunc(os.getcwd() + "\\filtered_data_files\\filter_action_names.txt", actionNamesList, myActionNamesList)
+    cleanListFunc(os.getcwd() + "\\filtered_data_files\\filter_extension_names.txt", extensionNamesList, myExtensionNamesList)
+    cleanListFunc(os.getcwd() + "\\filtered_data_files\\filter_espace_names.txt", espaceNamesList, myExtensionNamesList)
+    cleanListFunc(os.getcwd() + "\\filtered_data_files\\filter_cyclic_job_names.txt", cyclicJobNamesList, myCyclicJobNamesList)
 
     print("Closing: " + filename + ".txt")
 
