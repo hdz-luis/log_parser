@@ -9,6 +9,11 @@ import Evtx.Evtx as evtx
 from collections import Counter
 from datetime import datetime, timedelta
 
+import scripts.integrations
+import scripts.general
+import scripts.timer
+import scripts.screen
+import scripts.mobilerequests
 """
 OutSystems Log Parser
 
@@ -568,7 +573,7 @@ def cleanListFunc(txtFile, rawList, cleanList):
         #remove empty elements from the list
         cleanList = list(filter(lambda x: x != " \n", cleanList))
 
-        with codecs.open(txtFile, "w", "utf-8", "ignore") as linesFromtTxtFile:
+        with codecs.open(txtFile, "a", "utf-8", "ignore") as linesFromtTxtFile:
             linesFromtTxtFile.writelines(cleanList)
 
     del rawList[:]
@@ -3784,14 +3789,15 @@ def evtxFile(absolutePath, filenameWithExt, ext, _fromDate, _toDate):
 
 num_args = len(sys.argv)
 
-if num_args != 4:
+if num_args != 5:
     print("Error:\nTotal arguments passed: " + str(num_args) +
-          "\n4 arguments needed: log_parser.py directoryPath fromDate(YYYY-MM-DD) toDate(YYYY-MM-DD)" +
+          "\n5 arguments needed: log_parser.py directoryPath fromDate(YYYY-MM-DD) toDate(YYYY-MM-DD) createGraphsOption" +
           "\nPlease try again.")
 else:
     directoryPath = sys.argv[1]
     fromDate = sys.argv[2]
     toDate = sys.argv[3]
+    createGraphs = sys.argv[4]
 
     _fromDate = datetime.strptime(fromDate, "%Y-%m-%d").date()
     _toDate = datetime.strptime(toDate, "%Y-%m-%d").date()
@@ -3800,6 +3806,14 @@ else:
         print("The \"from date\" cannot be greater than the \"to date\"\nPlease try again.")
     else:
         searchDirectory(directoryPath, _fromDate, _toDate)
+
+        if createGraphs[0].lower() == "y":
+            #create the graphs
+            scripts.integrations.create_graph(directoryPath)
+            scripts.general.create_graph(directoryPath)
+            scripts.timer.create_graph(directoryPath)
+            scripts.screen.create_graph(directoryPath)
+            scripts.mobilerequests.create_graph(directoryPath)
 
         if os.path.exists(nonMatchedPath):
             print("\nALERT!\nThere were valid lines that did not match the logic.\n" +
