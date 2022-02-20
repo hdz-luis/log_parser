@@ -6,9 +6,11 @@ import plotly.express as px
 from datetime import datetime
 
 def create_graph(directoryPath):
+    foundLogs = False
     for root, subFolders, files in os.walk(directoryPath):
         for f in files:
             if "integrationslog" in f.lower():
+                foundLogs = True
                 print("Creating graphs from the Integrations logs")
                 absolutePathOfFile = os.path.join(root, f)
                 start = datetime.now()
@@ -61,7 +63,9 @@ def create_graph(directoryPath):
                 end = datetime.now()
                 print("\nElapsed time: {0}".format(end-start))
 
-                input("\nPress \"Enter\" to close the script.")
+    if not foundLogs:
+        print("The Integrations logs were not found in folder: \"" + directoryPath + "\"")
 
 directoryPath = input("In what folder are the Integrations logs located? ")
 create_graph(directoryPath)
+input("\nPress \"Enter\" to close the script.")

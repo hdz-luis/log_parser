@@ -7,12 +7,14 @@ from datetime import datetime
 import warnings
 
 def create_graph(directoryPath):
+    foundLogs = False
     with warnings.catch_warnings():
         warnings.warn("", DeprecationWarning)
         warnings.filterwarnings("ignore")
         for root, subFolders, files in os.walk(directoryPath):
             for f in files:
                 if "mobilerequestslog" in f.lower():
+                    foundLogs = True
                     print("Creating graphs from the Mobile Requests logs")
                     absolutePathOfFile = os.path.join(root, f)
                     start = datetime.now()
@@ -97,7 +99,9 @@ def create_graph(directoryPath):
                     end = datetime.now()
                     print("\nElapsed time: {0}".format(end-start))
 
-                    input("\nPress \"Enter\" to close the script.")
+    if not foundLogs:
+        print("The Mobile Requests logs were not found in folder: \"" + directoryPath + "\"")
 
 directoryPath = input("In what folder are the Mobile Requests logs located? ")
 create_graph(directoryPath)
+input("\nPress \"Enter\" to close the script.")

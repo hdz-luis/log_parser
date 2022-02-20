@@ -6,9 +6,11 @@ import plotly.express as px
 from datetime import datetime
 
 def create_graph(directoryPath):
+    foundLogs = False
     for root, subFolders, files in os.walk(directoryPath):
         for f in files:
             if "generallog" in f.lower():
+                foundLogs = True
                 print("Creating graphs from the General logs")
                 absolutePathOfFile = os.path.join(root, f)
                 start = datetime.now()
@@ -86,7 +88,9 @@ def create_graph(directoryPath):
                 end = datetime.now()
                 print("\nElapsed time: {0}".format(end-start))
 
-                input("\nPress \"Enter\" to close the script.")
+    if not foundLogs:
+        print("The General logs were not found in folder: \"" + directoryPath + "\"")
 
 directoryPath = input("In what folder are the General logs located? ")
 create_graph(directoryPath)
+input("\nPress \"Enter\" to close the script.")

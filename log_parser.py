@@ -3790,8 +3790,9 @@ def evtxFile(absolutePath, filenameWithExt, ext, _fromDate, _toDate):
 num_args = len(sys.argv)
 
 if num_args != 5:
-    print("Error:\nTotal arguments passed: " + str(num_args) +
-          "\n5 arguments needed: log_parser.py directoryPath fromDate(YYYY-MM-DD) toDate(YYYY-MM-DD) createGraphsOption" +
+    print("Error:\nTotal arguments passed: " + str(num_args))
+    print(" ".join(sys.argv[1:]))
+    print("\n5 arguments needed: log_parser.py directoryPath fromDate(YYYY-MM-DD) toDate(YYYY-MM-DD) createGraphsOption" +
           "\nPlease try again.")
 else:
     directoryPath = sys.argv[1]
@@ -3822,3 +3823,4 @@ else:
 
 end = datetime.now()
 print("\nElapsed time: {0}".format(end-start))
+input("\nPress \"Enter\" to close the script.")
