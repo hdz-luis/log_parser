@@ -83,6 +83,12 @@
     <Compile Include="Form4.Designer.cs">
       <DependentUpon>Form4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form5.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form5.Designer.cs">
+      <DependentUpon>Form5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -97,6 +103,10 @@
     <EmbeddedResource Include="Form4.resx">
       <DependentUpon>Form4.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form5.resx">
+      <DependentUpon>Form5.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="obj\Debug\OutSystems_Log_Parser.Form1.resources" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -105,6 +115,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
@@ -122,6 +133,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="outsystems_blue_icon.ico" />
+    <None Include="Resources\undo_blue.png" />
+    <None Include="Resources\submiticon_blue2.png" />
+    <None Include="Resources\searchicon_blue.png" />
+    <None Include="Resources\screenshot_blue2.png" />
+    <None Include="Resources\highlighter_blue.png" />
+    <None Include="Resources\glass_texture_blue.png" />
+    <None Include="Resources\garbage_blue.png" />
+    <None Include="Resources\filtericon_blue.png" />
+    <None Include="Resources\exporttxt_icon_blue.png" />
+    <None Include="Resources\browsefoldericon_blue.png" />
+    <None Include="Resources\browsefolder_imagefile.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -16,7 +16,7 @@ namespace OutSystems_Log_Parser
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new Form5());
         }
     }
 }
