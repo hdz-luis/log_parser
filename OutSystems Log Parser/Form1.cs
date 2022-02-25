@@ -771,35 +771,85 @@ namespace OutSystems_Log_Parser
                                 "QUALIFIERS", "EVENT_ID", "EVENT_RECORD_ID", "KEYWORDS" };
                             populateTables(fullPath + "\\windows_system_event_viewer_logs.txt", delimiters, column_names, dataGridViewWinSysEventViewer);
                         }
+
+                        btnFilter.Enabled = true;
+                        btnFilter.BackColor = SystemColors.ControlLight;
+                        dateTimePicker1.Enabled = true;
+                        maskedTextBox1.Enabled = true;
+                        dateTimePicker2.Enabled = true;
+                        maskedTextBox2.Enabled = true;
+                        btnRemoveGarbage.Enabled = true;
+                        btnRemoveGarbage.BackColor = SystemColors.ControlLight;
+                        numericUpDownPercentage.Enabled = true;
+                        comBoxField.Enabled = true;
+                        btnFilterFIeld.Enabled = false;
+                        btnHighlight.Enabled = false;
+                        btnScreenshot.Enabled = false;
+                        btnSearchKeyword.Enabled = true;
+                        btnSearchKeyword.BackColor = SystemColors.ControlLight;
+                        txtBoxKeyword.Enabled = true;
+                        chkBoxSortSlowSQLExtension.Checked = false;
+                        chkBoxSortWebServices.Checked = false;
+                        chkBoxSortScrReqScreens.Checked = false;
+                        chkBoxSortTimers.Checked = false;
+                        chkBoxSortEmails.Checked = false;
+                        chkBoxSortExtensions.Checked = false;
+                        chkBoxSortServiceActions.Checked = false;
+                        chkBoxSortTradWebRequestsScreens.Checked = false;
+                        chkBoxSortIIS.Checked = false;
+                        chkBoxSortDevinfo.Checked = false;
+                    }
+                    else
+                    {
+                        btnFilter.Enabled = false;
+                        btnFilterFIeld.Enabled = false;
+                        dateTimePicker1.Enabled = false;
+                        maskedTextBox1.Enabled = false;
+                        dateTimePicker2.Enabled = false;
+                        maskedTextBox2.Enabled = false;
+                        btnRemoveGarbage.Enabled = false;
+                        numericUpDownPercentage.Enabled = false;
+                        comBoxIssueCategory.Enabled = false;
+                        btnHighlight.Enabled = false;
+                        btnScreenshot.Enabled = false;
+                        btnSearchKeyword.Enabled = false;
+                        txtBoxKeyword.Enabled = false;
+                        comBoxReport.Enabled = false;
+                        comBoxField.Enabled = false;
+                        comBoxFilterField.Enabled = false;
+                        chkBoxSortSlowSQLExtension.Checked = false;
+                        chkBoxSortWebServices.Checked = false;
+                        chkBoxSortScrReqScreens.Checked = false;
+                        chkBoxSortTimers.Checked = false;
+                        chkBoxSortEmails.Checked = false;
+                        chkBoxSortExtensions.Checked = false;
+                        chkBoxSortServiceActions.Checked = false;
+                        chkBoxSortTradWebRequestsScreens.Checked = false;
+                        chkBoxSortIIS.Checked = false;
+                        chkBoxSortDevinfo.Checked = false;
+                        chkBoxSortSlowSQLExtension.Enabled = false;
+                        chkBoxSortWebServices.Enabled = false;
+                        chkBoxSortScrReqScreens.Enabled = false;
+                        chkBoxSortTimers.Enabled = false;
+                        chkBoxSortEmails.Enabled = false;
+                        chkBoxSortExtensions.Enabled = false;
+                        chkBoxSortServiceActions.Enabled = false;
+                        chkBoxSortTradWebRequestsScreens.Enabled = false;
+                        chkBoxSortIIS.Enabled = false;
+                        chkBoxSortDevinfo.Enabled = false;
+                        btnExportSlowSQLExtensionTables.Enabled = false;
+                        btnExportWebServiceTable.Enabled = false;
+                        btnExportScrReqScreenTable.Enabled = false;
+                        btnExportTimerTable.Enabled = false;
+                        btnExportEmailsTable.Enabled = false;
+                        btnExportExtensionsTable.Enabled = false;
+                        btnExportServiceActionsTable.Enabled = false;
+                        btnExportScreenTable.Enabled = false;
+                        btnExportIISTable.Enabled = false;
+                        btnExportIISLINQTable.Enabled = false;
+                        btnExportDevInfoTable.Enabled = false;
                     }
                 }
-
-                btnFilter.Enabled = true;
-                btnFilter.BackColor = SystemColors.ControlLight;
-                dateTimePicker1.Enabled = true;
-                maskedTextBox1.Enabled = true;
-                dateTimePicker2.Enabled = true;
-                maskedTextBox2.Enabled = true;
-                btnRemoveGarbage.Enabled = true;
-                btnRemoveGarbage.BackColor = SystemColors.ControlLight;
-                numericUpDownPercentage.Enabled = true;
-                comBoxField.Enabled = true;
-                btnFilterFIeld.Enabled = false;
-                btnHighlight.Enabled = false;
-                btnScreenshot.Enabled = false;
-                btnSearchKeyword.Enabled = true;
-                btnSearchKeyword.BackColor = SystemColors.ControlLight;
-                txtBoxKeyword.Enabled = true;
-                chkBoxSortSlowSQLExtension.Checked = false;
-                chkBoxSortWebServices.Checked = false;
-                chkBoxSortScrReqScreens.Checked = false;
-                chkBoxSortTimers.Checked = false;
-                chkBoxSortEmails.Checked = false;
-                chkBoxSortExtensions.Checked = false;
-                chkBoxSortServiceActions.Checked = false;
-                chkBoxSortTradWebRequestsScreens.Checked = false;
-                chkBoxSortIIS.Checked = false;
-                chkBoxSortDevinfo.Checked = false;
 
                 if (dataGridViewIISDateTime.Rows.Count > 0)
                 {
@@ -851,56 +901,7 @@ namespace OutSystems_Log_Parser
                 {
                     chkBoxSortDevinfo.Enabled = true;
                 }
-                else
-                {
-                    btnFilter.Enabled = false;
-                    btnFilterFIeld.Enabled = false;
-                    dateTimePicker1.Enabled = false;
-                    maskedTextBox1.Enabled = false;
-                    dateTimePicker2.Enabled = false;
-                    maskedTextBox2.Enabled = false;
-                    btnRemoveGarbage.Enabled = false;
-                    numericUpDownPercentage.Enabled = false;
-                    comBoxIssueCategory.Enabled = false;
-                    btnHighlight.Enabled = false;
-                    btnScreenshot.Enabled = false;
-                    btnSearchKeyword.Enabled = false;
-                    txtBoxKeyword.Enabled = false;
-                    comBoxReport.Enabled = false;
-                    comBoxField.Enabled = false;
-                    comBoxFilterField.Enabled = false;
-                    chkBoxSortSlowSQLExtension.Checked = false;
-                    chkBoxSortWebServices.Checked = false;
-                    chkBoxSortScrReqScreens.Checked = false;
-                    chkBoxSortTimers.Checked = false;
-                    chkBoxSortEmails.Checked = false;
-                    chkBoxSortExtensions.Checked = false;
-                    chkBoxSortServiceActions.Checked = false;
-                    chkBoxSortTradWebRequestsScreens.Checked = false;
-                    chkBoxSortIIS.Checked = false;
-                    chkBoxSortDevinfo.Checked = false;
-                    chkBoxSortSlowSQLExtension.Enabled = false;
-                    chkBoxSortWebServices.Enabled = false;
-                    chkBoxSortScrReqScreens.Enabled = false;
-                    chkBoxSortTimers.Enabled = false;
-                    chkBoxSortEmails.Enabled = false;
-                    chkBoxSortExtensions.Enabled = false;
-                    chkBoxSortServiceActions.Enabled = false;
-                    chkBoxSortTradWebRequestsScreens.Enabled = false;
-                    chkBoxSortIIS.Enabled = false;
-                    chkBoxSortDevinfo.Enabled = false;
-                    btnExportSlowSQLExtensionTables.Enabled = false;
-                    btnExportWebServiceTable.Enabled = false;
-                    btnExportScrReqScreenTable.Enabled = false;
-                    btnExportTimerTable.Enabled = false;
-                    btnExportEmailsTable.Enabled = false;
-                    btnExportExtensionsTable.Enabled = false;
-                    btnExportServiceActionsTable.Enabled = false;
-                    btnExportScreenTable.Enabled = false;
-                    btnExportIISTable.Enabled = false;
-                    btnExportIISLINQTable.Enabled = false;
-                    btnExportDevInfoTable.Enabled = false;
-                }
+                
             }
             catch (Exception ex)
             {
