@@ -59,3 +59,4 @@ C:\Users\herna\Documents\Visual Studio 2017\Projects\OutSystems Log Parser3\OutS
 C:\Users\herna\Documents\Visual Studio 2017\Projects\OutSystems Log Parser3\OutSystems Log Parser\obj\Debug\OutSystems Log Parser.application
 C:\Users\herna\Documents\Visual Studio 2017\Projects\OutSystems Log Parser3\OutSystems Log Parser\obj\Debug\OutSystems Log Parser.exe
 C:\Users\herna\Documents\Visual Studio 2017\Projects\OutSystems Log Parser3\OutSystems Log Parser\obj\Debug\OutSystems Log Parser.pdb
+C:\Users\herna\Documents\Visual Studio 2017\Projects\OutSystems Log Parser3\OutSystems Log Parser\obj\Debug\OutSystems_Log_Parser.Form5.resources
