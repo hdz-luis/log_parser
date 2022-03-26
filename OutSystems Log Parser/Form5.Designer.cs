@@ -43,6 +43,13 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.label3 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkBoxPandas = new System.Windows.Forms.CheckBox();
+            this.chkBoxPlotly = new System.Windows.Forms.CheckBox();
+            this.chkBoxEvtx = new System.Windows.Forms.CheckBox();
+            this.chkBoxLxml = new System.Windows.Forms.CheckBox();
+            this.chkBoxOpenPyxl = new System.Windows.Forms.CheckBox();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
@@ -181,13 +188,90 @@
             this.label3.TabIndex = 30;
             this.label3.Text = "Graphs:";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.BackColor = System.Drawing.Color.RoyalBlue;
+            this.groupBox1.Controls.Add(this.chkBoxPandas);
+            this.groupBox1.Controls.Add(this.chkBoxPlotly);
+            this.groupBox1.Controls.Add(this.chkBoxEvtx);
+            this.groupBox1.Controls.Add(this.chkBoxLxml);
+            this.groupBox1.Controls.Add(this.chkBoxOpenPyxl);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(755, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(209, 175);
+            this.groupBox1.TabIndex = 8;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Libraries:";
+            // 
+            // chkBoxPandas
+            // 
+            this.chkBoxPandas.AutoSize = true;
+            this.chkBoxPandas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkBoxPandas.Location = new System.Drawing.Point(101, 64);
+            this.chkBoxPandas.Name = "chkBoxPandas";
+            this.chkBoxPandas.Size = new System.Drawing.Size(99, 29);
+            this.chkBoxPandas.TabIndex = 13;
+            this.chkBoxPandas.Text = "pandas";
+            this.chkBoxPandas.UseVisualStyleBackColor = true;
+            this.chkBoxPandas.CheckedChanged += new System.EventHandler(this.chkBoxPandas_CheckedChanged);
+            // 
+            // chkBoxPlotly
+            // 
+            this.chkBoxPlotly.AutoSize = true;
+            this.chkBoxPlotly.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkBoxPlotly.Location = new System.Drawing.Point(16, 134);
+            this.chkBoxPlotly.Name = "chkBoxPlotly";
+            this.chkBoxPlotly.Size = new System.Drawing.Size(79, 29);
+            this.chkBoxPlotly.TabIndex = 12;
+            this.chkBoxPlotly.Text = "plotly";
+            this.chkBoxPlotly.UseVisualStyleBackColor = true;
+            this.chkBoxPlotly.CheckedChanged += new System.EventHandler(this.chkBoxPlotly_CheckedChanged);
+            // 
+            // chkBoxEvtx
+            // 
+            this.chkBoxEvtx.AutoSize = true;
+            this.chkBoxEvtx.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkBoxEvtx.Location = new System.Drawing.Point(16, 99);
+            this.chkBoxEvtx.Name = "chkBoxEvtx";
+            this.chkBoxEvtx.Size = new System.Drawing.Size(70, 29);
+            this.chkBoxEvtx.TabIndex = 11;
+            this.chkBoxEvtx.Text = "evtx";
+            this.chkBoxEvtx.UseVisualStyleBackColor = true;
+            this.chkBoxEvtx.CheckedChanged += new System.EventHandler(this.chkBoxEvtx_CheckedChanged);
+            // 
+            // chkBoxLxml
+            // 
+            this.chkBoxLxml.AutoSize = true;
+            this.chkBoxLxml.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkBoxLxml.Location = new System.Drawing.Point(16, 64);
+            this.chkBoxLxml.Name = "chkBoxLxml";
+            this.chkBoxLxml.Size = new System.Drawing.Size(68, 29);
+            this.chkBoxLxml.TabIndex = 10;
+            this.chkBoxLxml.Text = "lxml";
+            this.chkBoxLxml.UseVisualStyleBackColor = true;
+            this.chkBoxLxml.CheckedChanged += new System.EventHandler(this.chkBoxLxml_CheckedChanged);
+            // 
+            // chkBoxOpenPyxl
+            // 
+            this.chkBoxOpenPyxl.AutoSize = true;
+            this.chkBoxOpenPyxl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkBoxOpenPyxl.Location = new System.Drawing.Point(16, 29);
+            this.chkBoxOpenPyxl.Name = "chkBoxOpenPyxl";
+            this.chkBoxOpenPyxl.Size = new System.Drawing.Size(113, 29);
+            this.chkBoxOpenPyxl.TabIndex = 9;
+            this.chkBoxOpenPyxl.Text = "openpyxl";
+            this.chkBoxOpenPyxl.UseVisualStyleBackColor = true;
+            this.chkBoxOpenPyxl.CheckedChanged += new System.EventHandler(this.chkBoxOpenPyxl_CheckedChanged);
+            // 
             // Form5
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(735, 219);
+            this.ClientSize = new System.Drawing.Size(978, 219);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.radioButton2);
             this.Controls.Add(this.btnSubmit);
@@ -202,12 +286,14 @@
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(753, 266);
-            this.MinimumSize = new System.Drawing.Size(753, 266);
+            this.MaximumSize = new System.Drawing.Size(996, 266);
+            this.MinimumSize = new System.Drawing.Size(996, 266);
             this.Name = "Form5";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "OutSystems Log Parser V.021922";
+            this.Text = "OutSystems Log Parser V.032622";
             this.Load += new System.EventHandler(this.Form5_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -227,5 +313,11 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.CheckBox chkBoxOpenPyxl;
+        private System.Windows.Forms.CheckBox chkBoxLxml;
+        private System.Windows.Forms.CheckBox chkBoxEvtx;
+        private System.Windows.Forms.CheckBox chkBoxPlotly;
+        private System.Windows.Forms.CheckBox chkBoxPandas;
     }
 }

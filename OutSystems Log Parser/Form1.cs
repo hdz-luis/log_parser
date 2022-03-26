@@ -31,19 +31,42 @@ namespace OutSystems_Log_Parser
         string myMessage = "";
         int myMessageCount;
         string outputTXTfile = "";
+        int currentRow;
+        string rowValues = "";
+        string error_message = "";
         double percentageMessageCount;
         double roundedPercentageMessageCount;
+        double sixteenthOfTotal;
+        double roundedSixteenthOfTotal;
+        double eighthOfTotal;
+        double roundedEighthOfTotal;
+        double fourthOfTotal;
+        double roundedFourthOfTotal;
+        double halfOfTotal;
+        double roundedHalfOfTotal;
         bool bool_removeGarbage = false;
         bool bool_removeGarbageSuccessful = false;
         bool bool_highlightError = false;
-        bool bool_highlightErrorSuccessful = false;
+        bool bool_highlightErrorSuccessful_1 = false;
+        bool bool_highlightErrorSuccessful_2 = false;
+        bool bool_highlightErrorSuccessful_3 = false;
+        bool bool_highlightErrorSuccessful_4 = false;
+        bool bool_highlightErrorSuccessful_5 = false;
+        bool bool_highlightErrorSuccessful_6 = false;
         bool bool_findKeyword = false;
-        bool bool_findKeywordSuccessful = false;
+        bool bool_findKeywordSuccessful_1 = false;
+        bool bool_findKeywordSuccessful_2 = false;
+        bool bool_findKeywordSuccessful_3 = false;
+        bool bool_findKeywordSuccessful_4 = false;
+        bool bool_findKeywordSuccessful_5 = false;
         bool bool_screenshotSuccessful = false;
         bool bool_datetimeFilterSuccessful = false;
         bool bool_fieldFilterSuccessful = false;
         int countFindKeyword = 0;
+        int countFindKnownError = 0;
         List<string> keywordsSaved = new List<string>();
+        List<string> listIssueCategory = new List<string>();
+        List<string> categorySelected = new List<string>();
         Font myScreenshotFont = new Font("Times New Roman", 10);
         Color myScreenshotForeColor = Color.Gold;
         Color myScreenshotBackColor = Color.Black;
@@ -189,12 +212,24 @@ namespace OutSystems_Log_Parser
 
             try
             {
+                countFindKeyword = 0;
+                countFindKnownError = 0;
+
                 bool_removeGarbage = false;
                 bool_highlightError = false;
                 bool_findKeyword = false;
                 bool_removeGarbageSuccessful = false;
-                bool_highlightErrorSuccessful = false;
-                bool_findKeywordSuccessful = false;
+                bool_highlightErrorSuccessful_1 = false;
+                bool_highlightErrorSuccessful_2 = false;
+                bool_highlightErrorSuccessful_3 = false;
+                bool_highlightErrorSuccessful_4 = false;
+                bool_highlightErrorSuccessful_5 = false;
+                bool_highlightErrorSuccessful_6 = false;
+                bool_findKeywordSuccessful_1 = false;
+                bool_findKeywordSuccessful_2 = false;
+                bool_findKeywordSuccessful_3 = false;
+                bool_findKeywordSuccessful_4 = false;
+                bool_findKeywordSuccessful_5 = false;
                 bool_screenshotSuccessful = false;
                 bool_datetimeFilterSuccessful = false;
                 bool_fieldFilterSuccessful = false;
@@ -216,10 +251,20 @@ namespace OutSystems_Log_Parser
                 comBoxFilterField.SelectedIndex = -1;
                 comBoxReport.SelectedIndex = -1;
 
+                comBoxIssueCategory.Items.Clear();
+                listIssueCategory.Clear();
+                listIssueCategory.Add("Building Mobile App");
+                listIssueCategory.Add("Compilation");
+                listIssueCategory.Add("Content Security Policy (CSP)");
+                listIssueCategory.Add("Database");
+                listIssueCategory.Add("Logic");
+                listIssueCategory.Add("Network");
+                comBoxIssueCategory.Items.AddRange(listIssueCategory.ToArray());
                 comBoxIssueCategory.Enabled = true;
 
                 comBoxField.Items.Clear();
                 keywordsSaved.Clear();
+                categorySelected.Clear();
 
                 clearTextboxes(txtBoxDetailErrorLogs);
                 clearTextboxes(txtBoxDetailGenerallogs);
@@ -491,7 +536,7 @@ namespace OutSystems_Log_Parser
                         }
                         else if (fileName == "service_studio_report.txt")
                         {
-                            string[] column_names = { "DATE_TIME", "MESSAGE_TYPE", "ACTION_NAME", "MESSAGE" };
+                            string[] column_names = { "DATE_TIME", "MESSAGE_TYPE", "MESSAGE" };
                             populateTables(fullPath + "\\service_studio_report.txt", delimiters, column_names, dataGridViewServiceStudiologs);
                         }
                         else if (fileName == "general_text_logs.txt")
@@ -755,19 +800,19 @@ namespace OutSystems_Log_Parser
                         }
                         else if (fileName == "windows_application_event_viewer_logs.txt")
                         {
-                            string[] column_names = { "DATE_TIME", "LEVEL", "MESSAGE", "TASK", "COMPUTER", "PROVIDER_NAME",
+                            string[] column_names = { "DATE_TIME", "LEVEL", "MESSAGE", "TASK", "COMPUTER", "SOURCE",
                                 "QUALIFIERS", "EVENT_ID", "EVENT_RECORD_ID", "KEYWORDS" };
                             populateTables(fullPath + "\\windows_application_event_viewer_logs.txt", delimiters, column_names, dataGridViewWinAppEventViewer);
                         }
                         else if (fileName == "windows_security_event_viewer_logs.txt")
                         {
-                            string[] column_names = { "DATE_TIME", "LEVEL", "MESSAGE", "TASK", "COMPUTER", "PROVIDER_NAME",
+                            string[] column_names = { "DATE_TIME", "LEVEL", "MESSAGE", "TASK", "COMPUTER", "SOURCE",
                                 "QUALIFIERS", "EVENT_ID", "EVENT_RECORD_ID", "KEYWORDS" };
                             populateTables(fullPath + "\\windows_security_event_viewer_logs.txt", delimiters, column_names, dataGridViewWinSecEventViewer);
                         }
                         else if (fileName == "windows_system_event_viewer_logs.txt")
                         {
-                            string[] column_names = { "DATE_TIME", "LEVEL", "MESSAGE", "TASK", "COMPUTER", "PROVIDER_NAME",
+                            string[] column_names = { "DATE_TIME", "LEVEL", "MESSAGE", "TASK", "COMPUTER", "SOURCE",
                                 "QUALIFIERS", "EVENT_ID", "EVENT_RECORD_ID", "KEYWORDS" };
                             populateTables(fullPath + "\\windows_system_event_viewer_logs.txt", delimiters, column_names, dataGridViewWinSysEventViewer);
                         }
@@ -788,13 +833,26 @@ namespace OutSystems_Log_Parser
                         btnSearchKeyword.Enabled = true;
                         btnSearchKeyword.BackColor = SystemColors.ControlLight;
                         txtBoxKeyword.Enabled = true;
-                        chkBoxSortSlowSQLExtension.Checked = false;
-                        chkBoxSortWebServices.Checked = false;
-                        chkBoxSortScrReqScreens.Checked = false;
-                        chkBoxSortTimers.Checked = false;
-                        chkBoxSortEmails.Checked = false;
-                        chkBoxSortExtensions.Checked = false;
-                        chkBoxSortServiceActions.Checked = false;
+                        rdBtnSortSlowSQLExtension.Checked = false;
+                        rdBtnFilterErrorIDSLowSQLExtension.Checked = false;
+                        rdBtnSortFilterErrorIDSlowSQLExtension.Checked = false;
+                        rdBtnSortWebServices.Checked = false;
+                        rdBtnFilterErrorIDWebServices.Checked = false;
+                        rdBtnSortFilterErrorIDWebServices.Checked = false;
+                        rdBtnScrReqScreens.Checked = false;
+                        rdBtnFilterErrorIDScrReqScreens.Checked = false;
+                        rdBtnSortFilterErrorIDScrReqScreens.Checked = false;
+                        rdBtnSortTimers.Checked = false;
+                        rdBtnFilterErrorIDTimers.Checked = false;
+                        rdBtnSortFilterErrorIDTimers.Checked = false;
+                        rdBtnSortEmails.Checked = false;
+                        rdBtnFilterErrorIDEmails.Checked = false;
+                        rdBtnSortExtensions.Checked = false;
+                        rdBtnFilterErrorIDExtensions.Checked = false;
+                        rdBtnSortFilterErrorIDExtensions.Checked = false;
+                        rdBtnSortServiceActions.Checked = false;
+                        rdBtnFilterErrorIDServiceActions.Checked = false;
+                        rdBtnSortFilterErrorIDServiceActions.Checked = false;
                         chkBoxSortTradWebRequestsScreens.Checked = false;
                         chkBoxSortIIS.Checked = false;
                         chkBoxSortDevinfo.Checked = false;
@@ -817,23 +875,49 @@ namespace OutSystems_Log_Parser
                         comBoxReport.Enabled = false;
                         comBoxField.Enabled = false;
                         comBoxFilterField.Enabled = false;
-                        chkBoxSortSlowSQLExtension.Checked = false;
-                        chkBoxSortWebServices.Checked = false;
-                        chkBoxSortScrReqScreens.Checked = false;
-                        chkBoxSortTimers.Checked = false;
-                        chkBoxSortEmails.Checked = false;
-                        chkBoxSortExtensions.Checked = false;
-                        chkBoxSortServiceActions.Checked = false;
+                        rdBtnSortSlowSQLExtension.Checked = false;
+                        rdBtnFilterErrorIDSLowSQLExtension.Checked = false;
+                        rdBtnSortFilterErrorIDSlowSQLExtension.Checked = false;
+                        rdBtnSortWebServices.Checked = false;
+                        rdBtnFilterErrorIDWebServices.Checked = false;
+                        rdBtnSortFilterErrorIDWebServices.Checked = false;
+                        rdBtnScrReqScreens.Checked = false;
+                        rdBtnFilterErrorIDScrReqScreens.Checked = false;
+                        rdBtnSortFilterErrorIDScrReqScreens.Checked = false;
+                        rdBtnSortTimers.Checked = false;
+                        rdBtnFilterErrorIDTimers.Checked = false;
+                        rdBtnSortFilterErrorIDTimers.Checked = false;
+                        rdBtnSortEmails.Checked = false;
+                        rdBtnFilterErrorIDEmails.Checked = false;
+                        rdBtnSortExtensions.Checked = false;
+                        rdBtnFilterErrorIDExtensions.Checked = false;
+                        rdBtnSortFilterErrorIDExtensions.Checked = false;
+                        rdBtnSortServiceActions.Checked = false;
+                        rdBtnFilterErrorIDServiceActions.Checked = false;
+                        rdBtnSortFilterErrorIDServiceActions.Checked = false;
                         chkBoxSortTradWebRequestsScreens.Checked = false;
                         chkBoxSortIIS.Checked = false;
                         chkBoxSortDevinfo.Checked = false;
-                        chkBoxSortSlowSQLExtension.Enabled = false;
-                        chkBoxSortWebServices.Enabled = false;
-                        chkBoxSortScrReqScreens.Enabled = false;
-                        chkBoxSortTimers.Enabled = false;
-                        chkBoxSortEmails.Enabled = false;
-                        chkBoxSortExtensions.Enabled = false;
-                        chkBoxSortServiceActions.Enabled = false;
+                        rdBtnSortSlowSQLExtension.Enabled = false;
+                        rdBtnFilterErrorIDSLowSQLExtension.Enabled = false;
+                        rdBtnSortFilterErrorIDSlowSQLExtension.Enabled = false;
+                        rdBtnSortWebServices.Enabled = false;
+                        rdBtnFilterErrorIDWebServices.Enabled = false;
+                        rdBtnSortFilterErrorIDWebServices.Enabled = false;
+                        rdBtnScrReqScreens.Enabled = false;
+                        rdBtnFilterErrorIDScrReqScreens.Enabled = false;
+                        rdBtnSortFilterErrorIDScrReqScreens.Enabled = false;
+                        rdBtnSortTimers.Enabled = false;
+                        rdBtnFilterErrorIDTimers.Enabled = false;
+                        rdBtnSortFilterErrorIDTimers.Enabled = false;
+                        rdBtnSortEmails.Enabled = false;
+                        rdBtnFilterErrorIDEmails.Enabled = false;
+                        rdBtnSortExtensions.Enabled = false;
+                        rdBtnFilterErrorIDExtensions.Enabled = false;
+                        rdBtnSortFilterErrorIDExtensions.Enabled = false;
+                        rdBtnSortServiceActions.Enabled = false;
+                        rdBtnFilterErrorIDServiceActions.Enabled = false;
+                        rdBtnSortFilterErrorIDServiceActions.Enabled = false;
                         chkBoxSortTradWebRequestsScreens.Enabled = false;
                         chkBoxSortIIS.Enabled = false;
                         chkBoxSortDevinfo.Enabled = false;
@@ -859,37 +943,50 @@ namespace OutSystems_Log_Parser
 
                 if (dataGridViewSlowSQLlogs.Rows.Count > 0 || dataGridViewSlowExtensionlogs.Rows.Count > 0)
                 {
-                    chkBoxSortSlowSQLExtension.Enabled = true;
+                    rdBtnSortSlowSQLExtension.Enabled = true;
+                    rdBtnFilterErrorIDSLowSQLExtension.Enabled = true;
+                    rdBtnSortFilterErrorIDSlowSQLExtension.Enabled = true;
                 }
 
                 if (dataGridViewIntWebServiceslogs.Rows.Count > 0)
                 {
-                    chkBoxSortWebServices.Enabled = true;
+                    rdBtnSortWebServices.Enabled = true;
+                    rdBtnFilterErrorIDWebServices.Enabled = true;
+                    rdBtnSortFilterErrorIDWebServices.Enabled = true;
                 }
 
                 if (dataGridViewScreenRequestsScreenlogs.Rows.Count > 0)
                 {
-                    chkBoxSortScrReqScreens.Enabled = true;
+                    rdBtnScrReqScreens.Enabled = true;
+                    rdBtnFilterErrorIDScrReqScreens.Enabled = true;
+                    rdBtnSortFilterErrorIDScrReqScreens.Enabled = true;
                 }
 
                 if (dataGridViewTimerTimerslogs.Rows.Count > 0)
                 {
-                    chkBoxSortTimers.Enabled = true;
+                    rdBtnSortTimers.Enabled = true;
+                    rdBtnFilterErrorIDTimers.Enabled = true;
+                    rdBtnSortFilterErrorIDTimers.Enabled = true;
                 }
 
                 if (dataGridViewEmailEmailslogs.Rows.Count > 0)
                 {
-                    chkBoxSortEmails.Enabled = true;
+                    rdBtnSortEmails.Enabled = true;
+                    rdBtnFilterErrorIDEmails.Enabled = true;
                 }
 
                 if (dataGridViewExtensionLogsExtensions.Rows.Count > 0)
                 {
-                    chkBoxSortExtensions.Enabled = true;
+                    rdBtnSortExtensions.Enabled = true;
+                    rdBtnFilterErrorIDExtensions.Enabled = true;
+                    rdBtnSortFilterErrorIDExtensions.Enabled = true;
                 }
 
                 if (dataGridViewSrvActServicelogs.Rows.Count > 0)
                 {
-                    chkBoxSortServiceActions.Enabled = true;
+                    rdBtnSortServiceActions.Enabled = true;
+                    rdBtnFilterErrorIDServiceActions.Enabled = true;
+                    rdBtnSortFilterErrorIDServiceActions.Enabled = true;
                 }
 
                 if (dataGridViewTradWebRequestsScreenlogs.Rows.Count > 0)
@@ -901,11 +998,15 @@ namespace OutSystems_Log_Parser
                 {
                     chkBoxSortDevinfo.Enabled = true;
                 }
-                
+
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
                 throw;
             }
         }
@@ -913,7 +1014,7 @@ namespace OutSystems_Log_Parser
         private void populateTables(string filePath, char splitter, string[] headerLabels, DataGridView tableName)
         {
             DataTable dt = new DataTable();
-            string[] lines = System.IO.File.ReadAllLines(filePath).ToArray();
+            string[] lines = File.ReadAllLines(filePath).ToArray();
             List<string> newLines = new List<string>();
             int colsExpected = 0;
 
@@ -968,7 +1069,9 @@ namespace OutSystems_Log_Parser
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
                 throw;
             }
         }
@@ -1008,7 +1111,9 @@ namespace OutSystems_Log_Parser
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
                 throw;
             }
         }
@@ -1416,37 +1521,50 @@ namespace OutSystems_Log_Parser
 
                         if (dataGridViewSlowSQLlogs.Rows.Count == 0 || dataGridViewSlowExtensionlogs.Rows.Count == 0)
                         {
-                            chkBoxSortSlowSQLExtension.Enabled = false;
+                            rdBtnSortSlowSQLExtension.Enabled = false;
+                            rdBtnFilterErrorIDSLowSQLExtension.Enabled = false;
+                            rdBtnSortFilterErrorIDSlowSQLExtension.Enabled = false;
                         }
 
                         if (dataGridViewIntWebServiceslogs.Rows.Count == 0)
                         {
-                            chkBoxSortWebServices.Enabled = false;
+                            rdBtnSortWebServices.Enabled = false;
+                            rdBtnFilterErrorIDWebServices.Enabled = false;
+                            rdBtnSortFilterErrorIDWebServices.Enabled = false;
                         }
 
                         if (dataGridViewScreenRequestsScreenlogs.Rows.Count == 0)
                         {
-                            chkBoxSortScrReqScreens.Enabled = false;
+                            rdBtnScrReqScreens.Enabled = false;
+                            rdBtnFilterErrorIDScrReqScreens.Enabled = false;
+                            rdBtnSortFilterErrorIDScrReqScreens.Enabled = false;
                         }
 
                         if (dataGridViewTimerTimerslogs.Rows.Count == 0)
                         {
-                            chkBoxSortTimers.Enabled = false;
+                            rdBtnSortTimers.Enabled = false;
+                            rdBtnFilterErrorIDTimers.Enabled = false;
+                            rdBtnSortFilterErrorIDTimers.Enabled = false;
                         }
 
                         if (dataGridViewEmailEmailslogs.Rows.Count == 0)
                         {
-                            chkBoxSortEmails.Enabled = false;
+                            rdBtnSortEmails.Enabled = false;
+                            rdBtnFilterErrorIDEmails.Enabled = false;
                         }
 
                         if (dataGridViewExtensionLogsExtensions.Rows.Count == 0)
                         {
-                            chkBoxSortExtensions.Enabled = false;
+                            rdBtnSortExtensions.Enabled = false;
+                            rdBtnFilterErrorIDExtensions.Enabled = false;
+                            rdBtnSortFilterErrorIDExtensions.Enabled = false;
                         }
 
                         if (dataGridViewSrvActServicelogs.Rows.Count == 0)
                         {
-                            chkBoxSortServiceActions.Enabled = false;
+                            rdBtnSortServiceActions.Enabled = false;
+                            rdBtnFilterErrorIDServiceActions.Enabled = false;
+                            rdBtnSortFilterErrorIDServiceActions.Enabled = false;
                         }
 
                         if (dataGridViewTradWebRequestsScreenlogs.Rows.Count == 0)
@@ -1463,15 +1581,23 @@ namespace OutSystems_Log_Parser
 
                 if (bool_highlightError)
                 {
-                    category = comBoxIssueCategory.Text;
-                    highlightError(category);
+                    if (bool_highlightErrorSuccessful_1 || bool_highlightErrorSuccessful_2 || bool_highlightErrorSuccessful_3 || bool_highlightErrorSuccessful_4 || bool_highlightErrorSuccessful_5 || bool_highlightErrorSuccessful_6)
+                    {
+                        foreach (string c in categorySelected)
+                        {
+                            highlightError(c);
+                        }
+                    }
                 }
-                
+
                 if (bool_findKeyword)
                 {
-                    findKeyword2();
+                    if (bool_findKeywordSuccessful_1 || bool_findKeywordSuccessful_2 || bool_findKeywordSuccessful_3 || bool_findKeywordSuccessful_4 || bool_findKeywordSuccessful_5)
+                    {
+                        findKeyword2();
+                    }
                 }
-                
+
                 if (bool_datetimeFilterSuccessful)
                 {
                     MessageBox.Show("The data was filtered by the datetime range provided", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1479,7 +1605,9 @@ namespace OutSystems_Log_Parser
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
                 throw;
             }
         }
@@ -1502,7 +1630,9 @@ namespace OutSystems_Log_Parser
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
                 throw;
             }
         }
@@ -1525,13 +1655,21 @@ namespace OutSystems_Log_Parser
 
             if (bool_highlightError)
             {
-                category = comBoxIssueCategory.Text;
-                highlightError(category);
+                if (bool_highlightErrorSuccessful_1 || bool_highlightErrorSuccessful_2 || bool_highlightErrorSuccessful_3 || bool_highlightErrorSuccessful_4 || bool_highlightErrorSuccessful_5 || bool_highlightErrorSuccessful_6)
+                {
+                    foreach (string c in categorySelected)
+                    {
+                        highlightError(c);
+                    }
+                }
             }
 
             if (bool_findKeyword)
             {
-                findKeyword2();
+                if (bool_findKeywordSuccessful_1 || bool_findKeywordSuccessful_2 || bool_findKeywordSuccessful_3 || bool_findKeywordSuccessful_4 || bool_findKeywordSuccessful_5)
+                {
+                    findKeyword2();
+                }
             }
 
             if (bool_removeGarbageSuccessful)
@@ -1588,16 +1726,18 @@ namespace OutSystems_Log_Parser
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
                 throw;
             }
         }
 
         private void btnHighlight_Click(object sender, EventArgs e)
         {
-            comBoxIssueCategory.Enabled = false;
-
             bool_highlightError = true;
+
+            countFindKnownError++;
 
             category = comBoxIssueCategory.Text;
             highlightError(category);
@@ -1607,12 +1747,59 @@ namespace OutSystems_Log_Parser
                 removeGarbage();
             }
 
-            if (bool_highlightErrorSuccessful)
+            if (countFindKnownError == 1)
             {
-                MessageBox.Show("Known errors were highlighted", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (bool_highlightErrorSuccessful_1)
+                {
+                    MessageBox.Show("Known errors were highlighted", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else if (countFindKnownError == 2)
+            {
+                if (bool_highlightErrorSuccessful_2)
+                {
+                    MessageBox.Show("Known errors were highlighted", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else if (countFindKnownError == 3)
+            {
+                if (bool_highlightErrorSuccessful_3)
+                {
+                    MessageBox.Show("Known errors were highlighted", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else if (countFindKnownError == 4)
+            {
+                if (bool_highlightErrorSuccessful_4)
+                {
+                    MessageBox.Show("Known errors were highlighted", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else if (countFindKnownError == 5)
+            {
+                if (bool_highlightErrorSuccessful_5)
+                {
+                    MessageBox.Show("Known errors were highlighted", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else if (countFindKnownError == 6)
+            {
+                if (bool_highlightErrorSuccessful_6)
+                {
+                    MessageBox.Show("Known errors were highlighted", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
 
-            btnHighlight.Enabled = false;
+            categorySelected.Add(category);
+            listIssueCategory.Remove(category);
+            comBoxIssueCategory.Items.Clear();
+            comBoxIssueCategory.Items.AddRange(listIssueCategory.ToArray());
+
+            if (listIssueCategory.Count == 0)
+            {
+                comBoxIssueCategory.Enabled = false;
+                btnHighlight.Enabled = false;
+            }
         }
 
         private void highlightKnownErrors(string dgvName, DataGridView tableName, int columnIndex, string[] errorsList)
@@ -1621,17 +1808,67 @@ namespace OutSystems_Log_Parser
             {
                 if (tableName.Rows.Count > 0)
                 {
+                    totalRowsCount = tableName.RowCount;
+
+                    sixteenthOfTotal = ((double)totalRowsCount / (double)16);
+                    roundedSixteenthOfTotal = Math.Round(sixteenthOfTotal, 0, MidpointRounding.AwayFromZero);
+
+                    eighthOfTotal = ((double)totalRowsCount / (double)8);
+                    roundedEighthOfTotal = Math.Round(eighthOfTotal, 0, MidpointRounding.AwayFromZero);
+
+                    fourthOfTotal = ((double)totalRowsCount / (double)4);
+                    roundedFourthOfTotal = Math.Round(fourthOfTotal, 0, MidpointRounding.AwayFromZero);
+
+                    halfOfTotal = ((double)totalRowsCount / (double)2);
+                    roundedHalfOfTotal = Math.Round(halfOfTotal, 0, MidpointRounding.AwayFromZero);
+
                     forceTabClick(dgvName);
 
                     foreach (string error in errorsList)
                     {
                         foreach (DataGridViewRow row in tableName.Rows)
                         {
+                            currentRow = row.Index + 1;
+
                             if (row.Cells[columnIndex].Value.ToString().ToLower().Contains(error))
                             {
                                 row.DefaultCellStyle.BackColor = Color.Yellow;
 
-                                bool_highlightErrorSuccessful = true;
+                                if (countFindKnownError == 1)
+                                {
+                                    bool_highlightErrorSuccessful_1 = true;
+                                }
+                                else if (countFindKnownError == 2)
+                                {
+                                    bool_highlightErrorSuccessful_2 = true;
+                                }
+                                else if (countFindKnownError == 3)
+                                {
+                                    bool_highlightErrorSuccessful_3 = true;
+                                }
+                                else if (countFindKnownError == 4)
+                                {
+                                    bool_highlightErrorSuccessful_4 = true;
+                                }
+                                else if (countFindKnownError == 5)
+                                {
+                                    bool_highlightErrorSuccessful_5 = true;
+                                }
+                                else if (countFindKnownError == 6)
+                                {
+                                    bool_highlightErrorSuccessful_6 = true;
+                                }
+                            }
+
+                            if ((double)currentRow == roundedSixteenthOfTotal || (double)currentRow == roundedEighthOfTotal || (double)currentRow == roundedFourthOfTotal || (double)currentRow == roundedHalfOfTotal)
+                            {
+                                GC.Collect();
+                                GC.WaitForPendingFinalizers();
+                            }
+                            else if (currentRow == totalRowsCount - 1)
+                            {
+                                GC.Collect();
+                                GC.WaitForPendingFinalizers();
                             }
                         }
                     }
@@ -1639,7 +1876,9 @@ namespace OutSystems_Log_Parser
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
                 throw;
             }
         }
@@ -1731,23 +1970,49 @@ namespace OutSystems_Log_Parser
             btnSearchKeyword.Enabled = false;
             txtBoxKeyword.Enabled = false;
             comBoxReport.Enabled = false;
-            chkBoxSortSlowSQLExtension.Checked = false;
-            chkBoxSortWebServices.Checked = false;
-            chkBoxSortScrReqScreens.Checked = false;
-            chkBoxSortTimers.Checked = false;
-            chkBoxSortEmails.Checked = false;
-            chkBoxSortExtensions.Checked = false;
-            chkBoxSortServiceActions.Checked = false;
+            rdBtnSortSlowSQLExtension.Checked = false;
+            rdBtnFilterErrorIDSLowSQLExtension.Checked = false;
+            rdBtnSortFilterErrorIDSlowSQLExtension.Checked = false;
+            rdBtnSortWebServices.Checked = false;
+            rdBtnFilterErrorIDWebServices.Checked = false;
+            rdBtnSortFilterErrorIDWebServices.Checked = false;
+            rdBtnScrReqScreens.Checked = false;
+            rdBtnFilterErrorIDScrReqScreens.Checked = false;
+            rdBtnSortFilterErrorIDScrReqScreens.Checked = false;
+            rdBtnSortTimers.Checked = false;
+            rdBtnFilterErrorIDTimers.Checked = false;
+            rdBtnSortFilterErrorIDTimers.Checked = false;
+            rdBtnSortEmails.Checked = false;
+            rdBtnFilterErrorIDEmails.Checked = false;
+            rdBtnSortExtensions.Checked = false;
+            rdBtnFilterErrorIDExtensions.Checked = false;
+            rdBtnSortFilterErrorIDExtensions.Checked = false;
+            rdBtnSortServiceActions.Checked = false;
+            rdBtnFilterErrorIDServiceActions.Checked = false;
+            rdBtnSortFilterErrorIDServiceActions.Checked = false;
             chkBoxSortTradWebRequestsScreens.Checked = false;
             chkBoxSortIIS.Checked = false;
             chkBoxSortDevinfo.Checked = false;
-            chkBoxSortSlowSQLExtension.Enabled = false;
-            chkBoxSortWebServices.Enabled = false;
-            chkBoxSortScrReqScreens.Enabled = false;
-            chkBoxSortTimers.Enabled = false;
-            chkBoxSortEmails.Enabled = false;
-            chkBoxSortExtensions.Enabled = false;
-            chkBoxSortServiceActions.Enabled = false;
+            rdBtnSortSlowSQLExtension.Enabled = false;
+            rdBtnFilterErrorIDSLowSQLExtension.Enabled = false;
+            rdBtnSortFilterErrorIDSlowSQLExtension.Enabled = false;
+            rdBtnSortWebServices.Enabled = false;
+            rdBtnFilterErrorIDWebServices.Enabled = false;
+            rdBtnSortFilterErrorIDWebServices.Enabled = false;
+            rdBtnScrReqScreens.Enabled = false;
+            rdBtnFilterErrorIDScrReqScreens.Enabled = false;
+            rdBtnSortFilterErrorIDScrReqScreens.Enabled = false;
+            rdBtnSortTimers.Enabled = false;
+            rdBtnFilterErrorIDTimers.Enabled = false;
+            rdBtnSortFilterErrorIDTimers.Enabled = false;
+            rdBtnSortEmails.Enabled = false;
+            rdBtnFilterErrorIDEmails.Enabled = false;
+            rdBtnSortExtensions.Enabled = false;
+            rdBtnFilterErrorIDExtensions.Enabled = false;
+            rdBtnSortFilterErrorIDExtensions.Enabled = false;
+            rdBtnSortServiceActions.Enabled = false;
+            rdBtnFilterErrorIDServiceActions.Enabled = false;
+            rdBtnSortFilterErrorIDServiceActions.Enabled = false;
             chkBoxSortTradWebRequestsScreens.Enabled = false;
             chkBoxSortIIS.Enabled = false;
             chkBoxSortDevinfo.Enabled = false;
@@ -1800,17 +2065,17 @@ namespace OutSystems_Log_Parser
             else if (!string.IsNullOrEmpty(txtBoxDetailWinAppEventViewer.Text))
             {
                 DataGridViewRow row = this.dataGridViewWinAppEventViewer.Rows[dataGridViewWinAppEventViewer.CurrentCell.RowIndex];
-                txtWinAppEventVieLogs = "DATE_TIME: " + row.Cells["DATE_TIME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "LEVEL: " + row.Cells["LEVEL"].Value.ToString() + Environment.NewLine + Environment.NewLine + "MESSAGE: " + row.Cells["MESSAGE"].Value.ToString() + Environment.NewLine + Environment.NewLine + "SOURCE: " + row.Cells["PROVIDER_NAME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "COMPUTER: " + row.Cells["COMPUTER"].Value.ToString();
+                txtWinAppEventVieLogs = "DATE_TIME: " + row.Cells["DATE_TIME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "LEVEL: " + row.Cells["LEVEL"].Value.ToString() + Environment.NewLine + Environment.NewLine + "MESSAGE: " + row.Cells["MESSAGE"].Value.ToString() + Environment.NewLine + Environment.NewLine + "SOURCE: " + row.Cells["SOURCE"].Value.ToString() + Environment.NewLine + Environment.NewLine + "COMPUTER: " + row.Cells["COMPUTER"].Value.ToString();
             }
             else if (!string.IsNullOrEmpty(txtBoxDetailWinSecEventViewer.Text))
             {
                 DataGridViewRow row = this.dataGridViewWinSecEventViewer.Rows[dataGridViewWinSecEventViewer.CurrentCell.RowIndex];
-                txtWinSecEventVieLogs = "DATE_TIME: " + row.Cells["DATE_TIME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "LEVEL: " + row.Cells["LEVEL"].Value.ToString() + Environment.NewLine + Environment.NewLine + "MESSAGE: " + row.Cells["MESSAGE"].Value.ToString() + Environment.NewLine + Environment.NewLine + "SOURCE: " + row.Cells["PROVIDER_NAME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "COMPUTER: " + row.Cells["COMPUTER"].Value.ToString();
+                txtWinSecEventVieLogs = "DATE_TIME: " + row.Cells["DATE_TIME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "LEVEL: " + row.Cells["LEVEL"].Value.ToString() + Environment.NewLine + Environment.NewLine + "MESSAGE: " + row.Cells["MESSAGE"].Value.ToString() + Environment.NewLine + Environment.NewLine + "SOURCE: " + row.Cells["SOURCE"].Value.ToString() + Environment.NewLine + Environment.NewLine + "COMPUTER: " + row.Cells["COMPUTER"].Value.ToString();
             }
             else if (!string.IsNullOrEmpty(txtBoxDetailWinSysEventViewer.Text))
             {
                 DataGridViewRow row = this.dataGridViewWinSysEventViewer.Rows[dataGridViewWinSysEventViewer.CurrentCell.RowIndex];
-                txtWinSysEventVieLogs = "DATE_TIME: " + row.Cells["DATE_TIME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "LEVEL: " + row.Cells["LEVEL"].Value.ToString() + Environment.NewLine + Environment.NewLine + "MESSAGE: " + row.Cells["MESSAGE"].Value.ToString() + Environment.NewLine + Environment.NewLine + "SOURCE: " + row.Cells["PROVIDER_NAME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "COMPUTER: " + row.Cells["COMPUTER"].Value.ToString();
+                txtWinSysEventVieLogs = "DATE_TIME: " + row.Cells["DATE_TIME"].Value.ToString() + Environment.NewLine + Environment.NewLine + "LEVEL: " + row.Cells["LEVEL"].Value.ToString() + Environment.NewLine + Environment.NewLine + "MESSAGE: " + row.Cells["MESSAGE"].Value.ToString() + Environment.NewLine + Environment.NewLine + "SOURCE: " + row.Cells["SOURCE"].Value.ToString() + Environment.NewLine + Environment.NewLine + "COMPUTER: " + row.Cells["COMPUTER"].Value.ToString();
             }
 
             createScreenshot("detailed_error_logs", txtBoxDetailErrorLogs, txtDetailErrorLogs, myScreenshotFont, myScreenshotForeColor, myScreenshotBackColor);
@@ -1940,8 +2205,8 @@ namespace OutSystems_Log_Parser
                     drawing.Dispose();
 
                     //create a folder
-                    string screenshotsFolder = System.IO.Path.Combine(label8.Text, "screenshots");
-                    System.IO.Directory.CreateDirectory(screenshotsFolder);
+                    string screenshotsFolder = Path.Combine(label8.Text, "screenshots");
+                    Directory.CreateDirectory(screenshotsFolder);
 
                     string timeStamp = DateTime.Now.ToString();
                     timeStamp = timeStamp.Replace("/", "");
@@ -1957,7 +2222,9 @@ namespace OutSystems_Log_Parser
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
                 throw;
             }
         }
@@ -2166,12 +2433,6 @@ namespace OutSystems_Log_Parser
                     removeGarbage();
                 }
 
-                if (bool_highlightError)
-                {
-                    category = comBoxIssueCategory.Text;
-                    highlightError(category);
-                }
-
                 if (countFindKeyword != 5)
                 {
                     txtBoxKeyword.Text = "";
@@ -2183,9 +2444,40 @@ namespace OutSystems_Log_Parser
                     txtBoxKeyword.Enabled = false;
                 }
 
-                if (bool_findKeywordSuccessful)
+                if (countFindKeyword == 1)
                 {
-                    MessageBox.Show("The keyword was found", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (bool_findKeywordSuccessful_1)
+                    {
+                        MessageBox.Show("The keyword was found", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else if (countFindKeyword == 2)
+                {
+                    if (bool_findKeywordSuccessful_2)
+                    {
+                        MessageBox.Show("The keyword was found", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else if (countFindKeyword == 3)
+                {
+                    if (bool_findKeywordSuccessful_3)
+                    {
+                        MessageBox.Show("The keyword was found", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else if (countFindKeyword == 4)
+                {
+                    if (bool_findKeywordSuccessful_4)
+                    {
+                        MessageBox.Show("The keyword was found", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else if (countFindKeyword == 5)
+                {
+                    if (bool_findKeywordSuccessful_5)
+                    {
+                        MessageBox.Show("The keyword was found", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
             }
         }
@@ -2196,59 +2488,83 @@ namespace OutSystems_Log_Parser
             {
                 if (tableName.Rows.Count > 0)
                 {
+                    totalRowsCount = tableName.RowCount;
+
+                    sixteenthOfTotal = ((double)totalRowsCount / (double)16);
+                    roundedSixteenthOfTotal = Math.Round(sixteenthOfTotal, 0, MidpointRounding.AwayFromZero);
+
+                    eighthOfTotal = ((double)totalRowsCount / (double)8);
+                    roundedEighthOfTotal = Math.Round(eighthOfTotal, 0, MidpointRounding.AwayFromZero);
+
+                    fourthOfTotal = ((double)totalRowsCount / (double)4);
+                    roundedFourthOfTotal = Math.Round(fourthOfTotal, 0, MidpointRounding.AwayFromZero);
+
+                    halfOfTotal = ((double)totalRowsCount / (double)2);
+                    roundedHalfOfTotal = Math.Round(halfOfTotal, 0, MidpointRounding.AwayFromZero);
+
                     forceTabClick(dgvName);
 
                     //search for the value in all of the table's rows
-                    string rowValues = "";
-
-                    for (int r = 0; r <= tableName.Rows.Count - 1; r++)
+                    foreach (DataGridViewRow row in tableName.Rows)
                     {
-                        for (int c = 0; c <= tableName.Columns.Count - 1; c++)
+                        currentRow = row.Index + 1;
+
+                        rowValues += string.Join(" ", row.Cells.Cast<DataGridViewCell>().Where(c => c.Value != null).Select(c => c.Value.ToString()).ToArray());
+
+                        if (rowValues.ToLower().Contains(myKeyword.ToLower()))
                         {
-                            rowValues = rowValues + tableName.Rows[r].Cells[c].Value.ToString() + " ";
-                            if (c == tableName.Columns.Count - 1)
+                            if (myCount == 1)
                             {
-                                if (rowValues.ToLower().Contains(myKeyword.ToLower()))
-                                {
-                                    if (myCount == 1)
-                                    {
-                                        tableName.Rows[r].DefaultCellStyle.BackColor = Color.FromArgb(255, 240, 240);
-                                        tableName.Rows[r].DefaultCellStyle.ForeColor = Color.Red;
-                                    }
-                                    else if (myCount == 2)
-                                    {
-                                        tableName.Rows[r].DefaultCellStyle.BackColor = Color.FromArgb(255, 247, 183);
-                                        tableName.Rows[r].DefaultCellStyle.ForeColor = Color.FromArgb(255, 108, 0);
-                                    }
-                                    if (myCount == 3)
-                                    {
-                                        tableName.Rows[r].DefaultCellStyle.BackColor = Color.FromArgb(245, 213, 255);
-                                        tableName.Rows[r].DefaultCellStyle.ForeColor = Color.Purple;
-                                    }
-                                    if (myCount == 4)
-                                    {
-                                        tableName.Rows[r].DefaultCellStyle.BackColor = Color.FromArgb(213, 255, 219);
-                                        tableName.Rows[r].DefaultCellStyle.ForeColor = Color.DarkGreen;
-                                    }
-                                    if (myCount == 5)
-                                    {
-                                        tableName.Rows[r].DefaultCellStyle.BackColor = Color.FromArgb(225, 255, 253);
-                                        tableName.Rows[r].DefaultCellStyle.ForeColor = Color.FromArgb(2, 181, 208);
-                                    }
-
-                                    bool_findKeywordSuccessful = true;
-
-                                    rowValues = "";
-                                }
-                                rowValues = "";
+                                row.DefaultCellStyle.BackColor = Color.FromArgb(255, 240, 240);
+                                row.DefaultCellStyle.ForeColor = Color.Red;
+                                bool_findKeywordSuccessful_1 = true;
                             }
+                            else if (myCount == 2)
+                            {
+                                row.DefaultCellStyle.BackColor = Color.FromArgb(255, 247, 183);
+                                row.DefaultCellStyle.ForeColor = Color.FromArgb(255, 108, 0);
+                                bool_findKeywordSuccessful_2 = true;
+                            }
+                            else if (myCount == 3)
+                            {
+                                row.DefaultCellStyle.BackColor = Color.FromArgb(245, 213, 255);
+                                row.DefaultCellStyle.ForeColor = Color.Purple;
+                                bool_findKeywordSuccessful_3 = true;
+                            }
+                            else if (myCount == 4)
+                            {
+                                row.DefaultCellStyle.BackColor = Color.FromArgb(213, 255, 219);
+                                row.DefaultCellStyle.ForeColor = Color.DarkGreen;
+                                bool_findKeywordSuccessful_4 = true;
+                            }
+                            else if (myCount == 5)
+                            {
+                                row.DefaultCellStyle.BackColor = Color.FromArgb(225, 255, 253);
+                                row.DefaultCellStyle.ForeColor = Color.FromArgb(2, 181, 208);
+                                bool_findKeywordSuccessful_5 = true;
+                            }
+                        }
+
+                        rowValues = null;
+
+                        if ((double)currentRow == roundedSixteenthOfTotal || (double)currentRow == roundedEighthOfTotal || (double)currentRow == roundedFourthOfTotal || (double)currentRow == roundedHalfOfTotal)
+                        {
+                            GC.Collect();
+                            GC.WaitForPendingFinalizers();
+                        }
+                        else if (currentRow == totalRowsCount - 1)
+                        {
+                            GC.Collect();
+                            GC.WaitForPendingFinalizers();
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
                 throw;
             }
         }
@@ -2406,7 +2722,9 @@ namespace OutSystems_Log_Parser
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
                 throw;
             }
         }
@@ -2541,7 +2859,9 @@ namespace OutSystems_Log_Parser
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
                 throw;
             }
         }
@@ -2554,7 +2874,7 @@ namespace OutSystems_Log_Parser
             removeGenericErrors("dataGridViewWinSecEventViewer", dataGridViewWinSecEventViewer, 2, txtBoxDetailWinSecEventViewer);
             removeGenericErrors("dataGridViewAndroidlogs", dataGridViewAndroidlogs, 3, txtBoxDetailAndroidLogs);
             removeGenericErrors("dataGridViewiOSlogs", dataGridViewiOSlogs, 3, txtBoxDetailiOSLogs);
-            removeGenericErrors("dataGridViewServiceStudiologs", dataGridViewServiceStudiologs, 3, txtBoxDetailServiceStudioLogs);
+            removeGenericErrors("dataGridViewServiceStudiologs", dataGridViewServiceStudiologs, 2, txtBoxDetailServiceStudioLogs);
             removeGenericErrors("dataGridViewGeneralTXTlogs", dataGridViewGeneralTXTlogs, 2, txtBoxDetailGeneralTXTLogs);
         }
 
@@ -2562,7 +2882,7 @@ namespace OutSystems_Log_Parser
         {
             if (ctg == "Building Mobile App")
             {
-                knownErrors_AndroidiOSlogs = new string[] { "command finished with error code 0", "plugin is not going to work", "plugin doesn't support this project's cordova-android version", "failed to fetch plug", "archive failed", "build failed with the following error", "command failed with exit code", "the ios deployment target", "kotlin", "cordovaerror", "file is corrupt or invalid", "error: spawnsync sudo etimeout", "signing certificate is invalid", "verification failed" };
+                knownErrors_AndroidiOSlogs = new string[] { "command finished with error code 0", "plugin is not going to work", "plugin doesn't support this project's cordova-android version", "failed to fetch plug", "archive failed", "build failed with the following error", "command failed with exit code", "the ios deployment target", "kotlin", "cordovaerror", "file is corrupt or invalid", "error: spawnsync sudo etimeout", "signing certificate is invalid", "verification failed", "incompatibility", "android:exported" };
 
                 highlightKnownErrors("dataGridViewAndroidlogs", dataGridViewAndroidlogs, 3, knownErrors_AndroidiOSlogs);
                 highlightKnownErrors("dataGridViewiOSlogs", dataGridViewiOSlogs, 3, knownErrors_AndroidiOSlogs);
@@ -2582,7 +2902,7 @@ namespace OutSystems_Log_Parser
             }
             else if (ctg == "Database")
             {
-                knownErrors_Errorlogs = new string[] { "truncated in table", "dequeuing" };
+                knownErrors_Errorlogs = new string[] { "truncated in table", "dequeuing", "connection is broken" };
                 knownErrors_WinAppEventViewer = new string[] { "ora-", "error closing", "error opening" };
                 knownErrors_WinSysEventViewer = new string[] { "error closing", "timed out" };
 
@@ -2605,13 +2925,13 @@ namespace OutSystems_Log_Parser
                 highlightKnownErrors("dataGridViewWinSysEventViewer", dataGridViewWinSysEventViewer, 2, knownErrors_WinSysEventViewer);
                 highlightKnownErrors("dataGridViewAndroidlogs", dataGridViewAndroidlogs, 3, knownErrors_AndroidiOSlogs);
                 highlightKnownErrors("dataGridViewiOSlogs", dataGridViewiOSlogs, 3, knownErrors_AndroidiOSlogs);
-                highlightKnownErrors("dataGridViewServiceStudiologs", dataGridViewServiceStudiologs, 3, knownErrors_ServiceStudiologs);
+                highlightKnownErrors("dataGridViewServiceStudiologs", dataGridViewServiceStudiologs, 2, knownErrors_ServiceStudiologs);
             }
             else if (ctg == "Network")
             {
-                knownErrors_Errorlogs = new string[] { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "communicationexception", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "unable to open service studio", "invalid authentication token"};
-                knownErrors_WinAppEventViewer = new string[] { "error closing", "cannot access", "error opening" };
-                knownErrors_WinSysEventViewer = new string[] { "error closing", "timed out" };
+                knownErrors_Errorlogs = new string[] { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "communicationexception", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "unable to open service studio", "invalid authentication token", "connection is broken" };
+                knownErrors_WinAppEventViewer = new string[] { "error closing", "cannot access", "error opening", "certificate" };
+                knownErrors_WinSysEventViewer = new string[] { "error closing", "timed out", "certificate" };
                 knownErrors_AndroidiOSlogs = new string[] { "file is corrupt or invalid", "error: spawnsync sudo etimeout", "signing certificate is invalid", "verification failed" };
                 knownErrors_ServiceStudiologs = new string[] { "http forbidden", "[not connected]" };
 
@@ -2620,7 +2940,7 @@ namespace OutSystems_Log_Parser
                 highlightKnownErrors("dataGridViewWinSysEventViewer", dataGridViewWinSysEventViewer, 2, knownErrors_WinSysEventViewer);
                 highlightKnownErrors("dataGridViewAndroidlogs", dataGridViewAndroidlogs, 3, knownErrors_AndroidiOSlogs);
                 highlightKnownErrors("dataGridViewiOSlogs", dataGridViewiOSlogs, 3, knownErrors_AndroidiOSlogs);
-                highlightKnownErrors("dataGridViewServiceStudiologs", dataGridViewServiceStudiologs, 3, knownErrors_ServiceStudiologs);
+                highlightKnownErrors("dataGridViewServiceStudiologs", dataGridViewServiceStudiologs, 2, knownErrors_ServiceStudiologs);
             }
         }
 
@@ -3641,18 +3961,53 @@ namespace OutSystems_Log_Parser
 
         private void btnExportSlowSQLExtensionTables_Click(object sender, EventArgs e)
         {
-            exportTableContent(dataGridViewSlowSQLDurationlogs, "\\slow_sql_table.txt", "|");
-            exportTableContent(dataGridViewSlowExtensionDurationlogs, "\\slow_extension_table.txt", "|");
+            if (rdBtnSortSlowSQLExtension.Checked == true)
+            {
+                exportTableContent(dataGridViewSlowSQLDurationlogs, "\\slow_sql_table_sort_duration.txt", "|");
+                exportTableContent(dataGridViewSlowExtensionDurationlogs, "\\slow_extension_table_sort_duration.txt", "|");
+            }
+            else if (rdBtnFilterErrorIDSLowSQLExtension.Checked == true)
+            {
+                exportTableContent(dataGridViewSlowSQLDurationlogs, "\\slow_sql_table_filter_with_error_id.txt", "|");
+                exportTableContent(dataGridViewSlowExtensionDurationlogs, "\\slow_extension_table_filter_with_error_id.txt", "|");
+            }
+            else if (rdBtnSortFilterErrorIDSlowSQLExtension.Checked == true)
+            {
+                exportTableContent(dataGridViewSlowSQLDurationlogs, "\\slow_sql_table_sort_duration_filter_with_error_id.txt", "|");
+                exportTableContent(dataGridViewSlowExtensionDurationlogs, "\\slow_extension_table_sort_duration_filter_with_error_id.txt", "|");
+            }
         }
 
         private void btnExportWebServiceTable_Click(object sender, EventArgs e)
         {
-            exportTableContent(dataGridViewInWebServicesDurationlogs, "\\webservices_table.txt", "|");
+            if (rdBtnSortWebServices.Checked == true)
+            {
+                exportTableContent(dataGridViewInWebServicesDurationlogs, "\\webservices_table_sort_duration.txt", "|");
+            }
+            else if (rdBtnFilterErrorIDWebServices.Checked == true)
+            {
+                exportTableContent(dataGridViewInWebServicesDurationlogs, "\\webservices_table_filter_with_error_id.txt", "|");
+            }
+            else if (rdBtnSortFilterErrorIDWebServices.Checked == true)
+            {
+                exportTableContent(dataGridViewInWebServicesDurationlogs, "\\webservices_table_sort_duration_filter_with_error_id.txt", "|");
+            }
         }
 
         private void btnExportTimerTable_Click(object sender, EventArgs e)
         {
-            exportTableContent(dataGridViewTimerTimersDurationlogs, "\\timers_table.txt", "|");
+            if (rdBtnSortTimers.Checked == true)
+            {
+                exportTableContent(dataGridViewTimerTimersDurationlogs, "\\timers_table_sort_duration.txt", "|");
+            }
+            else if (rdBtnFilterErrorIDTimers.Checked == true)
+            {
+                exportTableContent(dataGridViewTimerTimersDurationlogs, "\\timers_table_filter_with_error_id.txt", "|");
+            }
+            else if (rdBtnSortFilterErrorIDTimers.Checked == true)
+            {
+                exportTableContent(dataGridViewTimerTimersDurationlogs, "\\timers_table_sort_duration_filter_with_error_id.txt", "|");
+            }
         }
 
         private void btnExportScreenTable_Click(object sender, EventArgs e)
@@ -3715,7 +4070,9 @@ namespace OutSystems_Log_Parser
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                    error_message = "Error: " + Environment.NewLine + ex.ToString();
+                    errorLog("\\error_log.txt", error_message);
+                    MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
                     throw;
                 }
             }
@@ -3733,209 +4090,52 @@ namespace OutSystems_Log_Parser
             }
         }
 
-        private void chkBoxSortSlowSQLExtension_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (chkBoxSortSlowSQLExtension.Checked == true)
-                {
-                    if (dataGridViewSlowSQLlogs.Rows.Count > 0)
-                    {
-                        var sortSlowSQLDuration = (dataGridViewSlowSQLlogs.Rows.Cast<DataGridViewRow>()
-                            .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null)
-                            .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ModuleName = r.Cells[2].Value, ApplicationName = r.Cells[3].Value, ActionName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
-                            .GroupBy(slowsqltime => slowsqltime)
-                            .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
-                            .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
-
-                        dataGridViewSlowSQLDurationlogs.DataSource = sortSlowSQLDuration;
-                    }
-
-                    if (dataGridViewSlowExtensionlogs.Rows.Count > 0)
-                    {
-                        var sortSlowExtensionDuration = (dataGridViewSlowExtensionlogs.Rows.Cast<DataGridViewRow>()
-                            .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null)
-                            .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ModuleName = r.Cells[2].Value, ApplicationName = r.Cells[3].Value, ActionName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
-                            .GroupBy(slowexttime => slowexttime)
-                            .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
-                            .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
-
-                        dataGridViewSlowExtensionDurationlogs.DataSource = sortSlowExtensionDuration;
-                    }
-
-                    btnExportSlowSQLExtensionTables.Enabled = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
-        }
-
-        private void chkBoxSortWebServices_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (chkBoxSortWebServices.Checked == true)
-                {
-                    var sortWebServicesDuration = (dataGridViewIntWebServiceslogs.Rows.Cast<DataGridViewRow>()
-                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null && r.Cells[10].Value != null)
-                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ModuleName = r.Cells[2].Value, ApplicationName = r.Cells[3].Value, ActionName = r.Cells[4].Value, ActionType = r.Cells[5].Value, EspaceName = r.Cells[6].Value, Message = r.Cells[7].Value, Stack = r.Cells[8].Value, EnvironmentInformation = r.Cells[9].Value, ErrorID = r.Cells[10].Value })
-                                .GroupBy(srtwebsrvs => srtwebsrvs)
-                                .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
-                                .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ACTION_TYPE = g.Key.ActionType, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
-
-                    dataGridViewInWebServicesDurationlogs.DataSource = sortWebServicesDuration;
-
-                    btnExportWebServiceTable.Enabled = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
-        }
-
-        private void chkBoxSortTimers_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (chkBoxSortTimers.Checked == true)
-                {
-                    var sortTimersDuration = (dataGridViewTimerTimerslogs.Rows.Cast<DataGridViewRow>()
-                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null)
-                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, CyclicJobNameName = r.Cells[2].Value, ModuleName = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
-                                .GroupBy(srttimers => srttimers)
-                                .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
-                                .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, CYCLIC_JOB_NAME = g.Key.CyclicJobNameName, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
-
-                    dataGridViewTimerTimersDurationlogs.DataSource = sortTimersDuration;
-
-                    btnExportTimerTable.Enabled = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
-        }
-
-        private void chkBoxSortTradWebRequestsScreens_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (chkBoxSortTradWebRequestsScreens.Checked == true)
-                {
-                    var sortScreenssDuration = (dataGridViewTradWebRequestsScreenlogs.Rows.Cast<DataGridViewRow>()
-                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null)
-                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, Screen = r.Cells[2].Value, ScreenType = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, ActionName = r.Cells[5].Value, EspaceName = r.Cells[6].Value })
-                                .GroupBy(srtscreens => srtscreens)
-                                .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
-                                .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, SCREEN = g.Key.Screen, SCREEN_TYPE = g.Key.ScreenType, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ESPACE_NAME = g.Key.EspaceName })).ToList();
-
-                    dataGridViewTradWebRequestsScreenDurationlogs.DataSource = sortScreenssDuration;
-
-                    btnExportScreenTable.Enabled = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
-        }
-
-        private void chkBoxSortExtensions_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (chkBoxSortExtensions.Checked == true)
-                {
-                    var sortExtensionsDuration = (dataGridViewExtensionLogsExtensions.Rows.Cast<DataGridViewRow>()
-                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null && r.Cells[10].Value != null)
-                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ExtensionName = r.Cells[2].Value, ModuleName = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, ActionName = r.Cells[5].Value, EspaceName = r.Cells[6].Value, Message = r.Cells[7].Value, Stack = r.Cells[8].Value, EnvironmentInformation = r.Cells[9].Value, ErrorID = r.Cells[10].Value })
-                                .GroupBy(srtexts => srtexts)
-                                .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
-                                .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, EXTENSION_NAME = g.Key.ExtensionName, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
-
-                    dataGridViewExtensionsDurationlogs.DataSource = sortExtensionsDuration;
-
-                    btnExportExtensionsTable.Enabled = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
-        }
-
         private void btnExportExtensionsTable_Click(object sender, EventArgs e)
         {
-            exportTableContent(dataGridViewExtensionsDurationlogs, "\\extensions_table.txt", "|");
-        }
-
-        private void chkBoxSortScrReqScreens_CheckedChanged(object sender, EventArgs e)
-        {
-            try
+            if (rdBtnSortExtensions.Checked == true)
             {
-                if (chkBoxSortScrReqScreens.Checked == true)
-                {
-                    var sortScrReqScreenDuration = (dataGridViewScreenRequestsScreenlogs.Rows.Cast<DataGridViewRow>()
-                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null)
-                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ScreenName = r.Cells[2].Value, ModuleName = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
-                                .GroupBy(srtscrreqs => srtscrreqs)
-                                .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
-                                .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, SCREEN = g.Key.ScreenName, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
-
-                    dataGridViewScrReqScreenDurationlogs.DataSource = sortScrReqScreenDuration;
-
-                    btnExportScrReqScreenTable.Enabled = true;
-                }
+                exportTableContent(dataGridViewExtensionsDurationlogs, "\\extensions_table_sort_duration.txt", "|");
             }
-            catch (Exception ex)
+            else if (rdBtnFilterErrorIDExtensions.Checked == true)
             {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
+                exportTableContent(dataGridViewExtensionsDurationlogs, "\\extensions_table_filter_with_error_id.txt", "|");
+            }
+            else if (rdBtnSortFilterErrorIDExtensions.Checked == true)
+            {
+                exportTableContent(dataGridViewExtensionsDurationlogs, "\\extensions_table_sort_duration_filter_with_error_id.txt", "|");
             }
         }
 
         private void btnExportScrReqScreenTable_Click(object sender, EventArgs e)
         {
-            exportTableContent(dataGridViewScrReqScreenDurationlogs, "\\mobile_requests_screen_table.txt", "|");
-        }
-
-        private void chkBoxSortServiceActions_CheckedChanged(object sender, EventArgs e)
-        {
-            try
+            if (rdBtnScrReqScreens.Checked == true)
             {
-                if (chkBoxSortServiceActions.Checked == true)
-                {
-                    var sortServiceActionsDuration = (dataGridViewSrvActServicelogs.Rows.Cast<DataGridViewRow>()
-                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null)
-                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ActionName = r.Cells[2].Value, ModuleName = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
-                                .GroupBy(srtsrvacts => srtsrvacts)
-                                .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
-                                .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, ACTION_NAME = g.Key.ActionName, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
-
-                    dataGridViewSrvActServiceDurationlogs.DataSource = sortServiceActionsDuration;
-
-                    btnExportServiceActionsTable.Enabled = true;
-                }
+                exportTableContent(dataGridViewScrReqScreenDurationlogs, "\\mobile_requests_screen_table_sort_duration.txt", "|");
             }
-            catch (Exception ex)
+            else if (rdBtnFilterErrorIDScrReqScreens.Checked == true)
             {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
+                exportTableContent(dataGridViewScrReqScreenDurationlogs, "\\mobile_requests_screen_table_filter_with_error_id.txt", "|");
+            }
+            else if (rdBtnSortFilterErrorIDScrReqScreens.Checked == true)
+            {
+                exportTableContent(dataGridViewScrReqScreenDurationlogs, "\\mobile_requests_screen_table_sort_duration_filter_with_error_id.txt", "|");
             }
         }
 
         private void btnExportServiceActionsTable_Click(object sender, EventArgs e)
         {
-            exportTableContent(dataGridViewSrvActServiceDurationlogs, "\\service_actions_table.txt", "|");
+            if (rdBtnSortServiceActions.Checked == true)
+            {
+                exportTableContent(dataGridViewSrvActServiceDurationlogs, "\\service_actions_table_sort_duration.txt", "|");
+            }
+            else if (rdBtnFilterErrorIDServiceActions.Checked == true)
+            {
+                exportTableContent(dataGridViewSrvActServiceDurationlogs, "\\service_actions_table_filter_with_error_id.txt", "|");
+            }
+            else if (rdBtnSortFilterErrorIDServiceActions.Checked == true)
+            {
+                exportTableContent(dataGridViewSrvActServiceDurationlogs, "\\service_actions_table_sort_duration_filter_with_error_id.txt", "|");
+            }
         }
 
         private void chkBoxSortIIS_CheckedChanged(object sender, EventArgs e)
@@ -3958,7 +4158,9 @@ namespace OutSystems_Log_Parser
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
                 throw;
             }
         }
@@ -3983,7 +4185,9 @@ namespace OutSystems_Log_Parser
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
                 throw;
             }
         }
@@ -4003,34 +4207,16 @@ namespace OutSystems_Log_Parser
             exportTableContent(dataGridViewDevInfoCount, "\\device_information_count_table.txt", "|");
         }
 
-        private void chkBoxSortEmails_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (chkBoxSortEmails.Checked == true)
-                {
-                    var sortEmailsDuration = (dataGridViewEmailEmailslogs.Rows.Cast<DataGridViewRow>()
-                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null && r.Cells[10].Value != null && r.Cells[11].Value != null && r.Cells[12].Value != null && r.Cells[13].Value != null && r.Cells[14].Value != null)
-                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ModuleName = r.Cells[2].Value, ApplicationName = r.Cells[3].Value, EspaceName = r.Cells[4].Value, Message = r.Cells[5].Value, Stack = r.Cells[6].Value, From = r.Cells[7].Value, To = r.Cells[8].Value, Subject = r.Cells[9].Value, cc = r.Cells[10].Value, bcc = r.Cells[11].Value, IsTestEmail = r.Cells[12].Value, EnvironmentInformation = r.Cells[13].Value, ErrorId = r.Cells[14].Value })
-                                .GroupBy(srtemails => srtemails)
-                                .OrderByDescending(g => Convert.ToInt32(g.Key.TimeTaken))
-                                .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, FROM = g.Key.From, TO = g.Key.To, SUBJECT = g.Key.Subject, CC = g.Key.cc, BCC = g.Key.bcc, IS_TEST_EMAIL = g.Key.IsTestEmail, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorId })).ToList();
-
-                    dataGridViewEmailEmailsDurationlogs.DataSource = sortEmailsDuration;
-
-                    btnExportEmailsTable.Enabled = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
-                throw;
-            }
-        }
-
         private void btnExportEmailsTable_Click(object sender, EventArgs e)
         {
-            exportTableContent(dataGridViewEmailEmailsDurationlogs, "\\emails_table.txt", "|");
+            if (rdBtnSortEmails.Checked == true)
+            {
+                exportTableContent(dataGridViewEmailEmailsDurationlogs, "\\emails_table_sort_duration.txt", "|");
+            }
+            else if (rdBtnFilterErrorIDEmails.Checked == true)
+            {
+                exportTableContent(dataGridViewEmailEmailsDurationlogs, "\\emails_table_filter_with_error_id.txt", "|");
+            }
         }
 
         private void comBoxField_SelectedIndexChanged(object sender, EventArgs e)
@@ -4093,7 +4279,9 @@ namespace OutSystems_Log_Parser
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
                 throw;
             }
         }
@@ -4135,37 +4323,50 @@ namespace OutSystems_Log_Parser
 
             if (dataGridViewSlowSQLlogs.Rows.Count == 0 || dataGridViewSlowExtensionlogs.Rows.Count == 0)
             {
-                chkBoxSortSlowSQLExtension.Enabled = false;
+                rdBtnSortSlowSQLExtension.Enabled = false;
+                rdBtnFilterErrorIDSLowSQLExtension.Enabled = false;
+                rdBtnSortFilterErrorIDSlowSQLExtension.Enabled = false;
             }
 
             if (dataGridViewIntWebServiceslogs.Rows.Count == 0)
             {
-                chkBoxSortWebServices.Enabled = false;
+                rdBtnSortWebServices.Enabled = false;
+                rdBtnFilterErrorIDWebServices.Enabled = false;
+                rdBtnSortFilterErrorIDWebServices.Enabled = false;
             }
 
             if (dataGridViewScreenRequestsScreenlogs.Rows.Count == 0)
             {
-                chkBoxSortScrReqScreens.Enabled = false;
+                rdBtnScrReqScreens.Enabled = false;
+                rdBtnFilterErrorIDScrReqScreens.Enabled = false;
+                rdBtnSortFilterErrorIDScrReqScreens.Enabled = false;
             }
 
             if (dataGridViewTimerTimerslogs.Rows.Count == 0)
             {
-                chkBoxSortTimers.Enabled = false;
+                rdBtnSortTimers.Enabled = false;
+                rdBtnFilterErrorIDTimers.Enabled = false;
+                rdBtnSortFilterErrorIDTimers.Enabled = false;
             }
 
             if (dataGridViewEmailEmailslogs.Rows.Count == 0)
             {
-                chkBoxSortEmails.Enabled = false;
+                rdBtnSortEmails.Enabled = false;
+                rdBtnFilterErrorIDEmails.Enabled = false;
             }
 
             if (dataGridViewExtensionLogsExtensions.Rows.Count == 0)
             {
-                chkBoxSortExtensions.Enabled = false;
+                rdBtnSortExtensions.Enabled = false;
+                rdBtnFilterErrorIDExtensions.Enabled = false;
+                rdBtnSortFilterErrorIDExtensions.Enabled = false;
             }
 
             if (dataGridViewSrvActServicelogs.Rows.Count == 0)
             {
-                chkBoxSortServiceActions.Enabled = false;
+                rdBtnSortServiceActions.Enabled = false;
+                rdBtnFilterErrorIDServiceActions.Enabled = false;
+                rdBtnSortFilterErrorIDServiceActions.Enabled = false;
             }
 
             if (dataGridViewTradWebRequestsScreenlogs.Rows.Count == 0)
@@ -4180,15 +4381,23 @@ namespace OutSystems_Log_Parser
 
             if (bool_highlightError)
             {
-                category = comBoxIssueCategory.Text;
-                highlightError(category);
+                if (bool_highlightErrorSuccessful_1 || bool_highlightErrorSuccessful_2 || bool_highlightErrorSuccessful_3 || bool_highlightErrorSuccessful_4 || bool_highlightErrorSuccessful_5 || bool_highlightErrorSuccessful_6)
+                {
+                    foreach (string c in categorySelected)
+                    {
+                        highlightError(c);
+                    }
+                }
             }
-            
+
             if (bool_findKeyword)
             {
-                findKeyword2();
+                if (bool_findKeywordSuccessful_1 || bool_findKeywordSuccessful_2 || bool_findKeywordSuccessful_3 || bool_findKeywordSuccessful_4 || bool_findKeywordSuccessful_5)
+                {
+                    findKeyword2();
+                }
             }
-            
+
             if (bool_fieldFilterSuccessful)
             {
                 MessageBox.Show("The data was filtered by the field selected", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -4220,7 +4429,9 @@ namespace OutSystems_Log_Parser
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + Environment.NewLine + ex.ToString());
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
                 throw;
             }
         }
@@ -4233,6 +4444,627 @@ namespace OutSystems_Log_Parser
                 {
                     btnFilterFIeld.Enabled = true;
                 }
+            }
+        }
+
+        private void rdBtnSortSlowSQLExtension_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (rdBtnSortSlowSQLExtension.Checked == true)
+                {
+                    if (dataGridViewSlowSQLlogs.Rows.Count > 0)
+                    {
+                        var sortSlowSQLDuration = (dataGridViewSlowSQLlogs.Rows.Cast<DataGridViewRow>()
+                            .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null)
+                            .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ModuleName = r.Cells[2].Value, ApplicationName = r.Cells[3].Value, ActionName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
+                            .GroupBy(slowsqltime => slowsqltime)
+                            .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                            .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+
+                        dataGridViewSlowSQLDurationlogs.DataSource = sortSlowSQLDuration;
+                    }
+
+                    if (dataGridViewSlowExtensionlogs.Rows.Count > 0)
+                    {
+                        var sortSlowExtensionDuration = (dataGridViewSlowExtensionlogs.Rows.Cast<DataGridViewRow>()
+                            .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null)
+                            .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ModuleName = r.Cells[2].Value, ApplicationName = r.Cells[3].Value, ActionName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
+                            .GroupBy(slowexttime => slowexttime)
+                            .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                            .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+
+                        dataGridViewSlowExtensionDurationlogs.DataSource = sortSlowExtensionDuration;
+                    }
+
+                    btnExportSlowSQLExtensionTables.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
+                throw;
+            }
+        }
+
+        private void rdBtnFilterErrorIDSLowSQLExtension_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (rdBtnFilterErrorIDSLowSQLExtension.Checked == true)
+                {
+                    if (dataGridViewSlowSQLlogs.Rows.Count > 0)
+                    {
+                        var filterSlowSQLErrorID = (dataGridViewSlowSQLlogs.Rows.Cast<DataGridViewRow>()
+                            .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value.ToString().Trim().Length > 0)
+                            .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ModuleName = r.Cells[2].Value, ApplicationName = r.Cells[3].Value, ActionName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
+                            .GroupBy(slowsqlerrorid => slowsqlerrorid)
+                            .OrderBy(g => Convert.ToDateTime(g.Key.DateTime))
+                            .Select(g => new { DATE_TIME = g.Key.DateTime, DURATION_SECONDS = g.Key.TimeTaken, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+
+                        dataGridViewSlowSQLDurationlogs.DataSource = filterSlowSQLErrorID;
+                    }
+
+                    if (dataGridViewSlowExtensionlogs.Rows.Count > 0)
+                    {
+                        var filterSlowExtensionErrorID = (dataGridViewSlowExtensionlogs.Rows.Cast<DataGridViewRow>()
+                            .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value.ToString().Trim().Length > 0)
+                            .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ModuleName = r.Cells[2].Value, ApplicationName = r.Cells[3].Value, ActionName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
+                            .GroupBy(slowexterrorid => slowexterrorid)
+                            .OrderByDescending(g => g.Key.DateTime)
+                            .Select(g => new { DATE_TIME = g.Key.DateTime, DURATION_SECONDS = g.Key.TimeTaken, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+
+                        dataGridViewSlowExtensionDurationlogs.DataSource = filterSlowExtensionErrorID;
+                    }
+
+                    btnExportSlowSQLExtensionTables.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
+                throw;
+            }
+        }
+
+        private void rdBtnSortFilterErrorIDSlowSQLExtension_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (rdBtnSortFilterErrorIDSlowSQLExtension.Checked == true)
+                {
+                    if (dataGridViewSlowSQLlogs.Rows.Count > 0)
+                    {
+                        var sortFilterSlowSQLDurationErrorID = (dataGridViewSlowSQLlogs.Rows.Cast<DataGridViewRow>()
+                            .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value.ToString().Trim().Length > 0)
+                            .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ModuleName = r.Cells[2].Value, ApplicationName = r.Cells[3].Value, ActionName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
+                            .GroupBy(slowsqltimeError => slowsqltimeError)
+                            .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                            .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+
+                        dataGridViewSlowSQLDurationlogs.DataSource = sortFilterSlowSQLDurationErrorID;
+                    }
+
+                    if (dataGridViewSlowExtensionlogs.Rows.Count > 0)
+                    {
+                        var sortFilterSlowExtensionDurationErrorID = (dataGridViewSlowExtensionlogs.Rows.Cast<DataGridViewRow>()
+                            .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value.ToString().Trim().Length > 0)
+                            .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ModuleName = r.Cells[2].Value, ApplicationName = r.Cells[3].Value, ActionName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
+                            .GroupBy(slowextTimeError => slowextTimeError)
+                            .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                            .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+
+                        dataGridViewSlowExtensionDurationlogs.DataSource = sortFilterSlowExtensionDurationErrorID;
+                    }
+
+                    btnExportSlowSQLExtensionTables.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
+                throw;
+            }
+        }
+
+        private void rdBtnSortWebServices_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (rdBtnSortWebServices.Checked == true)
+                {
+                    var sortWebServicesDuration = (dataGridViewIntWebServiceslogs.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null && r.Cells[10].Value != null)
+                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ModuleName = r.Cells[2].Value, ApplicationName = r.Cells[3].Value, ActionName = r.Cells[4].Value, ActionType = r.Cells[5].Value, EspaceName = r.Cells[6].Value, Message = r.Cells[7].Value, Stack = r.Cells[8].Value, EnvironmentInformation = r.Cells[9].Value, ErrorID = r.Cells[10].Value })
+                                .GroupBy(srtwebsrvs => srtwebsrvs)
+                                .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                                .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ACTION_TYPE = g.Key.ActionType, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+
+                    dataGridViewInWebServicesDurationlogs.DataSource = sortWebServicesDuration;
+
+                    btnExportWebServiceTable.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
+                throw;
+            }
+        }
+
+        private void rdBtnSortFilterErrorIDWebServices_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (rdBtnSortFilterErrorIDWebServices.Checked == true)
+                {
+                    var sortFilterWebServicesDurationErrorID = (dataGridViewIntWebServiceslogs.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null && r.Cells[10].Value.ToString().Trim().Length > 0)
+                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ModuleName = r.Cells[2].Value, ApplicationName = r.Cells[3].Value, ActionName = r.Cells[4].Value, ActionType = r.Cells[5].Value, EspaceName = r.Cells[6].Value, Message = r.Cells[7].Value, Stack = r.Cells[8].Value, EnvironmentInformation = r.Cells[9].Value, ErrorID = r.Cells[10].Value })
+                                .GroupBy(srtfilterwebsrvs => srtfilterwebsrvs)
+                                .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                                .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ACTION_TYPE = g.Key.ActionType, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+
+                    dataGridViewInWebServicesDurationlogs.DataSource = sortFilterWebServicesDurationErrorID;
+
+                    btnExportWebServiceTable.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
+                throw;
+            }
+        }
+
+        private void rdBtnFilterErrorIDWebServices_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (rdBtnFilterErrorIDWebServices.Checked == true)
+                {
+                    var filterWebServicesErrorID = (dataGridViewIntWebServiceslogs.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null && r.Cells[10].Value.ToString().Trim().Length > 0)
+                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ModuleName = r.Cells[2].Value, ApplicationName = r.Cells[3].Value, ActionName = r.Cells[4].Value, ActionType = r.Cells[5].Value, EspaceName = r.Cells[6].Value, Message = r.Cells[7].Value, Stack = r.Cells[8].Value, EnvironmentInformation = r.Cells[9].Value, ErrorID = r.Cells[10].Value })
+                                .GroupBy(filterwebsrvs => filterwebsrvs)
+                                .OrderBy(g => Convert.ToDateTime(g.Key.DateTime))
+                                .Select(g => new { DATE_TIME = g.Key.DateTime, DURATION_SECONDS = g.Key.TimeTaken, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ACTION_TYPE = g.Key.ActionType, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+
+                    dataGridViewInWebServicesDurationlogs.DataSource = filterWebServicesErrorID;
+
+                    btnExportWebServiceTable.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
+                throw;
+            }
+        }
+
+        private void rdBtnScrReqScreens_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (rdBtnScrReqScreens.Checked == true)
+                {
+                    var sortScrReqScreenDuration = (dataGridViewScreenRequestsScreenlogs.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null)
+                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ScreenName = r.Cells[2].Value, ModuleName = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
+                                .GroupBy(srtscrreqs => srtscrreqs)
+                                .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                                .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, SCREEN = g.Key.ScreenName, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+
+                    dataGridViewScrReqScreenDurationlogs.DataSource = sortScrReqScreenDuration;
+
+                    btnExportScrReqScreenTable.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
+                throw;
+            }
+        }
+
+        private void rdBtnSortFilterErrorIDScrReqScreens_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (rdBtnSortFilterErrorIDScrReqScreens.Checked == true)
+                {
+                    var sortFilterScrReqScreenDurationErrorID = (dataGridViewScreenRequestsScreenlogs.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value.ToString().Trim().Length > 0)
+                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ScreenName = r.Cells[2].Value, ModuleName = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
+                                .GroupBy(srtfilterscrreqs => srtfilterscrreqs)
+                                .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                                .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, SCREEN = g.Key.ScreenName, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+
+                    dataGridViewScrReqScreenDurationlogs.DataSource = sortFilterScrReqScreenDurationErrorID;
+
+                    btnExportScrReqScreenTable.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
+                throw;
+            }
+        }
+
+        private void rdBtnFilterErrorIDScrReqScreens_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (rdBtnFilterErrorIDScrReqScreens.Checked == true)
+                {
+                    var filterScrReqScreenErrorID = (dataGridViewScreenRequestsScreenlogs.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value.ToString().Trim().Length > 0)
+                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ScreenName = r.Cells[2].Value, ModuleName = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
+                                .GroupBy(filterscrreqs => filterscrreqs)
+                                .OrderBy(g => Convert.ToDateTime(g.Key.DateTime))
+                                .Select(g => new { DATE_TIME = g.Key.DateTime, DURATION_SECONDS = g.Key.TimeTaken, SCREEN = g.Key.ScreenName, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+
+                    dataGridViewScrReqScreenDurationlogs.DataSource = filterScrReqScreenErrorID;
+
+                    btnExportScrReqScreenTable.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
+                throw;
+            }
+        }
+
+        private void rdBtnSortTimers_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (rdBtnSortTimers.Checked == true)
+                {
+                    var sortTimersDuration = (dataGridViewTimerTimerslogs.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null)
+                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, CyclicJobNameName = r.Cells[2].Value, ModuleName = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
+                                .GroupBy(srttimers => srttimers)
+                                .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                                .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, CYCLIC_JOB_NAME = g.Key.CyclicJobNameName, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+
+                    dataGridViewTimerTimersDurationlogs.DataSource = sortTimersDuration;
+
+                    btnExportTimerTable.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
+                throw;
+            }
+        }
+
+        private void rdBtnSortFilterErrorIDTimers_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (rdBtnSortFilterErrorIDTimers.Checked == true)
+                {
+                    var sortFilterTimersDurationErrorID = (dataGridViewTimerTimerslogs.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value.ToString().Trim().Length > 0)
+                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, CyclicJobNameName = r.Cells[2].Value, ModuleName = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
+                                .GroupBy(srtfiltertimers => srtfiltertimers)
+                                .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                                .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, CYCLIC_JOB_NAME = g.Key.CyclicJobNameName, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+
+                    dataGridViewTimerTimersDurationlogs.DataSource = sortFilterTimersDurationErrorID;
+
+                    btnExportTimerTable.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
+                throw;
+            }
+        }
+
+        private void rdBtnFilterErrorIDTimers_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (rdBtnFilterErrorIDTimers.Checked == true)
+                {
+                    var filterTimersErrorID = (dataGridViewTimerTimerslogs.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value.ToString().Trim().Length > 0)
+                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, CyclicJobNameName = r.Cells[2].Value, ModuleName = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
+                                .GroupBy(filtertimers => filtertimers)
+                                .OrderBy(g => Convert.ToDateTime(g.Key.DateTime))
+                                .Select(g => new { DATE_TIME = g.Key.DateTime, DURATION_SECONDS = g.Key.TimeTaken, CYCLIC_JOB_NAME = g.Key.CyclicJobNameName, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+
+                    dataGridViewTimerTimersDurationlogs.DataSource = filterTimersErrorID;
+
+                    btnExportTimerTable.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
+                throw;
+            }
+        }
+
+        private void rdBtnSortEmails_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (rdBtnSortEmails.Checked == true)
+                {
+                    var sortEmailsDuration = (dataGridViewEmailEmailslogs.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null && r.Cells[10].Value != null && r.Cells[11].Value != null && r.Cells[12].Value != null && r.Cells[13].Value != null && r.Cells[14].Value != null)
+                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ModuleName = r.Cells[2].Value, ApplicationName = r.Cells[3].Value, EspaceName = r.Cells[4].Value, Message = r.Cells[5].Value, Stack = r.Cells[6].Value, From = r.Cells[7].Value, To = r.Cells[8].Value, Subject = r.Cells[9].Value, cc = r.Cells[10].Value, bcc = r.Cells[11].Value, IsTestEmail = r.Cells[12].Value, EnvironmentInformation = r.Cells[13].Value, ErrorId = r.Cells[14].Value })
+                                .GroupBy(srtemails => srtemails)
+                                .OrderByDescending(g => Convert.ToInt32(g.Key.TimeTaken))
+                                .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, FROM = g.Key.From, TO = g.Key.To, SUBJECT = g.Key.Subject, CC = g.Key.cc, BCC = g.Key.bcc, IS_TEST_EMAIL = g.Key.IsTestEmail, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorId })).ToList();
+
+                    dataGridViewEmailEmailsDurationlogs.DataSource = sortEmailsDuration;
+
+                    btnExportEmailsTable.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
+                throw;
+            }
+        }
+
+        private void rdBtnFilterErrorIDEmails_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (rdBtnFilterErrorIDEmails.Checked == true)
+                {
+                    var filterEmailsErrorID = (dataGridViewEmailEmailslogs.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null && r.Cells[10].Value != null && r.Cells[11].Value != null && r.Cells[12].Value != null && r.Cells[13].Value != null && r.Cells[14].Value.ToString().Trim().Length > 0)
+                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ModuleName = r.Cells[2].Value, ApplicationName = r.Cells[3].Value, EspaceName = r.Cells[4].Value, Message = r.Cells[5].Value, Stack = r.Cells[6].Value, From = r.Cells[7].Value, To = r.Cells[8].Value, Subject = r.Cells[9].Value, cc = r.Cells[10].Value, bcc = r.Cells[11].Value, IsTestEmail = r.Cells[12].Value, EnvironmentInformation = r.Cells[13].Value, ErrorId = r.Cells[14].Value })
+                                .GroupBy(filteremails => filteremails)
+                                .OrderBy(g => Convert.ToDateTime(g.Key.DateTime))
+                                .Select(g => new { DATE_TIME = g.Key.DateTime, DURATION_SECONDS = g.Key.TimeTaken, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, FROM = g.Key.From, TO = g.Key.To, SUBJECT = g.Key.Subject, CC = g.Key.cc, BCC = g.Key.bcc, IS_TEST_EMAIL = g.Key.IsTestEmail, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorId })).ToList();
+
+                    dataGridViewEmailEmailsDurationlogs.DataSource = filterEmailsErrorID;
+
+                    btnExportEmailsTable.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
+                throw;
+            }
+        }
+
+        private void rdBtnSortExtensions_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (rdBtnSortExtensions.Checked == true)
+                {
+                    var sortExtensionsDuration = (dataGridViewExtensionLogsExtensions.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null && r.Cells[10].Value != null)
+                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ExtensionName = r.Cells[2].Value, ModuleName = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, ActionName = r.Cells[5].Value, EspaceName = r.Cells[6].Value, Message = r.Cells[7].Value, Stack = r.Cells[8].Value, EnvironmentInformation = r.Cells[9].Value, ErrorID = r.Cells[10].Value })
+                                .GroupBy(srtexts => srtexts)
+                                .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                                .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, EXTENSION_NAME = g.Key.ExtensionName, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+
+                    dataGridViewExtensionsDurationlogs.DataSource = sortExtensionsDuration;
+
+                    btnExportExtensionsTable.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
+                throw;
+            }
+        }
+
+        private void rdBtnSortFilterErrorIDExtensions_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (rdBtnSortFilterErrorIDExtensions.Checked == true)
+                {
+                    var sortFilterExtensionsDurationErrorID = (dataGridViewExtensionLogsExtensions.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null && r.Cells[10].Value.ToString().Trim().Length > 0)
+                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ExtensionName = r.Cells[2].Value, ModuleName = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, ActionName = r.Cells[5].Value, EspaceName = r.Cells[6].Value, Message = r.Cells[7].Value, Stack = r.Cells[8].Value, EnvironmentInformation = r.Cells[9].Value, ErrorID = r.Cells[10].Value })
+                                .GroupBy(srtfilterexts => srtfilterexts)
+                                .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                                .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, EXTENSION_NAME = g.Key.ExtensionName, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+
+                    dataGridViewExtensionsDurationlogs.DataSource = sortFilterExtensionsDurationErrorID;
+
+                    btnExportExtensionsTable.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
+                throw;
+            }
+        }
+
+        private void rdBtnFilterErrorIDExtensions_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (rdBtnFilterErrorIDExtensions.Checked == true)
+                {
+                    var filterExtensionsErrorID = (dataGridViewExtensionLogsExtensions.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null && r.Cells[10].Value.ToString().Trim().Length > 0)
+                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ExtensionName = r.Cells[2].Value, ModuleName = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, ActionName = r.Cells[5].Value, EspaceName = r.Cells[6].Value, Message = r.Cells[7].Value, Stack = r.Cells[8].Value, EnvironmentInformation = r.Cells[9].Value, ErrorID = r.Cells[10].Value })
+                                .GroupBy(filterexts => filterexts)
+                                .OrderBy(g => Convert.ToDateTime(g.Key.DateTime))
+                                .Select(g => new { DATE_TIME = g.Key.DateTime, DURATION_SECONDS = g.Key.TimeTaken, EXTENSION_NAME = g.Key.ExtensionName, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+
+                    dataGridViewExtensionsDurationlogs.DataSource = filterExtensionsErrorID;
+
+                    btnExportExtensionsTable.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
+                throw;
+            }
+        }
+
+        private void rdBtnSortServiceActions_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (rdBtnSortServiceActions.Checked == true)
+                {
+                    var sortServiceActionsDuration = (dataGridViewSrvActServicelogs.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value != null)
+                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ActionName = r.Cells[2].Value, ModuleName = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
+                                .GroupBy(srtsrvacts => srtsrvacts)
+                                .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                                .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, ACTION_NAME = g.Key.ActionName, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+
+                    dataGridViewSrvActServiceDurationlogs.DataSource = sortServiceActionsDuration;
+
+                    btnExportServiceActionsTable.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
+                throw;
+            }
+        }
+
+        private void rdBtnSortFilterErrorIDServiceActions_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (rdBtnSortFilterErrorIDServiceActions.Checked == true)
+                {
+                    var sortFilterServiceActionsDurationErrorID = (dataGridViewSrvActServicelogs.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value.ToString().Trim().Length > 0)
+                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ActionName = r.Cells[2].Value, ModuleName = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
+                                .GroupBy(srtfiltersrvacts => srtfiltersrvacts)
+                                .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                                .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, ACTION_NAME = g.Key.ActionName, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+
+                    dataGridViewSrvActServiceDurationlogs.DataSource = sortFilterServiceActionsDurationErrorID;
+
+                    btnExportServiceActionsTable.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
+                throw;
+            }
+        }
+
+        private void rdBtnFilterErrorIDServiceActions_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (rdBtnFilterErrorIDServiceActions.Checked == true)
+                {
+                    var filterServiceActionsErrorID = (dataGridViewSrvActServicelogs.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null && r.Cells[7].Value != null && r.Cells[8].Value != null && r.Cells[9].Value.ToString().Trim().Length > 0)
+                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, ActionName = r.Cells[2].Value, ModuleName = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, EspaceName = r.Cells[5].Value, Message = r.Cells[6].Value, Stack = r.Cells[7].Value, EnvironmentInformation = r.Cells[8].Value, ErrorID = r.Cells[9].Value })
+                                .GroupBy(filtersrvacts => filtersrvacts)
+                                .OrderBy(g => Convert.ToDateTime(g.Key.DateTime))
+                                .Select(g => new { DATE_TIME = g.Key.DateTime, DURATION_SECONDS = g.Key.TimeTaken, ACTION_NAME = g.Key.ActionName, MODULE_NAME = g.Key.ModuleName, APPLICATION_NAME = g.Key.ApplicationName, ESPACE_NAME = g.Key.EspaceName, MESSAGE = g.Key.Message, STACK = g.Key.Stack, ENVIRONMENT_INFORMATION = g.Key.EnvironmentInformation, ERROR_ID = g.Key.ErrorID })).ToList();
+
+                    dataGridViewSrvActServiceDurationlogs.DataSource = filterServiceActionsErrorID;
+
+                    btnExportServiceActionsTable.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
+                throw;
+            }
+        }
+
+        private void chkBoxSortTradWebRequestsScreens_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (chkBoxSortTradWebRequestsScreens.Checked == true)
+                {
+                    var sortScreenssDuration = (dataGridViewTradWebRequestsScreenlogs.Rows.Cast<DataGridViewRow>()
+                                .Where(r => r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[3].Value != null && r.Cells[4].Value != null && r.Cells[5].Value != null && r.Cells[6].Value != null)
+                                .Select(r => new { DateTime = r.Cells[0].Value, TimeTaken = r.Cells[1].Value, Screen = r.Cells[2].Value, ScreenType = r.Cells[3].Value, ApplicationName = r.Cells[4].Value, ActionName = r.Cells[5].Value, EspaceName = r.Cells[6].Value })
+                                .GroupBy(srtscreens => srtscreens)
+                                .OrderByDescending(g => Convert.ToDecimal(g.Key.TimeTaken))
+                                .Select(g => new { DURATION_SECONDS = g.Key.TimeTaken, DATE_TIME = g.Key.DateTime, SCREEN = g.Key.Screen, SCREEN_TYPE = g.Key.ScreenType, APPLICATION_NAME = g.Key.ApplicationName, ACTION_NAME = g.Key.ActionName, ESPACE_NAME = g.Key.EspaceName })).ToList();
+
+                    dataGridViewTradWebRequestsScreenDurationlogs.DataSource = sortScreenssDuration;
+
+                    btnExportScreenTable.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
+                throw;
+            }
+        }
+
+        private void errorLog(string txtFile, string err_msg)
+        {
+            outputTXTfile = label8.Text + txtFile;
+            using (StreamWriter logFile = new StreamWriter(outputTXTfile, true))
+            {
+                logFile.WriteLine(err_msg);
             }
         }
     }

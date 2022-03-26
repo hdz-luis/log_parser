@@ -41,7 +41,9 @@
             this.dataGridViewErrorlogs = new System.Windows.Forms.DataGridView();
             this.txtBoxDetailErrorLogs = new System.Windows.Forms.TextBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.chkBoxSortSlowSQLExtension = new System.Windows.Forms.CheckBox();
+            this.rdBtnSortFilterErrorIDSlowSQLExtension = new System.Windows.Forms.RadioButton();
+            this.rdBtnFilterErrorIDSLowSQLExtension = new System.Windows.Forms.RadioButton();
+            this.rdBtnSortSlowSQLExtension = new System.Windows.Forms.RadioButton();
             this.btnExportSlowSQLExtensionTables = new System.Windows.Forms.Button();
             this.tabControl10 = new System.Windows.Forms.TabControl();
             this.tabPage61 = new System.Windows.Forms.TabPage();
@@ -55,7 +57,9 @@
             this.txtBoxDetailGenerallogs = new System.Windows.Forms.TextBox();
             this.dataGridViewGenerallogs = new System.Windows.Forms.DataGridView();
             this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.chkBoxSortWebServices = new System.Windows.Forms.CheckBox();
+            this.rdBtnSortFilterErrorIDWebServices = new System.Windows.Forms.RadioButton();
+            this.rdBtnFilterErrorIDWebServices = new System.Windows.Forms.RadioButton();
+            this.rdBtnSortWebServices = new System.Windows.Forms.RadioButton();
             this.btnExportWebServiceTable = new System.Windows.Forms.Button();
             this.txtBoxDetailsIntWebServiceslogs = new System.Windows.Forms.TextBox();
             this.dataGridViewInWebServicesDurationlogs = new System.Windows.Forms.DataGridView();
@@ -63,7 +67,9 @@
             this.txtBoxDetailIntegrationlogs = new System.Windows.Forms.TextBox();
             this.dataGridViewIntegrationslogs = new System.Windows.Forms.DataGridView();
             this.tabPage8 = new System.Windows.Forms.TabPage();
-            this.chkBoxSortScrReqScreens = new System.Windows.Forms.CheckBox();
+            this.rdBtnSortFilterErrorIDScrReqScreens = new System.Windows.Forms.RadioButton();
+            this.rdBtnFilterErrorIDScrReqScreens = new System.Windows.Forms.RadioButton();
+            this.rdBtnScrReqScreens = new System.Windows.Forms.RadioButton();
             this.btnExportScrReqScreenTable = new System.Windows.Forms.Button();
             this.txtBoxDetailScrReqScreenlogs = new System.Windows.Forms.TextBox();
             this.dataGridViewScrReqScreenDurationlogs = new System.Windows.Forms.DataGridView();
@@ -71,7 +77,9 @@
             this.txtBoxDetailScreenRequestslogs = new System.Windows.Forms.TextBox();
             this.dataGridViewScreenRequestslogs = new System.Windows.Forms.DataGridView();
             this.tabPage9 = new System.Windows.Forms.TabPage();
-            this.chkBoxSortTimers = new System.Windows.Forms.CheckBox();
+            this.rdBtnSortFilterErrorIDTimers = new System.Windows.Forms.RadioButton();
+            this.rdBtnFilterErrorIDTimers = new System.Windows.Forms.RadioButton();
+            this.rdBtnSortTimers = new System.Windows.Forms.RadioButton();
             this.btnExportTimerTable = new System.Windows.Forms.Button();
             this.txtBoxDetailsTimerTimerslogs = new System.Windows.Forms.TextBox();
             this.dataGridViewTimerTimersDurationlogs = new System.Windows.Forms.DataGridView();
@@ -79,7 +87,8 @@
             this.txtBoxDetailTimerlogs = new System.Windows.Forms.TextBox();
             this.dataGridViewTimerlogs = new System.Windows.Forms.DataGridView();
             this.tabPage10 = new System.Windows.Forms.TabPage();
-            this.chkBoxSortEmails = new System.Windows.Forms.CheckBox();
+            this.rdBtnSortEmails = new System.Windows.Forms.RadioButton();
+            this.rdBtnFilterErrorIDEmails = new System.Windows.Forms.RadioButton();
             this.btnExportEmailsTable = new System.Windows.Forms.Button();
             this.txtBoxDetailsEmailEmailslogs = new System.Windows.Forms.TextBox();
             this.dataGridViewEmailEmailsDurationlogs = new System.Windows.Forms.DataGridView();
@@ -87,7 +96,9 @@
             this.txtBoxDetailEmaillogs = new System.Windows.Forms.TextBox();
             this.dataGridViewEmaillogs = new System.Windows.Forms.DataGridView();
             this.tabPage11 = new System.Windows.Forms.TabPage();
-            this.chkBoxSortExtensions = new System.Windows.Forms.CheckBox();
+            this.rdBtnSortExtensions = new System.Windows.Forms.RadioButton();
+            this.rdBtnSortFilterErrorIDExtensions = new System.Windows.Forms.RadioButton();
+            this.rdBtnFilterErrorIDExtensions = new System.Windows.Forms.RadioButton();
             this.btnExportExtensionsTable = new System.Windows.Forms.Button();
             this.txtBoxDetailExtExtensionlogs = new System.Windows.Forms.TextBox();
             this.dataGridViewExtensionsDurationlogs = new System.Windows.Forms.DataGridView();
@@ -95,7 +106,9 @@
             this.txtBoxDetailExtensionlogs = new System.Windows.Forms.TextBox();
             this.dataGridViewExtensionlogs = new System.Windows.Forms.DataGridView();
             this.tabPage12 = new System.Windows.Forms.TabPage();
-            this.chkBoxSortServiceActions = new System.Windows.Forms.CheckBox();
+            this.rdBtnSortServiceActions = new System.Windows.Forms.RadioButton();
+            this.rdBtnSortFilterErrorIDServiceActions = new System.Windows.Forms.RadioButton();
+            this.rdBtnFilterErrorIDServiceActions = new System.Windows.Forms.RadioButton();
             this.btnExportServiceActionsTable = new System.Windows.Forms.Button();
             this.txtBoxDetailSrvActServicelogs = new System.Windows.Forms.TextBox();
             this.dataGridViewSrvActServiceDurationlogs = new System.Windows.Forms.DataGridView();
@@ -608,7 +621,9 @@
             // tabPage6
             // 
             this.tabPage6.BackColor = System.Drawing.Color.RoyalBlue;
-            this.tabPage6.Controls.Add(this.chkBoxSortSlowSQLExtension);
+            this.tabPage6.Controls.Add(this.rdBtnSortFilterErrorIDSlowSQLExtension);
+            this.tabPage6.Controls.Add(this.rdBtnFilterErrorIDSLowSQLExtension);
+            this.tabPage6.Controls.Add(this.rdBtnSortSlowSQLExtension);
             this.tabPage6.Controls.Add(this.btnExportSlowSQLExtensionTables);
             this.tabPage6.Controls.Add(this.tabControl10);
             this.tabPage6.Controls.Add(this.txtBoxDetailGenerallogs);
@@ -622,28 +637,52 @@
             this.tabPage6.TabIndex = 1;
             this.tabPage6.Text = "General";
             // 
-            // chkBoxSortSlowSQLExtension
+            // rdBtnSortFilterErrorIDSlowSQLExtension
             // 
-            this.chkBoxSortSlowSQLExtension.AutoSize = true;
-            this.chkBoxSortSlowSQLExtension.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBoxSortSlowSQLExtension.Location = new System.Drawing.Point(7, 604);
-            this.chkBoxSortSlowSQLExtension.Name = "chkBoxSortSlowSQLExtension";
-            this.chkBoxSortSlowSQLExtension.Size = new System.Drawing.Size(171, 29);
-            this.chkBoxSortSlowSQLExtension.TabIndex = 17;
-            this.chkBoxSortSlowSQLExtension.Text = "Sort by duration";
-            this.chkBoxSortSlowSQLExtension.UseVisualStyleBackColor = true;
-            this.chkBoxSortSlowSQLExtension.CheckedChanged += new System.EventHandler(this.chkBoxSortSlowSQLExtension_CheckedChanged);
+            this.rdBtnSortFilterErrorIDSlowSQLExtension.AutoSize = true;
+            this.rdBtnSortFilterErrorIDSlowSQLExtension.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdBtnSortFilterErrorIDSlowSQLExtension.Location = new System.Drawing.Point(369, 603);
+            this.rdBtnSortFilterErrorIDSlowSQLExtension.Name = "rdBtnSortFilterErrorIDSlowSQLExtension";
+            this.rdBtnSortFilterErrorIDSlowSQLExtension.Size = new System.Drawing.Size(339, 29);
+            this.rdBtnSortFilterErrorIDSlowSQLExtension.TabIndex = 19;
+            this.rdBtnSortFilterErrorIDSlowSQLExtension.Text = "Sort by duration && Filter with error id";
+            this.rdBtnSortFilterErrorIDSlowSQLExtension.UseVisualStyleBackColor = true;
+            this.rdBtnSortFilterErrorIDSlowSQLExtension.CheckedChanged += new System.EventHandler(this.rdBtnSortFilterErrorIDSlowSQLExtension_CheckedChanged);
+            // 
+            // rdBtnFilterErrorIDSLowSQLExtension
+            // 
+            this.rdBtnFilterErrorIDSLowSQLExtension.AutoSize = true;
+            this.rdBtnFilterErrorIDSLowSQLExtension.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdBtnFilterErrorIDSLowSQLExtension.Location = new System.Drawing.Point(184, 603);
+            this.rdBtnFilterErrorIDSLowSQLExtension.Name = "rdBtnFilterErrorIDSLowSQLExtension";
+            this.rdBtnFilterErrorIDSLowSQLExtension.Size = new System.Drawing.Size(179, 29);
+            this.rdBtnFilterErrorIDSLowSQLExtension.TabIndex = 18;
+            this.rdBtnFilterErrorIDSLowSQLExtension.Text = "Filter with error id";
+            this.rdBtnFilterErrorIDSLowSQLExtension.UseVisualStyleBackColor = true;
+            this.rdBtnFilterErrorIDSLowSQLExtension.CheckedChanged += new System.EventHandler(this.rdBtnFilterErrorIDSLowSQLExtension_CheckedChanged);
+            // 
+            // rdBtnSortSlowSQLExtension
+            // 
+            this.rdBtnSortSlowSQLExtension.AutoSize = true;
+            this.rdBtnSortSlowSQLExtension.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdBtnSortSlowSQLExtension.Location = new System.Drawing.Point(8, 603);
+            this.rdBtnSortSlowSQLExtension.Name = "rdBtnSortSlowSQLExtension";
+            this.rdBtnSortSlowSQLExtension.Size = new System.Drawing.Size(170, 29);
+            this.rdBtnSortSlowSQLExtension.TabIndex = 17;
+            this.rdBtnSortSlowSQLExtension.Text = "Sort by duration";
+            this.rdBtnSortSlowSQLExtension.UseVisualStyleBackColor = true;
+            this.rdBtnSortSlowSQLExtension.CheckedChanged += new System.EventHandler(this.rdBtnSortSlowSQLExtension_CheckedChanged);
             // 
             // btnExportSlowSQLExtensionTables
             // 
             this.btnExportSlowSQLExtensionTables.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportSlowSQLExtensionTables.BackgroundImage")));
             this.btnExportSlowSQLExtensionTables.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnExportSlowSQLExtensionTables.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportSlowSQLExtensionTables.Location = new System.Drawing.Point(195, 603);
+            this.btnExportSlowSQLExtensionTables.Location = new System.Drawing.Point(722, 600);
             this.btnExportSlowSQLExtensionTables.Margin = new System.Windows.Forms.Padding(4);
             this.btnExportSlowSQLExtensionTables.Name = "btnExportSlowSQLExtensionTables";
             this.btnExportSlowSQLExtensionTables.Size = new System.Drawing.Size(64, 32);
-            this.btnExportSlowSQLExtensionTables.TabIndex = 15;
+            this.btnExportSlowSQLExtensionTables.TabIndex = 20;
             this.btnExportSlowSQLExtensionTables.Text = ",";
             this.toolTip1.SetToolTip(this.btnExportSlowSQLExtensionTables, "Export table content.");
             this.btnExportSlowSQLExtensionTables.UseVisualStyleBackColor = true;
@@ -815,7 +854,9 @@
             // tabPage7
             // 
             this.tabPage7.BackColor = System.Drawing.Color.RoyalBlue;
-            this.tabPage7.Controls.Add(this.chkBoxSortWebServices);
+            this.tabPage7.Controls.Add(this.rdBtnSortFilterErrorIDWebServices);
+            this.tabPage7.Controls.Add(this.rdBtnFilterErrorIDWebServices);
+            this.tabPage7.Controls.Add(this.rdBtnSortWebServices);
             this.tabPage7.Controls.Add(this.btnExportWebServiceTable);
             this.tabPage7.Controls.Add(this.txtBoxDetailsIntWebServiceslogs);
             this.tabPage7.Controls.Add(this.dataGridViewInWebServicesDurationlogs);
@@ -830,28 +871,52 @@
             this.tabPage7.TabIndex = 2;
             this.tabPage7.Text = "Integrations";
             // 
-            // chkBoxSortWebServices
+            // rdBtnSortFilterErrorIDWebServices
             // 
-            this.chkBoxSortWebServices.AutoSize = true;
-            this.chkBoxSortWebServices.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBoxSortWebServices.Location = new System.Drawing.Point(8, 606);
-            this.chkBoxSortWebServices.Name = "chkBoxSortWebServices";
-            this.chkBoxSortWebServices.Size = new System.Drawing.Size(171, 29);
-            this.chkBoxSortWebServices.TabIndex = 21;
-            this.chkBoxSortWebServices.Text = "Sort by duration";
-            this.chkBoxSortWebServices.UseVisualStyleBackColor = true;
-            this.chkBoxSortWebServices.CheckedChanged += new System.EventHandler(this.chkBoxSortWebServices_CheckedChanged);
+            this.rdBtnSortFilterErrorIDWebServices.AutoSize = true;
+            this.rdBtnSortFilterErrorIDWebServices.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdBtnSortFilterErrorIDWebServices.Location = new System.Drawing.Point(369, 602);
+            this.rdBtnSortFilterErrorIDWebServices.Name = "rdBtnSortFilterErrorIDWebServices";
+            this.rdBtnSortFilterErrorIDWebServices.Size = new System.Drawing.Size(339, 29);
+            this.rdBtnSortFilterErrorIDWebServices.TabIndex = 23;
+            this.rdBtnSortFilterErrorIDWebServices.Text = "Sort by duration && Filter with error id";
+            this.rdBtnSortFilterErrorIDWebServices.UseVisualStyleBackColor = true;
+            this.rdBtnSortFilterErrorIDWebServices.CheckedChanged += new System.EventHandler(this.rdBtnSortFilterErrorIDWebServices_CheckedChanged);
+            // 
+            // rdBtnFilterErrorIDWebServices
+            // 
+            this.rdBtnFilterErrorIDWebServices.AutoSize = true;
+            this.rdBtnFilterErrorIDWebServices.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdBtnFilterErrorIDWebServices.Location = new System.Drawing.Point(184, 602);
+            this.rdBtnFilterErrorIDWebServices.Name = "rdBtnFilterErrorIDWebServices";
+            this.rdBtnFilterErrorIDWebServices.Size = new System.Drawing.Size(179, 29);
+            this.rdBtnFilterErrorIDWebServices.TabIndex = 22;
+            this.rdBtnFilterErrorIDWebServices.Text = "Filter with error id";
+            this.rdBtnFilterErrorIDWebServices.UseVisualStyleBackColor = true;
+            this.rdBtnFilterErrorIDWebServices.CheckedChanged += new System.EventHandler(this.rdBtnFilterErrorIDWebServices_CheckedChanged);
+            // 
+            // rdBtnSortWebServices
+            // 
+            this.rdBtnSortWebServices.AutoSize = true;
+            this.rdBtnSortWebServices.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdBtnSortWebServices.Location = new System.Drawing.Point(8, 603);
+            this.rdBtnSortWebServices.Name = "rdBtnSortWebServices";
+            this.rdBtnSortWebServices.Size = new System.Drawing.Size(170, 29);
+            this.rdBtnSortWebServices.TabIndex = 21;
+            this.rdBtnSortWebServices.Text = "Sort by duration";
+            this.rdBtnSortWebServices.UseVisualStyleBackColor = true;
+            this.rdBtnSortWebServices.CheckedChanged += new System.EventHandler(this.rdBtnSortWebServices_CheckedChanged);
             // 
             // btnExportWebServiceTable
             // 
             this.btnExportWebServiceTable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportWebServiceTable.BackgroundImage")));
             this.btnExportWebServiceTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnExportWebServiceTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportWebServiceTable.Location = new System.Drawing.Point(195, 603);
+            this.btnExportWebServiceTable.Location = new System.Drawing.Point(722, 600);
             this.btnExportWebServiceTable.Margin = new System.Windows.Forms.Padding(4);
             this.btnExportWebServiceTable.Name = "btnExportWebServiceTable";
             this.btnExportWebServiceTable.Size = new System.Drawing.Size(64, 32);
-            this.btnExportWebServiceTable.TabIndex = 20;
+            this.btnExportWebServiceTable.TabIndex = 24;
             this.btnExportWebServiceTable.Text = ",";
             this.toolTip1.SetToolTip(this.btnExportWebServiceTable, "Export table content.");
             this.btnExportWebServiceTable.UseVisualStyleBackColor = true;
@@ -868,7 +933,7 @@
             this.txtBoxDetailsIntWebServiceslogs.Name = "txtBoxDetailsIntWebServiceslogs";
             this.txtBoxDetailsIntWebServiceslogs.ReadOnly = true;
             this.txtBoxDetailsIntWebServiceslogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtBoxDetailsIntWebServiceslogs.Size = new System.Drawing.Size(250, 293);
+            this.txtBoxDetailsIntWebServiceslogs.Size = new System.Drawing.Size(250, 290);
             this.txtBoxDetailsIntWebServiceslogs.TabIndex = 19;
             this.txtBoxDetailsIntWebServiceslogs.TabStop = false;
             // 
@@ -877,7 +942,7 @@
             this.dataGridViewInWebServicesDurationlogs.AllowUserToAddRows = false;
             this.dataGridViewInWebServicesDurationlogs.AllowUserToDeleteRows = false;
             this.dataGridViewInWebServicesDurationlogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewInWebServicesDurationlogs.Location = new System.Drawing.Point(9, 456);
+            this.dataGridViewInWebServicesDurationlogs.Location = new System.Drawing.Point(9, 453);
             this.dataGridViewInWebServicesDurationlogs.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewInWebServicesDurationlogs.MultiSelect = false;
             this.dataGridViewInWebServicesDurationlogs.Name = "dataGridViewInWebServicesDurationlogs";
@@ -936,7 +1001,9 @@
             // tabPage8
             // 
             this.tabPage8.BackColor = System.Drawing.Color.RoyalBlue;
-            this.tabPage8.Controls.Add(this.chkBoxSortScrReqScreens);
+            this.tabPage8.Controls.Add(this.rdBtnSortFilterErrorIDScrReqScreens);
+            this.tabPage8.Controls.Add(this.rdBtnFilterErrorIDScrReqScreens);
+            this.tabPage8.Controls.Add(this.rdBtnScrReqScreens);
             this.tabPage8.Controls.Add(this.btnExportScrReqScreenTable);
             this.tabPage8.Controls.Add(this.txtBoxDetailScrReqScreenlogs);
             this.tabPage8.Controls.Add(this.dataGridViewScrReqScreenDurationlogs);
@@ -951,28 +1018,52 @@
             this.tabPage8.TabIndex = 3;
             this.tabPage8.Text = "Screen Requests";
             // 
-            // chkBoxSortScrReqScreens
+            // rdBtnSortFilterErrorIDScrReqScreens
             // 
-            this.chkBoxSortScrReqScreens.AutoSize = true;
-            this.chkBoxSortScrReqScreens.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBoxSortScrReqScreens.Location = new System.Drawing.Point(8, 605);
-            this.chkBoxSortScrReqScreens.Name = "chkBoxSortScrReqScreens";
-            this.chkBoxSortScrReqScreens.Size = new System.Drawing.Size(171, 29);
-            this.chkBoxSortScrReqScreens.TabIndex = 31;
-            this.chkBoxSortScrReqScreens.Text = "Sort by duration";
-            this.chkBoxSortScrReqScreens.UseVisualStyleBackColor = true;
-            this.chkBoxSortScrReqScreens.CheckedChanged += new System.EventHandler(this.chkBoxSortScrReqScreens_CheckedChanged);
+            this.rdBtnSortFilterErrorIDScrReqScreens.AutoSize = true;
+            this.rdBtnSortFilterErrorIDScrReqScreens.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdBtnSortFilterErrorIDScrReqScreens.Location = new System.Drawing.Point(369, 603);
+            this.rdBtnSortFilterErrorIDScrReqScreens.Name = "rdBtnSortFilterErrorIDScrReqScreens";
+            this.rdBtnSortFilterErrorIDScrReqScreens.Size = new System.Drawing.Size(339, 29);
+            this.rdBtnSortFilterErrorIDScrReqScreens.TabIndex = 34;
+            this.rdBtnSortFilterErrorIDScrReqScreens.Text = "Sort by duration && Filter with error id";
+            this.rdBtnSortFilterErrorIDScrReqScreens.UseVisualStyleBackColor = true;
+            this.rdBtnSortFilterErrorIDScrReqScreens.CheckedChanged += new System.EventHandler(this.rdBtnSortFilterErrorIDScrReqScreens_CheckedChanged);
+            // 
+            // rdBtnFilterErrorIDScrReqScreens
+            // 
+            this.rdBtnFilterErrorIDScrReqScreens.AutoSize = true;
+            this.rdBtnFilterErrorIDScrReqScreens.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdBtnFilterErrorIDScrReqScreens.Location = new System.Drawing.Point(184, 603);
+            this.rdBtnFilterErrorIDScrReqScreens.Name = "rdBtnFilterErrorIDScrReqScreens";
+            this.rdBtnFilterErrorIDScrReqScreens.Size = new System.Drawing.Size(179, 29);
+            this.rdBtnFilterErrorIDScrReqScreens.TabIndex = 33;
+            this.rdBtnFilterErrorIDScrReqScreens.Text = "Filter with error id";
+            this.rdBtnFilterErrorIDScrReqScreens.UseVisualStyleBackColor = true;
+            this.rdBtnFilterErrorIDScrReqScreens.CheckedChanged += new System.EventHandler(this.rdBtnFilterErrorIDScrReqScreens_CheckedChanged);
+            // 
+            // rdBtnScrReqScreens
+            // 
+            this.rdBtnScrReqScreens.AutoSize = true;
+            this.rdBtnScrReqScreens.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdBtnScrReqScreens.Location = new System.Drawing.Point(8, 603);
+            this.rdBtnScrReqScreens.Name = "rdBtnScrReqScreens";
+            this.rdBtnScrReqScreens.Size = new System.Drawing.Size(170, 29);
+            this.rdBtnScrReqScreens.TabIndex = 32;
+            this.rdBtnScrReqScreens.Text = "Sort by duration";
+            this.rdBtnScrReqScreens.UseVisualStyleBackColor = true;
+            this.rdBtnScrReqScreens.CheckedChanged += new System.EventHandler(this.rdBtnScrReqScreens_CheckedChanged);
             // 
             // btnExportScrReqScreenTable
             // 
             this.btnExportScrReqScreenTable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportScrReqScreenTable.BackgroundImage")));
             this.btnExportScrReqScreenTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnExportScrReqScreenTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportScrReqScreenTable.Location = new System.Drawing.Point(195, 602);
+            this.btnExportScrReqScreenTable.Location = new System.Drawing.Point(722, 600);
             this.btnExportScrReqScreenTable.Margin = new System.Windows.Forms.Padding(4);
             this.btnExportScrReqScreenTable.Name = "btnExportScrReqScreenTable";
             this.btnExportScrReqScreenTable.Size = new System.Drawing.Size(64, 32);
-            this.btnExportScrReqScreenTable.TabIndex = 30;
+            this.btnExportScrReqScreenTable.TabIndex = 35;
             this.btnExportScrReqScreenTable.Text = ",";
             this.toolTip1.SetToolTip(this.btnExportScrReqScreenTable, "Export table content.");
             this.btnExportScrReqScreenTable.UseVisualStyleBackColor = true;
@@ -983,13 +1074,13 @@
             // txtBoxDetailScrReqScreenlogs
             // 
             this.txtBoxDetailScrReqScreenlogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxDetailScrReqScreenlogs.Location = new System.Drawing.Point(1318, 305);
+            this.txtBoxDetailScrReqScreenlogs.Location = new System.Drawing.Point(1318, 306);
             this.txtBoxDetailScrReqScreenlogs.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoxDetailScrReqScreenlogs.Multiline = true;
             this.txtBoxDetailScrReqScreenlogs.Name = "txtBoxDetailScrReqScreenlogs";
             this.txtBoxDetailScrReqScreenlogs.ReadOnly = true;
             this.txtBoxDetailScrReqScreenlogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtBoxDetailScrReqScreenlogs.Size = new System.Drawing.Size(250, 293);
+            this.txtBoxDetailScrReqScreenlogs.Size = new System.Drawing.Size(250, 290);
             this.txtBoxDetailScrReqScreenlogs.TabIndex = 29;
             this.txtBoxDetailScrReqScreenlogs.TabStop = false;
             // 
@@ -998,7 +1089,7 @@
             this.dataGridViewScrReqScreenDurationlogs.AllowUserToAddRows = false;
             this.dataGridViewScrReqScreenDurationlogs.AllowUserToDeleteRows = false;
             this.dataGridViewScrReqScreenDurationlogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewScrReqScreenDurationlogs.Location = new System.Drawing.Point(9, 455);
+            this.dataGridViewScrReqScreenDurationlogs.Location = new System.Drawing.Point(9, 453);
             this.dataGridViewScrReqScreenDurationlogs.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewScrReqScreenDurationlogs.MultiSelect = false;
             this.dataGridViewScrReqScreenDurationlogs.Name = "dataGridViewScrReqScreenDurationlogs";
@@ -1014,7 +1105,7 @@
             this.dataGridViewScreenRequestsScreenlogs.AllowUserToAddRows = false;
             this.dataGridViewScreenRequestsScreenlogs.AllowUserToDeleteRows = false;
             this.dataGridViewScreenRequestsScreenlogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewScreenRequestsScreenlogs.Location = new System.Drawing.Point(9, 305);
+            this.dataGridViewScreenRequestsScreenlogs.Location = new System.Drawing.Point(9, 306);
             this.dataGridViewScreenRequestsScreenlogs.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewScreenRequestsScreenlogs.MultiSelect = false;
             this.dataGridViewScreenRequestsScreenlogs.Name = "dataGridViewScreenRequestsScreenlogs";
@@ -1057,7 +1148,9 @@
             // tabPage9
             // 
             this.tabPage9.BackColor = System.Drawing.Color.RoyalBlue;
-            this.tabPage9.Controls.Add(this.chkBoxSortTimers);
+            this.tabPage9.Controls.Add(this.rdBtnSortFilterErrorIDTimers);
+            this.tabPage9.Controls.Add(this.rdBtnFilterErrorIDTimers);
+            this.tabPage9.Controls.Add(this.rdBtnSortTimers);
             this.tabPage9.Controls.Add(this.btnExportTimerTable);
             this.tabPage9.Controls.Add(this.txtBoxDetailsTimerTimerslogs);
             this.tabPage9.Controls.Add(this.dataGridViewTimerTimersDurationlogs);
@@ -1071,28 +1164,52 @@
             this.tabPage9.TabIndex = 4;
             this.tabPage9.Text = "Timer";
             // 
-            // chkBoxSortTimers
+            // rdBtnSortFilterErrorIDTimers
             // 
-            this.chkBoxSortTimers.AutoSize = true;
-            this.chkBoxSortTimers.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBoxSortTimers.Location = new System.Drawing.Point(8, 605);
-            this.chkBoxSortTimers.Name = "chkBoxSortTimers";
-            this.chkBoxSortTimers.Size = new System.Drawing.Size(171, 29);
-            this.chkBoxSortTimers.TabIndex = 23;
-            this.chkBoxSortTimers.Text = "Sort by duration";
-            this.chkBoxSortTimers.UseVisualStyleBackColor = true;
-            this.chkBoxSortTimers.CheckedChanged += new System.EventHandler(this.chkBoxSortTimers_CheckedChanged);
+            this.rdBtnSortFilterErrorIDTimers.AutoSize = true;
+            this.rdBtnSortFilterErrorIDTimers.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdBtnSortFilterErrorIDTimers.Location = new System.Drawing.Point(369, 603);
+            this.rdBtnSortFilterErrorIDTimers.Name = "rdBtnSortFilterErrorIDTimers";
+            this.rdBtnSortFilterErrorIDTimers.Size = new System.Drawing.Size(339, 29);
+            this.rdBtnSortFilterErrorIDTimers.TabIndex = 37;
+            this.rdBtnSortFilterErrorIDTimers.Text = "Sort by duration && Filter with error id";
+            this.rdBtnSortFilterErrorIDTimers.UseVisualStyleBackColor = true;
+            this.rdBtnSortFilterErrorIDTimers.CheckedChanged += new System.EventHandler(this.rdBtnSortFilterErrorIDTimers_CheckedChanged);
+            // 
+            // rdBtnFilterErrorIDTimers
+            // 
+            this.rdBtnFilterErrorIDTimers.AutoSize = true;
+            this.rdBtnFilterErrorIDTimers.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdBtnFilterErrorIDTimers.Location = new System.Drawing.Point(184, 603);
+            this.rdBtnFilterErrorIDTimers.Name = "rdBtnFilterErrorIDTimers";
+            this.rdBtnFilterErrorIDTimers.Size = new System.Drawing.Size(179, 29);
+            this.rdBtnFilterErrorIDTimers.TabIndex = 36;
+            this.rdBtnFilterErrorIDTimers.Text = "Filter with error id";
+            this.rdBtnFilterErrorIDTimers.UseVisualStyleBackColor = true;
+            this.rdBtnFilterErrorIDTimers.CheckedChanged += new System.EventHandler(this.rdBtnFilterErrorIDTimers_CheckedChanged);
+            // 
+            // rdBtnSortTimers
+            // 
+            this.rdBtnSortTimers.AutoSize = true;
+            this.rdBtnSortTimers.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdBtnSortTimers.Location = new System.Drawing.Point(8, 603);
+            this.rdBtnSortTimers.Name = "rdBtnSortTimers";
+            this.rdBtnSortTimers.Size = new System.Drawing.Size(170, 29);
+            this.rdBtnSortTimers.TabIndex = 35;
+            this.rdBtnSortTimers.Text = "Sort by duration";
+            this.rdBtnSortTimers.UseVisualStyleBackColor = true;
+            this.rdBtnSortTimers.CheckedChanged += new System.EventHandler(this.rdBtnSortTimers_CheckedChanged);
             // 
             // btnExportTimerTable
             // 
             this.btnExportTimerTable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportTimerTable.BackgroundImage")));
             this.btnExportTimerTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnExportTimerTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportTimerTable.Location = new System.Drawing.Point(195, 603);
+            this.btnExportTimerTable.Location = new System.Drawing.Point(722, 600);
             this.btnExportTimerTable.Margin = new System.Windows.Forms.Padding(4);
             this.btnExportTimerTable.Name = "btnExportTimerTable";
             this.btnExportTimerTable.Size = new System.Drawing.Size(64, 32);
-            this.btnExportTimerTable.TabIndex = 22;
+            this.btnExportTimerTable.TabIndex = 38;
             this.btnExportTimerTable.Text = ",";
             this.toolTip1.SetToolTip(this.btnExportTimerTable, "Export table content.");
             this.btnExportTimerTable.UseVisualStyleBackColor = true;
@@ -1103,13 +1220,13 @@
             // txtBoxDetailsTimerTimerslogs
             // 
             this.txtBoxDetailsTimerTimerslogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxDetailsTimerTimerslogs.Location = new System.Drawing.Point(1318, 307);
+            this.txtBoxDetailsTimerTimerslogs.Location = new System.Drawing.Point(1318, 306);
             this.txtBoxDetailsTimerTimerslogs.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoxDetailsTimerTimerslogs.Multiline = true;
             this.txtBoxDetailsTimerTimerslogs.Name = "txtBoxDetailsTimerTimerslogs";
             this.txtBoxDetailsTimerTimerslogs.ReadOnly = true;
             this.txtBoxDetailsTimerTimerslogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtBoxDetailsTimerTimerslogs.Size = new System.Drawing.Size(250, 294);
+            this.txtBoxDetailsTimerTimerslogs.Size = new System.Drawing.Size(250, 290);
             this.txtBoxDetailsTimerTimerslogs.TabIndex = 21;
             this.txtBoxDetailsTimerTimerslogs.TabStop = false;
             // 
@@ -1118,7 +1235,7 @@
             this.dataGridViewTimerTimersDurationlogs.AllowUserToAddRows = false;
             this.dataGridViewTimerTimersDurationlogs.AllowUserToDeleteRows = false;
             this.dataGridViewTimerTimersDurationlogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewTimerTimersDurationlogs.Location = new System.Drawing.Point(8, 458);
+            this.dataGridViewTimerTimersDurationlogs.Location = new System.Drawing.Point(9, 453);
             this.dataGridViewTimerTimersDurationlogs.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewTimerTimersDurationlogs.MultiSelect = false;
             this.dataGridViewTimerTimersDurationlogs.Name = "dataGridViewTimerTimersDurationlogs";
@@ -1134,7 +1251,7 @@
             this.dataGridViewTimerTimerslogs.AllowUserToAddRows = false;
             this.dataGridViewTimerTimerslogs.AllowUserToDeleteRows = false;
             this.dataGridViewTimerTimerslogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewTimerTimerslogs.Location = new System.Drawing.Point(8, 307);
+            this.dataGridViewTimerTimerslogs.Location = new System.Drawing.Point(9, 306);
             this.dataGridViewTimerTimerslogs.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewTimerTimerslogs.MultiSelect = false;
             this.dataGridViewTimerTimerslogs.Name = "dataGridViewTimerTimerslogs";
@@ -1177,7 +1294,8 @@
             // tabPage10
             // 
             this.tabPage10.BackColor = System.Drawing.Color.RoyalBlue;
-            this.tabPage10.Controls.Add(this.chkBoxSortEmails);
+            this.tabPage10.Controls.Add(this.rdBtnSortEmails);
+            this.tabPage10.Controls.Add(this.rdBtnFilterErrorIDEmails);
             this.tabPage10.Controls.Add(this.btnExportEmailsTable);
             this.tabPage10.Controls.Add(this.txtBoxDetailsEmailEmailslogs);
             this.tabPage10.Controls.Add(this.dataGridViewEmailEmailsDurationlogs);
@@ -1191,28 +1309,40 @@
             this.tabPage10.TabIndex = 5;
             this.tabPage10.Text = "Email";
             // 
-            // chkBoxSortEmails
+            // rdBtnSortEmails
             // 
-            this.chkBoxSortEmails.AutoSize = true;
-            this.chkBoxSortEmails.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBoxSortEmails.Location = new System.Drawing.Point(8, 606);
-            this.chkBoxSortEmails.Name = "chkBoxSortEmails";
-            this.chkBoxSortEmails.Size = new System.Drawing.Size(171, 29);
-            this.chkBoxSortEmails.TabIndex = 28;
-            this.chkBoxSortEmails.Text = "Sort by duration";
-            this.chkBoxSortEmails.UseVisualStyleBackColor = true;
-            this.chkBoxSortEmails.CheckedChanged += new System.EventHandler(this.chkBoxSortEmails_CheckedChanged);
+            this.rdBtnSortEmails.AutoSize = true;
+            this.rdBtnSortEmails.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdBtnSortEmails.Location = new System.Drawing.Point(8, 603);
+            this.rdBtnSortEmails.Name = "rdBtnSortEmails";
+            this.rdBtnSortEmails.Size = new System.Drawing.Size(170, 29);
+            this.rdBtnSortEmails.TabIndex = 38;
+            this.rdBtnSortEmails.Text = "Sort by duration";
+            this.rdBtnSortEmails.UseVisualStyleBackColor = true;
+            this.rdBtnSortEmails.CheckedChanged += new System.EventHandler(this.rdBtnSortEmails_CheckedChanged);
+            // 
+            // rdBtnFilterErrorIDEmails
+            // 
+            this.rdBtnFilterErrorIDEmails.AutoSize = true;
+            this.rdBtnFilterErrorIDEmails.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdBtnFilterErrorIDEmails.Location = new System.Drawing.Point(184, 603);
+            this.rdBtnFilterErrorIDEmails.Name = "rdBtnFilterErrorIDEmails";
+            this.rdBtnFilterErrorIDEmails.Size = new System.Drawing.Size(179, 29);
+            this.rdBtnFilterErrorIDEmails.TabIndex = 39;
+            this.rdBtnFilterErrorIDEmails.Text = "Filter with error id";
+            this.rdBtnFilterErrorIDEmails.UseVisualStyleBackColor = true;
+            this.rdBtnFilterErrorIDEmails.CheckedChanged += new System.EventHandler(this.rdBtnFilterErrorIDEmails_CheckedChanged);
             // 
             // btnExportEmailsTable
             // 
             this.btnExportEmailsTable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportEmailsTable.BackgroundImage")));
             this.btnExportEmailsTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnExportEmailsTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportEmailsTable.Location = new System.Drawing.Point(195, 604);
+            this.btnExportEmailsTable.Location = new System.Drawing.Point(382, 600);
             this.btnExportEmailsTable.Margin = new System.Windows.Forms.Padding(4);
             this.btnExportEmailsTable.Name = "btnExportEmailsTable";
             this.btnExportEmailsTable.Size = new System.Drawing.Size(64, 32);
-            this.btnExportEmailsTable.TabIndex = 27;
+            this.btnExportEmailsTable.TabIndex = 41;
             this.btnExportEmailsTable.Text = ",";
             this.toolTip1.SetToolTip(this.btnExportEmailsTable, "Export table content.");
             this.btnExportEmailsTable.UseVisualStyleBackColor = true;
@@ -1223,13 +1353,13 @@
             // txtBoxDetailsEmailEmailslogs
             // 
             this.txtBoxDetailsEmailEmailslogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxDetailsEmailEmailslogs.Location = new System.Drawing.Point(1318, 308);
+            this.txtBoxDetailsEmailEmailslogs.Location = new System.Drawing.Point(1318, 306);
             this.txtBoxDetailsEmailEmailslogs.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoxDetailsEmailEmailslogs.Multiline = true;
             this.txtBoxDetailsEmailEmailslogs.Name = "txtBoxDetailsEmailEmailslogs";
             this.txtBoxDetailsEmailEmailslogs.ReadOnly = true;
             this.txtBoxDetailsEmailEmailslogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtBoxDetailsEmailEmailslogs.Size = new System.Drawing.Size(250, 294);
+            this.txtBoxDetailsEmailEmailslogs.Size = new System.Drawing.Size(250, 290);
             this.txtBoxDetailsEmailEmailslogs.TabIndex = 26;
             this.txtBoxDetailsEmailEmailslogs.TabStop = false;
             // 
@@ -1238,7 +1368,7 @@
             this.dataGridViewEmailEmailsDurationlogs.AllowUserToAddRows = false;
             this.dataGridViewEmailEmailsDurationlogs.AllowUserToDeleteRows = false;
             this.dataGridViewEmailEmailsDurationlogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewEmailEmailsDurationlogs.Location = new System.Drawing.Point(8, 459);
+            this.dataGridViewEmailEmailsDurationlogs.Location = new System.Drawing.Point(9, 453);
             this.dataGridViewEmailEmailsDurationlogs.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewEmailEmailsDurationlogs.MultiSelect = false;
             this.dataGridViewEmailEmailsDurationlogs.Name = "dataGridViewEmailEmailsDurationlogs";
@@ -1254,7 +1384,7 @@
             this.dataGridViewEmailEmailslogs.AllowUserToAddRows = false;
             this.dataGridViewEmailEmailslogs.AllowUserToDeleteRows = false;
             this.dataGridViewEmailEmailslogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewEmailEmailslogs.Location = new System.Drawing.Point(8, 308);
+            this.dataGridViewEmailEmailslogs.Location = new System.Drawing.Point(9, 306);
             this.dataGridViewEmailEmailslogs.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewEmailEmailslogs.MultiSelect = false;
             this.dataGridViewEmailEmailslogs.Name = "dataGridViewEmailEmailslogs";
@@ -1297,7 +1427,9 @@
             // tabPage11
             // 
             this.tabPage11.BackColor = System.Drawing.Color.RoyalBlue;
-            this.tabPage11.Controls.Add(this.chkBoxSortExtensions);
+            this.tabPage11.Controls.Add(this.rdBtnSortExtensions);
+            this.tabPage11.Controls.Add(this.rdBtnSortFilterErrorIDExtensions);
+            this.tabPage11.Controls.Add(this.rdBtnFilterErrorIDExtensions);
             this.tabPage11.Controls.Add(this.btnExportExtensionsTable);
             this.tabPage11.Controls.Add(this.txtBoxDetailExtExtensionlogs);
             this.tabPage11.Controls.Add(this.dataGridViewExtensionsDurationlogs);
@@ -1311,28 +1443,52 @@
             this.tabPage11.TabIndex = 6;
             this.tabPage11.Text = "Extension";
             // 
-            // chkBoxSortExtensions
+            // rdBtnSortExtensions
             // 
-            this.chkBoxSortExtensions.AutoSize = true;
-            this.chkBoxSortExtensions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBoxSortExtensions.Location = new System.Drawing.Point(8, 606);
-            this.chkBoxSortExtensions.Name = "chkBoxSortExtensions";
-            this.chkBoxSortExtensions.Size = new System.Drawing.Size(171, 29);
-            this.chkBoxSortExtensions.TabIndex = 26;
-            this.chkBoxSortExtensions.Text = "Sort by duration";
-            this.chkBoxSortExtensions.UseVisualStyleBackColor = true;
-            this.chkBoxSortExtensions.CheckedChanged += new System.EventHandler(this.chkBoxSortExtensions_CheckedChanged);
+            this.rdBtnSortExtensions.AutoSize = true;
+            this.rdBtnSortExtensions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdBtnSortExtensions.Location = new System.Drawing.Point(8, 603);
+            this.rdBtnSortExtensions.Name = "rdBtnSortExtensions";
+            this.rdBtnSortExtensions.Size = new System.Drawing.Size(170, 29);
+            this.rdBtnSortExtensions.TabIndex = 41;
+            this.rdBtnSortExtensions.Text = "Sort by duration";
+            this.rdBtnSortExtensions.UseVisualStyleBackColor = true;
+            this.rdBtnSortExtensions.CheckedChanged += new System.EventHandler(this.rdBtnSortExtensions_CheckedChanged);
+            // 
+            // rdBtnSortFilterErrorIDExtensions
+            // 
+            this.rdBtnSortFilterErrorIDExtensions.AutoSize = true;
+            this.rdBtnSortFilterErrorIDExtensions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdBtnSortFilterErrorIDExtensions.Location = new System.Drawing.Point(369, 603);
+            this.rdBtnSortFilterErrorIDExtensions.Name = "rdBtnSortFilterErrorIDExtensions";
+            this.rdBtnSortFilterErrorIDExtensions.Size = new System.Drawing.Size(339, 29);
+            this.rdBtnSortFilterErrorIDExtensions.TabIndex = 43;
+            this.rdBtnSortFilterErrorIDExtensions.Text = "Sort by duration && Filter with error id";
+            this.rdBtnSortFilterErrorIDExtensions.UseVisualStyleBackColor = true;
+            this.rdBtnSortFilterErrorIDExtensions.CheckedChanged += new System.EventHandler(this.rdBtnSortFilterErrorIDExtensions_CheckedChanged);
+            // 
+            // rdBtnFilterErrorIDExtensions
+            // 
+            this.rdBtnFilterErrorIDExtensions.AutoSize = true;
+            this.rdBtnFilterErrorIDExtensions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdBtnFilterErrorIDExtensions.Location = new System.Drawing.Point(184, 603);
+            this.rdBtnFilterErrorIDExtensions.Name = "rdBtnFilterErrorIDExtensions";
+            this.rdBtnFilterErrorIDExtensions.Size = new System.Drawing.Size(179, 29);
+            this.rdBtnFilterErrorIDExtensions.TabIndex = 42;
+            this.rdBtnFilterErrorIDExtensions.Text = "Filter with error id";
+            this.rdBtnFilterErrorIDExtensions.UseVisualStyleBackColor = true;
+            this.rdBtnFilterErrorIDExtensions.CheckedChanged += new System.EventHandler(this.rdBtnFilterErrorIDExtensions_CheckedChanged);
             // 
             // btnExportExtensionsTable
             // 
             this.btnExportExtensionsTable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportExtensionsTable.BackgroundImage")));
             this.btnExportExtensionsTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnExportExtensionsTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportExtensionsTable.Location = new System.Drawing.Point(195, 603);
+            this.btnExportExtensionsTable.Location = new System.Drawing.Point(722, 600);
             this.btnExportExtensionsTable.Margin = new System.Windows.Forms.Padding(4);
             this.btnExportExtensionsTable.Name = "btnExportExtensionsTable";
             this.btnExportExtensionsTable.Size = new System.Drawing.Size(64, 32);
-            this.btnExportExtensionsTable.TabIndex = 25;
+            this.btnExportExtensionsTable.TabIndex = 44;
             this.btnExportExtensionsTable.Text = ",";
             this.toolTip1.SetToolTip(this.btnExportExtensionsTable, "Export table content.");
             this.btnExportExtensionsTable.UseVisualStyleBackColor = true;
@@ -1349,7 +1505,7 @@
             this.txtBoxDetailExtExtensionlogs.Name = "txtBoxDetailExtExtensionlogs";
             this.txtBoxDetailExtExtensionlogs.ReadOnly = true;
             this.txtBoxDetailExtExtensionlogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtBoxDetailExtExtensionlogs.Size = new System.Drawing.Size(250, 293);
+            this.txtBoxDetailExtExtensionlogs.Size = new System.Drawing.Size(250, 290);
             this.txtBoxDetailExtExtensionlogs.TabIndex = 24;
             this.txtBoxDetailExtExtensionlogs.TabStop = false;
             // 
@@ -1358,7 +1514,7 @@
             this.dataGridViewExtensionsDurationlogs.AllowUserToAddRows = false;
             this.dataGridViewExtensionsDurationlogs.AllowUserToDeleteRows = false;
             this.dataGridViewExtensionsDurationlogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewExtensionsDurationlogs.Location = new System.Drawing.Point(9, 456);
+            this.dataGridViewExtensionsDurationlogs.Location = new System.Drawing.Point(9, 453);
             this.dataGridViewExtensionsDurationlogs.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewExtensionsDurationlogs.MultiSelect = false;
             this.dataGridViewExtensionsDurationlogs.Name = "dataGridViewExtensionsDurationlogs";
@@ -1417,7 +1573,9 @@
             // tabPage12
             // 
             this.tabPage12.BackColor = System.Drawing.Color.RoyalBlue;
-            this.tabPage12.Controls.Add(this.chkBoxSortServiceActions);
+            this.tabPage12.Controls.Add(this.rdBtnSortServiceActions);
+            this.tabPage12.Controls.Add(this.rdBtnSortFilterErrorIDServiceActions);
+            this.tabPage12.Controls.Add(this.rdBtnFilterErrorIDServiceActions);
             this.tabPage12.Controls.Add(this.btnExportServiceActionsTable);
             this.tabPage12.Controls.Add(this.txtBoxDetailSrvActServicelogs);
             this.tabPage12.Controls.Add(this.dataGridViewSrvActServiceDurationlogs);
@@ -1431,28 +1589,52 @@
             this.tabPage12.TabIndex = 7;
             this.tabPage12.Text = "Service Action";
             // 
-            // chkBoxSortServiceActions
+            // rdBtnSortServiceActions
             // 
-            this.chkBoxSortServiceActions.AutoSize = true;
-            this.chkBoxSortServiceActions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBoxSortServiceActions.Location = new System.Drawing.Point(8, 606);
-            this.chkBoxSortServiceActions.Name = "chkBoxSortServiceActions";
-            this.chkBoxSortServiceActions.Size = new System.Drawing.Size(171, 29);
-            this.chkBoxSortServiceActions.TabIndex = 31;
-            this.chkBoxSortServiceActions.Text = "Sort by duration";
-            this.chkBoxSortServiceActions.UseVisualStyleBackColor = true;
-            this.chkBoxSortServiceActions.CheckedChanged += new System.EventHandler(this.chkBoxSortServiceActions_CheckedChanged);
+            this.rdBtnSortServiceActions.AutoSize = true;
+            this.rdBtnSortServiceActions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdBtnSortServiceActions.Location = new System.Drawing.Point(8, 603);
+            this.rdBtnSortServiceActions.Name = "rdBtnSortServiceActions";
+            this.rdBtnSortServiceActions.Size = new System.Drawing.Size(170, 29);
+            this.rdBtnSortServiceActions.TabIndex = 44;
+            this.rdBtnSortServiceActions.Text = "Sort by duration";
+            this.rdBtnSortServiceActions.UseVisualStyleBackColor = true;
+            this.rdBtnSortServiceActions.CheckedChanged += new System.EventHandler(this.rdBtnSortServiceActions_CheckedChanged);
+            // 
+            // rdBtnSortFilterErrorIDServiceActions
+            // 
+            this.rdBtnSortFilterErrorIDServiceActions.AutoSize = true;
+            this.rdBtnSortFilterErrorIDServiceActions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdBtnSortFilterErrorIDServiceActions.Location = new System.Drawing.Point(369, 603);
+            this.rdBtnSortFilterErrorIDServiceActions.Name = "rdBtnSortFilterErrorIDServiceActions";
+            this.rdBtnSortFilterErrorIDServiceActions.Size = new System.Drawing.Size(339, 29);
+            this.rdBtnSortFilterErrorIDServiceActions.TabIndex = 46;
+            this.rdBtnSortFilterErrorIDServiceActions.Text = "Sort by duration && Filter with error id";
+            this.rdBtnSortFilterErrorIDServiceActions.UseVisualStyleBackColor = true;
+            this.rdBtnSortFilterErrorIDServiceActions.CheckedChanged += new System.EventHandler(this.rdBtnSortFilterErrorIDServiceActions_CheckedChanged);
+            // 
+            // rdBtnFilterErrorIDServiceActions
+            // 
+            this.rdBtnFilterErrorIDServiceActions.AutoSize = true;
+            this.rdBtnFilterErrorIDServiceActions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdBtnFilterErrorIDServiceActions.Location = new System.Drawing.Point(184, 603);
+            this.rdBtnFilterErrorIDServiceActions.Name = "rdBtnFilterErrorIDServiceActions";
+            this.rdBtnFilterErrorIDServiceActions.Size = new System.Drawing.Size(179, 29);
+            this.rdBtnFilterErrorIDServiceActions.TabIndex = 45;
+            this.rdBtnFilterErrorIDServiceActions.Text = "Filter with error id";
+            this.rdBtnFilterErrorIDServiceActions.UseVisualStyleBackColor = true;
+            this.rdBtnFilterErrorIDServiceActions.CheckedChanged += new System.EventHandler(this.rdBtnFilterErrorIDServiceActions_CheckedChanged);
             // 
             // btnExportServiceActionsTable
             // 
             this.btnExportServiceActionsTable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportServiceActionsTable.BackgroundImage")));
             this.btnExportServiceActionsTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnExportServiceActionsTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportServiceActionsTable.Location = new System.Drawing.Point(195, 603);
+            this.btnExportServiceActionsTable.Location = new System.Drawing.Point(722, 600);
             this.btnExportServiceActionsTable.Margin = new System.Windows.Forms.Padding(4);
             this.btnExportServiceActionsTable.Name = "btnExportServiceActionsTable";
             this.btnExportServiceActionsTable.Size = new System.Drawing.Size(64, 32);
-            this.btnExportServiceActionsTable.TabIndex = 30;
+            this.btnExportServiceActionsTable.TabIndex = 47;
             this.btnExportServiceActionsTable.Text = ",";
             this.toolTip1.SetToolTip(this.btnExportServiceActionsTable, "Export table content.");
             this.btnExportServiceActionsTable.UseVisualStyleBackColor = true;
@@ -1469,7 +1651,7 @@
             this.txtBoxDetailSrvActServicelogs.Name = "txtBoxDetailSrvActServicelogs";
             this.txtBoxDetailSrvActServicelogs.ReadOnly = true;
             this.txtBoxDetailSrvActServicelogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtBoxDetailSrvActServicelogs.Size = new System.Drawing.Size(250, 293);
+            this.txtBoxDetailSrvActServicelogs.Size = new System.Drawing.Size(250, 290);
             this.txtBoxDetailSrvActServicelogs.TabIndex = 29;
             this.txtBoxDetailSrvActServicelogs.TabStop = false;
             // 
@@ -1478,7 +1660,7 @@
             this.dataGridViewSrvActServiceDurationlogs.AllowUserToAddRows = false;
             this.dataGridViewSrvActServiceDurationlogs.AllowUserToDeleteRows = false;
             this.dataGridViewSrvActServiceDurationlogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewSrvActServiceDurationlogs.Location = new System.Drawing.Point(9, 456);
+            this.dataGridViewSrvActServiceDurationlogs.Location = new System.Drawing.Point(9, 453);
             this.dataGridViewSrvActServiceDurationlogs.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewSrvActServiceDurationlogs.MultiSelect = false;
             this.dataGridViewSrvActServiceDurationlogs.Name = "dataGridViewSrvActServiceDurationlogs";
@@ -1555,10 +1737,11 @@
             // 
             this.chkBoxSortTradWebRequestsScreens.AutoSize = true;
             this.chkBoxSortTradWebRequestsScreens.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBoxSortTradWebRequestsScreens.Location = new System.Drawing.Point(10, 604);
+            this.chkBoxSortTradWebRequestsScreens.Location = new System.Drawing.Point(10, 603);
             this.chkBoxSortTradWebRequestsScreens.Name = "chkBoxSortTradWebRequestsScreens";
             this.chkBoxSortTradWebRequestsScreens.Size = new System.Drawing.Size(171, 29);
             this.chkBoxSortTradWebRequestsScreens.TabIndex = 27;
+            this.chkBoxSortTradWebRequestsScreens.TabStop = false;
             this.chkBoxSortTradWebRequestsScreens.Text = "Sort by duration";
             this.chkBoxSortTradWebRequestsScreens.UseVisualStyleBackColor = true;
             this.chkBoxSortTradWebRequestsScreens.CheckedChanged += new System.EventHandler(this.chkBoxSortTradWebRequestsScreens_CheckedChanged);
@@ -1568,11 +1751,11 @@
             this.btnExportScreenTable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportScreenTable.BackgroundImage")));
             this.btnExportScreenTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnExportScreenTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportScreenTable.Location = new System.Drawing.Point(195, 603);
+            this.btnExportScreenTable.Location = new System.Drawing.Point(197, 600);
             this.btnExportScreenTable.Margin = new System.Windows.Forms.Padding(4);
             this.btnExportScreenTable.Name = "btnExportScreenTable";
             this.btnExportScreenTable.Size = new System.Drawing.Size(64, 32);
-            this.btnExportScreenTable.TabIndex = 26;
+            this.btnExportScreenTable.TabIndex = 28;
             this.btnExportScreenTable.Text = ",";
             this.toolTip1.SetToolTip(this.btnExportScreenTable, "Export table content.");
             this.btnExportScreenTable.UseVisualStyleBackColor = true;
@@ -1589,7 +1772,7 @@
             this.txtBoxDetailTradWebRequestsScreenlogs.Name = "txtBoxDetailTradWebRequestsScreenlogs";
             this.txtBoxDetailTradWebRequestsScreenlogs.ReadOnly = true;
             this.txtBoxDetailTradWebRequestsScreenlogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtBoxDetailTradWebRequestsScreenlogs.Size = new System.Drawing.Size(250, 295);
+            this.txtBoxDetailTradWebRequestsScreenlogs.Size = new System.Drawing.Size(250, 290);
             this.txtBoxDetailTradWebRequestsScreenlogs.TabIndex = 25;
             this.txtBoxDetailTradWebRequestsScreenlogs.TabStop = false;
             // 
@@ -1598,7 +1781,7 @@
             this.dataGridViewTradWebRequestsScreenDurationlogs.AllowUserToAddRows = false;
             this.dataGridViewTradWebRequestsScreenDurationlogs.AllowUserToDeleteRows = false;
             this.dataGridViewTradWebRequestsScreenDurationlogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewTradWebRequestsScreenDurationlogs.Location = new System.Drawing.Point(10, 458);
+            this.dataGridViewTradWebRequestsScreenDurationlogs.Location = new System.Drawing.Point(9, 453);
             this.dataGridViewTradWebRequestsScreenDurationlogs.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewTradWebRequestsScreenDurationlogs.MultiSelect = false;
             this.dataGridViewTradWebRequestsScreenDurationlogs.Name = "dataGridViewTradWebRequestsScreenDurationlogs";
@@ -1717,6 +1900,7 @@
             this.chkBoxSortIIS.Name = "chkBoxSortIIS";
             this.chkBoxSortIIS.Size = new System.Drawing.Size(171, 29);
             this.chkBoxSortIIS.TabIndex = 25;
+            this.chkBoxSortIIS.TabStop = false;
             this.chkBoxSortIIS.Text = "Sort by duration";
             this.chkBoxSortIIS.UseVisualStyleBackColor = true;
             this.chkBoxSortIIS.CheckedChanged += new System.EventHandler(this.chkBoxSortIIS_CheckedChanged);
@@ -2136,6 +2320,7 @@
             this.chkBoxSortDevinfo.Name = "chkBoxSortDevinfo";
             this.chkBoxSortDevinfo.Size = new System.Drawing.Size(149, 29);
             this.chkBoxSortDevinfo.TabIndex = 23;
+            this.chkBoxSortDevinfo.TabStop = false;
             this.chkBoxSortDevinfo.Text = "Sort by count";
             this.chkBoxSortDevinfo.UseVisualStyleBackColor = true;
             this.chkBoxSortDevinfo.CheckedChanged += new System.EventHandler(this.chkBoxSortDevinfo_CheckedChanged);
@@ -4110,13 +4295,6 @@
             this.comBoxIssueCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comBoxIssueCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comBoxIssueCategory.FormattingEnabled = true;
-            this.comBoxIssueCategory.Items.AddRange(new object[] {
-            "Building Mobile App",
-            "Compilation",
-            "Content Security Policy (CSP)",
-            "Database",
-            "Logic",
-            "Network"});
             this.comBoxIssueCategory.Location = new System.Drawing.Point(1037, 49);
             this.comBoxIssueCategory.Name = "comBoxIssueCategory";
             this.comBoxIssueCategory.Size = new System.Drawing.Size(297, 33);
@@ -4238,7 +4416,7 @@
             this.MinimumSize = new System.Drawing.Size(1649, 872);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "OutSystems Log Parser V.021922";
+            this.Text = "OutSystems Log Parser V.032622";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -4673,21 +4851,14 @@
         private System.Windows.Forms.ComboBox comBoxIssueCategory;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.CheckBox chkBoxSortSlowSQLExtension;
-        private System.Windows.Forms.CheckBox chkBoxSortWebServices;
-        private System.Windows.Forms.CheckBox chkBoxSortTimers;
-        private System.Windows.Forms.CheckBox chkBoxSortTradWebRequestsScreens;
-        private System.Windows.Forms.CheckBox chkBoxSortExtensions;
         private System.Windows.Forms.Button btnExportExtensionsTable;
         private System.Windows.Forms.TextBox txtBoxDetailExtExtensionlogs;
         private System.Windows.Forms.DataGridView dataGridViewExtensionsDurationlogs;
         private System.Windows.Forms.DataGridView dataGridViewExtensionLogsExtensions;
-        private System.Windows.Forms.CheckBox chkBoxSortScrReqScreens;
         private System.Windows.Forms.Button btnExportScrReqScreenTable;
         private System.Windows.Forms.TextBox txtBoxDetailScrReqScreenlogs;
         private System.Windows.Forms.DataGridView dataGridViewScrReqScreenDurationlogs;
         private System.Windows.Forms.DataGridView dataGridViewScreenRequestsScreenlogs;
-        private System.Windows.Forms.CheckBox chkBoxSortServiceActions;
         private System.Windows.Forms.Button btnExportServiceActionsTable;
         private System.Windows.Forms.TextBox txtBoxDetailSrvActServicelogs;
         private System.Windows.Forms.DataGridView dataGridViewSrvActServiceDurationlogs;
@@ -4700,7 +4871,6 @@
         private System.Windows.Forms.DataGridView dataGridViewDevInfoCount;
         private System.Windows.Forms.TextBox txtBoxDetailDevInfoCount;
         private System.Windows.Forms.Button btnExportIISLINQTable;
-        private System.Windows.Forms.CheckBox chkBoxSortEmails;
         private System.Windows.Forms.Button btnExportEmailsTable;
         private System.Windows.Forms.TextBox txtBoxDetailsEmailEmailslogs;
         private System.Windows.Forms.DataGridView dataGridViewEmailEmailsDurationlogs;
@@ -4710,6 +4880,27 @@
         private System.Windows.Forms.ComboBox comBoxFilterField;
         private System.Windows.Forms.Button btnFilterFIeld;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.RadioButton rdBtnSortSlowSQLExtension;
+        private System.Windows.Forms.RadioButton rdBtnFilterErrorIDSLowSQLExtension;
+        private System.Windows.Forms.RadioButton rdBtnSortFilterErrorIDSlowSQLExtension;
+        private System.Windows.Forms.RadioButton rdBtnSortFilterErrorIDWebServices;
+        private System.Windows.Forms.RadioButton rdBtnFilterErrorIDWebServices;
+        private System.Windows.Forms.RadioButton rdBtnSortWebServices;
+        private System.Windows.Forms.RadioButton rdBtnSortFilterErrorIDScrReqScreens;
+        private System.Windows.Forms.RadioButton rdBtnFilterErrorIDScrReqScreens;
+        private System.Windows.Forms.RadioButton rdBtnScrReqScreens;
+        private System.Windows.Forms.RadioButton rdBtnSortFilterErrorIDTimers;
+        private System.Windows.Forms.RadioButton rdBtnFilterErrorIDTimers;
+        private System.Windows.Forms.RadioButton rdBtnSortTimers;
+        private System.Windows.Forms.RadioButton rdBtnFilterErrorIDEmails;
+        private System.Windows.Forms.RadioButton rdBtnSortEmails;
+        private System.Windows.Forms.RadioButton rdBtnSortExtensions;
+        private System.Windows.Forms.RadioButton rdBtnSortFilterErrorIDExtensions;
+        private System.Windows.Forms.RadioButton rdBtnFilterErrorIDExtensions;
+        private System.Windows.Forms.RadioButton rdBtnSortServiceActions;
+        private System.Windows.Forms.RadioButton rdBtnSortFilterErrorIDServiceActions;
+        private System.Windows.Forms.RadioButton rdBtnFilterErrorIDServiceActions;
+        private System.Windows.Forms.CheckBox chkBoxSortTradWebRequestsScreens;
     }
 }
 
