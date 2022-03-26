@@ -22,67 +22,71 @@ Error logs:
 DATE_TIME MESSAGE STACK MODULE_NAME APPLICATION_NAME APPLICATION_KEY ACTION_NAME ENTRYPOINT_NAME SERVER ESPACE_NAME ESPACE_ID USER_ID SESSION_ID ENVIRONMENT_INFORMATION ID TENANT_ID
 
 Device Information:
-OPERATING_SYSTEM OPERATING_SYSTEM_VERSION DEVICE_MODEL CORDOVA_VERSION DEVICE_UUID
+OPERATING_SYSTEM OPERATING_SYSTEM_VERSION COUNT DEVICE_MODEL CORDOVA_VERSION DEVICE_UUID
 
 General logs:
 DATE_TIME MESSAGE MESSAGE_TYPE MODULE_NAME APPLICATION_NAME APPLICATION_KEY ACTION_NAME ENTRYPOINT_NAME CLIENT_IP ESPACE_NAME ESPACE_ID USER_ID SESSION_ID ERROR_ID REQUEST_KEY TENANT_ID
 
 General logs (Slow Extensions/Slow SQLs):
-DATE_TIME DURATION MODULE_NAME ACTION_NAME ESPACE_NAME
-
-DURATION DATE_TIME MODULE_NAME ACTION_NAME ESPACE_NAME
+DATE_TIME DURATION_SECONDS MODULE_NAME APPLICATION_NAME ACTION_NAME ESPACE_NAME MESSAGE STACK ENVIRONMENT_INFORMATION ERROR_ID
 
 Integration logs:
-DATE_TIME DURATION APPLICATION_NAME APPLICATION_KEY ACTION_NAME ACTION_TYPE SOURCE ENDPOINT EXECUTED_BY ESPACE_NAME ESPACE_ID ERROR_ID REQUEST_KEY TENANT_ID
+DATE_TIME DURATION_SECONDS APPLICATION_NAME APPLICATION_KEY ACTION_NAME ACTION_TYPE SOURCE ENDPOINT EXECUTED_BY ESPACE_NAME ESPACE_ID ERROR_ID REQUEST_KEY TENANT_ID
 
 Integrations logs (Web Services):
-DATE_TIME DURATION ACTION_NAME ACTION_TYPE ESPACE_NAME
-
-DURATION DATE_TIME ACTION_NAME ACTION_TYPE ESPACE_NAME
+DATE_TIME DURATION_SECONDS MODULE_NAME APPLICATION_NAME ACTION_NAME ACTION_TYPE ESPACE_NAME MESSAGE STACK ENVIRONMENT_INFORMATION ERROR_ID
 
 MobileRequestsLog = ScreenRequests
 Screen Requests logs:
 DATE_TIME DURATION SCREEN APPLICATION_NAME APPLICATION_KEY SOURCE ENDPOINT EXECUTED_BY ESPACE_NAME ESPACE_ID LOGIN_ID USER_ID CYCLE ERROR_ID REQUEST_KEY TENANT_ID
 
+Screen Requests logs (Screens):
+DATE_TIME DURATION_SECONDS SCREEN MODULE_NAME APPLICATION_NAME ESPACE_NAME MESSAGE STACK ENVIRONMENT_INFORMATION ERROR_ID
+
 Timer logs:
 DATE_TIME DURATION APPLICATION_NAME APPLICATION_KEY EXECUTED_BY ESPACE_NAME ESPACE_ID CYCLIC_JOB_NAME CYCLIC_JOB_KEY SHOULD_HAVE_RUN_AT NEXT_RUN ERROR_ID REQUEST_KEY TENANT_ID
 
 Timer logs (Timers):
-DATE_TIME DURATION CYCLIC_JOB_NAME ESPACE_NAME
-
-DURATION DATE_TIME CYCLIC_JOB_NAME ESPACE_NAME
+DATE_TIME DURATION_SECONDS CYCLIC_JOB_NAME MODULE_NAME APPLICATION_NAME ESPACE_NAME MESSAGE STACK ENVIRONMENT_INFORMATION ERROR_ID
 
 Email logs:
-DATE_TIME SENT LAST_ERROR FROM TO SUBJECT CC BCC NAME SIZE MESSAGE_ID ACTIVITY EMAIL_DEFINITION STORE_CONTENT IS_TEST_EMAIL ID TENANT_ID
+DATE_TIME SENT ERROR_ID FROM TO SUBJECT CC BCC ESPACE_NAME SIZE MESSAGE_ID ACTIVITY EMAIL_DEFINITION STORE_CONTENT IS_TEST_EMAIL ID TENANT_ID
+
+Email logs (Emails):
+DATE_TIME DURATION_SECONDS MODULE_NAME APPLICATION_NAME ESPACE_NAME MESSAGE STACK FROM TO SUBJECT CC BCC IS_TEST_EMAIL ENVIRONMENT_INFORMATION ERROR_ID
 
 Extension logs:
 DATE_TIME DURATION APPLICATION_NAME APPLICATION_KEY ACTION_NAME EXECUTED_BY ESPACE_NAME ESPACE_ID USERNAME USER_ID SESSION_ID EXTENSION_ID EXTENSION_NAME ERROR_ID REQUEST_KEY TENANT_ID
 
+Extension logs (Extensions):
+DATE_TIME DURATION_SECONDS EXTENSION_NAME MODULE_NAME APPLICATION_NAME ACTION_NAME ESPACE_NAME MESSAGE STACK ENVIRONMENT_INFORMATION ERROR_ID
+
 Service Action logs:
 DATE_TIME DURATION APPLICATION_NAME APPLICATION_KEY ACTION_NAME SOURCE ENTRYPOINT_NAME ENDPOINT EXECUTED_BY ESPACE_NAME ESPACE_ID USERNAME LOGIN_ID USER_ID SESSION_ID ERROR_ID REQUEST_KEY ORIGINAL_REQUEST_KEY TENANT_ID
 
-Screen Logs = TraditionalWebRequests             
-TraditionalWebRequests logs:
+Service Action logs (Service Actions):
+DATE_TIME DURATION_SECONDS ACTION_NAME MODULE_NAME APPLICATION_NAME ESPACE_NAME MESSAGE STACK ENVIRONMENT_INFORMATION ERROR_ID
+
+TraditionalWebRequests = Screen Logs              
+Screen logs:
 DATE_TIME DURATION SCREEN SCREEN_TYPE APPLICATION_NAME APPLICATION_KEY ACTION_NAME ACCESS_MODE EXECUTED_BY CLIENT_IP ESPACE_NAME ESPACE_ID USER_ID SESSION_ID SESSION_REQUESTS SESSION_BYTES VIEW_STATE_BYTES MS_IS_DN REQUEST_KEY TENANT_ID
 
 Screen Logs (Screens):
-DATE_TIME DURATION SCREEN ESPACE_NAME
-
-DURATION DATE_TIME SCREEN ESPACE_NAME
+DATE_TIME DURATION_SECONDS SCREEN SCREEN_TYPE APPLICATION_NAME ACTION_NAME ESPACE_NAME
 
 BPTTroubleshootingReports:
 DATE_TIME ESPACE_NAME PROCESS_NAME PROCESS_STATUS PROCESS_LAST_MODIFIED PROCESS_SUSPENDED_DATE PROCESS_ID PARENT_PROCESS_ID ACTIVITY_CREATED ACTIVITY_NAME ACTIVITY_KIND ACTIVITY_STATUS ACTIVITY_RUNNING_SINCE ACTIVITY_NEXT_RUN ACTIVITY_CLOSED ACTIVITY_ERROR_COUNT ACTIVITY_ERROR_ID
 
 IIS logs:
-DATE_TIME TIME_TAKEN HTTP_CODE HTTP_SUBCODE WINDOWS_ERROR_CODE CLIENT_IP SERVER_IP SERVER_PORT
+DATE_TIME TIME_TAKEN_SECONDS HTTP_CODE HTTP_SUBCODE WINDOWS_ERROR_CODE CLIENT_IP SERVER_IP SERVER_PORT
 METHOD URI_STEM URI_QUERY USERNAME BROWSER REFERRER
 
-TIME_TAKEN DATE_TIME HTTP_CODE HTTP_SUBCODE WINDOWS_ERROR_CODE CLIENT_IP SERVER_IP SERVER_PORT
+TIME_TAKEN_SECONDS DATE_TIME HTTP_CODE HTTP_SUBCODE WINDOWS_ERROR_CODE CLIENT_IP SERVER_IP SERVER_PORT
 METHOD URI_STEM URI_QUERY USERNAME BROWSER REFERRER
 
 *******   *******   *******
 NOTE: The IIS logs with filenames ending in "_x" mean the customer selected the columns to display data from and rearranged
-the columns at his own will. Until we have a defined set of columns and their order, no logic can anticipate the customer's will.
+the columns at his own will.
 
 #Fields: date time s-sitename s-computername s-ip cs-method cs-uri-stem cs-uri-query s-port cs-username c-ip cs-version cs(User-Agent) cs(Referer)
 sc-status sc-substatus sc-win32-status sc-bytes cs-bytes time-taken x-forwarded-for
@@ -93,14 +97,17 @@ DATE_TIME TIME_TAKEN HTTP_CODE HTTP_SUBCODE HTTP_VERSION WINDOWS_ERROR_CODE CLIE
 SERVER_PORT SERVER_NAME SERVICE_NAME METHOD URI_STEM URI_QUERY USERNAME BROWSER REFERRER BYTES_SENT BYTES_RECEIVED
 *******   *******   *******
 
-Android, iOS, and Service Studio Report:
+Android and iOS:
 DATE_TIME MESSAGE_TYPE ACTION_NAME MESSAGE
+
+Service Studio Reports:
+DATE_TIME MESSAGE_TYPE MESSAGE
 
 General Text Logs:
 DATE_TIME MESSAGE_TYPE MESSAGE
 
 Windows Event Viewer logs:
-DATE_TIME LEVEL MESSAGE TASK COMPUTER PROVIDER_NAME QUALIFIERS EVENT_ID EVENT_RECORD_ID KEYWORDS
+DATE_TIME LEVEL MESSAGE TASK COMPUTER SOURCE QUALIFIERS EVENT_ID EVENT_RECORD_ID KEYWORDS
 
 Full Error Dump logs:
 PLATFORM_INFORMATION
@@ -203,12 +210,18 @@ ID STAGING APPLICATION
 
 Staging Outdated Module logs:
 ID STAGING MODULE
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-1) Filter data based on a date range
+1) Filter the data based on a date range.
 2) Read the input files and rearrange the columns.
-3) Filtered outputs should be already sorted by their timestamp.
+3) Filtered outputs should be already sorted by their timestamp (ascending order).
 4) Filtered outputs should be TXT files using the pipe ("|") as the delimiter and their filenames should be the logs they represent.
-5) All the "datetime" fields from the logs should be in the following format: YYYY-MM-DD hh:mm:ss
+5) All the timestamp fields from the logs should be in the following format: YYYY-MM-DD hh:mm:ss
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Convert illegal character to decimal value: https://www.branah.com/unicode-converter
+Confirm character based on decimal value: https://www.charset.org/utf-8
 """
 
 myLinesFromDateRange = []
@@ -293,7 +306,7 @@ myCyclicJobNamesList = []
 replacementDict = {}
 replacementDict.update(dict.fromkeys(range(4, 7), ""))
 replacementDict.update(dict.fromkeys(range(135, 136), ""))
-replacementDict.update(dict.fromkeys(range(166, 168), ""))
+replacementDict.update(dict.fromkeys(range(166, 169), ""))
 replacementDict.update(dict.fromkeys(range(170, 172), ""))
 replacementDict.update(dict.fromkeys(range(176, 190), ""))
 replacementDict.update(dict.fromkeys(range(196, 198), ""))
@@ -328,6 +341,7 @@ replacementDict[6158] = ""
 replacementDict[8211] = "-"
 replacementDict[8215] = "_"
 replacementDict[8218] = ","
+replacementDict[8226] = ""
 replacementDict[8240] = ""
 replacementDict[8801] = "="
 replacementDict[9472] = "-"
@@ -387,8 +401,8 @@ japaneseErrorLogsRegex = r"^([\d]+)\|(.*?)\|([\d\-\:\. ]+)\|(.*?)?\|([\d]+)\|([\
 errorLogsContentRegex = r"^(?:[\d\-\:\. ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|(?:(?:.*?\|){6})([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\-]+)\|(?:[\d]+)"
 errorLogsContentRegex2 = r"^(?:[\d\-\:\. ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\-\.\,\(\)\[\]\/\& ]+)\|(?:(?:.*?\|){5})([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\-]+)\|(?:[\d]+)"
 
-generalLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\w\+\/\=\' ]+)?\|([\d]+)\|([\d]+)\|([\w\-]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w]+)?\|([\w\-\.\:\# ]+)?\|([\w\-]+)?\|([\w\-\(\)\.\* ]+)?\|([\w\(\)\.]+)?\|([\w\-\.\:\;\% ]+)?\|([\w]+)?\|([\w\-\.\,\(\)\[\]\/\& ]+)?\|([\w\-]+)?\|([\w\@\.\\]+)?"
-negativeGeneralLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\w\+\/\=\' ]+)?\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w]+)?\|(?:[\w\-\.\:\# ]+)?\|(?:[\w\-]+)?\|(?:[\w\-\(\)\.\* ]+)?\|(?:[\w\(\)\.]+)?\|(?:[\w\-\.\:\;\% ]+)?\|(?:[\w]+)?\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)?\|(?:[\w\-]+)?\|(?:[\w\@\.\\]+)?).*)"
+generalLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\w\+\/\=\' ]+)?\|([\d]+)\|([\d]+)\|([\w\-]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w]+)?\|([\w\-\.\:\#\[\] ]+)?\|([\w\-]+)?\|([\w\-\(\)\.\* ]+)?\|([\w\(\)\.]+)?\|([\w\-\.\:\;\%\= ]+)?\|([\w]+)?\|([\w\-\.\,\(\)\[\]\/\& ]+)?\|([\w\-]+)?\|([\w\@\.\\]+)?"
+negativeGeneralLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\w\+\/\=\' ]+)?\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w]+)?\|(?:[\w\-\.\:\#\[\] ]+)?\|(?:[\w\-]+)?\|(?:[\w\-\(\)\.\* ]+)?\|(?:[\w\(\)\.]+)?\|(?:[\w\-\.\:\;\%\= ]+)?\|(?:[\w]+)?\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)?\|(?:[\w\-]+)?\|(?:[\w\@\.\\]+)?).*)"
 nonMatchedGeneralLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseGeneralLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|(.*?)?\|([\d]+)\|([\d]+)\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?"
 generalLogsContentRegex = r"^([\d\-\: ]+)\|.*?([\d]+)\s*?ms.*?\|(SLOWSQL|SLOWEXTENSION)\|([\w\(\)\. ]+)\|.+?\|([\w\(\)\.]+|\s*?)\|(?:(?:.*?\|){2})([\w]+|\s*?)\|(?:(?:.*?\|){3})([\w\-]+|\s*?)?\|.+"
@@ -399,8 +413,8 @@ nonMatchedIntegrationsLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseIntegrationsLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|(.*?)?\|(.*?)?\|(.*?)\|(.*?)\|([\d]+)\|(.*?)?\|(.*?)\|(.*?)\|(.*?)?\|(.*?)?\|(.*?)?"
 integrationsLogsContentRegex = r"^([\d\-\:\. ]+)\|([\d]+)\|([\w\-\.\,\(\)\[\]\/\& ]+).+?\|([\w\/\.\-\(\) ]+)\|([\w\(\) ]+)\|(?:(?:.+?\|){3})([\w\.]+|\s*?)\|(?:[\d]+)\|([\w\-]+|\s*?)\|.+"
 
-mobileRequestsLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\.\-\:\;\% ]+)\|([\w\:\/\\\.\-\=\%\&\?]+)\|([\d]+)\|([\w\-]+)\|([\w\-]+)?\|([\d]+)\|([\w\-\:]+)\|([\w\/\+\=]+)?\|([\d]+)\|([\w\.]+)\|([\w\-\.\,\(\)\[\]\/\& ]+)\|([\w\-]+)"
-negativeMobileRequestsLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w\.\-\:\;\% ]+)\|(?:[\w\:\/\\\.\-\=\%\&\?]+)\|(?:[\d]+)\|(?:[\w\-]+)\|(?:[\w\-]+)?\|(?:[\d]+)\|(?:[\w\-\:]+)\|(?:[\w\/\+\=]+)?\|(?:[\d]+)\|(?:[\w\.]+)\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)\|(?:[\w\-]+)).*)"
+mobileRequestsLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\.\-\:\;\% ]+)\|([\w\:\/\\\.\-\=\%\&\?]+)\|([\d]+)\|([\w\-]+)\|([\w\-]+)?\|([\d]+)\|([\w\-\:]+)\|([\w\/\+\=\']+)?\|([\d]+)\|([\w\.]+)\|([\w\-\.\,\(\)\[\]\/\& ]+)\|([\w\-]+)"
+negativeMobileRequestsLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w\.\-\:\;\% ]+)\|(?:[\w\:\/\\\.\-\=\%\&\?]+)\|(?:[\d]+)\|(?:[\w\-]+)\|(?:[\w\-]+)?\|(?:[\d]+)\|(?:[\w\-\:]+)\|(?:[\w\/\+\=\']+)?\|(?:[\d]+)\|(?:[\w\.]+)\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)\|(?:[\w\-]+)).*)"
 nonMatchedMobileRequestsLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseMobileRequestsLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|(.*?)\|(.*?)\|(.*?)\|([\d]+)\|(.*?)\|(.*?)?\|([\d]+)\|(.*?)\|(.*?)?\|([\d]+)\|(.*?)\|(.*?)\|(.*?)"
 mobileRequestsLogsContentRegex = r"^([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\-\.\,\(\)\[\]\/\& ]+)\|(?:(?:.*?\|){4})([\w\.]+)\|(?:(?:.*?\|){4})([\w\-]+|\s*?)\|.+"
@@ -444,10 +458,11 @@ negativeAndroidiOSBuildLogsRegex = "^((?!\[(?:[\d\-]+)T(?:[\d\:\.]+)Z\][ ]\[(?:I
 nonMatchedAndroidiOSBuildLogsRegex = "^\[([\d\-]+)(?:T.+)"
 japaneseAndroidiOSBuildLogsRegex = "^\[([\d\-]+)T([\d\:\.]+)Z\](.+)"
 
-serviceStudioReportsDetailsRegex = "^.*?(Service.*?:\s*?(?:[\d\.])+).*?(Platform.*?:\s*?(?:[\d\.])+).*?(Service.*?)Channel"
-serviceStudioReportsOperationsLogsRegex = "\[([\d\-]+)[ ]([\d\:A-Z ]+)\][ ]\[([\d\:\?]+)\][ ]([\w\-\(\) ]{10,}?)\s+([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®\t\r\n ]+)?\|"
-serviceStudioReportsOperationsLogsRegex2 = "^([\d\-]+)\|([\d\:A-Z ]+)\|([\d\:\?]+)\|([\w\-\(\) ]{10,}?)\|([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?"
-negativeServiceStudioReportsOperationsLogsRegex = "^((?!(?:[\d\-]+)\|(?:[\d\:A-Z ]+)\|(?:[\d\:\?]+)\|(?:[\w\-\(\) ]{10,}?)\|(?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?).*)"
+serviceStudioReportsDetailsRegex = "^.*?(Service.*?:\s*?(?:[\d\.])+).*?(Platform.*?:\s*?(?:[\w\d\.\[\] ])+).*?(Service.*?)Channel"
+serviceStudioReportsOperationsLogsRegex0 = "(\[(?:[\d\-]+)[ ](?:[\d\:A-Z ])+\])"
+serviceStudioReportsOperationsLogsRegex1 = "\[([\d\-]+)[ ]([\d\:A-Z ]+)\][ ](\[(?:[\d\:\?]+)\](?:[\w\-\(\) ]{10,}?)\s+)?([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®\t\r\n ]+)?\|"
+serviceStudioReportsOperationsLogsRegex2 = "^([\d\-]+)\|([\d\:A-Z ]+)\|(\[(?:[\d\:\?]+)\](?:[\w\-\(\) ]{10,}?))?\|([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?"
+negativeServiceStudioReportsOperationsLogsRegex = "^((?!(?:[\d\-]+)\|(?:[\d\:A-Z ]+)\|(?:\[(?:[\d\:\?]+)\](?:[\w\-\(\) ]{10,}?))?\|(?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?).*)"
 nonMatchedServiceStudioReportsOperationsLogsRegex = "^([\d\-]+)\|(.+)"
 japaneseServiceStudioReportsOperationsLogsRegex = "^([\d\-]+)\|([\d\:A-Z ]+)\|(.+)"
 
@@ -465,6 +480,28 @@ nonMatchedPath = os.getcwd() + "\\nonmatched_valid_lines\\file.txt"
 tempFilePath = os.getcwd() + "\\tempFile.txt"
 
 start = datetime.now()
+
+def prereqs(directoryPath, fromDate, toDate, createGraphs):
+    _fromDate = datetime.strptime(fromDate, "%Y-%m-%d").date()
+    _toDate = datetime.strptime(toDate, "%Y-%m-%d").date()
+
+    if _fromDate > _toDate:
+        print("The \"from date\" cannot be greater than the \"to date\"\nPlease try again.")
+    else:
+        searchDirectory(directoryPath, _fromDate, _toDate)
+
+        if createGraphs[0].lower() == "y":
+            #create the graphs
+            scripts.integrations.create_graph(directoryPath)
+            scripts.general.create_graph(directoryPath)
+            scripts.timer.create_graph(directoryPath)
+            scripts.screen.create_graph(directoryPath)
+            scripts.mobilerequests.create_graph(directoryPath)
+
+        if os.path.exists(nonMatchedPath):
+            print("\nALERT!\nThere were valid lines that did not match the logic.\n" +
+                  "A file has been created in your current workig directory: \"" + os.getcwd() + "\" under the \"nonmatched_valid_lines\" folder.\n" +
+                  "Please go to the Slack channel #log-parser-feedback and post the generated file for further review.\nALERT!")
 
 def splitDirectory(root, file):
     absolutePathOfFile = os.path.join(root, file)
@@ -528,17 +565,26 @@ def searchDirectory(directoryPath, _fromDate, _toDate):
                                 xlsxFile(absolutePathOfFile, filePathWithoutFilename, filenameWithoutExt, ".txt", _fromDate, _toDate)
 
         for f in files:
-            if not "infrastructurereport" in root.lower() and not "stagingreport" in root.lower() and not "userpermissionsreport" in root.lower():
-                absolutePathOfFile, filePathWithoutFilename, filenameWithExt, filenameWithoutExt, extension = splitDirectory(root, f)
+            if f.endswith(".zip"):
+                zipFilePath = os.path.join(root, f)
+                zipFilePathWithoutFilename = os.path.split(zipFilePath)[0]
+                zipFilenameWithExt = os.path.split(zipFilePath)[1]
+                zipFilenameWithoutExt = os.path.splitext(zipFilenameWithExt)[0]
+                newZipFilePath = zipFilePathWithoutFilename + "\\" + zipFilenameWithoutExt
+                shutil.unpack_archive(zipFilePath, newZipFilePath)
+                searchDirectory(newZipFilePath, _fromDate, _toDate)
+            else:
+                if not "infrastructurereport" in root.lower() and not "stagingreport" in root.lower() and not "userpermissionsreport" in root.lower():
+                    absolutePathOfFile, filePathWithoutFilename, filenameWithExt, filenameWithoutExt, extension = splitDirectory(root, f)
 
-                if extension == ".xlsx":
-                    xlsxFile(absolutePathOfFile, filePathWithoutFilename, filenameWithoutExt, ".txt", _fromDate, _toDate)
-                elif extension == ".txt":
-                    txtFile(absolutePathOfFile, filenameWithoutExt, filenameWithExt, extension, _fromDate, _toDate)
-                elif extension == ".log":
-                    logFile(absolutePathOfFile, filenameWithExt, ".txt", _fromDate, _toDate)
-                elif extension == ".evtx":
-                    evtxFile(absolutePathOfFile, filenameWithExt, ".txt", _fromDate, _toDate)
+                    if extension == ".xlsx":
+                        xlsxFile(absolutePathOfFile, filePathWithoutFilename, filenameWithoutExt, ".txt", _fromDate, _toDate)
+                    elif extension == ".txt":
+                        txtFile(absolutePathOfFile, filenameWithoutExt, filenameWithExt, extension, _fromDate, _toDate)
+                    elif extension == ".log":
+                        logFile(absolutePathOfFile, filenameWithExt, ".txt", _fromDate, _toDate)
+                    elif extension == ".evtx":
+                        evtxFile(absolutePathOfFile, filenameWithExt, ".txt", _fromDate, _toDate)
 
 def createFolder(fldPath):
     fldName = os.getcwd() + fldPath
@@ -2930,7 +2976,7 @@ def readServiceStudioReportLogs(searchLines3, _fromDate, _toDate):
     global numOfServiceStudioReports
     numOfServiceStudioReports+=1
 
-    #split the fields and rearrange them to combine them all later
+    #split the fields and rearrange them to combine them all later   
     regex1 = re.findall(serviceStudioReportsDetailsRegex, searchLines3)
     if regex1:
         findAllString = ' '.join([str(elm) for elm in regex1])
@@ -2938,16 +2984,17 @@ def readServiceStudioReportLogs(searchLines3, _fromDate, _toDate):
         findAllString = findAllString.replace("('", "")
         findAllString = findAllString.replace("')", "")
         findAllString = findAllString.replace("', '", " ")
-        outText = fromDate + " 00:00:00|||" + findAllString + "\n"
+        outText = fromDate + " 00:00:00||" + findAllString + "\n"
         myLinesFromDateRange.append(outText)
+
+    searchLines3 = re.sub(serviceStudioReportsOperationsLogsRegex0, "|" + r"\1", searchLines3)
             
-    regex2 = re.findall(serviceStudioReportsOperationsLogsRegex, searchLines3)
+    regex2 = re.findall(serviceStudioReportsOperationsLogsRegex1, searchLines3)
     if regex2:
         findAllString2 = '\n'.join([str(elm2) for elm2 in regex2])
         findAllString2 = findAllString2.replace("|", "")
         findAllString2 = findAllString2.replace("('", "")
         findAllString2 = findAllString2.replace("')", "")
-        findAllString2 = findAllString2.replace("(\"", "")
         findAllString2 = findAllString2.replace("\")", "")
         findAllString2 = findAllString2.replace("', '", "|")
         findAllString2 = findAllString2.replace("', \"", "|")
@@ -2961,9 +3008,8 @@ def readServiceStudioReportLogs(searchLines3, _fromDate, _toDate):
             for match3 in regex3.finditer(_searchLines):
                 date = match3.group(1)
                 time = match3.group(2)
-                numberOfOccurrences = match3.group(3)
-                actionName = match3.group(4)
-                message = match3.group(5)#null
+                messageType = match3.group(3)#null
+                message = match3.group(4)#null
 
                 #reformat the dates
                 year = date.split("-")[2]
@@ -2997,13 +3043,14 @@ def readServiceStudioReportLogs(searchLines3, _fromDate, _toDate):
                                                 
                 if _fromDate <= _date_ <= _toDate:
 
+                    if messageType == None:
+                        messageType = " "
+
                     if message == None:
                         message = " "
-                        outText2 = _date + " " + _time.strip() + "|" + numberOfOccurrences + "|" + actionName.strip() + "|" + message + "\n"
-                        myLinesFromDateRange.append(outText2)
-                    else:            
-                        outText2 = _date + " " + _time.strip() + "|" + numberOfOccurrences + "|" + actionName.strip() + "|" + message.strip() + "\n"
-                        myLinesFromDateRange.append(outText2)
+
+                    outText2 = _date + " " + _time.strip() + "|" + messageType + "|" + message + "\n"
+                    myLinesFromDateRange.append(outText2)
 
             #capture all the lines that didn't match the regex
             negativeRegex = re.compile(negativeServiceStudioReportsOperationsLogsRegex, re.MULTILINE + re.IGNORECASE)
@@ -3072,7 +3119,7 @@ def readServiceStudioReportLogs(searchLines3, _fromDate, _toDate):
                                     seconds = JPTime.split(":")[2]
                                     _JPTime = str(int(hours) + 12) + ":" + minutes + ":" + seconds[:-2]
 
-                                JPText = _JPDate + " " + _JPTime + "|||" + JPTail.strip() + "\n"
+                                JPText = _JPDate + " " + _JPTime + "||" + JPTail.strip() + "\n"
 
                                 myLinesFromDateRange.append(JPText)
 
@@ -3508,7 +3555,7 @@ def txtFile(absolutePath, filename, filenameWithExt, ext, _fromDate, _toDate):
             searchLines = searchLines.replace("|", "")
             searchLines = searchLines.replace("\\", "")
             searchLines = searchLines.replace("/", "-")
-            searchLines2 = '|'.join(searchLines.splitlines())
+            searchLines2 = ' '.join(searchLines.splitlines())
             searchLines3 = ' '.join(searchLines2.split())
             
             if "iosbuildlog" in filename.lower() or "androidbuildlog" in filename.lower():
@@ -3790,36 +3837,26 @@ def evtxFile(absolutePath, filenameWithExt, ext, _fromDate, _toDate):
 num_args = len(sys.argv)
 
 if num_args != 5:
-    print("Error:\nTotal arguments passed: " + str(num_args))
-    print(" ".join(sys.argv[1:]))
-    print("\n5 arguments needed: log_parser.py directoryPath fromDate(YYYY-MM-DD) toDate(YYYY-MM-DD) createGraphsOption" +
-          "\nPlease try again.")
+    #check if the additional arguments are due to the directory name being separated by spaces
+    dirs = "".join(sys.argv[1:num_args - 3])
+    os.rename(" ".join(sys.argv[1:num_args - 3]), dirs)
+    if os.path.exists(dirs):
+        directoryPath = dirs
+        fromDate = sys.argv[num_args - 3]
+        toDate = sys.argv[num_args - 2]
+        createGraphs = sys.argv[num_args -1]
+        prereqs(directoryPath, fromDate, toDate, createGraphs)
+    else:
+        print("Error:\nTotal arguments passed: " + str(num_args))
+        print(" ".join(sys.argv[1:]))
+        print("\n5 arguments needed: log_parser.py directoryPath fromDate(YYYY-MM-DD) toDate(YYYY-MM-DD) createGraphsOption" +
+              "\nPlease try again.")
 else:
     directoryPath = sys.argv[1]
     fromDate = sys.argv[2]
     toDate = sys.argv[3]
     createGraphs = sys.argv[4]
-
-    _fromDate = datetime.strptime(fromDate, "%Y-%m-%d").date()
-    _toDate = datetime.strptime(toDate, "%Y-%m-%d").date()
-
-    if _fromDate > _toDate:
-        print("The \"from date\" cannot be greater than the \"to date\"\nPlease try again.")
-    else:
-        searchDirectory(directoryPath, _fromDate, _toDate)
-
-        if createGraphs[0].lower() == "y":
-            #create the graphs
-            scripts.integrations.create_graph(directoryPath)
-            scripts.general.create_graph(directoryPath)
-            scripts.timer.create_graph(directoryPath)
-            scripts.screen.create_graph(directoryPath)
-            scripts.mobilerequests.create_graph(directoryPath)
-
-        if os.path.exists(nonMatchedPath):
-            print("\nALERT!\nThere were valid lines that did not match the logic.\n" +
-                  "A file has been created in your current workig directory: \"" + os.getcwd() + "\" under the \"nonmatched_valid_lines\" folder.\n" +
-                  "Please go to the Slack channel #log-parser-feedback and post the generated file for further review.\nALERT!")
+    prereqs(directoryPath, fromDate, toDate, createGraphs)
 
 end = datetime.now()
 print("\nElapsed time: {0}".format(end-start))
