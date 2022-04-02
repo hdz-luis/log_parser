@@ -1014,7 +1014,8 @@ namespace OutSystems_Log_Parser
         private void populateTables(string filePath, char splitter, string[] headerLabels, DataGridView tableName)
         {
             DataTable dt = new DataTable();
-            string[] lines = File.ReadAllLines(filePath).ToArray();
+            //string[] lines = File.ReadAllLines(filePath).ToArray();
+            string[] lines = File.ReadAllLines(filePath).Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
             List<string> newLines = new List<string>();
             int colsExpected = 0;
 
@@ -1808,20 +1809,6 @@ namespace OutSystems_Log_Parser
             {
                 if (tableName.Rows.Count > 0)
                 {
-                    totalRowsCount = tableName.RowCount;
-
-                    sixteenthOfTotal = ((double)totalRowsCount / (double)16);
-                    roundedSixteenthOfTotal = Math.Round(sixteenthOfTotal, 0, MidpointRounding.AwayFromZero);
-
-                    eighthOfTotal = ((double)totalRowsCount / (double)8);
-                    roundedEighthOfTotal = Math.Round(eighthOfTotal, 0, MidpointRounding.AwayFromZero);
-
-                    fourthOfTotal = ((double)totalRowsCount / (double)4);
-                    roundedFourthOfTotal = Math.Round(fourthOfTotal, 0, MidpointRounding.AwayFromZero);
-
-                    halfOfTotal = ((double)totalRowsCount / (double)2);
-                    roundedHalfOfTotal = Math.Round(halfOfTotal, 0, MidpointRounding.AwayFromZero);
-
                     forceTabClick(dgvName);
 
                     foreach (string error in errorsList)
@@ -1859,17 +1846,34 @@ namespace OutSystems_Log_Parser
                                     bool_highlightErrorSuccessful_6 = true;
                                 }
                             }
+                        }
+                    }
 
-                            if ((double)currentRow == roundedSixteenthOfTotal || (double)currentRow == roundedEighthOfTotal || (double)currentRow == roundedFourthOfTotal || (double)currentRow == roundedHalfOfTotal)
-                            {
-                                GC.Collect();
-                                GC.WaitForPendingFinalizers();
-                            }
-                            else if (currentRow == totalRowsCount - 1)
-                            {
-                                GC.Collect();
-                                GC.WaitForPendingFinalizers();
-                            }
+                    totalRowsCount = tableName.RowCount;
+
+                    if (totalRowsCount > 10000)
+                    {
+                        sixteenthOfTotal = ((double)totalRowsCount / (double)16);
+                        roundedSixteenthOfTotal = Math.Round(sixteenthOfTotal, 0, MidpointRounding.AwayFromZero);
+
+                        eighthOfTotal = ((double)totalRowsCount / (double)8);
+                        roundedEighthOfTotal = Math.Round(eighthOfTotal, 0, MidpointRounding.AwayFromZero);
+
+                        fourthOfTotal = ((double)totalRowsCount / (double)4);
+                        roundedFourthOfTotal = Math.Round(fourthOfTotal, 0, MidpointRounding.AwayFromZero);
+
+                        halfOfTotal = ((double)totalRowsCount / (double)2);
+                        roundedHalfOfTotal = Math.Round(halfOfTotal, 0, MidpointRounding.AwayFromZero);
+
+                        if ((double)currentRow == roundedSixteenthOfTotal || (double)currentRow == roundedEighthOfTotal || (double)currentRow == roundedFourthOfTotal || (double)currentRow == roundedHalfOfTotal)
+                        {
+                            GC.Collect();
+                            GC.WaitForPendingFinalizers();
+                        }
+                        else if (currentRow == totalRowsCount - 1)
+                        {
+                            GC.Collect();
+                            GC.WaitForPendingFinalizers();
                         }
                     }
                 }
@@ -2488,20 +2492,6 @@ namespace OutSystems_Log_Parser
             {
                 if (tableName.Rows.Count > 0)
                 {
-                    totalRowsCount = tableName.RowCount;
-
-                    sixteenthOfTotal = ((double)totalRowsCount / (double)16);
-                    roundedSixteenthOfTotal = Math.Round(sixteenthOfTotal, 0, MidpointRounding.AwayFromZero);
-
-                    eighthOfTotal = ((double)totalRowsCount / (double)8);
-                    roundedEighthOfTotal = Math.Round(eighthOfTotal, 0, MidpointRounding.AwayFromZero);
-
-                    fourthOfTotal = ((double)totalRowsCount / (double)4);
-                    roundedFourthOfTotal = Math.Round(fourthOfTotal, 0, MidpointRounding.AwayFromZero);
-
-                    halfOfTotal = ((double)totalRowsCount / (double)2);
-                    roundedHalfOfTotal = Math.Round(halfOfTotal, 0, MidpointRounding.AwayFromZero);
-
                     forceTabClick(dgvName);
 
                     //search for the value in all of the table's rows
@@ -2546,6 +2536,23 @@ namespace OutSystems_Log_Parser
                         }
 
                         rowValues = null;
+                    }
+
+                    totalRowsCount = tableName.RowCount;
+
+                    if (totalRowsCount > 10000)
+                    {
+                        sixteenthOfTotal = ((double)totalRowsCount / (double)16);
+                        roundedSixteenthOfTotal = Math.Round(sixteenthOfTotal, 0, MidpointRounding.AwayFromZero);
+
+                        eighthOfTotal = ((double)totalRowsCount / (double)8);
+                        roundedEighthOfTotal = Math.Round(eighthOfTotal, 0, MidpointRounding.AwayFromZero);
+
+                        fourthOfTotal = ((double)totalRowsCount / (double)4);
+                        roundedFourthOfTotal = Math.Round(fourthOfTotal, 0, MidpointRounding.AwayFromZero);
+
+                        halfOfTotal = ((double)totalRowsCount / (double)2);
+                        roundedHalfOfTotal = Math.Round(halfOfTotal, 0, MidpointRounding.AwayFromZero);
 
                         if ((double)currentRow == roundedSixteenthOfTotal || (double)currentRow == roundedEighthOfTotal || (double)currentRow == roundedFourthOfTotal || (double)currentRow == roundedHalfOfTotal)
                         {
@@ -2882,14 +2889,14 @@ namespace OutSystems_Log_Parser
         {
             if (ctg == "Building Mobile App")
             {
-                knownErrors_AndroidiOSlogs = new string[] { "command finished with error code 0", "plugin is not going to work", "plugin doesn't support this project's cordova-android version", "failed to fetch plug", "archive failed", "build failed with the following error", "command failed with exit code", "the ios deployment target", "kotlin", "cordovaerror", "file is corrupt or invalid", "error: spawnsync sudo etimeout", "signing certificate is invalid", "verification failed", "incompatibility", "android:exported" };
+                knownErrors_AndroidiOSlogs = new string[] { "command finished with error code 0", "plugin is not going to work", "plugin doesn't support this project's cordova-android version", "failed to fetch plug", "build failed with the following error", "command failed with exit code", "the ios deployment target", "kotlin", "cordovaerror", "file is corrupt or invalid", "error: spawnsync sudo etimeout", "signing certificate is invalid", "verification failed", "incompatibility", "android:exported", "could not find any" };
 
                 highlightKnownErrors("dataGridViewAndroidlogs", dataGridViewAndroidlogs, 3, knownErrors_AndroidiOSlogs);
                 highlightKnownErrors("dataGridViewiOSlogs", dataGridViewiOSlogs, 3, knownErrors_AndroidiOSlogs);
             }
             else if (ctg == "Compilation")
             {
-                knownErrors_Errorlogs = new string[] { "compilation error", "can't proceed" };
+                knownErrors_Errorlogs = new string[] { "compilation error", "can't proceed", "error loading espace" };
 
                 highlightKnownErrors("dataGridViewErrorlogs", dataGridViewErrorlogs, 1, knownErrors_Errorlogs);
 
@@ -2912,11 +2919,11 @@ namespace OutSystems_Log_Parser
             }
             else if (ctg == "Logic")
             {
-                knownErrors_Errorlogs = new string[] { "url rewrite module error", "an error occurred in task", "a fatal error has occurred", "json deserialization", "unknown reference expression type email", "bad json escape sequence", "dequeuing" };
+                knownErrors_Errorlogs = new string[] { "url rewrite module error", "an error occurred in task", "a fatal error has occurred", "json deserialization", "unknown reference expression type email", "bad json escape sequence", "dequeuing", "error loading espace" };
                 knownErrors_Generallogs = new string[] { "system cannot find" };
                 knownErrors_WinAppEventViewer = new string[] { "error closing", "error opening" };
                 knownErrors_WinSysEventViewer = new string[] { "error closing", "timed out" };
-                knownErrors_AndroidiOSlogs = new string[] { "androidx library", "error: spawnsync sudo etimeout", "verification failed" };
+                knownErrors_AndroidiOSlogs = new string[] { "androidx library", "error: spawnsync sudo etimeout", "verification failed", "could not find any" };
                 knownErrors_ServiceStudiologs = new string[] { "oneoftypedefinition" };
 
                 highlightKnownErrors("dataGridViewErrorlogs", dataGridViewErrorlogs, 1, knownErrors_Errorlogs);
