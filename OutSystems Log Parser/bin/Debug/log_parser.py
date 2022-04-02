@@ -407,8 +407,8 @@ nonMatchedGeneralLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseGeneralLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|(.*?)?\|([\d]+)\|([\d]+)\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?"
 generalLogsContentRegex = r"^([\d\-\: ]+)\|.*?([\d]+)\s*?ms.*?\|(SLOWSQL|SLOWEXTENSION)\|([\w\(\)\. ]+)\|.+?\|([\w\(\)\.]+|\s*?)\|(?:(?:.*?\|){2})([\w]+|\s*?)\|(?:(?:.*?\|){3})([\w\-]+|\s*?)?\|.+"
 
-integrationsLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w\.\:\;\-\% ]+)?\|([\w\:\/\\\.\,\-\=\%\&\?\~\(\)\{\}]+)?\|([\w\/\.\-\(\) ]+)\|([\w\(\) ]+)\|([\d]+)\|([\w\-]+)?\|([\w\-]+)\|([\w\-\:]+)\|([\w\.]+)?\|([\w\-\.\,\(\)\[\]\/\& ]+)?\|([\w\-]+)?"
-negativeIntegrationsLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w\.\:\;\-\% ]+)?\|(?:[\w\:\/\\\.\,\-\=\%\&\?\~\(\)\{\}]+)?\|(?:[\w\/\.\-\(\) ]+)\|(?:[\w\(\) ]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w\-]+)\|(?:[\w\-\:]+)\|(?:[\w\.]+)?\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)?\|(?:[\w\-]+)?).*)"
+integrationsLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w\.\:\;\-\% ]+)?\|([\w\:\/\\\.\,\*\-\=\%\&\?\~\(\)\{\}]+)?\|([\w\/\.\-\(\) ]+)\|([\w\(\) ]+)\|([\d]+)\|([\w\-]+)?\|([\w\-]+)\|([\w\-\:]+)\|([\w\.]+)?\|([\w\-\.\,\(\)\[\]\/\& ]+)?\|([\w\-]+)?"
+negativeIntegrationsLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w\.\:\;\-\% ]+)?\|(?:[\w\:\/\\\.\,\*\-\=\%\&\?\~\(\)\{\}]+)?\|(?:[\w\/\.\-\(\) ]+)\|(?:[\w\(\) ]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w\-]+)\|(?:[\w\-\:]+)\|(?:[\w\.]+)?\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)?\|(?:[\w\-]+)?).*)"
 nonMatchedIntegrationsLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseIntegrationsLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|(.*?)?\|(.*?)?\|(.*?)\|(.*?)\|([\d]+)\|(.*?)?\|(.*?)\|(.*?)\|(.*?)?\|(.*?)?\|(.*?)?"
 integrationsLogsContentRegex = r"^([\d\-\:\. ]+)\|([\d]+)\|([\w\-\.\,\(\)\[\]\/\& ]+).+?\|([\w\/\.\-\(\) ]+)\|([\w\(\) ]+)\|(?:(?:.+?\|){3})([\w\.]+|\s*?)\|(?:[\d]+)\|([\w\-]+|\s*?)\|.+"
@@ -609,6 +609,17 @@ def populateList(txtFile, rawList, cleanList):
     del rawList[:]
     del cleanList[:]
 
+def populateList2(txtFile, rawList):
+    with codecs.open(txtFile, "r", "utf-8", "ignore") as linesFromText:
+        rawList = linesFromText.readlines()
+
+    rawList.sort()
+
+    with codecs.open(txtFile, "w", "utf-8", "ignore") as linesToText:
+        linesToText.writelines(rawList)
+
+    del rawList[:]
+
 def cleanListFunc(txtFile, rawList, cleanList):
     if len(rawList) > 0:
         rawList.sort()
@@ -646,6 +657,17 @@ def writeToFile(absolutePath, txtFile, rawList, cleanList):
 
     del rawList[:]
     del cleanList[:]
+
+def writeToFile2(txtFile, rawList):
+    rawList.sort()
+
+    with codecs.open(txtFile, "a+", "utf-8", "ignore") as linesFromDateRange:
+        linesFromDateRange.seek(0)
+        if len(linesFromDateRange.read(100)) > 0:
+            linesFromDateRange.writelines("\n")
+        linesFromDateRange.writelines(rawList)
+
+    del rawList[:]
 
 def normalizeLines(string):
     string = string.replace("|", " ")
@@ -3580,14 +3602,14 @@ def txtFile(absolutePath, filename, filenameWithExt, ext, _fromDate, _toDate):
         createFolder("\\filtered_data_files\\")
         if "iosbuildlog" in filename.lower():
             outFilename = "iOS_build_logs" + ext
-            writeToFile(absolutePath, os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
+            writeToFile2(os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange)
             if numOfiOSLogs > 1:
-                populateList(os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
+                populateList2(os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange)
         elif "androidbuildlog" in filename.lower():
             outFilename = "android_build_logs" + ext
-            writeToFile(absolutePath, os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
+            writeToFile2(os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange)
             if numOfAndroidLogs > 1:
-                populateList(os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
+                populateList2(os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange)
         elif "studio" in filename.lower() and "report" in filename.lower():
             outFilename = "service_studio_report" + ext
             writeToFile(absolutePath, os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
@@ -3755,6 +3777,7 @@ def evtxFile(absolutePath, filenameWithExt, ext, _fromDate, _toDate):
                 xmlLine = record.xml()
                 xmlLine = xmlLine.replace(" xmlns=\"http://schemas.microsoft.com/win/2004/08/events/event\"", "")
                 xmlParse = etree.XML(xmlLine)
+
                 level = parseXMLtoString(xmlParse, ".//Level/text()")
 
                 if not level == "0" and not level == "4":
@@ -3767,7 +3790,8 @@ def evtxFile(absolutePath, filenameWithExt, ext, _fromDate, _toDate):
                     eventRecordID = parseXMLtoString(xmlParse, ".//EventRecordID/text()")
                     channel = parseXMLtoString(xmlParse, ".//Channel/text()")
                     computer = parseXMLtoString(xmlParse, ".//Computer/text()")
-                    message = parseXMLtoString(xmlParse, ".//Data/text()")
+                    message1 = parseXMLtoString(xmlParse, ".//Data/@Name")
+                    message2 = parseXMLtoString(xmlParse, ".//Data/text()")
 
                     if level == "1":
                         level = "Critical"
@@ -3784,12 +3808,16 @@ def evtxFile(absolutePath, filenameWithExt, ext, _fromDate, _toDate):
                                         
                     if _fromDate <= _date <= _toDate:
 
-                        message = message.replace("<string>", "")
-                        message = message.replace("</string>", "")
-                        newMessage = normalizeLines(message)
-                        newMessage = newMessage.translate(replacementDict)
-                                    
-                        outText = date + " " + time + "|" + level + "|" + newMessage.strip() + "|" + task + "|" + computer + "|" + providerName + "|" + qualifiers + "|" + eventID + "|" + eventRecordID + "|" + keywords + "\n"
+                        message2 = message2.replace("<string>", "")
+                        message2 = message2.replace("</string>", "")
+                        newMessage1 = normalizeLines(message1)
+                        newMessage2 = normalizeLines(message2)
+                        newMessage2 = newMessage2.translate(replacementDict)
+
+                        if len(newMessage1.strip()) > 0:
+                            outText = date + " " + time + "|" + level + "|" + "[" + newMessage1.strip() + "] " + newMessage2.strip() + "|" + task + "|" + computer + "|" + providerName + "|" + qualifiers + "|" + eventID + "|" + eventRecordID + "|" + keywords + "\n"
+                        else:
+                            outText = date + " " + time + "|" + level + "|" + newMessage2.strip() + "|" + task + "|" + computer + "|" + providerName + "|" + qualifiers + "|" + eventID + "|" + eventRecordID + "|" + keywords + "\n"
 
                         tempFile.writelines(outText)
 
