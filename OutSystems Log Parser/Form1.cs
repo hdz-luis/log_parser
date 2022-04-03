@@ -2889,7 +2889,7 @@ namespace OutSystems_Log_Parser
         {
             if (ctg == "Building Mobile App")
             {
-                knownErrors_AndroidiOSlogs = new string[] { "command finished with error code 0", "plugin is not going to work", "plugin doesn't support this project's cordova-android version", "failed to fetch plug", "build failed with the following error", "command failed with exit code", "the ios deployment target", "kotlin", "cordovaerror", "file is corrupt or invalid", "error: spawnsync sudo etimeout", "signing certificate is invalid", "verification failed", "incompatibility", "android:exported", "could not find any" };
+                knownErrors_AndroidiOSlogs = new string[] { "command finished with error code 0", "plugin is not going to work", "plugin doesn't support this project's cordova-android version", "failed to fetch plug", "build failed with the following error", "command failed with exit code", "the ios deployment target", "kotlin", "cordovaerror", "file is corrupt or invalid", "error: spawnsync sudo etimeout", "signing certificate is invalid", "verification failed", "incompatibility", "android:exported", "could not find any", "archive failed" };
 
                 highlightKnownErrors("dataGridViewAndroidlogs", dataGridViewAndroidlogs, 3, knownErrors_AndroidiOSlogs);
                 highlightKnownErrors("dataGridViewiOSlogs", dataGridViewiOSlogs, 3, knownErrors_AndroidiOSlogs);
@@ -2923,7 +2923,7 @@ namespace OutSystems_Log_Parser
                 knownErrors_Generallogs = new string[] { "system cannot find" };
                 knownErrors_WinAppEventViewer = new string[] { "error closing", "error opening" };
                 knownErrors_WinSysEventViewer = new string[] { "error closing", "timed out" };
-                knownErrors_AndroidiOSlogs = new string[] { "androidx library", "error: spawnsync sudo etimeout", "verification failed", "could not find any" };
+                knownErrors_AndroidiOSlogs = new string[] { "androidx library", "error: spawnsync sudo etimeout", "verification failed", "could not find any", "archive failed" };
                 knownErrors_ServiceStudiologs = new string[] { "oneoftypedefinition" };
 
                 highlightKnownErrors("dataGridViewErrorlogs", dataGridViewErrorlogs, 1, knownErrors_Errorlogs);
