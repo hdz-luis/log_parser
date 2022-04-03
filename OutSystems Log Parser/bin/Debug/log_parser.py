@@ -609,17 +609,6 @@ def populateList(txtFile, rawList, cleanList):
     del rawList[:]
     del cleanList[:]
 
-def populateList2(txtFile, rawList):
-    with codecs.open(txtFile, "r", "utf-8", "ignore") as linesFromText:
-        rawList = linesFromText.readlines()
-
-    rawList.sort()
-
-    with codecs.open(txtFile, "w", "utf-8", "ignore") as linesToText:
-        linesToText.writelines(rawList)
-
-    del rawList[:]
-
 def cleanListFunc(txtFile, rawList, cleanList):
     if len(rawList) > 0:
         rawList.sort()
@@ -657,17 +646,6 @@ def writeToFile(absolutePath, txtFile, rawList, cleanList):
 
     del rawList[:]
     del cleanList[:]
-
-def writeToFile2(txtFile, rawList):
-    rawList.sort()
-
-    with codecs.open(txtFile, "a+", "utf-8", "ignore") as linesFromDateRange:
-        linesFromDateRange.seek(0)
-        if len(linesFromDateRange.read(100)) > 0:
-            linesFromDateRange.writelines("\n")
-        linesFromDateRange.writelines(rawList)
-
-    del rawList[:]
 
 def normalizeLines(string):
     string = string.replace("|", " ")
@@ -3602,14 +3580,14 @@ def txtFile(absolutePath, filename, filenameWithExt, ext, _fromDate, _toDate):
         createFolder("\\filtered_data_files\\")
         if "iosbuildlog" in filename.lower():
             outFilename = "iOS_build_logs" + ext
-            writeToFile2(os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange)
+            writeToFile(absolutePath, os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
             if numOfiOSLogs > 1:
-                populateList2(os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange)
+                populateList(os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
         elif "androidbuildlog" in filename.lower():
             outFilename = "android_build_logs" + ext
-            writeToFile2(os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange)
+            writeToFile(absolutePath, os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
             if numOfAndroidLogs > 1:
-                populateList2(os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange)
+                populateList(os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
         elif "studio" in filename.lower() and "report" in filename.lower():
             outFilename = "service_studio_report" + ext
             writeToFile(absolutePath, os.getcwd() + "\\filtered_data_files\\" + outFilename, myLinesFromDateRange, myFinalLinesFromDateRange)
