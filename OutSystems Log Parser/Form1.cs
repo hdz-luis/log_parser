@@ -18,6 +18,12 @@ namespace OutSystems_Log_Parser
         string category = "";
         string fullPath = "";
         string[] filesPaths;
+        string[] lines;
+        string[] dataFields;
+        string[] dataCols;
+        int colsExpected = 0;
+        int colIndex = 0;
+        int colLengthDiff;
         string[] lineOfContents;
         string[] knownErrors_Errorlogs;
         string[] knownErrors_Generallogs;
@@ -1014,66 +1020,52 @@ namespace OutSystems_Log_Parser
         private void populateTables(string filePath, char splitter, string[] headerLabels, DataGridView tableName)
         {
             DataTable dt = new DataTable();
-            //string[] lines = File.ReadAllLines(filePath).ToArray();
-            string[] lines = File.ReadAllLines(filePath).Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
-            List<string> newLines = new List<string>();
-            int colsExpected = 0;
+            lines = File.ReadAllLines(filePath).Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
+            colsExpected = 0;
 
-            try
+            if (lines.Length > 0)
             {
-                if (lines.Length > 0)
+                //for the headers
+                foreach (string headerWord in headerLabels)
                 {
-                    //for the headers
+                    dt.Columns.Add(new DataColumn(headerWord));
+                }
+
+                colsExpected = dt.Columns.Count;
+
+                //for the data
+                dataFields = lines;
+                for (int i = 0; i < dataFields.Length; i++)
+                {
+                    dataCols = dataFields[i].Split(splitter);
+
+                    if (dataCols.Length < colsExpected)
+                    {
+                        colLengthDiff = colsExpected - dataCols.Length;
+                        Array.Resize(ref dataCols, dataCols.Length + colLengthDiff);
+                        while(colLengthDiff != 0)
+                        {
+                            dataCols[dataCols.Length - colLengthDiff] = "N/A";
+                            colLengthDiff--;
+                        }
+                    }
+
+                    DataRow dr = dt.NewRow();
+                    colIndex = 0;
                     foreach (string headerWord in headerLabels)
                     {
-                        dt.Columns.Add(new DataColumn(headerWord));
+                        dr[headerWord] = dataCols[colIndex++];
                     }
-
-                    colsExpected = dt.Columns.Count;
-
-                    //for removing line breaks in data
-                    for (int i = 0; i < lines.Length; i++)
-                    {
-                        string temp = lines[i];
-                        string[] fields = temp.Split(splitter);
-                        while (fields.Length < colsExpected && i < (lines.Length - 1))
-                        {
-                            i++;
-                            temp += lines[i];
-                            fields = temp.Split(splitter);
-                        }
-                        newLines.Add(temp);
-                    }
-
-                    //for the data
-                    string[] dataFields = newLines.ToArray();
-                    for (int i = 0; i < dataFields.Length; i++)
-                    {
-                        string[] dataCols = dataFields[i].Split(splitter);
-                        DataRow dr = dt.NewRow();
-                        int columnIndex = 0;
-                        foreach (string headerWord in headerLabels)
-                        {
-                            dr[headerWord] = dataCols[columnIndex++];
-                        }
-                        dt.Rows.Add(dr);
-                    }
-                }
-                if (dt.Rows.Count > 0)
-                {
-                    tableName.DataSource = dt;
-                }
-                foreach (DataGridViewColumn col in tableName.Columns)
-                {
-                    col.SortMode = DataGridViewColumnSortMode.NotSortable;
+                    dt.Rows.Add(dr);
                 }
             }
-            catch (Exception ex)
+            if (dt.Rows.Count > 0)
             {
-                error_message = "Error: " + Environment.NewLine + ex.ToString();
-                errorLog("\\error_log.txt", error_message);
-                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
-                throw;
+                tableName.DataSource = dt;
+            }
+            foreach (DataGridViewColumn col in tableName.Columns)
+            {
+                col.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
         }
 
@@ -2889,14 +2881,14 @@ namespace OutSystems_Log_Parser
         {
             if (ctg == "Building Mobile App")
             {
-                knownErrors_AndroidiOSlogs = new string[] { "command finished with error code 0", "plugin is not going to work", "plugin doesn't support this project's cordova-android version", "failed to fetch plug", "build failed with the following error", "command failed with exit code", "the ios deployment target", "kotlin", "cordovaerror", "file is corrupt or invalid", "error: spawnsync sudo etimeout", "signing certificate is invalid", "verification failed", "incompatibility", "android:exported", "could not find any", "archive failed" };
+                knownErrors_AndroidiOSlogs = new string[] { "command finished with error code 0", "plugin is not going to work", "plugin doesn't support this project's cordova-android version", "failed to fetch plug", "build failed with the following error", "command failed with exit code", "the ios deployment target", "kotlin", "cordovaerror", "file is corrupt or invalid", "error: spawnsync sudo etimeout", "signing certificate is invalid", "verification failed", "incompatibility", "android:exported", "could not find any", "archive failed", "missing the aps-environment entitlement" };
 
                 highlightKnownErrors("dataGridViewAndroidlogs", dataGridViewAndroidlogs, 3, knownErrors_AndroidiOSlogs);
                 highlightKnownErrors("dataGridViewiOSlogs", dataGridViewiOSlogs, 3, knownErrors_AndroidiOSlogs);
             }
             else if (ctg == "Compilation")
             {
-                knownErrors_Errorlogs = new string[] { "compilation error", "can't proceed", "error loading espace" };
+                knownErrors_Errorlogs = new string[] { "compilation error", "can't proceed", "error loading espace", "failed to parse response" };
 
                 highlightKnownErrors("dataGridViewErrorlogs", dataGridViewErrorlogs, 1, knownErrors_Errorlogs);
 
@@ -2936,7 +2928,7 @@ namespace OutSystems_Log_Parser
             }
             else if (ctg == "Network")
             {
-                knownErrors_Errorlogs = new string[] { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "communicationexception", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "unable to open service studio", "invalid authentication token", "connection is broken" };
+                knownErrors_Errorlogs = new string[] { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "communicationexception", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "unable to open service studio", "invalid authentication token", "connection is broken", "cannot decrypt the content", "could not establish trust relationship for the ssl/tls secure channel", "the remote certificate is invalid according to the validation procedure", "unexpected content found in ping", "win32error" };
                 knownErrors_WinAppEventViewer = new string[] { "error closing", "cannot access", "error opening", "certificate" };
                 knownErrors_WinSysEventViewer = new string[] { "error closing", "timed out", "certificate" };
                 knownErrors_AndroidiOSlogs = new string[] { "file is corrupt or invalid", "error: spawnsync sudo etimeout", "signing certificate is invalid", "verification failed" };
