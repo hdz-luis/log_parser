@@ -305,7 +305,8 @@ myCyclicJobNamesList = []
 #all illegal space characters, control characters, and ASCII characters
 replacementDict = {}
 replacementDict.update(dict.fromkeys(range(4, 7), ""))
-replacementDict.update(dict.fromkeys(range(135, 136), ""))
+replacementDict.update(dict.fromkeys(range(134, 136), ""))
+replacementDict.update(dict.fromkeys(range(143, 145), ""))
 replacementDict.update(dict.fromkeys(range(166, 169), ""))
 replacementDict.update(dict.fromkeys(range(170, 172), ""))
 replacementDict.update(dict.fromkeys(range(176, 190), ""))
@@ -320,10 +321,9 @@ replacementDict.update(dict.fromkeys(range(8192, 8207), ""))
 replacementDict.update(dict.fromkeys(range(8216, 8218), "'"))
 replacementDict.update(dict.fromkeys(range(8220, 8223), "\""))
 replacementDict.update(dict.fromkeys(range(9617, 9619), ""))
+replacementDict[127] = ""
 replacementDict[129] = ""
 replacementDict[141] = ""
-replacementDict[143] = ""
-replacementDict[145] = ""
 replacementDict[154] = ""
 replacementDict[160] = ""
 replacementDict[161] = "!"
@@ -336,6 +336,7 @@ replacementDict[255] = ""
 replacementDict[305] = ""
 replacementDict[353] = ""
 replacementDict[402] = ""
+replacementDict[1564] = ""
 replacementDict[5760] = "-"
 replacementDict[6158] = ""
 replacementDict[8211] = "-"
@@ -401,8 +402,8 @@ japaneseErrorLogsRegex = r"^([\d]+)\|(.*?)\|([\d\-\:\. ]+)\|(.*?)?\|([\d]+)\|([\
 errorLogsContentRegex = r"^(?:[\d\-\:\. ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|(?:(?:.*?\|){6})([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\-]+)\|(?:[\d]+)"
 errorLogsContentRegex2 = r"^(?:[\d\-\:\. ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\-\.\,\(\)\[\]\/\& ]+)\|(?:(?:.*?\|){5})([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\-]+)\|(?:[\d]+)"
 
-generalLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\w\+\/\=\' ]+)?\|([\d]+)\|([\d]+)\|([\w\-]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w]+)?\|([\w\-\.\:\#\[\] ]+)?\|([\w\-]+)?\|([\w\-\(\)\.\* ]+)?\|([\w\(\)\.]+)?\|([\w\-\.\:\;\%\= ]+)?\|([\w]+)?\|([\w\-\.\,\(\)\[\]\/\& ]+)?\|([\w\-]+)?\|([\w\@\.\\]+)?"
-negativeGeneralLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\w\+\/\=\' ]+)?\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w]+)?\|(?:[\w\-\.\:\#\[\] ]+)?\|(?:[\w\-]+)?\|(?:[\w\-\(\)\.\* ]+)?\|(?:[\w\(\)\.]+)?\|(?:[\w\-\.\:\;\%\= ]+)?\|(?:[\w]+)?\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)?\|(?:[\w\-]+)?\|(?:[\w\@\.\\]+)?).*)"
+generalLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\w\+\/\=\' ]+)?\|([\d]+)\|([\d]+)\|([\w\-]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w]+)?\|([\w\-\.\:\#\[\]\> ]+)?\|([\w\-]+)?\|([\w\-\(\)\.\* ]+)?\|([\w\(\)\.]+)?\|([\w\-\.\:\;\%\= ]+)?\|([\w]+)?\|([\w\-\.\,\(\)\[\]\/\& ]+)?\|([\w\-]+)?\|([\w\@\.\\]+)?"
+negativeGeneralLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\w\+\/\=\' ]+)?\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w]+)?\|(?:[\w\-\.\:\#\[\]\> ]+)?\|(?:[\w\-]+)?\|(?:[\w\-\(\)\.\* ]+)?\|(?:[\w\(\)\.]+)?\|(?:[\w\-\.\:\;\%\= ]+)?\|(?:[\w]+)?\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)?\|(?:[\w\-]+)?\|(?:[\w\@\.\\]+)?).*)"
 nonMatchedGeneralLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseGeneralLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|(.*?)?\|([\d]+)\|([\d]+)\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?"
 generalLogsContentRegex = r"^([\d\-\: ]+)\|.*?([\d]+)\s*?ms.*?\|(SLOWSQL|SLOWEXTENSION)\|([\w\(\)\. ]+)\|.+?\|([\w\(\)\.]+|\s*?)\|(?:(?:.*?\|){2})([\w]+|\s*?)\|(?:(?:.*?\|){3})([\w\-]+|\s*?)?\|.+"
@@ -425,11 +426,11 @@ nonMatchedTimerLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseTimerLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|(.*?)\|([\d]+)\|(.*?)\|(.*?)?\|([\d\-\:\. ]+)\|([\d\-\:\. ]+)\|(.*?)?\|(.*?)\|(.*?)\|(.*?)\|(.*?)"
 timerLogsContentRegex = r"^([\d\-\:\. ]+)\|([\d]+)\|([\w\-\.\,\(\)\[\]\/\& ]+)\|(?:(?:.+?\|){2})([\w\.]+)\|(?:.+?\|)([\w]+)\|(?:(?:.*?\|){2})(?:[\d\-\:\. ]+)\|([\w\-]+|\s*?)\|.+"
 
-emailLogsRegex = r"^([\d]+)\|([\w]+)\|([\w\-\:\. ]+)\|([\w\-\:\. ]+)?\|([\d]+)\|([\w\@\.\,\- ]+)\|([\w\@\.\,\- ]+)\|([\w\@\.\-]+)?\|([\w\@\.\-]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)\|([\w]+)\|([\w]+)\|([\d]+)\|([\w\@\.\-]+)"
-negativeEmailLogsRegex = r"^((?!(?:[\d]+)\|(?:[\w]+)\|(?:[\w\-\:\. ]+)\|(?:[\w\-\:\. ]+)?\|(?:[\d]+)\|(?:[\w\@\.\,\- ]+)\|(?:[\w\@\.\,\- ]+)\|(?:[\w\@\.\-]+)?\|(?:[\w\@\.\-]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w]+)\|(?:[\d]+)\|(?:[\w\@\.\-]+)).*)"
+emailLogsRegex = r"^([\d]+)\|([\w]+)\|([\w\-\:\.\% ]+)\|([\w\-\:\.\% ]+)?\|([\d]+)\|([\w\@\.\,\- ]+)\|([\w\@\.\,\- ]+)\|([\w\@\.\-]+)?\|([\w\@\.\-]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)\|([\w]+)\|([\w]+)\|([\d]+)\|([\w\@\.\-]+)"
+negativeEmailLogsRegex = r"^((?!(?:[\d]+)\|(?:[\w]+)\|(?:[\w\-\:\.\% ]+)\|(?:[\w\-\:\.\% ]+)?\|(?:[\d]+)\|(?:[\w\@\.\,\- ]+)\|(?:[\w\@\.\,\- ]+)\|(?:[\w\@\.\-]+)?\|(?:[\w\@\.\-]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w]+)\|(?:[\d]+)\|(?:[\w\@\.\-]+)).*)"
 nonMatchedEmailLogsRegex = r"^((?:.*?\|){10})([\d\-]+)(.+)"
 japaneseEmailLogsRegex = r"^([\d]+)\|(.*?)\|(.*?)\|(.*?)?\|([\d]+)\|(.*?)\|(.*?)\|(.*?)?\|(.*?)?\|(.*?)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)\|(.*?)\|(.*?)\|([\d]+)\|(.*?)"
-emailLogsContentRegex = r"^([\d\-\:\. ]+)\|([\w\-\:\. ]+)\|([\w\-\:\. ]+)\|([\w\@\.\,\- ]+)\|([\w\@\.\,\- ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\@\.\-]+|\s*?)\|([\w\@\.\-]+|\s*?)\|([\w]+)\|(?:(?:.*?\|){5})([\w]+)\|.+"
+emailLogsContentRegex = r"^([\d\-\:\. ]+)\|([\w\-\:\.\% ]+)\|([\w\-\:\.\% ]+)\|([\w\@\.\,\- ]+)\|([\w\@\.\,\- ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\@\.\-]+|\s*?)\|([\w\@\.\-]+|\s*?)\|([\w]+)\|(?:(?:.*?\|){5})([\w]+)\|.+"
 
 extensionLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\/\'\=\+]+)\|([\d]+)\|([\d]+)\|([\d]+)\|([\w\-]+)\|([\w\-]+)?\|([\w\-\:]+)\|([\w\.]+)\|([\w]+)\|([\w\-\.\,\(\)\[\]\/\& ]+)\|([\w\-]+)\|([\w\@\.\\]+)?"
 negativeExtensionLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w\/\'\=\+]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\-]+)\|(?:[\w\-]+)?\|(?:[\w\-\:]+)\|(?:[\w\.]+)\|(?:[\w]+)\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)\|(?:[\w\-]+)\|(?:[\w\@\.\\]+)?).*)"
@@ -443,8 +444,8 @@ nonMatchedServiceActionLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseServiceActionLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)?\|(.*?)\|([\d]+)\|(.*?)?\|(.*?)\|(.*?)\|(.*?)?\|(.*?)\|([\d]+)\|(.*?)\|(.*?)\|(.*?)\|(.*?)\|(.*?)\|(.*?)?\|(.*?)"
 serviceActionLogsContentRegex = r"^([\d\-\:\. ]+)\|([\d]+)\|([\w\-\.\,\(\)\[\]\/\& ]+)\|.*?\|([\w\.\(\)]+)\|(?:(?:.*?\|)){4}([\w\.]+)\|(?:(?:.*?\|){5})([\w\-]+|\s*?)\|.+"
 
-screenLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\/\'\=\+]+)\|([\d]+)\|([\d]+)\|([\w\-\:\. ]+)?\|([\w]+)\|([\w\-]+)\|([\d]+)\|([\d]+)\|([\d]+)\|([\w]+)\|([\w\-\:]+)\|([\w\(\)\.]+)?\|([\w\-\:\. ]+)\|([\w\.]+)\|([\w\-\.\,\(\)\[\]\/\& ]+)\|([\w\-]+)"
-negativeScreenLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w\/\'\=\+]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\-\:\. ]+)?\|(?:[\w]+)\|(?:[\w\-]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w\-\:]+)\|(?:[\w\(\)\.]+)?\|(?:[\w\-\:\. ]+)\|(?:[\w\.]+)\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)\|(?:[\w\-]+)).*)"
+screenLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\/\'\=\+]+)\|([\d]+)\|([\d]+)\|([\w\-\:\.\% ]+)?\|([\w]+)\|([\w\-]+)\|([\d]+)\|([\d]+)\|([\d]+)\|([\w]+)\|([\w\-\:]+)\|([\w\(\)\.]+)?\|([\w\-\:\.\% ]+)\|([\w\.]+)\|([\w\-\.\,\(\)\[\]\/\& ]+)\|([\w\-]+)"
+negativeScreenLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w\/\'\=\+]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\-\:\.\% ]+)?\|(?:[\w]+)\|(?:[\w\-]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w\-\:]+)\|(?:[\w\(\)\.]+)?\|(?:[\w\-\:\.\% ]+)\|(?:[\w\.]+)\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)\|(?:[\w\-]+)).*)"
 nonMatchedScreenLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseScreenLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|(.*?)\|(.*?)\|([\d]+)\|([\d]+)\|(.*?)?\|(.*?)\|(.*?)\|([\d]+)\|([\d]+)\|([\d]+)\|(.*?)\|(.*?)\|(.*?)?\|(.*?)\|(.*?)\|(.*?)\|(.*?)"
 screenLogsContentRegex = r"^([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w]+)\|([\w\-\.\,\(\)\[\]\/\& ]+)\|.*?\|([\w\(\)\.]+|\s*?)\|(?:(?:.*?\|){3})([\w\.]+)\|.+"
@@ -3039,18 +3040,39 @@ def readServiceStudioReportLogs(searchLines3, _fromDate, _toDate):
                     seconds = time.split(":")[2]
                     _time = str(int(hours) + 12) + ":" + minutes + ":" + seconds[:-2]
 
-                _date_ = datetime.strptime(_date, "%Y-%m-%d").date()
+                try:
+                    _date_ = datetime.strptime(_date, "%Y-%m-%d").date()
+
+                    if _fromDate <= _date_ <= _toDate:
+
+                        if messageType == None:
+                            messageType = " "
+
+                        if message == None:
+                            message = " "
+
+                        outText2 = _date + " " + _time.strip() + "|" + messageType + "|" + message + "\n"
+                        myLinesFromDateRange.append(outText2)
+
+                except ValueError as valError:
+                    pass
+
+                try:
+                    _dDate_ = datetime.strptime(date, "%Y-%m-%d").date()
                                                 
-                if _fromDate <= _date_ <= _toDate:
+                    if _fromDate <= _dDate_ <= _toDate:
 
-                    if messageType == None:
-                        messageType = " "
+                        if messageType == None:
+                            messageType = " "
 
-                    if message == None:
-                        message = " "
+                        if message == None:
+                            message = " "
 
-                    outText2 = _date + " " + _time.strip() + "|" + messageType + "|" + message + "\n"
-                    myLinesFromDateRange.append(outText2)
+                        outText2 = date + " " + _time.strip() + "|" + messageType + "|" + message + "\n"
+                        myLinesFromDateRange.append(outText2)
+
+                except ValueError as valError:
+                    pass
 
             #capture all the lines that didn't match the regex
             negativeRegex = re.compile(negativeServiceStudioReportsOperationsLogsRegex, re.MULTILINE + re.IGNORECASE)
@@ -3072,61 +3094,124 @@ def readServiceStudioReportLogs(searchLines3, _fromDate, _toDate):
 
                     _nonMatchedDate = nonMatchedYear + "-" + nonMatchedMonth + "-" + nonMatchedDay
 
-                    _nonMatchedDate_ = datetime.strptime(_nonMatchedDate, "%Y-%m-%d").date()
+                    try:
+                        _nonMatchedDate_ = datetime.strptime(_nonMatchedDate, "%Y-%m-%d").date()
 
-                    #check if the non-matched lines fall within the specified range
-                    if _fromDate <= _nonMatchedDate_ <= _toDate:
+                        #check if the non-matched lines fall within the specified range
+                        if _fromDate <= _nonMatchedDate_ <= _toDate:
 
-                        nonMatchedLine2 = nonMatchedDate + " " + nonMatchedTail
+                            nonMatchedLine2 = nonMatchedDate + " " + nonMatchedTail
 
-                        #check if the line has Japanese characters
-                        hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
-                        katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
-                        kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
+                            #check if the line has Japanese characters
+                            hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
+                            katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
+                            kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
 
-                        if hiragana or katakana or kanji:
-                            JPRegex = re.search(japaneseServiceStudioReportsOperationsLogsRegex, nonMatchedLine2)
-                            if JPRegex:
-                                JPDate = JPRegex.group(1)
-                                JPTime = JPRegex.group(2)
-                                JPTail = JPRegex.group(3)
+                            if hiragana or katakana or kanji:
+                                JPRegex = re.search(japaneseServiceStudioReportsOperationsLogsRegex, nonMatchedLine2)
+                                if JPRegex:
+                                    JPDate = JPRegex.group(1)
+                                    JPTime = JPRegex.group(2)
+                                    JPTail = JPRegex.group(3)
 
-                                #reformat the dates
-                                year = JPDate.split("-")[2]
-                                month = JPDate.split("-")[0]
-                                day = JPDate.split("-")[1]
+                                    #reformat the dates
+                                    year = JPDate.split("-")[2]
+                                    month = JPDate.split("-")[0]
+                                    day = JPDate.split("-")[1]
 
-                                if len(month) != 2:
-                                    month = "0" + month
+                                    if len(month) != 2:
+                                        month = "0" + month
 
-                                _JPDate = year + "-" + month + "-" + day
+                                    _JPDate = year + "-" + month + "-" + day
 
-                                #reformat the times
-                                if JPTime[-2:] == "AM" and JPTime[:2] == "12":
-                                    _JPTime = "00" + JPTime[2:-2]
-                                elif JPTime[-2:] == "AM":
-                                    hours = JPTime.split(":")[0]
-                                    minutes = JPTime.split(":")[1]
-                                    seconds = JPTime.split(":")[2]
-                                    if len(hours) < 2:
-                                        hours = "0" + hours
-                                    _JPTime = hours + ":" + minutes + ":" + seconds[:-2]
-                                elif JPTime[-2:] == "PM" and JPTime[:2] == "12":
-                                    _JPTime = JPTime[:-2]
-                                elif JPTime[-2:] == "PM":
-                                    hours = JPTime.split(":")[0]
-                                    minutes = JPTime.split(":")[1]
-                                    seconds = JPTime.split(":")[2]
-                                    _JPTime = str(int(hours) + 12) + ":" + minutes + ":" + seconds[:-2]
+                                    #reformat the times
+                                    if JPTime[-2:] == "AM" and JPTime[:2] == "12":
+                                        _JPTime = "00" + JPTime[2:-2]
+                                    elif JPTime[-2:] == "AM":
+                                        hours = JPTime.split(":")[0]
+                                        minutes = JPTime.split(":")[1]
+                                        seconds = JPTime.split(":")[2]
+                                        if len(hours) < 2:
+                                            hours = "0" + hours
+                                        _JPTime = hours + ":" + minutes + ":" + seconds[:-2]
+                                    elif JPTime[-2:] == "PM" and JPTime[:2] == "12":
+                                        _JPTime = JPTime[:-2]
+                                    elif JPTime[-2:] == "PM":
+                                        hours = JPTime.split(":")[0]
+                                        minutes = JPTime.split(":")[1]
+                                        seconds = JPTime.split(":")[2]
+                                        _JPTime = str(int(hours) + 12) + ":" + minutes + ":" + seconds[:-2]
 
-                                JPText = _JPDate + " " + _JPTime + "||" + JPTail.strip() + "\n"
+                                    JPText = _JPDate + " " + _JPTime + "||" + JPTail.strip() + "\n"
 
-                                myLinesFromDateRange.append(JPText)
+                                    myLinesFromDateRange.append(JPText)
 
-                        else:
-                            nonMatchedOutText = "ServiceStudioReport -> " + nonMatchedLine2.strip() + "\n"
+                            else:
+                                nonMatchedOutText = "ServiceStudioReport -> " + nonMatchedLine2.strip() + "\n"
 
-                            myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
+                                myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
+
+                    except ValueError as valError:
+                        pass
+
+                    try:
+                        _nonMatchedDDate_ = datetime.strptime(nonMatchedDate, "%Y-%m-%d").date()
+
+                        if _fromDate <= _nonMatchedDDate_ <= _toDate:
+
+                            nonMatchedLine2 = nonMatchedDate + " " + nonMatchedTail
+
+                            #check if the line has Japanese characters
+                            hiragana = re.findall(u'[\u3040-\u309F]', nonMatchedLine2)
+                            katakana = re.findall(u'[\u30A0-\u30FF]', nonMatchedLine2)
+                            kanji = re.findall(u'[\u4E00-\u9FAF]', nonMatchedLine2)
+
+                            if hiragana or katakana or kanji:
+                                JPRegex = re.search(japaneseServiceStudioReportsOperationsLogsRegex, nonMatchedLine2)
+                                if JPRegex:
+                                    JPDate = JPRegex.group(1)
+                                    JPTime = JPRegex.group(2)
+                                    JPTail = JPRegex.group(3)
+
+                                    #reformat the dates
+                                    year = JPDate.split("-")[2]
+                                    month = JPDate.split("-")[0]
+                                    day = JPDate.split("-")[1]
+
+                                    if len(month) != 2:
+                                        month = "0" + month
+
+                                    _JPDate = year + "-" + month + "-" + day
+
+                                    #reformat the times
+                                    if JPTime[-2:] == "AM" and JPTime[:2] == "12":
+                                        _JPTime = "00" + JPTime[2:-2]
+                                    elif JPTime[-2:] == "AM":
+                                        hours = JPTime.split(":")[0]
+                                        minutes = JPTime.split(":")[1]
+                                        seconds = JPTime.split(":")[2]
+                                        if len(hours) < 2:
+                                            hours = "0" + hours
+                                        _JPTime = hours + ":" + minutes + ":" + seconds[:-2]
+                                    elif JPTime[-2:] == "PM" and JPTime[:2] == "12":
+                                        _JPTime = JPTime[:-2]
+                                    elif JPTime[-2:] == "PM":
+                                        hours = JPTime.split(":")[0]
+                                        minutes = JPTime.split(":")[1]
+                                        seconds = JPTime.split(":")[2]
+                                        _JPTime = str(int(hours) + 12) + ":" + minutes + ":" + seconds[:-2]
+
+                                    JPText = _JPDate + " " + _JPTime + "||" + JPTail.strip() + "\n"
+
+                                    myLinesFromDateRange.append(JPText)
+
+                            else:
+                                nonMatchedOutText = "ServiceStudioReport -> " + nonMatchedLine2.strip() + "\n"
+
+                                myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
+
+                    except ValueError as valError:
+                        pass
 
         #delete the temporary file that was created
         os.remove(tempFilePath)
