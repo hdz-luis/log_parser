@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.IO;
+using Microsoft.Win32;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -14,21 +15,19 @@ namespace OutSystems_Log_Parser
 {
     public partial class Form5 : Form
     {
+        string pythonPath = "";
+        string pythonPath2 = "";
+        string pythonVersion = "";
+        string displayName = "";
+        string displayVersion = "";
+        string dplv = "";
+        string regFilePath = "";
         string scriptPath = "";
-        string userName = System.Security.Principal.WindowsIdentity.GetCurrent().Name.Split('\\')[1];
-        string path1 = @"C:\Users\";
         string openpyxlPath = "";
         string lxmlPath = "";
         string evtxPath = "";
         string plotlyPath = "";
         string pandasPath = "";
-        string pythonPath = @"\AppData\Local\Programs\Python\Python36\Scripts";
-        string fullOpenpyxlPath = "";
-        string fullLxmlPath = "";
-        string fullEvtxPath = "";
-        string fullPlotlyPath = "";
-        string fullPandasPath = "";
-        string fullPythonPath = "";
         string error_message = "";
         string outputTXTfile = "";
         string command = "";
@@ -51,84 +50,97 @@ namespace OutSystems_Log_Parser
 
         private void Form5_Load(object sender, EventArgs e)
         {
-            dateTimePicker1.Value = DateTime.Now;
-            dateTimePicker2.Value = DateTime.Now;
-            btnSubmit.Enabled = false;
+            var tpl = checkInstalled(@"SOFTWARE\Python\PythonCore\3.6", @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall");
 
-            openpyxlPath = @"\AppData\Local\Programs\Python\Python36\Lib\site-packages\openpyxl";
-            lxmlPath = @"\AppData\Local\Programs\Python\Python36\Lib\site-packages\lxml";
-            evtxPath = @"\AppData\Local\Programs\Python\Python36\Lib\site-packages\Evtx";
-            plotlyPath = @"\AppData\Local\Programs\Python\Python36\Lib\site-packages\plotly";
-            pandasPath = @"\AppData\Local\Programs\Python\Python36\Lib\site-packages\pandas";
-            fullOpenpyxlPath = path1 + userName + openpyxlPath;
-            fullLxmlPath = path1 + userName + lxmlPath;
-            fullEvtxPath = path1 + userName + evtxPath;
-            fullPlotlyPath = path1 + userName + plotlyPath;
-            fullPandasPath = path1 + userName + pandasPath;
+            pythonPath = tpl.Item1;
+            pythonVersion = tpl.Item2;
+            pythonPath2 = pythonPath.Substring(0, pythonPath.LastIndexOf('\\') + 1);
 
-            if (!Directory.Exists(fullOpenpyxlPath))
+            if (string.IsNullOrEmpty(pythonPath.Trim()) && pythonVersion != "3.6.2")
             {
-                chkBoxOpenPyxl.Checked = false;
-                chkBoxOpenPyxl.Enabled = true;
-            }
-            else
-            {
-                chkBoxOpenPyxl.Checked = false;
-                chkBoxOpenPyxl.Enabled = false;
-            }
-
-            if (!Directory.Exists(fullLxmlPath))
-            {
-                chkBoxLxml.Checked = false;
-                chkBoxLxml.Enabled = true;
-            }
-            else
-            {
-                chkBoxLxml.Checked = false;
-                chkBoxLxml.Enabled = false;
-            }
-
-            if (!Directory.Exists(fullEvtxPath))
-            {
-                chkBoxEvtx.Checked = false;
-                chkBoxEvtx.Enabled = true;
-            }
-            else
-            {
-                chkBoxEvtx.Checked = false;
-                chkBoxEvtx.Enabled = false;
-            }
-
-            if (!Directory.Exists(fullPlotlyPath))
-            {
-                chkBoxPlotly.Checked = false;
-                chkBoxPlotly.Enabled = true;
-            }
-            else
-            {
-                chkBoxPlotly.Checked = false;
-                chkBoxPlotly.Enabled = false;
-            }
-
-            if (!Directory.Exists(fullPandasPath))
-            {
-                chkBoxPandas.Checked = false;
-                chkBoxPandas.Enabled = true;
-            }
-            else
-            {
-                chkBoxPandas.Checked = false;
-                chkBoxPandas.Enabled = false;
-            }
-
-            if (!Directory.Exists(fullOpenpyxlPath) || !Directory.Exists(fullLxmlPath) || !Directory.Exists(fullEvtxPath) || !Directory.Exists(fullPlotlyPath) || !Directory.Exists(fullPandasPath))
-            {
+                btnBrowseFolder.Enabled = false;
                 btnSubmit.Enabled = false;
-                MessageBox.Show("Please install the missing libraries and restart the application", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                groupBox1.Enabled = false;
+
+                MessageBox.Show("Please install Python version 3.6.2 and restart the application", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
-                groupBox1.Enabled = false;
+                dateTimePicker1.Value = DateTime.Now;
+                dateTimePicker2.Value = DateTime.Now;
+                btnSubmit.Enabled = false;
+
+                openpyxlPath = pythonPath2 + @"Lib\site-packages\openpyxl";
+                lxmlPath = pythonPath2 + @"Lib\site-packages\lxml";
+                evtxPath = pythonPath2 + @"Lib\site-packages\Evtx";
+                plotlyPath = pythonPath2 + @"Lib\site-packages\plotly";
+                pandasPath = pythonPath2 + @"Lib\site-packages\pandas";
+
+                if (!Directory.Exists(openpyxlPath))
+                {
+                    chkBoxOpenPyxl.Checked = false;
+                    chkBoxOpenPyxl.Enabled = true;
+                }
+                else
+                {
+                    chkBoxOpenPyxl.Checked = false;
+                    chkBoxOpenPyxl.Enabled = false;
+                }
+
+                if (!Directory.Exists(lxmlPath))
+                {
+                    chkBoxLxml.Checked = false;
+                    chkBoxLxml.Enabled = true;
+                }
+                else
+                {
+                    chkBoxLxml.Checked = false;
+                    chkBoxLxml.Enabled = false;
+                }
+
+                if (!Directory.Exists(evtxPath))
+                {
+                    chkBoxEvtx.Checked = false;
+                    chkBoxEvtx.Enabled = true;
+                }
+                else
+                {
+                    chkBoxEvtx.Checked = false;
+                    chkBoxEvtx.Enabled = false;
+                }
+
+                if (!Directory.Exists(plotlyPath))
+                {
+                    chkBoxPlotly.Checked = false;
+                    chkBoxPlotly.Enabled = true;
+                }
+                else
+                {
+                    chkBoxPlotly.Checked = false;
+                    chkBoxPlotly.Enabled = false;
+                }
+
+                if (!Directory.Exists(pandasPath))
+                {
+                    chkBoxPandas.Checked = false;
+                    chkBoxPandas.Enabled = true;
+                }
+                else
+                {
+                    chkBoxPandas.Checked = false;
+                    chkBoxPandas.Enabled = false;
+                }
+
+                if (!Directory.Exists(openpyxlPath) || !Directory.Exists(lxmlPath) || !Directory.Exists(evtxPath) || !Directory.Exists(plotlyPath) || !Directory.Exists(pandasPath))
+                {
+                    btnBrowseFolder.Enabled = false;
+                    btnSubmit.Enabled = false;
+                    MessageBox.Show("Please install the missing libraries and restart the application", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    groupBox1.Enabled = false;
+                }
             }
         }
 
@@ -172,6 +184,7 @@ namespace OutSystems_Log_Parser
                 }
             }
         }
+
         private void errorLog(string txtFile, string err_msg)
         {
             outputTXTfile = currentWorkingDirectory + txtFile;
@@ -224,8 +237,7 @@ namespace OutSystems_Log_Parser
         {
             if (chkBoxOpenPyxl.Checked == true)
             {
-                fullPythonPath = path1 + userName + pythonPath;
-                command = @"/C cd " + fullPythonPath + " & pip3 install openpyxl";
+                command = @"/K cd " + pythonPath2 + "Scripts & pip3 install openpyxl";
                 commandLine(command);
             }
         }
@@ -234,8 +246,7 @@ namespace OutSystems_Log_Parser
         {
             if (chkBoxLxml.Checked == true)
             {
-                fullPythonPath = path1 + userName + pythonPath;
-                command = @"/C cd " + fullPythonPath + " & pip3 install lxml";
+                command = @"/K cd " + pythonPath2 + "Scripts & pip3 install lxml";
                 commandLine(command);
             }
         }
@@ -244,8 +255,7 @@ namespace OutSystems_Log_Parser
         {
             if (chkBoxEvtx.Checked == true)
             {
-                fullPythonPath = path1 + userName + pythonPath;
-                command = @"/C cd " + fullPythonPath + " & pip3 install python-evtx";
+                command = @"/K cd " + pythonPath2 + "Scripts & pip3 install python-evtx";
                 commandLine(command);
             }
         }
@@ -254,8 +264,7 @@ namespace OutSystems_Log_Parser
         {
             if (chkBoxPlotly.Checked == true)
             {
-                fullPythonPath = path1 + userName + pythonPath;
-                command = @"/C cd " + fullPythonPath + " & pip3 install plotly";
+                command = @"/K cd " + pythonPath2 + "Scripts & pip3 install plotly";
                 commandLine(command);
             }
         }
@@ -264,9 +273,50 @@ namespace OutSystems_Log_Parser
         {
             if (chkBoxPandas.Checked == true)
             {
-                fullPythonPath = path1 + userName + pythonPath;
-                command = @"/C cd " + fullPythonPath + " & pip3 install pandas";
+                command = @"/K cd " + pythonPath2 + "Scripts & pip3 install pandas";
                 commandLine(command);
+            }
+        }
+
+        public Tuple<string, string> checkInstalled(string registryKey, string registryKey2)
+        {
+            try
+            {
+                RegistryKey key = Registry.CurrentUser;
+                RegistryKey thevalue = key.OpenSubKey(registryKey);
+                regFilePath = thevalue.OpenSubKey("InstallPath").GetValue("ExecutablePath").ToString();
+
+                key.Close();
+
+                RegistryKey key64 = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
+                RegistryKey key2 = key64.OpenSubKey(registryKey2);
+
+                if (key2 != null)
+                {
+                    foreach (RegistryKey subkey in key2.GetSubKeyNames().Select(keyName => key2.OpenSubKey(keyName)))
+                    {
+                        displayName = subkey.GetValue("DisplayName") as string;
+                        if (displayName != null)
+                        {
+                            if (displayName.Contains("Python") && displayName.Contains("Executables (64-bit)"))
+                            {
+                                displayVersion = subkey.GetValue("DisplayVersion").ToString();
+                                dplv = displayVersion.Substring(0, 5);
+
+                                return Tuple.Create(regFilePath, dplv);
+                            }
+                        }
+                    }
+                    key2.Close();
+                }
+                return Tuple.Create(regFilePath, dplv);
+            }
+            catch (Exception ex)
+            {
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
+                throw;
             }
         }
     }

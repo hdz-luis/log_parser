@@ -290,7 +290,7 @@
             this.MinimumSize = new System.Drawing.Size(996, 266);
             this.Name = "Form5";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "OutSystems Log Parser V.040922";
+            this.Text = "OutSystems Log Parser V.042322";
             this.Load += new System.EventHandler(this.Form5_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

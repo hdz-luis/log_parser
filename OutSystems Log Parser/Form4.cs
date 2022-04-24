@@ -25,7 +25,7 @@ namespace OutSystems_Log_Parser
 
         // Instantiate a new 2D string array.
         //the Windows error code, its meaning, and its description
-        string[,] array = new string[244, 3]
+        string[,] array = new string[248, 3]
         {
             {"0", "ERROR_SUCCESS", "The operation completed successfully."},
             {"1", "ERROR_INVALID_FUNCTION", "Incorrect function."},
@@ -270,7 +270,11 @@ namespace OutSystems_Log_Parser
             {"401", "ERROR_THREAD_MODE_NOT_BACKGROUND", "The thread is not in background processing mode."},
             {"402", "ERROR_PROCESS_MODE_ALREADY_BACKGROUND", "The process is already in background processing mode."},
             {"403", "ERROR_PROCESS_MODE_NOT_BACKGROUND", "The process is not in background processing mode."},
-            {"487", "ERROR_INVALID_ADDRESS", "Attempt to access invalid address."}
+            {"487", "ERROR_INVALID_ADDRESS", "Attempt to access invalid address."},
+            {"995", "ERROR_OPERATION_ABORTED", "The I/O operation has been aborted because of either a thread exit or an application request."},
+            {"1236", "ERROR_CONNECTION_ABORTED", "The network connection was aborted by the local system."},
+            {"2148204809", "CERT_E_UNTRUSTEDROOT", "A certificate chain processed, but terminated in a root certificate which is not trusted by the trust provider."},
+            {"3221225581", "STATUS_LOGON_FAILURE", "The attempted logon is invalid. This is either due to a bad username or authentication information."}
         };
 
         private void listViewCodes_Click(object sender, EventArgs e)
