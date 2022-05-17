@@ -109,19 +109,19 @@
     <None Include="obj\Debug\OutSystems_Log_Parser.Form1.resources" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -133,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="outsystems_blue_icon.ico" />
+    <None Include="Resources\exportcsv_icon_blue1.png" />
     <None Include="Resources\undo_blue.png" />
     <None Include="Resources\submiticon_blue2.png" />
     <None Include="Resources\searchicon_blue.png" />
@@ -141,9 +142,7 @@
     <None Include="Resources\glass_texture_blue.png" />
     <None Include="Resources\garbage_blue.png" />
     <None Include="Resources\filtericon_blue.png" />
-    <None Include="Resources\exporttxt_icon_blue.png" />
     <None Include="Resources\browsefoldericon_blue.png" />
-    <None Include="Resources\browsefolder_imagefile.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

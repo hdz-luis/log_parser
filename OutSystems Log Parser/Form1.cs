@@ -16,6 +16,8 @@ namespace OutSystems_Log_Parser
     public partial class Form1 : Form
     {
         string category = "";
+        string categoryName = "";
+        string myKeyword2 = "";
         string fullPath = "";
         string[] filesPaths;
         string[] lines;
@@ -31,15 +33,19 @@ namespace OutSystems_Log_Parser
         string[] knownErrors_WinSysEventViewer;
         string[] knownErrors_AndroidiOSlogs;
         string[] knownErrors_ServiceStudiologs;
+        string[] knownErrors_GeneralTXTlogs;
         string fileName = "";
         char delimiters = '|';
         int totalRowsCount;
         string myMessage = "";
         int myMessageCount;
-        string outputTXTfile = "";
+        string outputCSVfile = "";
         int currentRow;
         string rowValues = "";
+        string rowInfo = "";
         string error_message = "";
+        string report = "";
+        string reportName = "";
         double percentageMessageCount;
         double roundedPercentageMessageCount;
         double sixteenthOfTotal;
@@ -1813,6 +1819,10 @@ namespace OutSystems_Log_Parser
                             {
                                 row.DefaultCellStyle.BackColor = Color.Yellow;
 
+                                categoryName = category.Replace(" ", "_").ToLower();
+                                string dgvName2 = dgvName.Replace("dataGridView", "");
+                                exportCellInfo(categoryName, dgvName2 + "|" + row.Cells[columnIndex].Value.ToString());
+
                                 if (countFindKnownError == 1)
                                 {
                                     bool_highlightErrorSuccessful_1 = true;
@@ -2492,9 +2502,14 @@ namespace OutSystems_Log_Parser
                         currentRow = row.Index + 1;
 
                         rowValues += string.Join(" ", row.Cells.Cast<DataGridViewCell>().Where(c => c.Value != null).Select(c => c.Value.ToString()).ToArray());
-
+                        
                         if (rowValues.ToLower().Contains(myKeyword.ToLower()))
                         {
+                            rowInfo += string.Join("|", row.Cells.Cast<DataGridViewCell>().Where(c => c.Value != null).Select(c => c.Value.ToString()).ToArray());
+                            string dgvName2 = dgvName.Replace("dataGridView", "");
+                            myKeyword2 = myKeyword.Replace(" ", "_").ToLower();
+                            exportRowInfo(myKeyword2, dgvName2 + "|" + rowInfo);
+
                             if (myCount == 1)
                             {
                                 row.DefaultCellStyle.BackColor = Color.FromArgb(255, 240, 240);
@@ -2528,6 +2543,7 @@ namespace OutSystems_Log_Parser
                         }
 
                         rowValues = null;
+                        rowInfo = null;
                     }
 
                     totalRowsCount = tableName.RowCount;
@@ -2576,7 +2592,7 @@ namespace OutSystems_Log_Parser
                 {
                     if (comBoxReport.SelectedIndex > -1)
                     {
-                        string report = comBoxReport.Text;
+                        report = comBoxReport.Text;
 
                         if (report == "All pages hits")
                         {
@@ -2888,7 +2904,7 @@ namespace OutSystems_Log_Parser
             }
             else if (ctg == "Compilation")
             {
-                knownErrors_Errorlogs = new string[] { "compilation error", "can't proceed", "error loading espace", "failed to parse response" };
+                knownErrors_Errorlogs = new string[] { "compilation error", "can't proceed", "error loading espace", "failed to parse response", "error obtaining version" };
 
                 highlightKnownErrors("dataGridViewErrorlogs", dataGridViewErrorlogs, 1, knownErrors_Errorlogs);
 
@@ -2928,11 +2944,12 @@ namespace OutSystems_Log_Parser
             }
             else if (ctg == "Network")
             {
-                knownErrors_Errorlogs = new string[] { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "communicationexception", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "unable to open service studio", "invalid authentication token", "connection is broken", "cannot decrypt the content", "could not establish trust relationship for the ssl/tls secure channel", "the remote certificate is invalid according to the validation procedure", "unexpected content found in ping", "win32error" };
+                knownErrors_Errorlogs = new string[] { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "communicationexception", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "unable to open service studio", "invalid authentication token", "connection is broken", "cannot decrypt the content", "could not establish trust relationship for the ssl/tls secure channel", "the remote certificate is invalid according to the validation procedure", "unexpected content found in ping", "win32error", "internal network use only", "could not ping" };
                 knownErrors_WinAppEventViewer = new string[] { "error closing", "cannot access", "error opening", "certificate" };
                 knownErrors_WinSysEventViewer = new string[] { "error closing", "timed out", "certificate" };
                 knownErrors_AndroidiOSlogs = new string[] { "file is corrupt or invalid", "error: spawnsync sudo etimeout", "signing certificate is invalid", "verification failed" };
                 knownErrors_ServiceStudiologs = new string[] { "http forbidden", "[not connected]" };
+                knownErrors_GeneralTXTlogs = new string[] { "unable to load one or more of the requested types" };
 
                 highlightKnownErrors("dataGridViewErrorlogs", dataGridViewErrorlogs, 1, knownErrors_Errorlogs);
                 highlightKnownErrors("dataGridViewWinAppEventViewer", dataGridViewWinAppEventViewer, 2, knownErrors_WinAppEventViewer);
@@ -2940,6 +2957,7 @@ namespace OutSystems_Log_Parser
                 highlightKnownErrors("dataGridViewAndroidlogs", dataGridViewAndroidlogs, 3, knownErrors_AndroidiOSlogs);
                 highlightKnownErrors("dataGridViewiOSlogs", dataGridViewiOSlogs, 3, knownErrors_AndroidiOSlogs);
                 highlightKnownErrors("dataGridViewServiceStudiologs", dataGridViewServiceStudiologs, 2, knownErrors_ServiceStudiologs);
+                highlightKnownErrors("dataGridViewGeneralTXTlogs", dataGridViewGeneralTXTlogs, 2, knownErrors_GeneralTXTlogs);
             }
         }
 
@@ -3962,18 +3980,18 @@ namespace OutSystems_Log_Parser
         {
             if (rdBtnSortSlowSQLExtension.Checked == true)
             {
-                exportTableContent(dataGridViewSlowSQLDurationlogs, "\\slow_sql_table_sort_duration.txt", "|");
-                exportTableContent(dataGridViewSlowExtensionDurationlogs, "\\slow_extension_table_sort_duration.txt", "|");
+                exportTableContent(dataGridViewSlowSQLDurationlogs, "\\slow_sql_table_sort_duration.csv", "|");
+                exportTableContent(dataGridViewSlowExtensionDurationlogs, "\\slow_extension_table_sort_duration.csv", "|");
             }
             else if (rdBtnFilterErrorIDSLowSQLExtension.Checked == true)
             {
-                exportTableContent(dataGridViewSlowSQLDurationlogs, "\\slow_sql_table_filter_with_error_id.txt", "|");
-                exportTableContent(dataGridViewSlowExtensionDurationlogs, "\\slow_extension_table_filter_with_error_id.txt", "|");
+                exportTableContent(dataGridViewSlowSQLDurationlogs, "\\slow_sql_table_filter_with_error_id.csv", "|");
+                exportTableContent(dataGridViewSlowExtensionDurationlogs, "\\slow_extension_table_filter_with_error_id.csv", "|");
             }
             else if (rdBtnSortFilterErrorIDSlowSQLExtension.Checked == true)
             {
-                exportTableContent(dataGridViewSlowSQLDurationlogs, "\\slow_sql_table_sort_duration_filter_with_error_id.txt", "|");
-                exportTableContent(dataGridViewSlowExtensionDurationlogs, "\\slow_extension_table_sort_duration_filter_with_error_id.txt", "|");
+                exportTableContent(dataGridViewSlowSQLDurationlogs, "\\slow_sql_table_sort_duration_filter_with_error_id.csv", "|");
+                exportTableContent(dataGridViewSlowExtensionDurationlogs, "\\slow_extension_table_sort_duration_filter_with_error_id.csv", "|");
             }
         }
 
@@ -3981,15 +3999,15 @@ namespace OutSystems_Log_Parser
         {
             if (rdBtnSortWebServices.Checked == true)
             {
-                exportTableContent(dataGridViewInWebServicesDurationlogs, "\\webservices_table_sort_duration.txt", "|");
+                exportTableContent(dataGridViewInWebServicesDurationlogs, "\\webservices_table_sort_duration.csv", "|");
             }
             else if (rdBtnFilterErrorIDWebServices.Checked == true)
             {
-                exportTableContent(dataGridViewInWebServicesDurationlogs, "\\webservices_table_filter_with_error_id.txt", "|");
+                exportTableContent(dataGridViewInWebServicesDurationlogs, "\\webservices_table_filter_with_error_id.csv", "|");
             }
             else if (rdBtnSortFilterErrorIDWebServices.Checked == true)
             {
-                exportTableContent(dataGridViewInWebServicesDurationlogs, "\\webservices_table_sort_duration_filter_with_error_id.txt", "|");
+                exportTableContent(dataGridViewInWebServicesDurationlogs, "\\webservices_table_sort_duration_filter_with_error_id.csv", "|");
             }
         }
 
@@ -3997,33 +4015,33 @@ namespace OutSystems_Log_Parser
         {
             if (rdBtnSortTimers.Checked == true)
             {
-                exportTableContent(dataGridViewTimerTimersDurationlogs, "\\timers_table_sort_duration.txt", "|");
+                exportTableContent(dataGridViewTimerTimersDurationlogs, "\\timers_table_sort_duration.csv", "|");
             }
             else if (rdBtnFilterErrorIDTimers.Checked == true)
             {
-                exportTableContent(dataGridViewTimerTimersDurationlogs, "\\timers_table_filter_with_error_id.txt", "|");
+                exportTableContent(dataGridViewTimerTimersDurationlogs, "\\timers_table_filter_with_error_id.csv", "|");
             }
             else if (rdBtnSortFilterErrorIDTimers.Checked == true)
             {
-                exportTableContent(dataGridViewTimerTimersDurationlogs, "\\timers_table_sort_duration_filter_with_error_id.txt", "|");
+                exportTableContent(dataGridViewTimerTimersDurationlogs, "\\timers_table_sort_duration_filter_with_error_id.csv", "|");
             }
         }
 
         private void btnExportScreenTable_Click(object sender, EventArgs e)
         {
-            exportTableContent(dataGridViewTradWebRequestsScreenDurationlogs, "\\screens_table.txt", "|");
+            exportTableContent(dataGridViewTradWebRequestsScreenDurationlogs, "\\screens_table.csv", "|");
         }
 
         private void exportTableContent(DataGridView tableName, string txtFile, string delimiter)
         {
             if (tableName.Rows.Count > 0)
             {
-                outputTXTfile = label8.Text + txtFile;
+                outputCSVfile = label8.Text + txtFile;
 
                 try
                 {
-                    //This line of code creates a text file for the data export.
-                    StreamWriter exportFile = new StreamWriter(outputTXTfile);
+                    //This line of code creates a csv file for the data export.
+                    StreamWriter exportFile = new StreamWriter(outputCSVfile);
                     string eLine = "";
 
                     //This for loop loops through the headers
@@ -4033,12 +4051,12 @@ namespace OutSystems_Log_Parser
                         if (h != tableName.Columns.Count - 1)
                         {
                             //Add a text delimiter in order
-                            //to separate each field in the text file.
+                            //to separate each field in the csv file.
                             eLine = eLine + delimiter;
                         }
                         else
                         {
-                            //The exported text is written to the text file, one line at a time.
+                            //The exported text is written to the csv file, one line at a time.
                             exportFile.WriteLine(eLine);
                             eLine = "";
                         }
@@ -4054,18 +4072,18 @@ namespace OutSystems_Log_Parser
                             eLine = eLine + tableName.Rows[r].Cells[c].Value;
                             if (c != tableName.Columns.Count - 1)
                             {
-                                //Add a text delimiter in order
-                                //to separate each field in the text file.
+                                //Add a csv delimiter in order
+                                //to separate each field in the csv file.
                                 eLine = eLine + delimiter;
                             }
                         }
-                        //The exported text is written to the text file, one line at a time.
+                        //The exported text is written to the csv file, one line at a time.
                         exportFile.WriteLine(eLine);
                         eLine = "";
                     }
 
                     exportFile.Close();
-                    MessageBox.Show("Exported the data to the following file:" + Environment.NewLine + outputTXTfile, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Exported the data to the following file:" + Environment.NewLine + outputCSVfile, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
@@ -4074,6 +4092,46 @@ namespace OutSystems_Log_Parser
                     MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
                     throw;
                 }
+            }
+        }
+
+        private void exportRowInfo(string kWord, string rowVal)
+        {
+            try
+            {
+                //create a folder
+                string keywordsFolder = Path.Combine(label8.Text, "keywords");
+                Directory.CreateDirectory(keywordsFolder);
+                outputCSVfile = keywordsFolder + "\\" + kWord + ".csv";
+
+                File.AppendAllText(outputCSVfile, rowVal + Environment.NewLine);
+            }
+            catch (Exception ex)
+            {
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
+                throw;
+            }
+        }
+
+        private void exportCellInfo(string ctg, string cellVal)
+        {
+            try
+            {
+                //create a folder
+                string knownErrorsFolder = Path.Combine(label8.Text, "known_errors");
+                Directory.CreateDirectory(knownErrorsFolder);
+                outputCSVfile = knownErrorsFolder + "\\" + ctg + ".csv";
+
+                File.AppendAllText(outputCSVfile, cellVal + Environment.NewLine);
+            }
+            catch (Exception ex)
+            {
+                error_message = "Error: " + Environment.NewLine + ex.ToString();
+                errorLog("\\error_log.txt", error_message);
+                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
+                throw;
             }
         }
 
@@ -4093,15 +4151,15 @@ namespace OutSystems_Log_Parser
         {
             if (rdBtnSortExtensions.Checked == true)
             {
-                exportTableContent(dataGridViewExtensionsDurationlogs, "\\extensions_table_sort_duration.txt", "|");
+                exportTableContent(dataGridViewExtensionsDurationlogs, "\\extensions_table_sort_duration.csv", "|");
             }
             else if (rdBtnFilterErrorIDExtensions.Checked == true)
             {
-                exportTableContent(dataGridViewExtensionsDurationlogs, "\\extensions_table_filter_with_error_id.txt", "|");
+                exportTableContent(dataGridViewExtensionsDurationlogs, "\\extensions_table_filter_with_error_id.csv", "|");
             }
             else if (rdBtnSortFilterErrorIDExtensions.Checked == true)
             {
-                exportTableContent(dataGridViewExtensionsDurationlogs, "\\extensions_table_sort_duration_filter_with_error_id.txt", "|");
+                exportTableContent(dataGridViewExtensionsDurationlogs, "\\extensions_table_sort_duration_filter_with_error_id.csv", "|");
             }
         }
 
@@ -4109,15 +4167,15 @@ namespace OutSystems_Log_Parser
         {
             if (rdBtnScrReqScreens.Checked == true)
             {
-                exportTableContent(dataGridViewScrReqScreenDurationlogs, "\\mobile_requests_screen_table_sort_duration.txt", "|");
+                exportTableContent(dataGridViewScrReqScreenDurationlogs, "\\mobile_requests_screen_table_sort_duration.csv", "|");
             }
             else if (rdBtnFilterErrorIDScrReqScreens.Checked == true)
             {
-                exportTableContent(dataGridViewScrReqScreenDurationlogs, "\\mobile_requests_screen_table_filter_with_error_id.txt", "|");
+                exportTableContent(dataGridViewScrReqScreenDurationlogs, "\\mobile_requests_screen_table_filter_with_error_id.csv", "|");
             }
             else if (rdBtnSortFilterErrorIDScrReqScreens.Checked == true)
             {
-                exportTableContent(dataGridViewScrReqScreenDurationlogs, "\\mobile_requests_screen_table_sort_duration_filter_with_error_id.txt", "|");
+                exportTableContent(dataGridViewScrReqScreenDurationlogs, "\\mobile_requests_screen_table_sort_duration_filter_with_error_id.csv", "|");
             }
         }
 
@@ -4125,15 +4183,15 @@ namespace OutSystems_Log_Parser
         {
             if (rdBtnSortServiceActions.Checked == true)
             {
-                exportTableContent(dataGridViewSrvActServiceDurationlogs, "\\service_actions_table_sort_duration.txt", "|");
+                exportTableContent(dataGridViewSrvActServiceDurationlogs, "\\service_actions_table_sort_duration.csv", "|");
             }
             else if (rdBtnFilterErrorIDServiceActions.Checked == true)
             {
-                exportTableContent(dataGridViewSrvActServiceDurationlogs, "\\service_actions_table_filter_with_error_id.txt", "|");
+                exportTableContent(dataGridViewSrvActServiceDurationlogs, "\\service_actions_table_filter_with_error_id.csv", "|");
             }
             else if (rdBtnSortFilterErrorIDServiceActions.Checked == true)
             {
-                exportTableContent(dataGridViewSrvActServiceDurationlogs, "\\service_actions_table_sort_duration_filter_with_error_id.txt", "|");
+                exportTableContent(dataGridViewSrvActServiceDurationlogs, "\\service_actions_table_sort_duration_filter_with_error_id.csv", "|");
             }
         }
 
@@ -4193,28 +4251,29 @@ namespace OutSystems_Log_Parser
 
         private void btnExportIISLINQTable_Click(object sender, EventArgs e)
         {
-            exportTableContent(dataGridViewIISLINQreport, "\\iis_logs_linq_report_table.txt", "|");
+            reportName = report.Replace(" ", "_").ToLower();
+            exportTableContent(dataGridViewIISLINQreport, "\\iis_logs_" + reportName + "_table.csv", "|");
         }
 
         private void btnExportIISTable_Click(object sender, EventArgs e)
         {
-            exportTableContent(dataGridViewIISTimeTaken, "\\iis_logs_timetaken_table.txt", "|");
+            exportTableContent(dataGridViewIISTimeTaken, "\\iis_logs_timetaken_table.csv", "|");
         }
 
         private void btnExportDevInfoTable_Click(object sender, EventArgs e)
         {
-            exportTableContent(dataGridViewDevInfoCount, "\\device_information_count_table.txt", "|");
+            exportTableContent(dataGridViewDevInfoCount, "\\device_information_count_table.csv", "|");
         }
 
         private void btnExportEmailsTable_Click(object sender, EventArgs e)
         {
             if (rdBtnSortEmails.Checked == true)
             {
-                exportTableContent(dataGridViewEmailEmailsDurationlogs, "\\emails_table_sort_duration.txt", "|");
+                exportTableContent(dataGridViewEmailEmailsDurationlogs, "\\emails_table_sort_duration.csv", "|");
             }
             else if (rdBtnFilterErrorIDEmails.Checked == true)
             {
-                exportTableContent(dataGridViewEmailEmailsDurationlogs, "\\emails_table_filter_with_error_id.txt", "|");
+                exportTableContent(dataGridViewEmailEmailsDurationlogs, "\\emails_table_filter_with_error_id.csv", "|");
             }
         }
 
@@ -5060,8 +5119,8 @@ namespace OutSystems_Log_Parser
 
         private void errorLog(string txtFile, string err_msg)
         {
-            outputTXTfile = label8.Text + txtFile;
-            using (StreamWriter logFile = new StreamWriter(outputTXTfile, true))
+            outputCSVfile = label8.Text + txtFile;
+            using (StreamWriter logFile = new StreamWriter(outputCSVfile, true))
             {
                 logFile.WriteLine(err_msg);
             }

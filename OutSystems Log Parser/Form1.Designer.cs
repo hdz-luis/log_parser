@@ -675,7 +675,7 @@
             // 
             // btnExportSlowSQLExtensionTables
             // 
-            this.btnExportSlowSQLExtensionTables.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportSlowSQLExtensionTables.BackgroundImage")));
+            this.btnExportSlowSQLExtensionTables.BackgroundImage = global::OutSystems_Log_Parser.Properties.Resources.exportcsv_icon_blue1;
             this.btnExportSlowSQLExtensionTables.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnExportSlowSQLExtensionTables.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExportSlowSQLExtensionTables.Location = new System.Drawing.Point(722, 600);
@@ -909,7 +909,7 @@
             // 
             // btnExportWebServiceTable
             // 
-            this.btnExportWebServiceTable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportWebServiceTable.BackgroundImage")));
+            this.btnExportWebServiceTable.BackgroundImage = global::OutSystems_Log_Parser.Properties.Resources.exportcsv_icon_blue1;
             this.btnExportWebServiceTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnExportWebServiceTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExportWebServiceTable.Location = new System.Drawing.Point(722, 600);
@@ -1056,7 +1056,7 @@
             // 
             // btnExportScrReqScreenTable
             // 
-            this.btnExportScrReqScreenTable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportScrReqScreenTable.BackgroundImage")));
+            this.btnExportScrReqScreenTable.BackgroundImage = global::OutSystems_Log_Parser.Properties.Resources.exportcsv_icon_blue1;
             this.btnExportScrReqScreenTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnExportScrReqScreenTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExportScrReqScreenTable.Location = new System.Drawing.Point(722, 600);
@@ -1202,7 +1202,7 @@
             // 
             // btnExportTimerTable
             // 
-            this.btnExportTimerTable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportTimerTable.BackgroundImage")));
+            this.btnExportTimerTable.BackgroundImage = global::OutSystems_Log_Parser.Properties.Resources.exportcsv_icon_blue1;
             this.btnExportTimerTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnExportTimerTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExportTimerTable.Location = new System.Drawing.Point(722, 600);
@@ -1335,7 +1335,7 @@
             // 
             // btnExportEmailsTable
             // 
-            this.btnExportEmailsTable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportEmailsTable.BackgroundImage")));
+            this.btnExportEmailsTable.BackgroundImage = global::OutSystems_Log_Parser.Properties.Resources.exportcsv_icon_blue1;
             this.btnExportEmailsTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnExportEmailsTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExportEmailsTable.Location = new System.Drawing.Point(382, 600);
@@ -1481,7 +1481,7 @@
             // 
             // btnExportExtensionsTable
             // 
-            this.btnExportExtensionsTable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportExtensionsTable.BackgroundImage")));
+            this.btnExportExtensionsTable.BackgroundImage = global::OutSystems_Log_Parser.Properties.Resources.exportcsv_icon_blue1;
             this.btnExportExtensionsTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnExportExtensionsTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExportExtensionsTable.Location = new System.Drawing.Point(722, 600);
@@ -1627,7 +1627,7 @@
             // 
             // btnExportServiceActionsTable
             // 
-            this.btnExportServiceActionsTable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportServiceActionsTable.BackgroundImage")));
+            this.btnExportServiceActionsTable.BackgroundImage = global::OutSystems_Log_Parser.Properties.Resources.exportcsv_icon_blue1;
             this.btnExportServiceActionsTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnExportServiceActionsTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExportServiceActionsTable.Location = new System.Drawing.Point(722, 600);
@@ -1748,7 +1748,7 @@
             // 
             // btnExportScreenTable
             // 
-            this.btnExportScreenTable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportScreenTable.BackgroundImage")));
+            this.btnExportScreenTable.BackgroundImage = global::OutSystems_Log_Parser.Properties.Resources.exportcsv_icon_blue1;
             this.btnExportScreenTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnExportScreenTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExportScreenTable.Location = new System.Drawing.Point(197, 600);
@@ -1864,7 +1864,7 @@
             // 
             // btnExportIISLINQTable
             // 
-            this.btnExportIISLINQTable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportIISLINQTable.BackgroundImage")));
+            this.btnExportIISLINQTable.BackgroundImage = global::OutSystems_Log_Parser.Properties.Resources.exportcsv_icon_blue1;
             this.btnExportIISLINQTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnExportIISLINQTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExportIISLINQTable.Location = new System.Drawing.Point(477, 470);
@@ -1907,7 +1907,7 @@
             // 
             // btnExportIISTable
             // 
-            this.btnExportIISTable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportIISTable.BackgroundImage")));
+            this.btnExportIISTable.BackgroundImage = global::OutSystems_Log_Parser.Properties.Resources.exportcsv_icon_blue1;
             this.btnExportIISTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnExportIISTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExportIISTable.Location = new System.Drawing.Point(1267, 437);
@@ -2327,7 +2327,7 @@
             // 
             // btnExportDevInfoTable
             // 
-            this.btnExportDevInfoTable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnExportDevInfoTable.BackgroundImage")));
+            this.btnExportDevInfoTable.BackgroundImage = global::OutSystems_Log_Parser.Properties.Resources.exportcsv_icon_blue1;
             this.btnExportDevInfoTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnExportDevInfoTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExportDevInfoTable.Location = new System.Drawing.Point(196, 599);
@@ -4416,7 +4416,7 @@
             this.MinimumSize = new System.Drawing.Size(1649, 872);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "OutSystems Log Parser V.042322";
+            this.Text = "OutSystems Log Parser V.051622";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
