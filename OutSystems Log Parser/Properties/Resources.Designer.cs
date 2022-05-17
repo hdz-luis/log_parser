@@ -73,9 +73,9 @@ namespace OutSystems_Log_Parser.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap exporttxt_icon_blue {
+        internal static System.Drawing.Bitmap exportcsv_icon_blue1 {
             get {
-                object obj = ResourceManager.GetObject("exporttxt_icon_blue", resourceCulture);
+                object obj = ResourceManager.GetObject("exportcsv_icon_blue1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
