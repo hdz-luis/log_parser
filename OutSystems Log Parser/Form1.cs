@@ -1821,7 +1821,8 @@ namespace OutSystems_Log_Parser
 
                                 categoryName = category.Replace(" ", "_").ToLower();
                                 string dgvName2 = dgvName.Replace("dataGridView", "");
-                                exportCellInfo(categoryName, dgvName2 + "|" + row.Cells[columnIndex].Value.ToString());
+                                rowInfo += string.Join("|", row.Cells.Cast<DataGridViewCell>().Where(c => c.Value != null).Select(c => c.Value.ToString()).ToArray());
+                                exportRowInfo("known_errors", categoryName, dgvName2 + "|" + rowInfo);
 
                                 if (countFindKnownError == 1)
                                 {
@@ -2508,7 +2509,7 @@ namespace OutSystems_Log_Parser
                             rowInfo += string.Join("|", row.Cells.Cast<DataGridViewCell>().Where(c => c.Value != null).Select(c => c.Value.ToString()).ToArray());
                             string dgvName2 = dgvName.Replace("dataGridView", "");
                             myKeyword2 = myKeyword.Replace(" ", "_").ToLower();
-                            exportRowInfo(myKeyword2, dgvName2 + "|" + rowInfo);
+                            exportRowInfo("keywords", myKeyword2, dgvName2 + "|" + rowInfo);
 
                             if (myCount == 1)
                             {
@@ -4095,36 +4096,16 @@ namespace OutSystems_Log_Parser
             }
         }
 
-        private void exportRowInfo(string kWord, string rowVal)
+        private void exportRowInfo(string fldName, string kWord, string rowVal)
         {
             try
             {
                 //create a folder
-                string keywordsFolder = Path.Combine(label8.Text, "keywords");
-                Directory.CreateDirectory(keywordsFolder);
-                outputCSVfile = keywordsFolder + "\\" + kWord + ".csv";
+                string outputFolder = Path.Combine(label8.Text, fldName);
+                Directory.CreateDirectory(outputFolder);
+                outputCSVfile = outputFolder + "\\" + kWord + ".csv";
 
                 File.AppendAllText(outputCSVfile, rowVal + Environment.NewLine);
-            }
-            catch (Exception ex)
-            {
-                error_message = "Error: " + Environment.NewLine + ex.ToString();
-                errorLog("\\error_log.txt", error_message);
-                MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
-                throw;
-            }
-        }
-
-        private void exportCellInfo(string ctg, string cellVal)
-        {
-            try
-            {
-                //create a folder
-                string knownErrorsFolder = Path.Combine(label8.Text, "known_errors");
-                Directory.CreateDirectory(knownErrorsFolder);
-                outputCSVfile = knownErrorsFolder + "\\" + ctg + ".csv";
-
-                File.AppendAllText(outputCSVfile, cellVal + Environment.NewLine);
             }
             catch (Exception ex)
             {
