@@ -2905,7 +2905,7 @@ namespace OutSystems_Log_Parser
             }
             else if (ctg == "Compilation")
             {
-                knownErrors_Errorlogs = new string[] { "compilation error", "can't proceed", "error loading espace", "failed to parse response", "error obtaining version" };
+                knownErrors_Errorlogs = new string[] { "compilation error", "can't proceed", "error loading espace", "failed to parse response", "error obtaining version", "check if a third-party program is using" };
 
                 highlightKnownErrors("dataGridViewErrorlogs", dataGridViewErrorlogs, 1, knownErrors_Errorlogs);
 
@@ -4103,6 +4103,10 @@ namespace OutSystems_Log_Parser
                 //create a folder
                 string outputFolder = Path.Combine(label8.Text, fldName);
                 Directory.CreateDirectory(outputFolder);
+
+                //replace illegal characters in filename
+                kWord = Regex.Replace(kWord, "[\\/:*?<>|\"]", "");
+
                 outputCSVfile = outputFolder + "\\" + kWord + ".csv";
 
                 File.AppendAllText(outputCSVfile, rowVal + Environment.NewLine);
