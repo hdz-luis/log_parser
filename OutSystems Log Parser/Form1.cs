@@ -17,7 +17,6 @@ namespace OutSystems_Log_Parser
     {
         string category = "";
         string categoryName = "";
-        string myKeyword2 = "";
         string fullPath = "";
         string[] filesPaths;
         string[] lines;
@@ -1819,10 +1818,9 @@ namespace OutSystems_Log_Parser
                             {
                                 row.DefaultCellStyle.BackColor = Color.Yellow;
 
-                                categoryName = category.Replace(" ", "_").ToLower();
                                 string dgvName2 = dgvName.Replace("dataGridView", "");
                                 rowInfo += string.Join("|", row.Cells.Cast<DataGridViewCell>().Where(c => c.Value != null).Select(c => c.Value.ToString()).ToArray());
-                                exportRowInfo("known_errors", categoryName, dgvName2 + "|" + rowInfo);
+                                exportRowInfo("known_errors", category, dgvName2 + "|" + rowInfo);
 
                                 if (countFindKnownError == 1)
                                 {
@@ -2508,8 +2506,7 @@ namespace OutSystems_Log_Parser
                         {
                             rowInfo += string.Join("|", row.Cells.Cast<DataGridViewCell>().Where(c => c.Value != null).Select(c => c.Value.ToString()).ToArray());
                             string dgvName2 = dgvName.Replace("dataGridView", "");
-                            myKeyword2 = myKeyword.Replace(" ", "_").ToLower();
-                            exportRowInfo("keywords", myKeyword2, dgvName2 + "|" + rowInfo);
+                            exportRowInfo("keywords", myKeyword, dgvName2 + "|" + rowInfo);
 
                             if (myCount == 1)
                             {
@@ -2898,7 +2895,7 @@ namespace OutSystems_Log_Parser
         {
             if (ctg == "Building Mobile App")
             {
-                knownErrors_AndroidiOSlogs = new string[] { "command finished with error code 0", "plugin is not going to work", "plugin doesn't support this project's cordova-android version", "failed to fetch plug", "build failed with the following error", "command failed with exit code", "the ios deployment target", "kotlin", "cordovaerror", "file is corrupt or invalid", "error: spawnsync sudo etimeout", "signing certificate is invalid", "verification failed", "incompatibility", "android:exported", "could not find any", "archive failed", "missing the aps-environment entitlement" };
+                knownErrors_AndroidiOSlogs = new string[] { "command finished with error code 0", "plugin is not going to work", "plugin doesn't support this project's cordova-android version", "failed to fetch plug", "build failed with the following error", "command failed with exit code", "the ios deployment target", "kotlin", "cordovaerror", "file is corrupt or invalid", "error: spawnsync sudo etimeout", "signing certificate is invalid", "verification failed", "incompatibility", "android:exported", "could not find any", "archive failed", "missing the aps-environment entitlement", "google-services.json is missing" };
 
                 highlightKnownErrors("dataGridViewAndroidlogs", dataGridViewAndroidlogs, 3, knownErrors_AndroidiOSlogs);
                 highlightKnownErrors("dataGridViewiOSlogs", dataGridViewiOSlogs, 3, knownErrors_AndroidiOSlogs);
@@ -2928,7 +2925,7 @@ namespace OutSystems_Log_Parser
             }
             else if (ctg == "Logic")
             {
-                knownErrors_Errorlogs = new string[] { "url rewrite module error", "an error occurred in task", "a fatal error has occurred", "json deserialization", "unknown reference expression type email", "bad json escape sequence", "dequeuing", "error loading espace" };
+                knownErrors_Errorlogs = new string[] { "url rewrite module error", "an error occurred in task", "a fatal error has occurred", "json deserialization", "unknown reference expression type email", "bad json escape sequence", "dequeuing", "error loading espace", "waited too long for debug command" };
                 knownErrors_Generallogs = new string[] { "system cannot find" };
                 knownErrors_WinAppEventViewer = new string[] { "error closing", "error opening" };
                 knownErrors_WinSysEventViewer = new string[] { "error closing", "timed out" };
@@ -4107,7 +4104,9 @@ namespace OutSystems_Log_Parser
                 //replace illegal characters in filename
                 kWord = Regex.Replace(kWord, "[\\/:*?<>|\"]", "");
 
-                outputCSVfile = outputFolder + "\\" + kWord + ".csv";
+                string kWord2 = kWord.Replace(" ", "_");
+
+                outputCSVfile = outputFolder + "\\" + kWord2.ToLower() + ".csv";
 
                 File.AppendAllText(outputCSVfile, rowVal + Environment.NewLine);
             }

@@ -28,6 +28,8 @@ namespace OutSystems_Log_Parser
         string evtxPath = "";
         string plotlyPath = "";
         string pandasPath = "";
+        string py7zrPath = "";
+        string patoolPath = "";
         string error_message = "";
         string outputTXTfile = "";
         string command = "";
@@ -58,7 +60,12 @@ namespace OutSystems_Log_Parser
 
             if (string.IsNullOrEmpty(pythonPath.Trim()) && pythonVersion != "3.6.2")
             {
+                txtBoxSearchDirectory.Enabled = false;
                 btnBrowseFolder.Enabled = false;
+                dateTimePicker1.Enabled = false;
+                dateTimePicker2.Enabled = false;
+                radioButton1.Enabled = false;
+                radioButton2.Enabled = false;
                 btnSubmit.Enabled = false;
                 groupBox1.Enabled = false;
 
@@ -75,6 +82,8 @@ namespace OutSystems_Log_Parser
                 evtxPath = pythonPath2 + @"Lib\site-packages\Evtx";
                 plotlyPath = pythonPath2 + @"Lib\site-packages\plotly";
                 pandasPath = pythonPath2 + @"Lib\site-packages\pandas";
+                py7zrPath = pythonPath2 + @"Lib\site-packages\py7zr";
+                patoolPath = pythonPath2 + @"Lib\site-packages\patoolib";
 
                 if (!Directory.Exists(openpyxlPath))
                 {
@@ -131,9 +140,36 @@ namespace OutSystems_Log_Parser
                     chkBoxPandas.Enabled = false;
                 }
 
-                if (!Directory.Exists(openpyxlPath) || !Directory.Exists(lxmlPath) || !Directory.Exists(evtxPath) || !Directory.Exists(plotlyPath) || !Directory.Exists(pandasPath))
+                if (!Directory.Exists(py7zrPath))
                 {
+                    chkBoxPy7zr.Checked = false;
+                    chkBoxPy7zr.Enabled = true;
+                }
+                else
+                {
+                    chkBoxPy7zr.Checked = false;
+                    chkBoxPy7zr.Enabled = false;
+                }
+
+                if (!Directory.Exists(patoolPath))
+                {
+                    chkBoxPatool.Checked = false;
+                    chkBoxPatool.Enabled = true;
+                }
+                else
+                {
+                    chkBoxPatool.Checked = false;
+                    chkBoxPatool.Enabled = false;
+                }
+
+                if (!Directory.Exists(openpyxlPath) || !Directory.Exists(lxmlPath) || !Directory.Exists(evtxPath) || !Directory.Exists(plotlyPath) || !Directory.Exists(pandasPath) || !Directory.Exists(py7zrPath) || !Directory.Exists(patoolPath))
+                {
+                    txtBoxSearchDirectory.Enabled = false;
                     btnBrowseFolder.Enabled = false;
+                    dateTimePicker1.Enabled = false;
+                    dateTimePicker2.Enabled = false;
+                    radioButton1.Enabled = false;
+                    radioButton2.Enabled = false;
                     btnSubmit.Enabled = false;
                     MessageBox.Show("Please install the missing libraries and restart the application", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
@@ -317,6 +353,24 @@ namespace OutSystems_Log_Parser
                 errorLog("\\error_log.txt", error_message);
                 MessageBox.Show("A file has been created with the error message." + Environment.NewLine + Environment.NewLine + error_message);
                 throw;
+            }
+        }
+
+        private void chkBoxPy7zr_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkBoxPy7zr.Checked == true)
+            {
+                command = @"/C cd " + pythonPath2 + "Scripts & pip3 install setuptools --upgrade & pip3 install pip --upgrade & pip3 install py7zr";
+                commandLine(command);
+            }
+        }
+
+        private void chkBoxPatool_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkBoxPatool.Checked == true)
+            {
+                command = @"/C cd " + pythonPath2 + "Scripts & pip3 install patool";
+                commandLine(command);
             }
         }
     }
