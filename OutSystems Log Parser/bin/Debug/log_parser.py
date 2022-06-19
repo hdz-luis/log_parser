@@ -554,6 +554,14 @@ def splitDirectory2(root, file):
 
     return absolutePathOfFile, filePathWithoutFilename, filenameWithoutExt, extension
 
+def splitDirectory3(absolutePathOfFile):
+    pathWithoutFilename = os.path.split(absolutePathOfFile)[0]
+    filenameWithExt = os.path.split(absolutePathOfFile)[1]
+    filenameWithoutExt = os.path.splitext(filenameWithExt)[0]
+    newFilePath = pathWithoutFilename + "\\" + filenameWithoutExt
+
+    return newFilePath
+
 def searchDirectory(directoryPath, _fromDate, _toDate):
     readStagingInfrastructureUserPermissionReports = False
     #search for the files with the raw data in the specified directory
@@ -601,27 +609,18 @@ def searchDirectory(directoryPath, _fromDate, _toDate):
         for f in files:
             if f.endswith(".zip"):
                 zipFilePath = os.path.join(root, f)
-                zipFilePathWithoutFilename = os.path.split(zipFilePath)[0]
-                zipFilenameWithExt = os.path.split(zipFilePath)[1]
-                zipFilenameWithoutExt = os.path.splitext(zipFilenameWithExt)[0]
-                newZipFilePath = zipFilePathWithoutFilename + "\\" + zipFilenameWithoutExt
+                newZipFilePath = splitDirectory3(zipFilePath)
                 shutil.unpack_archive(zipFilePath, newZipFilePath)
                 searchDirectory(newZipFilePath, _fromDate, _toDate)
             elif f.endswith(".7z"):
                 zFilePath = os.path.join(root, f)
-                zFilePathWithoutFilename = os.path.split(zFilePath)[0]
-                zFilenameWithExt = os.path.split(zFilePath)[1]
-                zFilenameWithoutExt = os.path.splitext(zFilenameWithExt)[0]
-                new7zFilePath = zFilePathWithoutFilename + "\\" + zFilenameWithoutExt
+                new7zFilePath = splitDirectory3(zFilePath)
                 with py7zr.SevenZipFile(zFilePath, mode="r") as z:
                     z.extractall(new7zFilePath)
                     searchDirectory(new7zFilePath, _fromDate, _toDate)
             elif f.endswith(".rar"):
                 rarFilePath = os.path.join(root, f)
-                rarFilePathWithoutFilename = os.path.split(rarFilePath)[0]
-                rarFilenameWithExt = os.path.split(rarFilePath)[1]
-                rarFilenameWithoutExt = os.path.splitext(rarFilenameWithExt)[0]
-                newRarFilePath = rarFilePathWithoutFilename + "\\" + rarFilenameWithoutExt
+                newRarFilePath = splitDirectory3(rarFilePath)
                 patoolib.extract_archive(rarFilePath, outdir=newRarFilePath, verbosity=-1)
                 searchDirectory(newRarFilePath, _fromDate, _toDate)
             else:
