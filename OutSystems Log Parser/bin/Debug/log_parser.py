@@ -1,9 +1,11 @@
 import os
 import re
 import sys
+import py7zr
 import codecs
 import shutil
 import openpyxl
+import patoolib
 from lxml import etree
 import Evtx.Evtx as evtx
 from collections import Counter
@@ -392,6 +394,7 @@ replacementDict[9632] = ""
 replacementDict[10296] = ""
 replacementDict[12290] = ""
 replacementDict[57425] = ""
+replacementDict[57772] = ""
 replacementDict[61607] = ""
 replacementDict[61137] = ""
 replacementDict[65279] = ""
@@ -426,8 +429,8 @@ japaneseErrorLogsRegex = r"^([\d]+)\|(.*?)\|([\d\-\:\. ]+)\|(.*?)?\|([\d]+)\|([\
 errorLogsContentRegex = r"^(?:[\d\-\:\. ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|(?:(?:.*?\|){6})([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\-]+)\|(?:[\d]+)"
 errorLogsContentRegex2 = r"^(?:[\d\-\:\. ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\-\.\,\(\)\[\]\/\& ]+)\|(?:(?:.*?\|){5})([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\-]+)\|(?:[\d]+)"
 
-generalLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\w\+\/\=\' ]+)?\|([\d]+)\|([\d]+)\|([\w\-]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w]+)?\|([\w\-\.\:\#\&\[\]\<\>\! ]+)?\|([\w\-]+)?\|([\w\-\(\)\.\* ]+)?\|([\w\(\)\.]+)?\|([\w\-\.\:\;\'\"\`\%\=\$\%\@\&\#\^\+\*\(\)\{\}\[\]\<\>\/\\ ]+)?\|([\w]+)?\|([\w\-\.\,\(\)\[\]\/\& ]+)?\|([\w\-]+)?\|([\w\@\.\\]+)?"
-negativeGeneralLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\w\+\/\=\' ]+)?\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w]+)?\|(?:[\w\-\.\:\#\&\[\]\<\>\! ]+)?\|(?:[\w\-]+)?\|(?:[\w\-\(\)\.\* ]+)?\|(?:[\w\(\)\.]+)?\|(?:[\w\-\.\:\;\'\"\`\%\=\$\%\@\&\#\^\+\*\(\)\{\}\[\]\<\>\/\\ ]+)?\|(?:[\w]+)?\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)?\|(?:[\w\-]+)?\|(?:[\w\@\.\\]+)?).*)"
+generalLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\w\+\/\=\' ]+)?\|([\d]+)\|([\d]+)\|([\w\-]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w]+)?\|([\w\-\.\:\#\&\@\[\]\<\>\!\/ ]+)?\|([\w\-]+)?\|([\w\-\(\)\.\* ]+)?\|([\w\(\)\.]+)?\|([\w\-\.\:\;\'\"\`\%\=\$\%\@\&\#\^\+\*\(\)\{\}\[\]\<\>\/\\ ]+)?\|([\w]+)?\|([\w\-\.\,\(\)\[\]\/\& ]+)?\|([\w\-]+)?\|([\w\@\.\\]+)?"
+negativeGeneralLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\w\+\/\=\' ]+)?\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w]+)?\|(?:[\w\-\.\:\#\&\@\[\]\<\>\!\/ ]+)?\|(?:[\w\-]+)?\|(?:[\w\-\(\)\.\* ]+)?\|(?:[\w\(\)\.]+)?\|(?:[\w\-\.\:\;\'\"\`\%\=\$\%\@\&\#\^\+\*\(\)\{\}\[\]\<\>\/\\ ]+)?\|(?:[\w]+)?\|(?:[\w\-\.\,\(\)\[\]\/\& ]+)?\|(?:[\w\-]+)?\|(?:[\w\@\.\\]+)?).*)"
 nonMatchedGeneralLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseGeneralLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|(.*?)?\|([\d]+)\|([\d]+)\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?"
 generalLogsContentRegex = r"^([\d\-\: ]+)\|.*?([\d]+)\s*?ms.*?\|(SLOWSQL|SLOWEXTENSION)\|([\w\(\)\. ]+)\|.+?\|([\w\(\)\.]+|\s*?)\|(?:(?:.*?\|){2})([\w]+|\s*?)\|(?:(?:.*?\|){3})([\w\-]+|\s*?)?\|.+"
@@ -505,6 +508,7 @@ hiraganaRegexRange = u'[\u3040-\u309F]'
 katakanaRegexRange = u'[\u30A0-\u30FF]'
 kanjiRegexRange = u'[\u4E00-\u9FAF]'
 koreanRegexRange = u'[\uAC00-\uD7A3]'
+thaiRegexRange = u'[\u0E00-\u0E7F]'
 
 nonMatchedPath = os.getcwd() + "\\nonmatched_valid_lines\\file.txt"
 tempFilePath = os.getcwd() + "\\tempFile.txt"
@@ -603,6 +607,23 @@ def searchDirectory(directoryPath, _fromDate, _toDate):
                 newZipFilePath = zipFilePathWithoutFilename + "\\" + zipFilenameWithoutExt
                 shutil.unpack_archive(zipFilePath, newZipFilePath)
                 searchDirectory(newZipFilePath, _fromDate, _toDate)
+            elif f.endswith(".7z"):
+                zFilePath = os.path.join(root, f)
+                zFilePathWithoutFilename = os.path.split(zFilePath)[0]
+                zFilenameWithExt = os.path.split(zFilePath)[1]
+                zFilenameWithoutExt = os.path.splitext(zFilenameWithExt)[0]
+                new7zFilePath = zFilePathWithoutFilename + "\\" + zFilenameWithoutExt
+                with py7zr.SevenZipFile(zFilePath, mode="r") as z:
+                    z.extractall(new7zFilePath)
+                    searchDirectory(new7zFilePath, _fromDate, _toDate)
+            elif f.endswith(".rar"):
+                rarFilePath = os.path.join(root, f)
+                rarFilePathWithoutFilename = os.path.split(rarFilePath)[0]
+                rarFilenameWithExt = os.path.split(rarFilePath)[1]
+                rarFilenameWithoutExt = os.path.splitext(rarFilenameWithExt)[0]
+                newRarFilePath = rarFilePathWithoutFilename + "\\" + rarFilenameWithoutExt
+                patoolib.extract_archive(rarFilePath, outdir=newRarFilePath, verbosity=-1)
+                searchDirectory(newRarFilePath, _fromDate, _toDate)
             else:
                 if not "infrastructurereport" in root.lower() and not "stagingreport" in root.lower() and not "userpermissionsreport" in root.lower():
                     absolutePathOfFile, filePathWithoutFilename, filenameWithExt, filenameWithoutExt, extension = splitDirectory(root, f)
@@ -880,13 +901,14 @@ def readErrorLogs(searchLines, _fromDate, _toDate):
 
                     nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
 
-                    #check if the line has Japanese or Korean characters
+                    #check if the line has Japanese, Korean, or Thai characters
                     hiragana = re.findall(hiraganaRegexRange, nonMatchedLine2)
                     katakana = re.findall(katakanaRegexRange, nonMatchedLine2)
                     kanji = re.findall(kanjiRegexRange, nonMatchedLine2)
                     korean = re.findall(koreanRegexRange, nonMatchedLine2)
+                    thai = re.findall(thaiRegexRange, nonMatchedLine2)
 
-                    if hiragana or katakana or kanji or korean:
+                    if hiragana or katakana or kanji or korean or thai:
                         JPRegex = re.search(japaneseErrorLogsRegex, nonMatchedLine2)
                         if JPRegex:
                             JPtenantID = JPRegex.group(1)
@@ -1064,13 +1086,14 @@ def readGeneralLogs(searchLines, _fromDate, _toDate):
 
                     nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
 
-                    #check if the line has Japanese or Korean characters
+                    #check if the line has Japanese, Korean, or Thai characters
                     hiragana = re.findall(hiraganaRegexRange, nonMatchedLine2)
                     katakana = re.findall(katakanaRegexRange, nonMatchedLine2)
                     kanji = re.findall(kanjiRegexRange, nonMatchedLine2)
                     korean = re.findall(koreanRegexRange, nonMatchedLine2)
+                    thai = re.findall(thaiRegexRange, nonMatchedLine2)
 
-                    if hiragana or katakana or kanji or korean:
+                    if hiragana or katakana or kanji or korean or thai:
                         JPRegex = re.search(japaneseGeneralLogsRegex, nonMatchedLine2)
                         if JPRegex:
                             JPtenantID = JPRegex.group(1)
@@ -1362,13 +1385,14 @@ def readIntegrationsLogs(searchLines, _fromDate, _toDate):
 
                     nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
 
-                    #check if the line has Japanese or Korean characters
+                    #check if the line has Japanese, Korean, or Thai characters
                     hiragana = re.findall(hiraganaRegexRange, nonMatchedLine2)
                     katakana = re.findall(katakanaRegexRange, nonMatchedLine2)
                     kanji = re.findall(kanjiRegexRange, nonMatchedLine2)
                     korean = re.findall(koreanRegexRange, nonMatchedLine2)
+                    thai = re.findall(thaiRegexRange, nonMatchedLine2)
 
-                    if hiragana or katakana or kanji or korean:
+                    if hiragana or katakana or kanji or korean or thai:
                         JPRegex = re.search(japaneseIntegrationsLogsRegex, nonMatchedLine2)
                         if JPRegex:
                             JPtenantID = JPRegex.group(1)
@@ -1589,13 +1613,14 @@ def readMobileRequestsLogs(searchLines, _fromDate, _toDate):
 
                     nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
 
-                    #check if the line has Japanese or Korean characters
+                    #check if the line has Japanese, Korean, or Thai characters
                     hiragana = re.findall(hiraganaRegexRange, nonMatchedLine2)
                     katakana = re.findall(katakanaRegexRange, nonMatchedLine2)
                     kanji = re.findall(kanjiRegexRange, nonMatchedLine2)
                     korean = re.findall(koreanRegexRange, nonMatchedLine2)
+                    thai = re.findall(thaiRegexRange, nonMatchedLine2)
 
-                    if hiragana or katakana or kanji or korean:
+                    if hiragana or katakana or kanji or korean or thai:
                         JPRegex = re.search(japaneseMobileRequestsLogsRegex, nonMatchedLine2)
                         if JPRegex:
                             JPtenantID = JPRegex.group(1)
@@ -1797,13 +1822,14 @@ def readTimerLogs(searchLines, _fromDate, _toDate):
 
                     nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
 
-                    #check if the line has Japanese or Korean characters
+                    #check if the line has Japanese, Korean, or Thai characters
                     hiragana = re.findall(hiraganaRegexRange, nonMatchedLine2)
                     katakana = re.findall(katakanaRegexRange, nonMatchedLine2)
                     kanji = re.findall(kanjiRegexRange, nonMatchedLine2)
                     korean = re.findall(koreanRegexRange, nonMatchedLine2)
+                    thai = re.findall(thaiRegexRange, nonMatchedLine2)
 
-                    if hiragana or katakana or kanji or korean:
+                    if hiragana or katakana or kanji or korean or thai:
                         JPRegex = re.search(japaneseTimerLogsRegex, nonMatchedLine2)
                         if JPRegex:
                             JPtenantID = JPRegex.group(1)
@@ -2011,13 +2037,14 @@ def readEmailLogs(searchLines, _fromDate, _toDate):
 
                     nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
 
-                    #check if the line has Japanese or Korean characters
+                    #check if the line has Japanese, Korean, or Thai characters
                     hiragana = re.findall(hiraganaRegexRange, nonMatchedLine2)
                     katakana = re.findall(katakanaRegexRange, nonMatchedLine2)
                     kanji = re.findall(kanjiRegexRange, nonMatchedLine2)
                     korean = re.findall(koreanRegexRange, nonMatchedLine2)
+                    thai = re.findall(thaiRegexRange, nonMatchedLine2)
 
-                    if hiragana or katakana or kanji or korean:
+                    if hiragana or katakana or kanji or korean or thai:
                         JPRegex = re.search(japaneseEmailLogsRegex, nonMatchedLine2)
                         if JPRegex:
                             JPiD = JPRegex.group(1)
@@ -2269,13 +2296,14 @@ def readExtensionLogs(searchLines, _fromDate, _toDate):
 
                     nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
 
-                    #check if the line has Japanese or Korean characters
+                    #check if the line has Japanese, Korean, or Thai characters
                     hiragana = re.findall(hiraganaRegexRange, nonMatchedLine2)
                     katakana = re.findall(katakanaRegexRange, nonMatchedLine2)
                     kanji = re.findall(kanjiRegexRange, nonMatchedLine2)
                     korean = re.findall(koreanRegexRange, nonMatchedLine2)
+                    thai = re.findall(thaiRegexRange, nonMatchedLine2)
 
-                    if hiragana or katakana or kanji or korean:
+                    if hiragana or katakana or kanji or korean or thai:
                         JPRegex = re.search(japaneseExtensionLogsRegex, nonMatchedLine2)
                         if JPRegex:
                             JPtenantID = JPRegex.group(1)
@@ -2491,13 +2519,14 @@ def readServiceActionLogs(searchLines, _fromDate, _toDate):
 
                     nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
 
-                    #check if the line has Japanese or Korean characters
+                    #check if the line has Japanese, Korean, or Thai characters
                     hiragana = re.findall(hiraganaRegexRange, nonMatchedLine2)
                     katakana = re.findall(katakanaRegexRange, nonMatchedLine2)
                     kanji = re.findall(kanjiRegexRange, nonMatchedLine2)
                     korean = re.findall(koreanRegexRange, nonMatchedLine2)
+                    thai = re.findall(thaiRegexRange, nonMatchedLine2)
 
-                    if hiragana or katakana or kanji or korean:
+                    if hiragana or katakana or kanji or korean or thai:
                         JPRegex = re.search(japaneseServiceActionLogsRegex, nonMatchedLine2)
                         if JPRegex:
                             JPtenantID = JPRegex.group(1)
@@ -2715,13 +2744,14 @@ def readScreenLogs(searchLines, _fromDate, _toDate):
 
                     nonMatchedLine2 = nonMatchedHead + nonMatchedDate + nonMatchedTail
 
-                    #check if the line has Japanese or Korean characters
+                    #check if the line has Japanese, Korean, or Thai characters
                     hiragana = re.findall(hiraganaRegexRange, nonMatchedLine2)
                     katakana = re.findall(katakanaRegexRange, nonMatchedLine2)
                     kanji = re.findall(kanjiRegexRange, nonMatchedLine2)
                     korean = re.findall(koreanRegexRange, nonMatchedLine2)
+                    thai = re.findall(thaiRegexRange, nonMatchedLine2)
 
-                    if hiragana or katakana or kanji or korean:
+                    if hiragana or katakana or kanji or korean or thai:
                         JPRegex = re.search(japaneseScreenLogsRegex, nonMatchedLine2)
                         if JPRegex:
                             JPtenantID = JPRegex.group(1)
@@ -2951,13 +2981,14 @@ def readiOSAndroidLogs(filename, searchLines, _fromDate, _toDate):
             #check if the non-matched lines fall within the specified range
             if _fromDate <= _nonMatchedDate <= _toDate:
 
-                #check if the line has Japanese or Korean characters
+                #check if the line has Japanese, Korean, or Thai characters
                 hiragana = re.findall(hiraganaRegexRange, nonMatchedLine2)
                 katakana = re.findall(katakanaRegexRange, nonMatchedLine2)
                 kanji = re.findall(kanjiRegexRange, nonMatchedLine2)
                 korean = re.findall(koreanRegexRange, nonMatchedLine2)
+                thai = re.findall(thaiRegexRange, nonMatchedLine2)
 
-                if hiragana or katakana or kanji or korean:
+                if hiragana or katakana or kanji or korean or thai:
                     JPRegex = re.search(japaneseAndroidiOSBuildLogsRegex, nonMatchedLine)
                     if JPRegex:
                         JPDate = JPRegex.group(1)
@@ -3141,13 +3172,14 @@ def readServiceStudioReportLogs(searchLines3, _fromDate, _toDate):
 
                             nonMatchedLine2 = nonMatchedDate + " " + nonMatchedTail
 
-                            #check if the line has Japanese or Korean characters
+                            #check if the line has Japanese, Korean, or Thai characters
                             hiragana = re.findall(hiraganaRegexRange, nonMatchedLine2)
                             katakana = re.findall(katakanaRegexRange, nonMatchedLine2)
                             kanji = re.findall(kanjiRegexRange, nonMatchedLine2)
                             korean = re.findall(koreanRegexRange, nonMatchedLine2)
+                            thai = re.findall(thaiRegexRange, nonMatchedLine2)
 
-                            if hiragana or katakana or kanji or korean:
+                            if hiragana or katakana or kanji or korean or thai:
                                 JPRegex = re.search(japaneseServiceStudioReportsOperationsLogsRegex, nonMatchedLine2)
                                 if JPRegex:
                                     JPDate = JPRegex.group(1)
@@ -3201,13 +3233,14 @@ def readServiceStudioReportLogs(searchLines3, _fromDate, _toDate):
 
                             nonMatchedLine2 = nonMatchedDate + " " + nonMatchedTail
 
-                            #check if the line has Japanese or Korean characters
+                            #check if the line has Japanese, Korean, or Thai characters
                             hiragana = re.findall(hiraganaRegexRange, nonMatchedLine2)
                             katakana = re.findall(katakanaRegexRange, nonMatchedLine2)
                             kanji = re.findall(kanjiRegexRange, nonMatchedLine2)
                             korean = re.findall(koreanRegexRange, nonMatchedLine2)
+                            thai = re.findall(thaiRegexRange, nonMatchedLine2)
 
-                            if hiragana or katakana or kanji or korean:
+                            if hiragana or katakana or kanji or korean or thai:
                                 JPRegex = re.search(japaneseServiceStudioReportsOperationsLogsRegex, nonMatchedLine2)
                                 if JPRegex:
                                     JPDate = JPRegex.group(1)
@@ -3557,8 +3590,6 @@ def xlsxtxtFile(absolutePath, filename, ext, _fromDate, _toDate):
             if numOfErrorLogs > 1:
                 populateList(os.getcwd() + "\\filtered_data_files\\device_information.txt", androidOSVersionOccurrencesList, myandroidOSVersionOccurrencesList)
 
-            del deviceInformationList[:]
-            del myDeviceInformationList[:]
             del androidOSVersionList[:]
             del myAndroidOSVersionList[:]
 
@@ -3581,10 +3612,11 @@ def xlsxtxtFile(absolutePath, filename, ext, _fromDate, _toDate):
             if numOfErrorLogs > 1:
                 populateList(os.getcwd() + "\\filtered_data_files\\device_information.txt", iOSOSVersionOccurrencesList, myiOSOSVersionOccurrencesList)
 
-            del deviceInformationList[:]
-            del myDeviceInformationList[:]
             del iosOSVersionList[:]
             del myiOSVersionList[:]
+
+        del myDeviceInformationList[:]
+        del deviceInformationList[:]
 
     if len(myNonMatchedValidLinesFromDateRange) > 0:
         createFolder("\\nonmatched_valid_lines\\")
@@ -3795,13 +3827,14 @@ def logFile(absolutePath, filenameWithExt, ext, _fromDate, _toDate):
 
                             nonMatchedLine2 = nonMatchedDate + nonMatchedTail
 
-                            #check if the line has Japanese or Korean characters
+                            #check if the line has Japanese, Korean, or Thai characters
                             hiragana = re.findall(hiraganaRegexRange, nonMatchedLine2)
                             katakana = re.findall(katakanaRegexRange, nonMatchedLine2)
                             kanji = re.findall(kanjiRegexRange, nonMatchedLine2)
                             korean = re.findall(koreanRegexRange, nonMatchedLine2)
+                            thai = re.findall(thaiRegexRange, nonMatchedLine2)
 
-                            if hiragana or katakana or kanji or korean:
+                            if hiragana or katakana or kanji or korean or thai:
                                 JPRegex = re.search(japaneseIisLogsRegex, nonMatchedLine2)
                                 if JPRegex:
                                     JPDate = JPRegex.group(1)
