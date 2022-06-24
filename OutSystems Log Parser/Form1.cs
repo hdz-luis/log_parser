@@ -2902,7 +2902,7 @@ namespace OutSystems_Log_Parser
             }
             else if (ctg == "Compilation")
             {
-                knownErrors_Errorlogs = new string[] { "compilation error", "can't proceed", "error loading espace", "failed to parse response", "error obtaining version", "check if a third-party program is using" };
+                knownErrors_Errorlogs = new string[] { "compilation error", "can't proceed", "error loading espace", "failed to parse response", "error obtaining version", "check if a third-party program is using", "the paging file is too small for this operation to complete", "could not allocate space for object", "environment fault", "old producer", "locked module", "an error occurred in task" };
 
                 highlightKnownErrors("dataGridViewErrorlogs", dataGridViewErrorlogs, 1, knownErrors_Errorlogs);
 
@@ -2915,7 +2915,7 @@ namespace OutSystems_Log_Parser
             }
             else if (ctg == "Database")
             {
-                knownErrors_Errorlogs = new string[] { "truncated in table", "dequeuing", "connection is broken" };
+                knownErrors_Errorlogs = new string[] { "truncated in table", "dequeuing", "connection is broken", "locked module" };
                 knownErrors_WinAppEventViewer = new string[] { "ora-", "error closing", "error opening" };
                 knownErrors_WinSysEventViewer = new string[] { "error closing", "timed out" };
 
