@@ -2930,7 +2930,7 @@ namespace OutSystems_Log_Parser
                 knownErrors_WinAppEventViewer = new string[] { "error closing", "error opening" };
                 knownErrors_WinSysEventViewer = new string[] { "error closing", "timed out" };
                 knownErrors_AndroidiOSlogs = new string[] { "androidx library", "error: spawnsync sudo etimeout", "verification failed", "could not find any", "archive failed" };
-                knownErrors_ServiceStudiologs = new string[] { "oneoftypedefinition" };
+                knownErrors_ServiceStudiologs = new string[] { "oneoftypedefinition", "unable to consume soap web service" };
 
                 highlightKnownErrors("dataGridViewErrorlogs", dataGridViewErrorlogs, 1, knownErrors_Errorlogs);
                 highlightKnownErrors("dataGridViewGenerallogs", dataGridViewGenerallogs, 1, knownErrors_Generallogs);
