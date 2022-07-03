@@ -3339,6 +3339,39 @@ def parseXMLtoString(lineToXML, xmlPath):
     newXMLVar = " ".join(xmlVar(lineToXML))
     return newXMLVar
 
+def parseXMLtoString2(lineToXML, xmlPath1, xmlPath2):
+    xmlVar1 = etree.XPath(xmlPath1)
+    xmlVar2 = etree.XPath(xmlPath2)
+    newXMLVar1 = "|".join(xmlVar1(lineToXML))
+    newXMLVar2 = "|".join(xmlVar2(lineToXML))
+
+    newXMLVar2 = newXMLVar2.replace("<string>", "")
+    newXMLVar2 = newXMLVar2.replace("</string>", "")
+    newXMLVar1 = newXMLVar1.replace("\t", " ")
+    newXMLVar2 = newXMLVar2.replace("\t", " ")
+
+    #remove all the new lines from the string
+    newXMLVar1_2 = ' '.join(newXMLVar1.splitlines())
+    newXMLVar2_2 = ' '.join(newXMLVar2.splitlines())
+
+    #replace white spaces with a single space
+    newXMLVar1_3 = ' '.join(newXMLVar1_2.split())
+    newXMLVar2_3 = ' '.join(newXMLVar2_2.split())
+
+    newXMLVar2_3 = newXMLVar2_3.translate(replacementDict)
+
+    #split the string into a list and join their values
+    msgList1 = newXMLVar1_3.split("|")
+    msgList2 = newXMLVar2_3.split("|")
+
+    newMessage = ' '.join(["[" + a + ": " + b + "]" for a,b in zip(msgList1,msgList2)])
+
+    if newMessage[1] == ":":
+        newMessage = newMessage.replace("[: ", "")
+        newMessage = newMessage.replace(newMessage[len(newMessage)-1], "")
+    
+    return newMessage
+
 def xlsxFile(absolutePath, relativePath, filename, ext, _fromDate, _toDate):
     #convert the XLSX file to TXT to manipulate the data in an easier way
     print("Converting " + filename + ".xlsx to .txt format")
@@ -3918,25 +3951,8 @@ def evtxFile(absolutePath, filenameWithExt, ext, _fromDate, _toDate):
                 level = parseXMLtoString(xmlParse, ".//Level/text()")
 
                 if not level == "0" and not level == "4":
-                    providerName = parseXMLtoString(xmlParse, ".//Provider/@Name")
-                    qualifiers = parseXMLtoString(xmlParse, ".//EventID/@Qualifiers")
                     timestamp = parseXMLtoString(xmlParse, ".//TimeCreated/@SystemTime")
-                    eventID = parseXMLtoString(xmlParse, ".//EventID/text()")
-                    task = parseXMLtoString(xmlParse, ".//Task/text()")
-                    keywords = parseXMLtoString(xmlParse, ".//Keywords/text()")
-                    eventRecordID = parseXMLtoString(xmlParse, ".//EventRecordID/text()")
-                    channel = parseXMLtoString(xmlParse, ".//Channel/text()")
-                    computer = parseXMLtoString(xmlParse, ".//Computer/text()")
-                    message1 = parseXMLtoString(xmlParse, ".//Data/@Name")
-                    message2 = parseXMLtoString(xmlParse, ".//Data/text()")
 
-                    if level == "1":
-                        level = "Critical"
-                    elif level == "2":
-                        level = "Error"
-                    elif level == "3":
-                        level = "Warning"
-                                
                     date = timestamp[0:10]
                     time = timestamp[11:19]
                     time = time.replace(".", "")
@@ -3945,16 +3961,24 @@ def evtxFile(absolutePath, filenameWithExt, ext, _fromDate, _toDate):
                                         
                     if _fromDate <= _date <= _toDate:
 
-                        message2 = message2.replace("<string>", "")
-                        message2 = message2.replace("</string>", "")
-                        newMessage1 = normalizeLines(message1)
-                        newMessage2 = normalizeLines(message2)
-                        newMessage2 = newMessage2.translate(replacementDict)
+                        providerName = parseXMLtoString(xmlParse, ".//Provider/@Name")
+                        qualifiers = parseXMLtoString(xmlParse, ".//EventID/@Qualifiers")
+                        eventID = parseXMLtoString(xmlParse, ".//EventID/text()")
+                        task = parseXMLtoString(xmlParse, ".//Task/text()")
+                        keywords = parseXMLtoString(xmlParse, ".//Keywords/text()")
+                        eventRecordID = parseXMLtoString(xmlParse, ".//EventRecordID/text()")
+                        channel = parseXMLtoString(xmlParse, ".//Channel/text()")
+                        computer = parseXMLtoString(xmlParse, ".//Computer/text()")
+                        message = parseXMLtoString2(xmlParse, ".//Data/@Name", ".//Data/text()")
 
-                        if len(newMessage1.strip()) > 0:
-                            outText = date + " " + time + "|" + level + "|" + "[" + newMessage1.strip() + "] " + newMessage2.strip() + "|" + task + "|" + computer + "|" + providerName + "|" + qualifiers + "|" + eventID + "|" + eventRecordID + "|" + keywords + "\n"
-                        else:
-                            outText = date + " " + time + "|" + level + "|" + newMessage2.strip() + "|" + task + "|" + computer + "|" + providerName + "|" + qualifiers + "|" + eventID + "|" + eventRecordID + "|" + keywords + "\n"
+                        if level == "1":
+                            level = "Critical"
+                        elif level == "2":
+                            level = "Error"
+                        elif level == "3":
+                            level = "Warning"
+
+                        outText = date + " " + time + "|" + level + "|" + message.strip() + "|" + task + "|" + computer + "|" + providerName + "|" + qualifiers + "|" + eventID + "|" + eventRecordID + "|" + keywords + "\n"
 
                         tempFile.writelines(outText)
 
