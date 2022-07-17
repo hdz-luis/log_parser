@@ -303,6 +303,13 @@ espaceNamesList = []
 myEspaceNamesList = []
 cyclicJobNamesList = []
 myCyclicJobNamesList = []
+tempList1 = []
+tempList2 = []
+tempList3 = []
+tempList4 = []
+tempList5 = []
+tempList6 = []
+myVals = []
 
 #all illegal space characters, control characters, and ASCII characters
 replacementDict = {}
@@ -422,36 +429,37 @@ numOfWinAppEvViewerLogs = 0
 numOfWinSecEvViewerLogs = 0
 numOfWinSysEvViewerLogs = 0
 
-errorLogsRegex = r"^([\d]+)\|([\w\-]+)\|([\d\-\:\. ]+)\|([\w\'\/\=\+ ]+)?\|([\d]+)\|([\d]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w\-\(\)\.\* ]+)?\|([\w\.\(\)]+)?\|([\w\-]+)?\|([\w]+)?\|([\w\-\.\,\:\(\)\[\]\/\& ]+)?\|([\w\-]+)?"
-negativeErrorLogsRegex = r"^((?!(?:[\d]+)\|(?:[\w\-]+)\|(?:[\d\-\:\. ]+)\|(?:[\w\'\/\=\+ ]+)?\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w\-\(\)\.\* ]+)?\|(?:[\w\.\(\)]+)?\|(?:[\w\-]+)?\|(?:[\w]+)?\|(?:[\w\-\.\,\:\(\)\[\]\/\& ]+)?\|(?:[\w\-]+)?).*)"
+errorLogsRegex = r"^([\d]+)\|([\w\-]+)\|([\d\-\:\. ]+)\|([\w\'\/\=\+ ]+)?\|([\d]+)\|([\d]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w\-\(\)\.\* ]+)?\|([\w\.\(\)]+)?\|([\w\-]+)?\|([\w]+)?\|([\w\-\.\,\:\(\)\[\]\/\&\+ ]+)?\|([\w\-]+)?"
+negativeErrorLogsRegex = r"^((?!(?:[\d]+)\|(?:[\w\-]+)\|(?:[\d\-\:\. ]+)\|(?:[\w\'\/\=\+ ]+)?\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w\-\(\)\.\* ]+)?\|(?:[\w\.\(\)]+)?\|(?:[\w\-]+)?\|(?:[\w]+)?\|(?:[\w\-\.\,\:\(\)\[\]\/\&\+ ]+)?\|(?:[\w\-]+)?).*)"
 nonMatchedErrorLogsRegex = r"^((?:.*?\|){2})([\d\-]+)(.+)"
 japaneseErrorLogsRegex = r"^([\d]+)\|(.*?)\|([\d\-\:\. ]+)\|(.*?)?\|([\d]+)\|([\d]+)\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?"
 errorLogsContentRegex = r"^(?:[\d\-\:\. ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|(?:(?:.*?\|){6})([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\-]+)\|(?:[\d]+)"
-errorLogsContentRegex2 = r"^(?:[\d\-\:\. ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\-\.\,\:\(\)\[\]\/\& ]+)\|(?:(?:.*?\|){5})([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\-]+)\|(?:[\d]+)"
+errorLogsContentRegex2 = r"^(?:[\d\-\:\. ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\-\.\,\:\(\)\[\]\/\&\+ ]+)\|(?:(?:.*?\|){5})([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\-]+)\|(?:[\d]+)"
+errorLogsDeviceInformationRegex = r"^((?:.*?\|){3})(.+)"
 
-generalLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\w\+\/\=\' ]+)?\|([\d]+)\|([\d]+)\|([\w\-]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w]+)?\|([\w\-\.\:\#\&\@\[\]\<\>\!\/ ]+)?\|([\w\-]+)?\|([\w\-\(\)\.\* ]+)?\|([\w\(\)\.]+)?\|([\w\-\.\:\;\'\"\`\%\=\$\%\@\&\#\^\+\*\(\)\{\}\[\]\<\>\/\\ ]+)?\|([\w]+)?\|([\w\-\.\,\:\(\)\[\]\/\& ]+)?\|([\w\-]+)?\|([\w\@\.\\]+)?"
-negativeGeneralLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\w\+\/\=\' ]+)?\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w]+)?\|(?:[\w\-\.\:\#\&\@\[\]\<\>\!\/ ]+)?\|(?:[\w\-]+)?\|(?:[\w\-\(\)\.\* ]+)?\|(?:[\w\(\)\.]+)?\|(?:[\w\-\.\:\;\'\"\`\%\=\$\%\@\&\#\^\+\*\(\)\{\}\[\]\<\>\/\\ ]+)?\|(?:[\w]+)?\|(?:[\w\-\.\,\:\(\)\[\]\/\& ]+)?\|(?:[\w\-]+)?\|(?:[\w\@\.\\]+)?).*)"
+generalLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\w\+\/\=\' ]+)?\|([\d]+)\|([\d]+)\|([\w\-]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w]+)?\|([\w\-\.\:\#\&\@\[\]\<\>\!\/ ]+)?\|([\w\-]+)?\|([\w\-\(\)\.\* ]+)?\|([\w\(\)\.]+)?\|([\w\-\.\:\;\'\"\`\%\=\$\%\@\&\#\^\+\*\(\)\{\}\[\]\<\>\/\\ ]+)?\|([\w]+)?\|([\w\-\.\,\:\(\)\[\]\/\&\+ ]+)?\|([\w\-]+)?\|([\w\@\.\\]+)?"
+negativeGeneralLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\w\+\/\=\' ]+)?\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w]+)?\|(?:[\w\-\.\:\#\&\@\[\]\<\>\!\/ ]+)?\|(?:[\w\-]+)?\|(?:[\w\-\(\)\.\* ]+)?\|(?:[\w\(\)\.]+)?\|(?:[\w\-\.\:\;\'\"\`\%\=\$\%\@\&\#\^\+\*\(\)\{\}\[\]\<\>\/\\ ]+)?\|(?:[\w]+)?\|(?:[\w\-\.\,\:\(\)\[\]\/\&\+ ]+)?\|(?:[\w\-]+)?\|(?:[\w\@\.\\]+)?).*)"
 nonMatchedGeneralLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseGeneralLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|(.*?)?\|([\d]+)\|([\d]+)\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?"
 generalLogsContentRegex = r"^([\d\-\: ]+)\|.*?([\d]+)\s*?ms.*?\|(SLOWSQL|SLOWEXTENSION)\|([\w\(\)\. ]+)\|.+?\|([\w\(\)\.]+|\s*?)\|(?:(?:.*?\|){2})([\w]+|\s*?)\|(?:(?:.*?\|){3})([\w\-]+|\s*?)?\|.+"
 
-integrationsLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w\.\:\;\-\% ]+)?\|([\w\:\/\\\.\,\*\-\=\%\&\?\~\(\)\{\}]+)?\|([\w\/\.\-\(\) ]+)\|([\w\(\) ]+)\|([\d]+)\|([\w\-]+)?\|([\w\-]+)\|([\w\-\:]+)\|([\w\.]+)?\|([\w\-\.\,\:\(\)\[\]\/\& ]+)?\|([\w\-]+)?"
-negativeIntegrationsLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w\.\:\;\-\% ]+)?\|(?:[\w\:\/\\\.\,\*\-\=\%\&\?\~\(\)\{\}]+)?\|(?:[\w\/\.\-\(\) ]+)\|(?:[\w\(\) ]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w\-]+)\|(?:[\w\-\:]+)\|(?:[\w\.]+)?\|(?:[\w\-\.\,\:\(\)\[\]\/\& ]+)?\|(?:[\w\-]+)?).*)"
+integrationsLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w\.\:\;\-\% ]+)?\|([\w\:\/\\\.\,\*\-\=\%\&\?\~\(\)\{\}]+)?\|([\w\/\.\-\(\) ]+)\|([\w\(\) ]+)\|([\d]+)\|([\w\-]+)?\|([\w\-]+)\|([\w\-\:]+)\|([\w\.]+)?\|([\w\-\.\,\:\(\)\[\]\/\&\+ ]+)?\|([\w\-]+)?"
+negativeIntegrationsLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w\.\:\;\-\% ]+)?\|(?:[\w\:\/\\\.\,\*\-\=\%\&\?\~\(\)\{\}]+)?\|(?:[\w\/\.\-\(\) ]+)\|(?:[\w\(\) ]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w\-]+)\|(?:[\w\-\:]+)\|(?:[\w\.]+)?\|(?:[\w\-\.\,\:\(\)\[\]\/\&\+ ]+)?\|(?:[\w\-]+)?).*)"
 nonMatchedIntegrationsLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseIntegrationsLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|(.*?)?\|(.*?)?\|(.*?)\|(.*?)\|([\d]+)\|(.*?)?\|(.*?)\|(.*?)\|(.*?)?\|(.*?)?\|(.*?)?"
-integrationsLogsContentRegex = r"^([\d\-\:\. ]+)\|([\d]+)\|([\w\-\.\,\:\(\)\[\]\/\& ]+).+?\|([\w\/\.\-\(\) ]+)\|([\w\(\) ]+)\|(?:(?:.+?\|){3})([\w\.]+|\s*?)\|(?:[\d]+)\|([\w\-]+|\s*?)\|.+"
+integrationsLogsContentRegex = r"^([\d\-\:\. ]+)\|([\d]+)\|([\w\-\.\,\:\(\)\[\]\/\&\+ ]+).+?\|([\w\/\.\-\(\) ]+)\|([\w\(\) ]+)\|(?:(?:.+?\|){3})([\w\.]+|\s*?)\|(?:[\d]+)\|([\w\-]+|\s*?)\|.+"
 
-mobileRequestsLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\.\-\:\;\% ]+)\|([\w\:\/\\\.\-\=\%\&\?]+)\|([\d]+)\|([\w\-]+)\|([\w\-]+)?\|([\d]+)\|([\w\-\:]+)\|([\w\/\+\=\']+)?\|([\d]+)\|([\w\.]+)\|([\w\-\.\,\:\(\)\[\]\/\& ]+)\|([\w\-]+)"
-negativeMobileRequestsLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w\.\-\:\;\% ]+)\|(?:[\w\:\/\\\.\-\=\%\&\?]+)\|(?:[\d]+)\|(?:[\w\-]+)\|(?:[\w\-]+)?\|(?:[\d]+)\|(?:[\w\-\:]+)\|(?:[\w\/\+\=\']+)?\|(?:[\d]+)\|(?:[\w\.]+)\|(?:[\w\-\.\,\:\(\)\[\]\/\& ]+)\|(?:[\w\-]+)).*)"
+mobileRequestsLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\.\-\:\;\% ]+)\|([\w\:\/\\\.\-\=\%\&\?]+)\|([\d]+)\|([\w\-]+)\|([\w\-]+)?\|([\d]+)\|([\w\-\:]+)\|([\w\/\+\=\']+)?\|([\d]+)\|([\w\.]+)\|([\w\-\.\,\:\(\)\[\]\/\&\+ ]+)\|([\w\-]+)"
+negativeMobileRequestsLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w\.\-\:\;\% ]+)\|(?:[\w\:\/\\\.\-\=\%\&\?]+)\|(?:[\d]+)\|(?:[\w\-]+)\|(?:[\w\-]+)?\|(?:[\d]+)\|(?:[\w\-\:]+)\|(?:[\w\/\+\=\']+)?\|(?:[\d]+)\|(?:[\w\.]+)\|(?:[\w\-\.\,\:\(\)\[\]\/\&\+ ]+)\|(?:[\w\-]+)).*)"
 nonMatchedMobileRequestsLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseMobileRequestsLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|(.*?)\|(.*?)\|(.*?)\|([\d]+)\|(.*?)\|(.*?)?\|([\d]+)\|(.*?)\|(.*?)?\|([\d]+)\|(.*?)\|(.*?)\|(.*?)"
-mobileRequestsLogsContentRegex = r"^([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\-\.\,\:\(\)\[\]\/\& ]+)\|(?:(?:.*?\|){4})([\w\.]+)\|(?:(?:.*?\|){4})([\w\-]+|\s*?)\|.+"
+mobileRequestsLogsContentRegex = r"^([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\-\.\,\:\(\)\[\]\/\&\+ ]+)\|(?:(?:.*?\|){4})([\w\.]+)\|(?:(?:.*?\|){4})([\w\-]+|\s*?)\|.+"
 
-timerLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w\-]+)\|([\d]+)\|([\w\-]+)\|([\w\-]+)?\|([\d\-\:\. ]+)\|([\d\-\:\. ]+)\|([\w\-\:]+)?\|([\w\.]+)\|([\w\-\.\,\:\(\)\[\]\/\& ]+)\|([\w\-]+)\|([\w]+)"
-negativeTimerLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w\-]+)\|(?:[\d]+)\|(?:[\w\-]+)\|(?:[\w\-]+)?\|(?:[\d\-\:\. ]+)\|(?:[\d\-\:\. ]+)\|(?:[\w\-\:]+)?\|(?:[\w\.]+)\|(?:[\w\-\.\,\:\(\)\[\]\/\& ]+)\|(?:[\w\-]+)\|(?:[\w]+)).*)"
+timerLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w\-]+)\|([\d]+)\|([\w\-]+)\|([\w\-]+)?\|([\d\-\:\. ]+)\|([\d\-\:\. ]+)\|([\w\-\:]+)?\|([\w\.]+)\|([\w\-\.\,\:\(\)\[\]\/\&\+ ]+)\|([\w\-]+)\|([\w]+)"
+negativeTimerLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w\-]+)\|(?:[\d]+)\|(?:[\w\-]+)\|(?:[\w\-]+)?\|(?:[\d\-\:\. ]+)\|(?:[\d\-\:\. ]+)\|(?:[\w\-\:]+)?\|(?:[\w\.]+)\|(?:[\w\-\.\,\:\(\)\[\]\/\&\+ ]+)\|(?:[\w\-]+)\|(?:[\w]+)).*)"
 nonMatchedTimerLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseTimerLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|(.*?)\|([\d]+)\|(.*?)\|(.*?)?\|([\d\-\:\. ]+)\|([\d\-\:\. ]+)\|(.*?)?\|(.*?)\|(.*?)\|(.*?)\|(.*?)"
-timerLogsContentRegex = r"^([\d\-\:\. ]+)\|([\d]+)\|([\w\-\.\,\:\(\)\[\]\/\& ]+)\|(?:(?:.+?\|){2})([\w\.]+)\|(?:.+?\|)([\w]+)\|(?:(?:.*?\|){2})(?:[\d\-\:\. ]+)\|([\w\-]+|\s*?)\|.+"
+timerLogsContentRegex = r"^([\d\-\:\. ]+)\|([\d]+)\|([\w\-\.\,\:\(\)\[\]\/\&\+ ]+)\|(?:(?:.+?\|){2})([\w\.]+)\|(?:.+?\|)([\w]+)\|(?:(?:.*?\|){2})(?:[\d\-\:\. ]+)\|([\w\-]+|\s*?)\|.+"
 
 emailLogsRegex = r"^([\d]+)\|([\w]+)\|([\w\-\:\.\% ]+)\|([\w\-\:\.\% ]+)?\|([\d]+)\|([\w\@\.\,\- ]+)\|([\w\@\.\,\- ]+)\|([\w\@\.\-]+)?\|([\w\@\.\-]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)\|([\w]+)\|([\w]+)\|([\d]+)\|([\w\@\.\-]+)"
 negativeEmailLogsRegex = r"^((?!(?:[\d]+)\|(?:[\w]+)\|(?:[\w\-\:\.\% ]+)\|(?:[\w\-\:\.\% ]+)?\|(?:[\d]+)\|(?:[\w\@\.\,\- ]+)\|(?:[\w\@\.\,\- ]+)\|(?:[\w\@\.\-]+)?\|(?:[\w\@\.\-]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w]+)\|(?:[\d]+)\|(?:[\w\@\.\-]+)).*)"
@@ -459,23 +467,23 @@ nonMatchedEmailLogsRegex = r"^((?:.*?\|){10})([\d\-]+)(.+)"
 japaneseEmailLogsRegex = r"^([\d]+)\|(.*?)\|(.*?)\|(.*?)?\|([\d]+)\|(.*?)\|(.*?)\|(.*?)?\|(.*?)?\|(.*?)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)\|(.*?)\|(.*?)\|([\d]+)\|(.*?)"
 emailLogsContentRegex = r"^([\d\-\:\. ]+)\|([\w\-\:\.\% ]+)\|([\w\-\:\.\% ]+)\|([\w\@\.\,\- ]+)\|([\w\@\.\,\- ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\@\.\-]+|\s*?)\|([\w\@\.\-]+|\s*?)\|([\w]+)\|(?:(?:.*?\|){5})([\w]+)\|.+"
 
-extensionLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\/\'\=\+]+)\|([\d]+)\|([\d]+)\|([\d]+)\|([\w\-]+)\|([\w\-]+)?\|([\w\-\:]+)\|([\w\.]+)\|([\w]+)\|([\w\-\.\,\:\(\)\[\]\/\& ]+)\|([\w\-]+)\|([\w\@\.\\]+)?"
-negativeExtensionLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w\/\'\=\+]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\-]+)\|(?:[\w\-]+)?\|(?:[\w\-\:]+)\|(?:[\w\.]+)\|(?:[\w]+)\|(?:[\w\-\.\,\:\(\)\[\]\/\& ]+)\|(?:[\w\-]+)\|(?:[\w\@\.\\]+)?).*)"
+extensionLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\/\'\=\+]+)\|([\d]+)\|([\d]+)\|([\d]+)\|([\w\-]+)\|([\w\-]+)?\|([\w\-\:]+)\|([\w\.]+)\|([\w]+)\|([\w\-\.\,\:\(\)\[\]\/\&\+ ]+)\|([\w\-]+)\|([\w\@\.\\]+)?"
+negativeExtensionLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w\/\'\=\+]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\-]+)\|(?:[\w\-]+)?\|(?:[\w\-\:]+)\|(?:[\w\.]+)\|(?:[\w]+)\|(?:[\w\-\.\,\:\(\)\[\]\/\&\+ ]+)\|(?:[\w\-]+)\|(?:[\w\@\.\\]+)?).*)"
 nonMatchedExtensionLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseExtensionLogsRegex = r"^([\d]+)\|(.*?)\|(.*?)\|(.*?)?\|([\d]+)\|(.*?)\|(.*?)\|(.*?)?\|(.*?)?\|(.*?)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)\|(.*?)\|(.*?)\|([\d]+)\|(.*?)"
-extensionLogsContentRegex = r"^([\d\-\:\. ]+)\|([\d]+)\|([\w\-\.\,\:\(\)\[\]\/\& ]+)\|.*?\|([\w]+)\|.*?\|([\w\.]+)\|(?:(?:.*?\|){5})([\w]+)\|([\w\-]+|\s*?)\|.+"
+extensionLogsContentRegex = r"^([\d\-\:\. ]+)\|([\d]+)\|([\w\-\.\,\:\(\)\[\]\/\&\+ ]+)\|.*?\|([\w]+)\|.*?\|([\w\.]+)\|(?:(?:.*?\|){5})([\w]+)\|([\w\-]+|\s*?)\|.+"
 
-serviceActionLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)?\|([\w\/\'\=\+]+)\|([\d]+)\|([\w\-]+)?\|([\w\-]+)\|([\w\-\:]+)\|([\w\-\(\)\.\* ]+)?\|([\w\.\(\)]+)\|([\d]+)\|([\w\.\:\;\-\% ]+)\|([\w\:\/\\\.\-\=\%\&\?]+)\|([\w\.]+)\|([\w\-\.\,\:\(\)\[\]\/\& ]+)\|([\w\-]+)\|([\w\@\.\\]+)?\|([\w\-\:]+)"
-negativeServiceActionLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\d]+)?\|(?:[\w\/\'\=\+]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w\-]+)\|(?:[\w\-\:]+)\|(?:[\w\-\(\)\.\* ]+)?\|(?:[\w\.\(\)]+)\|(?:[\d]+)\|(?:[\w\.\:\;\-\% ]+)\|(?:[\w\:\/\\\.\-\=\%\&\?]+)\|(?:[\w\.]+)\|(?:[\w\-\.\,\:\(\)\[\]\/\& ]+)\|(?:[\w\-]+)\|(?:[\w\@\.\\]+)?\|(?:[\w\-\:]+)).*)"
+serviceActionLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)?\|([\w\/\'\=\+]+)\|([\d]+)\|([\w\-]+)?\|([\w\-]+)\|([\w\-\:]+)\|([\w\-\(\)\.\* ]+)?\|([\w\.\(\)]+)\|([\d]+)\|([\w\.\:\;\-\% ]+)\|([\w\:\/\\\.\-\=\%\&\?]+)\|([\w\.]+)\|([\w\-\.\,\:\(\)\[\]\/\&\+ ]+)\|([\w\-]+)\|([\w\@\.\\]+)?\|([\w\-\:]+)"
+negativeServiceActionLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\d]+)?\|(?:[\w\/\'\=\+]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w\-]+)\|(?:[\w\-\:]+)\|(?:[\w\-\(\)\.\* ]+)?\|(?:[\w\.\(\)]+)\|(?:[\d]+)\|(?:[\w\.\:\;\-\% ]+)\|(?:[\w\:\/\\\.\-\=\%\&\?]+)\|(?:[\w\.]+)\|(?:[\w\-\.\,\:\(\)\[\]\/\&\+ ]+)\|(?:[\w\-]+)\|(?:[\w\@\.\\]+)?\|(?:[\w\-\:]+)).*)"
 nonMatchedServiceActionLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseServiceActionLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)?\|(.*?)\|([\d]+)\|(.*?)?\|(.*?)\|(.*?)\|(.*?)?\|(.*?)\|([\d]+)\|(.*?)\|(.*?)\|(.*?)\|(.*?)\|(.*?)\|(.*?)?\|(.*?)"
-serviceActionLogsContentRegex = r"^([\d\-\:\. ]+)\|([\d]+)\|([\w\-\.\,\:\(\)\[\]\/\& ]+)\|.*?\|([\w\.\(\)]+)\|(?:(?:.*?\|)){4}([\w\.]+)\|(?:(?:.*?\|){5})([\w\-]+|\s*?)\|.+"
+serviceActionLogsContentRegex = r"^([\d\-\:\. ]+)\|([\d]+)\|([\w\-\.\,\:\(\)\[\]\/\&\+ ]+)\|.*?\|([\w\.\(\)]+)\|(?:(?:.*?\|)){4}([\w\.]+)\|(?:(?:.*?\|){5})([\w\-]+|\s*?)\|.+"
 
-screenLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\/\'\=\+]+)\|([\d]+)\|([\d]+)\|([\w\-\:\.\% ]+)?\|([\w]+)\|([\w\-]+)\|([\d]+)\|([\d]+)\|([\d]+)\|([\w]+)\|([\w\-\:]+)\|([\w\(\)\.]+)?\|([\w\-\:\.\% ]+)\|([\w\.]+)\|([\w\-\.\,\:\(\)\[\]\/\& ]+)\|([\w\-]+)"
-negativeScreenLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w\/\'\=\+]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\-\:\.\% ]+)?\|(?:[\w]+)\|(?:[\w\-]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w\-\:]+)\|(?:[\w\(\)\.]+)?\|(?:[\w\-\:\.\% ]+)\|(?:[\w\.]+)\|(?:[\w\-\.\,\:\(\)\[\]\/\& ]+)\|(?:[\w\-]+)).*)"
+screenLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\/\'\=\+]+)\|([\d]+)\|([\d]+)\|([\w\-\:\.\% ]+)?\|([\w]+)\|([\w\-]+)\|([\d]+)\|([\d]+)\|([\d]+)\|([\w]+)\|([\w\-\:]+)\|([\w\(\)\.]+)?\|([\w\-\:\.\% ]+)\|([\w\.]+)\|([\w\-\.\,\:\(\)\[\]\/\&\+ ]+)\|([\w\-]+)"
+negativeScreenLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w\/\'\=\+]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\-\:\.\% ]+)?\|(?:[\w]+)\|(?:[\w\-]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w\-\:]+)\|(?:[\w\(\)\.]+)?\|(?:[\w\-\:\.\% ]+)\|(?:[\w\.]+)\|(?:[\w\-\.\,\:\(\)\[\]\/\&\+ ]+)\|(?:[\w\-]+)).*)"
 nonMatchedScreenLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseScreenLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|(.*?)\|(.*?)\|([\d]+)\|([\d]+)\|(.*?)?\|(.*?)\|(.*?)\|([\d]+)\|([\d]+)\|([\d]+)\|(.*?)\|(.*?)\|(.*?)?\|(.*?)\|(.*?)\|(.*?)\|(.*?)"
-screenLogsContentRegex = r"^([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w]+)\|([\w\-\.\,\:\(\)\[\]\/\& ]+)\|.*?\|([\w\(\)\.]+|\s*?)\|(?:(?:.*?\|){3})([\w\.]+)\|.+"
+screenLogsContentRegex = r"^([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w]+)\|([\w\-\.\,\:\(\)\[\]\/\&\+ ]+)\|.*?\|([\w\(\)\.]+|\s*?)\|(?:(?:.*?\|){3})([\w\.]+)\|.+"
 
 bptTroubleshootingReportsRegex = "^([\d]+)\|([\w]+)\|([\w]+)\|([\w]+)\|([\d]+)\|([\d\-\:\. ]+)\|([\d\-\:\. ]+)\|([\w\d\-\:\. ]+)?\|([\w\? ]+)\|([\w]+)\|([\d]+)\|([\w\-]+)?\|([\w ]+)\|([\d\-\:\. ]+)((?:\|)(?:[\w\d\-\:\. ]+))?((?:\|)(?:[\w\d\-\:\. ]+))?((?:\|)(?:[\w\d\-\:\. ]+))?"
 negativeBptTroubleshootingReportsRegex = "^((?!(?:[\d]+)\|(?:[\w]+)\|(?:[\w]+)\|(?:[\w]+)\|(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d\-\:\. ]+)\|(?:[\w\d\-\:\. ]+)?\|(?:[\w\? ]+)\|(?:[\w]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w ]+)\|(?:[\d\-\:\. ]+)(?:(?:\|)(?:[\w\d\-\:\. ]+))?(?:(?:\|)(?:[\w\d\-\:\. ]+))?(?:(?:\|)(?:[\w\d\-\:\. ]+))?).*)"
@@ -675,6 +683,65 @@ def cleanListFunc(txtFile, rawList, cleanList):
     del rawList[:]
     del cleanList[:]
 
+def cleanDeviceInfo(txtFile, deviceInfoRegex):
+    with codecs.open(txtFile, "r", "utf-8", "ignore") as tempFile:
+        searchLines = tempFile.read()
+        regex = re.compile(deviceInfoRegex, re.MULTILINE + re.IGNORECASE)
+        for match in regex.finditer(searchLines):
+            osVersionOccurrences = match.group(1)
+            deviceModelCordovaUUID = match.group(2)
+
+            tempList1.append(osVersionOccurrences + "\n")
+            tempList3.append(osVersionOccurrences.split("|")[0] + "|" + osVersionOccurrences.split("|")[1] + "|" + deviceModelCordovaUUID + "\n")
+
+    #remove duplicate records from the list
+    tempList2 = list(set(tempList1))
+    tempList2.sort()
+
+    tempList4 = list(set(tempList3))
+    tempList4.sort()
+
+    myInd = 0
+
+    for te, tempElm in enumerate(tempList2):
+        if not myInd+(numOfErrorLogs-1) >= len(tempList2):
+            currElm = tempList2[myInd].split("|")[0] + " " + tempList2[myInd].split("|")[1]
+            nextElm = tempList2[myInd+1].split("|")[0] + " " + tempList2[myInd+1].split("|")[1]
+            if currElm == nextElm:
+                del myVals[:]
+                myCount = 0
+                addVals = 0
+                while myCount <= numOfErrorLogs-1:
+                    addVals = int(tempList2[myInd+myCount].split("|")[2])
+                    myVals.append(addVals)
+                    myCount+=1
+                tempList5.append(tempList2[(myInd+myCount)-1].split("|")[0] + "|" + tempList2[(myInd+myCount)-1].split("|")[1] + "|" + str(sum(myVals)))
+                myInd+=numOfErrorLogs
+            else:
+                tempList5.append(tempList2[myInd].split("|")[0] + "|" + tempList2[myInd].split("|")[1] + "|" + tempList2[myInd].split("|")[2])
+                myInd+=1
+        elif myInd+(numOfErrorLogs-1) == len(tempList2):
+            tempList5.append(tempList2[myInd].split("|")[0] + "|" + tempList2[myInd].split("|")[1] + "|" + tempList2[myInd].split("|")[2])
+            myInd+=1
+
+    for te5, tempElm5 in enumerate(tempList5):
+            for te4, tempElm4 in enumerate(tempList4):
+                item = tempElm5.split("|")
+                elm = tempElm4.split("|")
+                if item[0] + "|" + item[1] == elm[0] + "|" + elm[1]:
+                    tempList6.append(item[0] + "|" + item[1] + "|" + item[2] + "|" + elm[2] + "|" + elm[3] + "|" + elm[4])
+
+    with codecs.open(txtFile, "w", "utf-8", "ignore") as tempFile2:
+        tempFile2.writelines(tempList6)
+
+    del tempList1[:]
+    del tempList2[:]
+    del tempList3[:]
+    del tempList4[:]
+    del tempList5[:]
+    del tempList6[:]
+    del myVals[:]
+
 def writeToFile(absolutePath, txtFile, rawList, cleanList):
     if not "infrastructurereport" in absolutePath.lower() and not "stagingreport" in absolutePath.lower() and not "userpermissionsreport" in absolutePath.lower():
         rawList.sort()
@@ -769,9 +836,6 @@ def readSplitFilesXLSX(cycleNum, filename, ext, _fromDate, _toDate):
               "2- The customer switched the columns of the spreadsheet.\n3- The customer modified the dates on the spreadsheet.\n")
 
 def readErrorLogs(searchLines, _fromDate, _toDate):
-    global numOfErrorLogs
-    numOfErrorLogs+=1
-
     outText = ""
     nonMatchedOutText = ""
     JPText = ""
@@ -980,9 +1044,6 @@ def readErrorLogs(searchLines, _fromDate, _toDate):
                         myNonMatchedValidLinesFromDateRange.append(nonMatchedOutText)
 
 def readGeneralLogs(searchLines, _fromDate, _toDate):
-    global numOfGeneralLogs
-    numOfGeneralLogs+=1
-
     outText = ""
     nonMatchedOutText = ""
     JPText = ""
@@ -1177,6 +1238,7 @@ def sortGeneralLogsContent(outFile1, outFile2, logsFile1, logsFile2, logsFile1Re
             with codecs.open(logsFile1, "r", "utf-8", "ignore") as linesFromText:
                 generalLogsList = linesFromText.readlines()
 
+            #since the general logs have an error id field, they need to be cross-referenced with the id field from the error logs
             with codecs.open(logsFile2, "r", "utf-8", "ignore") as linesFromText2:
                 errorLogsList = linesFromText2.readlines()
 
@@ -1304,9 +1366,6 @@ def sortGeneralLogsContent(outFile1, outFile2, logsFile1, logsFile2, logsFile1Re
         pass
 
 def readIntegrationsLogs(searchLines, _fromDate, _toDate):
-    global numOfIntegrationsLogs
-    numOfIntegrationsLogs+=1
-
     outText = ""
     nonMatchedOutText = ""
     JPText = ""
@@ -1451,6 +1510,7 @@ def sortIntegrationsLogsContent(outFile1, logsFile1, logsFile2, logsFile1Regex, 
             with codecs.open(logsFile1, "r", "utf-8", "ignore") as linesFromText:
                 integrationsLogsList = linesFromText.readlines()
 
+            #since the integrations logs have an error id field, they need to be cross-referenced with the id field from the error logs
             with codecs.open(logsFile2, "r", "utf-8", "ignore") as linesFromText2:
                 errorLogsList = linesFromText2.readlines()
 
@@ -1543,9 +1603,6 @@ def sortIntegrationsLogsContent(outFile1, logsFile1, logsFile2, logsFile1Regex, 
         pass
 
 def readMobileRequestsLogs(searchLines, _fromDate, _toDate):
-    global numOfMobileRequestsLogs
-    numOfMobileRequestsLogs+=1
-
     outText = ""
     nonMatchedOutText = ""
     JPText = ""
@@ -1668,6 +1725,7 @@ def sortMobileRequestsLogsContent(outFile1, logsFile1, logsFile2, logsFile1Regex
             with codecs.open(logsFile1, "r", "utf-8", "ignore") as linesFromText:
                 mobileRequestsLogsList = linesFromText.readlines()
 
+            #since the mobile requests logs have an error id field, they need to be cross-referenced with the id field from the error logs
             with codecs.open(logsFile2, "r", "utf-8", "ignore") as linesFromText2:
                 errorLogsList = linesFromText2.readlines()
 
@@ -1753,9 +1811,6 @@ def sortMobileRequestsLogsContent(outFile1, logsFile1, logsFile2, logsFile1Regex
         pass
 
 def readTimerLogs(searchLines, _fromDate, _toDate):
-    global numOfTimerLogs
-    numOfTimerLogs+=1
-
     outText = ""
     nonMatchedOutText = ""
     JPText = ""
@@ -1876,6 +1931,7 @@ def sortTimerLogsContent(outFile1, logsFile1, logsFile2, logsFile1Regex, logsFil
             with codecs.open(logsFile1, "r", "utf-8", "ignore") as linesFromText:
                 timerLogsList = linesFromText.readlines()
 
+            #since the timer logs have an error id field, they need to be cross-referenced with the id field from the error logs
             with codecs.open(logsFile2, "r", "utf-8", "ignore") as linesFromText2:
                 errorLogsList = linesFromText2.readlines()
 
@@ -1961,9 +2017,6 @@ def sortTimerLogsContent(outFile1, logsFile1, logsFile2, logsFile1Regex, logsFil
         pass
 
 def readEmailLogs(searchLines, _fromDate, _toDate):
-    global numOfEmailLogs
-    numOfEmailLogs+=1
-
     outText = ""
     nonMatchedOutText = ""
     JPText = ""
@@ -2098,6 +2151,7 @@ def sortEmailLogsContent(outFile1, logsFile1, logsFile2, logsFile1Regex, logsFil
             with codecs.open(logsFile1, "r", "utf-8", "ignore") as linesFromText:
                 emailLogsList = linesFromText.readlines()
 
+            #since the email logs have an error id field, they need to be cross-referenced with the id field from the error logs
             with codecs.open(logsFile2, "r", "utf-8", "ignore") as linesFromText2:
                 errorLogsList = linesFromText2.readlines()
 
@@ -2224,9 +2278,6 @@ def sortEmailLogsContent(outFile1, logsFile1, logsFile2, logsFile1Regex, logsFil
         pass
 
 def readExtensionLogs(searchLines, _fromDate, _toDate):
-    global numOfExtensionLogs
-    numOfExtensionLogs+=1
-
     outText = ""
     nonMatchedOutText = ""
     JPText = ""
@@ -2353,6 +2404,7 @@ def sortExtensionLogsContent(outFile1, logsFile1, logsFile2, logsFile1Regex, log
             with codecs.open(logsFile1, "r", "utf-8", "ignore") as linesFromText:
                 extensionLogsList = linesFromText.readlines()
 
+            #since the extension logs have an error id field, they need to be cross-referenced with the id field from the error logs
             with codecs.open(logsFile2, "r", "utf-8", "ignore") as linesFromText2:
                 errorLogsList = linesFromText2.readlines()
 
@@ -2439,9 +2491,6 @@ def sortExtensionLogsContent(outFile1, logsFile1, logsFile2, logsFile1Regex, log
         pass
 
 def readServiceActionLogs(searchLines, _fromDate, _toDate):
-    global numOfServiceActionLogs
-    numOfServiceActionLogs+=1
-
     outText = ""
     nonMatchedOutText = ""
     JPText = ""
@@ -2669,9 +2718,6 @@ def sortServiceActionLogsContent(outFile1, logsFile1, logsFile2, logsFile1Regex,
         pass
 
 def readScreenLogs(searchLines, _fromDate, _toDate):
-    global numOfScreenLogs
-    numOfScreenLogs+=1
-
     outText = ""
     nonMatchedOutText = ""
     JPText = ""
@@ -3517,6 +3563,16 @@ def xlsxFile(absolutePath, relativePath, filename, ext, _fromDate, _toDate):
 def xlsxtxtFile(absolutePath, filename, ext, _fromDate, _toDate):
     print("Reading: " + filename + ext)
 
+    global numOfErrorLogs
+    global numOfGeneralLogs
+    global numOfIntegrationsLogs
+    global numOfMobileRequestsLogs
+    global numOfTimerLogs
+    global numOfEmailLogs
+    global numOfExtensionLogs
+    global numOfServiceActionLogs
+    global numOfScreenLogs
+
     outText = ""
     nonMatchedOutText = ""
     JPText = ""
@@ -3536,6 +3592,25 @@ def xlsxtxtFile(absolutePath, filename, ext, _fromDate, _toDate):
         readSplitFilesXLSX(cycleNum, filename, ext, _fromDate, _toDate)
 
         if os.path.exists(tempFilePath):
+            if "errorlog" in filename.lower():
+                numOfErrorLogs+=1
+            elif "generallog" in filename.lower():
+                numOfGeneralLogs+=1
+            elif "integrationslog" in filename.lower():
+                numOfIntegrationsLogs+=1
+            elif "mobilerequestslog" in filename.lower():
+                numOfMobileRequestsLogs+=1
+            elif "timerlog" in filename.lower():
+                numOfTimerLogs+=1
+            elif "emaillog" in filename.lower():
+                numOfEmailLogs+=1
+            elif "extensionlog" in filename.lower():
+                numOfExtensionLogs+=1
+            elif "serviceactionlog" in filename.lower():
+                numOfServiceActionLogs+=1
+            elif "screenlog" in filename.lower():
+                numOfScreenLogs+=1
+
             with codecs.open(tempFilePath, "r", "utf-8", "ignore") as tempFile2:
                 myLinesFromDateRange = tempFile2.readlines()
         else:
@@ -3581,6 +3656,25 @@ def xlsxtxtFile(absolutePath, filename, ext, _fromDate, _toDate):
                   "2- The customer switched the columns of the spreadsheet.\n3- The customer modified the dates on the spreadsheet.\n")
 
         if os.path.exists(tempFilePath):
+            if "errorlog" in filename.lower():
+                numOfErrorLogs+=1
+            elif "generallog" in filename.lower():
+                numOfGeneralLogs+=1
+            elif "integrationslog" in filename.lower():
+                numOfIntegrationsLogs+=1
+            elif "mobilerequestslog" in filename.lower():
+                numOfMobileRequestsLogs+=1
+            elif "timerlog" in filename.lower():
+                numOfTimerLogs+=1
+            elif "emaillog" in filename.lower():
+                numOfEmailLogs+=1
+            elif "extensionlog" in filename.lower():
+                numOfExtensionLogs+=1
+            elif "serviceactionlog" in filename.lower():
+                numOfServiceActionLogs+=1
+            elif "screenlog" in filename.lower():
+                numOfScreenLogs+=1
+
             with codecs.open(tempFilePath, "r", "utf-8", "ignore") as tempFile2:
                 myLinesFromDateRange = tempFile2.readlines()
         else:
@@ -3622,6 +3716,8 @@ def xlsxtxtFile(absolutePath, filename, ext, _fromDate, _toDate):
             if numOfErrorLogs > 1:
                 populateList(os.getcwd() + "\\filtered_data_files\\device_information.txt", androidOSVersionOccurrencesList, myandroidOSVersionOccurrencesList)
 
+                cleanDeviceInfo(os.getcwd() + "\\filtered_data_files\\device_information.txt", errorLogsDeviceInformationRegex)
+
             del androidOSVersionList[:]
             del myAndroidOSVersionList[:]
 
@@ -3643,6 +3739,8 @@ def xlsxtxtFile(absolutePath, filename, ext, _fromDate, _toDate):
             writeToFile(absolutePath, os.getcwd() + "\\filtered_data_files\\device_information.txt", iOSOSVersionOccurrencesList, myiOSOSVersionOccurrencesList)
             if numOfErrorLogs > 1:
                 populateList(os.getcwd() + "\\filtered_data_files\\device_information.txt", iOSOSVersionOccurrencesList, myiOSOSVersionOccurrencesList)
+
+                cleanDeviceInfo(os.getcwd() + "\\filtered_data_files\\device_information.txt", errorLogsDeviceInformationRegex)
 
             del iosOSVersionList[:]
             del myiOSVersionList[:]
