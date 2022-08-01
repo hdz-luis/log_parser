@@ -47,6 +47,10 @@ def create_graph(directoryPath, deviceInfoRegex):
 
                 print("The graph from the Device Information file was created. Please check your browser.")
 
+                del myOsList[:]
+                del myOsVersionList[:]
+                del myOccurrencesList[:]
+
                 end = datetime.now()
                 print("\nElapsed time: {0}".format(end-start))
 

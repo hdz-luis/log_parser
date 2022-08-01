@@ -36,3 +36,7 @@ def create_graph(txtFile, deviceInfoRegex):
     fig_bar.show()
 
     print("The graph from the Device Information file was created. Please check your browser.")
+
+    del myOsList[:]
+    del myOsVersionList[:]
+    del myOccurrencesList[:]
