@@ -102,6 +102,11 @@ def create_graph(directoryPath):
                     fig_bar2.update_xaxes(type="category")
                     fig_bar2.update_layout(showlegend=False,title={"y":0.9,"x":0.5,"xanchor": "center","yanchor": "top"})
 
+                    fig_scatter.update_traces(dict(marker_line_width=0))
+                    fig_scatter2.update_traces(dict(marker_line_width=0))
+                    fig_bar.update_traces(dict(marker_line_width=0))
+                    fig_bar2.update_traces(dict(marker_line_width=0))
+
                     fig_scatter.show()
                     fig_scatter2.show()
                     fig_bar.show()

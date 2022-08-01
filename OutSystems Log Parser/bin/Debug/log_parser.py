@@ -16,6 +16,7 @@ import scripts.general
 import scripts.timer
 import scripts.screen
 import scripts.mobilerequests
+import scripts.deviceinformation
 """
 OutSystems Log Parser
 
@@ -303,12 +304,12 @@ espaceNamesList = []
 myEspaceNamesList = []
 cyclicJobNamesList = []
 myCyclicJobNamesList = []
-tempList1 = []
-tempList2 = []
-tempList3 = []
-tempList4 = []
-tempList5 = []
-tempList6 = []
+tempOsVersionOccurrencesList = []
+tempOsVersionOccurrencesList2 = []
+tempDeviceModelCordovaUUIDList = []
+tempDeviceModelCordovaUUIDList2 = []
+tempOsVersionNewOccurrencesList = []
+tempOsVersionNewOccurrencesDeviceModelCordovaUUIDList = []
 myVals = []
 
 #all illegal space characters, control characters, and ASCII characters
@@ -540,6 +541,7 @@ def prereqs(directoryPath, fromDate, toDate, createGraphs):
             scripts.timer.create_graph(directoryPath)
             scripts.screen.create_graph(directoryPath)
             scripts.mobilerequests.create_graph(directoryPath)
+            scripts.deviceinformation.create_graph(os.getcwd() + "\\filtered_data_files\\device_information.txt", r"^([\w]+)\|([\d\.]+)\|([\d]+)\|.+")
 
         if os.path.exists(nonMatchedPath):
             print("\nALERT!\nThere were valid lines that did not match the logic.\n" +
@@ -692,55 +694,55 @@ def cleanDeviceInfo(txtFile, deviceInfoRegex):
             osVersionOccurrences = match.group(1)
             deviceModelCordovaUUID = match.group(2)
 
-            tempList1.append(osVersionOccurrences + "\n")
-            tempList3.append(osVersionOccurrences.split("|")[0] + "|" + osVersionOccurrences.split("|")[1] + "|" + deviceModelCordovaUUID + "\n")
+            tempOsVersionOccurrencesList.append(osVersionOccurrences + "\n")
+            tempDeviceModelCordovaUUIDList.append(osVersionOccurrences.split("|")[0] + "|" + osVersionOccurrences.split("|")[1] + "|" + deviceModelCordovaUUID + "\n")
 
     #remove duplicate records from the list
-    tempList2 = list(set(tempList1))
-    tempList2.sort()
+    tempOsVersionOccurrencesList2 = list(set(tempOsVersionOccurrencesList))
+    tempOsVersionOccurrencesList2.sort()
 
-    tempList4 = list(set(tempList3))
-    tempList4.sort()
+    tempDeviceModelCordovaUUIDList2 = list(set(tempDeviceModelCordovaUUIDList))
+    tempDeviceModelCordovaUUIDList2.sort()
 
     myInd = 0
 
-    for te, tempElm in enumerate(tempList2):
-        if not myInd+(numOfErrorLogs-1) >= len(tempList2):
-            currElm = tempList2[myInd].split("|")[0] + " " + tempList2[myInd].split("|")[1]
-            nextElm = tempList2[myInd+1].split("|")[0] + " " + tempList2[myInd+1].split("|")[1]
+    for te, tempElm in enumerate(tempOsVersionOccurrencesList2):
+        if not myInd+(numOfErrorLogs-1) >= len(tempOsVersionOccurrencesList2):
+            currElm = tempOsVersionOccurrencesList2[myInd].split("|")[0] + " " + tempOsVersionOccurrencesList2[myInd].split("|")[1]
+            nextElm = tempOsVersionOccurrencesList2[myInd+1].split("|")[0] + " " + tempOsVersionOccurrencesList2[myInd+1].split("|")[1]
             if currElm == nextElm:
                 del myVals[:]
                 myCount = 0
                 addVals = 0
                 while myCount <= numOfErrorLogs-1:
-                    addVals = int(tempList2[myInd+myCount].split("|")[2])
+                    addVals = int(tempOsVersionOccurrencesList2[myInd+myCount].split("|")[2])
                     myVals.append(addVals)
                     myCount+=1
-                tempList5.append(tempList2[(myInd+myCount)-1].split("|")[0] + "|" + tempList2[(myInd+myCount)-1].split("|")[1] + "|" + str(sum(myVals)))
+                tempOsVersionNewOccurrencesList.append(tempOsVersionOccurrencesList2[(myInd+myCount)-1].split("|")[0] + "|" + tempOsVersionOccurrencesList2[(myInd+myCount)-1].split("|")[1] + "|" + str(sum(myVals)))
                 myInd+=numOfErrorLogs
             else:
-                tempList5.append(tempList2[myInd].split("|")[0] + "|" + tempList2[myInd].split("|")[1] + "|" + tempList2[myInd].split("|")[2])
+                tempOsVersionNewOccurrencesList.append(tempOsVersionOccurrencesList2[myInd].split("|")[0] + "|" + tempOsVersionOccurrencesList2[myInd].split("|")[1] + "|" + tempOsVersionOccurrencesList2[myInd].split("|")[2])
                 myInd+=1
-        elif myInd+(numOfErrorLogs-1) == len(tempList2):
-            tempList5.append(tempList2[myInd].split("|")[0] + "|" + tempList2[myInd].split("|")[1] + "|" + tempList2[myInd].split("|")[2])
+        elif myInd+(numOfErrorLogs-1) == len(tempOsVersionOccurrencesList2):
+            tempOsVersionNewOccurrencesList.append(tempOsVersionOccurrencesList2[myInd].split("|")[0] + "|" + tempOsVersionOccurrencesList2[myInd].split("|")[1] + "|" + tempOsVersionOccurrencesList2[myInd].split("|")[2])
             myInd+=1
 
-    for te5, tempElm5 in enumerate(tempList5):
-            for te4, tempElm4 in enumerate(tempList4):
+    for te5, tempElm5 in enumerate(tempOsVersionNewOccurrencesList):
+            for te4, tempElm4 in enumerate(tempDeviceModelCordovaUUIDList2):
                 item = tempElm5.split("|")
                 elm = tempElm4.split("|")
                 if item[0] + "|" + item[1] == elm[0] + "|" + elm[1]:
-                    tempList6.append(item[0] + "|" + item[1] + "|" + item[2] + "|" + elm[2] + "|" + elm[3] + "|" + elm[4])
+                    tempOsVersionNewOccurrencesDeviceModelCordovaUUIDList.append(item[0] + "|" + item[1] + "|" + item[2] + "|" + elm[2] + "|" + elm[3] + "|" + elm[4])
 
     with codecs.open(txtFile, "w", "utf-8", "ignore") as tempFile2:
-        tempFile2.writelines(tempList6)
+        tempFile2.writelines(tempOsVersionNewOccurrencesDeviceModelCordovaUUIDList)
 
-    del tempList1[:]
-    del tempList2[:]
-    del tempList3[:]
-    del tempList4[:]
-    del tempList5[:]
-    del tempList6[:]
+    del tempOsVersionOccurrencesList[:]
+    del tempOsVersionOccurrencesList2[:]
+    del tempDeviceModelCordovaUUIDList[:]
+    del tempDeviceModelCordovaUUIDList2[:]
+    del tempOsVersionNewOccurrencesList[:]
+    del tempOsVersionNewOccurrencesDeviceModelCordovaUUIDList[:]
     del myVals[:]
 
 def writeToFile(absolutePath, txtFile, rawList, cleanList):

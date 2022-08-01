@@ -76,6 +76,9 @@ def create_graph(directoryPath):
                         "yanchor": "top"}
                 )
 
+                fig_scatter.update_traces(dict(marker_line_width=0))
+                fig_bar.update_traces(dict(marker_line_width=0))
+
                 fig_scatter.show()
                 fig_bar.show()
 
