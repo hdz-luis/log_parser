@@ -6,6 +6,7 @@ import codecs
 import shutil
 import openpyxl
 import patoolib
+import traceback
 from lxml import etree
 import Evtx.Evtx as evtx
 from collections import Counter
@@ -463,11 +464,11 @@ nonMatchedTimerLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseTimerLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|(.*?)\|([\d]+)\|(.*?)\|(.*?)?\|([\d\-\:\. ]+)\|([\d\-\:\. ]+)\|(.*?)?\|(.*?)\|(.*?)\|(.*?)\|(.*?)"
 timerLogsContentRegex = r"^([\d\-\:\. ]+)\|([\d]+)\|([\w\-\.\,\:\(\)\[\]\/\&\+ ]+)\|(?:(?:.+?\|){2})([\w\.]+)\|(?:.+?\|)([\w]+)\|(?:(?:.*?\|){2})(?:[\d\-\:\. ]+)\|([\w\-]+|\s*?)\|.+"
 
-emailLogsRegex = r"^([\d]+)\|([\w]+)\|([\w\-\:\.\% ]+)\|([\w\-\:\.\% ]+)?\|([\d]+)\|([\w\@\.\,\- ]+)\|([\w\@\.\,\- ]+)\|([\w\@\.\-]+)?\|([\w\@\.\-]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)\|([\w]+)\|([\w]+)\|([\d]+)\|([\w\@\.\-]+)"
-negativeEmailLogsRegex = r"^((?!(?:[\d]+)\|(?:[\w]+)\|(?:[\w\-\:\.\% ]+)\|(?:[\w\-\:\.\% ]+)?\|(?:[\d]+)\|(?:[\w\@\.\,\- ]+)\|(?:[\w\@\.\,\- ]+)\|(?:[\w\@\.\-]+)?\|(?:[\w\@\.\-]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w]+)\|(?:[\d]+)\|(?:[\w\@\.\-]+)).*)"
+emailLogsRegex = r"^([\d]+)\|([\w]+)\|([\w\-\:\.\% ]+)\|([\w\-\:\.\% ]+)?\|([\d]+)\|([\w\@\.\,\- ]+)\|([\w\@\.\,\- ]+)?\|([\w\@\.\,\- ]+)?\|([\w\@\.\,\- ]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)\|([\w]+)\|([\w]+)\|([\d]+)\|([\w\@\.\,\- ]+)"
+negativeEmailLogsRegex = r"^((?!(?:[\d]+)\|(?:[\w]+)\|(?:[\w\-\:\.\% ]+)\|(?:[\w\-\:\.\% ]+)?\|(?:[\d]+)\|(?:[\w\@\.\,\- ]+)\|(?:[\w\@\.\,\- ]+)\|(?:[\w\@\.\,\- ]+)?\|(?:[\w\@\.\,\- ]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w]+)\|(?:[\d]+)\|(?:[\w\@\.\,\- ]+)).*)"
 nonMatchedEmailLogsRegex = r"^((?:.*?\|){10})([\d\-]+)(.+)"
 japaneseEmailLogsRegex = r"^([\d]+)\|(.*?)\|(.*?)\|(.*?)?\|([\d]+)\|(.*?)\|(.*?)\|(.*?)?\|(.*?)?\|(.*?)\|([\d\-\:\. ]+)\|([\d]+)\|([\d]+)\|(.*?)\|(.*?)\|([\d]+)\|(.*?)"
-emailLogsContentRegex = r"^([\d\-\:\. ]+)\|([\w\-\:\.\% ]+)\|([\w\-\:\.\% ]+)\|([\w\@\.\,\- ]+)\|([\w\@\.\,\- ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\@\.\-]+|\s*?)\|([\w\@\.\-]+|\s*?)\|([\w]+)\|(?:(?:.*?\|){5})([\w]+)\|.+"
+emailLogsContentRegex = r"^([\d\-\:\. ]+)\|([\w\-\:\.\% ]+)\|([\w\-\:\.\% ]+)\|([\w\@\.\,\- ]+)\|([\w\@\.\,\- ]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\@\.\,\- ]+|\s*?)\|([\w\@\.\,\- ]+|\s*?)\|([\w]+)\|(?:(?:.*?\|){5})([\w]+)\|.+"
 
 extensionLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w]+)\|([\w\/\'\=\+]+)\|([\d]+)\|([\d]+)\|([\d]+)\|([\w\-]+)\|([\w\-]+)?\|([\w\-\:]+)\|([\w\.]+)\|([\w]+)\|([\w\-\.\,\:\(\)\[\]\/\&\+ ]+)\|([\w\-]+)\|([\w\@\.\\]+)?"
 negativeExtensionLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w]+)\|(?:[\w\/\'\=\+]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\-]+)\|(?:[\w\-]+)?\|(?:[\w\-\:]+)\|(?:[\w\.]+)\|(?:[\w]+)\|(?:[\w\-\.\,\:\(\)\[\]\/\&\+ ]+)\|(?:[\w\-]+)\|(?:[\w\@\.\\]+)?).*)"
@@ -522,8 +523,13 @@ thaiRegexRange = u'[\u0E00-\u0E7F]'
 
 nonMatchedPath = os.getcwd() + "\\nonmatched_valid_lines\\file.txt"
 tempFilePath = os.getcwd() + "\\tempFile.txt"
+errorLogPath = os.getcwd() + "\\error_log.txt"
 
 start = datetime.now()
+
+def error_log(error_message):
+    with codecs.open(errorLogPath, "w", "utf-8", "ignore") as errorFile:
+        errorFile.writelines("Unexpected Error:\n" + str(error_message).strip())
 
 def prereqs(directoryPath, fromDate, toDate, createGraphs):
     _fromDate = datetime.strptime(fromDate, "%Y-%m-%d").date()
@@ -2036,10 +2042,10 @@ def readEmailLogs(searchLines, _fromDate, _toDate):
             errorID = match.group(4)#null
             tenantID = match.group(5)
             from_ = match.group(6)
-            to = match.group(7)
+            to = match.group(7)#null
             cc = match.group(8)#null
             bcc = match.group(9)#null
-            subject = match.group(10)#null
+            subject = match.group(10)
             created = match.group(11)
             activity = match.group(12)
             emailDefinition = match.group(13)
@@ -2059,14 +2065,14 @@ def readEmailLogs(searchLines, _fromDate, _toDate):
                 if errorID == None:
                     errorID = " "
 
+                if to == None:
+                    to = " "
+
                 if cc == None:
                     cc = " "
 
                 if bcc == None:
                     bcc = " "
-
-                if subject == None:
-                    subject = " "
 
                 espaceNamesList.append(eSpaceName + "\n")
 
@@ -2180,14 +2186,14 @@ def sortEmailLogsContent(outFile1, logsFile1, logsFile2, logsFile1Regex, logsFil
                     if errorID == "None":
                         errorID == " "
 
+                    if to == "None":
+                        to = " "
+
                     if cc == "None":
                         cc = " "
 
                     if bcc == "None":
                         bcc = " "
-
-                    if subject == "None":
-                        subject = " "
 
                     #subtract the sentDateTime by the timestamp to get the duration
                     _timestamp = datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S")
@@ -2203,14 +2209,27 @@ def sortEmailLogsContent(outFile1, logsFile1, logsFile2, logsFile1Regex, logsFil
                         diffTime = sentDateTime - _timestamp
                         strDiffTime = str(diffTime)
 
-                        #convert duration time to seconds (whole value)
-                        delta = timedelta(hours=int(strDiffTime.split(":")[0]), minutes=int(strDiffTime.split(":")[1]), seconds=int(strDiffTime.split(":")[2]))
-                        secs = delta.total_seconds()
-                        strSecs = str(secs)
-                        _seconds = strSecs.split(".")[0]
+                        if diffTime.days > 0:
+                            diffTimeHours = diffTime.days*24
+                            diffTimeHours2 = (diffTime.seconds//3600)+diffTimeHours
 
-                        emailsList.append(timestamp + "|" + _seconds + "|" + eSpaceName + "|" + from_ + "|" + to + "|" + subject + "|" + cc + "|" + bcc + "|" + isTestEmail + "|" + errorID + "\n")
-                        emailsList2.append(errorID + "\n")
+                            #convert duration time to seconds (whole value)
+                            delta = timedelta(hours=int(diffTimeHours2), minutes=int(strDiffTime.split(":")[1]), seconds=int(strDiffTime.split(":")[2]))
+                            secs = delta.total_seconds()
+                            strSecs = str(secs)
+                            _seconds = strSecs.split(".")[0]
+
+                            emailsList.append(timestamp + "|" + _seconds + "|" + eSpaceName + "|" + from_ + "|" + to + "|" + subject + "|" + cc + "|" + bcc + "|" + isTestEmail + "|" + errorID + "\n")
+                            emailsList2.append(errorID + "\n")
+                        else:
+                            #convert duration time to seconds (whole value)
+                            delta = timedelta(hours=int(strDiffTime.split(":")[0]), minutes=int(strDiffTime.split(":")[1]), seconds=int(strDiffTime.split(":")[2]))
+                            secs = delta.total_seconds()
+                            strSecs = str(secs)
+                            _seconds = strSecs.split(".")[0]
+
+                            emailsList.append(timestamp + "|" + _seconds + "|" + eSpaceName + "|" + from_ + "|" + to + "|" + subject + "|" + cc + "|" + bcc + "|" + isTestEmail + "|" + errorID + "\n")
+                            emailsList2.append(errorID + "\n")
                     else:
                         emailsList.append(timestamp + "|-1|" + eSpaceName + "|" + from_ + "|" + to + "|" + subject + "|" + cc + "|" + bcc + "|" + isTestEmail + "|" + errorID + "\n")
                         emailsList2.append(errorID + "\n")
@@ -4126,27 +4145,32 @@ def evtxFile(absolutePath, filenameWithExt, ext, _fromDate, _toDate):
 
 num_args = len(sys.argv)
 
-if num_args != 5:
-    #check if the additional arguments are due to the directory name being separated by spaces
-    dirs = "".join(sys.argv[1:num_args - 3])
-    os.rename(" ".join(sys.argv[1:num_args - 3]), dirs)
-    if os.path.exists(dirs):
-        directoryPath = dirs
-        fromDate = sys.argv[num_args - 3]
-        toDate = sys.argv[num_args - 2]
-        createGraphs = sys.argv[num_args -1]
-        prereqs(directoryPath, fromDate, toDate, createGraphs)
+try:
+    if num_args != 5:
+        #check if the additional arguments are due to the directory name being separated by spaces
+        dirs = "".join(sys.argv[1:num_args - 3])
+        os.rename(" ".join(sys.argv[1:num_args - 3]), dirs)
+        if os.path.exists(dirs):
+            directoryPath = dirs
+            fromDate = sys.argv[num_args - 3]
+            toDate = sys.argv[num_args - 2]
+            createGraphs = sys.argv[num_args -1]
+            prereqs(directoryPath, fromDate, toDate, createGraphs)
+        else:
+            print("Error:\nTotal arguments passed: " + str(num_args))
+            print(" ".join(sys.argv[1:]))
+            print("\n5 arguments needed: log_parser.py directoryPath fromDate(YYYY-MM-DD) toDate(YYYY-MM-DD) createGraphsOption" +
+                  "\nPlease try again.")
     else:
-        print("Error:\nTotal arguments passed: " + str(num_args))
-        print(" ".join(sys.argv[1:]))
-        print("\n5 arguments needed: log_parser.py directoryPath fromDate(YYYY-MM-DD) toDate(YYYY-MM-DD) createGraphsOption" +
-              "\nPlease try again.")
-else:
-    directoryPath = sys.argv[1]
-    fromDate = sys.argv[2]
-    toDate = sys.argv[3]
-    createGraphs = sys.argv[4]
-    prereqs(directoryPath, fromDate, toDate, createGraphs)
+        directoryPath = sys.argv[1]
+        fromDate = sys.argv[2]
+        toDate = sys.argv[3]
+        createGraphs = sys.argv[4]
+        prereqs(directoryPath, fromDate, toDate, createGraphs)
+except Exception as e:
+    error_stack = traceback.format_exc()
+    error_log(error_stack)
+    print("A file has been created with the error message.\n\nUnexpected Error:\n", error_stack)
 
 end = datetime.now()
 print("\nElapsed time: {0}".format(end-start))
