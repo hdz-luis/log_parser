@@ -333,6 +333,7 @@ replacementDict.update(dict.fromkeys(range(8192, 8207), ""))
 replacementDict.update(dict.fromkeys(range(8216, 8218), "'"))
 replacementDict.update(dict.fromkeys(range(8220, 8223), "\""))
 replacementDict.update(dict.fromkeys(range(9617, 9619), ""))
+replacementDict.update(dict.fromkeys(range(9792, 9794), ""))
 replacementDict[127] = ""
 replacementDict[129] = ""
 replacementDict[141] = ""
@@ -374,6 +375,7 @@ replacementDict[8211] = "-"
 replacementDict[8215] = "_"
 replacementDict[8218] = ","
 replacementDict[8226] = ""
+replacementDict[8230] = ""
 replacementDict[8240] = ""
 replacementDict[8243] = "\""
 replacementDict[8629] = ""

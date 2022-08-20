@@ -15,7 +15,7 @@ myClientIPList = []
 myHTTPcodeList = []
 myTimeTakenList = []
 
-iisFilenameRegex = r"^((?!(?:u_ex(?:[\d]{6}))_x).*)"
+iisFilenameRegex = r"^((?=(?:u_ex(?:[\d]{6})))(?!.*_x).*)"
 iisInfoRegex = r"^([\d\-]+)[ ]([\d\:]+)[ ]([\w\-\.\:\%]+)[ ](POST|PUT|PROPFIND|(?:n)?GET|OPTIONS|HEAD|ABCD|QUALYS|TRACE|SEARCH|RNDMMTD|TRACK|B(?:A)?DM(?:E)?T(?:H)?(?:O)?(?:D)?|CFYZ|DEBUG|MKCOL|INDEX|DELETE|PATCH|ACUNETIX)[ ]([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ].*?[ ]([\d]+)[ ](?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ]([\w\-\.\:\%]+)[ ](?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+).*?[ ]([\d]+)(?:(?:[\d ]+){2})[ ]([\d]+)"
 errorLogPath = os.getcwd() + "\\error_log.txt"
 
@@ -167,8 +167,14 @@ def create_graph(directoryPath, iisInfoRegex):
                     del myClientIPList[:]
                     del myHTTPcodeList[:]
                     del myTimeTakenList[:]
+
+                    end = datetime.now()
+                    print("\nElapsed time: {0}".format(end-start))
+
         if not foundFile:
-            print("The IIS logs were not found in folder: \"" + directoryPath + "\"")
+            print("The IIS logs were not found in folder: \"" + directoryPath + "\"\n\n" +
+                  "Possible reasons:\n1- The customer renamed the file.\n" +
+                  "2- The filename ends in \"_x\" meaning the customer created his own customized version of the IIS logs.\n")
     except Exception as e:
         error_stack = traceback.format_exc()
         error_log(error_stack)
