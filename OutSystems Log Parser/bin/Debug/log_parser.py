@@ -511,6 +511,7 @@ japaneseServiceStudioReportsOperationsLogsRegex = "^([\d\-]+)\|([\d\:A-Z ]+)\|(.
 generalTextLogsRegex = "^([\w]+)\:\s*?\[([\d\:\.]+)\]\s+([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)"
 generalTextLogsRegex2 = "^\[([\d\:\.]+)\]\s+([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)"
 
+iisFilenameRegex = r"^(?:(?=.*(?:u_ex(?:[\d]{6})))(?!.*_x).*)"
 iisLogsRegex = "^([\d\-]+)[ ]([\d\:]+)[ ]([\w\-\.\:\%]+)[ ](POST|PUT|PROPFIND|(?:n)?GET|OPTIONS|HEAD|ABCD|QUALYS|TRACE|SEARCH|RNDMMTD|TRACK|B(?:A)?DM(?:E)?T(?:H)?(?:O)?(?:D)?|CFYZ|DEBUG|MKCOL|INDEX|DELETE|PATCH|ACUNETIX)[ ]([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ]([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ]([\d]+)[ ]([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ]([\w\-\.\:\%]+)[ ]([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ]([\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ]([\d]+)[ ]([\d]+)[ ]([\d]+)[ ]([\d]+)"
 negativeIisLogsRegex = "^((?!(?:[\d\-]+)[ ](?:[\d\:]+)[ ](?:[\w\-\.\:\%]+)[ ](?:POST|PUT|PROPFIND|(?:n)?GET|OPTIONS|HEAD|ABCD|QUALYS|TRACE|SEARCH|RNDMMTD|TRACK|B(?:A)?DM(?:E)?T(?:H)?(?:O)?(?:D)?|CFYZ|DEBUG|MKCOL|INDEX|DELETE|PATCH|ACUNETIX)[ ](?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ](?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ](?:[\d]+)[ ](?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ](?:[\w\-\.\:\%]+)[ ](?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ](?:[\w\(\)\[\]\{\}\-\–\—\:\;\‘\’\'\"\“\”\,\.\<\>\«\»\`\~\|\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\®]+)[ ](?:[\d]+)[ ](?:[\d]+)[ ](?:[\d]+)[ ](?:[\d]+)).*)"
 nonMatchedIisLogsRegex = "^([\d\-]+)(.+)"
@@ -3922,21 +3923,20 @@ def txtFile(absolutePath, filename, filenameWithExt, ext, _fromDate, _toDate):
     print("Closing: " + filenameWithExt)
 
 def logFile(absolutePath, filenameWithExt, ext, _fromDate, _toDate):
-    global numOfIISLogs
-    numOfIISLogs+=1
+    iisNameRegex = re.match(iisFilenameRegex, filenameWithExt[:-4])
+    if iisNameRegex:
+        #IIS logs
+        global numOfIISLogs
+        numOfIISLogs+=1
 
-    #pattern for filenames: u_exYYMMDD.log
-    print("Reading: " + filenameWithExt)
+        print("Reading: " + filenameWithExt)
 
-    nonMatchedOutText = ""
-    JPText = ""
-    nonMatchedLine = ""
-    nonMatchedLine2 = ""
+        nonMatchedOutText = ""
+        JPText = ""
+        nonMatchedLine = ""
+        nonMatchedLine2 = ""
 
-    #split the fields and rearrange them to combine them all later
-    if filenameWithExt.lower().endswith("_x.log"):
-        print("\nThe customer altered the original IIS logs.\n\nFilenames ending in \"_x\" mean the customer created his own customized version of the IIS logs.\n")
-    else:
+        #split the fields and rearrange them to combine them all later
         try:
             with codecs.open(absolutePath, "r", "utf-8", "ignore") as linesFromLog:
                 searchLines = linesFromLog.read()
@@ -3959,7 +3959,7 @@ def logFile(absolutePath, filenameWithExt, ext, _fromDate, _toDate):
                     timeTaken = match.group(15)
 
                     _date = datetime.strptime(date, "%Y-%m-%d").date()
-                        
+
                     if _fromDate <= _date <= _toDate:
                         #timeTaken is in milliseconds and it needs to be converted to seconds
                         seconds = int(timeTaken)/1000
@@ -4007,7 +4007,7 @@ def logFile(absolutePath, filenameWithExt, ext, _fromDate, _toDate):
                             else:
                                 newNonMatchedLine2 = normalizeLines(nonMatchedLine2)
                                 newNonMatchedLine2 = newNonMatchedLine2.translate(replacementDict)
-                                
+
                                 #check if the line matches the regular expression
                                 regex2 = re.search(iisLogsRegex, newNonMatchedLine2)
                                 if regex2:
@@ -4040,6 +4040,9 @@ def logFile(absolutePath, filenameWithExt, ext, _fromDate, _toDate):
         except ValueError as valError:
             print("\nThe customer altered the original IIS logs.\n\nPossible reasons:\n1- The customer added a column on the logs.\n" +
                   "2- The customer switched the columns of the logs.\n")
+    if not iisNameRegex:
+        print("The IIS logs were not found\n\nPossible reasons:\n1- The customer renamed the file.\n" +
+              "2- The filename ends in \"_x\" meaning the customer created his own customized version of the IIS logs.\n")
 
     if len(myNonMatchedValidLinesFromDateRange) > 0:
         createFolder("\\nonmatched_valid_lines\\")
