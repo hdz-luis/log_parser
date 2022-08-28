@@ -2902,7 +2902,7 @@ namespace OutSystems_Log_Parser
             }
             else if (ctg == "Compilation")
             {
-                knownErrors_Errorlogs = new string[] { "compilation error", "can't proceed", "error loading espace", "failed to parse response", "error obtaining version", "check if a third-party program is using", "the paging file is too small for this operation to complete", "could not allocate space for object", "environment fault", "old producer", "locked module", "an error occurred in task" };
+                knownErrors_Errorlogs = new string[] { "compilation error", "can't proceed", "error loading espace", "failed to parse response", "error obtaining version", "check if a third-party program is using", "the paging file is too small for this operation to complete", "could not allocate space for object", "environment fault", "old producer", "locked module", "an error occurred in task", "creating a circular dependency between entities" };
 
                 highlightKnownErrors("dataGridViewErrorlogs", dataGridViewErrorlogs, 1, knownErrors_Errorlogs);
 
@@ -2915,7 +2915,7 @@ namespace OutSystems_Log_Parser
             }
             else if (ctg == "Database")
             {
-                knownErrors_Errorlogs = new string[] { "truncated in table", "dequeuing", "connection is broken", "locked module" };
+                knownErrors_Errorlogs = new string[] { "truncated in table", "dequeuing", "connection is broken", "locked module", "creating a circular dependency between entities" };
                 knownErrors_WinAppEventViewer = new string[] { "ora-", "error closing", "error opening" };
                 knownErrors_WinSysEventViewer = new string[] { "error closing", "timed out" };
 
@@ -2925,7 +2925,7 @@ namespace OutSystems_Log_Parser
             }
             else if (ctg == "Logic")
             {
-                knownErrors_Errorlogs = new string[] { "url rewrite module error", "an error occurred in task", "a fatal error has occurred", "json deserialization", "unknown reference expression type email", "bad json escape sequence", "dequeuing", "error loading espace", "waited too long for debug command" };
+                knownErrors_Errorlogs = new string[] { "url rewrite module error", "an error occurred in task", "a fatal error has occurred", "json deserialization", "unknown reference expression type email", "bad json escape sequence", "dequeuing", "error loading espace", "waited too long for debug command", "error executing pubsub jobs" };
                 knownErrors_Generallogs = new string[] { "system cannot find" };
                 knownErrors_WinAppEventViewer = new string[] { "error closing", "error opening" };
                 knownErrors_WinSysEventViewer = new string[] { "error closing", "timed out" };
@@ -2942,7 +2942,7 @@ namespace OutSystems_Log_Parser
             }
             else if (ctg == "Network")
             {
-                knownErrors_Errorlogs = new string[] { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "communicationexception", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "unable to open service studio", "invalid authentication token", "connection is broken", "cannot decrypt the content", "could not establish trust relationship for the ssl/tls secure channel", "the remote certificate is invalid according to the validation procedure", "unexpected content found in ping", "win32error", "internal network use only", "could not ping", "error invalidating cache" };
+                knownErrors_Errorlogs = new string[] { "url rewrite module error", "an error occurred in task", "server cannot modify cookies", "ping validation failed", "communicationexception", "file is corrupt or invalid", "checksum failed for file", "connection failed421", "temporary server error", "unable to open service studio", "invalid authentication token", "connection is broken", "cannot decrypt the content", "could not establish trust relationship for the ssl/tls secure channel", "the remote certificate is invalid according to the validation procedure", "unexpected content found in ping", "win32error", "internal network use only", "could not ping", "error invalidating cache", "there was no endpoint listening", "a connection attempt failed" };
                 knownErrors_WinAppEventViewer = new string[] { "error closing", "cannot access", "error opening", "certificate" };
                 knownErrors_WinSysEventViewer = new string[] { "error closing", "timed out", "certificate" };
                 knownErrors_AndroidiOSlogs = new string[] { "file is corrupt or invalid", "error: spawnsync sudo etimeout", "signing certificate is invalid", "verification failed" };
