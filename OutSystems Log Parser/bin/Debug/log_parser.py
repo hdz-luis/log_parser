@@ -329,7 +329,7 @@ replacementDict.update(dict.fromkeys(range(221, 223), ""))
 replacementDict.update(dict.fromkeys(range(228, 230), ""))
 replacementDict.update(dict.fromkeys(range(239, 240), ""))
 replacementDict.update(dict.fromkeys(range(246, 248), ""))
-replacementDict.update(dict.fromkeys(range(8192, 8207), ""))
+replacementDict.update(dict.fromkeys(range(8192, 8208), ""))
 replacementDict.update(dict.fromkeys(range(8216, 8218), "'"))
 replacementDict.update(dict.fromkeys(range(8220, 8223), "\""))
 replacementDict.update(dict.fromkeys(range(9617, 9619), ""))
@@ -357,6 +357,7 @@ replacementDict[481] = ""
 replacementDict[509] = ""
 replacementDict[528] = ""
 replacementDict[694] = ""
+replacementDict[10024] = ""
 replacementDict[1130] = ""
 replacementDict[1544] = ""
 replacementDict[1564] = ""
@@ -411,7 +412,11 @@ replacementDict[57772] = ""
 replacementDict[61607] = ""
 replacementDict[61137] = ""
 replacementDict[65279] = ""
+replacementDict[65288] = "("
+replacementDict[65289] = ")"
+replacementDict[65311] = "?"
 replacementDict[65533] = ""
+replacementDict[11100769] = "ó"
 replacementDict[79000110] = ""
 replacementDict[83900067] = ""
 
@@ -443,14 +448,14 @@ errorLogsContentRegex = r"^(?:[\d\-\:\. ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\
 errorLogsContentRegex2 = r"^(?:[\d\-\:\. ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\-\.\,\:\'\(\)\[\]\/\&\+ ]+)\|(?:(?:.*?\|){5})([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\«\»\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)\|([\w\-]+)\|(?:[\d]+)"
 errorLogsDeviceInformationRegex = r"^((?:.*?\|){3})(.+)"
 
-generalLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\w\+\/\=\' ]+)?\|([\d]+)\|([\d]+)\|([\w\-]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w]+)?\|([\w\-\.\:\#\&\@\?\!\+\[\]\<\>\/ ]+)?\|([\w\-]+)?\|([\w\-\(\)\.\* ]+)?\|([\w\(\)\.]+)?\|([\w\-\.\:\;\'\"\`\%\=\$\%\@\&\#\^\+\*\(\)\{\}\[\]\<\>\/\\ ]+)?\|([\w]+)?\|([\w\-\.\,\:\'\(\)\[\]\/\&\+ ]+)?\|([\w\-]+)?\|([\w\@\.\\]+)?"
-negativeGeneralLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\w\+\/\=\' ]+)?\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w]+)?\|(?:[\w\-\.\:\#\&\@\?\!\+\[\]\<\>\/ ]+)?\|(?:[\w\-]+)?\|(?:[\w\-\(\)\.\* ]+)?\|(?:[\w\(\)\.]+)?\|(?:[\w\-\.\:\;\'\"\`\%\=\$\%\@\&\#\^\+\*\(\)\{\}\[\]\<\>\/\\ ]+)?\|(?:[\w]+)?\|(?:[\w\-\.\,\:\'\(\)\[\]\/\&\+ ]+)?\|(?:[\w\-]+)?\|(?:[\w\@\.\\]+)?).*)"
+generalLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\w\+\/\=\' ]+)?\|([\d]+)\|([\d]+)\|([\w\-]+)?\|([\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|([\w]+)?\|([\w\-\=\.\:\;\#\&\@\?\!\+\[\]\<\>\/ ]+)?\|([\w\-]+)?\|([\w\-\(\)\.\* ]+)?\|([\w\(\)\.]+)?\|([\w\-\.\:\;\'\"\`\%\=\$\%\@\&\#\^\+\*\(\)\{\}\[\]\<\>\/\\ ]+)?\|([\w]+)?\|([\w\-\.\,\:\'\(\)\[\]\/\&\+ ]+)?\|([\w\-]+)?\|([\w\@\.\\]+)?"
+negativeGeneralLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\w\+\/\=\' ]+)?\|(?:[\d]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w\(\)\[\]\{\}\-\:\;\'\"\,\.\<\>\`\~\á\Á\à\À\â\Â\ã\Ã\é\É\è\È\ê\Ê\í\Í\ì\Ì\î\Î\ó\Ó\ò\Ò\ô\Ô\õ\Õ\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\ç\Ç\&\=\\\/\?\+\$\@\%\^\#\*\!\¿\¡\£\€\¢\¥\©\® ]+)?\|(?:[\w]+)?\|(?:[\w\-\=\.\:\;\#\&\@\?\!\+\[\]\<\>\/ ]+)?\|(?:[\w\-]+)?\|(?:[\w\-\(\)\.\* ]+)?\|(?:[\w\(\)\.]+)?\|(?:[\w\-\.\:\;\'\"\`\%\=\$\%\@\&\#\^\+\*\(\)\{\}\[\]\<\>\/\\ ]+)?\|(?:[\w]+)?\|(?:[\w\-\.\,\:\'\(\)\[\]\/\&\+ ]+)?\|(?:[\w\-]+)?\|(?:[\w\@\.\\]+)?).*)"
 nonMatchedGeneralLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseGeneralLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|(.*?)?\|([\d]+)\|([\d]+)\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?\|(.*?)?"
 generalLogsContentRegex = r"^([\d\-\: ]+)\|.*?([\d]+)\s*?ms.*?\|(SLOWSQL|SLOWEXTENSION)\|([\w\(\)\. ]+)\|.+?\|([\w\(\)\.]+|\s*?)\|(?:(?:.*?\|){2})([\w]+|\s*?)\|(?:(?:.*?\|){3})([\w\-]+|\s*?)?\|.+"
 
-integrationsLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w\.\:\;\-\% ]+)?\|([\w\:\/\\\.\,\'\*\-\=\%\$\&\?\~\(\)\{\}]+)?\|([\w\/\.\-\(\) ]+)\|([\w\(\) ]+)\|([\d]+)\|([\w\-]+)?\|([\w\-]+)\|([\w\-\:]+)\|([\w\.]+)?\|([\w\-\.\,\:\'\(\)\[\]\/\&\+ ]+)?\|([\w\-]+)?"
-negativeIntegrationsLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w\.\:\;\-\% ]+)?\|(?:[\w\:\/\\\.\,\'\*\-\=\%\$\&\?\~\(\)\{\}]+)?\|(?:[\w\/\.\-\(\) ]+)\|(?:[\w\(\) ]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w\-]+)\|(?:[\w\-\:]+)\|(?:[\w\.]+)?\|(?:[\w\-\.\,\:\'\(\)\[\]\/\&\+ ]+)?\|(?:[\w\-]+)?).*)"
+integrationsLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|([\w\.\:\;\-\% ]+)?\|([\w\:\/\\\.\,\'\*\-\=\%\$\&\?\~\(\)\{\} ]+)?\|([\w\/\.\-\(\) ]+)\|([\w\(\) ]+)\|([\d]+)\|([\w\-]+)?\|([\w\-]+)\|([\w\-\:]+)\|([\w\.]+)?\|([\w\-\.\,\:\'\(\)\[\]\/\&\+ ]+)?\|([\w\-]+)?"
+negativeIntegrationsLogsRegex = r"^((?!(?:[\d]+)\|(?:[\d\-\:\. ]+)\|(?:[\d]+)\|(?:[\w\.\:\;\-\% ]+)?\|(?:[\w\:\/\\\.\,\'\*\-\=\%\$\&\?\~\(\)\{\} ]+)?\|(?:[\w\/\.\-\(\) ]+)\|(?:[\w\(\) ]+)\|(?:[\d]+)\|(?:[\w\-]+)?\|(?:[\w\-]+)\|(?:[\w\-\:]+)\|(?:[\w\.]+)?\|(?:[\w\-\.\,\:\'\(\)\[\]\/\&\+ ]+)?\|(?:[\w\-]+)?).*)"
 nonMatchedIntegrationsLogsRegex = r"^((?:.*?\|){1})([\d\-]+)(.+)"
 japaneseIntegrationsLogsRegex = r"^([\d]+)\|([\d\-\:\. ]+)\|([\d]+)\|(.*?)?\|(.*?)?\|(.*?)\|(.*?)\|([\d]+)\|(.*?)?\|(.*?)\|(.*?)\|(.*?)?\|(.*?)?\|(.*?)?"
 integrationsLogsContentRegex = r"^([\d\-\:\. ]+)\|([\d]+)\|([\w\-\.\,\:\'\(\)\[\]\/\&\+ ]+).+?\|([\w\/\.\-\(\) ]+)\|([\w\(\) ]+)\|(?:(?:.+?\|){3})([\w\.]+|\s*?)\|(?:[\d]+)\|([\w\-]+|\s*?)\|.+"
@@ -524,6 +529,7 @@ katakanaRegexRange = u'[\u30A0-\u30FF]'
 kanjiRegexRange = u'[\u4E00-\u9FAF]'
 koreanRegexRange = u'[\uAC00-\uD7A3]'
 thaiRegexRange = u'[\u0E00-\u0E7F]'
+hebrewRegexRange = u'[\u0591-\u05F4]'
 
 nonMatchedPath = os.getcwd() + "\\nonmatched_valid_lines\\file.txt"
 tempFilePath = os.getcwd() + "\\tempFile.txt"
@@ -984,8 +990,9 @@ def readErrorLogs(searchLines, _fromDate, _toDate):
                     kanji = re.findall(kanjiRegexRange, nonMatchedLine2)
                     korean = re.findall(koreanRegexRange, nonMatchedLine2)
                     thai = re.findall(thaiRegexRange, nonMatchedLine2)
+                    hebrew = re.findall(hebrewRegexRange, nonMatchedLine2)
 
-                    if hiragana or katakana or kanji or korean or thai:
+                    if hiragana or katakana or kanji or korean or thai or hebrew:
                         JPRegex = re.search(japaneseErrorLogsRegex, nonMatchedLine2)
                         if JPRegex:
                             JPtenantID = JPRegex.group(1)
@@ -1166,8 +1173,9 @@ def readGeneralLogs(searchLines, _fromDate, _toDate):
                     kanji = re.findall(kanjiRegexRange, nonMatchedLine2)
                     korean = re.findall(koreanRegexRange, nonMatchedLine2)
                     thai = re.findall(thaiRegexRange, nonMatchedLine2)
+                    hebrew = re.findall(hebrewRegexRange, nonMatchedLine2)
 
-                    if hiragana or katakana or kanji or korean or thai:
+                    if hiragana or katakana or kanji or korean or thai or hebrew:
                         JPRegex = re.search(japaneseGeneralLogsRegex, nonMatchedLine2)
                         if JPRegex:
                             JPtenantID = JPRegex.group(1)
@@ -1463,8 +1471,9 @@ def readIntegrationsLogs(searchLines, _fromDate, _toDate):
                     kanji = re.findall(kanjiRegexRange, nonMatchedLine2)
                     korean = re.findall(koreanRegexRange, nonMatchedLine2)
                     thai = re.findall(thaiRegexRange, nonMatchedLine2)
+                    hebrew = re.findall(hebrewRegexRange, nonMatchedLine2)
 
-                    if hiragana or katakana or kanji or korean or thai:
+                    if hiragana or katakana or kanji or korean or thai or hebrew:
                         JPRegex = re.search(japaneseIntegrationsLogsRegex, nonMatchedLine2)
                         if JPRegex:
                             JPtenantID = JPRegex.group(1)
@@ -1689,8 +1698,9 @@ def readMobileRequestsLogs(searchLines, _fromDate, _toDate):
                     kanji = re.findall(kanjiRegexRange, nonMatchedLine2)
                     korean = re.findall(koreanRegexRange, nonMatchedLine2)
                     thai = re.findall(thaiRegexRange, nonMatchedLine2)
+                    hebrew = re.findall(hebrewRegexRange, nonMatchedLine2)
 
-                    if hiragana or katakana or kanji or korean or thai:
+                    if hiragana or katakana or kanji or korean or thai or hebrew:
                         JPRegex = re.search(japaneseMobileRequestsLogsRegex, nonMatchedLine2)
                         if JPRegex:
                             JPtenantID = JPRegex.group(1)
@@ -1896,8 +1906,9 @@ def readTimerLogs(searchLines, _fromDate, _toDate):
                     kanji = re.findall(kanjiRegexRange, nonMatchedLine2)
                     korean = re.findall(koreanRegexRange, nonMatchedLine2)
                     thai = re.findall(thaiRegexRange, nonMatchedLine2)
+                    hebrew = re.findall(hebrewRegexRange, nonMatchedLine2)
 
-                    if hiragana or katakana or kanji or korean or thai:
+                    if hiragana or katakana or kanji or korean or thai or hebrew:
                         JPRegex = re.search(japaneseTimerLogsRegex, nonMatchedLine2)
                         if JPRegex:
                             JPtenantID = JPRegex.group(1)
@@ -2109,8 +2120,9 @@ def readEmailLogs(searchLines, _fromDate, _toDate):
                     kanji = re.findall(kanjiRegexRange, nonMatchedLine2)
                     korean = re.findall(koreanRegexRange, nonMatchedLine2)
                     thai = re.findall(thaiRegexRange, nonMatchedLine2)
+                    hebrew = re.findall(hebrewRegexRange, nonMatchedLine2)
 
-                    if hiragana or katakana or kanji or korean or thai:
+                    if hiragana or katakana or kanji or korean or thai or hebrew:
                         JPRegex = re.search(japaneseEmailLogsRegex, nonMatchedLine2)
                         if JPRegex:
                             JPiD = JPRegex.group(1)
@@ -2379,8 +2391,9 @@ def readExtensionLogs(searchLines, _fromDate, _toDate):
                     kanji = re.findall(kanjiRegexRange, nonMatchedLine2)
                     korean = re.findall(koreanRegexRange, nonMatchedLine2)
                     thai = re.findall(thaiRegexRange, nonMatchedLine2)
+                    hebrew = re.findall(hebrewRegexRange, nonMatchedLine2)
 
-                    if hiragana or katakana or kanji or korean or thai:
+                    if hiragana or katakana or kanji or korean or thai or hebrew:
                         JPRegex = re.search(japaneseExtensionLogsRegex, nonMatchedLine2)
                         if JPRegex:
                             JPtenantID = JPRegex.group(1)
@@ -2600,8 +2613,9 @@ def readServiceActionLogs(searchLines, _fromDate, _toDate):
                     kanji = re.findall(kanjiRegexRange, nonMatchedLine2)
                     korean = re.findall(koreanRegexRange, nonMatchedLine2)
                     thai = re.findall(thaiRegexRange, nonMatchedLine2)
+                    hebrew = re.findall(hebrewRegexRange, nonMatchedLine2)
 
-                    if hiragana or katakana or kanji or korean or thai:
+                    if hiragana or katakana or kanji or korean or thai or hebrew:
                         JPRegex = re.search(japaneseServiceActionLogsRegex, nonMatchedLine2)
                         if JPRegex:
                             JPtenantID = JPRegex.group(1)
@@ -2822,8 +2836,9 @@ def readScreenLogs(searchLines, _fromDate, _toDate):
                     kanji = re.findall(kanjiRegexRange, nonMatchedLine2)
                     korean = re.findall(koreanRegexRange, nonMatchedLine2)
                     thai = re.findall(thaiRegexRange, nonMatchedLine2)
+                    hebrew = re.findall(hebrewRegexRange, nonMatchedLine2)
 
-                    if hiragana or katakana or kanji or korean or thai:
+                    if hiragana or katakana or kanji or korean or thai or hebrew:
                         JPRegex = re.search(japaneseScreenLogsRegex, nonMatchedLine2)
                         if JPRegex:
                             JPtenantID = JPRegex.group(1)
@@ -3059,8 +3074,9 @@ def readiOSAndroidLogs(filename, searchLines, _fromDate, _toDate):
                 kanji = re.findall(kanjiRegexRange, nonMatchedLine2)
                 korean = re.findall(koreanRegexRange, nonMatchedLine2)
                 thai = re.findall(thaiRegexRange, nonMatchedLine2)
+                hebrew = re.findall(hebrewRegexRange, nonMatchedLine2)
 
-                if hiragana or katakana or kanji or korean or thai:
+                if hiragana or katakana or kanji or korean or thai or hebrew:
                     JPRegex = re.search(japaneseAndroidiOSBuildLogsRegex, nonMatchedLine)
                     if JPRegex:
                         JPDate = JPRegex.group(1)
@@ -3250,8 +3266,9 @@ def readServiceStudioReportLogs(searchLines3, _fromDate, _toDate):
                             kanji = re.findall(kanjiRegexRange, nonMatchedLine2)
                             korean = re.findall(koreanRegexRange, nonMatchedLine2)
                             thai = re.findall(thaiRegexRange, nonMatchedLine2)
+                            hebrew = re.findall(hebrewRegexRange, nonMatchedLine2)
 
-                            if hiragana or katakana or kanji or korean or thai:
+                            if hiragana or katakana or kanji or korean or thai or hebrew:
                                 JPRegex = re.search(japaneseServiceStudioReportsOperationsLogsRegex, nonMatchedLine2)
                                 if JPRegex:
                                     JPDate = JPRegex.group(1)
@@ -3311,8 +3328,9 @@ def readServiceStudioReportLogs(searchLines3, _fromDate, _toDate):
                             kanji = re.findall(kanjiRegexRange, nonMatchedLine2)
                             korean = re.findall(koreanRegexRange, nonMatchedLine2)
                             thai = re.findall(thaiRegexRange, nonMatchedLine2)
+                            hebrew = re.findall(hebrewRegexRange, nonMatchedLine2)
 
-                            if hiragana or katakana or kanji or korean or thai:
+                            if hiragana or katakana or kanji or korean or thai or hebrew:
                                 JPRegex = re.search(japaneseServiceStudioReportsOperationsLogsRegex, nonMatchedLine2)
                                 if JPRegex:
                                     JPDate = JPRegex.group(1)
@@ -3989,8 +4007,9 @@ def logFile(absolutePath, filenameWithExt, ext, _fromDate, _toDate):
                             kanji = re.findall(kanjiRegexRange, nonMatchedLine2)
                             korean = re.findall(koreanRegexRange, nonMatchedLine2)
                             thai = re.findall(thaiRegexRange, nonMatchedLine2)
+                            hebrew = re.findall(hebrewRegexRange, nonMatchedLine2)
 
-                            if hiragana or katakana or kanji or korean or thai:
+                            if hiragana or katakana or kanji or korean or thai or hebrew:
                                 JPRegex = re.search(japaneseIisLogsRegex, nonMatchedLine2)
                                 if JPRegex:
                                     JPDate = JPRegex.group(1)
